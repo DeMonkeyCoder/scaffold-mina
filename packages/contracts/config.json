@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "deployAliases": {
+    "next": {
+      "networkId": "testnet",
+      "url": "https://api.minascan.io/node/devnet/v1/graphql",
+      "keyPath": "keys/next.json",
+      "feepayerKeyPath": "/home/ali/.cache/zkapp-cli/keys/testim.json",
+      "feepayerAlias": "testim",
+      "fee": "0.1",
+      "smartContract": "Add"
+    }
+  }
+}
