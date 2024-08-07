@@ -1,73 +1,22 @@
-import { Field, PublicKey, fetchAccount } from 'o1js';
+import { fetchAccount, Field, PublicKey } from "o1js";
 
 import type {
   WorkerFunctions,
   ZkappWorkerReponse,
   ZkappWorkerRequest,
-} from './zkappWorker';
+} from "./zkappWorker";
 
 export default class ZkappWorkerClient {
   // ---------------------------------------------------------------------------------------
 
-  setActiveInstanceToDevnet() {
-    return this._call('setActiveInstanceToDevnet', {});
-  }
-
-  loadContract() {
-    return this._call('loadContract', {});
-  }
-
-  compileContract() {
-    return this._call('compileContract', {});
-  }
-
-  fetchAccount({
-    publicKey,
-  }: {
-    publicKey: PublicKey;
-  }): ReturnType<typeof fetchAccount> {
-    const result = this._call('fetchAccount', {
-      publicKey58: publicKey.toBase58(),
-    });
-    return result as ReturnType<typeof fetchAccount>;
-  }
-
-  initZkappInstance(publicKey: PublicKey) {
-    return this._call('initZkappInstance', {
-      publicKey58: publicKey.toBase58(),
-    });
-  }
-
-  async getNum(): Promise<Field> {
-    const result = await this._call('getNum', {});
-    return Field.fromJSON(JSON.parse(result as string));
-  }
-
-  createUpdateTransaction() {
-    return this._call('createUpdateTransaction', {});
-  }
-
-  proveUpdateTransaction() {
-    return this._call('proveUpdateTransaction', {});
-  }
-
-  async getTransactionJSON() {
-    const result = await this._call('getTransactionJSON', {});
-    return result;
-  }
-
-  // ---------------------------------------------------------------------------------------
-
   worker: Worker;
-
   promises: {
     [id: number]: { resolve: (res: any) => void; reject: (err: any) => void };
   };
-
   nextId: number;
 
   constructor() {
-    this.worker = new Worker(new URL('./zkappWorker.ts', import.meta.url));
+    this.worker = new Worker(new URL("./zkappWorker.ts", import.meta.url));
     this.promises = {};
     this.nextId = 0;
 
@@ -75,6 +24,53 @@ export default class ZkappWorkerClient {
       this.promises[event.data.id].resolve(event.data.data);
       delete this.promises[event.data.id];
     };
+  }
+
+  setActiveInstanceToDevnet() {
+    return this._call("setActiveInstanceToDevnet", {});
+  }
+
+  loadContract() {
+    return this._call("loadContract", { contractName: "Add" });
+  }
+
+  compileContract() {
+    return this._call("compileContract", { contractName: "Add" });
+  }
+
+  // ---------------------------------------------------------------------------------------
+
+  fetchAccount({
+    publicKey,
+  }: {
+    publicKey: PublicKey;
+  }): ReturnType<typeof fetchAccount> {
+    const result = this._call("fetchAccount", {
+      publicKey58: publicKey.toBase58(),
+    });
+    return result as ReturnType<typeof fetchAccount>;
+  }
+
+  initZkappInstance(publicKey: PublicKey) {
+    return this._call("initZkappInstance", {
+      contractName: "Add",
+      publicKey58: publicKey.toBase58(),
+    });
+  }
+
+  async getNum(): Promise<Field> {
+    const result = await this._call("getState", {
+      contractName: "Add",
+      stateVariable: "num",
+    });
+    return Field.fromJSON(JSON.parse(result as string));
+  }
+
+  async getTransactionJSON() {
+    return await this._call("createAndProveTransaction", {
+      contractName: "Add",
+      method: "update",
+    });
   }
 
   _call(fn: WorkerFunctions, args: any) {

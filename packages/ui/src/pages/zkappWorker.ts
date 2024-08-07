@@ -1,57 +1,103 @@
-import { Mina, PublicKey, fetchAccount } from 'o1js';
-
-type Transaction = Awaited<ReturnType<typeof Mina.transaction>>;
-
+import { fetchAccount, Mina, PublicKey } from "o1js";
 // ---------------------------------------------------------------------------------------
-
-import type { Add } from '../../../contracts/src/Add';
+import type { Add } from "../../../contracts/src/Add";
+import type { Quest } from "../../../contracts/src/Quest";
 
 const state = {
-  Add: null as null | typeof Add,
-  zkapp: null as null | Add,
-  transaction: null as null | Transaction,
+  contracts: {
+    Add: {
+      contract: null as null | typeof Add,
+      zkapp: null as null | Add,
+    },
+    Quest: {
+      contract: null as null | typeof Quest,
+      zkapp: null as null | Quest,
+    },
+  },
 };
 
 // ---------------------------------------------------------------------------------------
 
+export type ContractName = keyof (typeof state)["contracts"];
+
 const functions = {
   setActiveInstanceToDevnet: async (args: {}) => {
     const Network = Mina.Network(
-      'https://api.minascan.io/node/devnet/v1/graphql'
+      "https://api.minascan.io/node/devnet/v1/graphql"
     );
-    console.log('Devnet network instance configured.');
+    console.log("Devnet network instance configured.");
     Mina.setActiveInstance(Network);
   },
-  loadContract: async (args: {}) => {
-    const { Add } = await import('../../../contracts/build/src/Add.js');
-    state.Add = Add;
+  loadContract: async ({ contractName }: { contractName: ContractName }) => {
+    if (!state.contracts[contractName])
+      throw new Error(`${contractName} contract is not defined`);
+    if (!state.contracts[contractName].contract) {
+      const contract = (
+        await import(`../../../contracts/build/src/${contractName}.js`)
+      )[contractName];
+      if (!contract) {
+        throw new Error(
+          `Could not load contract ${contractName} from the module`
+        );
+      }
+      state.contracts[contractName].contract = contract;
+    }
   },
-  compileContract: async (args: {}) => {
-    await state.Add!.compile();
+  compileContract: async ({ contractName }: { contractName: ContractName }) => {
+    const contract = state.contracts[contractName]?.contract;
+    if (!contract) throw new Error(`${contractName} contract is not loaded`);
+    await contract.compile();
+  },
+  loadAndCompileContract: async (args: { contractName: ContractName }) => {
+    await functions.loadContract(args);
+    await functions.compileContract(args);
   },
   fetchAccount: async (args: { publicKey58: string }) => {
-    const publicKey = PublicKey.fromBase58(args.publicKey58);
-    return await fetchAccount({ publicKey });
+    return await fetchAccount({
+      publicKey: PublicKey.fromBase58(args.publicKey58),
+    });
   },
-  initZkappInstance: async (args: { publicKey58: string }) => {
-    const publicKey = PublicKey.fromBase58(args.publicKey58);
-    state.zkapp = new state.Add!(publicKey);
+  initZkappInstance: async ({
+    publicKey58,
+    contractName,
+  }: {
+    contractName: ContractName;
+    publicKey58: string;
+  }) => {
+    const contract = state.contracts[contractName]?.contract;
+    if (!contract) throw new Error(`${contractName} contract is not loaded`);
+    state.contracts[contractName].zkapp = new contract(
+      PublicKey.fromBase58(publicKey58)
+    );
   },
-  getNum: async (args: {}) => {
-    const currentNum = await state.zkapp!.num.get();
+  getState: async <T extends ContractName>({
+    contractName,
+    stateVariable,
+  }: {
+    contractName: T;
+    stateVariable: keyof (typeof state)["contracts"][T]["zkapp"];
+  }) => {
+    const zkapp = state.contracts[contractName]?.zkapp;
+    if (!zkapp) throw new Error(`${contractName} zkapp is not initialized.`);
+    // @ts-ignore
+    const currentNum = await zkapp[stateVariable].get();
     return JSON.stringify(currentNum.toJSON());
   },
-  createUpdateTransaction: async (args: {}) => {
+  createAndProveTransaction: async <T extends ContractName>({
+    contractName,
+    method,
+  }: {
+    contractName: T;
+    method: keyof (typeof state)["contracts"][T]["zkapp"];
+  }) => {
+    const zkapp = state.contracts[contractName]?.zkapp;
+    if (!zkapp) throw new Error(`${contractName} zkapp is not initialized.`);
     const transaction = await Mina.transaction(async () => {
-      await state.zkapp!.update();
+      // @ts-ignore
+      await zkapp[method]();
     });
-    state.transaction = transaction;
-  },
-  proveUpdateTransaction: async (args: {}) => {
-    await state.transaction!.prove();
-  },
-  getTransactionJSON: async (args: {}) => {
-    return state.transaction!.toJSON();
+    await transaction.prove();
+    return transaction.toJSON();
   },
 };
 
@@ -70,9 +116,9 @@ export type ZkappWorkerReponse = {
   data: any;
 };
 
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   addEventListener(
-    'message',
+    "message",
     async (event: MessageEvent<ZkappWorkerRequest>) => {
       const returnData = await functions[event.data.fn](event.data.args);
 
@@ -85,4 +131,4 @@ if (typeof window !== 'undefined') {
   );
 }
 
-console.log('Web Worker Successfully Initialized.');
+console.log("Web Worker Successfully Initialized.");
