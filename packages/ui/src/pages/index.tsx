@@ -4,11 +4,14 @@ import GradientBG from "../components/GradientBG.js";
 import styles from "../styles/Home.module.css";
 import "./reactCOIServiceWorker";
 import ZkappWorkerClient from "./zkappWorkerClient";
+import LoadingScreen from "@/components/LoadingScreen";
 
 let transactionFee = 0.1;
 const ZKAPP_ADDRESS = "B62qpXPvmKDf4SaFJynPsT6DyvuxMS9H1pT4TGonDT26m599m7dS9gP";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+
   const [state, setState] = useState({
     zkappWorkerClient: null as null | ZkappWorkerClient,
     hasWallet: null as null | boolean,
@@ -41,6 +44,7 @@ export default function Home() {
         console.log("Loading web worker...");
         const zkappWorkerClient = new ZkappWorkerClient();
         await timeout(5);
+        setLoading(false);
 
         setDisplayText("Done loading web worker");
         console.log("Done loading web worker");
@@ -248,7 +252,9 @@ export default function Home() {
     );
   }
 
-  return (
+  return loading ? (
+    <LoadingScreen />
+  ) : (
     <GradientBG>
       <div className={styles.main} style={{ padding: 0 }}>
         <div className={styles.center} style={{ padding: 0 }}>
