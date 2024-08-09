@@ -5,8 +5,8 @@ export default function LoadingScreen() {
   return (
     <GradientBG>
       <div className={styles.main} style={{ padding: 0 }}>
-        <div className={styles.center} style={{ padding: 0 }}>
-          Loading Screen
+        <div className={styles.center} style={{ padding: 0}}>
+          Loading Screen...
         </div>
       </div>
     </GradientBG>

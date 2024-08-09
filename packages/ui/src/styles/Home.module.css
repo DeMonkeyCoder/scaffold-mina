@@ -19,18 +19,7 @@
   z-index: 0;
 }
 
-.background::before {
-  background: url('/assets/hash-pattern.png');
-  z-index: 1;
-  -webkit-mask-image: linear-gradient(20deg, #000 25%, transparent);
-  mask-image: linear-gradient(20deg, #000 25%, transparent);
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
+
 
 .backgroundGradients {
   display: block;
