@@ -8,7 +8,7 @@ export default function LoadingScreen() {
     <GradientBG>
       <div className={styles.main} style={{ padding: 0 }}>
         <div className={styles.center} style={{ padding: 0 }}>
-            <span className={styles.loadingText}><LoadingScreen /> <PacmanLoader /></span>      
+            <span className={styles.loadingText}>Loading Screen<PacmanLoader /></span>      
         </div>
       </div>
     </GradientBG>
