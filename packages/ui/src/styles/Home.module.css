@@ -196,3 +196,57 @@
     grid-template-columns: repeat(2, 50%);
   }
 }
+
+/* Home.module.css */
+@keyframes dot1 {
+  0%, 20%, 100% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+@keyframes dot2 {
+  0%, 40%, 100% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+}
+
+@keyframes dot3 {
+  0%, 60%, 100% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 1;
+  }
+}
+
+.loadingDots {
+  display: inline;
+}
+
+.loadingDots span {
+  display: inline-block;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+.loadingDots .dot1 {
+  animation-name: dot1;
+}
+
+.loadingDots .dot2 {
+  animation-name: dot2;
+}
+
+.loadingDots .dot3 {
+  animation-name: dot3;
+}
+
+.loadingText {
+  font-size: 1em;
+}
