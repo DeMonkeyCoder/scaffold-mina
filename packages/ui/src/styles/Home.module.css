@@ -19,19 +19,6 @@
     z-index: 0;
 }
 
-.background::before {
-    background: url('/assets/hash-pattern.png');
-    z-index: 1;
-    -webkit-mask-image: linear-gradient(20deg, #000 25%, transparent);
-    mask-image: linear-gradient(20deg, #000 25%, transparent);
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
 .backgroundGradients {
     display: block;
     position: absolute;
@@ -207,4 +194,58 @@
     .grid {
         grid-template-columns: repeat(2, 50%);
     }
+}
+
+/* Home.module.css */
+@keyframes dot1 {
+    0%, 20%, 100% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+}
+
+@keyframes dot2 {
+    0%, 40%, 100% {
+        opacity: 0;
+    }
+    60% {
+        opacity: 1;
+    }
+}
+
+@keyframes dot3 {
+    0%, 60%, 100% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 1;
+    }
+}
+
+.loadingDots {
+    display: inline;
+}
+
+.loadingDots span {
+    display: inline-block;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+.loadingDots .dot1 {
+    animation-name: dot1;
+}
+
+.loadingDots .dot2 {
+    animation-name: dot2;
+}
+
+.loadingDots .dot3 {
+    animation-name: dot3;
+}
+
+.loadingText {
+    font-size: 1em;
 }
