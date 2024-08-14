@@ -1,6 +1,7 @@
 import { fetchAccount, Field, PublicKey } from "o1js";
 
-import type {
+import {
+  ContractName,
   WorkerFunctions,
   ZkappWorkerReponse,
   ZkappWorkerRequest,
@@ -30,12 +31,16 @@ export default class ZkappWorkerClient {
     return this._call("setActiveInstanceToDevnet", {});
   }
 
-  loadContract() {
-    return this._call("loadContract", { contractName: "Add" });
+  loadAndCompileContract(args: { contractName: ContractName }) {
+    return this._call("loadAndCompileContract", args);
   }
 
-  compileContract() {
-    return this._call("compileContract", { contractName: "Add" });
+  loadContract(args: { contractName: ContractName }) {
+    return this._call("loadContract", args);
+  }
+
+  compileContract(args: { contractName: ContractName }) {
+    return this._call("compileContract", args);
   }
 
   // ---------------------------------------------------------------------------------------
@@ -51,9 +56,15 @@ export default class ZkappWorkerClient {
     return result as ReturnType<typeof fetchAccount>;
   }
 
-  initZkappInstance(publicKey: PublicKey) {
+  initZkappInstance({
+    contractName,
+    publicKey,
+  }: {
+    contractName: ContractName;
+    publicKey: PublicKey;
+  }) {
     return this._call("initZkappInstance", {
-      contractName: "Add",
+      contractName,
       publicKey58: publicKey.toBase58(),
     });
   }

@@ -5,20 +5,23 @@ import "./reactCOIServiceWorker";
 import LoadingScreen from "@/components/LoadingScreen";
 import { useZkappContext } from "@/context/ZkappContext";
 import { useMina } from "@/hooks/useMina";
+import {
+  AddContractProvider,
+  useAddContractContext,
+} from "@/context/AddContractContext";
 
 let transactionFee = 0.1;
 
-export default function Home() {
+function HomeBody() {
   const {
-    loading,
     setCreatingTransaction,
-    setHasBeenSetup,
     setZkappWorkerClient,
-    setCurrentNum,
     zkappPublicKey,
     ...state
   } = useZkappContext();
+  const { loading } = useAddContractContext();
 
+  const { currentNum, onRefreshCurrentNum } = useAddContractContext();
   const { accountExists, account } = useMina();
 
   const [displayText, setDisplayText] = useState("");
@@ -60,22 +63,6 @@ export default function Home() {
     setCreatingTransaction(false);
   };
 
-  // -------------------------------------------------------
-  // Refresh the current state
-
-  const onRefreshCurrentNum = async () => {
-    console.log("Getting zkApp state...");
-    setDisplayText("Getting zkApp state...");
-
-    await state.zkappWorkerClient!.fetchAccount({
-      publicKey: zkappPublicKey,
-    });
-    const currentNum = await state.zkappWorkerClient!.getNum();
-    setCurrentNum(currentNum);
-    console.log(`Current state in zkApp: ${currentNum.toString()}`);
-    setDisplayText("");
-  };
-
   const stepDisplay = transactionlink ? (
     <a
       href={transactionlink}
@@ -99,11 +86,12 @@ export default function Home() {
   );
 
   let AccountDoesNotExist;
-  if (state.hasBeenSetup && !accountExists) {
+  if (!loading && !accountExists) {
     const faucetLink =
       "https://faucet.minaprotocol.com/?address=" + account?.toBase58();
     AccountDoesNotExist = (
       <div>
+        {String(accountExists)}
         <span style={{ paddingRight: "1rem" }}>Account does not exist.</span>
         <a href={faucetLink} target="_blank" rel="noreferrer">
           Visit the faucet to fund this fee payer account
@@ -113,11 +101,11 @@ export default function Home() {
   }
 
   let MainContent;
-  if (state.hasBeenSetup && accountExists) {
+  if (!loading && accountExists) {
     MainContent = (
       <div style={{ justifyContent: "center", alignItems: "center" }}>
         <div className={styles.center} style={{ padding: 0 }}>
-          Current state in zkApp: {state.currentNum!.toString()}{" "}
+          Current state in zkApp: {currentNum!.toString()}{" "}
         </div>
         <button
           className={styles.card}
@@ -145,5 +133,13 @@ export default function Home() {
         </div>
       </div>
     </GradientBG>
+  );
+}
+
+export default function Home() {
+  return (
+    <AddContractProvider>
+      <HomeBody />
+    </AddContractProvider>
   );
 }

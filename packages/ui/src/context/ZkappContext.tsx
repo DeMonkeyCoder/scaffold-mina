@@ -7,16 +7,13 @@ import React, {
 } from "react";
 import { Field, PublicKey } from "o1js";
 import ZkappWorkerClient from "../pages/zkappWorkerClient";
+import { timeout } from "@/utils";
 
 interface ZkappContextType {
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   zkappWorkerClient: ZkappWorkerClient | null;
   setZkappWorkerClient: React.Dispatch<
     React.SetStateAction<ZkappWorkerClient | null>
   >;
-  hasBeenSetup: boolean;
-  setHasBeenSetup: React.Dispatch<React.SetStateAction<boolean>>;
   currentNum: Field | null;
   setCurrentNum: React.Dispatch<React.SetStateAction<Field | null>>;
   zkappPublicKey: PublicKey;
@@ -27,10 +24,8 @@ interface ZkappContextType {
 const ZkappContext = createContext<ZkappContextType | null>(null);
 
 export const ZkappProvider = ({ children }: { children: ReactNode }) => {
-  const [loading, setLoading] = useState<boolean>(true);
   const [zkappWorkerClient, setZkappWorkerClient] =
     useState<ZkappWorkerClient | null>(null);
-  const [hasBeenSetup, setHasBeenSetup] = useState<boolean>(false);
   const [currentNum, setCurrentNum] = useState<Field | null>(null);
   const [zkappPublicKey] = useState<PublicKey>(
     PublicKey.fromBase58(
@@ -44,46 +39,21 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
   // Do Setup
 
   useEffect(() => {
-    async function timeout(seconds: number): Promise<void> {
-      return new Promise<void>((resolve) => {
-        setTimeout(() => {
-          resolve();
-        }, seconds * 1000);
-      });
-    }
-
     (async () => {
-      if (!hasBeenSetup) {
-        const zkappWorkerClient = new ZkappWorkerClient();
+      if (!zkappWorkerClient) {
+        const zkappWorkerClientInstance = new ZkappWorkerClient();
         await timeout(5);
-        setZkappWorkerClient(zkappWorkerClient);
-        console.log("Done loading web worker");
-        await zkappWorkerClient.setActiveInstanceToDevnet();
-        await zkappWorkerClient.loadContract();
-        console.log("Compiling zkApp...");
-        await zkappWorkerClient.compileContract();
-        console.log("zkApp compiled");
-        await zkappWorkerClient.initZkappInstance(zkappPublicKey);
-        console.log("Getting zkApp state...");
-        await zkappWorkerClient.fetchAccount({ publicKey: zkappPublicKey });
-        const currentNum = await zkappWorkerClient.getNum();
-        console.log(`Current state in zkApp: ${currentNum.toString()}`);
-        setHasBeenSetup(true);
-        setLoading(false);
-        setCurrentNum(currentNum);
+        await zkappWorkerClientInstance.setActiveInstanceToDevnet();
+        setZkappWorkerClient(zkappWorkerClientInstance);
       }
     })();
-  }, [hasBeenSetup, zkappPublicKey]);
+  }, [zkappWorkerClient, zkappPublicKey]);
 
   return (
     <ZkappContext.Provider
       value={{
-        loading,
-        setLoading,
         zkappWorkerClient,
         setZkappWorkerClient,
-        hasBeenSetup,
-        setHasBeenSetup,
         currentNum,
         setCurrentNum,
         zkappPublicKey,
