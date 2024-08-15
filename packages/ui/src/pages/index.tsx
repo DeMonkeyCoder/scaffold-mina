@@ -83,7 +83,7 @@ function HomeBody() {
         {String(accountExists)}
         <span style={{ paddingRight: "1rem" }}>Account does not exist.</span>
         <a href={faucetLink} target="_blank" rel="noreferrer">
-          Visit the faucet to fund this fee payer account
+        Visit the faucet to fund this fee payer account.
         </a>
       </div>
     );
