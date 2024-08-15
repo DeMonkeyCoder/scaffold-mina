@@ -2,49 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @font-face {
-    font-family: 'Courier Prime';
+    font-family: 'ABC Monument Grotesk';
     font-style: normal;
     font-weight: normal;
-    src: url('/assets/fonts/CourierPrime-Regular.ttf') format('truetype'),
-    url('/assets/fonts/CourierPrime-Regular.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Courier Prime Light';
+    src: url('/assets/fonts/ABCMonumentGrotesk-Regular.woff2') format('woff2'),
+      url('/assets/fonts/ABCMonumentGrotesk-Regular.woff') format('woff');
+  }
+  
+  @font-face {
+    font-family: 'ABC Monument Grotesk Light';
     font-style: normal;
-    src: url('/assets/fonts/CourierPrime-Regular.ttf') format('truetype'),
-    url('/assets/fonts/CourierPrime-Regular.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Courier Prime Bold';
+    src: url('/assets/fonts/ABCMonumentGrotesk-Light.woff2') format('woff2'),
+      url('/assets/fonts/ABCMonumentGrotesk-Light.woff') format('woff');
+  }
+  
+  @font-face {
+    font-family: 'ABC Monument Grotesk Bold';
     font-style: normal;
     font-weight: bold;
-    src: url('/assets/fonts/CourierPrime-Bold.ttf') format('truetype'),
-    url('/assets/fonts/CourierPrime-Bold.ttf') format('truetype');
-}
+    src: url('/assets/fonts/ABCMonumentGrotesk-Bold.woff2') format('woff2'),
+      url('/assets/fonts/ABCMonumentGrotesk-Bold.woff') format('woff');
+  }
 
-:root {
+  :root {
     --max-width: 1100px;
     --border-radius: 12px;
-    --font-monument: 'Courier Prime', sans-serif;
-    --font-monument-bold: 'Courier Prime Bold', sans-serif;
-    --font-monument-light: 'Courier Prime Light', sans-serif;
+    --font-monument: 'ABC Monument Grotesk', sans-serif;
+    --font-monument-bold: 'ABC Monument Grotesk Bold', sans-serif;
+    --font-monument-light: 'ABC Monument Grotesk Light', sans-serif;
     --foreground-rgb: 0, 0, 0;
-}
-
-* {
+  }
+  
+  * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-}
+  }
+
 
 html,
 body {
     max-width: 100vw;
     overflow-x: hidden;
-    font-family: 'Courier Prime';
+    overflow: hidden;
 }
 
 a {
