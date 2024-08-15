@@ -1,9 +1,9 @@
 import styles from "@/styles/Home.module.css";
-import { useMina } from "@/hooks/useMina";
+import { useMinaWallet } from "@/hooks/useMinaWallet";
 import { formatPublicKey } from "@/utils";
 
 export default function ConnectWallet() {
-  const { connect, hasWallet, isConnected, account } = useMina();
+  const { connect, hasWallet, isConnected, account } = useMinaWallet();
   if (!hasWallet) {
     return (
       <a

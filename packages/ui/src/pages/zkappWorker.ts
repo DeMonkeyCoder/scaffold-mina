@@ -85,7 +85,7 @@ const functions = {
     const currentNum = await zkapp[stateVariable].get();
     return JSON.stringify(currentNum.toJSON());
   },
-  createAndProveTransaction: async <T extends ContractName>({
+  prepareTransaction: async <T extends ContractName>({
     contractName,
     method,
   }: {

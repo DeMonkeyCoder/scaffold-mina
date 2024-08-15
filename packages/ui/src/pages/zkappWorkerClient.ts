@@ -86,11 +86,11 @@ export default class ZkappWorkerClient {
     return Field.fromJSON(JSON.parse(result as string));
   }
 
-  async getTransactionJSON() {
-    return await this._call("createAndProveTransaction", {
-      contractName: "Add",
-      method: "update",
-    });
+  async prepareTransaction<T extends ContractName>(args: {
+    contractName: T;
+    method: keyof State["contracts"][T]["zkapp"];
+  }) {
+    return await this._call("prepareTransaction", args);
   }
 
   _call(fn: WorkerFunctions, args: any) {

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { PublicKey } from "o1js";
 import { useZkappContext } from "@/context/ZkappContext";
 
-export function useMina() {
+export function useMinaWallet() {
   const { zkappWorkerClient } = useZkappContext();
 
   const [isConnected, setIsConnected] = useState(false);
@@ -52,7 +52,33 @@ export function useMina() {
     })();
   }, [account, zkappWorkerClient, setAccountExists]);
 
+  const sendTransaction = useCallback(
+    ({
+      transactionJSON,
+      transactionFee,
+    }: {
+      transactionJSON: any;
+      transactionFee: number;
+    }) => {
+      if (!isConnected) {
+        throw Error("Wallet is not connected");
+      }
+      if (!accountExists) {
+        throw Error("Mina account does not exist");
+      }
+      return (window as any).mina.sendTransaction({
+        transaction: transactionJSON,
+        feePayer: {
+          fee: transactionFee,
+          memo: "",
+        },
+      });
+    },
+    [accountExists, isConnected]
+  );
+
   return {
+    sendTransaction,
     hasWallet,
     account,
     accountExists,

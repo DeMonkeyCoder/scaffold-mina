@@ -22,6 +22,7 @@ interface AddContractContextType {
   getState: (args: {
     stateVariable: keyof State["contracts"]["Add"]["zkapp"];
   }) => Promise<Field>;
+  prepareTransaction: any; //TODO: fix this type
 }
 
 const AddContractContext = createContext<AddContractContextType | null>(null);
@@ -86,10 +87,26 @@ export const AddContractProvider = ({ children }: { children: ReactNode }) => {
     },
     [fetchAccount, zkappWorkerClient]
   );
+  const prepareTransaction = async ({
+    method,
+  }: {
+    method: keyof State["contracts"]["Add"]["zkapp"];
+  }) => {
+    if (!zkappWorkerClient) {
+      throw Error("zkappWorkerClient not initialized");
+    }
+    await fetchAccount();
+    console.log("fetchAccount done");
+    return zkappWorkerClient.prepareTransaction({
+      contractName: "Add",
+      method,
+    });
+  };
 
   return (
     <AddContractContext.Provider
       value={{
+        prepareTransaction,
         getState,
         loading,
         setLoading,

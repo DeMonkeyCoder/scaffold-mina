@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css";
 import "./reactCOIServiceWorker";
 import LoadingScreen from "@/components/LoadingScreen";
 import { useZkappContext } from "@/context/ZkappContext";
-import { useMina } from "@/hooks/useMina";
+import { useMinaWallet } from "@/hooks/useMinaWallet";
 import {
   AddContractProvider,
   useAddContractContext,
@@ -20,9 +20,9 @@ function HomeBody() {
     zkappPublicKey,
     ...state
   } = useZkappContext();
-  const { loading } = useAddContractContext();
+  const { loading, prepareTransaction } = useAddContractContext();
 
-  const { accountExists, account } = useMina();
+  const { accountExists, account, sendTransaction } = useMinaWallet();
   const { data: currentNum } = useGetAddContractState({
     stateVariable: "num" as never,
     watch: true,
@@ -36,34 +36,19 @@ function HomeBody() {
 
   const onSendTransaction = async () => {
     setCreatingTransaction(true);
-
-    setDisplayText("Creating a transaction...");
-    console.log("Creating a transaction...");
-
-    await state.zkappWorkerClient!.fetchAccount({
-      publicKey: account!,
+    setDisplayText("Preparing transaction...");
+    const transactionJSON = await prepareTransaction({
+      method: "update" as never,
     });
-
-    console.log("Creating proof and requesting send transaction...");
-    setDisplayText("Creating proof and requesting send transaction...");
-    const transactionJSON = await state.zkappWorkerClient!.getTransactionJSON();
-
-    setDisplayText("Getting transaction JSON...");
-    console.log("Getting transaction JSON...");
-    const { hash } = await (window as any).mina.sendTransaction({
-      transaction: transactionJSON,
-      feePayer: {
-        fee: transactionFee,
-        memo: "",
-      },
+    setDisplayText("Waiting for user approval...");
+    const { hash } = await sendTransaction({
+      transactionJSON,
+      transactionFee: 0.1,
     });
-
     const transactionLink = `https://minascan.io/devnet/tx/${hash}`;
     console.log(`View transaction at ${transactionLink}`);
-
     setTransactionLink(transactionLink);
     setDisplayText(transactionLink);
-
     setCreatingTransaction(false);
   };
 
