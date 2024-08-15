@@ -6,12 +6,11 @@ import LoadingScreen from "@/components/LoadingScreen";
 import { useZkappContext } from "@/context/ZkappContext";
 import { useMinaWallet } from "@/hooks/useMinaWallet";
 import {
-  AddContractProvider,
-  useAddContractContext,
-  useGetAddContractState,
-} from "@/context/AddContractContext";
-
-let transactionFee = 0.1;
+  QuestContractProvider,
+  useGetQuestContractState,
+  useQuestContractContext,
+} from "@/context/QuestContractContext";
+import { PublicKey } from "o1js";
 
 function HomeBody() {
   const {
@@ -20,11 +19,11 @@ function HomeBody() {
     zkappPublicKey,
     ...state
   } = useZkappContext();
-  const { loading, prepareTransaction } = useAddContractContext();
+  const { loading, prepareTransaction } = useQuestContractContext();
 
   const { accountExists, account, sendTransaction } = useMinaWallet();
-  const { data: currentNum } = useGetAddContractState({
-    stateVariable: "num" as never,
+  const { data: currentNum } = useGetQuestContractState({
+    stateVariable: "counter" as never,
     watch: true,
   });
 
@@ -83,7 +82,7 @@ function HomeBody() {
         {String(accountExists)}
         <span style={{ paddingRight: "1rem" }}>Account does not exist.</span>
         <a href={faucetLink} target="_blank" rel="noreferrer">
-        Visit the faucet to fund this fee payer account.
+          Visit the faucet to fund this fee payer account.
         </a>
       </div>
     );
@@ -124,8 +123,12 @@ function HomeBody() {
 
 export default function Home() {
   return (
-    <AddContractProvider>
+    <QuestContractProvider
+      zkappPublicKey={PublicKey.fromBase58(
+        "B62qjDnppFhY5tsEmLbCDRniCoJcYqLmHpEeXVfwM4Ej18uJFhTrmBb"
+      )}
+    >
       <HomeBody />
-    </AddContractProvider>
+    </QuestContractProvider>
   );
 }

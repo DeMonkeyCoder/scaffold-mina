@@ -70,14 +70,6 @@ export default class ZkappWorkerClient {
     });
   }
 
-  async getNum(): Promise<Field> {
-    const result = await this._call("getState", {
-      contractName: "Add",
-      stateVariable: "num",
-    });
-    return Field.fromJSON(JSON.parse(result as string));
-  }
-
   async getState<T extends ContractName>(args: {
     contractName: T;
     stateVariable: keyof State["contracts"][T]["zkapp"];

@@ -11,7 +11,7 @@ import { useZkappContext } from "@/context/ZkappContext";
 import { State } from "@/pages/zkappWorker";
 import { timeout } from "@/utils";
 
-interface AddContractContextType {
+interface QuestContractContextType {
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   currentNum: Field | null;
@@ -19,14 +19,16 @@ interface AddContractContextType {
   creatingTransaction: boolean;
   setCreatingTransaction: React.Dispatch<React.SetStateAction<boolean>>;
   getState: (args: {
-    stateVariable: keyof State["contracts"]["Add"]["zkapp"];
+    stateVariable: keyof State["contracts"]["Quest"]["zkapp"];
   }) => Promise<Field>;
   prepareTransaction: any; //TODO: fix this type
 }
 
-const AddContractContext = createContext<AddContractContextType | null>(null);
+const QuestContractContext = createContext<QuestContractContextType | null>(
+  null
+);
 
-export const AddContractProvider = ({
+export const QuestContractProvider = ({
   children,
   zkappPublicKey,
 }: {
@@ -44,19 +46,14 @@ export const AddContractProvider = ({
     (async () => {
       if (zkappWorkerClient) {
         await zkappWorkerClient.loadAndCompileContract({
-          contractName: "Add",
+          contractName: "Quest",
         });
         console.log("zkApp compiled");
         await zkappWorkerClient.initZkappInstance({
-          contractName: "Add",
+          contractName: "Quest",
           publicKey: zkappPublicKey,
         });
-        console.log("Getting zkApp state...");
-        await zkappWorkerClient.fetchAccount({ publicKey: zkappPublicKey });
-        const currentNum = await zkappWorkerClient.getNum();
-        console.log(`Current state in zkApp: ${currentNum.toString()}`);
         setLoading(false);
-        setCurrentNum(currentNum);
       }
     })();
   }, [zkappWorkerClient, zkappPublicKey]);
@@ -74,14 +71,14 @@ export const AddContractProvider = ({
     async ({
       stateVariable,
     }: {
-      stateVariable: keyof State["contracts"]["Add"]["zkapp"];
+      stateVariable: keyof State["contracts"]["Quest"]["zkapp"];
     }) => {
       if (!zkappWorkerClient) {
         throw Error("zkappWorkerClient not initialized");
       }
       await fetchAccount();
       return zkappWorkerClient.getState({
-        contractName: "Add",
+        contractName: "Quest",
         stateVariable,
       });
     },
@@ -90,7 +87,7 @@ export const AddContractProvider = ({
   const prepareTransaction = async ({
     method,
   }: {
-    method: keyof State["contracts"]["Add"]["zkapp"];
+    method: keyof State["contracts"]["Quest"]["zkapp"];
   }) => {
     if (!zkappWorkerClient) {
       throw Error("zkappWorkerClient not initialized");
@@ -98,13 +95,13 @@ export const AddContractProvider = ({
     await fetchAccount();
     console.log("fetchAccount done");
     return zkappWorkerClient.prepareTransaction({
-      contractName: "Add",
+      contractName: "Quest",
       method,
     });
   };
 
   return (
-    <AddContractContext.Provider
+    <QuestContractContext.Provider
       value={{
         prepareTransaction,
         getState,
@@ -117,29 +114,29 @@ export const AddContractProvider = ({
       }}
     >
       {children}
-    </AddContractContext.Provider>
+    </QuestContractContext.Provider>
   );
 };
 
-export const useAddContractContext = (): AddContractContextType => {
-  const context = useContext(AddContractContext);
+export const useQuestContractContext = (): QuestContractContextType => {
+  const context = useContext(QuestContractContext);
   if (!context) {
     throw new Error(
-      "useAddContractContext must be used within a AddContractProvider"
+      "useQuestContractContext must be used within a QuestContractProvider"
     );
   }
   return context;
 };
 
-export function useGetAddContractState({
+export function useGetQuestContractState({
   watch,
   stateVariable,
 }: {
   watch?: boolean;
-  stateVariable: keyof State["contracts"]["Add"]["zkapp"];
+  stateVariable: keyof State["contracts"]["Quest"]["zkapp"];
 }) {
   const [data, setData] = useState<Field | null>(null);
-  const { loading, getState } = useAddContractContext();
+  const { loading, getState } = useQuestContractContext();
   useEffect(() => {
     let continuePolling = watch;
 
