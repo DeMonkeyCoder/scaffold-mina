@@ -16,9 +16,11 @@ const state = {
   },
 };
 
+export type State = typeof state;
+
 // ---------------------------------------------------------------------------------------
 
-export type ContractName = keyof (typeof state)["contracts"];
+export type ContractName = keyof State["contracts"];
 
 const functions = {
   setActiveInstanceToDevnet: async (args: {}) => {
@@ -75,7 +77,7 @@ const functions = {
     stateVariable,
   }: {
     contractName: T;
-    stateVariable: keyof (typeof state)["contracts"][T]["zkapp"];
+    stateVariable: keyof State["contracts"][T]["zkapp"];
   }) => {
     const zkapp = state.contracts[contractName]?.zkapp;
     if (!zkapp) throw new Error(`${contractName} zkapp is not initialized.`);
@@ -88,7 +90,7 @@ const functions = {
     method,
   }: {
     contractName: T;
-    method: keyof (typeof state)["contracts"][T]["zkapp"];
+    method: keyof State["contracts"][T]["zkapp"];
   }) => {
     const zkapp = state.contracts[contractName]?.zkapp;
     if (!zkapp) throw new Error(`${contractName} zkapp is not initialized.`);

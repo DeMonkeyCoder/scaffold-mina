@@ -8,6 +8,7 @@ import { useMina } from "@/hooks/useMina";
 import {
   AddContractProvider,
   useAddContractContext,
+  useGetAddContractState,
 } from "@/context/AddContractContext";
 
 let transactionFee = 0.1;
@@ -21,8 +22,11 @@ function HomeBody() {
   } = useZkappContext();
   const { loading } = useAddContractContext();
 
-  const { currentNum, onRefreshCurrentNum } = useAddContractContext();
   const { accountExists, account } = useMina();
+  const { data: currentNum } = useGetAddContractState({
+    stateVariable: "num" as never,
+    watch: true,
+  });
 
   const [displayText, setDisplayText] = useState("");
   const [transactionlink, setTransactionLink] = useState("");
@@ -105,7 +109,7 @@ function HomeBody() {
     MainContent = (
       <div style={{ justifyContent: "center", alignItems: "center" }}>
         <div className={styles.center} style={{ padding: 0 }}>
-          Current state in zkApp: {currentNum!.toString()}{" "}
+          Current state in zkApp: {currentNum?.toString()}{" "}
         </div>
         <button
           className={styles.card}
@@ -113,9 +117,6 @@ function HomeBody() {
           disabled={state.creatingTransaction}
         >
           Send Transaction
-        </button>
-        <button className={styles.card} onClick={onRefreshCurrentNum}>
-          Get Latest State
         </button>
       </div>
     );

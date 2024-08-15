@@ -2,6 +2,7 @@ import { fetchAccount, Field, PublicKey } from "o1js";
 
 import {
   ContractName,
+  State,
   WorkerFunctions,
   ZkappWorkerReponse,
   ZkappWorkerRequest,
@@ -74,6 +75,14 @@ export default class ZkappWorkerClient {
       contractName: "Add",
       stateVariable: "num",
     });
+    return Field.fromJSON(JSON.parse(result as string));
+  }
+
+  async getState<T extends ContractName>(args: {
+    contractName: T;
+    stateVariable: keyof State["contracts"][T]["zkapp"];
+  }) {
+    const result = await this._call("getState", args);
     return Field.fromJSON(JSON.parse(result as string));
   }
 
