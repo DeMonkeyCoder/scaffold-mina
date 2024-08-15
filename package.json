@@ -5,6 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "contracts:build": "pnpm run --filter scaffold-mina-contracts build",
+    "contracts:test": "pnpm run --filter scaffold-mina-contracts test",
     "ui:dev": "pnpm run --filter scaffold-mina-ui dev"
   },
   "keywords": [],

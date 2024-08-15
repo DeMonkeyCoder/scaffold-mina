@@ -16,7 +16,6 @@ interface AddContractContextType {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   currentNum: Field | null;
   setCurrentNum: React.Dispatch<React.SetStateAction<Field | null>>;
-  zkappPublicKey: PublicKey;
   creatingTransaction: boolean;
   setCreatingTransaction: React.Dispatch<React.SetStateAction<boolean>>;
   getState: (args: {
@@ -27,14 +26,15 @@ interface AddContractContextType {
 
 const AddContractContext = createContext<AddContractContextType | null>(null);
 
-export const AddContractProvider = ({ children }: { children: ReactNode }) => {
+export const AddContractProvider = ({
+  children,
+  zkappPublicKey,
+}: {
+  children: ReactNode;
+  zkappPublicKey: PublicKey;
+}) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [currentNum, setCurrentNum] = useState<Field | null>(null);
-  const [zkappPublicKey] = useState<PublicKey>(
-    PublicKey.fromBase58(
-      "B62qpXPvmKDf4SaFJynPsT6DyvuxMS9H1pT4TGonDT26m599m7dS9gP"
-    )
-  );
   const [creatingTransaction, setCreatingTransaction] =
     useState<boolean>(false);
 
@@ -112,7 +112,6 @@ export const AddContractProvider = ({ children }: { children: ReactNode }) => {
         setLoading,
         currentNum,
         setCurrentNum,
-        zkappPublicKey,
         creatingTransaction,
         setCreatingTransaction,
       }}
