@@ -96,10 +96,11 @@ function HomeBody() {
           Current state in zkApp: {currentNum?.toString()}{" "}
         </div>
         <button
-          className={styles.card}
+          className={`${styles.card} flex items-center justify-center`}
           onClick={onSendTransaction}
           disabled={state.creatingTransaction}
         >
+          <img src="/assets/upload-circle-01-stroke-rounded.svg" alt="" />
           Send Transaction
         </button>
       </div>
