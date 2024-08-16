@@ -25,7 +25,6 @@ function HomeBody() {
     useMinaWallet();
 
   const { data: currentNum } = useGetQuestContractState({
-    // @ts-ignore
     stateVariable: "counter",
     watch: true,
   });
