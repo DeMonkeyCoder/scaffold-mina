@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import ZkappWorkerClient from "../pages/zkappWorkerClient";
+import ZkappWorkerClient from "./zkappWorkerClient";
 import { timeout } from "@/utils";
 
 interface ZkappContextType {

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { PublicKey } from "o1js";
-import { useZkappContext } from "@/context/ZkappContext";
+import { useZkappContext } from "@/lib/ZkappContext";
 
 export function useMinaWallet() {
   const { zkappWorkerClient } = useZkappContext();

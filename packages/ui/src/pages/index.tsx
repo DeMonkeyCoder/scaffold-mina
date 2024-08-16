@@ -7,8 +7,8 @@ import { useMinaWallet } from "@/hooks/useMinaWallet";
 import {
   QuestContractProvider,
   useGetQuestContractState,
-  useQuestContractContext,
-} from "@/context/QuestContractContext";
+  useQuestContract,
+} from "@/lib/useQuestContract";
 import { CircuitString, PublicKey } from "o1js";
 import Image from "next/image";
 
@@ -19,7 +19,7 @@ enum TransactionState {
 }
 
 function HomeBody() {
-  const { loading, prepareTransaction } = useQuestContractContext();
+  const { loading, prepareTransaction } = useQuestContract();
 
   const { isConnected, accountExists, sendTransaction, account } =
     useMinaWallet();

@@ -1,12 +1,12 @@
-import { fetchAccount, Field, PublicKey } from "o1js";
+import { fetchAccount, Field, PublicKey, SmartContract } from "o1js";
 
 import {
   ContractName,
-  State,
   WorkerFunctions,
   ZkappWorkerReponse,
   ZkappWorkerRequest,
 } from "./zkappWorker";
+import { Methods, StateVariables } from "@/lib/types";
 
 export default class ZkappWorkerClient {
   // ---------------------------------------------------------------------------------------
@@ -90,18 +90,20 @@ export default class ZkappWorkerClient {
     });
   }
 
-  async getState<T extends ContractName>(args: {
-    contractName: T;
-    stateVariable: keyof State["contracts"][T]["zkapp"];
+  async getState<T extends SmartContract>(args: {
+    //TODO: fix this general string type
+    contractName: string;
+    stateVariable: StateVariables<T>;
   }) {
     const result = await this._call("getState", args);
     return Field.fromJSON(JSON.parse(result as string));
   }
 
-  async prepareTransaction<T extends ContractName>(args: {
-    contractName: T;
-    method: keyof State["contracts"][T]["zkapp"];
-    args?: any[];
+  async prepareTransaction<T extends SmartContract>(args: {
+    //TODO: fix this general string type
+    contractName: string;
+    method: Methods<T>;
+    args?: Field[];
   }) {
     return await this._call("prepareTransaction", {
       ...args,

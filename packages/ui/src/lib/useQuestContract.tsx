@@ -7,24 +7,12 @@ import React, {
   useState,
 } from "react";
 import { Field, PublicKey } from "o1js";
-import { useZkappContext } from "@/context/ZkappContext";
-import { State } from "@/pages/zkappWorker";
+import { useZkappContext } from "@/lib/ZkappContext";
 import { timeout } from "@/utils";
+import { ContractContextType, Methods, StateVariables } from "@/lib/types";
+import { Quest } from "../../../contracts";
 
-interface QuestContractContextType {
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  currentNum: Field | null;
-  setCurrentNum: React.Dispatch<React.SetStateAction<Field | null>>;
-  creatingTransaction: boolean;
-  setCreatingTransaction: React.Dispatch<React.SetStateAction<boolean>>;
-  getState: (args: {
-    stateVariable: keyof State["contracts"]["Quest"]["zkapp"];
-  }) => Promise<Field>;
-  prepareTransaction: any; //TODO: fix this type
-}
-
-const QuestContractContext = createContext<QuestContractContextType | null>(
+const QuestContractContext = createContext<ContractContextType<Quest> | null>(
   null
 );
 
@@ -36,10 +24,6 @@ export const QuestContractProvider = ({
   zkappPublicKey: PublicKey;
 }) => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [currentNum, setCurrentNum] = useState<Field | null>(null);
-  const [creatingTransaction, setCreatingTransaction] =
-    useState<boolean>(false);
-
   const { zkappWorkerClient } = useZkappContext();
 
   useEffect(() => {
@@ -68,11 +52,7 @@ export const QuestContractProvider = ({
   }, [zkappPublicKey, zkappWorkerClient]);
 
   const getState = useCallback(
-    async ({
-      stateVariable,
-    }: {
-      stateVariable: keyof State["contracts"]["Quest"]["zkapp"];
-    }) => {
+    async ({ stateVariable }: { stateVariable: StateVariables<Quest> }) => {
       if (!zkappWorkerClient) {
         throw Error("zkappWorkerClient not initialized");
       }
@@ -88,8 +68,8 @@ export const QuestContractProvider = ({
     method,
     args,
   }: {
-    method: keyof State["contracts"]["Quest"]["zkapp"];
-    args?: any[];
+    method: Methods<Quest>;
+    args?: Field[];
   }) => {
     if (!zkappWorkerClient) {
       throw Error("zkappWorkerClient not initialized");
@@ -109,11 +89,6 @@ export const QuestContractProvider = ({
         prepareTransaction,
         getState,
         loading,
-        setLoading,
-        currentNum,
-        setCurrentNum,
-        creatingTransaction,
-        setCreatingTransaction,
       }}
     >
       {children}
@@ -121,7 +96,7 @@ export const QuestContractProvider = ({
   );
 };
 
-export const useQuestContractContext = (): QuestContractContextType => {
+export const useQuestContract = (): ContractContextType<Quest> => {
   const context = useContext(QuestContractContext);
   if (!context) {
     throw new Error(
@@ -136,10 +111,10 @@ export function useGetQuestContractState({
   stateVariable,
 }: {
   watch?: boolean;
-  stateVariable: keyof State["contracts"]["Quest"]["zkapp"];
+  stateVariable: StateVariables<Quest>;
 }) {
   const [data, setData] = useState<Field | null>(null);
-  const { loading, getState } = useQuestContractContext();
+  const { loading, getState } = useQuestContract();
   useEffect(() => {
     let continuePolling = watch;
 
