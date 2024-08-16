@@ -96,12 +96,18 @@ const functions = {
   }): Promise<any> => {
     const zkapp = state.contracts[contractName]?.zkapp;
     if (!zkapp) throw new Error(`${contractName} zkapp is not initialized.`);
-    const transaction = await Mina.transaction(async () => {
-      // @ts-ignore
-      await zkapp[method](...args?.map((arg) => Field.fromJSON(arg)));
-    });
-    await transaction.prove();
-    return transaction.toJSON();
+    try {
+      const transaction = await Mina.transaction(async () => {
+        // @ts-ignore
+        await zkapp[method](...args?.map((arg) => Field.fromJSON(arg)));
+      });
+      await transaction.prove();
+      return transaction.toJSON();
+    } catch (e) {
+      return {
+        errorMessage: String(e),
+      };
+    }
   },
 };
 

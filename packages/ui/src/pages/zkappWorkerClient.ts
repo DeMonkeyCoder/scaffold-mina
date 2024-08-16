@@ -23,9 +23,29 @@ export default class ZkappWorkerClient {
     this.nextId = 0;
 
     this.worker.onmessage = (event: MessageEvent<ZkappWorkerReponse>) => {
-      this.promises[event.data.id].resolve(event.data.data);
+      if (event.data.data?.errorMessage) {
+        this.promises[event.data.id].reject(event.data.data.errorMessage);
+      } else {
+        this.promises[event.data.id].resolve(event.data.data);
+      }
       delete this.promises[event.data.id];
     };
+  }
+
+  _call(fn: WorkerFunctions, args: any) {
+    return new Promise((resolve, reject) => {
+      this.promises[this.nextId] = { resolve, reject };
+
+      const message: ZkappWorkerRequest = {
+        id: this.nextId,
+        fn,
+        args,
+      };
+
+      this.worker.postMessage(message);
+
+      this.nextId++;
+    });
   }
 
   setActiveInstanceToDevnet() {
@@ -86,22 +106,6 @@ export default class ZkappWorkerClient {
     return await this._call("prepareTransaction", {
       ...args,
       args: args.args?.map((arg) => arg.toJSON()),
-    });
-  }
-
-  _call(fn: WorkerFunctions, args: any) {
-    return new Promise((resolve, reject) => {
-      this.promises[this.nextId] = { resolve, reject };
-
-      const message: ZkappWorkerRequest = {
-        id: this.nextId,
-        fn,
-        args,
-      };
-
-      this.worker.postMessage(message);
-
-      this.nextId++;
     });
   }
 }
