@@ -83,10 +83,11 @@ function HomeBody() {
             accountExists ? (
               <div style={{ justifyContent: "center", alignItems: "center" }}>
                 <div
-                  className={`${styles.center} text-2xl mb-2 flex items-center`}  
+                  className={`text-center text-2xl mb-2 flex items-center justify-center`}
                   style={{ padding: 0 }}
                 >
-                  Solve the riddle <img src="/assets/face-smile-2.svg" alt="" />
+                  Solve the riddle{" "}
+                  <img className="px-2" src="/assets/face-smile-2.svg" alt="" />
                 </div>
                 <div
                   style={{
