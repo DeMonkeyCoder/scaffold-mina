@@ -111,23 +111,25 @@ function HomeBody() {
                     onChange={(e) => setQuestSolution(e.target.value)}
                   />
                 </div>
-                <button
-                  className={`${styles.card} flex items-center justify-center`}
-                  onClick={onSendTransaction}
-                  disabled={txState !== TransactionState.INITIAL}
-                >
-                  <Image
-                    width={16}
-                    height={16}
-                    src="/assets/upload-circle-01-stroke-rounded.svg"
-                    alt=""
-                  />
-                  {txState === TransactionState.AWAITING_USER_APPROVAL
-                    ? "Awaiting Approval..."
-                    : txState === TransactionState.PREPARING
-                    ? "Preparing Transaction..."
-                    : "Send Transaction"}
-                </button>
+                <div className="flex items-center justify-center">
+                  <button
+                    className={`${styles.card} flex items-center justify-center`}
+                    onClick={onSendTransaction}
+                    disabled={txState !== TransactionState.INITIAL}
+                  >
+                    <Image
+                      width={16}
+                      height={16}
+                      src="/assets/upload-circle-01-stroke-rounded.svg"
+                      alt=""
+                    />
+                    {txState === TransactionState.AWAITING_USER_APPROVAL
+                      ? "Awaiting Approval..."
+                      : txState === TransactionState.PREPARING
+                      ? "Preparing Transaction..."
+                      : "Send Transaction"}
+                  </button>
+                </div>
                 <div>Correct Submissions: {currentNum?.toString()} </div>
               </div>
             ) : (
