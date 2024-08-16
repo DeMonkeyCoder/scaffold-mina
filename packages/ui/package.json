@@ -10,20 +10,22 @@
     "ts-watch": "tsc --noEmit --incremental --watch"
   },
   "dependencies": {
+    "next": "14.2.3",
+    "o1js": "^1.*",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.3",
-    "o1js": "^1.*"
+    "sass": "^1.77.8"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/tailwindcss": "^3.1.0",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.3"
+    "typescript": "^5"
   },
   "type": "module"
 }

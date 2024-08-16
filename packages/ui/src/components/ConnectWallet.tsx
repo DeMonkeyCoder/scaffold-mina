@@ -1,4 +1,3 @@
-import styles from "@/styles/Home.module.css";
 import { useMinaWallet } from "@/hooks/useMinaWallet";
 import { formatPublicKey } from "@/utils";
 import Image from "next/image";
@@ -11,7 +10,7 @@ export default function ConnectWallet() {
         href="https://www.aurowallet.com"
         target="_blank"
         rel="noreferrer"
-        className={`${styles.card} flex items-center justify-center`}
+        className="card flex items-center justify-center"
       >
         Install Auro Wallet
       </a>
@@ -20,7 +19,7 @@ export default function ConnectWallet() {
 
   return (
     <button
-      className={`${styles.card} flex items-center justify-center`}
+      className="card flex items-center justify-center"
       onClick={() => {
         if (!isConnected) {
           connect();

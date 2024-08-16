@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import GradientBG from "../components/GradientBG.js";
-import styles from "../styles/Home.module.css";
 import "./reactCOIServiceWorker";
 import LoadingScreen from "@/components/LoadingScreen";
 import { useMinaWallet } from "@/hooks/useMinaWallet";
@@ -53,106 +52,90 @@ function HomeBody() {
     setTxState(TransactionState.INITIAL);
   }, [prepareTransaction, questSolution, sendTransaction, txState]);
 
-  return loading ? (
-    <LoadingScreen />
-  ) : (
+  return (
     <GradientBG>
-      <div className={styles.main} style={{ padding: 0 }}>
-        <div className={styles.center} style={{ padding: 0 }}>
-          {transactionLink && (
-            <div
-              className={styles.start}
-              style={{
-                fontWeight: "bold",
-                fontSize: "1.5rem",
-                paddingBottom: "5rem",
-              }}
-            >
-              <a
-                href={transactionLink}
-                target="_blank"
-                rel="noreferrer"
-                style={{ textDecoration: "underline" }}
-              >
-                View transaction
-              </a>
-            </div>
-          )}
-          {isConnected ? (
-            accountExists ? (
-              <div style={{ justifyContent: "center", alignItems: "center" }}>
-                <div
-                  className={`text-center text-2xl mb-2 flex items-center justify-center`}
-                  style={{ padding: 0 }}
-                >
-                  Solve the riddle{" "}
-                  <img className="px-2" src="/assets/face-smile-2.svg" alt="" />
-                </div>
-                <div
-                  style={{
-                    textAlign: "justify",
-                    textAlignLast: "justify",
-                  }}
-                >
-                  I am a mighty ledger, yet I weigh next to none,
-                  <br />
-                  Verified by all, even when the work is done.
-                  <br />
-                  My size is constant, no matter how much I grow,
-                  <br />
-                  What’s my name, this protocol you need to know?
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    className={`p-2 my-4 rounded-l border-2 border-gray-400`}
-                    placeholder="Solution"
-                    value={questSolution}
-                    onChange={(e) => setQuestSolution(e.target.value)}
-                  />
-                </div>
-                <div className="flex items-center justify-center">
-                  <button
-                    className={`${styles.card} flex items-center justify-center`}
-                    onClick={onSendTransaction}
-                    disabled={txState !== TransactionState.INITIAL}
-                  >
-                    <Image
-                      width={16}
-                      height={16}
-                      src="/assets/upload-circle-01-stroke-rounded.svg"
-                      alt=""
-                    />
-                    {txState === TransactionState.AWAITING_USER_APPROVAL
-                      ? "Awaiting Approval..."
-                      : txState === TransactionState.PREPARING
-                      ? "Preparing Transaction..."
-                      : "Send Transaction"}
-                  </button>
-                </div>
-                <div>Correct Submissions: {currentNum?.toString()} </div>
-              </div>
-            ) : (
-              <div>
-                <span style={{ paddingRight: "1rem" }}>
-                  Account does not exist.
-                </span>
-                <a
-                  href={
-                    "https://faucet.minaprotocol.com/?address=" +
-                    account?.toBase58()
-                  }
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Visit the faucet to fund this fee payer account.
+      <div className="main">
+        {loading ? (
+          <LoadingScreen />
+        ) : (
+          <div className="center">
+            {transactionLink && (
+              <div className="start text-2xl font-bold pb-10 underline">
+                <a href={transactionLink} target="_blank" rel="noreferrer">
+                  View transaction
                 </a>
               </div>
-            )
-          ) : (
-            <div>Please connect your wallet first.</div>
-          )}
-        </div>
+            )}
+            {isConnected ? (
+              accountExists ? (
+                <div className="justify-center items-center">
+                  <div className="text-center text-2xl mb-2 flex items-center justify-center p-0">
+                    Solve the riddle{" "}
+                    <img
+                      className="px-2"
+                      src="/assets/face-smile-2.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div className="text-justify text-last-justify">
+                    I am a mighty ledger, yet I weigh next to none,
+                    <br />
+                    Verified by all, even when the work is done.
+                    <br />
+                    My size is constant, no matter how much I grow,
+                    <br />
+                    What’s my name, this protocol you need to know?
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      className="p-2 my-4 rounded-l border-2 border-gray-400"
+                      placeholder="Solution"
+                      value={questSolution}
+                      onChange={(e) => setQuestSolution(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <button
+                      className="card flex items-center justify-center"
+                      onClick={onSendTransaction}
+                      disabled={txState !== TransactionState.INITIAL}
+                    >
+                      <Image
+                        width={16}
+                        height={16}
+                        src="/assets/upload-circle-01-stroke-rounded.svg"
+                        alt=""
+                      />
+                      {txState === TransactionState.AWAITING_USER_APPROVAL
+                        ? "Awaiting Approval..."
+                        : txState === TransactionState.PREPARING
+                        ? "Preparing Transaction..."
+                        : "Send Transaction"}
+                    </button>
+                  </div>
+                  <div>Correct Submissions: {currentNum?.toString()} </div>
+                </div>
+              ) : (
+                <div>
+                  <span className="pr-2">Account does not exist.</span>
+                  <a
+                    href={
+                      "https://faucet.minaprotocol.com/?address=" +
+                      account?.toBase58()
+                    }
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Visit the faucet to fund this fee payer account.
+                  </a>
+                </div>
+              )
+            ) : (
+              <div>Please connect your wallet first.</div>
+            )}
+          </div>
+        )}
       </div>
     </GradientBG>
   );

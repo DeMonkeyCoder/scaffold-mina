@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+  font-family: 'ABC Monument Grotesk';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/ABCMonumentGrotesk-Regular.woff2') format('woff2'),
+  url('/assets/fonts/ABCMonumentGrotesk-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'ABC Monument Grotesk Light';
+  font-style: normal;
+  src: url('/assets/fonts/ABCMonumentGrotesk-Light.woff2') format('woff2'),
+  url('/assets/fonts/ABCMonumentGrotesk-Light.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'ABC Monument Grotesk Bold';
+  font-style: normal;
+  font-weight: bold;
+  src: url('/assets/fonts/ABCMonumentGrotesk-Bold.woff2') format('woff2'),
+  url('/assets/fonts/ABCMonumentGrotesk-Bold.woff') format('woff');
+}
+
+:root {
+  --max-width: 1100px;
+  --border-radius: 12px;
+  --font-monument: 'ABC Monument Grotesk', sans-serif;
+  --font-monument-bold: 'ABC Monument Grotesk Bold', sans-serif;
+  --font-monument-light: 'ABC Monument Grotesk Light', sans-serif;
+  --foreground-rgb: 0, 0, 0;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.main {
+  @apply flex flex-col justify-center items-center p-0 min-h-screen overflow-hidden;
+}
+
+.background {
+  @apply pointer-events-none absolute top-0 left-0 w-full h-full overflow-hidden z-0;
+}
+
+.background::before {
+  @apply absolute inset-0 opacity-30;
+  z-index: 1;
+  -webkit-mask-image: linear-gradient(20deg, #000 25%, transparent);
+  mask-image: linear-gradient(20deg, #000 25%, transparent);
+  content: '';
+}
+
+.backgroundGradients {
+  @apply block absolute top-[-5%] left-[-5%] w-[110%] h-[110%] blur-xl opacity-40;
+}
+
+.container {
+  @apply flex flex-col justify-center items-center relative h-screen w-screen overflow-hidden;
+}
+
+.tagline {
+  @apply font-[var(--font-monument-light)] text-sm pt-4 tracking-widest z-[99];
+}
+
+.start {
+  @apply font-[var(--font-monument-light)] text-xl tracking-widest z-[99];
+}
+
+.code {
+  @apply font-[var(--font-monument-bold)];
+}
+
+.custom-grid {
+  @apply grid grid-cols-4 gap-4 w-[var(--max-width)] max-w-full mb-12 justify-items-center;
+}
+
+.card {
+  @apply relative p-3.5 px-4 gap-2.5 m-4 bg-[rgba(var(--card-rgb),0)] bg-white border border-[#b7bdbd] rounded-[4px_1px] w-56 text-center opacity-100 filter-none text-black transition-all duration-500;
+  transform-style: preserve-3d;
+}
+
+.card:hover {
+  @apply tracking-wider shadow-lg border-transparent;
+  background: var(--card-rgb);
+}
+
+.card::before {
+  @apply absolute top-[-2px] left-[-2px] w-[calc(100%+4px)] h-[calc(100%+4px)] rounded-[4px_1px] bg-gradient-to-r from-pink-500 via-yellow-300 to-green-500 transition-opacity duration-300 ease-in-out opacity-10 z-[-1];
+  filter: blur(8px);
+}
+
+
+.card:hover::before {
+  @apply opacity-20;
+  animation: glowing 5s linear infinite;
+}
+
+.card span {
+  @apply inline-block transition-transform duration-200 text-sm font-bold;
+}
+
+.card h2 {
+  @apply flex font-semibold mb-2 justify-between tracking-wider;
+}
+
+.card h2 div {
+  @apply flex;
+}
+
+.card p {
+  @apply m-0 opacity-60 text-sm pr-2 leading-3 max-w-[30ch] font-light;
+}
+
+.center {
+  @apply flex flex-col justify-center items-center text-center p-0;
+}
+
+.logo {
+  @apply relative mix-blend-difference invert-70;
+}
+
+@media (max-width: 700px) {
+  .content {
+    @apply p-16;
+  }
+
+  .custom-grid {
+    @apply grid-cols-1 max-w-[320px] grid-rows-4;
+  }
+
+  .start {
+    @apply mb-8 pl-2.5 text-center;
+  }
+
+  .card {
+    @apply p-3.5 px-4 pb-2.5;
+  }
+
+  .center {
+    @apply flex flex-col justify-center items-center text-center py-0 pb-12 pl-0.5;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1120px) {
+  .custom-grid {
+    @apply grid-cols-2;
+  }
+}
+
+@keyframes glowing {
+  0%, 25%, 75%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes dot1 {
+  0%, 20%, 100% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+@keyframes dot2 {
+  0%, 40%, 100% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+}
+
+@keyframes dot3 {
+  0%, 60%, 100% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 1;
+  }
+}
+
+.loadingText {
+  @apply text-[1.4em] font-[var(--font-monument-light)] text-center bg-gradient-to-r from-[#ee7752] via-[#e73c7e] to-[#23a6d5] bg-clip-text text-transparent;
+  animation: animate 5s ease-in-out infinite;
+}
+
+.loadingText span {
+  @apply font-light block;
+}
+
+@keyframes animate {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.navbar {
+  @apply absolute top-0 left-0 w-full flex justify-end p-4 z-[1000];
+}
+
+.text-last-justify {
+  text-align-last: justify;
+}

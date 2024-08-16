@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import type { PluginAPI } from "tailwindcss/types/config";
 
 const config: Config = {
   content: [
@@ -8,6 +9,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      invert: {
+        70: "0.7", // Adding the custom invert value
+      },
+      transformStyle: {
+        "preserve-3d": "preserve-3d",
+      },
+      blur: {
+        xl: "150px",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -15,6 +25,15 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }: PluginAPI) {
+      addUtilities({
+        ".transform-style-preserve-3d": {
+          "transform-style": "preserve-3d",
+        },
+      });
+    },
+  ],
 };
+
 export default config;
