@@ -10,6 +10,7 @@ import {
   useQuestContractContext,
 } from "@/context/QuestContractContext";
 import { CircuitString, PublicKey } from "o1js";
+import Image from "next/image";
 
 enum TransactionState {
   INITIAL,
@@ -111,10 +112,16 @@ function HomeBody() {
                   />
                 </div>
                 <button
-                  className={styles.card}
+                  className={`${styles.card} flex items-center justify-center`}
                   onClick={onSendTransaction}
                   disabled={txState !== TransactionState.INITIAL}
                 >
+                  <Image
+                    width={16}
+                    height={16}
+                    src="/assets/upload-circle-01-stroke-rounded.svg"
+                    alt=""
+                  />
                   {txState === TransactionState.AWAITING_USER_APPROVAL
                     ? "Awaiting Approval..."
                     : txState === TransactionState.PREPARING
