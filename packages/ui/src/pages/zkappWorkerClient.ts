@@ -81,8 +81,12 @@ export default class ZkappWorkerClient {
   async prepareTransaction<T extends ContractName>(args: {
     contractName: T;
     method: keyof State["contracts"][T]["zkapp"];
+    args?: any[];
   }) {
-    return await this._call("prepareTransaction", args);
+    return await this._call("prepareTransaction", {
+      ...args,
+      args: args.args?.map((arg) => arg.toJSON()),
+    });
   }
 
   _call(fn: WorkerFunctions, args: any) {

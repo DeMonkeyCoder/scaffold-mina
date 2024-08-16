@@ -1,4 +1,4 @@
-import { fetchAccount, Mina, PublicKey } from "o1js";
+import { fetchAccount, Field, Mina, PublicKey } from "o1js";
 // ---------------------------------------------------------------------------------------
 import type { Add } from "../../../contracts/src/Add";
 import type { Quest } from "../../../contracts/src/Quest";
@@ -88,15 +88,17 @@ const functions = {
   prepareTransaction: async <T extends ContractName>({
     contractName,
     method,
+    args,
   }: {
     contractName: T;
     method: keyof State["contracts"][T]["zkapp"];
-  }) => {
+    args?: any[];
+  }): Promise<any> => {
     const zkapp = state.contracts[contractName]?.zkapp;
     if (!zkapp) throw new Error(`${contractName} zkapp is not initialized.`);
     const transaction = await Mina.transaction(async () => {
       // @ts-ignore
-      await zkapp[method]();
+      await zkapp[method](...args?.map((arg) => Field.fromJSON(arg)));
     });
     await transaction.prove();
     return transaction.toJSON();
@@ -122,13 +124,15 @@ if (typeof window !== "undefined") {
   addEventListener(
     "message",
     async (event: MessageEvent<ZkappWorkerRequest>) => {
-      const returnData = await functions[event.data.fn](event.data.args);
+      if (event.data.fn in functions) {
+        const returnData = await functions[event.data.fn](event.data.args);
 
-      const message: ZkappWorkerReponse = {
-        id: event.data.id,
-        data: returnData,
-      };
-      postMessage(message);
+        const message: ZkappWorkerReponse = {
+          id: event.data.id,
+          data: returnData,
+        };
+        postMessage(message);
+      }
     }
   );
 }

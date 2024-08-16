@@ -10,7 +10,7 @@ import {
   useGetQuestContractState,
   useQuestContractContext,
 } from "@/context/QuestContractContext";
-import { PublicKey } from "o1js";
+import { CircuitString, PublicKey } from "o1js";
 
 function HomeBody() {
   const {
@@ -37,7 +37,8 @@ function HomeBody() {
     setCreatingTransaction(true);
     setDisplayText("Preparing transaction...");
     const transactionJSON = await prepareTransaction({
-      method: "update" as never,
+      method: "solve" as never,
+      args: [CircuitString.fromString("mina").hash()],
     });
     setDisplayText("Waiting for user approval...");
     const { hash } = await sendTransaction({

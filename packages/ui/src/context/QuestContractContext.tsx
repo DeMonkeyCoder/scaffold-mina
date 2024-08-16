@@ -86,8 +86,10 @@ export const QuestContractProvider = ({
   );
   const prepareTransaction = async ({
     method,
+    args,
   }: {
     method: keyof State["contracts"]["Quest"]["zkapp"];
+    args?: any[];
   }) => {
     if (!zkappWorkerClient) {
       throw Error("zkappWorkerClient not initialized");
@@ -97,6 +99,7 @@ export const QuestContractProvider = ({
     return zkappWorkerClient.prepareTransaction({
       contractName: "Quest",
       method,
+      args,
     });
   };
 
@@ -144,7 +147,6 @@ export function useGetQuestContractState({
       const newData = await getState({
         stateVariable,
       });
-      console.log({ newData: newData.toString() });
       setData(newData);
       await timeout(3);
       if (continuePolling) {
