@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import GradientBG from "../components/GradientBG.js";
-import "./reactCOIServiceWorker";
 import LoadingScreen from "@/components/LoadingScreen";
 import { useMinaWallet } from "@/hooks/useMinaWallet";
 import {
