@@ -76,6 +76,9 @@ importers:
         specifier: ^1.77.8
         version: 1.77.8
     devDependencies:
+      '@aurowallet/mina-provider':
+        specifier: ^1.0.5
+        version: 1.0.5
       '@types/node':
         specifier: ^20
         version: 20.14.14
@@ -113,6 +116,9 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@aurowallet/mina-provider@1.0.5':
+    resolution: {integrity: sha512-a8yu33WHIj/yp12ZJsScG+hgsJDZzncs/YGSGN9aPcT4+J2pm1gbUNLofcyIqPruK0PXVgU6yQYXdAIPIHvMRQ==}
 
   '@babel/code-frame@7.24.7':
     resolution: {integrity: sha512-BcYH1CVJBO9tvyIZ2jVeXgSIMvGZ2FDRvDdOIVQyuklNKSsx+eppDEBq/g47Ayw+RqNFE+URvOShmf+f/qwAlA==}
@@ -951,6 +957,10 @@ packages:
   '@types/babel__traverse@7.20.6':
     resolution: {integrity: sha512-r1bzfrm0tomOI8g1SzvCaQHo6Lcv6zu0EA+W2kHrt8dyrHQxGzBBL4kdkzIS+jBMV+EYcMAEAqXqYaLJq5rOZg==}
 
+  '@types/eventemitter3@2.0.2':
+    resolution: {integrity: sha512-nLbSkHNDMVCyINVOtmDq9lTv+PDzeypazRMoqYDKyLPzrbLLiSHFSZLifMU1PxFHRvLJuyDlr/GU0j60eEyeaA==}
+    deprecated: This is a stub types definition for EventEmitter3 (https://github.com/primus/eventemitter3). EventEmitter3 provides its own type definitions, so you don't need @types/eventemitter3 installed!
+
   '@types/graceful-fs@4.1.9':
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
 
@@ -996,6 +1006,9 @@ packages:
   '@types/tailwindcss@3.1.0':
     resolution: {integrity: sha512-JxPzrm609hzvF4nmOI3StLjbBEP3WWQxDDJESqR1nh94h7gyyy3XSl0hn5RBMJ9mPudlLjtaXs5YEBtLw7CnPA==}
     deprecated: This is a stub types definition. tailwindcss provides its own type definitions, so you do not need this installed.
+
+  '@types/uuid@8.3.4':
+    resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
 
   '@types/yargs-parser@21.0.3':
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
@@ -1631,6 +1644,9 @@ packages:
   esutils@2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
+
+  eventemitter3@4.0.7:
+    resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
 
   execa@5.1.1:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
@@ -3022,6 +3038,10 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
+  uuid@8.3.2:
+    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
+
   v8-to-istanbul@9.3.0:
     resolution: {integrity: sha512-kiGUalWN+rgBJ/1OHZsBtU4rXZOfj/7rKQxULKlIzwzQSvMJUUNgPwJEEh7gU6xEVxC0ahoOBvN2YI8GH6FNgA==}
     engines: {node: '>=10.12.0'}
@@ -3109,6 +3129,13 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@aurowallet/mina-provider@1.0.5':
+    dependencies:
+      '@types/eventemitter3': 2.0.2
+      '@types/uuid': 8.3.4
+      eventemitter3: 4.0.7
+      uuid: 8.3.2
 
   '@babel/code-frame@7.24.7':
     dependencies:
@@ -4231,6 +4258,10 @@ snapshots:
     dependencies:
       '@babel/types': 7.25.2
 
+  '@types/eventemitter3@2.0.2':
+    dependencies:
+      eventemitter3: 4.0.7
+
   '@types/graceful-fs@4.1.9':
     dependencies:
       '@types/node': 20.14.14
@@ -4280,6 +4311,8 @@ snapshots:
       tailwindcss: 3.4.7
     transitivePeerDependencies:
       - ts-node
+
+  '@types/uuid@8.3.4': {}
 
   '@types/yargs-parser@21.0.3': {}
 
@@ -5140,6 +5173,8 @@ snapshots:
   estraverse@5.3.0: {}
 
   esutils@2.0.3: {}
+
+  eventemitter3@4.0.7: {}
 
   execa@5.1.1:
     dependencies:
@@ -6737,6 +6772,8 @@ snapshots:
       punycode: 2.3.1
 
   util-deprecate@1.0.2: {}
+
+  uuid@8.3.2: {}
 
   v8-to-istanbul@9.3.0:
     dependencies:

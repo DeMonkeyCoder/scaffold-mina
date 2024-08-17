@@ -11,12 +11,11 @@ export function useMinaWallet() {
 
   useEffect(() => {
     async function getAccount() {
-      const mina = (window as any).mina;
-      if (!mina) {
+      if (!window.mina) {
         setHasWallet(false);
         return;
       }
-      const publicKeyBase58: string = (await mina.getAccounts())[0];
+      const publicKeyBase58: string = (await window.mina.getAccounts())[0];
       if (publicKeyBase58) {
         setAccount(PublicKey.fromBase58(publicKeyBase58));
         setIsConnected(true);
@@ -28,22 +27,25 @@ export function useMinaWallet() {
   }, []);
 
   const connect = useCallback(async () => {
-    const mina = (window as any).mina;
-    if (!mina || !hasWallet) {
-      return;
+    if (!window.mina) {
+      throw Error("Wallet is not installed");
     }
-    const publicKeyBase58: string = (await mina.requestAccounts())[0];
-    if (publicKeyBase58) {
-      setAccount(PublicKey.fromBase58(publicKeyBase58));
+    const requestAccountsResponse = await window.mina.requestAccounts();
+    if (Array.isArray(requestAccountsResponse)) {
+      const publicKeyBase58 = requestAccountsResponse[0];
+      if (publicKeyBase58) {
+        setAccount(PublicKey.fromBase58(publicKeyBase58));
+      }
+      setIsConnected(true);
+    } else {
+      throw Error(requestAccountsResponse.message);
     }
-    setIsConnected(true);
-  }, [hasWallet]);
+  }, []);
 
   const [accountExists, setAccountExists] = useState<boolean | null>(null);
   useEffect(() => {
     (async () => {
       if (account && zkappWorkerClient) {
-        console.log("Checking if fee payer account exists...");
         const res = await zkappWorkerClient!.fetchAccount({
           publicKey: account,
         });
@@ -60,13 +62,16 @@ export function useMinaWallet() {
       transactionJSON: any;
       transactionFee: number;
     }) => {
+      if (!window.mina) {
+        throw Error("Wallet is not installed");
+      }
       if (!isConnected) {
         throw Error("Wallet is not connected");
       }
       if (!accountExists) {
         throw Error("Mina account does not exist");
       }
-      return (window as any).mina.sendTransaction({
+      return window.mina.sendTransaction({
         transaction: transactionJSON,
         feePayer: {
           fee: transactionFee,
