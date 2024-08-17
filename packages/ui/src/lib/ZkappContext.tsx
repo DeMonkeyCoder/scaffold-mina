@@ -22,7 +22,8 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
   const [zkappWorkerClient, setZkappWorkerClient] =
     useState<ZkappWorkerClient | null>(null);
 
-  const { account, ...oiawejf } = useMinaInjectedProvider();
+  const { account, ...minaInjectedProviderHookData } =
+    useMinaInjectedProvider();
 
   useEffect(() => {
     (async () => {
@@ -53,7 +54,7 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
         zkappWorkerClient,
         accountExists,
         account,
-        ...oiawejf,
+        ...minaInjectedProviderHookData,
       }}
     >
       {children}
