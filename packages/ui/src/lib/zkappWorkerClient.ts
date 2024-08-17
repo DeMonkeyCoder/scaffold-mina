@@ -17,12 +17,23 @@ export default class ZkappWorkerClient {
   };
   nextId: number;
 
+  workerReady: Promise<void>;
+  private workerReadyResolve: () => void;
+
   constructor() {
     this.worker = new Worker(new URL("./zkappWorker.ts", import.meta.url));
     this.promises = {};
     this.nextId = 0;
 
+    this.workerReady = new Promise<void>((resolve) => {
+      this.workerReadyResolve = resolve;
+    });
+
     this.worker.onmessage = (event: MessageEvent<ZkappWorkerReponse>) => {
+      if ("type" in event.data && event.data.type === "ready") {
+        this.workerReadyResolve();
+        return;
+      }
       if (event.data.data?.errorMessage) {
         this.promises[event.data.id].reject(event.data.data.errorMessage);
       } else {

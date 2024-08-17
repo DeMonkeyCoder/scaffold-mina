@@ -143,4 +143,6 @@ if (typeof window !== "undefined") {
   );
 }
 
+postMessage({ type: "ready" });
+
 console.log("Web Worker Successfully Initialized.");

@@ -6,7 +6,6 @@ import React, {
   useState,
 } from "react";
 import ZkappWorkerClient from "./zkappWorkerClient";
-import { timeout } from "@/utils";
 import { useMinaInjectedProvider } from "@/lib/useMinaInjectedProvider";
 
 type MinaAccountData = {
@@ -29,7 +28,7 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
     (async () => {
       if (!zkappWorkerClient) {
         const zkappWorkerClientInstance = new ZkappWorkerClient();
-        await timeout(5);
+        await zkappWorkerClientInstance.workerReady;
         await zkappWorkerClientInstance.setActiveInstanceToDevnet();
         setZkappWorkerClient(zkappWorkerClientInstance);
       }
