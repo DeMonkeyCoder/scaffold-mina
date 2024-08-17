@@ -1,9 +1,9 @@
-import { useMinaWallet } from "@/hooks/useMinaWallet";
 import { formatPublicKey } from "@/utils";
 import Image from "next/image";
+import { useMinaProvider } from "@/lib/ZkappContext";
 
 export default function ConnectWallet() {
-  const { connect, hasWallet, isConnected, account } = useMinaWallet();
+  const { connect, hasWallet, isConnected, account } = useMinaProvider();
   if (!hasWallet) {
     return (
       <a

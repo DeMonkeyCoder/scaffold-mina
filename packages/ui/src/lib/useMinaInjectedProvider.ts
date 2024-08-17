@@ -1,10 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { PublicKey } from "o1js";
-import { useZkappContext } from "@/lib/ZkappContext";
 
-export function useMinaWallet() {
-  const { zkappWorkerClient } = useZkappContext();
-
+export function useMinaInjectedProvider() {
   const [isConnected, setIsConnected] = useState(false);
   const [hasWallet, setHasWallet] = useState<boolean | null>(null);
   const [account, setAccount] = useState<PublicKey | null>(null);
@@ -33,7 +30,7 @@ export function useMinaWallet() {
     const requestAccountsResponse = await window.mina.requestAccounts();
     if (Array.isArray(requestAccountsResponse)) {
       const publicKeyBase58 = requestAccountsResponse[0];
-      console.log({publicKeyBase58})
+      console.log({ publicKeyBase58 });
       if (publicKeyBase58) {
         setAccount(PublicKey.fromBase58(publicKeyBase58));
       }
@@ -42,18 +39,6 @@ export function useMinaWallet() {
       throw Error(requestAccountsResponse.message);
     }
   }, []);
-
-  const [accountExists, setAccountExists] = useState<boolean | null>(null);
-  useEffect(() => {
-    (async () => {
-      if (account && zkappWorkerClient) {
-        const res = await zkappWorkerClient.fetchAccount({
-          publicKey: account,
-        });
-        setAccountExists(res.error == null);
-      }
-    })();
-  }, [account, zkappWorkerClient, setAccountExists]);
 
   const sendTransaction = useCallback(
     async ({
@@ -69,9 +54,6 @@ export function useMinaWallet() {
       if (!isConnected) {
         throw Error("Wallet is not connected");
       }
-      if (!accountExists) {
-        throw Error("Mina account does not exist");
-      }
       const result = await window.mina.sendTransaction({
         transaction: transactionJSON,
         feePayer: {
@@ -82,17 +64,18 @@ export function useMinaWallet() {
       if ("hash" in result) {
         return result;
       } else {
-        throw Error("message" in result ? result.message : "Unknown error happened");
+        throw Error(
+          "message" in result ? result.message : "Unknown error happened"
+        );
       }
     },
-    [accountExists, isConnected]
+    [isConnected]
   );
 
   return {
     sendTransaction,
     hasWallet,
     account,
-    accountExists,
     isConnected,
     connect,
   };

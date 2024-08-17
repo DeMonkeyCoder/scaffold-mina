@@ -104,7 +104,7 @@ export default class ZkappWorkerClient {
     contractName: string;
     method: Methods<T>;
     args?: Field[];
-  }) {
+  }): Promise<any> {
     return await this._call("prepareTransaction", {
       ...args,
       args: args.args?.map((arg) => arg.toJSON()),

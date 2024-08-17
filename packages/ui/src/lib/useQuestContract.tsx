@@ -7,7 +7,7 @@ import React, {
   useState,
 } from "react";
 import { Field, PublicKey } from "o1js";
-import { useZkappContext } from "@/lib/ZkappContext";
+import { useMinaProvider } from "@/lib/ZkappContext";
 import { timeout } from "@/utils";
 import { ContractContextType, Methods, StateVariables } from "@/lib/types";
 import { Quest } from "../../../contracts";
@@ -24,7 +24,7 @@ export const QuestContractProvider = ({
   zkappPublicKey: PublicKey;
 }) => {
   const [loading, setLoading] = useState<boolean>(true);
-  const { zkappWorkerClient } = useZkappContext();
+  const { zkappWorkerClient } = useMinaProvider();
 
   useEffect(() => {
     (async () => {
@@ -75,7 +75,6 @@ export const QuestContractProvider = ({
       throw Error("zkappWorkerClient not initialized");
     }
     await fetchAccount();
-    console.log("fetchAccount done");
     return zkappWorkerClient.prepareTransaction({
       contractName: "Quest",
       method,

@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import GradientBG from "../components/GradientBG.js";
 import LoadingScreen from "@/components/LoadingScreen";
-import { useMinaWallet } from "@/hooks/useMinaWallet";
 import {
   QuestContractProvider,
   useGetQuestContractState,
@@ -9,6 +8,7 @@ import {
 } from "@/lib/useQuestContract";
 import { CircuitString, PublicKey } from "o1js";
 import Image from "next/image";
+import { useMinaProvider } from "@/lib/ZkappContext";
 
 enum TransactionState {
   INITIAL,
@@ -20,7 +20,7 @@ function HomeBody() {
   const { loading, prepareTransaction } = useQuestContract();
 
   const { isConnected, accountExists, sendTransaction, account } =
-    useMinaWallet();
+    useMinaProvider();
 
   const { data: currentNum } = useGetQuestContractState({
     stateVariable: "counter",

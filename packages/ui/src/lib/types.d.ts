@@ -22,5 +22,5 @@ interface ContractContextType<T extends SmartContract> {
   prepareTransaction: (args: {
     method: Methods<T>;
     args: Field[];
-  }) => Promise<Field>;
+  }) => Promise<any>;
 }
