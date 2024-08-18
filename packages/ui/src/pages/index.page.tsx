@@ -10,6 +10,7 @@ import { CircuitString, PublicKey } from "o1js";
 import Image from "next/image";
 import { useMinaProvider } from "@/lib/ZkappContext";
 import { isSupportedNetwork } from "@/constants/network";
+import AccountDoesNotExist from "@/components/AccountDoesNotExist";
 
 enum TransactionState {
   INITIAL,
@@ -20,7 +21,7 @@ enum TransactionState {
 function HomeBody() {
   const { loading, prepareTransaction } = useQuestContract();
 
-  const { isConnected, accountExists, sendTransaction, account, network } =
+  const { isConnected, accountExists, sendTransaction, network } =
     useMinaProvider();
 
   const { data: currentNum } = useGetQuestContractState({
@@ -118,19 +119,7 @@ function HomeBody() {
                     <div>Correct Submissions: {currentNum?.toString()} </div>
                   </div>
                 ) : (
-                  <div>
-                    <span className="pr-2">Account does not exist.</span>
-                    <a
-                      href={
-                        "https://faucet.minaprotocol.com/?address=" +
-                        account?.toBase58()
-                      }
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Visit the faucet to fund this fee payer account.
-                    </a>
-                  </div>
+                 <AccountDoesNotExist />
                 )
               ) : (
                 <div>
