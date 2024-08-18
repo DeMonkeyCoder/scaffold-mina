@@ -5,6 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <title>Mina Scaffold</title>
+        <link rel="icon" href="/assets/favicon.ico" />
       </Head>
       <body>
         <Main />
