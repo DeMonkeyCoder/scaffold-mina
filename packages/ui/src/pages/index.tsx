@@ -9,6 +9,7 @@ import {
 import { CircuitString, PublicKey } from "o1js";
 import Image from "next/image";
 import { useMinaProvider } from "@/lib/ZkappContext";
+import { isSupportedNetwork } from "@/constants/network";
 
 enum TransactionState {
   INITIAL,
@@ -19,7 +20,7 @@ enum TransactionState {
 function HomeBody() {
   const { loading, prepareTransaction } = useQuestContract();
 
-  const { isConnected, accountExists, sendTransaction, account } =
+  const { isConnected, accountExists, sendTransaction, account, network } =
     useMinaProvider();
 
   const { data: currentNum } = useGetQuestContractState({
@@ -66,68 +67,74 @@ function HomeBody() {
               </div>
             )}
             {isConnected ? (
-              accountExists ? (
-                <div className="justify-center items-center">
-                  <div className="text-center text-2xl mb-2 flex items-center justify-center p-0">
-                    Solve the riddle{" "}
-                    <img
-                      className="px-2"
-                      src="/assets/face-smile-2.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="text-justify text-last-justify">
-                    I am a mighty ledger, yet I weigh next to none,
-                    <br />
-                    Verified by all, even when the work is done.
-                    <br />
-                    My size is constant, no matter how much I grow,
-                    <br />
-                    What’s my name, this protocol you need to know?
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      className="p-2 my-4 rounded-l border-2 border-gray-400"
-                      placeholder="Solution"
-                      value={questSolution}
-                      onChange={(e) => setQuestSolution(e.target.value)}
-                    />
-                  </div>
-                  <div className="flex items-center justify-center">
-                    <button
-                      className="card flex items-center justify-center"
-                      onClick={onSendTransaction}
-                      disabled={txState !== TransactionState.INITIAL}
-                    >
-                      <Image
-                        width={16}
-                        height={16}
-                        src="/assets/upload-circle-01-stroke-rounded.svg"
+              isSupportedNetwork(network) ? (
+                accountExists ? (
+                  <div className="justify-center items-center">
+                    <div className="text-center text-2xl mb-2 flex items-center justify-center p-0">
+                      Solve the riddle{" "}
+                      <img
+                        className="px-2"
+                        src="/assets/face-smile-2.svg"
                         alt=""
                       />
-                      {txState === TransactionState.AWAITING_USER_APPROVAL
-                        ? "Awaiting Approval..."
-                        : txState === TransactionState.PREPARING
-                        ? "Preparing Transaction..."
-                        : "Send Transaction"}
-                    </button>
+                    </div>
+                    <div className="text-justify text-last-justify">
+                      I am a mighty ledger, yet I weigh next to none,
+                      <br />
+                      Verified by all, even when the work is done.
+                      <br />
+                      My size is constant, no matter how much I grow,
+                      <br />
+                      What’s my name, this protocol you need to know?
+                    </div>
+                    <div>
+                      <input
+                        type="text"
+                        className="p-2 my-4 rounded-l border-2 border-gray-400"
+                        placeholder="Solution"
+                        value={questSolution}
+                        onChange={(e) => setQuestSolution(e.target.value)}
+                      />
+                    </div>
+                    <div className="flex items-center justify-center">
+                      <button
+                        className="card flex items-center justify-center"
+                        onClick={onSendTransaction}
+                        disabled={txState !== TransactionState.INITIAL}
+                      >
+                        <Image
+                          width={16}
+                          height={16}
+                          src="/assets/upload-circle-01-stroke-rounded.svg"
+                          alt=""
+                        />
+                        {txState === TransactionState.AWAITING_USER_APPROVAL
+                          ? "Awaiting Approval..."
+                          : txState === TransactionState.PREPARING
+                          ? "Preparing Transaction..."
+                          : "Send Transaction"}
+                      </button>
+                    </div>
+                    <div>Correct Submissions: {currentNum?.toString()} </div>
                   </div>
-                  <div>Correct Submissions: {currentNum?.toString()} </div>
-                </div>
+                ) : (
+                  <div>
+                    <span className="pr-2">Account does not exist.</span>
+                    <a
+                      href={
+                        "https://faucet.minaprotocol.com/?address=" +
+                        account?.toBase58()
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Visit the faucet to fund this fee payer account.
+                    </a>
+                  </div>
+                )
               ) : (
                 <div>
-                  <span className="pr-2">Account does not exist.</span>
-                  <a
-                    href={
-                      "https://faucet.minaprotocol.com/?address=" +
-                      account?.toBase58()
-                    }
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Visit the faucet to fund this fee payer account.
-                  </a>
+                  Wrong network. Please change your wallet network to Devnet
                 </div>
               )
             ) : (

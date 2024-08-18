@@ -1,10 +1,21 @@
 import { useCallback, useEffect, useState } from "react";
 import { PublicKey } from "o1js";
+import { ChainInfoArgs, SwitchChainArgs } from "@aurowallet/mina-provider";
 
 export function useMinaInjectedProvider() {
   const [isConnected, setIsConnected] = useState(false);
   const [hasWallet, setHasWallet] = useState<boolean | null>(null);
   const [account, setAccount] = useState<PublicKey | null>(null);
+  const [network, setNetwork] = useState<ChainInfoArgs | null>(null);
+
+  const setAccountFromWalletResponse = useCallback(
+    (base58Accounts: string[]) => {
+      if (base58Accounts[0]) {
+        setAccount(PublicKey.fromBase58(base58Accounts[0]));
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     async function getAccount() {
@@ -12,16 +23,23 @@ export function useMinaInjectedProvider() {
         setHasWallet(false);
         return;
       }
-      const publicKeyBase58: string = (await window.mina.getAccounts())[0];
-      if (publicKeyBase58) {
-        setAccount(PublicKey.fromBase58(publicKeyBase58));
-        setIsConnected(true);
-      }
+
+      window.mina.requestNetwork().then((chainInfo) => setNetwork(chainInfo));
+      const base58Accounts = await window.mina.getAccounts();
+      setAccountFromWalletResponse(base58Accounts);
+      setIsConnected(Boolean(base58Accounts[0]));
       setHasWallet(true);
     }
 
+    window.mina?.on("chainChanged", setNetwork);
+    window.mina?.on("accountsChanged", setAccountFromWalletResponse);
     getAccount();
-  }, []);
+
+    return () => {
+      window.mina?.off("chainChanged", setNetwork);
+      window.mina?.off("accountsChanged", setAccountFromWalletResponse);
+    };
+  }, [setAccountFromWalletResponse]);
 
   const connect = useCallback(async () => {
     if (!window.mina) {
@@ -29,14 +47,22 @@ export function useMinaInjectedProvider() {
     }
     const requestAccountsResponse = await window.mina.requestAccounts();
     if (Array.isArray(requestAccountsResponse)) {
-      const publicKeyBase58 = requestAccountsResponse[0];
-      console.log({ publicKeyBase58 });
-      if (publicKeyBase58) {
-        setAccount(PublicKey.fromBase58(publicKeyBase58));
-      }
+      setAccountFromWalletResponse(requestAccountsResponse);
       setIsConnected(true);
     } else {
       throw Error(requestAccountsResponse.message);
+    }
+  }, [setAccountFromWalletResponse]);
+
+  const switchNetwork = useCallback(async (args: SwitchChainArgs) => {
+    if (!window.mina) {
+      throw Error("Wallet is not installed");
+    }
+    const response = await window.mina.switchChain(args);
+    if ("networkID" in response) {
+      setNetwork(response);
+    } else {
+      throw Error(response.message);
     }
   }, []);
 
@@ -73,10 +99,12 @@ export function useMinaInjectedProvider() {
   );
 
   return {
-    sendTransaction,
+    network,
     hasWallet,
-    account,
+    switchNetwork,
     isConnected,
     connect,
+    account,
+    sendTransaction,
   };
 }
