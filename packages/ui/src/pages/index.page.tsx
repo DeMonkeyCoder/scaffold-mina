@@ -70,6 +70,7 @@ function HomeBody() {
             {isConnected ? (
               isSupportedNetwork(network) ? (
                 accountExists ? (
+      <div className="riddle-box"> 
                   <div className="justify-center items-center">
                     <div className="text-center text-2xl mb-2 flex items-center justify-center p-0">
                       Solve the riddle{" "}
@@ -79,24 +80,29 @@ function HomeBody() {
                         alt=""
                       />
                     </div>
-                    <div className="text-justify text-last-justify">
-                      I am a mighty ledger, yet I weigh next to none,
-                      <br />
-                      Verified by all, even when the work is done.
-                      <br />
-                      My size is constant, no matter how much I grow,
-                      <br />
-                      What’s my name, this protocol you need to know?
-                    </div>
+                                <div className="text-justify text-last-justify">
+                                  <br />
+                                  I am a mighty ledger, yet I weigh next to none,
+                                  <br />
+                                  Verified by all, even when the work is done.
+                                  <br />
+                                  My size is constant, no matter how much I grow,
+                                  <br />
+                                  What’s my name, this protocol you need to know?
+                                  <br />
+                                  <br />
+                                </div>
+      </div>
                     <div>
                       <input
                         type="text"
-                        className="p-2 my-4 rounded-l border-2 border-gray-400"
+                        className="p-2 my-4 rounded-l border-2 border-gray-400 w-56"
                         placeholder="Solution"
                         value={questSolution}
                         onChange={(e) => setQuestSolution(e.target.value)}
                       />
                     </div>
+                 
                     <div className="flex items-center justify-center">
                       <button
                         className="card flex items-center justify-center"
