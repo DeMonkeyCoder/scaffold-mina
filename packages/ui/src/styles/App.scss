@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
 
 
 @font-face {
@@ -250,7 +251,20 @@ a {
 }
 
 .riddle-box {
-  border: 1px solid #b7bdbd;
   padding: 2rem;
-  border-radius: 6px;
+  border-radius: 20px 5px;
+  // font-family: "Fira Code", monospace;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+  overflow: visible;
+
 }
+
+.riddle-box:hover {
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+  border: 2px solid rgb(207, 120, 237);
+  border-radius: 20px 5px;
+ }
+ 
+ 
+ 
