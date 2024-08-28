@@ -24,6 +24,12 @@ export function useMinaInjectedProvider() {
         return;
       }
 
+      const disconnected = localStorage.getItem("mina_disconnected");
+      if (disconnected === "true") {
+        setHasWallet(true);
+        return;
+      }
+
       window.mina.requestNetwork().then((chainInfo) => setNetwork(chainInfo));
       const base58Accounts = await window.mina.getAccounts();
       setAccountFromWalletResponse(base58Accounts);
@@ -45,9 +51,13 @@ export function useMinaInjectedProvider() {
     if (!window.mina) {
       throw Error("Wallet is not installed");
     }
+
+    localStorage.removeItem("mina_disconnected");
+
     const requestAccountsResponse = await window.mina.requestAccounts();
     if (Array.isArray(requestAccountsResponse)) {
       setAccountFromWalletResponse(requestAccountsResponse);
+      window.mina.requestNetwork().then((chainInfo) => setNetwork(chainInfo));
       setIsConnected(true);
     } else {
       throw Error(requestAccountsResponse.message);
@@ -98,12 +108,20 @@ export function useMinaInjectedProvider() {
     [isConnected]
   );
 
+  const disconnect = useCallback(() => {
+    setAccount(null);
+    setNetwork(null);
+    setIsConnected(false);
+    localStorage.setItem("mina_disconnected", "true");
+  }, []);
+
   return {
     network,
     hasWallet,
     switchNetwork,
     isConnected,
     connect,
+    disconnect,
     account,
     sendTransaction,
   };
