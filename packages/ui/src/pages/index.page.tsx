@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import GradientBG from "../components/GradientBG.js";
 import LoadingScreen from "@/components/LoadingScreen";
+import ConnectWallet from "@/components/ConnectWallet";
 import {
   QuestContractProvider,
   useGetQuestContractState,
@@ -11,6 +12,7 @@ import Image from "next/image";
 import { useMinaProvider } from "@/lib/ZkappContext";
 import { isSupportedNetwork } from "@/constants/network";
 import AccountDoesNotExist from "@/components/AccountDoesNotExist";
+
 
 enum TransactionState {
   INITIAL,
@@ -61,10 +63,13 @@ function HomeBody() {
         ) : (
           <div className="center">
             {transactionLink && (
-              <div className="start text-2xl font-bold pb-10 underline">
+              <div className="pb-10">
+                <button className="card flex items-center justify-center">
+                <Image width={16} height={16} src="/assets/view.svg" alt="" />
                 <a href={transactionLink} target="_blank" rel="noreferrer">
-                  View transaction
+                  View Transaction
                 </a>
+              </button>
               </div>
             )}
             {isConnected ? (
@@ -76,8 +81,8 @@ function HomeBody() {
                         <div className="text-center text-2xl mb-2 flex items-center justify-center p-0">
                           Solve the riddle{" "}
                           <img
-                            className="px-2"
-                            src="/assets/face-smile-2.svg"
+                            className="px-2 w-11"
+                            src="/assets/thinkingface.svg"
                             alt=""
                           />
                         </div>
@@ -106,16 +111,18 @@ function HomeBody() {
                     </div>
                     <div className="flex items-center justify-center">
                       <button
-                        className="card flex items-center justify-center"
+                        className="card flex items-center justify-center whitespace-nowrap"
                         onClick={onSendTransaction}
                         disabled={txState !== TransactionState.INITIAL}
                       >
+                        {txState !== TransactionState.PREPARING && (
                         <Image
                           width={16}
                           height={16}
                           src="/assets/upload-circle-01-stroke-rounded.svg"
                           alt=""
                         />
+                       )}
                         {txState === TransactionState.AWAITING_USER_APPROVAL
                           ? "Awaiting Approval..."
                           : txState === TransactionState.PREPARING
@@ -134,7 +141,18 @@ function HomeBody() {
                 </div>
               )
             ) : (
-              <div>Please connect your wallet first.</div>
+              <div className="welcome">
+                <div>Welcome to</div>
+                <div className="flex items-center justify-center text-2xl font-semibold mr-6">
+                <img
+                            className="px-2 w-12"
+                            src="/assets/minalogo.png"
+                            alt=""
+                 />
+                Scaffold-MINA
+                </div>
+                <div>Please connect your wallet</div>
+              </div>
             )}
           </div>
         )}
