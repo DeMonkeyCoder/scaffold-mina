@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import GradientBG from "../components/GradientBG.js";
 import LoadingScreen from "@/components/LoadingScreen";
 import ConnectWallet from "@/components/ConnectWallet";
@@ -23,7 +23,7 @@ enum TransactionState {
 function HomeBody() {
   const { loading, prepareTransaction } = useQuestContract();
 
-  const { isConnected, accountExists, sendTransaction, network } =
+  const { isConnected, accountExists, sendTransaction, network, account } =
     useMinaProvider();
 
   const { data: currentNum } = useGetQuestContractState({
@@ -54,6 +54,11 @@ function HomeBody() {
     }
     setTxState(TransactionState.INITIAL);
   }, [prepareTransaction, questSolution, sendTransaction, txState]);
+  
+  useEffect(() => {
+    setTransactionLink("")
+  }, [account])
+  
 
   return (
     <GradientBG>
