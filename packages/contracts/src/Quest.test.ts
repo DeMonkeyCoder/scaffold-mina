@@ -46,7 +46,6 @@ describe('Quest', () => {
   }
 
   async function submitSolution(winner: Mina.TestPublicKey, solution: Field) {
-    console.log({ solution });
     const txn = await Mina.transaction(winner, async () => {
       await zkApp.solve(solution);
     });

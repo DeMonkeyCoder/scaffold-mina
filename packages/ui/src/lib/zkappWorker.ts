@@ -27,7 +27,7 @@ const functions = {
     const Network = Mina.Network(
       "https://api.minascan.io/node/devnet/v1/graphql"
     );
-    console.log("Devnet network instance configured.");
+    console.log("Devnet networkID instance configured.");
     Mina.setActiveInstance(Network);
   },
   loadContract: async ({ contractName }: { contractName: ContractName }) => {

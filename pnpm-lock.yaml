@@ -60,6 +60,12 @@ importers:
 
   packages/ui:
     dependencies:
+      '@mina-js/connect':
+        specifier: https://pkg.pr.new/palladians/mina-js/@mina-js/connect@8107d7d
+        version: https://pkg.pr.new/palladians/mina-js/@mina-js/connect@8107d7d(typescript@5.5.4)
+      '@mina-js/providers':
+        specifier: https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d
+        version: https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d(typescript@5.5.4)
       next:
         specifier: 14.2.3
         version: 14.2.3(react-dom@18.3.1(react@18.2.0))(react@18.2.0)(sass@1.77.8)
@@ -848,6 +854,36 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
+  '@mina-js/accounts@https://pkg.pr.new/palladians/mina-js/@mina-js/accounts@8107d7d':
+    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/accounts@8107d7d}
+    version: 0.0.1
+    peerDependencies:
+      typescript: ^5.0.0
+
+  '@mina-js/connect@https://pkg.pr.new/palladians/mina-js/@mina-js/connect@8107d7d':
+    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/connect@8107d7d}
+    version: 0.0.1
+    peerDependencies:
+      typescript: ^5.0.0
+
+  '@mina-js/klesia-sdk@https://pkg.pr.new/palladians/mina-js/@mina-js/klesia-sdk@8107d7d':
+    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/klesia-sdk@8107d7d}
+    version: 0.0.1
+    peerDependencies:
+      typescript: ^5.0.0
+
+  '@mina-js/providers@https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d':
+    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d}
+    version: 0.0.1
+    peerDependencies:
+      typescript: ^5.0.0
+
+  '@mina-js/shared@https://pkg.pr.new/palladians/mina-js/@mina-js/shared@8107d7d':
+    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/shared@8107d7d}
+    version: 0.0.1
+    peerDependencies:
+      typescript: ^5.0.0
+
   '@next/env@14.2.3':
     resolution: {integrity: sha512-W7fd7IbkfmeeY2gXrzJYDx8D2lWKbVoTIj1o1ScPHNzvp30s1AuoEFSdr39bC5sjxJaxTtq3OTCZboNp0lNWHA==}
 
@@ -908,6 +944,16 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@noble/ciphers@0.6.0':
+    resolution: {integrity: sha512-mIbq/R9QXk5/cTfESb1OKtyFnk7oc1Om/8onA1158K9/OZUQFDEVy55jVTato+xmp3XX6F6Qh0zz0Nc1AxAlRQ==}
+
+  '@noble/curves@1.4.2':
+    resolution: {integrity: sha512-TavHr8qycMChk8UwMld0ZDRvatedkzWfH8IiaeGCfymOP5i0hSCozz9vHOL0nkwk7HRMlFnAiKpS2jrUmSybcw==}
+
+  '@noble/hashes@1.4.0':
+    resolution: {integrity: sha512-V1JJ1WTRUqHHrOSh597hURcMqVKVGL/ea3kv0gSnEdsEZ0/+VyPghM1lMNGc00z7CIQorSvbKpuJkxvuHbvdbg==}
+    engines: {node: '>= 16'}
+
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -926,6 +972,15 @@ packages:
 
   '@rushstack/eslint-patch@1.10.4':
     resolution: {integrity: sha512-WJgX9nzTqknM393q1QJDJmoW28kUfEnybeTfVNcNAPnIx210RXm2DiXiHzfNPJNIUUb1tJnz/l4QGtJ30PgWmA==}
+
+  '@scure/base@1.1.9':
+    resolution: {integrity: sha512-8YKhl8GHiNI/pU2VMaofa2Tor7PJRAjwQLBBuilkJ9L5+13yVbC7JO/wS7piioAvPSwR3JKM1IJ/u4xQzbcXKg==}
+
+  '@scure/bip32@1.4.0':
+    resolution: {integrity: sha512-sVUpc0Vq3tXCkDGYVWGIZTRfnvu8LoTDaev7vbwh0omSvVORONr960MQWdKqJDCReIEmTj3PAr73O3aoxz7OPg==}
+
+  '@scure/bip39@1.3.0':
+    resolution: {integrity: sha512-disdg7gHuTDZtY+ZdkmLpPCk7fxZSu3gBiEGuoC1XYxv9cGx3Z6cpTggCgW6odSOOIXCiDjuGejW+aJKCY/pIQ==}
 
   '@sinclair/typebox@0.24.51':
     resolution: {integrity: sha512-1P1OROm/rdubP5aFDSZQILU0vrLCJ4fvHt6EoqHEM+2D/G5MK3bIaymUKLit8Js9gbns5UyJnkP/TZROLw4tUA==}
@@ -1823,6 +1878,10 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
+  hono@4.6.2:
+    resolution: {integrity: sha512-v+39817TgAhetmHUEli8O0uHDmxp2Up3DnhS4oUZXOl5IQ9np9tYtldd42e5zgdLVS0wsOoXQNZ6mx+BGmEvCA==}
+    engines: {node: '>=16.9.0'}
+
   html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
 
@@ -2301,6 +2360,9 @@ packages:
   mimic-fn@2.1.0:
     resolution: {integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==}
     engines: {node: '>=6'}
+
+  mina-signer@3.0.7:
+    resolution: {integrity: sha512-7eYp/6WWj2VzJjvfC8dNeGMud/brdBrzkUsCdysFFXnfV2/FVpVhAGCMfaS6hs0HJtS4+eplmiD2hXfshQS8CQ==}
 
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
@@ -2949,6 +3011,9 @@ packages:
       esbuild:
         optional: true
 
+  ts-pattern@5.3.1:
+    resolution: {integrity: sha512-1RUMKa8jYQdNfmnK4jyzBK3/PS/tnjcZ1CW0v1vWDeYe5RBklc/nquw03MEoB66hVBm4BnlCfmOqDVxHyT1DpA==}
+
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
 
@@ -3117,6 +3182,9 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
 snapshots:
 
@@ -4167,6 +4235,46 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  '@mina-js/accounts@https://pkg.pr.new/palladians/mina-js/@mina-js/accounts@8107d7d(typescript@5.5.4)':
+    dependencies:
+      '@mina-js/providers': https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d(typescript@5.5.4)
+      '@noble/ciphers': 0.6.0
+      '@noble/curves': 1.4.2
+      '@noble/hashes': 1.4.0
+      '@scure/base': 1.1.9
+      '@scure/bip32': 1.4.0
+      '@scure/bip39': 1.3.0
+      mina-signer: 3.0.7
+      typescript: 5.5.4
+      zod: 3.23.8
+
+  '@mina-js/connect@https://pkg.pr.new/palladians/mina-js/@mina-js/connect@8107d7d(typescript@5.5.4)':
+    dependencies:
+      '@mina-js/accounts': https://pkg.pr.new/palladians/mina-js/@mina-js/accounts@8107d7d(typescript@5.5.4)
+      '@mina-js/klesia-sdk': https://pkg.pr.new/palladians/mina-js/@mina-js/klesia-sdk@8107d7d(typescript@5.5.4)
+      '@mina-js/providers': https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d(typescript@5.5.4)
+      '@mina-js/shared': https://pkg.pr.new/palladians/mina-js/@mina-js/shared@8107d7d(typescript@5.5.4)
+      ts-pattern: 5.3.1
+      typescript: 5.5.4
+      zod: 3.23.8
+
+  '@mina-js/klesia-sdk@https://pkg.pr.new/palladians/mina-js/@mina-js/klesia-sdk@8107d7d(typescript@5.5.4)':
+    dependencies:
+      hono: 4.6.2
+      ts-pattern: 5.3.1
+      typescript: 5.5.4
+
+  '@mina-js/providers@https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d(typescript@5.5.4)':
+    dependencies:
+      '@mina-js/shared': https://pkg.pr.new/palladians/mina-js/@mina-js/shared@8107d7d(typescript@5.5.4)
+      typescript: 5.5.4
+      zod: 3.23.8
+
+  '@mina-js/shared@https://pkg.pr.new/palladians/mina-js/@mina-js/shared@8107d7d(typescript@5.5.4)':
+    dependencies:
+      typescript: 5.5.4
+      zod: 3.23.8
+
   '@next/env@14.2.3': {}
 
   '@next/eslint-plugin-next@14.2.3':
@@ -4200,6 +4308,14 @@ snapshots:
   '@next/swc-win32-x64-msvc@14.2.3':
     optional: true
 
+  '@noble/ciphers@0.6.0': {}
+
+  '@noble/curves@1.4.2':
+    dependencies:
+      '@noble/hashes': 1.4.0
+
+  '@noble/hashes@1.4.0': {}
+
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -4216,6 +4332,19 @@ snapshots:
     optional: true
 
   '@rushstack/eslint-patch@1.10.4': {}
+
+  '@scure/base@1.1.9': {}
+
+  '@scure/bip32@1.4.0':
+    dependencies:
+      '@noble/curves': 1.4.2
+      '@noble/hashes': 1.4.0
+      '@scure/base': 1.1.9
+
+  '@scure/bip39@1.3.0':
+    dependencies:
+      '@noble/hashes': 1.4.0
+      '@scure/base': 1.1.9
 
   '@sinclair/typebox@0.24.51': {}
 
@@ -4967,7 +5096,7 @@ snapshots:
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       eslint-plugin-jsx-a11y: 6.9.0(eslint@8.57.0)
       eslint-plugin-react: 7.35.0(eslint@8.57.0)
       eslint-plugin-react-hooks: 4.6.2(eslint@8.57.0)
@@ -4991,7 +5120,7 @@ snapshots:
       enhanced-resolve: 5.17.1
       eslint: 8.57.0
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.6
       is-core-module: 2.15.0
@@ -5013,7 +5142,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0):
     dependencies:
       array-includes: 3.1.8
       array.prototype.findlastindex: 1.2.5
@@ -5371,6 +5500,8 @@ snapshots:
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
+
+  hono@4.6.2: {}
 
   html-escaper@2.0.2: {}
 
@@ -6005,6 +6136,11 @@ snapshots:
       picomatch: 2.3.1
 
   mimic-fn@2.1.0: {}
+
+  mina-signer@3.0.7:
+    dependencies:
+      blakejs: 1.2.1
+      js-sha256: 0.9.0
 
   minimatch@3.1.2:
     dependencies:
@@ -6682,6 +6818,8 @@ snapshots:
       '@jest/types': 28.1.3
       babel-jest: 28.1.3(@babel/core@7.25.2)
 
+  ts-pattern@5.3.1: {}
+
   tsconfig-paths@3.15.0:
     dependencies:
       '@types/json5': 0.0.29
@@ -6877,3 +7015,5 @@ snapshots:
       yargs-parser: 21.1.1
 
   yocto-queue@0.1.0: {}
+
+  zod@3.23.8: {}
