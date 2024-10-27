@@ -21,7 +21,7 @@ enum TransactionState {
 function HomeBody() {
   const { loading, prepareTransaction } = useQuestContract();
 
-  const { isConnected, accountExists, sendTransaction, network } =
+  const { isConnected, accountExists, sendTransaction, networkID } =
     useMinaProvider();
 
   const { data: currentNum } = useGetQuestContractState({
@@ -42,16 +42,16 @@ function HomeBody() {
         args: [CircuitString.fromString(questSolution.toLowerCase()).hash()],
       });
       setTxState(TransactionState.AWAITING_USER_APPROVAL);
-      const { hash } = await sendTransaction({
-        transactionJSON,
-        transactionFee: 0.1,
-      });
-      setTransactionLink(`https://minascan.io/devnet/tx/${hash}`);
+      // const { hash } = await sendTransaction({
+      //   transactionJSON,
+      //   transactionFee: 0.1,
+      // });
+      // setTransactionLink(`https://minascan.io/devnet/tx/${hash}`);
     } catch (e) {
       alert(JSON.stringify(e));
     }
     setTxState(TransactionState.INITIAL);
-  }, [prepareTransaction, questSolution, sendTransaction, txState]);
+  }, [prepareTransaction, questSolution, txState]);
 
   return (
     <GradientBG>
@@ -68,7 +68,7 @@ function HomeBody() {
               </div>
             )}
             {isConnected ? (
-              isSupportedNetwork(network) ? (
+              isSupportedNetwork(networkID) ? (
                 accountExists ? (
                   <>
                     <div className="riddle-box">
