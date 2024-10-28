@@ -152,7 +152,7 @@ export default function GradientBG({ children }) {
           ref={canvasRef}
         />
       </div>
-      <div className="container">{children}</div>
+      <div className="scaffold-container">{children}</div>
     </>
   );
 }

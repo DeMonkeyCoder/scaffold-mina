@@ -14,6 +14,7 @@ import { isSupportedNetwork } from "@/constants/network";
 import AccountDoesNotExist from "@/components/AccountDoesNotExist";
 
 
+
 enum TransactionState {
   INITIAL,
   PREPARING,
@@ -59,6 +60,7 @@ function HomeBody() {
     setTransactionLink("")
   }, [account])
   
+  console.log("isconnected",isConnected)
 
   return (
     <GradientBG>
@@ -67,8 +69,9 @@ function HomeBody() {
           <LoadingScreen />
         ) : (
           <div className="center">
+
             {transactionLink && (
-              <div className="pb-10">
+              <div className="mb-1">
                 <button className="card flex items-center justify-center">
                 <Image width={16} height={16} src="/assets/view.svg" alt="" />
                 <a href={transactionLink} target="_blank" rel="noreferrer">
@@ -81,7 +84,8 @@ function HomeBody() {
               isSupportedNetwork(network) ? (
                 accountExists ? (
                   <>
-                    <div className="riddle-box">
+               
+                    <div className="riddle-box bg-purple-50">
                       <div className="justify-center items-center">
                         <div className="text-center text-2xl mb-2 flex items-center justify-center p-0">
                           Solve the riddle{" "}
@@ -107,7 +111,7 @@ function HomeBody() {
                       <div>
                         <input
                           type="text"
-                          className="p-2 my-4 rounded-l border-2 border-gray-400 w-56"
+                          className="p-2 my-4 rounded-l border-2 border-gray-400 w-56 h-11"
                           placeholder="Solution"
                           value={questSolution}
                           onChange={(e) => setQuestSolution(e.target.value)}
@@ -142,11 +146,15 @@ function HomeBody() {
                 )
               ) : (
                 <div>
-                  Wrong network. Please change your wallet network to Devnet
+                Please change your wallet network to Devnet 
+                <div className="flex items-center justify-center">
+                <ConnectWallet />
+                </div> 
                 </div>
               )
             ) : (
               <div className="welcome">
+
                 <div>Welcome to</div>
                 <div className="flex items-center justify-center text-2xl font-semibold mr-6">
                 <img
@@ -154,9 +162,9 @@ function HomeBody() {
                             src="/assets/minalogo.png"
                             alt=""
                  />
-                Scaffold-MINA
+                Scaffold-<div className="bg-gradient-to-r from-purple-600 to-orange-500 text-transparent bg-clip-text">MINA</div>
                 </div>
-                <div>Please connect your wallet</div>
+                <ConnectWallet />
               </div>
             )}
           </div>
