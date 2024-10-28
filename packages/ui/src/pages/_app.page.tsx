@@ -3,10 +3,12 @@ import type { AppProps } from "next/app";
 import { ZkappProvider } from "@/lib/ZkappContext";
 import Navbar from "@/components/Navbar";
 
+
 export default function App({ Component, pageProps }: AppProps) {
+
   return (
     <ZkappProvider>
-      <Navbar />
+      <Navbar/>
       <Component {...pageProps} />
     </ZkappProvider>
   );

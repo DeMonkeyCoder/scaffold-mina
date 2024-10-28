@@ -51,6 +51,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #f3e8ff;
 }
 
 a {
@@ -59,19 +60,19 @@ a {
 }
 
 .main {
-  @apply flex flex-col justify-center items-center relative p-0 min-h-screen w-screen overflow-hidden;
+  @apply flex flex-col justify-center items-center relative p-0 min-h-screen w-full overflow-hidden;
 }
 
-.background {
-  @apply pointer-events-none justify-center absolute top-0 left-0 w-full h-full overflow-hidden z-0;
-}
+// .background {
+//   @apply pointer-events-none justify-center absolute top-0 left-0 w-full h-full overflow-hidden z-0;
+// }
 
-.backgroundGradients {
-  @apply block absolute top-[-5%] left-[-5%] w-[110%] h-[110%] blur-xl opacity-40;
-}
+// .backgroundGradients {
+//   @apply block absolute top-[-5%] left-[-5%] w-[110%] h-[110%] blur-xl opacity-40;
+// }
 
-.container {
-  @apply flex-col justify-center items-center relative h-screen w-screen overflow-hidden;
+.scaffold-container {
+  @apply flex-col justify-center items-center relative h-screen w-full overflow-hidden;
 }
 
 .tagline {
@@ -93,12 +94,13 @@ a {
 .card {
   position: relative; 
   padding: 0.8rem 1rem;
+  height: 2.75rem;
   gap: 0.5rem;
   margin: 1rem;
   background: rgba(var(--card-rgb), 0);
   background-color: rgb(255, 255, 255);
   border: 1px solid #b7bdbd;
-  border-radius: 4px 1px;
+  border-radius: 8px 2px;
   transform-style: preserve-3d;
   width: 14rem;
   text-align: center;
