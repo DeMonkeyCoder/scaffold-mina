@@ -113,20 +113,29 @@ export function useMinaInjectedProvider() {
       if (!isConnected) {
         throw Error("Wallet is not connected");
       }
-      // const result = await provider.sendTransaction({
-      //   transaction: transactionJSON,
-      //   feePayer: {
-      //     fee: transactionFee,
-      //     memo: "",
-      //   },
-      // });
-      // if ("hash" in result) {
-      //   return result;
-      // } else {
-      //   throw Error(
-      //     "message" in result ? result.message : "Unknown error happened"
-      //   );
-      // }
+      const req = {
+        method: "mina_signTransaction",
+        params: {
+          // @ts-ignore
+          command: {
+            zkappCommand: JSON.parse(transactionJSON),
+          },
+          feePayer: {
+            fee: transactionFee,
+            memo: "",
+          },
+        },
+      };
+      console.log(req);
+      const result = await provider.request(req as any);
+      console.log({ result });
+      if ("hash" in result) {
+        return result;
+      } else {
+        throw Error(
+          "message" in result ? result.message : "Unknown error happened"
+        );
+      }
     },
     [isConnected, provider]
   );

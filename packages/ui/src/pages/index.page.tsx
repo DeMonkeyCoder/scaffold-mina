@@ -42,16 +42,17 @@ function HomeBody() {
         args: [CircuitString.fromString(questSolution.toLowerCase()).hash()],
       });
       setTxState(TransactionState.AWAITING_USER_APPROVAL);
-      // const { hash } = await sendTransaction({
-      //   transactionJSON,
-      //   transactionFee: 0.1,
-      // });
-      // setTransactionLink(`https://minascan.io/devnet/tx/${hash}`);
+      const { hash } = await sendTransaction({
+        transactionJSON,
+        transactionFee: 0.1,
+      });
+      setTransactionLink(`https://minascan.io/devnet/tx/${hash}`);
     } catch (e) {
+      console.log({ e });
       alert(JSON.stringify(e));
     }
     setTxState(TransactionState.INITIAL);
-  }, [prepareTransaction, questSolution, txState]);
+  }, [prepareTransaction, questSolution, sendTransaction, txState]);
 
   return (
     <GradientBG>
