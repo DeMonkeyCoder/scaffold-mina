@@ -6,7 +6,7 @@ import {
   useGetQuestContractState,
   useQuestContract,
 } from "@/lib/useQuestContract";
-import { CircuitString, PublicKey } from "o1js";
+import { PublicKey } from "o1js";
 import Image from "next/image";
 import { useMinaProvider } from "@/lib/ZkappContext";
 import { isSupportedNetwork } from "@/constants/network";
@@ -37,18 +37,17 @@ function HomeBody() {
     if (txState !== TransactionState.INITIAL) return;
     try {
       setTxState(TransactionState.PREPARING);
-      const transactionJSON = await prepareTransaction({
-        method: "solve",
-        args: [CircuitString.fromString(questSolution.toLowerCase()).hash()],
-      });
+      // const transactionJSON = await prepareTransaction({
+      //   method: "solve",
+      //   args: [CircuitString.fromString(questSolution.toLowerCase()).hash()],
+      // });
+      // console.log(JSON.parse(transactionJSON));
       setTxState(TransactionState.AWAITING_USER_APPROVAL);
-      const { hash } = await sendTransaction({
-        transactionJSON,
-        transactionFee: 0.1,
-      });
-      setTransactionLink(`https://minascan.io/devnet/tx/${hash}`);
+      const result = await sendTransaction();
+      // setTransactionLink(`https://minascan.io/devnet/tx/${result.hash}`);
     } catch (e) {
-      console.log({ e });
+      console.log("Error:");
+      console.log(e);
       alert(JSON.stringify(e));
     }
     setTxState(TransactionState.INITIAL);

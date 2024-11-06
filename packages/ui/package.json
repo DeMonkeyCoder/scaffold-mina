@@ -10,8 +10,9 @@
     "ts-watch": "tsc --noEmit --incremental --watch"
   },
   "dependencies": {
-    "@mina-js/connect": "https://pkg.pr.new/palladians/mina-js/@mina-js/connect@8107d7d",
-    "@mina-js/providers": "https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d",
+    "@mina-js/connect": "https://pkg.pr.new/palladians/mina-js/@mina-js/connect@363f34c",
+    "@mina-js/providers": "https://pkg.pr.new/palladians/mina-js/@mina-js/providers@363f34c",
+    "bs58": "^6.0.0",
     "next": "14.2.3",
     "o1js": "^1.*",
     "react": "^18.2.0",
