@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { PublicKey } from "o1js";
-import { SwitchChainArgs } from "@aurowallet/mina-provider";
 import { MinaProviderClient } from "@mina-js/providers";
 
 export function useMinaInjectedProvider() {
@@ -32,16 +31,20 @@ export function useMinaInjectedProvider() {
         return;
       }
 
-      // provider
-      //   .request({ method: "mina_chainInformation" })
-      //   .then((chainInfo) => setNetworkID(chainInfo));
       provider
-        .request({
-          method: "mina_accounts",
-        })
+        .request({ method: "mina_networkId" })
         .then(({ result }) => {
-          setAccountFromWalletResponse(result);
-          setIsConnected(Boolean(result[0]));
+          setNetworkID(result);
+        })
+        .finally(() => {
+          provider
+            .request({
+              method: "mina_accounts",
+            })
+            .then(({ result }) => {
+              setAccountFromWalletResponse(result);
+              setIsConnected(Boolean(result[0]));
+            });
         });
       setHasWallet(true);
     }
@@ -71,13 +74,14 @@ export function useMinaInjectedProvider() {
 
     localStorage.removeItem("mina_disconnected");
 
-    // @ts-ignore
     const requestAccountsResponse = await provider.request({
       method: "mina_requestAccounts",
     });
     if (Array.isArray(requestAccountsResponse.result)) {
       setAccountFromWalletResponse(requestAccountsResponse.result);
-      // provider.requestNetwork().then((chainInfo) => setNetworkID(chainInfo));
+      provider
+        .request({ method: "mina_networkId" })
+        .then(({ result }) => setNetworkID(result));
       setIsConnected(true);
     } else {
       throw Error(requestAccountsResponse.result);
@@ -85,16 +89,15 @@ export function useMinaInjectedProvider() {
   }, [provider, setAccountFromWalletResponse]);
 
   const switchNetwork = useCallback(
-    async (args: SwitchChainArgs) => {
+    async (networkId: string) => {
       if (!provider) {
         throw Error("Wallet is not installed");
       }
-      // const response = await provider.switchChain(args);
-      // if ("networkID" in response) {
-      //   setNetworkID(response);
-      // } else {
-      //   throw Error(response.message);
-      // }
+      const { result } = await provider.request({
+        method: "mina_switchChain",
+        params: [networkId],
+      });
+      setNetworkID(result);
     },
     [provider]
   );

@@ -61,11 +61,11 @@ importers:
   packages/ui:
     dependencies:
       '@mina-js/connect':
-        specifier: https://pkg.pr.new/palladians/mina-js/@mina-js/connect@8107d7d
-        version: https://pkg.pr.new/palladians/mina-js/@mina-js/connect@8107d7d(typescript@5.5.4)
+        specifier: https://pkg.pr.new/palladians/mina-js/@mina-js/connect@758fc6f
+        version: https://pkg.pr.new/palladians/mina-js/@mina-js/connect@758fc6f(typescript@5.5.4)
       '@mina-js/providers':
-        specifier: https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d
-        version: https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d(typescript@5.5.4)
+        specifier: https://pkg.pr.new/palladians/mina-js/@mina-js/providers@758fc6f
+        version: https://pkg.pr.new/palladians/mina-js/@mina-js/providers@758fc6f(typescript@5.5.4)
       next:
         specifier: 14.2.3
         version: 14.2.3(react-dom@18.3.1(react@18.2.0))(react@18.2.0)(sass@1.77.8)
@@ -854,32 +854,32 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@mina-js/accounts@https://pkg.pr.new/palladians/mina-js/@mina-js/accounts@8107d7d':
-    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/accounts@8107d7d}
+  '@mina-js/accounts@https://pkg.pr.new/palladians/mina-js/@mina-js/accounts@758fc6f':
+    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/accounts@758fc6f}
     version: 0.0.1
     peerDependencies:
       typescript: ^5.0.0
 
-  '@mina-js/connect@https://pkg.pr.new/palladians/mina-js/@mina-js/connect@8107d7d':
-    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/connect@8107d7d}
+  '@mina-js/connect@https://pkg.pr.new/palladians/mina-js/@mina-js/connect@758fc6f':
+    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/connect@758fc6f}
     version: 0.0.1
     peerDependencies:
       typescript: ^5.0.0
 
-  '@mina-js/klesia-sdk@https://pkg.pr.new/palladians/mina-js/@mina-js/klesia-sdk@8107d7d':
-    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/klesia-sdk@8107d7d}
+  '@mina-js/klesia-sdk@https://pkg.pr.new/palladians/mina-js/@mina-js/klesia-sdk@758fc6f':
+    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/klesia-sdk@758fc6f}
     version: 0.0.1
     peerDependencies:
       typescript: ^5.0.0
 
-  '@mina-js/providers@https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d':
-    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d}
+  '@mina-js/providers@https://pkg.pr.new/palladians/mina-js/@mina-js/providers@758fc6f':
+    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/providers@758fc6f}
     version: 0.0.1
     peerDependencies:
       typescript: ^5.0.0
 
-  '@mina-js/shared@https://pkg.pr.new/palladians/mina-js/@mina-js/shared@8107d7d':
-    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/shared@8107d7d}
+  '@mina-js/utils@https://pkg.pr.new/palladians/mina-js/@mina-js/utils@758fc6f':
+    resolution: {tarball: https://pkg.pr.new/palladians/mina-js/@mina-js/utils@758fc6f}
     version: 0.0.1
     peerDependencies:
       typescript: ^5.0.0
@@ -1878,10 +1878,6 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
-  hono@4.6.2:
-    resolution: {integrity: sha512-v+39817TgAhetmHUEli8O0uHDmxp2Up3DnhS4oUZXOl5IQ9np9tYtldd42e5zgdLVS0wsOoXQNZ6mx+BGmEvCA==}
-    engines: {node: '>=16.9.0'}
-
   html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
 
@@ -2352,6 +2348,9 @@ packages:
   merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
+
+  micro-ftch@0.4.0:
+    resolution: {integrity: sha512-1SEH+syTsMQMQByZGJeMAiBxJIRu/3gG1z1+tHexgtXtXgwQy1C5JVBtXRdMZOIx9flerUBCJtmtVl7szwWgxQ==}
 
   micromatch@4.0.7:
     resolution: {integrity: sha512-LPP/3KorzCwBxfeUuZmaR6bG2kdeHSbe0P2tY3FLRU4vYrjYz5hI4QZwV0njUx3jeuKe67YukQ1LSPZBKDqO/Q==}
@@ -4235,9 +4234,9 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@mina-js/accounts@https://pkg.pr.new/palladians/mina-js/@mina-js/accounts@8107d7d(typescript@5.5.4)':
+  '@mina-js/accounts@https://pkg.pr.new/palladians/mina-js/@mina-js/accounts@758fc6f(typescript@5.5.4)':
     dependencies:
-      '@mina-js/providers': https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d(typescript@5.5.4)
+      '@mina-js/providers': https://pkg.pr.new/palladians/mina-js/@mina-js/providers@758fc6f(typescript@5.5.4)
       '@noble/ciphers': 0.6.0
       '@noble/curves': 1.4.2
       '@noble/hashes': 1.4.0
@@ -4248,32 +4247,30 @@ snapshots:
       typescript: 5.5.4
       zod: 3.23.8
 
-  '@mina-js/connect@https://pkg.pr.new/palladians/mina-js/@mina-js/connect@8107d7d(typescript@5.5.4)':
+  '@mina-js/connect@https://pkg.pr.new/palladians/mina-js/@mina-js/connect@758fc6f(typescript@5.5.4)':
     dependencies:
-      '@mina-js/accounts': https://pkg.pr.new/palladians/mina-js/@mina-js/accounts@8107d7d(typescript@5.5.4)
-      '@mina-js/klesia-sdk': https://pkg.pr.new/palladians/mina-js/@mina-js/klesia-sdk@8107d7d(typescript@5.5.4)
-      '@mina-js/providers': https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d(typescript@5.5.4)
-      '@mina-js/shared': https://pkg.pr.new/palladians/mina-js/@mina-js/shared@8107d7d(typescript@5.5.4)
+      '@mina-js/accounts': https://pkg.pr.new/palladians/mina-js/@mina-js/accounts@758fc6f(typescript@5.5.4)
+      '@mina-js/klesia-sdk': https://pkg.pr.new/palladians/mina-js/@mina-js/klesia-sdk@758fc6f(typescript@5.5.4)
+      '@mina-js/providers': https://pkg.pr.new/palladians/mina-js/@mina-js/providers@758fc6f(typescript@5.5.4)
+      '@mina-js/utils': https://pkg.pr.new/palladians/mina-js/@mina-js/utils@758fc6f(typescript@5.5.4)
       ts-pattern: 5.3.1
       typescript: 5.5.4
       zod: 3.23.8
 
-  '@mina-js/klesia-sdk@https://pkg.pr.new/palladians/mina-js/@mina-js/klesia-sdk@8107d7d(typescript@5.5.4)':
+  '@mina-js/klesia-sdk@https://pkg.pr.new/palladians/mina-js/@mina-js/klesia-sdk@758fc6f(typescript@5.5.4)':
     dependencies:
-      hono: 4.6.2
+      micro-ftch: 0.4.0
       ts-pattern: 5.3.1
       typescript: 5.5.4
 
-  '@mina-js/providers@https://pkg.pr.new/palladians/mina-js/@mina-js/providers@8107d7d(typescript@5.5.4)':
+  '@mina-js/providers@https://pkg.pr.new/palladians/mina-js/@mina-js/providers@758fc6f(typescript@5.5.4)':
     dependencies:
-      '@mina-js/shared': https://pkg.pr.new/palladians/mina-js/@mina-js/shared@8107d7d(typescript@5.5.4)
       typescript: 5.5.4
-      zod: 3.23.8
 
-  '@mina-js/shared@https://pkg.pr.new/palladians/mina-js/@mina-js/shared@8107d7d(typescript@5.5.4)':
+  '@mina-js/utils@https://pkg.pr.new/palladians/mina-js/@mina-js/utils@758fc6f(typescript@5.5.4)':
     dependencies:
+      mina-signer: 3.0.7
       typescript: 5.5.4
-      zod: 3.23.8
 
   '@next/env@14.2.3': {}
 
@@ -5501,8 +5498,6 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
-  hono@4.6.2: {}
-
   html-escaper@2.0.2: {}
 
   human-signals@2.1.0: {}
@@ -6129,6 +6124,8 @@ snapshots:
   merge-stream@2.0.0: {}
 
   merge2@1.4.1: {}
+
+  micro-ftch@0.4.0: {}
 
   micromatch@4.0.7:
     dependencies:

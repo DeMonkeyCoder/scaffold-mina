@@ -2,6 +2,7 @@ import { formatPublicKey } from "@/utils";
 import Image from "next/image";
 import { useMinaProvider } from "@/lib/ZkappContext";
 import { useState } from "react";
+import { NETWORK_ID } from "@/constants/network";
 
 export default function ConnectWallet() {
   const {
@@ -9,8 +10,8 @@ export default function ConnectWallet() {
     hasWallet,
     isConnected,
     account,
-    // networkID,
-    // switchNetwork,
+    networkID,
+    switchNetwork,
     disconnect,
   } = useMinaProvider();
   const [isHovered, setIsHovered] = useState(false);
@@ -36,8 +37,8 @@ export default function ConnectWallet() {
       onClick={() => {
         if (!isConnected) {
           connect();
-          // } else if (networkID?.networkID !== NETWORK_ID) {
-          //   switchNetwork({ networkID: NETWORK_ID });
+        } else if (networkID !== NETWORK_ID) {
+          switchNetwork(NETWORK_ID);
         } else {
           disconnect();
         }
@@ -45,14 +46,14 @@ export default function ConnectWallet() {
     >
       <Image width={16} height={16} src="/assets/wallet-2.svg" alt="" />
       {isConnected
-        ? // ? networkID?.networkID === NETWORK_ID
-          isHovered
-          ? "Disconnect"
-          : account
-          ? formatPublicKey(account)
-          : "No Account"
-        : // : "Wrong Network"
-          "Connect Wallet"}
+        ? networkID === NETWORK_ID
+          ? isHovered
+            ? "Disconnect"
+            : account
+            ? formatPublicKey(account)
+            : "No Account"
+          : "Wrong Network"
+        : "Connect Wallet"}
     </button>
   );
 }
