@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { toSignatureHash } from './toSignatureHash.js'
+import { toSignatureHash } from './toSignatureHash'
 
 test('hashes functions', () => {
   expect(toSignatureHash('function ownerOf(uint256)')).toEqual(

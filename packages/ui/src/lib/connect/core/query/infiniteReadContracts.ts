@@ -4,15 +4,15 @@ import {
   type ReadContractsParameters,
   type ReadContractsReturnType,
   readContracts,
-} from "../actions/readContracts.js";
-import type { Config } from "../createConfig.js";
+} from "../actions/readContracts";
+import type { Config } from "../createConfig";
 import type {
   ChainIdParameter,
   ScopeKeyParameter,
-} from "../types/properties.js";
-import type { StrictOmit } from "../types/utils.js";
-import type { InfiniteQueryOptions } from "./types.js";
-import { filterQueryOptions } from "./utils.js";
+} from "../types/properties";
+import type { StrictOmit } from "../types/utils";
+import type { InfiniteQueryOptions } from "./types";
+import { filterQueryOptions } from "./utils";
 
 export type InfiniteReadContractsOptions<
   contracts extends readonly unknown[],

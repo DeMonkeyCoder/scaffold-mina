@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getBlockQueryOptions } from './getBlock.js'
+import { getBlockQueryOptions } from './getBlock'
 
 test('default', () => {
   expect(getBlockQueryOptions(config)).toMatchInlineSnapshot(`

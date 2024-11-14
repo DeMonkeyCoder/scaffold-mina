@@ -1,9 +1,9 @@
-import type { ErrorType } from "../../errors/utils.js";
-import type { ByteArray, Hex } from "../../types/misc.js";
+import type { ErrorType } from "../../errors/utils";
+import type { ByteArray, Hex } from "../../types/misc";
 import {
   type CommitmentToVersionedHashErrorType,
   commitmentToVersionedHash,
-} from "./commitmentToVersionedHash.js";
+} from "./commitmentToVersionedHash";
 
 type To = "hex" | "bytes";
 

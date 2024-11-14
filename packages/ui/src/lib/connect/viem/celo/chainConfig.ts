@@ -1,6 +1,6 @@
-import { fees } from './fees.js'
-import { formatters } from './formatters.js'
-import { serializers } from './serializers.js'
+import { fees } from './fees'
+import { formatters } from './formatters'
+import { serializers } from './serializers'
 
 export const chainConfig = {
   formatters,

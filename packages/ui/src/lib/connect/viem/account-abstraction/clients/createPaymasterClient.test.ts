@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
-import { bundlerMainnet } from '../../../test/src/bundler.js'
-import { http } from '../../clients/transports/http.js'
-import { createPaymasterClient } from './createPaymasterClient.js'
+import { bundlerMainnet } from '../../../test/src/bundler'
+import { http } from '../../clients/transports/http'
+import { createPaymasterClient } from './createPaymasterClient'
 
 test('creates', () => {
   const { uid, transport, ...client } = createPaymasterClient({

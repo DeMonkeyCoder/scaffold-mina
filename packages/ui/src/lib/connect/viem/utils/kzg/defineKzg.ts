@@ -1,5 +1,5 @@
-import type { ErrorType } from "../../errors/utils.js";
-import type { Kzg } from "../../types/kzg.js";
+import type { ErrorType } from "../../errors/utils";
+import type { Kzg } from "../../types/kzg";
 
 export type DefineKzgParameters = Kzg;
 export type DefineKzgReturnType = Kzg;

@@ -1,7 +1,7 @@
 import { abi } from '@wagmi/test'
 import { expectTypeOf, test } from 'vitest'
 
-import { useInfiniteReadContracts } from './useInfiniteReadContracts.js'
+import { useInfiniteReadContracts } from './useInfiniteReadContracts'
 
 test('select data', () => {
   const result = useInfiniteReadContracts({

@@ -2,11 +2,11 @@ import { describe, expectTypeOf, test } from 'vitest'
 import {
   getSmartAccounts_06,
   getSmartAccounts_07,
-} from '../../../../test/src/account-abstraction.js'
-import { bundlerMainnet } from '../../../../test/src/bundler.js'
-import type { Hex } from '../../../types/misc.js'
-import type { UserOperation } from '../../types/userOperation.js'
-import { prepareUserOperation } from './prepareUserOperation.js'
+} from '../../../../test/src/account-abstraction'
+import { bundlerMainnet } from '../../../../test/src/bundler'
+import type { Hex } from '../../../types/misc'
+import type { UserOperation } from '../../types/userOperation'
+import { prepareUserOperation } from './prepareUserOperation'
 
 const bundlerClient = bundlerMainnet.getBundlerClient()
 

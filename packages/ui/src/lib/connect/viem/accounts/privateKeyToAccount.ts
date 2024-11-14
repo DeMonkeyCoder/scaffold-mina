@@ -1,27 +1,27 @@
 import { secp256k1 } from '@noble/curves/secp256k1'
 
-import type { Hex } from '../types/misc.js'
-import { type ToHexErrorType, toHex } from '../utils/encoding/toHex.js'
+import type { Hex } from '../types/misc'
+import { type ToHexErrorType, toHex } from '../utils/encoding/toHex'
 
-import type { ErrorType } from '../errors/utils.js'
-import type { NonceManager } from '../utils/nonceManager.js'
-import { type ToAccountErrorType, toAccount } from './toAccount.js'
-import type { PrivateKeyAccount } from './types.js'
+import type { ErrorType } from '../errors/utils'
+import type { NonceManager } from '../utils/nonceManager'
+import { type ToAccountErrorType, toAccount } from './toAccount'
+import type { PrivateKeyAccount } from './types'
 import {
   type PublicKeyToAddressErrorType,
   publicKeyToAddress,
-} from './utils/publicKeyToAddress.js'
-import { type SignErrorType, sign } from './utils/sign.js'
-import { experimental_signAuthorization } from './utils/signAuthorization.js'
-import { type SignMessageErrorType, signMessage } from './utils/signMessage.js'
+} from './utils/publicKeyToAddress'
+import { type SignErrorType, sign } from './utils/sign'
+import { experimental_signAuthorization } from './utils/signAuthorization'
+import { type SignMessageErrorType, signMessage } from './utils/signMessage'
 import {
   type SignTransactionErrorType,
   signTransaction,
-} from './utils/signTransaction.js'
+} from './utils/signTransaction'
 import {
   type SignTypedDataErrorType,
   signTypedData,
-} from './utils/signTypedData.js'
+} from './utils/signTypedData'
 
 export type PrivateKeyToAccountOptions = {
   nonceManager?: NonceManager | undefined

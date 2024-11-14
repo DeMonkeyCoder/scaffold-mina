@@ -3,11 +3,11 @@ import { recoverTypedDataAddress } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
 import { privateKeyToAccount } from "@/lib/connect/viem/accounts";
-import { mock } from "../connectors/mock.js";
-import { connect } from "./connect.js";
-import { disconnect } from "./disconnect.js";
-import { getAccount } from "./getAccount.js";
-import { signTypedData } from "./signTypedData.js";
+import { mock } from "../connectors/mock";
+import { connect } from "./connect";
+import { disconnect } from "./disconnect";
+import { getAccount } from "./getAccount";
+import { signTypedData } from "./signTypedData";
 
 const connector = config.connectors[0]!;
 

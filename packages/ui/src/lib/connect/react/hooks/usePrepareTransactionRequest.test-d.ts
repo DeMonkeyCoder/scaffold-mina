@@ -2,7 +2,7 @@ import { config } from "@wagmi/test";
 import type { PrepareTransactionRequestReturnType } from "@/lib/connect/viem";
 import { expectTypeOf, test } from "vitest";
 
-import { usePrepareTransactionRequest } from "./usePrepareTransactionRequest.js";
+import { usePrepareTransactionRequest } from "./usePrepareTransactionRequest";
 
 test("select data", () => {
   const result = usePrepareTransactionRequest({

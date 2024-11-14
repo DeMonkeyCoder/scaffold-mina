@@ -1,8 +1,8 @@
 import * as cKzg from 'c-kzg'
 import { expect, test } from 'vitest'
 
-import { mainnetTrustedSetupPath } from '../../node/index.js'
-import { setupKzg } from './setupKzg.js'
+import { mainnetTrustedSetupPath } from '../../node/index'
+import { setupKzg } from './setupKzg'
 
 test('setupKzg', () => {
   const kzg = setupKzg(cKzg, mainnetTrustedSetupPath)

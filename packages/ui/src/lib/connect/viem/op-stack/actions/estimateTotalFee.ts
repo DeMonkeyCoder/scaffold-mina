@@ -2,27 +2,27 @@ import {
   type EstimateGasErrorType,
   type EstimateGasParameters,
   estimateGas,
-} from '../../actions/public/estimateGas.js'
+} from '../../actions/public/estimateGas'
 import {
   type GetGasPriceErrorType,
   getGasPrice,
-} from '../../actions/public/getGasPrice.js'
+} from '../../actions/public/getGasPrice'
 import {
   type PrepareTransactionRequestErrorType,
   type PrepareTransactionRequestParameters,
   prepareTransactionRequest,
-} from '../../actions/wallet/prepareTransactionRequest.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
-import type { Chain } from '../../types/chain.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+} from '../../actions/wallet/prepareTransactionRequest'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../../types/account'
+import type { Chain } from '../../types/chain'
+import type { RequestErrorType } from '../../utils/buildRequest'
 import {
   type EstimateL1FeeErrorType,
   type EstimateL1FeeParameters,
   estimateL1Fee,
-} from './estimateL1Fee.js'
+} from './estimateL1Fee'
 
 export type EstimateTotalFeeParameters<
   chain extends Chain | undefined = Chain | undefined,

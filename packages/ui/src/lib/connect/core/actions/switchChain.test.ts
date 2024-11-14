@@ -1,11 +1,11 @@
 import { accounts, chain, config } from "@wagmi/test";
 import { expect, test } from "vitest";
 
-import { mock } from "../connectors/mock.js";
-import { connect } from "./connect.js";
-import { disconnect } from "./disconnect.js";
-import { getAccount } from "./getAccount.js";
-import { switchChain } from "./switchChain.js";
+import { mock } from "../connectors/mock";
+import { connect } from "./connect";
+import { disconnect } from "./disconnect";
+import { getAccount } from "./getAccount";
+import { switchChain } from "./switchChain";
 
 const connector = config.connectors[0]!;
 

@@ -1,21 +1,21 @@
 import type { Address } from 'abitype'
 import { beforeAll, expect, test } from 'vitest'
 
-import { SoladyAccountFactory07 } from '~contracts/generated.js'
-import { anvilMainnet } from '~test/src/anvil.js'
-import { accounts, typedData } from '~test/src/constants.js'
-import { deploySoladyAccount_07 } from '~test/src/utils.js'
-import { serializeSignature, sign } from '../../../accounts/index.js'
+import { SoladyAccountFactory07 } from '~contracts/generated'
+import { anvilMainnet } from '~test/src/anvil'
+import { accounts, typedData } from '~test/src/constants'
+import { deploySoladyAccount_07 } from '~test/src/utils'
+import { serializeSignature, sign } from '../../../accounts/index'
 import {
   getEip712Domain,
   mine,
   simulateContract,
   verifyTypedData,
   writeContract,
-} from '../../../actions/index.js'
-import { pad } from '../../../utils/index.js'
-import { hashTypedData } from './hashTypedData.js'
-import { wrapTypedDataSignature } from './wrapTypedDataSignature.js'
+} from '../../../actions/index'
+import { pad } from '../../../utils/index'
+import { hashTypedData } from './hashTypedData'
+import { wrapTypedDataSignature } from './wrapTypedDataSignature'
 
 const client = anvilMainnet.getClient()
 

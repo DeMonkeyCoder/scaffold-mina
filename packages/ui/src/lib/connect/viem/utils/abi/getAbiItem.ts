@@ -3,24 +3,24 @@ import type { Abi, AbiParameter, Address } from 'abitype'
 import {
   AbiItemAmbiguityError,
   type AbiItemAmbiguityErrorType,
-} from '../../errors/abi.js'
-import type { ErrorType } from '../../errors/utils.js'
+} from '../../errors/abi'
+import type { ErrorType } from '../../errors/utils'
 import type {
   AbiItem,
   AbiItemArgs,
   AbiItemName,
   ExtractAbiItemForArgs,
   Widen,
-} from '../../types/contract.js'
-import type { Hex } from '../../types/misc.js'
-import type { UnionEvaluate } from '../../types/utils.js'
-import { type IsHexErrorType, isHex } from '../../utils/data/isHex.js'
-import { type IsAddressErrorType, isAddress } from '../address/isAddress.js'
-import { toEventSelector } from '../hash/toEventSelector.js'
+} from '../../types/contract'
+import type { Hex } from '../../types/misc'
+import type { UnionEvaluate } from '../../types/utils'
+import { type IsHexErrorType, isHex } from '../../utils/data/isHex'
+import { type IsAddressErrorType, isAddress } from '../address/isAddress'
+import { toEventSelector } from '../hash/toEventSelector'
 import {
   type ToFunctionSelectorErrorType,
   toFunctionSelector,
-} from '../hash/toFunctionSelector.js'
+} from '../hash/toFunctionSelector'
 
 export type GetAbiItemParameters<
   abi extends Abi | readonly unknown[] = Abi,

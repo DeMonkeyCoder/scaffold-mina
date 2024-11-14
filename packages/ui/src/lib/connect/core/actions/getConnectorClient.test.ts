@@ -1,9 +1,9 @@
 import { address, config } from "@wagmi/test";
 import { expect, test } from "vitest";
 
-import { connect } from "./connect.js";
-import { disconnect } from "./disconnect.js";
-import { getConnectorClient } from "./getConnectorClient.js";
+import { connect } from "./connect";
+import { disconnect } from "./disconnect";
+import { getConnectorClient } from "./getConnectorClient";
 
 const connector = config.connectors[0]!;
 

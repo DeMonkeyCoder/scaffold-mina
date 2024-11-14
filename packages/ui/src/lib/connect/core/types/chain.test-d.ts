@@ -6,9 +6,9 @@ import type {
 } from "@/lib/connect/viem/chains";
 import { expectTypeOf, test } from "vitest";
 
-import type { Config } from "../createConfig.js";
-import type { SelectChains } from "./chain.js";
-import type { Merge } from "./utils.js";
+import type { Config } from "../createConfig";
+import type { SelectChains } from "./chain";
+import type { Merge } from "./utils";
 
 test("not narrowable", () => {
   type Result = SelectChains<Config, number>;

@@ -1,11 +1,11 @@
 import { beforeAll, describe, expect, test } from 'vitest'
 
-import { deployEnsAvatarTokenUri } from '~test/src/utils.js'
+import { deployEnsAvatarTokenUri } from '~test/src/utils'
 
-import { anvilMainnet } from '../../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../../test/src/anvil'
 
-import { reset } from '../../../actions/index.js'
-import { parseAvatarRecord } from './parseAvatarRecord.js'
+import { reset } from '../../../actions/index'
+import { parseAvatarRecord } from './parseAvatarRecord'
 
 const client = anvilMainnet.getClient()
 

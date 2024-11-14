@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { WagmiProviderNotFoundError } from './context.js'
+import { WagmiProviderNotFoundError } from './context'
 
 test('WagmiProviderNotFoundError', () => {
   expect(new WagmiProviderNotFoundError()).toMatchInlineSnapshot(`

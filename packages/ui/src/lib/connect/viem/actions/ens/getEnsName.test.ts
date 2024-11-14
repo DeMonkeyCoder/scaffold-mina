@@ -1,23 +1,23 @@
 import { beforeAll, describe, expect, test } from 'vitest'
 
-import { address } from '~test/src/constants.js'
+import { address } from '~test/src/constants'
 import {
   createHttpServer,
   setVitalikName,
   setVitalikResolver,
-} from '~test/src/utils.js'
+} from '~test/src/utils'
 import {
   createClient,
   encodeErrorResult,
   encodeFunctionResult,
-} from '~viem/index.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { optimism } from '../../chains/index.js'
-import { http } from '../../clients/transports/http.js'
+} from '~viem/index'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { optimism } from '../../chains/index'
+import { http } from '../../clients/transports/http'
 
 import { parseAbi } from 'abitype'
-import { reset } from '../test/reset.js'
-import { getEnsName } from './getEnsName.js'
+import { reset } from '../test/reset'
+import { getEnsName } from './getEnsName'
 
 const client = anvilMainnet.getClient()
 

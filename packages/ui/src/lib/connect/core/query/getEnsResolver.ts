@@ -5,11 +5,11 @@ import {
   type GetEnsResolverParameters,
   type GetEnsResolverReturnType,
   getEnsResolver,
-} from '../actions/getEnsResolver.js'
-import type { Config } from '../createConfig.js'
-import type { ScopeKeyParameter } from '../types/properties.js'
-import type { Compute, ExactPartial } from '../types/utils.js'
-import { filterQueryOptions } from './utils.js'
+} from '../actions/getEnsResolver'
+import type { Config } from '../createConfig'
+import type { ScopeKeyParameter } from '../types/properties'
+import type { Compute, ExactPartial } from '../types/utils'
+import { filterQueryOptions } from './utils'
 
 export type GetEnsResolverOptions<config extends Config> = Compute<
   ExactPartial<GetEnsResolverParameters<config>> & ScopeKeyParameter

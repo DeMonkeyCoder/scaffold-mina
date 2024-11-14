@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { isHash } from './isHash.js'
+import { isHash } from './isHash'
 
 test('checks if address is valid', () => {
   expect(isHash('0xa5cc3c03994db5b0d9a5eEdD10Cabab0813678ac')).toBeFalsy()

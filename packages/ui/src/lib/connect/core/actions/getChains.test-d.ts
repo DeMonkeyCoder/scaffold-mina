@@ -2,7 +2,7 @@ import { type chain, config } from "@wagmi/test";
 import type { Chain } from "@/lib/connect/viem";
 import { expectTypeOf, test } from "vitest";
 
-import { getChains } from "./getChains.js";
+import { getChains } from "./getChains";
 
 test("default", async () => {
   const chains = getChains(config);

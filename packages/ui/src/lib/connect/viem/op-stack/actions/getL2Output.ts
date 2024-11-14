@@ -1,26 +1,26 @@
 import {
   type ReadContractErrorType,
   readContract,
-} from '../../actions/public/readContract.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
+} from '../../actions/public/readContract'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import type { Hex } from '../../types/misc.js'
-import type { OneOf } from '../../types/utils.js'
-import { l2OutputOracleAbi } from '../abis.js'
-import type { TargetChain } from '../types/chain.js'
-import type { GetContractAddressParameter } from '../types/contract.js'
-import { type GetGameParameters, getGame } from './getGame.js'
+} from '../../types/chain'
+import type { Hex } from '../../types/misc'
+import type { OneOf } from '../../types/utils'
+import { l2OutputOracleAbi } from '../abis'
+import type { TargetChain } from '../types/chain'
+import type { GetContractAddressParameter } from '../types/contract'
+import { type GetGameParameters, getGame } from './getGame'
 import {
   type GetPortalVersionParameters,
   getPortalVersion,
-} from './getPortalVersion.js'
+} from './getPortalVersion'
 
 export type GetL2OutputParameters<
   chain extends Chain | undefined = Chain | undefined,

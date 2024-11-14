@@ -16,13 +16,13 @@ import {
   switchAccountMutationOptions,
 } from "@/lib/connect/core/exports/query";
 
-import type { ConfigParameter } from "../types/properties.js";
+import type { ConfigParameter } from "../types/properties";
 import type {
   UseMutationParameters,
   UseMutationReturnType,
-} from "../utils/query.js";
-import { useConfig } from "./useConfig.js";
-import { useConnections } from "./useConnections.js";
+} from "../utils/query";
+import { useConfig } from "./useConfig";
+import { useConnections } from "./useConnections";
 
 export type UseSwitchAccountParameters<
   config extends Config = Config,

@@ -2,7 +2,7 @@ import { http, createConfig, webSocket } from "@/lib/connect/core/exports";
 import { mainnet, optimism } from "@/lib/connect/core/exports/chains";
 import { expectTypeOf, test } from "vitest";
 
-import { useBlockNumber } from "./useBlockNumber.js";
+import { useBlockNumber } from "./useBlockNumber";
 
 test("select data", () => {
   const result = useBlockNumber({

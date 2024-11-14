@@ -11,7 +11,7 @@ import {
   InvalidAbiDecodingTypeError,
   InvalidAbiEncodingTypeError,
   InvalidArrayError,
-} from "./abi.js";
+} from "./abi";
 
 test("AbiDecodingDataSizeInvalidError", () => {
   expect(new AbiDecodingDataSizeInvalidError({ data: "0x1234", size: 2 }))

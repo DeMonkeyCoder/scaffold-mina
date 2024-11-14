@@ -1,9 +1,9 @@
 import { abi, address, chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { connect } from '../connect.js'
-import { disconnect } from '../disconnect.js'
-import { createSimulateContract } from './createSimulateContract.js'
+import { connect } from '../connect'
+import { disconnect } from '../disconnect'
+import { createSimulateContract } from './createSimulateContract'
 
 const connector = config.connectors[0]!
 

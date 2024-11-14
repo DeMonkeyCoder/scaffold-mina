@@ -2,20 +2,20 @@ import type { Address } from 'abitype'
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../accounts/utils/parseAccount.js'
+} from '../../accounts/utils/parseAccount'
 import {
   type PrepareTransactionRequestErrorType,
   type PrepareTransactionRequestParameters,
   prepareTransactionRequest,
-} from '../../actions/wallet/prepareTransactionRequest.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account, GetAccountParameter } from '../../types/account.js'
-import type { Chain, GetChainParameter } from '../../types/chain.js'
-import type { Hex } from '../../types/misc.js'
-import type { Prettify, UnionOmit } from '../../types/utils.js'
-import type { InitiateWithdrawalParameters } from './initiateWithdrawal.js'
+} from '../../actions/wallet/prepareTransactionRequest'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account, GetAccountParameter } from '../../types/account'
+import type { Chain, GetChainParameter } from '../../types/chain'
+import type { Hex } from '../../types/misc'
+import type { Prettify, UnionOmit } from '../../types/utils'
+import type { InitiateWithdrawalParameters } from './initiateWithdrawal'
 
 export type BuildInitiateWithdrawalParameters<
   chain extends Chain | undefined = Chain | undefined,

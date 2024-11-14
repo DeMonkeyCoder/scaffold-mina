@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 
-import { formatAbiItemWithArgs } from "./formatAbiItemWithArgs.js";
+import { formatAbiItemWithArgs } from "./formatAbiItemWithArgs";
 
 test("default", () => {
   expect(

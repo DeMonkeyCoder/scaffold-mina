@@ -1,9 +1,9 @@
 import { AbiCoder } from "ethers";
 import { bench, describe } from "vitest";
 
-import { seaportContractConfig } from "../../../test/src/abis.js";
-import { decodeAbiParameters } from "./decodeAbiParameters.js";
-import { getAbiItem } from "./getAbiItem.js";
+import { seaportContractConfig } from "../../../test/src/abis";
+import { decodeAbiParameters } from "./decodeAbiParameters";
+import { getAbiItem } from "./getAbiItem";
 
 const fulfillAdvancedOrder = getAbiItem({
   abi: seaportContractConfig.abi,

@@ -1,23 +1,23 @@
 import type { Abi, AbiStateMutability } from 'abitype'
 
-import { AbiFunctionSignatureNotFoundError } from '../../errors/abi.js'
-import type { ErrorType } from '../../errors/utils.js'
+import { AbiFunctionSignatureNotFoundError } from '../../errors/abi'
+import type { ErrorType } from '../../errors/utils'
 import type {
   ContractFunctionArgs,
   ContractFunctionName,
-} from '../../types/contract.js'
-import type { Hex } from '../../types/misc.js'
-import type { IsNarrowable, UnionEvaluate } from '../../types/utils.js'
-import { type SliceErrorType, slice } from '../data/slice.js'
+} from '../../types/contract'
+import type { Hex } from '../../types/misc'
+import type { IsNarrowable, UnionEvaluate } from '../../types/utils'
+import { type SliceErrorType, slice } from '../data/slice'
 import {
   type ToFunctionSelectorErrorType,
   toFunctionSelector,
-} from '../hash/toFunctionSelector.js'
+} from '../hash/toFunctionSelector'
 import {
   type DecodeAbiParametersErrorType,
   decodeAbiParameters,
-} from './decodeAbiParameters.js'
-import { type FormatAbiItemErrorType, formatAbiItem } from './formatAbiItem.js'
+} from './decodeAbiParameters'
+import { type FormatAbiItemErrorType, formatAbiItem } from './formatAbiItem'
 
 export type DecodeFunctionDataParameters<
   abi extends Abi | readonly unknown[] = Abi,

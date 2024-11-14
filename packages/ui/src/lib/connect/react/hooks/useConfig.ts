@@ -3,9 +3,9 @@
 import type { Config, ResolvedRegister } from "@/lib/connect/core/exports";
 import { useContext } from "react";
 
-import { WagmiContext } from "../context.js";
-import { WagmiProviderNotFoundError } from "../errors/context.js";
-import type { ConfigParameter } from "../types/properties.js";
+import { WagmiContext } from "../context";
+import { WagmiProviderNotFoundError } from "../errors/context";
+import type { ConfigParameter } from "../types/properties";
 
 export type UseConfigParameters<config extends Config = Config> =
   ConfigParameter<config>;

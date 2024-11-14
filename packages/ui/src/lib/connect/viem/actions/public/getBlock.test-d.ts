@@ -1,12 +1,12 @@
 import { describe, expectTypeOf, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { optimism } from '../../chains/index.js'
-import { http, createPublicClient } from '../../index.js'
-import type { Hash, Hex } from '../../types/misc.js'
-import type { Transaction } from '../../types/transaction.js'
-import type { Prettify } from '../../types/utils.js'
-import { getBlock } from './getBlock.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { optimism } from '../../chains/index'
+import { http, createPublicClient } from '../../index'
+import type { Hash, Hex } from '../../types/misc'
+import type { Transaction } from '../../types/transaction'
+import type { Prettify } from '../../types/utils'
+import { getBlock } from './getBlock'
 
 const client = anvilMainnet.getClient()
 

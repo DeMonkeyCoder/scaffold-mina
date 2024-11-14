@@ -1,18 +1,18 @@
 import { describe, expect, test } from 'vitest'
-import { accounts } from '~test/src/constants.js'
-import { signTransaction } from '../accounts/utils/signTransaction.js'
-import { zksync } from '../chains/index.js'
-import { BaseError } from '../errors/base.js'
-import { InvalidChainIdError } from '../errors/chain.js'
-import { InvalidAddressError } from '../index.js'
+import { accounts } from '~test/src/constants'
+import { signTransaction } from '../accounts/utils/signTransaction'
+import { zksync } from '../chains/index'
+import { BaseError } from '../errors/base'
+import { InvalidChainIdError } from '../errors/chain'
+import { InvalidAddressError } from '../index'
 import {
   type TransactionSerializableEIP1559,
   parseEther,
   parseGwei,
   parseTransaction,
-} from '../index.js'
-import { serializeTransaction } from './serializers.js'
-import type { ZksyncTransactionSerializableEIP712 } from './types/transaction.js'
+} from '../index'
+import { serializeTransaction } from './serializers'
+import type { ZksyncTransactionSerializableEIP712 } from './types/transaction'
 
 const baseTransaction: TransactionSerializableEIP1559 = {
   to: '0x111C3E89Ce80e62EE88318C2804920D4c96f92bb',

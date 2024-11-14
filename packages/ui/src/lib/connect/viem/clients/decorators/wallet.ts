@@ -1,89 +1,89 @@
 import type { Abi, Address, TypedData } from "abitype";
 
-import type { Account } from "../../accounts/types.js";
+import type { Account } from "../../accounts/types";
 import {
   type GetChainIdReturnType,
   getChainId,
-} from "../../actions/public/getChainId.js";
+} from "../../actions/public/getChainId";
 import {
   type AddChainParameters,
   addChain,
-} from "../../actions/wallet/addChain.js";
+} from "../../actions/wallet/addChain";
 import {
   type DeployContractParameters,
   type DeployContractReturnType,
   deployContract,
-} from "../../actions/wallet/deployContract.js";
+} from "../../actions/wallet/deployContract";
 import {
   type GetAddressesReturnType,
   getAddresses,
-} from "../../actions/wallet/getAddresses.js";
+} from "../../actions/wallet/getAddresses";
 import {
   type GetPermissionsReturnType,
   getPermissions,
-} from "../../actions/wallet/getPermissions.js";
+} from "../../actions/wallet/getPermissions";
 import {
   type PrepareTransactionRequestParameters,
   type PrepareTransactionRequestRequest,
   type PrepareTransactionRequestReturnType,
   prepareTransactionRequest,
-} from "../../actions/wallet/prepareTransactionRequest.js";
+} from "../../actions/wallet/prepareTransactionRequest";
 import {
   type RequestAddressesReturnType,
   requestAddresses,
-} from "../../actions/wallet/requestAddresses.js";
+} from "../../actions/wallet/requestAddresses";
 import {
   type RequestPermissionsParameters,
   type RequestPermissionsReturnType,
   requestPermissions,
-} from "../../actions/wallet/requestPermissions.js";
+} from "../../actions/wallet/requestPermissions";
 import {
   type SendRawTransactionParameters,
   type SendRawTransactionReturnType,
   sendRawTransaction,
-} from "../../actions/wallet/sendRawTransaction.js";
+} from "../../actions/wallet/sendRawTransaction";
 import {
   type SendTransactionParameters,
   type SendTransactionRequest,
   type SendTransactionReturnType,
   sendTransaction,
-} from "../../actions/wallet/sendTransaction.js";
+} from "../../actions/wallet/sendTransaction";
 import {
   type SignMessageParameters,
   type SignMessageReturnType,
   signMessage,
-} from "../../actions/wallet/signMessage.js";
+} from "../../actions/wallet/signMessage";
 import {
   type SignTransactionParameters,
   type SignTransactionReturnType,
   signTransaction,
-} from "../../actions/wallet/signTransaction.js";
+} from "../../actions/wallet/signTransaction";
 import {
   type SignTypedDataParameters,
   type SignTypedDataReturnType,
   signTypedData,
-} from "../../actions/wallet/signTypedData.js";
+} from "../../actions/wallet/signTypedData";
 import {
   type SwitchChainParameters,
   switchChain,
-} from "../../actions/wallet/switchChain.js";
+} from "../../actions/wallet/switchChain";
 import {
   type WatchAssetParameters,
   type WatchAssetReturnType,
   watchAsset,
-} from "../../actions/wallet/watchAsset.js";
+} from "../../actions/wallet/watchAsset";
 import {
   type WriteContractParameters,
   type WriteContractReturnType,
   writeContract,
-} from "../../actions/wallet/writeContract.js";
-import type { Chain } from "../../types/chain.js";
+} from "../../actions/wallet/writeContract";
+import type { Chain } from "../../types/chain";
 import type {
   ContractFunctionArgs,
   ContractFunctionName,
-} from "../../types/contract.js";
-import type { Client } from "../createClient.js";
-import type { Transport } from "../transports/createTransport.js";
+} from "../../types/contract";
+import type { Client } from "../createClient";
+import type { Transport } from "../transports/createTransport";
 
 export type WalletActions<
   chain extends Chain | undefined = Chain | undefined,
@@ -93,7 +93,7 @@ export type WalletActions<
    * Adds an EVM chain to the wallet.
    *
    * - Docs: https://viem.sh/docs/actions/wallet/addChain
-   * - JSON-RPC Methods: [`eth_addEthereumChain`](https://eips.ethereum.org/EIPS/eip-3085)
+   * - JSON-RPC Methods: [`mina_addEthereumChain`](https://eips.ethereum.org/EIPS/eip-3085)
    *
    * @param args - {@link AddChainParameters}
    *
@@ -142,7 +142,7 @@ export type WalletActions<
    * Returns a list of account addresses owned by the wallet or client.
    *
    * - Docs: https://viem.sh/docs/actions/wallet/getAddresses
-   * - JSON-RPC Methods: [`eth_accounts`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_accounts)
+   * - JSON-RPC Methods: [`mina_accounts`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_accounts)
    *
    * @returns List of account addresses owned by the wallet or client. {@link GetAddressesReturnType}
    *
@@ -161,7 +161,7 @@ export type WalletActions<
    * Returns the chain ID associated with the current networkID.
    *
    * - Docs: https://viem.sh/docs/actions/public/getChainId
-   * - JSON-RPC Methods: [`eth_chainId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_chainid)
+   * - JSON-RPC Methods: [`mina_chainId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_chainid)
    *
    * @returns The current chain ID. {@link GetChainIdReturnType}
    *
@@ -262,7 +262,7 @@ export type WalletActions<
    * Requests a list of accounts managed by a wallet.
    *
    * - Docs: https://viem.sh/docs/actions/wallet/requestAddresses
-   * - JSON-RPC Methods: [`eth_requestAccounts`](https://eips.ethereum.org/EIPS/eip-1102)
+   * - JSON-RPC Methods: [`mina_requestAccounts`](https://eips.ethereum.org/EIPS/eip-1102)
    *
    * Sends a request to the wallet, asking for permission to access the user's accounts. After the user accepts the request, it will return a list of accounts (addresses).
    *
@@ -299,7 +299,7 @@ export type WalletActions<
    *   transport: custom(window.ethereum),
    * })
    * const permissions = await client.requestPermissions({
-   *   eth_accounts: {}
+   *   mina_accounts: {}
    * })
    */
   requestPermissions: (
@@ -309,7 +309,7 @@ export type WalletActions<
    * Sends a **signed** transaction to the networkID
    *
    * - Docs: https://viem.sh/docs/actions/wallet/sendRawTransaction
-   * - JSON-RPC Method: [`eth_sendRawTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)
+   * - JSON-RPC Method: [`mina_sendRawTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)
    *
    * @param client - Client to use
    * @param parameters - {@link SendRawTransactionParameters}
@@ -338,8 +338,8 @@ export type WalletActions<
    * - Docs: https://viem.sh/docs/actions/wallet/sendTransaction
    * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/transactions/sending-transactions
    * - JSON-RPC Methods:
-   *   - JSON-RPC Accounts: [`eth_sendTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendtransaction)
-   *   - Local Accounts: [`eth_sendRawTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendrawtransaction)
+   *   - JSON-RPC Accounts: [`mina_sendTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_sendtransaction)
+   *   - Local Accounts: [`mina_sendRawTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_sendrawtransaction)
    *
    * @param args - {@link SendTransactionParameters}
    * @returns The [Transaction](https://viem.sh/docs/glossary/terms#transaction) hash. {@link SendTransactionReturnType}
@@ -431,7 +431,7 @@ export type WalletActions<
    *
    * - Docs: https://viem.sh/docs/actions/wallet/signTransaction
    * - JSON-RPC Methods:
-   *   - JSON-RPC Accounts: [`eth_signTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)
+   *   - JSON-RPC Accounts: [`mina_signTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)
    *   - Local Accounts: Signs locally. No JSON-RPC request.
    *
    * @param args - {@link SignTransactionParameters}
@@ -477,7 +477,7 @@ export type WalletActions<
    *
    * - Docs: https://viem.sh/docs/actions/wallet/signTypedData
    * - JSON-RPC Methods:
-   *   - JSON-RPC Accounts: [`eth_signTypedData_v4`](https://docs.metamask.io/guide/signing-data#signtypeddata-v4)
+   *   - JSON-RPC Accounts: [`mina_signTypedData_v4`](https://docs.metamask.io/guide/signing-data#signtypeddata-v4)
    *   - Local Accounts: Signs locally. No JSON-RPC request.
    *
    * @param client - Client to use
@@ -578,7 +578,7 @@ export type WalletActions<
    * Switch the target chain in a wallet.
    *
    * - Docs: https://viem.sh/docs/actions/wallet/switchChain
-   * - JSON-RPC Methods: [`eth_switchEthereumChain`](https://eips.ethereum.org/EIPS/eip-3326)
+   * - JSON-RPC Methods: [`mina_switchEthereumChain`](https://eips.ethereum.org/EIPS/eip-3326)
    *
    * @param args - {@link SwitchChainParameters}
    *
@@ -597,7 +597,7 @@ export type WalletActions<
    * Adds an EVM chain to the wallet.
    *
    * - Docs: https://viem.sh/docs/actions/wallet/watchAsset
-   * - JSON-RPC Methods: [`eth_switchEthereumChain`](https://eips.ethereum.org/EIPS/eip-747)
+   * - JSON-RPC Methods: [`mina_switchEthereumChain`](https://eips.ethereum.org/EIPS/eip-747)
    *
    * @param args - {@link WatchAssetParameters}
    * @returns Boolean indicating if the token was successfully added. {@link WatchAssetReturnType}

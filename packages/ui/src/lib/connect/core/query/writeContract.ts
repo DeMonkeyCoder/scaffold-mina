@@ -10,9 +10,9 @@ import {
   type WriteContractParameters,
   type WriteContractReturnType,
   writeContract,
-} from "../actions/writeContract.js";
-import type { Config } from "../createConfig.js";
-import type { Compute } from "../types/utils.js";
+} from "../actions/writeContract";
+import type { Config } from "../createConfig";
+import type { Compute } from "../types/utils";
 
 export function writeContractMutationOptions<config extends Config>(
   config: config

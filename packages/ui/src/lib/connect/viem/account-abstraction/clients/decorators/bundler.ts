@@ -1,49 +1,49 @@
 import {
   type GetChainIdReturnType,
   getChainId,
-} from '../../../actions/public/getChainId.js'
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import type { Chain } from '../../../types/chain.js'
-import type { SmartAccount } from '../../accounts/types.js'
+} from "../../../actions/public/getChainId";
+import type { Client } from "../../../clients/createClient";
+import type { Transport } from "../../../clients/transports/createTransport";
+import type { Chain } from "../../../types/chain";
+import type { SmartAccount } from "../../accounts/types";
 import {
   type EstimateUserOperationGasParameters,
   type EstimateUserOperationGasReturnType,
   estimateUserOperationGas,
-} from '../../actions/bundler/estimateUserOperationGas.js'
+} from "../../actions/bundler/estimateUserOperationGas";
 import {
   type GetSupportedEntryPointsReturnType,
   getSupportedEntryPoints,
-} from '../../actions/bundler/getSupportedEntryPoints.js'
+} from "../../actions/bundler/getSupportedEntryPoints";
 import {
   type GetUserOperationParameters,
   type GetUserOperationReturnType,
   getUserOperation,
-} from '../../actions/bundler/getUserOperation.js'
+} from "../../actions/bundler/getUserOperation";
 import {
   type GetUserOperationReceiptParameters,
   type GetUserOperationReceiptReturnType,
   getUserOperationReceipt,
-} from '../../actions/bundler/getUserOperationReceipt.js'
+} from "../../actions/bundler/getUserOperationReceipt";
 import {
   type PrepareUserOperationParameters,
   type PrepareUserOperationRequest,
   type PrepareUserOperationReturnType,
   prepareUserOperation,
-} from '../../actions/bundler/prepareUserOperation.js'
+} from "../../actions/bundler/prepareUserOperation";
 import {
   type SendUserOperationParameters,
   type SendUserOperationReturnType,
   sendUserOperation,
-} from '../../actions/bundler/sendUserOperation.js'
+} from "../../actions/bundler/sendUserOperation";
 import {
   type WaitForUserOperationReceiptParameters,
   type WaitForUserOperationReceiptReturnType,
   waitForUserOperationReceipt,
-} from '../../actions/bundler/waitForUserOperationReceipt.js'
+} from "../../actions/bundler/waitForUserOperationReceipt";
 
 export type BundlerActions<
-  account extends SmartAccount | undefined = SmartAccount | undefined,
+  account extends SmartAccount | undefined = SmartAccount | undefined
 > = {
   /**
    * Returns an estimate of gas values necessary to execute the User Operation.
@@ -73,19 +73,19 @@ export type BundlerActions<
    */
   estimateUserOperationGas: <
     const calls extends readonly unknown[],
-    accountOverride extends SmartAccount | undefined = undefined,
+    accountOverride extends SmartAccount | undefined = undefined
   >(
     parameters: EstimateUserOperationGasParameters<
       account,
       accountOverride,
       calls
-    >,
-  ) => Promise<EstimateUserOperationGasReturnType<account, accountOverride>>
+    >
+  ) => Promise<EstimateUserOperationGasReturnType<account, accountOverride>>;
   /**
    * Returns the chain ID associated with the bundler.
    *
    * - Docs: https://viem.sh/docs/actions/public/getChainId
-   * - JSON-RPC Methods: [`eth_chainId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_chainid)
+   * - JSON-RPC Methods: [`mina_chainId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_chainid)
    *
    * @returns The current chain ID. {@link GetChainIdReturnType}
    *
@@ -100,7 +100,7 @@ export type BundlerActions<
    * const chainId = await client.getChainId()
    * // 1
    */
-  getChainId: () => Promise<GetChainIdReturnType>
+  getChainId: () => Promise<GetChainIdReturnType>;
   /**
    * Returns the EntryPoints that the bundler supports.
    *
@@ -121,7 +121,7 @@ export type BundlerActions<
    *
    * const addresses = await bundlerClient.getSupportedEntryPoints()
    */
-  getSupportedEntryPoints: () => Promise<GetSupportedEntryPointsReturnType>
+  getSupportedEntryPoints: () => Promise<GetSupportedEntryPointsReturnType>;
   /**
    * Returns the information about a User Operation given a hash.
    *
@@ -145,8 +145,8 @@ export type BundlerActions<
    * })
    */
   getUserOperation: (
-    parameters: GetUserOperationParameters,
-  ) => Promise<GetUserOperationReturnType>
+    parameters: GetUserOperationParameters
+  ) => Promise<GetUserOperationReturnType>;
   /**
    * Returns the User Operation Receipt given a User Operation hash.
    *
@@ -170,8 +170,8 @@ export type BundlerActions<
    * })
    */
   getUserOperationReceipt: (
-    parameters: GetUserOperationReceiptParameters,
-  ) => Promise<GetUserOperationReceiptReturnType>
+    parameters: GetUserOperationReceiptParameters
+  ) => Promise<GetUserOperationReceiptReturnType>;
   /**
    * Prepares a User Operation and fills in missing properties.
    *
@@ -204,17 +204,17 @@ export type BundlerActions<
       accountOverride,
       calls
     >,
-    accountOverride extends SmartAccount | undefined = undefined,
+    accountOverride extends SmartAccount | undefined = undefined
   >(
     parameters: PrepareUserOperationParameters<
       account,
       accountOverride,
       calls,
       request
-    >,
+    >
   ) => Promise<
     PrepareUserOperationReturnType<account, accountOverride, calls, request>
-  >
+  >;
   /**
    * Broadcasts a User Operation to the Bundler.
    *
@@ -243,10 +243,10 @@ export type BundlerActions<
    */
   sendUserOperation: <
     const calls extends readonly unknown[],
-    accountOverride extends SmartAccount | undefined = undefined,
+    accountOverride extends SmartAccount | undefined = undefined
   >(
-    parameters: SendUserOperationParameters<account, accountOverride, calls>,
-  ) => Promise<SendUserOperationReturnType>
+    parameters: SendUserOperationParameters<account, accountOverride, calls>
+  ) => Promise<SendUserOperationReturnType>;
   /**
    * Waits for the User Operation to be included on a [Block](https://viem.sh/docs/glossary/terms#block) (one confirmation), and then returns the User Operation receipt.
    *
@@ -270,14 +270,14 @@ export type BundlerActions<
    * })
    */
   waitForUserOperationReceipt: (
-    parameters: WaitForUserOperationReceiptParameters,
-  ) => Promise<WaitForUserOperationReceiptReturnType>
-}
+    parameters: WaitForUserOperationReceiptParameters
+  ) => Promise<WaitForUserOperationReceiptReturnType>;
+};
 
 export function bundlerActions<
   transport extends Transport = Transport,
   chain extends Chain | undefined = Chain | undefined,
-  account extends SmartAccount | undefined = SmartAccount | undefined,
+  account extends SmartAccount | undefined = SmartAccount | undefined
 >(client: Client<transport, chain, account>): BundlerActions<account> {
   return {
     estimateUserOperationGas: (parameters) =>
@@ -292,5 +292,5 @@ export function bundlerActions<
     sendUserOperation: (parameters) => sendUserOperation(client, parameters),
     waitForUserOperationReceipt: (parameters) =>
       waitForUserOperationReceipt(client, parameters),
-  }
+  };
 }

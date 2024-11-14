@@ -1,13 +1,13 @@
 import type { TypedDataDomain } from 'abitype'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { Hex, SignableMessage } from '../../../types/misc.js'
-import type { RequiredBy } from '../../../types/utils.js'
-import { hashTypedData } from '../../../utils/index.js'
-import type { HashTypedDataErrorType } from '../../../utils/signature/hashTypedData.js'
+import type { ErrorType } from '../../../errors/utils'
+import type { Hex, SignableMessage } from '../../../types/misc'
+import type { RequiredBy } from '../../../types/utils'
+import { hashTypedData } from '../../../utils/index'
+import type { HashTypedDataErrorType } from '../../../utils/signature/hashTypedData'
 import {
   type ToPrefixedMessageErrorType,
   toPrefixedMessage,
-} from '../../../utils/signature/toPrefixedMessage.js'
+} from '../../../utils/signature/toPrefixedMessage'
 
 export type HashMessageParameters = {
   message: SignableMessage

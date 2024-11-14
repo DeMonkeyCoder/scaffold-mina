@@ -1,81 +1,81 @@
 import type { Address } from "abitype";
-import type { Client } from "../../clients/createClient.js";
-import type { Transport } from "../../clients/transports/createTransport.js";
-import type { Account } from "../../types/account.js";
-import { estimateFee } from "../actions/estimateFee.js";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { Account } from "../../types/account";
+import { estimateFee } from "../actions/estimateFee";
 import type {
   EstimateFeeParameters,
   EstimateFeeReturnType,
-} from "../actions/estimateFee.js";
+} from "../actions/estimateFee";
 import {
   type EstimateGasL1ToL2Parameters,
   type EstimateGasL1ToL2ReturnType,
   estimateGasL1ToL2,
-} from "../actions/estimateGasL1ToL2.js";
+} from "../actions/estimateGasL1ToL2";
 import {
   type GetAllBalancesParameters,
   type GetAllBalancesReturnType,
   getAllBalances,
-} from "../actions/getAllBalances.js";
+} from "../actions/getAllBalances";
 import {
   type GetBaseTokenL1AddressReturnType,
   getBaseTokenL1Address,
-} from "../actions/getBaseTokenL1Address.js";
+} from "../actions/getBaseTokenL1Address";
 import {
   type GetBlockDetailsParameters,
   type GetBlockDetailsReturnType,
   getBlockDetails,
-} from "../actions/getBlockDetails.js";
+} from "../actions/getBlockDetails";
 import {
   type GetBridgehubContractAddressReturnType,
   getBridgehubContractAddress,
-} from "../actions/getBridgehubContractAddress.js";
+} from "../actions/getBridgehubContractAddress";
 import {
   type GetDefaultBridgeAddressesReturnType,
   getDefaultBridgeAddresses,
-} from "../actions/getDefaultBridgeAddresses.js";
+} from "../actions/getDefaultBridgeAddresses";
 import {
   type GetL1BatchBlockRangeParameters,
   type GetL1BatchBlockRangeReturnParameters,
   getL1BatchBlockRange,
-} from "../actions/getL1BatchBlockRange.js";
+} from "../actions/getL1BatchBlockRange";
 import {
   type GetL1BatchDetailsParameters,
   type GetL1BatchDetailsReturnType,
   getL1BatchDetails,
-} from "../actions/getL1BatchDetails.js";
+} from "../actions/getL1BatchDetails";
 import {
   type GetL1BatchNumberReturnType,
   getL1BatchNumber,
-} from "../actions/getL1BatchNumber.js";
+} from "../actions/getL1BatchNumber";
 import {
   type GetL1ChainIdReturnType,
   getL1ChainId,
-} from "../actions/getL1ChainId.js";
+} from "../actions/getL1ChainId";
 import {
   type GetLogProofParameters,
   type GetLogProofReturnType,
   getLogProof,
-} from "../actions/getLogProof.js";
+} from "../actions/getLogProof";
 import {
   type GetMainContractAddressReturnType,
   getMainContractAddress,
-} from "../actions/getMainContractAddress.js";
+} from "../actions/getMainContractAddress";
 import {
   type GetRawBlockTransactionsParameters,
   type GetRawBlockTransactionsReturnType,
   getRawBlockTransactions,
-} from "../actions/getRawBlockTransactions.js";
+} from "../actions/getRawBlockTransactions";
 import {
   type GetTestnetPaymasterAddressReturnType,
   getTestnetPaymasterAddress,
-} from "../actions/getTestnetPaymasterAddress.js";
+} from "../actions/getTestnetPaymasterAddress";
 import {
   type GetTransactionDetailsParameters,
   type GetTransactionDetailsReturnType,
   getTransactionDetails,
-} from "../actions/getTransactionDetails.js";
-import type { ChainEIP712 } from "../types/chain.js";
+} from "../actions/getTransactionDetails";
+import type { ChainEIP712 } from "../types/chain";
 
 export type PublicActionsL2<
   chain extends ChainEIP712 | undefined = ChainEIP712 | undefined,

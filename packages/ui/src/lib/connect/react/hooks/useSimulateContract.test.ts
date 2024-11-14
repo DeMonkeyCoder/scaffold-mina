@@ -3,7 +3,7 @@ import { abi, address, config, wait } from "@wagmi/test";
 import { renderHook, waitFor } from "@wagmi/test/react";
 import { expect, test } from "vitest";
 
-import { useSimulateContract } from "./useSimulateContract.js";
+import { useSimulateContract } from "./useSimulateContract";
 
 const connector = config.connectors[0]!;
 

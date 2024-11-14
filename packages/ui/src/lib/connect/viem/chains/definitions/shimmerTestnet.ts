@@ -1,4 +1,4 @@
-import { defineChain } from '../../utils/chain/defineChain.js'
+import { defineChain } from '../../utils/chain/defineChain'
 
 export const shimmerTestnet = /*#__PURE__*/ defineChain({
   id: 1073,

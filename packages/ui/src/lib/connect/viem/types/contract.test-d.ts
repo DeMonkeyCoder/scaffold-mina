@@ -20,8 +20,8 @@ import type {
   GetValue,
   LogTopicType,
   Widen,
-} from './contract.js'
-import type { Hex } from './misc.js'
+} from './contract'
+import type { Hex } from './misc'
 
 test('ContractFunctionName', () => {
   expectTypeOf<ContractFunctionName<typeof seaportAbi>>().toEqualTypeOf<

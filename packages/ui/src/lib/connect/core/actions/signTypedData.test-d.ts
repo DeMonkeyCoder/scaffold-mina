@@ -1,7 +1,7 @@
 import { config, typedData } from '@wagmi/test'
 import { test } from 'vitest'
 
-import { signTypedData } from './signTypedData.js'
+import { signTypedData } from './signTypedData'
 
 test('default', async () => {
   signTypedData(config, {

@@ -1,29 +1,29 @@
 import type { Abi, AbiStateMutability, Address, Narrow } from "abitype";
 
-import type { Client } from "../../../clients/createClient.js";
-import type { Transport } from "../../../clients/transports/createTransport.js";
-import type { ErrorType } from "../../../errors/utils.js";
-import type { Account, GetAccountParameter } from "../../../types/account.js";
-import type { Chain, GetChainParameter } from "../../../types/chain.js";
+import type { Client } from "../../../clients/createClient";
+import type { Transport } from "../../../clients/transports/createTransport";
+import type { ErrorType } from "../../../errors/utils";
+import type { Account, GetAccountParameter } from "../../../types/account";
+import type { Chain, GetChainParameter } from "../../../types/chain";
 import type {
   ContractFunctionArgs,
   ContractFunctionName,
   GetValue,
   UnionWiden,
   Widen,
-} from "../../../types/contract.js";
-import type { MulticallContracts } from "../../../types/multicall.js";
+} from "../../../types/contract";
+import type { MulticallContracts } from "../../../types/multicall";
 import {
   type EncodeFunctionDataErrorType,
   encodeFunctionData,
-} from "../../../utils/abi/encodeFunctionData.js";
-import { getAction } from "../../../utils/getAction.js";
+} from "../../../utils/abi/encodeFunctionData";
+import { getAction } from "../../../utils/getAction";
 import {
   type SendCallsErrorType,
   type SendCallsParameters,
   type SendCallsReturnType,
   sendCalls,
-} from "./sendCalls.js";
+} from "./sendCalls";
 
 export type WriteContractsParameters<
   contracts extends readonly unknown[] = readonly WriteContractFunctionParameters[],

@@ -1,30 +1,30 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest'
-import { wagmiContractConfig } from '../../../../test/src/abis.js'
+import { wagmiContractConfig } from '../../../../test/src/abis'
 import {
   createVerifyingPaymasterServer,
   getSmartAccounts_06,
   getSmartAccounts_07,
   getVerifyingPaymaster_07,
-} from '../../../../test/src/account-abstraction.js'
-import { anvilMainnet } from '../../../../test/src/anvil.js'
-import { bundlerMainnet } from '../../../../test/src/bundler.js'
-import { accounts } from '../../../../test/src/constants.js'
-import { privateKeyToAccount } from '../../../accounts/privateKeyToAccount.js'
+} from '../../../../test/src/account-abstraction'
+import { anvilMainnet } from '../../../../test/src/anvil'
+import { bundlerMainnet } from '../../../../test/src/bundler'
+import { accounts } from '../../../../test/src/constants'
+import { privateKeyToAccount } from '../../../accounts/privateKeyToAccount'
 import {
   getBalance,
   mine,
   readContract,
   setBalance,
   writeContract,
-} from '../../../actions/index.js'
-import { sepolia } from '../../../chains/index.js'
-import { createPublicClient } from '../../../clients/createPublicClient.js'
-import { http } from '../../../clients/transports/http.js'
-import { pad, parseEther, parseGwei } from '../../../utils/index.js'
-import { toCoinbaseSmartAccount } from '../../accounts/implementations/toCoinbaseSmartAccount.js'
-import { createBundlerClient } from '../../clients/createBundlerClient.js'
-import { createPaymasterClient } from '../../clients/createPaymasterClient.js'
-import { sendUserOperation } from './sendUserOperation.js'
+} from '../../../actions/index'
+import { sepolia } from '../../../chains/index'
+import { createPublicClient } from '../../../clients/createPublicClient'
+import { http } from '../../../clients/transports/http'
+import { pad, parseEther, parseGwei } from '../../../utils/index'
+import { toCoinbaseSmartAccount } from '../../accounts/implementations/toCoinbaseSmartAccount'
+import { createBundlerClient } from '../../clients/createBundlerClient'
+import { createPaymasterClient } from '../../clients/createPaymasterClient'
+import { sendUserOperation } from './sendUserOperation'
 
 const client = anvilMainnet.getClient({ account: true })
 const bundlerClient = bundlerMainnet.getBundlerClient({ client })

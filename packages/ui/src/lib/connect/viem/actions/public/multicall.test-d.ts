@@ -2,13 +2,13 @@ import { type Abi, type Address, parseAbi } from 'abitype'
 import { erc20Abi, seaportAbi, wagmiMintExampleAbi } from 'abitype/abis'
 import { expectTypeOf, test } from 'vitest'
 
-import { baycContractConfig, usdcContractConfig } from '~test/src/abis.js'
-import { address } from '~test/src/constants.js'
+import { baycContractConfig, usdcContractConfig } from '~test/src/abis'
+import { address } from '~test/src/constants'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import type { MulticallResponse } from '../../types/multicall.js'
-import { multicall } from './multicall.js'
+import type { MulticallResponse } from '../../types/multicall'
+import { multicall } from './multicall'
 
 const client = anvilMainnet.getClient()
 

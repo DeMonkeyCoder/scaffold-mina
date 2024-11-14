@@ -1,9 +1,9 @@
 import { beforeAll, test, vi } from 'vitest'
-import { anvilMainnet, anvilOptimism } from '../../../test/src/anvil.js'
-import { getTransactionReceipt, reset } from '../../actions/index.js'
+import { anvilMainnet, anvilOptimism } from '../../../test/src/anvil'
+import { getTransactionReceipt, reset } from '../../actions/index'
 
-import { getWithdrawals, optimism } from '../../op-stack/index.js'
-import { waitToFinalize } from './waitToFinalize.js'
+import { getWithdrawals, optimism } from '../../op-stack/index'
+import { waitToFinalize } from './waitToFinalize'
 
 const client = anvilMainnet.getClient()
 const optimismClient = anvilOptimism.getClient()

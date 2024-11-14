@@ -1,7 +1,7 @@
 import { assertType, expect, test, vi } from 'vitest'
 
-import type { EIP1193RequestFn } from '../../types/eip1193.js'
-import { createTransport } from './createTransport.js'
+import type { EIP1193RequestFn } from '../../types/eip1193'
+import { createTransport } from './createTransport'
 
 test('default', () => {
   const transport = createTransport({

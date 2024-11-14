@@ -2,8 +2,8 @@ import { abi, config, mainnet, optimism } from "@wagmi/test";
 import { http, webSocket } from "@/lib/connect/viem";
 import { expectTypeOf, test } from "vitest";
 
-import { createConfig } from "../../createConfig.js";
-import { createWatchContractEvent } from "./createWatchContractEvent.js";
+import { createConfig } from "../../createConfig";
+import { createWatchContractEvent } from "./createWatchContractEvent";
 
 test("default", () => {
   const watchErc20Event = createWatchContractEvent({

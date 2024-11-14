@@ -4,8 +4,8 @@ import { renderHook, waitFor } from "@wagmi/test/react";
 import { parseEther } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { useCallsStatus } from "./useCallsStatus.js";
-import { useSendCalls } from "./useSendCalls.js";
+import { useCallsStatus } from "./useCallsStatus";
+import { useSendCalls } from "./useSendCalls";
 
 const connector = config.connectors[0]!;
 

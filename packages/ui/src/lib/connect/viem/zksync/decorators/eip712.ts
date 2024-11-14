@@ -1,27 +1,27 @@
 import type { Abi } from "abitype";
 
-import type { SendTransactionRequest } from "../../actions/wallet/sendTransaction.js";
-import { writeContract } from "../../actions/wallet/writeContract.js";
-import type { Client } from "../../clients/createClient.js";
-import type { WalletActions } from "../../clients/decorators/wallet.js";
-import type { Transport } from "../../clients/transports/createTransport.js";
-import type { Account } from "../../types/account.js";
+import type { SendTransactionRequest } from "../../actions/wallet/sendTransaction";
+import { writeContract } from "../../actions/wallet/writeContract";
+import type { Client } from "../../clients/createClient";
+import type { WalletActions } from "../../clients/decorators/wallet";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { Account } from "../../types/account";
 import {
   type DeployContractParameters,
   type DeployContractReturnType,
   deployContract,
-} from "../actions/deployContract.js";
+} from "../actions/deployContract";
 import {
   type SendTransactionParameters,
   type SendTransactionReturnType,
   sendTransaction,
-} from "../actions/sendTransaction.js";
+} from "../actions/sendTransaction";
 import {
   type SignTransactionParameters,
   type SignTransactionReturnType,
   signTransaction,
-} from "../actions/signTransaction.js";
-import type { ChainEIP712 } from "../types/chain.js";
+} from "../actions/signTransaction";
+import type { ChainEIP712 } from "../types/chain";
 
 export type Eip712WalletActions<
   chain extends ChainEIP712 | undefined = ChainEIP712 | undefined,
@@ -32,8 +32,8 @@ export type Eip712WalletActions<
    *
    * - Docs: https://viem.sh/docs/zksync/actions/sendTransaction
    * - JSON-RPC Methods:
-   *   - JSON-RPC Accounts: [`eth_sendTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendtransaction)
-   *   - Local Accounts: [`eth_sendRawTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendrawtransaction)
+   *   - JSON-RPC Accounts: [`mina_sendTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_sendtransaction)
+   *   - Local Accounts: [`mina_sendRawTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_sendrawtransaction)
    *
    * @param client - Client to use
    * @param parameters - {@link SendTransactionParameters}
@@ -82,7 +82,7 @@ export type Eip712WalletActions<
    *
    * - Docs: https://viem.sh/docs/actions/wallet/signTransaction
    * - JSON-RPC Methods:
-   *   - JSON-RPC Accounts: [`eth_signTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)
+   *   - JSON-RPC Accounts: [`mina_signTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)
    *   - Local Accounts: Signs locally. No JSON-RPC request.
    *
    * @param args - {@link SignTransactionParameters}

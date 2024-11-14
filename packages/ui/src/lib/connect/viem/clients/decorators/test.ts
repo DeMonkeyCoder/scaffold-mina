@@ -1,104 +1,104 @@
 import {
   type DropTransactionParameters,
   dropTransaction,
-} from "../../actions/test/dropTransaction.js";
+} from "../../actions/test/dropTransaction";
 import {
   type DumpStateReturnType,
   dumpState,
-} from "../../actions/test/dumpState.js";
+} from "../../actions/test/dumpState";
 import {
   type GetAutomineReturnType,
   getAutomine,
-} from "../../actions/test/getAutomine.js";
+} from "../../actions/test/getAutomine";
 import {
   type GetTxpoolContentReturnType,
   getTxpoolContent,
-} from "../../actions/test/getTxpoolContent.js";
+} from "../../actions/test/getTxpoolContent";
 import {
   type GetTxpoolStatusReturnType,
   getTxpoolStatus,
-} from "../../actions/test/getTxpoolStatus.js";
+} from "../../actions/test/getTxpoolStatus";
 import {
   type ImpersonateAccountParameters,
   impersonateAccount,
-} from "../../actions/test/impersonateAccount.js";
+} from "../../actions/test/impersonateAccount";
 import {
   type IncreaseTimeParameters,
   increaseTime,
-} from "../../actions/test/increaseTime.js";
+} from "../../actions/test/increaseTime";
 import {
   type InspectTxpoolReturnType,
   inspectTxpool,
-} from "../../actions/test/inspectTxpool.js";
+} from "../../actions/test/inspectTxpool";
 import {
   type LoadStateParameters,
   type LoadStateReturnType,
   loadState,
-} from "../../actions/test/loadState.js";
-import { type MineParameters, mine } from "../../actions/test/mine.js";
-import { removeBlockTimestampInterval } from "../../actions/test/removeBlockTimestampInterval.js";
-import { type ResetParameters, reset } from "../../actions/test/reset.js";
-import { type RevertParameters, revert } from "../../actions/test/revert.js";
+} from "../../actions/test/loadState";
+import { type MineParameters, mine } from "../../actions/test/mine";
+import { removeBlockTimestampInterval } from "../../actions/test/removeBlockTimestampInterval";
+import { type ResetParameters, reset } from "../../actions/test/reset";
+import { type RevertParameters, revert } from "../../actions/test/revert";
 import {
   type SendUnsignedTransactionParameters,
   type SendUnsignedTransactionReturnType,
   sendUnsignedTransaction,
-} from "../../actions/test/sendUnsignedTransaction.js";
-import { setAutomine } from "../../actions/test/setAutomine.js";
+} from "../../actions/test/sendUnsignedTransaction";
+import { setAutomine } from "../../actions/test/setAutomine";
 import {
   type SetBalanceParameters,
   setBalance,
-} from "../../actions/test/setBalance.js";
+} from "../../actions/test/setBalance";
 import {
   type SetBlockGasLimitParameters,
   setBlockGasLimit,
-} from "../../actions/test/setBlockGasLimit.js";
+} from "../../actions/test/setBlockGasLimit";
 import {
   type SetBlockTimestampIntervalParameters,
   setBlockTimestampInterval,
-} from "../../actions/test/setBlockTimestampInterval.js";
-import { type SetCodeParameters, setCode } from "../../actions/test/setCode.js";
+} from "../../actions/test/setBlockTimestampInterval";
+import { type SetCodeParameters, setCode } from "../../actions/test/setCode";
 import {
   type SetCoinbaseParameters,
   setCoinbase,
-} from "../../actions/test/setCoinbase.js";
+} from "../../actions/test/setCoinbase";
 import {
   type SetIntervalMiningParameters,
   setIntervalMining,
-} from "../../actions/test/setIntervalMining.js";
-import { setLoggingEnabled } from "../../actions/test/setLoggingEnabled.js";
+} from "../../actions/test/setIntervalMining";
+import { setLoggingEnabled } from "../../actions/test/setLoggingEnabled";
 import {
   type SetMinGasPriceParameters,
   setMinGasPrice,
-} from "../../actions/test/setMinGasPrice.js";
+} from "../../actions/test/setMinGasPrice";
 import {
   type SetNextBlockBaseFeePerGasParameters,
   setNextBlockBaseFeePerGas,
-} from "../../actions/test/setNextBlockBaseFeePerGas.js";
+} from "../../actions/test/setNextBlockBaseFeePerGas";
 import {
   type SetNextBlockTimestampParameters,
   setNextBlockTimestamp,
-} from "../../actions/test/setNextBlockTimestamp.js";
+} from "../../actions/test/setNextBlockTimestamp";
 import {
   type SetNonceParameters,
   setNonce,
-} from "../../actions/test/setNonce.js";
-import { setRpcUrl } from "../../actions/test/setRpcUrl.js";
+} from "../../actions/test/setNonce";
+import { setRpcUrl } from "../../actions/test/setRpcUrl";
 import {
   type SetStorageAtParameters,
   setStorageAt,
-} from "../../actions/test/setStorageAt.js";
-import { snapshot } from "../../actions/test/snapshot.js";
+} from "../../actions/test/setStorageAt";
+import { snapshot } from "../../actions/test/snapshot";
 import {
   type StopImpersonatingAccountParameters,
   stopImpersonatingAccount,
-} from "../../actions/test/stopImpersonatingAccount.js";
-import type { Account } from "../../types/account.js";
-import type { Chain } from "../../types/chain.js";
-import type { Quantity } from "../../types/rpc.js";
-import type { Client } from "../createClient.js";
-import type { TestClientMode } from "../createTestClient.js";
-import type { Transport } from "../transports/createTransport.js";
+} from "../../actions/test/stopImpersonatingAccount";
+import type { Account } from "../../types/account";
+import type { Chain } from "../../types/chain";
+import type { Quantity } from "../../types/rpc";
+import type { Client } from "../createClient";
+import type { TestClientMode } from "../createTestClient";
+import type { Transport } from "../transports/createTransport";
 
 export type TestActions = {
   /**

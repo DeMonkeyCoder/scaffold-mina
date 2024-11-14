@@ -4,7 +4,7 @@ import { queryClient, renderHook, waitFor } from '@wagmi/test/react'
 import { createElement } from 'react'
 import { expect, test } from 'vitest'
 
-import { useReadContract } from './useReadContract.js'
+import { useReadContract } from './useReadContract'
 
 test('default', async () => {
   const { result } = renderHook(() =>

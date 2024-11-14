@@ -2,8 +2,8 @@ import { http } from "@/lib/connect/viem";
 import { celo, mainnet } from "@/lib/connect/viem/chains";
 import { expectTypeOf, test } from "vitest";
 
-import { createConfig } from "../createConfig.js";
-import { getTransaction } from "./getTransaction.js";
+import { createConfig } from "../createConfig";
+import { getTransaction } from "./getTransaction";
 
 test("chain formatters", async () => {
   const config = createConfig({

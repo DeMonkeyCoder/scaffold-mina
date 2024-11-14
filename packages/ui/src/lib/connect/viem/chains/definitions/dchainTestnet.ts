@@ -1,5 +1,5 @@
-import { chainConfig } from '../../op-stack/chainConfig.js'
-import { defineChain } from '../../utils/chain/defineChain.js'
+import { chainConfig } from '../../op-stack/chainConfig'
+import { defineChain } from '../../utils/chain/defineChain'
 
 export const dchainTestnet = /*#__PURE__*/ defineChain({
   ...chainConfig,
@@ -9,7 +9,7 @@ export const dchainTestnet = /*#__PURE__*/ defineChain({
   rpcUrls: {
     default: {
       http: [
-        'https://dchaintestnet-2713017997578000-1.jsonrpc.testnet.sagarpc.io',
+        'https://dchaintestnet-2713017997578000-1onrpc.testnet.sagarpc.io',
       ],
     },
   },

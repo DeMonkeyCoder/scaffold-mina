@@ -8,31 +8,31 @@ import type {
 import {
   AbiEventNotFoundError,
   type AbiEventNotFoundErrorType,
-} from '../../errors/abi.js'
+} from '../../errors/abi'
 import {
   FilterTypeNotSupportedError,
   type FilterTypeNotSupportedErrorType,
-} from '../../errors/log.js'
-import type { ErrorType } from '../../errors/utils.js'
+} from '../../errors/log'
+import type { ErrorType } from '../../errors/utils'
 import type {
   ContractEventArgs,
   ContractEventName,
   EventDefinition,
-} from '../../types/contract.js'
-import type { Hex } from '../../types/misc.js'
-import type { IsNarrowable, UnionEvaluate } from '../../types/utils.js'
-import { type ToBytesErrorType, toBytes } from '../encoding/toBytes.js'
-import { type Keccak256ErrorType, keccak256 } from '../hash/keccak256.js'
+} from '../../types/contract'
+import type { Hex } from '../../types/misc'
+import type { IsNarrowable, UnionEvaluate } from '../../types/utils'
+import { type ToBytesErrorType, toBytes } from '../encoding/toBytes'
+import { type Keccak256ErrorType, keccak256 } from '../hash/keccak256'
 import {
   type ToEventSelectorErrorType,
   toEventSelector,
-} from '../hash/toEventSelector.js'
+} from '../hash/toEventSelector'
 import {
   type EncodeAbiParametersErrorType,
   encodeAbiParameters,
-} from './encodeAbiParameters.js'
-import { type FormatAbiItemErrorType, formatAbiItem } from './formatAbiItem.js'
-import { type GetAbiItemErrorType, getAbiItem } from './getAbiItem.js'
+} from './encodeAbiParameters'
+import { type FormatAbiItemErrorType, formatAbiItem } from './formatAbiItem'
+import { type GetAbiItemErrorType, getAbiItem } from './getAbiItem'
 
 const docsPath = '/docs/contract/encodeEventTopics'
 

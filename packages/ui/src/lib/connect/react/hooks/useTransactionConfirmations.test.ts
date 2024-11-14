@@ -4,7 +4,7 @@ import type { Hash } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
 import { getTransactionReceipt } from "@/lib/connect/core/exports";
-import { useTransactionConfirmations } from "./useTransactionConfirmations.js";
+import { useTransactionConfirmations } from "./useTransactionConfirmations";
 
 test("default", async () => {
   const { result } = renderHook(() =>

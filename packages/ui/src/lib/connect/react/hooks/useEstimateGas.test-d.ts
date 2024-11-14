@@ -1,6 +1,6 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { useEstimateGas } from './useEstimateGas.js'
+import { useEstimateGas } from './useEstimateGas'
 
 test('select data', () => {
   const result = useEstimateGas({

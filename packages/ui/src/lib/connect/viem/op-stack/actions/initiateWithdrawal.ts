@@ -3,27 +3,27 @@ import {
   type WriteContractErrorType,
   type WriteContractParameters,
   writeContract,
-} from '../../actions/wallet/writeContract.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account, GetAccountParameter } from '../../types/account.js'
+} from '../../actions/wallet/writeContract'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account, GetAccountParameter } from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import type { Hash } from '../../types/misc.js'
-import type { UnionEvaluate, UnionOmit } from '../../types/utils.js'
-import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest.js'
-import { l2ToL1MessagePasserAbi } from '../abis.js'
-import { contracts } from '../contracts.js'
-import type { WithdrawalRequest } from '../types/withdrawal.js'
+} from '../../types/chain'
+import type { Hash } from '../../types/misc'
+import type { UnionEvaluate, UnionOmit } from '../../types/utils'
+import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest'
+import { l2ToL1MessagePasserAbi } from '../abis'
+import { contracts } from '../contracts'
+import type { WithdrawalRequest } from '../types/withdrawal'
 import {
   type EstimateInitiateWithdrawalGasErrorType,
   type EstimateInitiateWithdrawalGasParameters,
   estimateInitiateWithdrawalGas,
-} from './estimateInitiateWithdrawalGas.js'
+} from './estimateInitiateWithdrawalGas'
 
 export type InitiateWithdrawalParameters<
   chain extends Chain | undefined = Chain | undefined,

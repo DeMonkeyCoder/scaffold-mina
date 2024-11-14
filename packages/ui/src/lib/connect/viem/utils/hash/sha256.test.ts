@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { sha256 } from './sha256.js'
+import { sha256 } from './sha256'
 
 test('to hex', () => {
   expect(sha256('0xdeadbeef')).toMatchInlineSnapshot(

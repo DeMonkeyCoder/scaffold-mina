@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { injected } from './injected.js'
+import { injected } from './injected'
 
 test('setup', () => {
   const connectorFn = injected()

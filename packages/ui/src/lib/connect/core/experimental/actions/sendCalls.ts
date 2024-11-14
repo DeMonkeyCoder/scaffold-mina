@@ -9,15 +9,15 @@ import {
 import {
   type GetConnectorClientErrorType,
   getConnectorClient,
-} from "../../actions/getConnectorClient.js";
-import type { Config } from "../../createConfig.js";
-import type { BaseErrorType, ErrorType } from "../../errors/base.js";
-import type { SelectChains } from "../../types/chain.js";
+} from "../../actions/getConnectorClient";
+import type { Config } from "../../createConfig";
+import type { BaseErrorType, ErrorType } from "../../errors/base";
+import type { SelectChains } from "../../types/chain";
 import type {
   ChainIdParameter,
   ConnectorParameter,
-} from "../../types/properties.js";
-import type { Compute } from "../../types/utils.js";
+} from "../../types/properties";
+import type { Compute } from "../../types/utils";
 
 export type SendCallsParameters<
   config extends Config = Config,

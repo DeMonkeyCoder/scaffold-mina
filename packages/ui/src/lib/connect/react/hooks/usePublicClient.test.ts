@@ -4,7 +4,7 @@ import { renderHook } from "@wagmi/test/react";
 import { Fragment, createElement } from "react";
 import { expect, test } from "vitest";
 
-import { usePublicClient } from "./usePublicClient.js";
+import { usePublicClient } from "./usePublicClient";
 
 test("default", async () => {
   const { result, rerender } = renderHook(() => usePublicClient());

@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { camelCaseKeys } from './camelCaseKeys.js'
+import { camelCaseKeys } from './camelCaseKeys'
 
 test('default', () => {
   expect(

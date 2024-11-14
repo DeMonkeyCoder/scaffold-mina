@@ -1,36 +1,36 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import type { TransactionReceipt } from '../../types/transaction.js'
-import type { OneOf } from '../../types/utils.js'
-import { ReceiptContainsNoWithdrawalsError } from '../errors/withdrawal.js'
-import type { GetContractAddressParameter } from '../types/contract.js'
-import type { Withdrawal } from '../types/withdrawal.js'
+} from '../../types/chain'
+import type { TransactionReceipt } from '../../types/transaction'
+import type { OneOf } from '../../types/utils'
+import { ReceiptContainsNoWithdrawalsError } from '../errors/withdrawal'
+import type { GetContractAddressParameter } from '../types/contract'
+import type { Withdrawal } from '../types/withdrawal'
 import {
   type GetWithdrawalsErrorType,
   getWithdrawals,
-} from '../utils/getWithdrawals.js'
+} from '../utils/getWithdrawals'
 import {
   type GetPortalVersionParameters,
   getPortalVersion,
-} from './getPortalVersion.js'
+} from './getPortalVersion'
 import {
   type WaitForNextGameParameters,
   type WaitForNextGameReturnType,
   waitForNextGame,
-} from './waitForNextGame.js'
+} from './waitForNextGame'
 import {
   type WaitForNextL2OutputErrorType,
   type WaitForNextL2OutputParameters,
   type WaitForNextL2OutputReturnType,
   waitForNextL2Output,
-} from './waitForNextL2Output.js'
+} from './waitForNextL2Output'
 
 export type WaitToProveParameters<
   chain extends Chain | undefined = Chain | undefined,

@@ -3,7 +3,7 @@ import { abi, address, config } from "@wagmi/test";
 import { renderHook, waitFor } from "@wagmi/test/react";
 import { expect, test } from "vitest";
 
-import { useWriteContracts } from "./useWriteContracts.js";
+import { useWriteContracts } from "./useWriteContracts";
 
 const connector = config.connectors[0]!;
 

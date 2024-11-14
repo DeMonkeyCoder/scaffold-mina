@@ -1,22 +1,22 @@
-import { InvalidAddressError } from '../errors/address.js'
-import type { ErrorType } from '../errors/utils.js'
-import type { ChainSerializers } from '../types/chain.js'
-import type { Hex, Signature } from '../types/misc.js'
-import type { TransactionSerializable } from '../types/transaction.js'
-import type { RequiredBy } from '../types/utils.js'
-import { isAddress } from '../utils/address/isAddress.js'
-import { concatHex } from '../utils/data/concat.js'
-import { toHex } from '../utils/encoding/toHex.js'
-import { toRlp } from '../utils/encoding/toRlp.js'
+import { InvalidAddressError } from '../errors/address'
+import type { ErrorType } from '../errors/utils'
+import type { ChainSerializers } from '../types/chain'
+import type { Hex, Signature } from '../types/misc'
+import type { TransactionSerializable } from '../types/transaction'
+import type { RequiredBy } from '../types/utils'
+import { isAddress } from '../utils/address/isAddress'
+import { concatHex } from '../utils/data/concat'
+import { toHex } from '../utils/encoding/toHex'
+import { toRlp } from '../utils/encoding/toRlp'
 import {
   type SerializeTransactionErrorType as SerializeTransactionErrorType_,
   serializeTransaction as serializeTransaction_,
-} from '../utils/transaction/serializeTransaction.js'
+} from '../utils/transaction/serializeTransaction'
 import type {
   OpStackTransactionSerializable,
   TransactionSerializableDeposit,
   TransactionSerializedDeposit,
-} from './types/transaction.js'
+} from './types/transaction'
 
 export type SerializeTransactionReturnType = ReturnType<
   typeof serializeTransaction

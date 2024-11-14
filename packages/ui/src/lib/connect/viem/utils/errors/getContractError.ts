@@ -1,7 +1,7 @@
 import type { Abi, Address } from 'abitype'
 
-import { AbiDecodingZeroDataError } from '../../errors/abi.js'
-import { BaseError } from '../../errors/base.js'
+import { AbiDecodingZeroDataError } from '../../errors/abi'
+import { BaseError } from '../../errors/base'
 import {
   ContractFunctionExecutionError,
   type ContractFunctionExecutionErrorType,
@@ -10,9 +10,9 @@ import {
   ContractFunctionZeroDataError,
   type ContractFunctionZeroDataErrorType,
   RawContractError,
-} from '../../errors/contract.js'
-import { InternalRpcError } from '../../errors/rpc.js'
-import type { ErrorType } from '../../errors/utils.js'
+} from '../../errors/contract'
+import { InternalRpcError } from '../../errors/rpc'
+import type { ErrorType } from '../../errors/utils'
 
 const EXECUTION_REVERTED_ERROR_CODE = 3
 

@@ -1,6 +1,6 @@
 import { expect, test, vi } from 'vitest'
 
-import { createStorage } from './createStorage.js'
+import { createStorage } from './createStorage'
 
 Object.defineProperty(window, 'localStorage', {
   value: {

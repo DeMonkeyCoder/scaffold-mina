@@ -1,8 +1,8 @@
 import { config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getTransaction } from './getTransaction.js'
-import { getTransactionReceipt } from './getTransactionReceipt.js'
+import { getTransaction } from './getTransaction'
+import { getTransactionReceipt } from './getTransactionReceipt'
 
 test('default', async () => {
   const transaction = await getTransaction(config, {

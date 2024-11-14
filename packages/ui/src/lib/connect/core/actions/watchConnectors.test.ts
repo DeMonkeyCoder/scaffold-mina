@@ -1,9 +1,9 @@
 import { accounts, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { mock } from '../connectors/mock.js'
-import type { Connector } from '../createConfig.js'
-import { watchConnectors } from './watchConnectors.js'
+import { mock } from '../connectors/mock'
+import type { Connector } from '../createConfig'
+import { watchConnectors } from './watchConnectors'
 
 test('default', async () => {
   const connectors: (readonly Connector[])[] = []

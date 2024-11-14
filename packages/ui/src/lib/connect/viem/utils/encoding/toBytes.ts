@@ -1,15 +1,15 @@
-import { BaseError } from "../../errors/base.js";
-import type { ErrorType } from "../../errors/utils.js";
-import type { ByteArray, Hex } from "../../types/misc.js";
-import { type IsHexErrorType, isHex } from "../data/isHex.js";
-import { type PadErrorType, pad } from "../data/pad.js";
+import { BaseError } from "../../errors/base";
+import type { ErrorType } from "../../errors/utils";
+import type { ByteArray, Hex } from "../../types/misc";
+import { type IsHexErrorType, isHex } from "../data/isHex";
+import { type PadErrorType, pad } from "../data/pad";
 
-import { type AssertSizeErrorType, assertSize } from "./fromHex.js";
+import { type AssertSizeErrorType, assertSize } from "./fromHex";
 import {
   type NumberToHexErrorType,
   type NumberToHexOpts,
   numberToHex,
-} from "./toHex.js";
+} from "./toHex";
 
 const encoder = /*#__PURE__*/ new TextEncoder();
 

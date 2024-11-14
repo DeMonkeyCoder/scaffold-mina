@@ -1,11 +1,11 @@
 import { assertType, describe, expect, test, vi } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { wagmiContractConfig } from '../../../test/src/abis.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { blobData, kzg } from '../../../test/src/kzg.js'
-import { prepareTransactionRequest } from '../../actions/index.js'
-import { concatHex, stringToHex, toHex, toRlp } from '../../index.js'
+import { accounts } from '~test/src/constants'
+import { wagmiContractConfig } from '../../../test/src/abis'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { blobData, kzg } from '../../../test/src/kzg'
+import { prepareTransactionRequest } from '../../actions/index'
+import { concatHex, stringToHex, toHex, toRlp } from '../../index'
 import type {
   TransactionSerializable,
   TransactionSerializableBase,
@@ -14,14 +14,14 @@ import type {
   TransactionSerializableGeneric,
   TransactionSerializableLegacy,
   TransactionSerializedLegacy,
-} from '../../types/transaction.js'
-import { sidecarsToVersionedHashes } from '../../utils/blob/sidecarsToVersionedHashes.js'
-import { toBlobSidecars } from '../../utils/blob/toBlobSidecars.js'
-import { toBlobs } from '../../utils/blob/toBlobs.js'
-import type { SerializeTransactionFn } from '../../utils/transaction/serializeTransaction.js'
-import { parseGwei } from '../../utils/unit/parseGwei.js'
-import { privateKeyToAccount } from '../privateKeyToAccount.js'
-import { signTransaction } from './signTransaction.js'
+} from '../../types/transaction'
+import { sidecarsToVersionedHashes } from '../../utils/blob/sidecarsToVersionedHashes'
+import { toBlobSidecars } from '../../utils/blob/toBlobSidecars'
+import { toBlobs } from '../../utils/blob/toBlobs'
+import type { SerializeTransactionFn } from '../../utils/transaction/serializeTransaction'
+import { parseGwei } from '../../utils/unit/parseGwei'
+import { privateKeyToAccount } from '../privateKeyToAccount'
+import { signTransaction } from './signTransaction'
 
 const client = anvilMainnet.getClient()
 

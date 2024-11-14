@@ -1,13 +1,13 @@
 import type { Address } from 'abitype'
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import type { Account } from '../../../types/account.js'
-import type { WalletGrantPermissionsReturnType } from '../../../types/eip1193.js'
-import type { Hex } from '../../../types/misc.js'
-import type { OneOf } from '../../../types/utils.js'
-import { numberToHex, parseAccount } from '../../../utils/index.js'
-import type { Permission } from '../types/permission.js'
-import type { Signer } from '../types/signer.js'
+import type { Client } from '../../../clients/createClient'
+import type { Transport } from '../../../clients/transports/createTransport'
+import type { Account } from '../../../types/account'
+import type { WalletGrantPermissionsReturnType } from '../../../types/eip1193'
+import type { Hex } from '../../../types/misc'
+import type { OneOf } from '../../../types/utils'
+import { numberToHex, parseAccount } from '../../../utils/index'
+import type { Permission } from '../types/permission'
+import type { Signer } from '../types/signer'
 
 export type GrantPermissionsParameters = {
   /** Timestamp (in seconds) that specifies the time by which this session MUST expire. */

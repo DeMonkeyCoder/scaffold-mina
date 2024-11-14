@@ -1,11 +1,11 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { mainnet } from '../../chains/index.js'
+import { accounts } from '~test/src/constants'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { mainnet } from '../../chains/index'
 
-import { buildInitiateWithdrawal } from './buildInitiateWithdrawal.js'
-import { initiateWithdrawal } from './initiateWithdrawal.js'
+import { buildInitiateWithdrawal } from './buildInitiateWithdrawal'
+import { initiateWithdrawal } from './initiateWithdrawal'
 
 const client = anvilMainnet.getClient()
 const clientWithAccount = anvilMainnet.getClient({

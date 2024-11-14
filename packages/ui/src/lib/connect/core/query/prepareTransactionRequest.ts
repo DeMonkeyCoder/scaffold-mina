@@ -7,12 +7,12 @@ import {
   type PrepareTransactionRequestParameters,
   type PrepareTransactionRequestReturnType,
   prepareTransactionRequest,
-} from "../actions/prepareTransactionRequest.js";
-import type { Config } from "../createConfig.js";
-import type { SelectChains } from "../types/chain.js";
-import type { ScopeKeyParameter } from "../types/properties.js";
-import type { UnionExactPartial } from "../types/utils.js";
-import { filterQueryOptions } from "./utils.js";
+} from "../actions/prepareTransactionRequest";
+import type { Config } from "../createConfig";
+import type { SelectChains } from "../types/chain";
+import type { ScopeKeyParameter } from "../types/properties";
+import type { UnionExactPartial } from "../types/utils";
+import { filterQueryOptions } from "./utils";
 
 export type PrepareTransactionRequestOptions<
   config extends Config,

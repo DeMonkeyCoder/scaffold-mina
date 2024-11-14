@@ -1,11 +1,11 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { mainnetClient } from '~test/src/utils.js'
+import { accounts } from '~test/src/constants'
+import { mainnetClient } from '~test/src/utils'
 
-import { signMessage } from '../../accounts/utils/signMessage.js'
-import { createSiweMessage } from '../../utils/siwe/createSiweMessage.js'
-import { verifySiweMessage } from './verifySiweMessage.js'
+import { signMessage } from '../../accounts/utils/signMessage'
+import { createSiweMessage } from '../../utils/siwe/createSiweMessage'
+import { verifySiweMessage } from './verifySiweMessage'
 
 const account = accounts[0]
 

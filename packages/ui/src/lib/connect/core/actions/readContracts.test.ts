@@ -2,10 +2,10 @@ import { abi, address, chain } from "@wagmi/test";
 import { http, type MulticallResponse } from "@/lib/connect/viem";
 import { expect, expectTypeOf, test, vi } from "vitest";
 
-import { createConfig } from "../createConfig.js";
-import * as multicall from "./multicall.js";
-import * as readContract from "./readContract.js";
-import { readContracts } from "./readContracts.js";
+import { createConfig } from "../createConfig";
+import * as multicall from "./multicall";
+import * as readContract from "./readContract";
+import { readContracts } from "./readContracts";
 
 const contracts = [
   {

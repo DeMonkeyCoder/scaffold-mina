@@ -1,22 +1,22 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest'
-import { wagmiContractConfig } from '../../../../test/src/abis.js'
+import { wagmiContractConfig } from '../../../../test/src/abis'
 import {
   createVerifyingPaymasterServer,
   getSmartAccounts_06,
   getSmartAccounts_07,
   getVerifyingPaymaster_07,
-} from '../../../../test/src/account-abstraction.js'
-import { anvilMainnet } from '../../../../test/src/anvil.js'
-import { bundlerMainnet } from '../../../../test/src/bundler.js'
-import { accounts } from '../../../../test/src/constants.js'
-import { mine } from '../../../actions/test/mine.js'
-import { writeContract } from '../../../actions/wallet/writeContract.js'
-import { http } from '../../../clients/transports/http.js'
-import { pad, parseEther, parseGwei } from '../../../utils/index.js'
-import { createPaymasterClient } from '../../clients/createPaymasterClient.js'
-import { getPaymasterData } from '../paymaster/getPaymasterData.js'
-import { getPaymasterStubData } from '../paymaster/getPaymasterStubData.js'
-import { prepareUserOperation } from './prepareUserOperation.js'
+} from '../../../../test/src/account-abstraction'
+import { anvilMainnet } from '../../../../test/src/anvil'
+import { bundlerMainnet } from '../../../../test/src/bundler'
+import { accounts } from '../../../../test/src/constants'
+import { mine } from '../../../actions/test/mine'
+import { writeContract } from '../../../actions/wallet/writeContract'
+import { http } from '../../../clients/transports/http'
+import { pad, parseEther, parseGwei } from '../../../utils/index'
+import { createPaymasterClient } from '../../clients/createPaymasterClient'
+import { getPaymasterData } from '../paymaster/getPaymasterData'
+import { getPaymasterStubData } from '../paymaster/getPaymasterStubData'
+import { prepareUserOperation } from './prepareUserOperation'
 
 const client = anvilMainnet.getClient({ account: true })
 const bundlerClient = bundlerMainnet.getBundlerClient({ client })

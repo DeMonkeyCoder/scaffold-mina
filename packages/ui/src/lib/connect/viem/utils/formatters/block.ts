@@ -1,16 +1,16 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Block, BlockTag } from '../../types/block.js'
-import type { Chain } from '../../types/chain.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Block, BlockTag } from '../../types/block'
+import type { Chain } from '../../types/chain'
 import type {
   ExtractChainFormatterExclude,
   ExtractChainFormatterReturnType,
-} from '../../types/chain.js'
-import type { Hash } from '../../types/misc.js'
-import type { RpcBlock } from '../../types/rpc.js'
-import type { ExactPartial, Prettify } from '../../types/utils.js'
+} from '../../types/chain'
+import type { Hash } from '../../types/misc'
+import type { RpcBlock } from '../../types/rpc'
+import type { ExactPartial, Prettify } from '../../types/utils'
 
-import { type DefineFormatterErrorType, defineFormatter } from './formatter.js'
-import { type FormattedTransaction, formatTransaction } from './transaction.js'
+import { type DefineFormatterErrorType, defineFormatter } from './formatter'
+import { type FormattedTransaction, formatTransaction } from './transaction'
 
 type BlockPendingDependencies = 'hash' | 'logsBloom' | 'nonce' | 'number'
 

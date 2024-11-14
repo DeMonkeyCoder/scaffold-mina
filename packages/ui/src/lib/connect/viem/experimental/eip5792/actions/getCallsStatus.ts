@@ -1,13 +1,13 @@
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { Account } from '../../../types/account.js'
-import type { Chain } from '../../../types/chain.js'
-import type { WalletGetCallsStatusReturnType } from '../../../types/eip1193.js'
-import type { Prettify } from '../../../types/utils.js'
-import type { RequestErrorType } from '../../../utils/buildRequest.js'
-import { hexToBigInt } from '../../../utils/encoding/fromHex.js'
-import { receiptStatuses } from '../../../utils/formatters/transactionReceipt.js'
+import type { Client } from '../../../clients/createClient'
+import type { Transport } from '../../../clients/transports/createTransport'
+import type { ErrorType } from '../../../errors/utils'
+import type { Account } from '../../../types/account'
+import type { Chain } from '../../../types/chain'
+import type { WalletGetCallsStatusReturnType } from '../../../types/eip1193'
+import type { Prettify } from '../../../types/utils'
+import type { RequestErrorType } from '../../../utils/buildRequest'
+import { hexToBigInt } from '../../../utils/encoding/fromHex'
+import { receiptStatuses } from '../../../utils/formatters/transactionReceipt'
 
 export type GetCallsStatusParameters = { id: string }
 

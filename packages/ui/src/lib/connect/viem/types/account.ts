@@ -1,7 +1,7 @@
 import type { Address } from 'abitype'
 
-import type { Account, JsonRpcAccount } from '../accounts/types.js'
-import type { IsUndefined, Prettify } from './utils.js'
+import type { Account, JsonRpcAccount } from '../accounts/types'
+import type { IsUndefined, Prettify } from './utils'
 
 export type DeriveAccount<
   account extends Account | undefined,
@@ -27,5 +27,5 @@ export type ParseAccount<
   ? Prettify<JsonRpcAccount<accountOrAddress>>
   : accountOrAddress
 
-export type { Account } from '../accounts/types.js'
+export type { Account } from '../accounts/types'
 export type { HDKey } from '@scure/bip32'

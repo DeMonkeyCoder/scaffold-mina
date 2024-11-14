@@ -1,10 +1,10 @@
-import type { Client } from '../clients/createClient.js'
-import type { PublicActions } from '../clients/decorators/public.js'
-import type { WalletActions } from '../clients/decorators/wallet.js'
-import type { Transport } from '../clients/transports/createTransport.js'
-import type { Account } from '../types/account.js'
-import type { Chain } from '../types/chain.js'
-import type { RpcSchema } from '../types/eip1193.js'
+import type { Client } from '../clients/createClient'
+import type { PublicActions } from '../clients/decorators/public'
+import type { WalletActions } from '../clients/decorators/wallet'
+import type { Transport } from '../clients/transports/createTransport'
+import type { Account } from '../types/account'
+import type { Chain } from '../types/chain'
+import type { RpcSchema } from '../types/eip1193'
 
 /**
  * Retrieves and returns an action from the client (if exists), and falls

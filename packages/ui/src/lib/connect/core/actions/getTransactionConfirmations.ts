@@ -6,10 +6,10 @@ import {
   getTransactionConfirmations as viem_getTransactionConfirmations,
 } from "@/lib/connect/viem/actions";
 
-import type { Config } from "../createConfig.js";
-import type { SelectChains } from "../types/chain.js";
-import type { ChainIdParameter } from "../types/properties.js";
-import { getAction } from "../utils/getAction.js";
+import type { Config } from "../createConfig";
+import type { SelectChains } from "../types/chain";
+import type { ChainIdParameter } from "../types/properties";
+import { getAction } from "../utils/getAction";
 
 export type GetTransactionConfirmationsParameters<
   config extends Config = Config,

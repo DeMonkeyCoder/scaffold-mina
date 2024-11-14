@@ -1,41 +1,41 @@
-import { describe, expect, test, vi } from 'vitest'
+import { describe, expect, test, vi } from "vitest";
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { mainnet } from '../../chains/index.js'
+import { anvilMainnet } from "../../../test/src/anvil";
+import { mainnet } from "../../chains/index";
 
-import { createPublicClient } from '../../clients/createPublicClient.js'
-import { http } from '../../clients/transports/http.js'
-import { MethodNotSupportedRpcError } from '../../errors/rpc.js'
-import { buildRequest } from '../../utils/buildRequest.js'
+import { createPublicClient } from "../../clients/createPublicClient";
+import { http } from "../../clients/transports/http";
+import { MethodNotSupportedRpcError } from "../../errors/rpc";
+import { buildRequest } from "../../utils/buildRequest";
 import {
   estimateMaxPriorityFeePerGas,
   internal_estimateMaxPriorityFeePerGas,
-} from './estimateMaxPriorityFeePerGas.js'
-import * as getBlock from './getBlock.js'
+} from "./estimateMaxPriorityFeePerGas";
+import * as getBlock from "./getBlock";
 
-const client = anvilMainnet.getClient()
+const client = anvilMainnet.getClient();
 
-test('default', async () => {
-  expect(await estimateMaxPriorityFeePerGas(client)).toBeDefined()
-})
+test("default", async () => {
+  expect(await estimateMaxPriorityFeePerGas(client)).toBeDefined();
+});
 
-test('fallback', async () => {
-  const client_1 = client
+test("fallback", async () => {
+  const client_1 = client;
   client_1.request = buildRequest(({ method, params }) => {
-    if (method === 'eth_maxPriorityFeePerGas')
-      throw new MethodNotSupportedRpcError(new Error('unsupported'))
+    if (method === "mina_maxPriorityFeePerGas")
+      throw new MethodNotSupportedRpcError(new Error("unsupported"));
 
-    return client.transport.request({ method, params })
-  })
+    return client.transport.request({ method, params });
+  });
 
-  expect(await estimateMaxPriorityFeePerGas(client_1)).toBeDefined()
-})
+  expect(await estimateMaxPriorityFeePerGas(client_1)).toBeDefined();
+});
 
-test('args: chain `defaultPriorityFee` override', async () => {
+test("args: chain `defaultPriorityFee` override", async () => {
   // value
   const client_1 = createPublicClient({
     transport: http(anvilMainnet.rpcUrl.http),
-  })
+  });
   expect(
     await estimateMaxPriorityFeePerGas(client_1, {
       chain: {
@@ -44,13 +44,13 @@ test('args: chain `defaultPriorityFee` override', async () => {
           defaultPriorityFee: 69420n,
         },
       },
-    }),
-  ).toBe(69420n)
+    })
+  ).toBe(69420n);
 
   // sync fn
   const client_2 = createPublicClient({
     transport: http(anvilMainnet.rpcUrl.http),
-  })
+  });
   expect(
     await estimateMaxPriorityFeePerGas(client_2, {
       chain: {
@@ -59,13 +59,13 @@ test('args: chain `defaultPriorityFee` override', async () => {
           defaultPriorityFee: () => 69420n,
         },
       },
-    }),
-  ).toBe(69420n)
+    })
+  ).toBe(69420n);
 
   // async fn
   const client_3 = createPublicClient({
     transport: http(anvilMainnet.rpcUrl.http),
-  })
+  });
   expect(
     await estimateMaxPriorityFeePerGas(client_3, {
       chain: {
@@ -74,13 +74,13 @@ test('args: chain `defaultPriorityFee` override', async () => {
           defaultPriorityFee: async () => 69420n,
         },
       },
-    }),
-  ).toBe(69420n)
+    })
+  ).toBe(69420n);
 
   // zero base fee
   const client_4 = createPublicClient({
     transport: http(anvilMainnet.rpcUrl.http),
-  })
+  });
   expect(
     await estimateMaxPriorityFeePerGas(client_4, {
       chain: {
@@ -89,13 +89,13 @@ test('args: chain `defaultPriorityFee` override', async () => {
           defaultPriorityFee: 0n,
         },
       },
-    }),
-  ).toBe(0n)
+    })
+  ).toBe(0n);
 
   // async zero base fee
   const client_5 = createPublicClient({
     transport: http(anvilMainnet.rpcUrl.http),
-  })
+  });
   expect(
     await estimateMaxPriorityFeePerGas(client_5, {
       chain: {
@@ -104,11 +104,11 @@ test('args: chain `defaultPriorityFee` override', async () => {
           defaultPriorityFee: async () => 0n,
         },
       },
-    }),
-  ).toBe(0n)
-})
+    })
+  ).toBe(0n);
+});
 
-test('client: chain `defaultPriorityFee` override', async () => {
+test("client: chain `defaultPriorityFee` override", async () => {
   // value
   const client_1 = createPublicClient({
     chain: {
@@ -118,8 +118,8 @@ test('client: chain `defaultPriorityFee` override', async () => {
       },
     },
     transport: http(),
-  })
-  expect(await estimateMaxPriorityFeePerGas(client_1)).toBe(69420n)
+  });
+  expect(await estimateMaxPriorityFeePerGas(client_1)).toBe(69420n);
 
   // sync fn
   const client_2 = createPublicClient({
@@ -130,8 +130,8 @@ test('client: chain `defaultPriorityFee` override', async () => {
       },
     },
     transport: http(),
-  })
-  expect(await estimateMaxPriorityFeePerGas(client_2)).toBe(69420n)
+  });
+  expect(await estimateMaxPriorityFeePerGas(client_2)).toBe(69420n);
 
   // async fn
   const client_3 = createPublicClient({
@@ -142,8 +142,8 @@ test('client: chain `defaultPriorityFee` override', async () => {
       },
     },
     transport: http(),
-  })
-  expect(await estimateMaxPriorityFeePerGas(client_3)).toBe(69420n)
+  });
+  expect(await estimateMaxPriorityFeePerGas(client_3)).toBe(69420n);
 
   // zero base fee
   const client_4 = createPublicClient({
@@ -154,8 +154,8 @@ test('client: chain `defaultPriorityFee` override', async () => {
       },
     },
     transport: http(),
-  })
-  expect(await estimateMaxPriorityFeePerGas(client_4)).toBe(0n)
+  });
+  expect(await estimateMaxPriorityFeePerGas(client_4)).toBe(0n);
 
   // async zero base fee
   const client_5 = createPublicClient({
@@ -166,60 +166,59 @@ test('client: chain `defaultPriorityFee` override', async () => {
       },
     },
     transport: http(),
-  })
-  expect(await estimateMaxPriorityFeePerGas(client_5)).toBe(0n)
-})
+  });
+  expect(await estimateMaxPriorityFeePerGas(client_5)).toBe(0n);
+});
 
-test('chain does not support eip1559', async () => {
-  vi.spyOn(getBlock, 'getBlock').mockResolvedValueOnce({
+test("chain does not support eip1559", async () => {
+  vi.spyOn(getBlock, "getBlock").mockResolvedValueOnce({
     baseFeePerGas: undefined,
-  } as any)
+  } as any);
 
-  await expect(() =>
-    estimateMaxPriorityFeePerGas(client),
-  ).rejects.toThrowErrorMatchingInlineSnapshot(`
+  await expect(() => estimateMaxPriorityFeePerGas(client)).rejects
+    .toThrowErrorMatchingInlineSnapshot(`
     [Eip1559FeesNotSupportedError: Chain does not support EIP-1559 fees.
 
     Version: viem@x.y.z]
-  `)
-})
+  `);
+});
 
-test('maxPriorityFeePerGas < 0', async () => {
-  vi.spyOn(getBlock, 'getBlock').mockResolvedValueOnce({
+test("maxPriorityFeePerGas < 0", async () => {
+  vi.spyOn(getBlock, "getBlock").mockResolvedValueOnce({
     baseFeePerGas: 999999999999999999999n,
-  } as any)
+  } as any);
 
-  expect(await estimateMaxPriorityFeePerGas(client)).toBe(0n)
-})
+  expect(await estimateMaxPriorityFeePerGas(client)).toBe(0n);
+});
 
-describe('mainnet smoke', () => {
-  test('default', async () => {
+describe("mainnet smoke", () => {
+  test("default", async () => {
     const mainnetClient = createPublicClient({
       chain: mainnet,
       transport: http(process.env.VITE_ANVIL_FORK_URL),
-    })
-    expect(await estimateMaxPriorityFeePerGas(mainnetClient)).toBeDefined()
-  })
+    });
+    expect(await estimateMaxPriorityFeePerGas(mainnetClient)).toBeDefined();
+  });
 
-  test.skip('fallback', async () => {
+  test.skip("fallback", async () => {
     const mainnetClient = createPublicClient({
       chain: mainnet,
-      // cloudflare doesn't support eth_maxPriorityFeePerGas
-      transport: http('https://cloudflare-eth.com'),
-    })
-    expect(await estimateMaxPriorityFeePerGas(mainnetClient)).toBeDefined()
-  })
-})
+      // cloudflare doesn't support mina_maxPriorityFeePerGas
+      transport: http("https://cloudflare-eth.com"),
+    });
+    expect(await estimateMaxPriorityFeePerGas(mainnetClient)).toBeDefined();
+  });
+});
 
-describe('internal_estimateMaxPriorityFeePerGas', () => {
-  test('args: block', async () => {
-    const block = await getBlock.getBlock(client)
+describe("internal_estimateMaxPriorityFeePerGas", () => {
+  test("args: block", async () => {
+    const block = await getBlock.getBlock(client);
     const maxPriorityFeePerGas = await internal_estimateMaxPriorityFeePerGas(
       client,
       {
         block,
-      },
-    )
-    expect(maxPriorityFeePerGas).toBeDefined()
-  })
-})
+      }
+    );
+    expect(maxPriorityFeePerGas).toBeDefined();
+  });
+});

@@ -6,7 +6,7 @@ import {
   numberToBytes,
   stringToBytes,
   toBytes,
-} from "./toBytes.js";
+} from "./toBytes";
 
 describe("converts numbers to bytes", () => {
   test("default", () => {

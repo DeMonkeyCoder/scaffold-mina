@@ -6,9 +6,9 @@ import {
   type DeployContractParameters,
   type DeployContractReturnType,
   deployContract,
-} from "../actions/deployContract.js";
-import type { Config } from "../createConfig.js";
-import type { Compute } from "../types/utils.js";
+} from "../actions/deployContract";
+import type { Config } from "../createConfig";
+import type { Compute } from "../types/utils";
 
 export function deployContractMutationOptions<config extends Config>(
   config: config

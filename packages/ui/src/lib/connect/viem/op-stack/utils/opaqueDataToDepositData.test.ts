@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
-import { encodePacked } from '../../index.js'
-import { opaqueDataToDepositData } from './opaqueDataToDepositData.js'
+import { encodePacked } from '../../index'
+import { opaqueDataToDepositData } from './opaqueDataToDepositData'
 
 test('default', () => {
   const data_1 = {

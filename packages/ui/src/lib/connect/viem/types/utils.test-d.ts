@@ -10,7 +10,7 @@ import type {
   MaybePartial,
   Or,
   UnionToTuple,
-} from './utils.js'
+} from './utils'
 
 test('Filter', () => {
   expectTypeOf<Filter<[1, 'foo', false, 'baz'], 1 | boolean>>().toEqualTypeOf<

@@ -1,11 +1,11 @@
 import { describe, expect, test } from "vitest";
 
-import { pad, toHex } from "./index.js";
+import { pad, toHex } from "./index";
 import {
   domainSeparator,
   serializeTypedData,
   validateTypedData,
-} from "./typedData.js";
+} from "./typedData";
 
 describe("serializeTypedData", () => {
   test("default", () => {

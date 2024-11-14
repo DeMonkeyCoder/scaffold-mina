@@ -13,9 +13,9 @@ import type {
 import { useEffect } from "react";
 import type { BlockTag } from "@/lib/connect/viem";
 
-import type { ConfigParameter, EnabledParameter } from "../types/properties.js";
-import { useChainId } from "./useChainId.js";
-import { useConfig } from "./useConfig.js";
+import type { ConfigParameter, EnabledParameter } from "../types/properties";
+import { useChainId } from "./useChainId";
+import { useConfig } from "./useConfig";
 
 export type UseWatchBlocksParameters<
   includeTransactions extends boolean = false,

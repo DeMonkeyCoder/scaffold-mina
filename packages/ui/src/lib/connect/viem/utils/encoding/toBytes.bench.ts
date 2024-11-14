@@ -1,8 +1,8 @@
 import { toBeArray } from "ethers";
 import { bench, describe } from "vitest";
 
-import { hexToBytes } from "./toBytes.js";
-import { bytesToHex } from "./toHex.js";
+import { hexToBytes } from "./toBytes";
+import { bytesToHex } from "./toHex";
 
 const generateBytes = (length: number) => {
   const bytes = new Uint8Array(length);

@@ -1,7 +1,7 @@
-import type { PartializedState } from './createConfig.js'
-import type { Compute } from './types/utils.js'
-import { deserialize as deserialize_ } from './utils/deserialize.js'
-import { serialize as serialize_ } from './utils/serialize.js'
+import type { PartializedState } from './createConfig'
+import type { Compute } from './types/utils'
+import { deserialize as deserialize_ } from './utils/deserialize'
+import { serialize as serialize_ } from './utils/serialize'
 
 // key-values for loose autocomplete and typing
 export type StorageItemMap = {

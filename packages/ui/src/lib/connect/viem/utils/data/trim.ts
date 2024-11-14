@@ -1,5 +1,5 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex } from '../../types/misc.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex } from '../../types/misc'
 
 type TrimOptions = {
   dir?: 'left' | 'right' | undefined

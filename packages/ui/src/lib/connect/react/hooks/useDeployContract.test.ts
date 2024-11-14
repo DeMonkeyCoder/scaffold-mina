@@ -3,7 +3,7 @@ import { abi, bytecode, config, transactionHashRegex } from "@wagmi/test";
 import { renderHook, waitFor } from "@wagmi/test/react";
 import { expect, test } from "vitest";
 
-import { useDeployContract } from "./useDeployContract.js";
+import { useDeployContract } from "./useDeployContract";
 
 const connector = config.connectors[0]!;
 

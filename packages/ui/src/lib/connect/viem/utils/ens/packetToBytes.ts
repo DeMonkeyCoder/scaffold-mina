@@ -1,15 +1,15 @@
 // Adapted from https://github.com/mafintosh/dns-packet
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray } from '../../types/misc.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray } from '../../types/misc'
 import {
   type StringToBytesErrorType,
   stringToBytes,
-} from '../encoding/toBytes.js'
+} from '../encoding/toBytes'
 import {
   type EncodeLabelhashErrorType,
   encodeLabelhash,
-} from './encodeLabelhash.js'
-import { type LabelhashErrorType, labelhash } from './labelhash.js'
+} from './encodeLabelhash'
+import { type LabelhashErrorType, labelhash } from './labelhash'
 
 export type PacketToBytesErrorType =
   | EncodeLabelhashErrorType

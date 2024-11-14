@@ -1,7 +1,7 @@
 import { randomBytes } from 'node:crypto'
 import type { Address } from 'abitype'
 import { beforeEach, describe, expect, test } from 'vitest'
-import { isCIP64, isEIP1559, isEmpty, isPresent } from './utils.js'
+import { isCIP64, isEIP1559, isEmpty, isPresent } from './utils'
 
 let mockAddress: Address
 

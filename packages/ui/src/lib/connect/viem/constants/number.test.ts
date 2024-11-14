@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import * as number from './number.js'
+import * as number from './number'
 
 test('exports number', () => {
   expect(number).toMatchInlineSnapshot(`

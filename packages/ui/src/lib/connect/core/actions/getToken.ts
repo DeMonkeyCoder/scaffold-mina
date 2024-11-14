@@ -6,12 +6,12 @@ import {
   trim,
 } from "@/lib/connect/viem";
 
-import type { Config } from "../createConfig.js";
-import type { ChainIdParameter } from "../types/properties.js";
-import type { Unit } from "../types/unit.js";
-import type { Compute } from "../types/utils.js";
-import { getUnit } from "../utils/getUnit.js";
-import { type ReadContractsErrorType, readContracts } from "./readContracts.js";
+import type { Config } from "../createConfig";
+import type { ChainIdParameter } from "../types/properties";
+import type { Unit } from "../types/unit";
+import type { Compute } from "../types/utils";
+import { getUnit } from "../utils/getUnit";
+import { type ReadContractsErrorType, readContracts } from "./readContracts";
 
 export type GetTokenParameters<config extends Config = Config> = Compute<
   ChainIdParameter<config> & {

@@ -4,8 +4,8 @@ import {
   mockClientPublicActionsL2,
   zksyncClientLocalNode,
   zksyncClientLocalNodeWithAccount,
-} from '../../../test/src/zksync.js'
-import { getAllBalances } from './getAllBalances.js'
+} from '../../../test/src/zksync'
+import { getAllBalances } from './getAllBalances'
 
 const client = { ...zksyncClientLocalNode }
 const clientWithAccount = zksyncClientLocalNodeWithAccount

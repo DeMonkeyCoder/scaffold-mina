@@ -1,18 +1,18 @@
 import type { Address } from 'abitype'
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex, Signature } from '../../types/misc.js'
-import type { TransactionSerialized } from '../../types/transaction.js'
-import { type Keccak256ErrorType, keccak256 } from '../hash/keccak256.js'
-import { parseTransaction } from '../transaction/parseTransaction.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex, Signature } from '../../types/misc'
+import type { TransactionSerialized } from '../../types/transaction'
+import { type Keccak256ErrorType, keccak256 } from '../hash/keccak256'
+import { parseTransaction } from '../transaction/parseTransaction'
 import {
   type SerializeTransactionErrorType,
   serializeTransaction,
-} from '../transaction/serializeTransaction.js'
+} from '../transaction/serializeTransaction'
 import {
   type RecoverAddressErrorType,
   recoverAddress,
-} from './recoverAddress.js'
-import type { SerializeSignatureErrorType } from './serializeSignature.js'
+} from './recoverAddress'
+import type { SerializeSignatureErrorType } from './serializeSignature'
 
 export type RecoverTransactionAddressParameters = {
   serializedTransaction: TransactionSerialized

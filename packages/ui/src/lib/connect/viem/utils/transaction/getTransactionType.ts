@@ -1,13 +1,13 @@
 import {
   InvalidSerializableTransactionError,
   type InvalidSerializableTransactionErrorType,
-} from '../../errors/transaction.js'
-import type { ErrorType } from '../../errors/utils.js'
+} from '../../errors/transaction'
+import type { ErrorType } from '../../errors/utils'
 import type {
   FeeValuesEIP1559,
   FeeValuesEIP4844,
   FeeValuesLegacy,
-} from '../../index.js'
+} from '../../index'
 import type {
   TransactionRequestEIP1559,
   TransactionRequestEIP2930,
@@ -21,14 +21,14 @@ import type {
   TransactionSerializableEIP7702,
   TransactionSerializableGeneric,
   TransactionSerializableLegacy,
-} from '../../types/transaction.js'
+} from '../../types/transaction'
 import type {
   Assign,
   ExactPartial,
   IsNever,
   OneOf,
   ValueOf,
-} from '../../types/utils.js'
+} from '../../types/utils'
 
 export type GetTransactionType<
   transaction extends OneOf<

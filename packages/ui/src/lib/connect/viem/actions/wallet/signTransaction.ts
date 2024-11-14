@@ -1,51 +1,47 @@
-import type { Account } from '../../accounts/types.js'
+import type { Account } from "../../accounts/types";
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../accounts/utils/parseAccount.js'
-import type { SignTransactionErrorType as SignTransactionErrorType_account } from '../../accounts/utils/signTransaction.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import { AccountNotFoundError } from '../../errors/account.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { GetAccountParameter } from '../../types/account.js'
-import type {
-  Chain,
-  DeriveChain,
-  GetChainParameter,
-} from '../../types/chain.js'
-import type { GetTransactionRequestKzgParameter } from '../../types/kzg.js'
-import type { RpcTransactionRequest } from '../../types/rpc.js'
+} from "../../accounts/utils/parseAccount";
+import type { SignTransactionErrorType as SignTransactionErrorType_account } from "../../accounts/utils/signTransaction";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import { AccountNotFoundError } from "../../errors/account";
+import type { ErrorType } from "../../errors/utils";
+import type { GetAccountParameter } from "../../types/account";
+import type { Chain, DeriveChain, GetChainParameter } from "../../types/chain";
+import type { GetTransactionRequestKzgParameter } from "../../types/kzg";
+import type { RpcTransactionRequest } from "../../types/rpc";
 import type {
   TransactionRequest,
   TransactionSerializable,
   TransactionSerialized,
-} from '../../types/transaction.js'
-import type { UnionOmit } from '../../types/utils.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+} from "../../types/transaction";
+import type { UnionOmit } from "../../types/utils";
+import type { RequestErrorType } from "../../utils/buildRequest";
 import {
   type AssertCurrentChainErrorType,
   assertCurrentChain,
-} from '../../utils/chain/assertCurrentChain.js'
-import { numberToHex } from '../../utils/encoding/toHex.js'
-import type { NumberToHexErrorType } from '../../utils/encoding/toHex.js'
+} from "../../utils/chain/assertCurrentChain";
+import { numberToHex } from "../../utils/encoding/toHex";
+import type { NumberToHexErrorType } from "../../utils/encoding/toHex";
 import {
   type FormattedTransactionRequest,
   formatTransactionRequest,
-} from '../../utils/formatters/transactionRequest.js'
-import { getAction } from '../../utils/getAction.js'
+} from "../../utils/formatters/transactionRequest";
+import { getAction } from "../../utils/getAction";
 import {
   type AssertRequestErrorType,
   assertRequest,
-} from '../../utils/transaction/assertRequest.js'
-import { type GetChainIdErrorType, getChainId } from '../public/getChainId.js'
+} from "../../utils/transaction/assertRequest";
+import { type GetChainIdErrorType, getChainId } from "../public/getChainId";
 
 type SignTransactionRequest<
   chain extends Chain | undefined = Chain | undefined,
   chainOverride extends Chain | undefined = Chain | undefined,
   ///
-  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>,
-> = UnionOmit<FormattedTransactionRequest<_derivedChain>, 'from'>
+  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>
+> = UnionOmit<FormattedTransactionRequest<_derivedChain>, "from">;
 
 export type SignTransactionParameters<
   chain extends Chain | undefined,
@@ -54,13 +50,13 @@ export type SignTransactionParameters<
   request extends SignTransactionRequest<
     chain,
     chainOverride
-  > = SignTransactionRequest<chain, chainOverride>,
+  > = SignTransactionRequest<chain, chainOverride>
 > = request &
   GetAccountParameter<account> &
   GetChainParameter<chain, chainOverride> &
-  GetTransactionRequestKzgParameter<request>
+  GetTransactionRequestKzgParameter<request>;
 
-export type SignTransactionReturnType = TransactionSerialized
+export type SignTransactionReturnType = TransactionSerialized;
 
 export type SignTransactionErrorType =
   | ParseAccountErrorType
@@ -70,14 +66,14 @@ export type SignTransactionErrorType =
   | SignTransactionErrorType_account
   | NumberToHexErrorType
   | RequestErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Signs a transaction.
  *
  * - Docs: https://viem.sh/docs/actions/wallet/signTransaction
  * - JSON-RPC Methods:
- *   - JSON-RPC Accounts: [`eth_signTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)
+ *   - JSON-RPC Accounts: [`mina_signTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)
  *   - Local Accounts: Signs locally. No JSON-RPC request.
  *
  * @param args - {@link SignTransactionParameters}
@@ -122,38 +118,38 @@ export async function signTransaction<
   const request extends SignTransactionRequest<
     chain,
     chainOverride
-  > = SignTransactionRequest<chain, chainOverride>,
+  > = SignTransactionRequest<chain, chainOverride>
 >(
   client: Client<Transport, chain, account>,
-  parameters: SignTransactionParameters<chain, account, chainOverride, request>,
+  parameters: SignTransactionParameters<chain, account, chainOverride, request>
 ): Promise<SignTransactionReturnType> {
   const {
     account: account_ = client.account,
     chain = client.chain,
     ...transaction
-  } = parameters
+  } = parameters;
 
   if (!account_)
     throw new AccountNotFoundError({
-      docsPath: '/docs/actions/wallet/signTransaction',
-    })
-  const account = parseAccount(account_)
+      docsPath: "/docs/actions/wallet/signTransaction",
+    });
+  const account = parseAccount(account_);
 
   assertRequest({
     account,
     ...parameters,
-  })
+  });
 
-  const chainId = await getAction(client, getChainId, 'getChainId')({})
+  const chainId = await getAction(client, getChainId, "getChainId")({});
   if (chain !== null)
     assertCurrentChain({
       currentChainId: chainId,
       chain,
-    })
+    });
 
-  const formatters = chain?.formatters || client.chain?.formatters
+  const formatters = chain?.formatters || client.chain?.formatters;
   const format =
-    formatters?.transactionRequest?.format || formatTransactionRequest
+    formatters?.transactionRequest?.format || formatTransactionRequest;
 
   if (account.signTransaction)
     return account.signTransaction(
@@ -161,12 +157,12 @@ export async function signTransaction<
         ...transaction,
         chainId,
       } as TransactionSerializable,
-      { serializer: client.chain?.serializers?.transaction },
-    ) as Promise<SignTransactionReturnType>
+      { serializer: client.chain?.serializers?.transaction }
+    ) as Promise<SignTransactionReturnType>;
 
   return await client.request(
     {
-      method: 'eth_signTransaction',
+      method: "mina_signTransaction",
       params: [
         {
           ...format(transaction as unknown as TransactionRequest),
@@ -175,6 +171,6 @@ export async function signTransaction<
         } as unknown as RpcTransactionRequest,
       ],
     },
-    { retryCount: 0 },
-  )
+    { retryCount: 0 }
+  );
 }

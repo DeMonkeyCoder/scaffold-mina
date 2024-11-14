@@ -1,19 +1,19 @@
-import type { ChainFormatters } from '../types/chain.js'
-import type { RpcTransaction } from '../types/rpc.js'
-import { hexToBigInt } from '../utils/encoding/fromHex.js'
-import { defineBlock } from '../utils/formatters/block.js'
+import type { ChainFormatters } from '../types/chain'
+import type { RpcTransaction } from '../types/rpc'
+import { hexToBigInt } from '../utils/encoding/fromHex'
+import { defineBlock } from '../utils/formatters/block'
 import {
   defineTransaction,
   formatTransaction,
-} from '../utils/formatters/transaction.js'
-import { defineTransactionReceipt } from '../utils/formatters/transactionReceipt.js'
-import type { OpStackBlock, OpStackRpcBlock } from './types/block.js'
+} from '../utils/formatters/transaction'
+import { defineTransactionReceipt } from '../utils/formatters/transactionReceipt'
+import type { OpStackBlock, OpStackRpcBlock } from './types/block'
 import type {
   OpStackRpcTransaction,
   OpStackRpcTransactionReceipt,
   OpStackTransaction,
   OpStackTransactionReceipt,
-} from './types/transaction.js'
+} from './types/transaction'
 
 export const formatters = {
   block: /*#__PURE__*/ defineBlock({

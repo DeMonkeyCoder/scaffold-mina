@@ -2,23 +2,23 @@ import {
   type EstimateGasErrorType,
   type EstimateGasParameters,
   estimateGas,
-} from '../../actions/public/estimateGas.js'
+} from '../../actions/public/estimateGas'
 import {
   type PrepareTransactionRequestErrorType,
   type PrepareTransactionRequestParameters,
   prepareTransactionRequest,
-} from '../../actions/wallet/prepareTransactionRequest.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
-import type { Chain } from '../../types/chain.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+} from '../../actions/wallet/prepareTransactionRequest'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../../types/account'
+import type { Chain } from '../../types/chain'
+import type { RequestErrorType } from '../../utils/buildRequest'
 import {
   type EstimateL1GasErrorType,
   type EstimateL1GasParameters,
   estimateL1Gas,
-} from './estimateL1Gas.js'
+} from './estimateL1Gas'
 
 export type EstimateTotalGasParameters<
   chain extends Chain | undefined = Chain | undefined,

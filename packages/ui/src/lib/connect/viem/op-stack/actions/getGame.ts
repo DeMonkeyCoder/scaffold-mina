@@ -1,19 +1,19 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
+} from '../../types/chain'
 import {
   GameNotFoundError,
   type GameNotFoundErrorType,
-} from '../errors/withdrawal.js'
-import type { GetContractAddressParameter } from '../types/contract.js'
-import type { Game } from '../types/withdrawal.js'
-import { type GetGamesErrorType, getGames } from './getGames.js'
+} from '../errors/withdrawal'
+import type { GetContractAddressParameter } from '../types/contract'
+import type { Game } from '../types/withdrawal'
+import { type GetGamesErrorType, getGames } from './getGames'
 
 export type GetGameParameters<
   chain extends Chain | undefined = Chain | undefined,

@@ -12,13 +12,13 @@ import {
   estimateFeesPerGas as viem_estimateFeesPerGas,
 } from "@/lib/connect/viem/actions";
 
-import type { Config } from "../createConfig.js";
-import type { ChainIdParameter } from "../types/properties.js";
-import type { Unit } from "../types/unit.js";
-import type { Compute } from "../types/utils.js";
-import type { UnionCompute, UnionLooseOmit } from "../types/utils.js";
-import { getAction } from "../utils/getAction.js";
-import { getUnit } from "../utils/getUnit.js";
+import type { Config } from "../createConfig";
+import type { ChainIdParameter } from "../types/properties";
+import type { Unit } from "../types/unit";
+import type { Compute } from "../types/utils";
+import type { UnionCompute, UnionLooseOmit } from "../types/utils";
+import { getAction } from "../utils/getAction";
+import { getUnit } from "../utils/getUnit";
 
 export type EstimateFeesPerGasParameters<
   type extends FeeValuesType = FeeValuesType,

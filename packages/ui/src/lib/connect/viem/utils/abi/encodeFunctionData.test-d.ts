@@ -1,12 +1,12 @@
 import { expectTypeOf, test } from 'vitest'
 
 import { type Abi, parseAbi } from 'abitype'
-import { wagmiContractConfig } from '~test/src/abis.js'
-import type { Hex } from '../../types/misc.js'
+import { wagmiContractConfig } from '~test/src/abis'
+import type { Hex } from '../../types/misc'
 import {
   type EncodeFunctionDataParameters,
   encodeFunctionData,
-} from './encodeFunctionData.js'
+} from './encodeFunctionData'
 
 test('default', () => {
   encodeFunctionData({

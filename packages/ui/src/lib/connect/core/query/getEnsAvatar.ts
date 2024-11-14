@@ -5,11 +5,11 @@ import {
   type GetEnsAvatarParameters,
   type GetEnsAvatarReturnType,
   getEnsAvatar,
-} from '../actions/getEnsAvatar.js'
-import type { Config } from '../createConfig.js'
-import type { ScopeKeyParameter } from '../types/properties.js'
-import type { Compute, ExactPartial } from '../types/utils.js'
-import { filterQueryOptions } from './utils.js'
+} from '../actions/getEnsAvatar'
+import type { Config } from '../createConfig'
+import type { ScopeKeyParameter } from '../types/properties'
+import type { Compute, ExactPartial } from '../types/utils'
+import { filterQueryOptions } from './utils'
 
 export type GetEnsAvatarOptions<config extends Config> = Compute<
   ExactPartial<GetEnsAvatarParameters<config>> & ScopeKeyParameter

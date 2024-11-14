@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { estimateMaxPriorityFeePerGas } from './estimateMaxPriorityFeePerGas.js'
+import { estimateMaxPriorityFeePerGas } from './estimateMaxPriorityFeePerGas'
 
 test('default', async () => {
   await expect(estimateMaxPriorityFeePerGas(config)).resolves.toBeDefined()

@@ -1,11 +1,11 @@
-import { BaseError } from '../errors/base.js'
+import { BaseError } from '../errors/base'
 import {
   HttpRequestError,
   type HttpRequestErrorType,
   type RpcRequestErrorType,
   type TimeoutErrorType,
   type WebSocketRequestErrorType,
-} from '../errors/request.js'
+} from '../errors/request'
 import {
   ChainDisconnectedError,
   type ChainDisconnectedErrorType,
@@ -49,19 +49,19 @@ import {
   type UnsupportedProviderMethodErrorType,
   UserRejectedRequestError,
   type UserRejectedRequestErrorType,
-} from '../errors/rpc.js'
-import type { ErrorType } from '../errors/utils.js'
+} from '../errors/rpc'
+import type { ErrorType } from '../errors/utils'
 import type {
   EIP1193RequestFn,
   EIP1193RequestOptions,
-} from '../types/eip1193.js'
-import { stringToHex } from './encoding/toHex.js'
-import { keccak256 } from './hash/keccak256.js'
-import type { CreateBatchSchedulerErrorType } from './promise/createBatchScheduler.js'
-import { withDedupe } from './promise/withDedupe.js'
-import { type WithRetryErrorType, withRetry } from './promise/withRetry.js'
-import type { GetSocketRpcClientErrorType } from './rpc/socket.js'
-import { stringify } from './stringify.js'
+} from '../types/eip1193'
+import { stringToHex } from './encoding/toHex'
+import { keccak256 } from './hash/keccak256'
+import type { CreateBatchSchedulerErrorType } from './promise/createBatchScheduler'
+import { withDedupe } from './promise/withDedupe'
+import { type WithRetryErrorType, withRetry } from './promise/withRetry'
+import type { GetSocketRpcClientErrorType } from './rpc/socket'
+import { stringify } from './stringify'
 
 export type RequestErrorType =
   | ChainDisconnectedErrorType

@@ -1,9 +1,9 @@
 import { beforeEach, expect, test } from 'vitest'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { accounts } from '../../../test/src/constants.js'
-import { getTransactionReceipt, mine, reset } from '../../actions/index.js'
-import { optimism } from '../../op-stack/chains.js'
-import { proveWithdrawal } from './proveWithdrawal.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { accounts } from '../../../test/src/constants'
+import { getTransactionReceipt, mine, reset } from '../../actions/index'
+import { optimism } from '../../op-stack/chains'
+import { proveWithdrawal } from './proveWithdrawal'
 
 const client = anvilMainnet.getClient()
 

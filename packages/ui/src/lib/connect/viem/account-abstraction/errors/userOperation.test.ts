@@ -1,10 +1,10 @@
 import { expect, test } from 'vitest'
-import { BaseError } from '../../errors/base.js'
+import { BaseError } from '../../errors/base'
 import {
   UserOperationExecutionError,
   UserOperationReceiptNotFoundError,
   WaitForUserOperationReceiptTimeoutError,
-} from './userOperation.js'
+} from './userOperation'
 
 test('UserOperationExecutionError', () => {
   expect(

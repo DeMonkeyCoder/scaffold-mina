@@ -3,7 +3,7 @@ import { expect, test } from 'vitest'
 import {
   AccountStateConflictError,
   StateAssignmentConflictError,
-} from './stateOverride.js'
+} from './stateOverride'
 
 test('AccountStateConflictError', () => {
   expect(

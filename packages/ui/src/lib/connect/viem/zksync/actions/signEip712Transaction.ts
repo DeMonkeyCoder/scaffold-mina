@@ -1,29 +1,29 @@
-import type { Account } from '../../accounts/types.js'
-import { parseAccount } from '../../accounts/utils/parseAccount.js'
-import { getChainId } from '../../actions/public/getChainId.js'
+import type { Account } from '../../accounts/types'
+import { parseAccount } from '../../accounts/utils/parseAccount'
+import { getChainId } from '../../actions/public/getChainId'
 import type {
   SignTransactionErrorType,
   SignTransactionReturnType,
-} from '../../actions/wallet/signTransaction.js'
-import { signTypedData } from '../../actions/wallet/signTypedData.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import { AccountNotFoundError } from '../../errors/account.js'
-import { BaseError } from '../../errors/base.js'
-import type { GetAccountParameter } from '../../types/account.js'
+} from '../../actions/wallet/signTransaction'
+import { signTypedData } from '../../actions/wallet/signTypedData'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import { AccountNotFoundError } from '../../errors/account'
+import { BaseError } from '../../errors/base'
+import type { GetAccountParameter } from '../../types/account'
 import type {
   ExtractChainFormatterParameters,
   GetChainParameter,
-} from '../../types/chain.js'
-import type { UnionOmit } from '../../types/utils.js'
-import { assertCurrentChain } from '../../utils/chain/assertCurrentChain.js'
-import { getAction } from '../../utils/getAction.js'
-import type { ChainEIP712 } from '../types/chain.js'
-import type { TransactionRequestEIP712 } from '../types/transaction.js'
+} from '../../types/chain'
+import type { UnionOmit } from '../../types/utils'
+import { assertCurrentChain } from '../../utils/chain/assertCurrentChain'
+import { getAction } from '../../utils/getAction'
+import type { ChainEIP712 } from '../types/chain'
+import type { TransactionRequestEIP712 } from '../types/transaction'
 import {
   type AssertEip712RequestParameters,
   assertEip712Request,
-} from '../utils/assertEip712Request.js'
+} from '../utils/assertEip712Request'
 
 type FormattedTransactionRequest<
   chain extends ChainEIP712 | undefined = ChainEIP712 | undefined,

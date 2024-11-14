@@ -1,6 +1,6 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { useBalance } from './useBalance.js'
+import { useBalance } from './useBalance'
 
 test('select data', () => {
   const result = useBalance({

@@ -11,12 +11,12 @@ import {
 } from "@/lib/connect/core/exports/experimental";
 import type { Compute } from "@/lib/connect/core/exports/internal";
 
-import { useConfig } from "../../hooks/useConfig.js";
+import { useConfig } from "../../hooks/useConfig";
 import type {
   ConfigParameter,
   QueryParameter,
-} from "../../types/properties.js";
-import { type UseQueryReturnType, useQuery } from "../../utils/query.js";
+} from "../../types/properties";
+import { type UseQueryReturnType, useQuery } from "../../utils/query";
 
 export type UseCallsStatusParameters<
   config extends Config = Config,

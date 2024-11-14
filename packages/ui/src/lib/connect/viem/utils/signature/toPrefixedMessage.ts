@@ -1,14 +1,14 @@
-import { presignMessagePrefix } from '../../constants/strings.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex, SignableMessage } from '../../types/misc.js'
-import { type ConcatErrorType, concat } from '../data/concat.js'
-import { size } from '../data/size.js'
+import { presignMessagePrefix } from '../../constants/strings'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex, SignableMessage } from '../../types/misc'
+import { type ConcatErrorType, concat } from '../data/concat'
+import { size } from '../data/size'
 import {
   type BytesToHexErrorType,
   type StringToHexErrorType,
   bytesToHex,
   stringToHex,
-} from '../encoding/toHex.js'
+} from '../encoding/toHex'
 
 export type ToPrefixedMessageErrorType =
   | ConcatErrorType

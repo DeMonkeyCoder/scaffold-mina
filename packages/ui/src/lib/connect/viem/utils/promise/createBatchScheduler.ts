@@ -1,4 +1,4 @@
-import type { ErrorType } from '../../errors/utils.js'
+import type { ErrorType } from '../../errors/utils'
 
 type Resolved<returnType extends readonly unknown[] = any> = [
   result: returnType[number],

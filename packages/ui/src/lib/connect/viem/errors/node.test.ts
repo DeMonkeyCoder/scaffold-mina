@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
 
-import { parseGwei } from "../utils/unit/parseGwei.js";
+import { parseGwei } from "../utils/unit/parseGwei";
 
-import { BaseError } from "./base.js";
+import { BaseError } from "./base";
 import {
   FeeCapTooHighError,
   FeeCapTooLowError,
@@ -15,7 +15,7 @@ import {
   TipAboveFeeCapError,
   TransactionTypeNotSupportedError,
   UnknownNodeError,
-} from "./node.js";
+} from "./node";
 
 test("FeeCapTooHighError", () => {
   let error = new FeeCapTooHighError({

@@ -1,4 +1,4 @@
-import { defineChain } from '../../../utils/chain/defineChain.js'
+import { defineChain } from '../../../utils/chain/defineChain'
 
 export const skaleBlockBrawlers = /*#__PURE__*/ defineChain({
   id: 391_845_894,

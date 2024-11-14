@@ -3,7 +3,7 @@ import { renderHook, waitFor } from "@wagmi/test/react";
 import type { Address } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { useTransactionCount } from "./useTransactionCount.js";
+import { useTransactionCount } from "./useTransactionCount";
 
 const address = accounts[0];
 

@@ -1,32 +1,32 @@
 import type { Abi } from 'abitype'
 
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { BaseError } from '../../errors/base.js'
-import type { Chain } from '../../types/chain.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { BaseError } from '../../errors/base'
+import type { Chain } from '../../types/chain'
 import type {
   ContractFunctionArgs,
   ContractFunctionName,
   ContractFunctionParameters,
   ContractFunctionReturnType,
-} from '../../types/contract.js'
-import type { UnionEvaluate } from '../../types/utils.js'
+} from '../../types/contract'
+import type { UnionEvaluate } from '../../types/utils'
 import {
   type DecodeFunctionResultErrorType,
   decodeFunctionResult,
-} from '../../utils/abi/decodeFunctionResult.js'
+} from '../../utils/abi/decodeFunctionResult'
 import {
   type EncodeFunctionDataErrorType,
   type EncodeFunctionDataParameters,
   encodeFunctionData,
-} from '../../utils/abi/encodeFunctionData.js'
+} from '../../utils/abi/encodeFunctionData'
 import {
   type GetContractErrorReturnType,
   getContractError,
-} from '../../utils/errors/getContractError.js'
-import { getAction } from '../../utils/getAction.js'
+} from '../../utils/errors/getContractError'
+import { getAction } from '../../utils/getAction'
 
-import { type CallErrorType, type CallParameters, call } from './call.js'
+import { type CallErrorType, type CallParameters, call } from './call'
 
 export type ReadContractParameters<
   abi extends Abi | readonly unknown[] = Abi,

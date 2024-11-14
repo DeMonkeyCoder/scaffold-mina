@@ -1,7 +1,7 @@
 import { abi, config } from '@wagmi/test'
 import { expectTypeOf, test } from 'vitest'
 
-import { readContractQueryOptions } from './readContract.js'
+import { readContractQueryOptions } from './readContract'
 
 test('default', async () => {
   const options = readContractQueryOptions(config, {

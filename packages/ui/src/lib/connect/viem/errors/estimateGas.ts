@@ -1,11 +1,11 @@
-import type { Account } from '../accounts/types.js'
-import type { EstimateGasParameters } from '../actions/public/estimateGas.js'
-import type { Chain } from '../types/chain.js'
-import { formatEther } from '../utils/unit/formatEther.js'
-import { formatGwei } from '../utils/unit/formatGwei.js'
+import type { Account } from '../accounts/types'
+import type { EstimateGasParameters } from '../actions/public/estimateGas'
+import type { Chain } from '../types/chain'
+import { formatEther } from '../utils/unit/formatEther'
+import { formatGwei } from '../utils/unit/formatGwei'
 
-import { BaseError } from './base.js'
-import { prettyPrint } from './transaction.js'
+import { BaseError } from './base'
+import { prettyPrint } from './transaction'
 
 export type EstimateGasExecutionErrorType = EstimateGasExecutionError & {
   name: 'EstimateGasExecutionError'

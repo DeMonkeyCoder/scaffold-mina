@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { createCursor } from "./cursor.js";
+import { createCursor } from "./cursor";
 
 const generateBytes = (length: number) => {
   const bytes = new Uint8Array(length);

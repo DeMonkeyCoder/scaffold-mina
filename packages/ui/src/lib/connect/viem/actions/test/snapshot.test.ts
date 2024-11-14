@@ -1,11 +1,11 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
-import { sendTransaction } from '../wallet/sendTransaction.js'
+import { accounts } from '~test/src/constants'
+import { parseEther } from '../../utils/unit/parseEther'
+import { sendTransaction } from '../wallet/sendTransaction'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { snapshot } from './snapshot.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { snapshot } from './snapshot'
 
 const sourceAccount = accounts[0]
 const targetAccount = accounts[1]

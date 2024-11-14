@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { estimateFeesPerGasQueryOptions } from './estimateFeesPerGas.js'
+import { estimateFeesPerGasQueryOptions } from './estimateFeesPerGas'
 
 test('default', () => {
   expect(estimateFeesPerGasQueryOptions(config)).toMatchInlineSnapshot(`

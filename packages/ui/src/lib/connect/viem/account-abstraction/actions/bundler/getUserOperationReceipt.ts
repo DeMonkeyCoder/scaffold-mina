@@ -1,27 +1,27 @@
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { Hash } from '../../../types/misc.js'
-import type { Prettify } from '../../../types/utils.js'
-import type { RequestErrorType } from '../../../utils/buildRequest.js'
+import type { Client } from "../../../clients/createClient";
+import type { Transport } from "../../../clients/transports/createTransport";
+import type { ErrorType } from "../../../errors/utils";
+import type { Hash } from "../../../types/misc";
+import type { Prettify } from "../../../types/utils";
+import type { RequestErrorType } from "../../../utils/buildRequest";
 import {
   UserOperationReceiptNotFoundError,
   type UserOperationReceiptNotFoundErrorType,
-} from '../../errors/userOperation.js'
-import type { UserOperationReceipt } from '../../types/userOperation.js'
-import { formatUserOperationReceipt } from '../../utils/formatters/userOperationReceipt.js'
+} from "../../errors/userOperation";
+import type { UserOperationReceipt } from "../../types/userOperation";
+import { formatUserOperationReceipt } from "../../utils/formatters/userOperationReceipt";
 
 export type GetUserOperationReceiptParameters = {
   /** The hash of the User Operation. */
-  hash: Hash
-}
+  hash: Hash;
+};
 
-export type GetUserOperationReceiptReturnType = Prettify<UserOperationReceipt>
+export type GetUserOperationReceiptReturnType = Prettify<UserOperationReceipt>;
 
 export type GetUserOperationReceiptErrorType =
   | RequestErrorType
   | UserOperationReceiptNotFoundErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Returns the User Operation Receipt given a User Operation hash.
@@ -48,17 +48,17 @@ export type GetUserOperationReceiptErrorType =
  */
 export async function getUserOperationReceipt(
   client: Client<Transport>,
-  { hash }: GetUserOperationReceiptParameters,
+  { hash }: GetUserOperationReceiptParameters
 ) {
   const receipt = await client.request(
     {
-      method: 'eth_getUserOperationReceipt',
+      method: "mina_getUserOperationReceipt",
       params: [hash],
     },
-    { dedupe: true },
-  )
+    { dedupe: true }
+  );
 
-  if (!receipt) throw new UserOperationReceiptNotFoundError({ hash })
+  if (!receipt) throw new UserOperationReceiptNotFoundError({ hash });
 
-  return formatUserOperationReceipt(receipt)
+  return formatUserOperationReceipt(receipt);
 }

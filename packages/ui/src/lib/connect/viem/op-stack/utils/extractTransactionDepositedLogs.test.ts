@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
-import { mainnetClient } from '~test/src/utils.js'
+import { mainnetClient } from '~test/src/utils'
 
-import { extractTransactionDepositedLogs } from './extractTransactionDepositedLogs.js'
+import { extractTransactionDepositedLogs } from './extractTransactionDepositedLogs'
 
 test('default', async () => {
   const receipt = await mainnetClient.getTransactionReceipt({

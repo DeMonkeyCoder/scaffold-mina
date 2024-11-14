@@ -3,19 +3,19 @@ import {
   createVerifyingPaymasterServer,
   getSmartAccounts_07,
   getVerifyingPaymaster_07,
-} from '../../../../test/src/account-abstraction.js'
-import { anvilMainnet } from '../../../../test/src/anvil.js'
-import { bundlerMainnet } from '../../../../test/src/bundler.js'
-import { mine } from '../../../actions/index.js'
-import { http } from '../../../clients/transports/http.js'
-import { parseEther } from '../../../utils/index.js'
-import { createPaymasterClient } from '../../clients/createPaymasterClient.js'
-import { estimateUserOperationGas } from '../bundler/estimateUserOperationGas.js'
-import { getUserOperationReceipt } from '../bundler/getUserOperationReceipt.js'
-import { prepareUserOperation } from '../bundler/prepareUserOperation.js'
-import { sendUserOperation } from '../bundler/sendUserOperation.js'
-import { getPaymasterData } from './getPaymasterData.js'
-import { getPaymasterStubData } from './getPaymasterStubData.js'
+} from '../../../../test/src/account-abstraction'
+import { anvilMainnet } from '../../../../test/src/anvil'
+import { bundlerMainnet } from '../../../../test/src/bundler'
+import { mine } from '../../../actions/index'
+import { http } from '../../../clients/transports/http'
+import { parseEther } from '../../../utils/index'
+import { createPaymasterClient } from '../../clients/createPaymasterClient'
+import { estimateUserOperationGas } from '../bundler/estimateUserOperationGas'
+import { getUserOperationReceipt } from '../bundler/getUserOperationReceipt'
+import { prepareUserOperation } from '../bundler/prepareUserOperation'
+import { sendUserOperation } from '../bundler/sendUserOperation'
+import { getPaymasterData } from './getPaymasterData'
+import { getPaymasterStubData } from './getPaymasterStubData'
 
 const client = anvilMainnet.getClient({ account: true })
 const bundlerClient = bundlerMainnet.getBundlerClient({ client })

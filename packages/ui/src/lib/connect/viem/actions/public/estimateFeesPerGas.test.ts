@@ -1,17 +1,17 @@
 import { describe, expect, test, vi } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { mainnet } from '../../chains/index.js'
-import { createPublicClient } from '../../clients/createPublicClient.js'
-import { http } from '../../clients/transports/http.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { mainnet } from '../../chains/index'
+import { createPublicClient } from '../../clients/createPublicClient'
+import { http } from '../../clients/transports/http'
 
-import { createTestClient } from '~viem/index.js'
+import { createTestClient } from '~viem/index'
 import {
   estimateFeesPerGas,
   internal_estimateFeesPerGas,
-} from './estimateFeesPerGas.js'
-import * as getBlock from './getBlock.js'
-import { getGasPrice } from './getGasPrice.js'
+} from './estimateFeesPerGas'
+import * as getBlock from './getBlock'
+import { getGasPrice } from './getGasPrice'
 
 const client = anvilMainnet.getClient()
 

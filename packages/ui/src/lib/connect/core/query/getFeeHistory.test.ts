@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getFeeHistoryQueryOptions } from './getFeeHistory.js'
+import { getFeeHistoryQueryOptions } from './getFeeHistory'
 
 test('default', async () => {
   expect(

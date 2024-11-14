@@ -10,5 +10,5 @@ const __dirname = dirname(__filename)
 
 export const mainnetTrustedSetupPath = resolve(
   __dirname,
-  '../trusted-setups/mainnet.json',
+  '../trusted-setups/mainneton',
 )

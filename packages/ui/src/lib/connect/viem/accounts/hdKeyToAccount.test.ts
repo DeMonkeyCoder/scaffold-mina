@@ -2,13 +2,13 @@ import { HDKey } from '@scure/bip32'
 
 import { describe, expect, test } from 'vitest'
 
-import { accounts, typedData } from '~test/src/constants.js'
-import { getAddress } from '../utils/address/getAddress.js'
-import { toBytes } from '../utils/encoding/toBytes.js'
-import { parseEther } from '../utils/unit/parseEther.js'
-import { parseGwei } from '../utils/unit/parseGwei.js'
+import { accounts, typedData } from '~test/src/constants'
+import { getAddress } from '../utils/address/getAddress'
+import { toBytes } from '../utils/encoding/toBytes'
+import { parseEther } from '../utils/unit/parseEther'
+import { parseGwei } from '../utils/unit/parseGwei'
 
-import { hdKeyToAccount } from './hdKeyToAccount.js'
+import { hdKeyToAccount } from './hdKeyToAccount'
 
 const hdKey = HDKey.fromMasterSeed(
   toBytes(

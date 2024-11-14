@@ -1,15 +1,15 @@
 import { beforeAll, expect, test } from 'vitest'
-import { anvilMainnet, anvilOptimism } from '../../test/src/anvil.js'
-import { generatePrivateKey } from '../accounts/generatePrivateKey.js'
-import { privateKeyToAccount } from '../accounts/privateKeyToAccount.js'
+import { anvilMainnet, anvilOptimism } from '../../test/src/anvil'
+import { generatePrivateKey } from '../accounts/generatePrivateKey'
+import { privateKeyToAccount } from '../accounts/privateKeyToAccount'
 import {
   dropTransaction,
   getTransaction,
   sendTransaction,
   setBalance,
-} from '../actions/index.js'
-import { createNonceManager, jsonRpc, nonceManager } from './nonceManager.js'
-import { parseEther } from './unit/parseEther.js'
+} from '../actions/index'
+import { createNonceManager, jsonRpc, nonceManager } from './nonceManager'
+import { parseEther } from './unit/parseEther'
 
 const privateKey = generatePrivateKey()
 const account = privateKeyToAccount(privateKey)

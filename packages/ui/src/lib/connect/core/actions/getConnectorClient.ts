@@ -8,8 +8,8 @@ import {
 } from "@/lib/connect/viem";
 import { getAddress, parseAccount } from "@/lib/connect/viem/utils";
 
-import type { Config, Connection } from "../createConfig.js";
-import type { ErrorType } from "../errors/base.js";
+import type { Config, Connection } from "../createConfig";
+import type { ErrorType } from "../errors/base";
 import {
   ConnectorAccountNotFoundError,
   type ConnectorAccountNotFoundErrorType,
@@ -17,12 +17,12 @@ import {
   type ConnectorChainMismatchErrorType,
   ConnectorNotConnectedError,
   type ConnectorNotConnectedErrorType,
-} from "../errors/config.js";
+} from "../errors/config";
 import type {
   ChainIdParameter,
   ConnectorParameter,
-} from "../types/properties.js";
-import type { Compute } from "../types/utils.js";
+} from "../types/properties";
+import type { Compute } from "../types/utils";
 
 export type GetConnectorClientParameters<
   config extends Config = Config,

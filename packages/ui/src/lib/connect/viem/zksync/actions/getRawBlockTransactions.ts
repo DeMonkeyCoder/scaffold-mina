@@ -1,11 +1,11 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { Account } from '../../types/account.js'
-import type { Chain } from '../../types/chain.js'
-import type { ZksyncNumberParameter } from '../types/block.js'
-import type { PublicZksyncRpcSchema } from '../types/eip1193.js'
-import type { ZksyncRawBlockTransactions } from '../types/transaction.js'
-import { camelCaseKeys } from '../utils/camelCaseKeys.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { Account } from '../../types/account'
+import type { Chain } from '../../types/chain'
+import type { ZksyncNumberParameter } from '../types/block'
+import type { PublicZksyncRpcSchema } from '../types/eip1193'
+import type { ZksyncRawBlockTransactions } from '../types/transaction'
+import { camelCaseKeys } from '../utils/camelCaseKeys'
 
 export type GetRawBlockTransactionsParameters = ZksyncNumberParameter
 

@@ -1,93 +1,93 @@
 import type { Address } from 'abitype'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { Account } from '../../types/account.js'
-import type { Chain } from '../../types/chain.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { Account } from '../../types/account'
+import type { Chain } from '../../types/chain'
 import {
   type BuildInitiateWithdrawalParameters,
   type BuildInitiateWithdrawalReturnType,
   buildInitiateWithdrawal,
-} from '../actions/buildInitiateWithdrawal.js'
+} from '../actions/buildInitiateWithdrawal'
 import {
   type EstimateDepositTransactionGasParameters,
   type EstimateDepositTransactionGasReturnType,
   estimateDepositTransactionGas,
-} from '../actions/estimateDepositTransactionGas.js'
+} from '../actions/estimateDepositTransactionGas'
 import {
   type EstimateFinalizeWithdrawalGasParameters,
   type EstimateFinalizeWithdrawalGasReturnType,
   estimateFinalizeWithdrawalGas,
-} from '../actions/estimateFinalizeWithdrawalGas.js'
+} from '../actions/estimateFinalizeWithdrawalGas'
 import {
   type EstimateProveWithdrawalGasParameters,
   type EstimateProveWithdrawalGasReturnType,
   estimateProveWithdrawalGas,
-} from '../actions/estimateProveWithdrawalGas.js'
+} from '../actions/estimateProveWithdrawalGas'
 import {
   type GetGameParameters,
   type GetGameReturnType,
   getGame,
-} from '../actions/getGame.js'
+} from '../actions/getGame'
 import {
   type GetGamesParameters,
   type GetGamesReturnType,
   getGames,
-} from '../actions/getGames.js'
+} from '../actions/getGames'
 import {
   type GetL2OutputParameters,
   type GetL2OutputReturnType,
   getL2Output,
-} from '../actions/getL2Output.js'
+} from '../actions/getL2Output'
 import {
   type GetPortalVersionParameters,
   type GetPortalVersionReturnType,
   getPortalVersion,
-} from '../actions/getPortalVersion.js'
+} from '../actions/getPortalVersion'
 import {
   type GetTimeToFinalizeParameters,
   type GetTimeToFinalizeReturnType,
   getTimeToFinalize,
-} from '../actions/getTimeToFinalize.js'
+} from '../actions/getTimeToFinalize'
 import {
   type GetTimeToNextGameParameters,
   type GetTimeToNextGameReturnType,
   getTimeToNextGame,
-} from '../actions/getTimeToNextGame.js'
+} from '../actions/getTimeToNextGame'
 import {
   type GetTimeToNextL2OutputParameters,
   type GetTimeToNextL2OutputReturnType,
   getTimeToNextL2Output,
-} from '../actions/getTimeToNextL2Output.js'
+} from '../actions/getTimeToNextL2Output'
 import {
   type GetTimeToProveParameters,
   type GetTimeToProveReturnType,
   getTimeToProve,
-} from '../actions/getTimeToProve.js'
+} from '../actions/getTimeToProve'
 import {
   type GetWithdrawalStatusParameters,
   type GetWithdrawalStatusReturnType,
   getWithdrawalStatus,
-} from '../actions/getWithdrawalStatus.js'
+} from '../actions/getWithdrawalStatus'
 import {
   type WaitForNextGameParameters,
   type WaitForNextGameReturnType,
   waitForNextGame,
-} from '../actions/waitForNextGame.js'
+} from '../actions/waitForNextGame'
 import {
   type WaitForNextL2OutputParameters,
   type WaitForNextL2OutputReturnType,
   waitForNextL2Output,
-} from '../actions/waitForNextL2Output.js'
+} from '../actions/waitForNextL2Output'
 import {
   type WaitToFinalizeParameters,
   type WaitToFinalizeReturnType,
   waitToFinalize,
-} from '../actions/waitToFinalize.js'
+} from '../actions/waitToFinalize'
 import {
   type WaitToProveParameters,
   type WaitToProveReturnType,
   waitToProve,
-} from '../actions/waitToProve.js'
+} from '../actions/waitToProve'
 
 export type PublicActionsL1<
   chain extends Chain | undefined = Chain | undefined,

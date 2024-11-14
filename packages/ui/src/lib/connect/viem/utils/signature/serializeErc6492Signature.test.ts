@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
-import { accounts } from '../../../test/src/constants.js'
-import { signMessage } from '../../accounts/index.js'
-import { serializeErc6492Signature } from './serializeErc6492Signature.js'
+import { accounts } from '../../../test/src/constants'
+import { signMessage } from '../../accounts/index'
+import { serializeErc6492Signature } from './serializeErc6492Signature'
 
 test('default', async () => {
   const signature = await signMessage({

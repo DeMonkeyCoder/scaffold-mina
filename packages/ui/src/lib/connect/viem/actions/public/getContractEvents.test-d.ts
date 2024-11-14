@@ -1,8 +1,8 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { getContractEvents } from './getContractEvents.js'
+import { getContractEvents } from './getContractEvents'
 
 const client = anvilMainnet.getClient()
 

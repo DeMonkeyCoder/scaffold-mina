@@ -1,5 +1,5 @@
-import { formatGwei } from '../utils/unit/formatGwei.js'
-import { BaseError } from './base.js'
+import { formatGwei } from '../utils/unit/formatGwei'
+import { BaseError } from './base'
 
 export type BaseFeeScalarErrorType = BaseFeeScalarError & {
   name: 'BaseFeeScalarError'

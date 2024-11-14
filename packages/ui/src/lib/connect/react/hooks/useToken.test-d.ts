@@ -1,6 +1,6 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { useToken } from './useToken.js'
+import { useToken } from './useToken'
 
 test('select data', () => {
   const result = useToken({

@@ -7,8 +7,8 @@ import {
 import type { Compute } from "@/lib/connect/core/exports/internal";
 import { useEffect } from "react";
 
-import type { ConfigParameter } from "../types/properties.js";
-import { useConfig } from "./useConfig.js";
+import type { ConfigParameter } from "../types/properties";
+import { useConfig } from "./useConfig";
 
 export type UseAccountEffectParameters = Compute<
   {

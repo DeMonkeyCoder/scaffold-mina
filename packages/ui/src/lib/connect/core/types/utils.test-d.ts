@@ -7,7 +7,7 @@ import type {
   Mutable,
   OneOf,
   PartialBy,
-} from './utils.js'
+} from './utils'
 
 test('ExactPartial', () => {
   expectTypeOf<ExactPartial<{ foo: boolean; bar: boolean }>>().toEqualTypeOf<{

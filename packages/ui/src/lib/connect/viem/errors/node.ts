@@ -1,6 +1,6 @@
-import { formatGwei } from '../utils/unit/formatGwei.js'
+import { formatGwei } from '../utils/unit/formatGwei'
 
-import { BaseError } from './base.js'
+import { BaseError } from './base'
 
 /**
  * geth:    https://github.com/ethereum/go-ethereum/blob/master/core/error.go

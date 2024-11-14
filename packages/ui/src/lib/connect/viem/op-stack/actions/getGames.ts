@@ -1,20 +1,20 @@
 import {
   type ReadContractErrorType,
   readContract,
-} from '../../actions/public/readContract.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
+} from '../../actions/public/readContract'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import { decodeAbiParameters } from '../../utils/abi/decodeAbiParameters.js'
-import { disputeGameFactoryAbi, portal2Abi } from '../abis.js'
-import type { GetContractAddressParameter } from '../types/contract.js'
-import type { Game } from '../types/withdrawal.js'
+} from '../../types/chain'
+import { decodeAbiParameters } from '../../utils/abi/decodeAbiParameters'
+import { disputeGameFactoryAbi, portal2Abi } from '../abis'
+import type { GetContractAddressParameter } from '../types/contract'
+import type { Game } from '../types/withdrawal'
 
 export type GetGamesParameters<
   chain extends Chain | undefined = Chain | undefined,

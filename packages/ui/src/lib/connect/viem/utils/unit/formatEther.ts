@@ -1,6 +1,6 @@
-import { etherUnits } from "../../constants/unit.js";
+import { etherUnits } from "../../constants/unit";
 
-import { type FormatUnitsErrorType, formatUnits } from "./formatUnits.js";
+import { type FormatUnitsErrorType, formatUnits } from "./formatUnits";
 
 export type FormatEtherErrorType = FormatUnitsErrorType;
 

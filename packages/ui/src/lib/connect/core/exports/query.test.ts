@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import * as query from './query.js'
+import * as query from './query'
 
 test('exports', () => {
   expect(Object.keys(query)).toMatchInlineSnapshot(`

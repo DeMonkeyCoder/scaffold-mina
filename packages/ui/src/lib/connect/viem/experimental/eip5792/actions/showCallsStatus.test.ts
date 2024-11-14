@@ -1,7 +1,7 @@
 import { test } from 'vitest'
-import { createClient } from '../../../clients/createClient.js'
-import { custom } from '../../../clients/transports/custom.js'
-import { showCallsStatus } from './showCallsStatus.js'
+import { createClient } from '../../../clients/createClient'
+import { custom } from '../../../clients/transports/custom'
+import { showCallsStatus } from './showCallsStatus'
 
 const client = createClient({
   transport: custom({

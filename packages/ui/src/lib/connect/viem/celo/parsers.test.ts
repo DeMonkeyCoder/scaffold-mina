@@ -1,16 +1,16 @@
 import { describe, expect, test } from "vitest";
 
-import { accounts } from "~test/src/constants.js";
+import { accounts } from "~test/src/constants";
 import {
   parseEther,
   parseGwei,
   parseTransaction as parseTransaction_,
   serializeTransaction as serializeTransaction_,
   toRlp,
-} from "../index.js";
-import { parseTransaction } from "./parsers.js";
-import { serializeTransaction } from "./serializers.js";
-import type { TransactionSerializableCIP64 } from "./types.js";
+} from "../index";
+import { parseTransaction } from "./parsers";
+import { serializeTransaction } from "./serializers";
+import type { TransactionSerializableCIP64 } from "./types";
 
 test("should be able to parse a cip42 transaction", () => {
   const signedTransaction =

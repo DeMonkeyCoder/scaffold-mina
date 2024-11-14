@@ -1,39 +1,39 @@
 import type { AbiStateMutability, Address, Narrow } from "abitype";
 
-import type { Client } from "../../clients/createClient.js";
-import type { Transport } from "../../clients/transports/createTransport.js";
-import { multicall3Abi } from "../../constants/abis.js";
-import { AbiDecodingZeroDataError } from "../../errors/abi.js";
-import { BaseError } from "../../errors/base.js";
-import { RawContractError } from "../../errors/contract.js";
-import type { Chain } from "../../types/chain.js";
-import type { ContractFunctionParameters } from "../../types/contract.js";
-import type { Hex } from "../../types/misc.js";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import { multicall3Abi } from "../../constants/abis";
+import { AbiDecodingZeroDataError } from "../../errors/abi";
+import { BaseError } from "../../errors/base";
+import { RawContractError } from "../../errors/contract";
+import type { Chain } from "../../types/chain";
+import type { ContractFunctionParameters } from "../../types/contract";
+import type { Hex } from "../../types/misc";
 import type {
   MulticallContracts,
   MulticallResults,
-} from "../../types/multicall.js";
+} from "../../types/multicall";
 import {
   type DecodeFunctionResultErrorType,
   decodeFunctionResult,
-} from "../../utils/abi/decodeFunctionResult.js";
+} from "../../utils/abi/decodeFunctionResult";
 import {
   type EncodeFunctionDataErrorType,
   encodeFunctionData,
-} from "../../utils/abi/encodeFunctionData.js";
+} from "../../utils/abi/encodeFunctionData";
 import {
   type GetChainContractAddressErrorType,
   getChainContractAddress,
-} from "../../utils/chain/getChainContractAddress.js";
+} from "../../utils/chain/getChainContractAddress";
 import {
   type GetContractErrorReturnType,
   getContractError,
-} from "../../utils/errors/getContractError.js";
+} from "../../utils/errors/getContractError";
 
-import type { ErrorType } from "../../errors/utils.js";
-import { getAction } from "../../utils/getAction.js";
-import type { CallParameters } from "./call.js";
-import { type ReadContractErrorType, readContract } from "./readContract.js";
+import type { ErrorType } from "../../errors/utils";
+import { getAction } from "../../utils/getAction";
+import type { CallParameters } from "./call";
+import { type ReadContractErrorType, readContract } from "./readContract";
 
 export type MulticallParameters<
   contracts extends readonly unknown[] = readonly ContractFunctionParameters[],

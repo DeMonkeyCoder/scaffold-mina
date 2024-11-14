@@ -1,5 +1,5 @@
-import type { Connector } from '../createConfig.js'
-import { BaseError } from './base.js'
+import type { Connector } from '../createConfig'
+import { BaseError } from './base'
 
 export type ProviderNotFoundErrorType = ProviderNotFoundError & {
   name: 'ProviderNotFoundError'

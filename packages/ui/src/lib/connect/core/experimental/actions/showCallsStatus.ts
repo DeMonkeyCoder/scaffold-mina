@@ -5,9 +5,9 @@ import {
   showCallsStatus as viem_showCallsStatus,
 } from "@/lib/connect/viem/experimental";
 
-import { getConnectorClient } from "../../actions/getConnectorClient.js";
-import type { Config } from "../../createConfig.js";
-import type { ConnectorParameter } from "../../types/properties.js";
+import { getConnectorClient } from "../../actions/getConnectorClient";
+import type { Config } from "../../createConfig";
+import type { ConnectorParameter } from "../../types/properties";
 
 export type ShowCallsStatusParameters = viem_ShowCallsStatusParameters &
   ConnectorParameter;

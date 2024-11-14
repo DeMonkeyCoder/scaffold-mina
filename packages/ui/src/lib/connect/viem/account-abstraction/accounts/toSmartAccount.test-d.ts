@@ -1,12 +1,12 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import type { Account } from '../../types/account.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import type { Account } from '../../types/account'
 import {
   type SoladySmartAccountImplementation,
   toSoladySmartAccount,
-} from './implementations/toSoladySmartAccount.js'
-import type { SmartAccount } from './types.js'
+} from './implementations/toSoladySmartAccount'
+import type { SmartAccount } from './types'
 
 const client = anvilMainnet.getClient()
 

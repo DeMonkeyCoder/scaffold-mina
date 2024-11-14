@@ -1,5 +1,5 @@
-import type { SendTransactionParameters } from '../../actions/wallet/sendTransaction.js'
-import { BaseError } from '../../errors/base.js'
+import type { SendTransactionParameters } from '../../actions/wallet/sendTransaction'
+import { BaseError } from '../../errors/base'
 import {
   ExecutionRevertedError,
   type ExecutionRevertedErrorType,
@@ -25,13 +25,13 @@ import {
   type TransactionTypeNotSupportedErrorType,
   UnknownNodeError,
   type UnknownNodeErrorType,
-} from '../../errors/node.js'
-import { RpcRequestError } from '../../errors/request.js'
+} from '../../errors/node'
+import { RpcRequestError } from '../../errors/request'
 import {
   InvalidInputRpcError,
   TransactionRejectedRpcError,
-} from '../../errors/rpc.js'
-import type { ExactPartial } from '../../types/utils.js'
+} from '../../errors/rpc'
+import type { ExactPartial } from '../../types/utils'
 
 export function containsNodeError(err: BaseError) {
   return (

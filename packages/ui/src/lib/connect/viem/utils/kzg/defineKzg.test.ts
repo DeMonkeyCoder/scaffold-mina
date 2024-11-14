@@ -3,20 +3,20 @@ import { resolve } from 'node:path'
 import * as cKzg from 'c-kzg'
 import { describe, expect, test } from 'vitest'
 
-import '../../../test/src/kzg.js'
-import type { Kzg } from '../../types/kzg.js'
-import { hexToBytes } from '../index.js'
-import { defineKzg } from './defineKzg.js'
+import '../../../test/src/kzg'
+import type { Kzg } from '../../types/kzg'
+import { hexToBytes } from '../index'
+import { defineKzg } from './defineKzg'
 
 const blobToKzgCommitmentCases = JSON.parse(
   readFileSync(
-    resolve(__dirname, '../../../test/kzg/blob-to-kzg-commitment.json'),
+    resolve(__dirname, '../../../test/kzg/blob-to-kzg-commitmenton'),
     'utf8',
   ),
 )
 const computeBlobKzgProofCases = JSON.parse(
   readFileSync(
-    resolve(__dirname, '../../../test/kzg/compute-blob-kzg-proof.json'),
+    resolve(__dirname, '../../../test/kzg/compute-blob-kzg-proofon'),
     'utf8',
   ),
 )

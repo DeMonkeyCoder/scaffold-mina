@@ -1,26 +1,26 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import { ContractFunctionRevertedError } from '../../errors/contract.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import { ContractFunctionRevertedError } from '../../errors/contract'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import { poll } from '../../utils/poll.js'
-import type { GetContractAddressParameter } from '../types/contract.js'
+} from '../../types/chain'
+import { poll } from '../../utils/poll'
+import type { GetContractAddressParameter } from '../types/contract'
 import {
   type GetL2OutputErrorType,
   type GetL2OutputParameters,
   type GetL2OutputReturnType,
   getL2Output,
-} from './getL2Output.js'
+} from './getL2Output'
 import {
   type GetTimeToNextL2OutputErrorType,
   type GetTimeToNextL2OutputParameters,
   getTimeToNextL2Output,
-} from './getTimeToNextL2Output.js'
+} from './getTimeToNextL2Output'
 
 export type WaitForNextL2OutputParameters<
   chain extends Chain | undefined = Chain | undefined,

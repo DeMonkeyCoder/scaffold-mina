@@ -1,11 +1,11 @@
 import type { Abi } from 'abitype'
 import { expectTypeOf, test } from 'vitest'
 
-import { seaportContractConfig } from '~test/src/abis.js'
+import { seaportContractConfig } from '~test/src/abis'
 import {
   type EncodeErrorResultParameters,
   encodeErrorResult,
-} from './encodeErrorResult.js'
+} from './encodeErrorResult'
 
 test('default', () => {
   encodeErrorResult({

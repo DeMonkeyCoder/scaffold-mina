@@ -1,19 +1,19 @@
-import type { Account } from '../../accounts/types.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+import type { Account } from "../../accounts/types";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Chain } from "../../types/chain";
+import type { RequestErrorType } from "../../utils/buildRequest";
 
-export type GetGasPriceReturnType = bigint
+export type GetGasPriceReturnType = bigint;
 
-export type GetGasPriceErrorType = RequestErrorType | ErrorType
+export type GetGasPriceErrorType = RequestErrorType | ErrorType;
 
 /**
  * Returns the current price of gas (in wei).
  *
  * - Docs: https://viem.sh/docs/actions/public/getGasPrice
- * - JSON-RPC Methods: [`eth_gasPrice`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_gasprice)
+ * - JSON-RPC Methods: [`mina_gasPrice`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_gasprice)
  *
  * @param client - Client to use
  * @returns The gas price (in wei). {@link GetGasPriceReturnType}
@@ -31,10 +31,10 @@ export type GetGasPriceErrorType = RequestErrorType | ErrorType
  */
 export async function getGasPrice<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(client: Client<Transport, chain, account>): Promise<GetGasPriceReturnType> {
   const gasPrice = await client.request({
-    method: 'eth_gasPrice',
-  })
-  return BigInt(gasPrice)
+    method: "mina_gasPrice",
+  });
+  return BigInt(gasPrice);
 }

@@ -1,10 +1,10 @@
 import type { Address } from 'abitype'
-import { trim } from '../utils/data/trim.js'
+import { trim } from '../utils/data/trim'
 import type {
   CeloTransactionRequest,
   CeloTransactionSerializable,
   TransactionSerializableCIP64,
-} from './types.js'
+} from './types'
 
 export function isEmpty(
   value: string | undefined | number | BigInt,

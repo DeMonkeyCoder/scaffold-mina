@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { useEnsAddress } from './useEnsAddress.js'
+import { useEnsAddress } from './useEnsAddress'
 
 test('default', async () => {
   const { result } = renderHook(() =>

@@ -2,7 +2,7 @@ import type { SendTransactionErrorType } from "@/lib/connect/core/exports";
 import type { Hash } from "@/lib/connect/viem";
 import { expectTypeOf, test } from "vitest";
 
-import { useSendTransaction } from "./useSendTransaction.js";
+import { useSendTransaction } from "./useSendTransaction";
 
 const contextValue = { foo: "bar" } as const;
 

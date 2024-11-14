@@ -1,5 +1,5 @@
-import type { Config } from '../createConfig.js'
-import type { GetConnectorsReturnType } from './getConnectors.js'
+import type { Config } from '../createConfig'
+import type { GetConnectorsReturnType } from './getConnectors'
 
 export type WatchConnectorsParameters = {
   onChange(

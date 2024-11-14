@@ -1,25 +1,25 @@
 import type { Abi, Address } from 'abitype'
 
-import { parseAccount } from '../accounts/utils/parseAccount.js'
-import type { CallParameters } from '../actions/public/call.js'
-import { panicReasons } from '../constants/solidity.js'
-import type { Chain } from '../types/chain.js'
-import type { Hex } from '../types/misc.js'
+import { parseAccount } from '../accounts/utils/parseAccount'
+import type { CallParameters } from '../actions/public/call'
+import { panicReasons } from '../constants/solidity'
+import type { Chain } from '../types/chain'
+import type { Hex } from '../types/misc'
 import {
   type DecodeErrorResultReturnType,
   decodeErrorResult,
-} from '../utils/abi/decodeErrorResult.js'
-import { formatAbiItem } from '../utils/abi/formatAbiItem.js'
-import { formatAbiItemWithArgs } from '../utils/abi/formatAbiItemWithArgs.js'
-import { getAbiItem } from '../utils/abi/getAbiItem.js'
-import { formatEther } from '../utils/unit/formatEther.js'
-import { formatGwei } from '../utils/unit/formatGwei.js'
+} from '../utils/abi/decodeErrorResult'
+import { formatAbiItem } from '../utils/abi/formatAbiItem'
+import { formatAbiItemWithArgs } from '../utils/abi/formatAbiItemWithArgs'
+import { getAbiItem } from '../utils/abi/getAbiItem'
+import { formatEther } from '../utils/unit/formatEther'
+import { formatGwei } from '../utils/unit/formatGwei'
 
-import { AbiErrorSignatureNotFoundError } from './abi.js'
-import { BaseError } from './base.js'
-import { prettyStateOverride } from './stateOverride.js'
-import { prettyPrint } from './transaction.js'
-import { getContractAddress } from './utils.js'
+import { AbiErrorSignatureNotFoundError } from './abi'
+import { BaseError } from './base'
+import { prettyStateOverride } from './stateOverride'
+import { prettyPrint } from './transaction'
+import { getContractAddress } from './utils'
 
 export type CallExecutionErrorType = CallExecutionError & {
   name: 'CallExecutionError'

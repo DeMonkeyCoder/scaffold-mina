@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { BytecodeLengthExceedsMaxSizeError } from './bytecode.js'
+import { BytecodeLengthExceedsMaxSizeError } from './bytecode'
 
 test('BytecodeLengthExceedsMaxSizeError', () => {
   expect(

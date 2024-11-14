@@ -10,11 +10,11 @@ import {
   type SimulateContractParameters,
   type SimulateContractReturnType,
   simulateContract,
-} from "../actions/simulateContract.js";
-import type { Config } from "../createConfig.js";
-import type { ScopeKeyParameter } from "../types/properties.js";
-import type { UnionExactPartial } from "../types/utils.js";
-import { filterQueryOptions } from "./utils.js";
+} from "../actions/simulateContract";
+import type { Config } from "../createConfig";
+import type { ScopeKeyParameter } from "../types/properties";
+import type { UnionExactPartial } from "../types/utils";
+import { filterQueryOptions } from "./utils";
 
 export type SimulateContractOptions<
   abi extends Abi | readonly unknown[],

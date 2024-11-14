@@ -1,10 +1,10 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { Account } from '../../types/account.js'
-import type { Chain } from '../../types/chain.js'
-import type { Hash } from '../../types/misc.js'
-import type { PublicZksyncRpcSchema } from '../types/eip1193.js'
-import type { ZksyncTransactionDetails } from '../types/transaction.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { Account } from '../../types/account'
+import type { Chain } from '../../types/chain'
+import type { Hash } from '../../types/misc'
+import type { PublicZksyncRpcSchema } from '../types/eip1193'
+import type { ZksyncTransactionDetails } from '../types/transaction'
 
 export type GetTransactionDetailsParameters = {
   txHash: Hash

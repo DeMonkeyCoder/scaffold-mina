@@ -13,11 +13,11 @@ import type { Abi, Address, ContractEventName } from "@/lib/connect/viem";
 import type {
   ConfigParameter,
   EnabledParameter,
-} from "../../types/properties.js";
-import { useAccount } from "../useAccount.js";
-import { useChainId } from "../useChainId.js";
-import { useConfig } from "../useConfig.js";
-import { useWatchContractEvent } from "../useWatchContractEvent.js";
+} from "../../types/properties";
+import { useAccount } from "../useAccount";
+import { useChainId } from "../useChainId";
+import { useConfig } from "../useConfig";
+import { useWatchContractEvent } from "../useWatchContractEvent";
 
 export type CreateUseWatchContractEventParameters<
   abi extends Abi | readonly unknown[],

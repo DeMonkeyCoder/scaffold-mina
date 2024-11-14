@@ -1,7 +1,7 @@
 import { config, testClient, wait } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { watchBlockNumber } from './watchBlockNumber.js'
+import { watchBlockNumber } from './watchBlockNumber'
 
 test('default', async () => {
   const blockNumbers: bigint[] = []

@@ -1,73 +1,75 @@
-import { expect, test } from 'vitest'
-import { anvilMainnet } from '../../../../test/src/anvil.js'
-import { accounts } from '../../../../test/src/constants.js'
-import { mainnet } from '../../../chains/index.js'
-import { createClient } from '../../../clients/createClient.js'
-import { custom } from '../../../clients/transports/custom.js'
-import { RpcRequestError } from '../../../errors/request.js'
-import { getHttpRpcClient, parseEther } from '../../../utils/index.js'
-import { sendCalls } from './sendCalls.js'
+import { expect, test } from "vitest";
+import { anvilMainnet } from "../../../../test/src/anvil";
+import { accounts } from "../../../../test/src/constants";
+import { mainnet } from "../../../chains/index";
+import { createClient } from "../../../clients/createClient";
+import { custom } from "../../../clients/transports/custom";
+import { RpcRequestError } from "../../../errors/request";
+import { getHttpRpcClient, parseEther } from "../../../utils/index";
+import { sendCalls } from "./sendCalls";
 
 const getClient = ({
   onRequest,
-}: { onRequest({ method, params }: any): void }) =>
+}: {
+  onRequest({ method, params }: any): void;
+}) =>
   createClient({
     transport: custom({
       async request({ method, params }) {
-        if (method !== 'wallet_sendCalls') return
+        if (method !== "wallet_sendCalls") return;
 
-        onRequest({ method, params })
+        onRequest({ method, params });
 
-        const rpcClient = getHttpRpcClient(anvilMainnet.rpcUrl.http)
+        const rpcClient = getHttpRpcClient(anvilMainnet.rpcUrl.http);
         for (const call of params[0].calls) {
           const { error } = await rpcClient.request({
             body: {
-              method: 'eth_sendTransaction',
+              method: "mina_sendTransaction",
               params: [call],
               id: 0,
             },
-          })
+          });
           if (error)
             throw new RpcRequestError({
               body: { method, params },
               error,
               url: anvilMainnet.rpcUrl.http,
-            })
+            });
         }
-        return '0xdeadbeef'
+        return "0xdeadbeef";
       },
     }),
-  })
+  });
 
-test('default', async () => {
-  const requests: unknown[] = []
+test("default", async () => {
+  const requests: unknown[] = [];
 
   const client = getClient({
     onRequest({ params }) {
-      requests.push(params)
+      requests.push(params);
     },
-  })
+  });
 
   const id_ = await sendCalls(client, {
     account: accounts[0].address,
     calls: [
       {
         to: accounts[1].address,
-        value: parseEther('1'),
+        value: parseEther("1"),
       },
       {
         to: accounts[2].address,
       },
       {
-        data: '0xcafebabe',
+        data: "0xcafebabe",
         to: accounts[3].address,
-        value: parseEther('100'),
+        value: parseEther("100"),
       },
     ],
     chain: mainnet,
-  })
+  });
 
-  expect(id_).toMatchInlineSnapshot(`"0xdeadbeef"`)
+  expect(id_).toMatchInlineSnapshot(`"0xdeadbeef"`);
   expect(requests).toMatchInlineSnapshot(`
     [
       [
@@ -94,17 +96,17 @@ test('default', async () => {
         },
       ],
     ]
-  `)
-})
+  `);
+});
 
-test('error: no chain', async () => {
-  const requests: unknown[] = []
+test("error: no chain", async () => {
+  const requests: unknown[] = [];
 
   const client = getClient({
     onRequest({ params }) {
-      requests.push(params)
+      requests.push(params);
     },
-  })
+  });
 
   await expect(() =>
     // @ts-expect-error
@@ -113,35 +115,35 @@ test('error: no chain', async () => {
       calls: [
         {
           to: accounts[1].address,
-          value: parseEther('1'),
+          value: parseEther("1"),
         },
         {
           to: accounts[2].address,
-          value: parseEther('10'),
+          value: parseEther("10"),
         },
         {
-          data: '0xcafebabe',
+          data: "0xcafebabe",
           to: accounts[3].address,
-          value: parseEther('1000000'),
+          value: parseEther("1000000"),
         },
       ],
-    }),
+    })
   ).rejects.toThrowErrorMatchingInlineSnapshot(`
     [ChainNotFoundError: No chain was provided to the request.
     Please provide a chain with the \`chain\` argument on the Action, or by supplying a \`chain\` to WalletClient.
 
     Version: viem@x.y.z]
-  `)
-})
+  `);
+});
 
-test('error: no account', async () => {
-  const requests: unknown[] = []
+test("error: no account", async () => {
+  const requests: unknown[] = [];
 
   const client = getClient({
     onRequest({ params }) {
-      requests.push(params)
+      requests.push(params);
     },
-  })
+  });
 
   await expect(() =>
     // @ts-expect-error
@@ -149,37 +151,37 @@ test('error: no account', async () => {
       calls: [
         {
           to: accounts[1].address,
-          value: parseEther('1'),
+          value: parseEther("1"),
         },
         {
           to: accounts[2].address,
-          value: parseEther('10'),
+          value: parseEther("10"),
         },
         {
-          data: '0xcafebabe',
+          data: "0xcafebabe",
           to: accounts[3].address,
-          value: parseEther('1000000'),
+          value: parseEther("1000000"),
         },
       ],
       chain: mainnet,
-    }),
+    })
   ).rejects.toThrowErrorMatchingInlineSnapshot(`
     [AccountNotFoundError: Could not find an Account to execute with this Action.
     Please provide an Account with the \`account\` argument on the Action, or by supplying an \`account\` to the Client.
 
     Docs: https://viem.sh/experimental/eip5792/sendCalls
     Version: viem@x.y.z]
-  `)
-})
+  `);
+});
 
-test('error: insufficient funds', async () => {
-  const requests: unknown[] = []
+test("error: insufficient funds", async () => {
+  const requests: unknown[] = [];
 
   const client = getClient({
     onRequest({ params }) {
-      requests.push(params)
+      requests.push(params);
     },
-  })
+  });
 
   await expect(() =>
     sendCalls(client, {
@@ -187,20 +189,20 @@ test('error: insufficient funds', async () => {
       calls: [
         {
           to: accounts[1].address,
-          value: parseEther('1'),
+          value: parseEther("1"),
         },
         {
           to: accounts[2].address,
-          value: parseEther('10'),
+          value: parseEther("10"),
         },
         {
-          data: '0xcafebabe',
+          data: "0xcafebabe",
           to: accounts[3].address,
-          value: parseEther('1000000'),
+          value: parseEther("1000000"),
         },
       ],
       chain: mainnet,
-    }),
+    })
   ).rejects.toThrowErrorMatchingInlineSnapshot(`
     [TransactionExecutionError: The total cost (gas * gas fee + value) of executing this transaction exceeds the balance of the account.
 
@@ -219,5 +221,5 @@ test('error: insufficient funds', async () => {
 
     Details: Insufficient funds for gas * price + value
     Version: viem@x.y.z]
-  `)
-})
+  `);
+});

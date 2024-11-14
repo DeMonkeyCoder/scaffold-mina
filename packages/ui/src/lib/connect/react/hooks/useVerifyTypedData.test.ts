@@ -3,7 +3,7 @@ import { renderHook, waitFor } from "@wagmi/test/react";
 import type { Hex } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { useVerifyTypedData } from "./useVerifyTypedData.js";
+import { useVerifyTypedData } from "./useVerifyTypedData";
 
 const smartAccountAddress = "0x3FCf42e10CC70Fe75A62EB3aDD6D305Aa840d145";
 const notDeployedAddress = "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef";

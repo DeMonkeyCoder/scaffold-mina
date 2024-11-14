@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { size } from './size.js'
+import { size } from './size'
 
 test('hex', () => {
   expect(size('0x')).toBe(0)

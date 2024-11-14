@@ -1,11 +1,11 @@
 import type { Address } from "@/lib/connect/viem";
 
-import type { Config, Connector } from "../createConfig.js";
-import type { BaseError, ErrorType } from "../errors/base.js";
+import type { Config, Connector } from "../createConfig";
+import type { BaseError, ErrorType } from "../errors/base";
 import {
   ConnectorNotConnectedError,
   type ConnectorNotConnectedErrorType,
-} from "../errors/config.js";
+} from "../errors/config";
 
 export type SwitchAccountParameters = {
   connector: Connector;

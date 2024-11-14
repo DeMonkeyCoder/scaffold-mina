@@ -2,10 +2,10 @@ import { accounts, config } from "@wagmi/test";
 import { parseEther } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { mock } from "../connectors/mock.js";
-import { connect } from "./connect.js";
-import { disconnect } from "./disconnect.js";
-import { estimateGas } from "./estimateGas.js";
+import { mock } from "../connectors/mock";
+import { connect } from "./connect";
+import { disconnect } from "./disconnect";
+import { estimateGas } from "./estimateGas";
 
 const connector = config._internal.connectors.setup(mock({ accounts }));
 

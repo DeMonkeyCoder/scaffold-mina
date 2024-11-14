@@ -1,19 +1,19 @@
-import type { Account } from "../../accounts/types.js";
-import { sendTransaction as core_sendTransaction } from "../../actions/wallet/sendTransaction.js";
+import type { Account } from "../../accounts/types";
+import { sendTransaction as core_sendTransaction } from "../../actions/wallet/sendTransaction";
 import type {
   SendTransactionRequest,
   SendTransactionErrorType as core_SendTransactionErrorType,
   SendTransactionParameters as core_SendTransactionParameters,
   SendTransactionReturnType as core_SendTransactionReturnType,
-} from "../../actions/wallet/sendTransaction.js";
-import type { Client } from "../../clients/createClient.js";
-import type { Transport } from "../../clients/transports/createTransport.js";
-import type { ChainEIP712 } from "../types/chain.js";
-import { isEIP712Transaction } from "../utils/isEip712Transaction.js";
+} from "../../actions/wallet/sendTransaction";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ChainEIP712 } from "../types/chain";
+import { isEIP712Transaction } from "../utils/isEip712Transaction";
 import {
   type SendEip712TransactionParameters,
   sendEip712Transaction,
-} from "./sendEip712Transaction.js";
+} from "./sendEip712Transaction";
 
 export type SendTransactionParameters<
   chain extends ChainEIP712 | undefined = ChainEIP712 | undefined,
@@ -34,8 +34,8 @@ export type SendTransactionErrorType = core_SendTransactionErrorType;
  *
  * - Docs: https://viem.sh/docs/zksync/actions/sendTransaction
  * - JSON-RPC Methods:
- *   - JSON-RPC Accounts: [`eth_sendTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendtransaction)
- *   - Local Accounts: [`eth_sendRawTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendrawtransaction)
+ *   - JSON-RPC Accounts: [`mina_sendTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_sendtransaction)
+ *   - Local Accounts: [`mina_sendRawTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_sendrawtransaction)
  *
  * @param client - Client to use
  * @param parameters - {@link SendTransactionParameters}

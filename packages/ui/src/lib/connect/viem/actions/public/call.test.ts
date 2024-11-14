@@ -4,30 +4,30 @@ import {
   OffchainLookupExample,
   SoladyAccount07,
   SoladyAccountFactory07,
-} from '~contracts/generated.js'
+} from '~contracts/generated'
 import {
   baycContractConfig,
   usdcContractConfig,
   wagmiContractConfig,
-} from '~test/src/abis.js'
-import { createCcipServer } from '~test/src/ccip.js'
-import { accounts } from '~test/src/constants.js'
-import { blobData, kzg } from '~test/src/kzg.js'
+} from '~test/src/abis'
+import { createCcipServer } from '~test/src/ccip'
+import { accounts } from '~test/src/constants'
+import { blobData, kzg } from '~test/src/kzg'
 import {
   deployOffchainLookupExample,
   deploySoladyAccount_07,
   mainnetClient,
-} from '~test/src/utils.js'
+} from '~test/src/utils'
 
-import { aggregate3Signature } from '../../constants/contract.js'
-import { BaseError } from '../../errors/base.js'
-import { RawContractError } from '../../errors/contract.js'
-import { encodeFunctionData } from '../../utils/abi/encodeFunctionData.js'
-import { trim } from '../../utils/data/trim.js'
-import { parseGwei } from '../../utils/unit/parseGwei.js'
-import { wait } from '../../utils/wait.js'
+import { aggregate3Signature } from '../../constants/contract'
+import { BaseError } from '../../errors/base'
+import { RawContractError } from '../../errors/contract'
+import { encodeFunctionData } from '../../utils/abi/encodeFunctionData'
+import { trim } from '../../utils/data/trim'
+import { parseGwei } from '../../utils/unit/parseGwei'
+import { wait } from '../../utils/wait'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 import {
   http,
   type Hex,
@@ -40,9 +40,9 @@ import {
   stringToHex,
   toBlobs,
   toHex,
-} from '../../index.js'
-import { call, getRevertErrorData } from './call.js'
-import { readContract } from './readContract.js'
+} from '../../index'
+import { call, getRevertErrorData } from './call'
+import { readContract } from './readContract'
 
 const client = anvilMainnet.getClient({ account: accounts[0].address })
 

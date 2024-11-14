@@ -3,11 +3,11 @@ import { recoverMessageAddress } from "@/lib/connect/viem";
 import { privateKeyToAccount } from "@/lib/connect/viem/accounts";
 import { expect, test } from "vitest";
 
-import { mock } from "../connectors/mock.js";
-import { connect } from "./connect.js";
-import { disconnect } from "./disconnect.js";
-import { getAccount } from "./getAccount.js";
-import { signMessage } from "./signMessage.js";
+import { mock } from "../connectors/mock";
+import { connect } from "./connect";
+import { disconnect } from "./disconnect";
+import { getAccount } from "./getAccount";
+import { signMessage } from "./signMessage";
 
 const connector = config.connectors[0]!;
 

@@ -2,7 +2,7 @@ import { accounts, address, config } from "@wagmi/test";
 import { parseEther, parseGwei } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { call } from "./call.js";
+import { call } from "./call";
 
 const name4bytes = "0x06fdde03";
 const mint4bytes = "0x1249c58b";

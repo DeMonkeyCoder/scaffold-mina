@@ -1,19 +1,19 @@
 import { beforeAll, describe, expect, test } from 'vitest'
 
-import { setVitalikResolver } from '~test/src/utils.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { optimism } from '../../chains/index.js'
-import { http } from '../../clients/transports/http.js'
+import { setVitalikResolver } from '~test/src/utils'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { optimism } from '../../chains/index'
+import { http } from '../../clients/transports/http'
 
-import { createHttpServer } from '~test/src/utils.js'
+import { createHttpServer } from '~test/src/utils'
 import {
   createClient,
   encodeErrorResult,
   encodeFunctionResult,
   parseAbi,
-} from '~viem/index.js'
-import { reset } from '../test/reset.js'
-import { getEnsText } from './getEnsText.js'
+} from '~viem/index'
+import { reset } from '../test/reset'
+import { getEnsText } from './getEnsText'
 
 const client = anvilMainnet.getClient()
 

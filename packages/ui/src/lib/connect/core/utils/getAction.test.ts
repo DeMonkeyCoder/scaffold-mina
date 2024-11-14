@@ -2,7 +2,7 @@ import { abi, address, config } from "@wagmi/test";
 import * as viem_actions from "@/lib/connect/viem/actions";
 import { expect, test, vi } from "vitest";
 
-import { getAction } from "./getAction.js";
+import { getAction } from "./getAction";
 
 test("uses tree-shakable action", async () => {
   const client = config.getClient({ chainId: 1 });

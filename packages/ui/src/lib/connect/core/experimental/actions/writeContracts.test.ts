@@ -1,9 +1,9 @@
 import { abi, address, config } from "@wagmi/test";
 import { expect, test } from "vitest";
 
-import { connect } from "../../actions/connect.js";
-import { disconnect } from "../../actions/disconnect.js";
-import { writeContracts } from "./writeContracts.js";
+import { connect } from "../../actions/connect";
+import { disconnect } from "../../actions/disconnect";
+import { writeContracts } from "./writeContracts";
 
 const connector = config.connectors[0]!;
 

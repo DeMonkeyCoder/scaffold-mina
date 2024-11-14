@@ -1,11 +1,11 @@
 import { beforeAll, bench, describe } from 'vitest'
 
-import { ethersProvider } from '~test/src/bench.js'
+import { ethersProvider } from '~test/src/bench'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { reset } from '../test/reset.js'
-import { getEnsName } from './getEnsName.js'
+import { reset } from '../test/reset'
+import { getEnsName } from './getEnsName'
 
 const client = anvilMainnet.getClient()
 

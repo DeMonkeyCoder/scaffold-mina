@@ -1,21 +1,21 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { Hex } from '../../types/misc.js'
-import type { Prettify } from '../../types/utils.js'
-import { hashMessage } from '../../utils/signature/hashMessage.js'
-import type { HashMessageErrorType } from '../../utils/signature/hashMessage.js'
-import { parseSiweMessage } from '../../utils/siwe/parseSiweMessage.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { Hex } from '../../types/misc'
+import type { Prettify } from '../../types/utils'
+import { hashMessage } from '../../utils/signature/hashMessage'
+import type { HashMessageErrorType } from '../../utils/signature/hashMessage'
+import { parseSiweMessage } from '../../utils/siwe/parseSiweMessage'
 import {
   type ValidateSiweMessageParameters,
   validateSiweMessage,
-} from '../../utils/siwe/validateSiweMessage.js'
+} from '../../utils/siwe/validateSiweMessage'
 import {
   type VerifyHashErrorType,
   type VerifyHashParameters,
   verifyHash,
-} from '../public/verifyHash.js'
+} from '../public/verifyHash'
 
 export type VerifySiweMessageParameters = Prettify<
   Pick<VerifyHashParameters, 'blockNumber' | 'blockTag'> &

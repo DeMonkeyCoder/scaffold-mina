@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expectTypeOf, test } from 'vitest'
 
-import { useWalletClient } from './useWalletClient.js'
+import { useWalletClient } from './useWalletClient'
 
 test('parameters: config', async () => {
   const client = useWalletClient({ config })

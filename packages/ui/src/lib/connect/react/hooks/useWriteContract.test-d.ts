@@ -8,8 +8,8 @@ import { abi } from "@wagmi/test";
 import type { Abi, Address, Hash } from "@/lib/connect/viem";
 import { expectTypeOf, test } from "vitest";
 
-import { useSimulateContract } from "./useSimulateContract.js";
-import { useWriteContract } from "./useWriteContract.js";
+import { useSimulateContract } from "./useSimulateContract";
+import { useWriteContract } from "./useWriteContract";
 
 const contextValue = { foo: "bar" } as const;
 

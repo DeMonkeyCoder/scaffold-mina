@@ -1,21 +1,21 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest'
-import { ErrorsExample } from '../../../../contracts/generated.js'
-import { wagmiContractConfig } from '../../../../test/src/abis.js'
+import { ErrorsExample } from '../../../../contracts/generated'
+import { wagmiContractConfig } from '../../../../test/src/abis'
 import {
   createVerifyingPaymasterServer,
   getSmartAccounts_06,
   getSmartAccounts_07,
   getVerifyingPaymaster_07,
-} from '../../../../test/src/account-abstraction.js'
-import { anvilMainnet } from '../../../../test/src/anvil.js'
-import { bundlerMainnet } from '../../../../test/src/bundler.js'
-import { accounts } from '../../../../test/src/constants.js'
-import { deployErrorExample } from '../../../../test/src/utils.js'
-import { mine, writeContract } from '../../../actions/index.js'
-import { http } from '../../../clients/transports/http.js'
-import { pad, parseEther, parseGwei } from '../../../utils/index.js'
-import { createPaymasterClient } from '../../clients/createPaymasterClient.js'
-import { estimateUserOperationGas } from './estimateUserOperationGas.js'
+} from '../../../../test/src/account-abstraction'
+import { anvilMainnet } from '../../../../test/src/anvil'
+import { bundlerMainnet } from '../../../../test/src/bundler'
+import { accounts } from '../../../../test/src/constants'
+import { deployErrorExample } from '../../../../test/src/utils'
+import { mine, writeContract } from '../../../actions/index'
+import { http } from '../../../clients/transports/http'
+import { pad, parseEther, parseGwei } from '../../../utils/index'
+import { createPaymasterClient } from '../../clients/createPaymasterClient'
+import { estimateUserOperationGas } from './estimateUserOperationGas'
 
 const client = anvilMainnet.getClient({ account: true })
 const bundlerClient = bundlerMainnet.getBundlerClient()

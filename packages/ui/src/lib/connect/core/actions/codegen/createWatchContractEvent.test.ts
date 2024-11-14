@@ -2,7 +2,7 @@ import { abi, address, chain, config } from "@wagmi/test";
 import type { WatchEventOnLogsParameter } from "@/lib/connect/viem";
 import { test } from "vitest";
 
-import { createWatchContractEvent } from "./createWatchContractEvent.js";
+import { createWatchContractEvent } from "./createWatchContractEvent";
 
 test("default", async () => {
   const watchErc20Event = createWatchContractEvent({

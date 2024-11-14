@@ -2,10 +2,10 @@ import { type AbiParameter, parseAbi, parseAbiParameters } from "abitype";
 
 import { describe, expect, test } from "vitest";
 
-import { wagmiContractConfig } from "~test/src/abis.js";
+import { wagmiContractConfig } from "~test/src/abis";
 
-import { toBytes } from "../index.js";
-import { getAbiItem, getAmbiguousTypes, isArgOfType } from "./getAbiItem.js";
+import { toBytes } from "../index";
+import { getAbiItem, getAmbiguousTypes, isArgOfType } from "./getAbiItem";
 
 test("default", () => {
   expect(

@@ -8,7 +8,7 @@ import {
   ConnectorChainMismatchError,
   ConnectorNotConnectedError,
   ConnectorNotFoundError,
-} from "./config.js";
+} from "./config";
 
 test("constructors", () => {
   expect(new ChainNotConfiguredError()).toMatchInlineSnapshot(`

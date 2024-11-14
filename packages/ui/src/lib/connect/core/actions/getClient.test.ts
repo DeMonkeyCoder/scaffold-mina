@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getClient } from './getClient.js'
+import { getClient } from './getClient'
 
 test('default', () => {
   expect(getClient(config)).toBeDefined()

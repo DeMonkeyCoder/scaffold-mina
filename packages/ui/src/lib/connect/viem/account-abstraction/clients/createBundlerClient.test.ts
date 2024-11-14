@@ -1,15 +1,15 @@
-import { expect, test } from 'vitest'
-import { bundlerMainnet } from '../../../test/src/bundler.js'
-import { http } from '../../clients/transports/http.js'
-import { createBundlerClient } from './createBundlerClient.js'
+import { expect, test } from "vitest";
+import { bundlerMainnet } from "../../../test/src/bundler";
+import { http } from "../../clients/transports/http";
+import { createBundlerClient } from "./createBundlerClient";
 
-test('creates', () => {
+test("creates", () => {
   const { uid, transport, ...client } = createBundlerClient({
     transport: http(bundlerMainnet.rpcUrl.http),
-  })
+  });
 
-  expect(uid).toBeDefined()
-  expect(transport).toBeDefined()
+  expect(uid).toBeDefined();
+  expect(transport).toBeDefined();
   expect(client).toMatchInlineSnapshot(`
     {
       "account": undefined,
@@ -36,15 +36,15 @@ test('creates', () => {
       "userOperation": undefined,
       "waitForUserOperationReceipt": [Function],
     }
-  `)
-})
+  `);
+});
 
-test('smoke', async () => {
+test("smoke", async () => {
   const bundlerClient = createBundlerClient({
     transport: http(bundlerMainnet.rpcUrl.http),
-  })
+  });
 
-  const chainId = await bundlerClient.request({ method: 'eth_chainId' })
+  const chainId = await bundlerClient.request({ method: "mina_chainId" });
 
-  expect(chainId).toMatchInlineSnapshot(`"0x1"`)
-})
+  expect(chainId).toMatchInlineSnapshot(`"0x1"`);
+});

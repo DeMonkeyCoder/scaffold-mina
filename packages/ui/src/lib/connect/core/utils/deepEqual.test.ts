@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { deepEqual } from './deepEqual.js'
+import { deepEqual } from './deepEqual'
 
 test('compares primitive values', () => {
   expect(deepEqual(true, true)).toBe(true)

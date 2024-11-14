@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { getWithdrawalHashStorageSlot } from './getWithdrawalHashStorageSlot.js'
+import { getWithdrawalHashStorageSlot } from './getWithdrawalHashStorageSlot'
 
 test('default', () => {
   expect(

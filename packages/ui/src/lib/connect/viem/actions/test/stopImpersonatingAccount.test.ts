@@ -1,12 +1,12 @@
 import { expect, test } from 'vitest'
 
-import { accounts, address } from '~test/src/constants.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
-import { sendTransaction } from '../wallet/sendTransaction.js'
+import { accounts, address } from '~test/src/constants'
+import { parseEther } from '../../utils/unit/parseEther'
+import { sendTransaction } from '../wallet/sendTransaction'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { impersonateAccount } from './impersonateAccount.js'
-import { stopImpersonatingAccount } from './stopImpersonatingAccount.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { impersonateAccount } from './impersonateAccount'
+import { stopImpersonatingAccount } from './stopImpersonatingAccount'
 
 const client = anvilMainnet.getClient()
 

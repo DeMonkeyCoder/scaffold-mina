@@ -1,27 +1,27 @@
 import type {
   TestClient,
   TestClientMode,
-} from '../../clients/createTestClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
-import type { Chain } from '../../types/chain.js'
-import type { Hash } from '../../types/misc.js'
-import type { TransactionRequest } from '../../types/transaction.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
-import { extract } from '../../utils/formatters/extract.js'
+} from "../../clients/createTestClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account } from "../../types/account";
+import type { Chain } from "../../types/chain";
+import type { Hash } from "../../types/misc";
+import type { TransactionRequest } from "../../types/transaction";
+import type { RequestErrorType } from "../../utils/buildRequest";
+import { extract } from "../../utils/formatters/extract";
 import {
   type FormattedTransactionRequest,
   formatTransactionRequest,
-} from '../../utils/formatters/transactionRequest.js'
+} from "../../utils/formatters/transactionRequest";
 
 export type SendUnsignedTransactionParameters<
-  chain extends Chain | undefined = Chain | undefined,
-> = FormattedTransactionRequest<chain>
+  chain extends Chain | undefined = Chain | undefined
+> = FormattedTransactionRequest<chain>;
 
-export type SendUnsignedTransactionReturnType = Hash
+export type SendUnsignedTransactionReturnType = Hash;
 
-export type SendUnsignedTransactionErrorType = RequestErrorType | ErrorType
+export type SendUnsignedTransactionErrorType = RequestErrorType | ErrorType;
 
 /**
  * Executes a transaction regardless of the signature.
@@ -50,10 +50,10 @@ export type SendUnsignedTransactionErrorType = RequestErrorType | ErrorType
  */
 export async function sendUnsignedTransaction<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(
   client: TestClient<TestClientMode, Transport, chain, account, false>,
-  args: SendUnsignedTransactionParameters<chain>,
+  args: SendUnsignedTransactionParameters<chain>
 ): Promise<SendUnsignedTransactionReturnType> {
   const {
     accessList,
@@ -67,10 +67,10 @@ export async function sendUnsignedTransaction<
     to,
     value,
     ...rest
-  } = args
+  } = args;
 
-  const chainFormat = client.chain?.formatters?.transactionRequest?.format
-  const format = chainFormat || formatTransactionRequest
+  const chainFormat = client.chain?.formatters?.transactionRequest?.format;
+  const format = chainFormat || formatTransactionRequest;
 
   const request = format({
     // Pick out extra data that might exist on the chain's transaction request type.
@@ -85,10 +85,10 @@ export async function sendUnsignedTransaction<
     nonce,
     to,
     value,
-  } as TransactionRequest)
+  } as TransactionRequest);
   const hash = await client.request({
-    method: 'eth_sendUnsignedTransaction',
+    method: "mina_sendUnsignedTransaction",
     params: [request],
-  })
-  return hash
+  });
+  return hash;
 }

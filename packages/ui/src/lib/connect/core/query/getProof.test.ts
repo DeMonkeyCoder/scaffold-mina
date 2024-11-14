@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getProofQueryOptions } from './getProof.js'
+import { getProofQueryOptions } from './getProof'
 
 test('default', () => {
   expect(

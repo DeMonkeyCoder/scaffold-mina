@@ -1,9 +1,9 @@
 import { expect, test } from 'vitest'
 
 import { verify } from 'webauthn-p256'
-import { typedData } from '../../../test/src/constants.js'
-import { hashMessage, hashTypedData, keccak256 } from '../../utils/index.js'
-import { toWebAuthnAccount } from './toWebAuthnAccount.js'
+import { typedData } from '../../../test/src/constants'
+import { hashMessage, hashTypedData, keccak256 } from '../../utils/index'
+import { toWebAuthnAccount } from './toWebAuthnAccount'
 
 const credential = {
   id: 'm1-bMPuAqpWhCxHZQZTT6e-lSPntQbh3opIoGe7g4Qs',

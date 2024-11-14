@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { formatAbiItem, formatAbiParams } from "./formatAbiItem.js";
+import { formatAbiItem, formatAbiParams } from "./formatAbiItem";
 
 describe("formatAbiItem", () => {
   test("foo()", () => {

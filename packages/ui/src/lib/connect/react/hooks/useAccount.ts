@@ -8,9 +8,9 @@ import {
   watchAccount,
 } from "@/lib/connect/core/exports";
 
-import type { ConfigParameter } from "../types/properties.js";
-import { useConfig } from "./useConfig.js";
-import { useSyncExternalStoreWithTracked } from "./useSyncExternalStoreWithTracked.js";
+import type { ConfigParameter } from "../types/properties";
+import { useConfig } from "./useConfig";
+import { useSyncExternalStoreWithTracked } from "./useSyncExternalStoreWithTracked";
 
 export type UseAccountParameters<config extends Config = Config> =
   ConfigParameter<config>;

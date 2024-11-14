@@ -1,7 +1,7 @@
 import { getAddress as getAddressV6 } from "ethers";
 import { bench, describe } from "vitest";
 
-import { getAddress } from "./getAddress.js";
+import { getAddress } from "./getAddress";
 
 describe.skip("Get Address", () => {
   bench("@/lib/connect/viem: getAddress", () => {

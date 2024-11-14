@@ -1,5 +1,5 @@
 import type { Address } from 'abitype'
-import type { Hex, Signature } from '../../../types/misc.js'
+import type { Hex, Signature } from '../../../types/misc'
 
 export type RpcAuthorization = {
   /** Address of the contract to set as code for the Authority. */

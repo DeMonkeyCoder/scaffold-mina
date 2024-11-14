@@ -1,9 +1,9 @@
-import type { Address } from '../../accounts/index.js'
+import type { Address } from '../../accounts/index'
 import {
   ethAddressInContracts,
   l2BaseTokenAddress,
   legacyEthAddress,
-} from '../constants/address.js'
+} from '../constants/address'
 
 export function isEth(token: Address) {
   return (

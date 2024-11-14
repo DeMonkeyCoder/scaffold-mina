@@ -1,9 +1,9 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { EIP1193RequestFn } from '../../types/eip1193.js'
-import { buildRequest } from '../../utils/buildRequest.js'
-import { uid as uid_ } from '../../utils/uid.js'
-import type { ClientConfig } from '../createClient.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { EIP1193RequestFn } from '../../types/eip1193'
+import { buildRequest } from '../../utils/buildRequest'
+import { uid as uid_ } from '../../utils/uid'
+import type { ClientConfig } from '../createClient'
 
 export type TransportConfig<
   type extends string = string,

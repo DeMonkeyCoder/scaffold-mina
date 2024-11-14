@@ -1,7 +1,7 @@
 import { getCreateAddress } from "ethers";
 import { bench, describe } from "vitest";
 
-import { getContractAddress } from "./getContractAddress.js";
+import { getContractAddress } from "./getContractAddress";
 
 describe.skip("Get Contract Address (CREATE)", () => {
   bench("@/lib/connect/viem: getContractAddress", () => {

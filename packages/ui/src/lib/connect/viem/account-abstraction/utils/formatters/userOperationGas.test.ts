@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { formatUserOperationGas } from './userOperationGas.js'
+import { formatUserOperationGas } from './userOperationGas'
 
 test('default', () => {
   expect(

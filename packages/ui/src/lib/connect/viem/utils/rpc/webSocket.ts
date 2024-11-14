@@ -3,13 +3,13 @@ import type { MessageEvent } from 'isows'
 import {
   SocketClosedError,
   WebSocketRequestError,
-} from '../../errors/request.js'
+} from '../../errors/request'
 import {
   type GetSocketRpcClientParameters,
   type Socket,
   type SocketRpcClient,
   getSocketRpcClient,
-} from './socket.js'
+} from './socket'
 
 export type GetWebSocketRpcClientOptions = Pick<
   GetSocketRpcClientParameters,

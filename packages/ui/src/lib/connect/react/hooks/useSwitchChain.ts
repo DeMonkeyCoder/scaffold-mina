@@ -15,13 +15,13 @@ import {
   switchChainMutationOptions,
 } from "@/lib/connect/core/exports/query";
 
-import type { ConfigParameter } from "../types/properties.js";
+import type { ConfigParameter } from "../types/properties";
 import type {
   UseMutationParameters,
   UseMutationReturnType,
-} from "../utils/query.js";
-import { useChains } from "./useChains.js";
-import { useConfig } from "./useConfig.js";
+} from "../utils/query";
+import { useChains } from "./useChains";
+import { useConfig } from "./useConfig";
 
 export type UseSwitchChainParameters<
   config extends Config = Config,

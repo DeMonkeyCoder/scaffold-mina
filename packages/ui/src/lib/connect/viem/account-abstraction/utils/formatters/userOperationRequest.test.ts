@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { formatUserOperationRequest } from './userOperationRequest.js'
+import { formatUserOperationRequest } from './userOperationRequest'
 
 test('default', () => {
   expect(

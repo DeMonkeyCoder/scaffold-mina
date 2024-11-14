@@ -3,8 +3,8 @@ import { writeContract } from "@/lib/connect/viem/actions";
 import { base } from "@/lib/connect/viem/chains";
 import { test } from "vitest";
 
-import { createConfig } from "../createConfig.js";
-import type { WriteContractMutate } from "./writeContract.js";
+import { createConfig } from "../createConfig";
+import type { WriteContractMutate } from "./writeContract";
 
 // https://github.com/wevm/wagmi/issues/3981
 test("gh#3981", () => {

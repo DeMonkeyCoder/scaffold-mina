@@ -1,54 +1,56 @@
-import { expect, test } from 'vitest'
-import { wagmiContractConfig } from '~test/src/abis.js'
-import { anvilMainnet } from '../../../../test/src/anvil.js'
-import { accounts } from '../../../../test/src/constants.js'
-import { mine, reset } from '../../../actions/index.js'
-import { mainnet } from '../../../chains/index.js'
-import { createClient } from '../../../clients/createClient.js'
-import { custom } from '../../../clients/transports/custom.js'
-import { RpcRequestError } from '../../../errors/request.js'
-import type { WalletCallReceipt } from '../../../types/eip1193.js'
-import type { Hex } from '../../../types/misc.js'
-import { getHttpRpcClient } from '../../../utils/index.js'
-import { uid } from '../../../utils/uid.js'
-import { getCallsStatus } from './getCallsStatus.js'
-import { writeContracts } from './writeContracts.js'
+import { expect, test } from "vitest";
+import { wagmiContractConfig } from "~test/src/abis";
+import { anvilMainnet } from "../../../../test/src/anvil";
+import { accounts } from "../../../../test/src/constants";
+import { mine, reset } from "../../../actions/index";
+import { mainnet } from "../../../chains/index";
+import { createClient } from "../../../clients/createClient";
+import { custom } from "../../../clients/transports/custom";
+import { RpcRequestError } from "../../../errors/request";
+import type { WalletCallReceipt } from "../../../types/eip1193";
+import type { Hex } from "../../../types/misc";
+import { getHttpRpcClient } from "../../../utils/index";
+import { uid } from "../../../utils/uid";
+import { getCallsStatus } from "./getCallsStatus";
+import { writeContracts } from "./writeContracts";
 
-type Uid = string
-type TxHashes = Hex[]
-const calls = new Map<Uid, TxHashes[]>()
+type Uid = string;
+type TxHashes = Hex[];
+const calls = new Map<Uid, TxHashes[]>();
 
-const testClient = anvilMainnet.getClient()
+const testClient = anvilMainnet.getClient();
 
 const getClient = ({
   onRequest,
-}: { onRequest({ method, params }: any): void }) =>
+}: {
+  onRequest({ method, params }: any): void;
+}) =>
   createClient({
     transport: custom({
       async request({ method, params }) {
-        onRequest({ method, params })
+        onRequest({ method, params });
 
-        const rpcClient = getHttpRpcClient(anvilMainnet.rpcUrl.http)
+        const rpcClient = getHttpRpcClient(anvilMainnet.rpcUrl.http);
 
-        if (method === 'wallet_getCallsStatus') {
-          const hashes = calls.get(params[0])
-          if (!hashes) return { status: 'PENDING', receipts: [] }
+        if (method === "wallet_getCallsStatus") {
+          const hashes = calls.get(params[0]);
+          if (!hashes) return { status: "PENDING", receipts: [] };
           const receipts = await Promise.all(
             hashes.map(async (hash) => {
               const { result, error } = await rpcClient.request({
                 body: {
-                  method: 'eth_getTransactionReceipt',
+                  method: "mina_getTransactionReceipt",
                   params: [hash],
                   id: 0,
                 },
-              })
+              });
               if (error)
                 throw new RpcRequestError({
                   body: { method, params },
                   error,
                   url: anvilMainnet.rpcUrl.http,
-                })
-              if (!result) throw new Error('receipt not found')
+                });
+              if (!result) throw new Error("receipt not found");
               return {
                 blockHash: result.blockHash,
                 blockNumber: result.blockNumber,
@@ -56,62 +58,62 @@ const getClient = ({
                 logs: result.logs,
                 status: result.status,
                 transactionHash: result.transactionHash,
-              } satisfies WalletCallReceipt
-            }),
-          )
-          return { status: 'CONFIRMED', receipts }
+              } satisfies WalletCallReceipt;
+            })
+          );
+          return { status: "CONFIRMED", receipts };
         }
 
-        if (method === 'wallet_sendCalls') {
-          const hashes = []
+        if (method === "wallet_sendCalls") {
+          const hashes = [];
           for (const call of params[0].calls) {
             const callResult = await rpcClient.request({
               body: {
-                method: 'eth_call',
+                method: "mina_call",
                 params: [{ ...call, from: params[0].from }],
                 id: 0,
               },
-            })
-            if (callResult.error) throw new Error(callResult.error.message)
+            });
+            if (callResult.error) throw new Error(callResult.error.message);
 
             const { result, error } = await rpcClient.request({
               body: {
-                method: 'eth_sendTransaction',
+                method: "mina_sendTransaction",
                 params: [{ ...call, from: params[0].from }],
                 id: 0,
               },
-            })
+            });
             if (error)
               throw new RpcRequestError({
                 body: { method, params },
                 error,
                 url: anvilMainnet.rpcUrl.http,
-              })
-            hashes.push(result)
+              });
+            hashes.push(result);
           }
-          const uid_ = uid()
-          calls.set(uid_, hashes)
-          return uid_
+          const uid_ = uid();
+          calls.set(uid_, hashes);
+          return uid_;
         }
 
-        return null
+        return null;
       },
     }),
-  })
+  });
 
-test('default', async () => {
-  const requests: unknown[] = []
+test("default", async () => {
+  const requests: unknown[] = [];
 
   const client = getClient({
     onRequest({ params }) {
-      requests.push(params)
+      requests.push(params);
     },
-  })
+  });
 
   await reset(testClient, {
     blockNumber: 16280770n,
     jsonRpcUrl: anvilMainnet.forkUrl,
-  })
+  });
 
   const id_ = await writeContracts(client, {
     account: accounts[0].address,
@@ -119,20 +121,20 @@ test('default', async () => {
     contracts: [
       {
         ...wagmiContractConfig,
-        functionName: 'mint',
+        functionName: "mint",
       },
       {
         ...wagmiContractConfig,
-        functionName: 'mint',
+        functionName: "mint",
       },
       {
         ...wagmiContractConfig,
-        functionName: 'mint',
+        functionName: "mint",
       },
     ],
-  })
+  });
 
-  expect(id_).toBeDefined()
+  expect(id_).toBeDefined();
   expect(requests).toMatchInlineSnapshot(`
     [
       [
@@ -161,18 +163,18 @@ test('default', async () => {
         },
       ],
     ]
-  `)
+  `);
 
-  await mine(testClient, { blocks: 3 })
+  await mine(testClient, { blocks: 3 });
 
-  const { receipts } = await getCallsStatus(client, { id: id_ })
+  const { receipts } = await getCallsStatus(client, { id: id_ });
 
   expect(
     receipts?.map((receipt) => ({
       ...receipt,
       logs: receipt.logs.map((log) => ({ ...log, blockHash: undefined })),
       blockHash: undefined,
-    })),
+    }))
   ).toMatchInlineSnapshot(`
     [
       {
@@ -254,5 +256,5 @@ test('default', async () => {
         "transactionHash": "0x8fc061d08b93512dd4e7cdd64f69142f357010d574152baf47513338675c3237",
       },
     ]
-  `)
-})
+  `);
+});

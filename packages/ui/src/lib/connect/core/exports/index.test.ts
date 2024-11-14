@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import * as core from './index.js'
+import * as core from './index'
 
 test('exports', () => {
   expect(Object.keys(core)).toMatchInlineSnapshot(`

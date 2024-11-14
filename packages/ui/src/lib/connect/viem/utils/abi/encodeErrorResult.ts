@@ -3,26 +3,26 @@ import type { Abi, ExtractAbiErrors } from 'abitype'
 import {
   AbiErrorInputsNotFoundError,
   AbiErrorNotFoundError,
-} from '../../errors/abi.js'
+} from '../../errors/abi'
 import type {
   ContractErrorArgs,
   ContractErrorName,
-} from '../../types/contract.js'
-import type { Hex } from '../../types/misc.js'
-import { type ConcatHexErrorType, concatHex } from '../data/concat.js'
+} from '../../types/contract'
+import type { Hex } from '../../types/misc'
+import { type ConcatHexErrorType, concatHex } from '../data/concat'
 import {
   type ToFunctionSelectorErrorType,
   toFunctionSelector,
-} from '../hash/toFunctionSelector.js'
+} from '../hash/toFunctionSelector'
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { IsNarrowable, UnionEvaluate } from '../../types/utils.js'
+import type { ErrorType } from '../../errors/utils'
+import type { IsNarrowable, UnionEvaluate } from '../../types/utils'
 import {
   type EncodeAbiParametersErrorType,
   encodeAbiParameters,
-} from './encodeAbiParameters.js'
-import { type FormatAbiItemErrorType, formatAbiItem } from './formatAbiItem.js'
-import { type GetAbiItemErrorType, getAbiItem } from './getAbiItem.js'
+} from './encodeAbiParameters'
+import { type FormatAbiItemErrorType, formatAbiItem } from './formatAbiItem'
+import { type GetAbiItemErrorType, getAbiItem } from './getAbiItem'
 
 const docsPath = '/docs/contract/encodeErrorResult'
 

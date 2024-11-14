@@ -1,23 +1,23 @@
 import type { Abi, AbiStateMutability, ExtractAbiFunctions } from 'abitype'
 
-import type { AbiFunctionNotFoundErrorType } from '../../errors/abi.js'
+import type { AbiFunctionNotFoundErrorType } from '../../errors/abi'
 import type {
   ContractFunctionArgs,
   ContractFunctionName,
-} from '../../types/contract.js'
-import { type ConcatHexErrorType, concatHex } from '../data/concat.js'
-import type { ToFunctionSelectorErrorType } from '../hash/toFunctionSelector.js'
+} from '../../types/contract'
+import { type ConcatHexErrorType, concatHex } from '../data/concat'
+import type { ToFunctionSelectorErrorType } from '../hash/toFunctionSelector'
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex } from '../../types/misc.js'
-import type { IsNarrowable, UnionEvaluate } from '../../types/utils.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex } from '../../types/misc'
+import type { IsNarrowable, UnionEvaluate } from '../../types/utils'
 import {
   type EncodeAbiParametersErrorType,
   encodeAbiParameters,
-} from './encodeAbiParameters.js'
-import type { FormatAbiItemErrorType } from './formatAbiItem.js'
-import type { GetAbiItemErrorType } from './getAbiItem.js'
-import { prepareEncodeFunctionData } from './prepareEncodeFunctionData.js'
+} from './encodeAbiParameters'
+import type { FormatAbiItemErrorType } from './formatAbiItem'
+import type { GetAbiItemErrorType } from './getAbiItem'
+import { prepareEncodeFunctionData } from './prepareEncodeFunctionData'
 
 export type EncodeFunctionDataParameters<
   abi extends Abi | readonly unknown[] = Abi,

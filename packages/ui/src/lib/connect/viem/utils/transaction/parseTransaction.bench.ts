@@ -2,12 +2,12 @@ import { Transaction } from "ethers";
 
 import { bench, describe } from "vitest";
 
-import { accounts } from "~test/src/constants.js";
-import type { TransactionSerializableBase } from "../../types/transaction.js";
-import { parseEther } from "../unit/parseEther.js";
+import { accounts } from "~test/src/constants";
+import type { TransactionSerializableBase } from "../../types/transaction";
+import { parseEther } from "../unit/parseEther";
 
-import { parseTransaction } from "./parseTransaction.js";
-import { serializeTransaction } from "./serializeTransaction.js";
+import { parseTransaction } from "./parseTransaction";
+import { serializeTransaction } from "./serializeTransaction";
 
 const base = {
   to: accounts[1].address,

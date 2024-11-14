@@ -3,8 +3,8 @@ import {
   mockChainId,
   mockClientPublicActionsL2,
   zksyncClientLocalNode,
-} from '../../../test/src/zksync.js'
-import { getL1ChainId } from './getL1ChainId.js'
+} from '../../../test/src/zksync'
+import { getL1ChainId } from './getL1ChainId'
 
 const client = { ...zksyncClientLocalNode }
 

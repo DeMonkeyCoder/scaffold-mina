@@ -2,7 +2,7 @@ import { abi, config } from "@wagmi/test";
 import type { MulticallResponse } from "@/lib/connect/viem";
 import { expectTypeOf, test } from "vitest";
 
-import { infiniteReadContractsQueryOptions } from "./infiniteReadContracts.js";
+import { infiniteReadContractsQueryOptions } from "./infiniteReadContracts";
 
 test("default", async () => {
   const options = infiniteReadContractsQueryOptions(config, {

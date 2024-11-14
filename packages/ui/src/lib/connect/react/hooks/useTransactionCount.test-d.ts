@@ -1,6 +1,6 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { useTransactionCount } from './useTransactionCount.js'
+import { useTransactionCount } from './useTransactionCount'
 
 test('select data', () => {
   const result = useTransactionCount({

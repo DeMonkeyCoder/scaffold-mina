@@ -1,11 +1,11 @@
 import type { AbiFunction } from 'abitype'
 
-import type { ErrorType } from '../../errors/utils.js'
-import { type SliceErrorType, slice } from '../data/slice.js'
+import type { ErrorType } from '../../errors/utils'
+import { type SliceErrorType, slice } from '../data/slice'
 import {
   type ToSignatureHashErrorType,
   toSignatureHash,
-} from './toSignatureHash.js'
+} from './toSignatureHash'
 
 export type ToFunctionSelectorErrorType =
   | ToSignatureHashErrorType

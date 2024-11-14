@@ -1,28 +1,28 @@
-import type { Account } from "../../accounts/types.js";
-import { parseAccount } from "../../accounts/utils/parseAccount.js";
-import { getChainId } from "../../actions/public/getChainId.js";
-import { prepareTransactionRequest } from "../../actions/wallet/prepareTransactionRequest.js";
-import { sendRawTransaction } from "../../actions/wallet/sendRawTransaction.js";
+import type { Account } from "../../accounts/types";
+import { parseAccount } from "../../accounts/utils/parseAccount";
+import { getChainId } from "../../actions/public/getChainId";
+import { prepareTransactionRequest } from "../../actions/wallet/prepareTransactionRequest";
+import { sendRawTransaction } from "../../actions/wallet/sendRawTransaction";
 import type {
   SendTransactionErrorType,
   SendTransactionParameters,
   SendTransactionRequest,
   SendTransactionReturnType,
-} from "../../actions/wallet/sendTransaction.js";
-import type { Client } from "../../clients/createClient.js";
-import type { Transport } from "../../clients/transports/createTransport.js";
-import { AccountNotFoundError } from "../../errors/account.js";
-import type { BaseError } from "../../errors/base.js";
-import type { Chain } from "../../types/chain.js";
-import { assertCurrentChain } from "../../utils/chain/assertCurrentChain.js";
+} from "../../actions/wallet/sendTransaction";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import { AccountNotFoundError } from "../../errors/account";
+import type { BaseError } from "../../errors/base";
+import type { Chain } from "../../types/chain";
+import { assertCurrentChain } from "../../utils/chain/assertCurrentChain";
 import {
   type GetTransactionErrorParameters,
   getTransactionError,
-} from "../../utils/errors/getTransactionError.js";
-import { getAction } from "../../utils/getAction.js";
-import type { ChainEIP712 } from "../types/chain.js";
-import { assertEip712Request } from "../utils/assertEip712Request.js";
-import { signTransaction } from "./signTransaction.js";
+} from "../../utils/errors/getTransactionError";
+import { getAction } from "../../utils/getAction";
+import type { ChainEIP712 } from "../types/chain";
+import { assertEip712Request } from "../utils/assertEip712Request";
+import { signTransaction } from "./signTransaction";
 
 export type SendEip712TransactionParameters<
   chain extends ChainEIP712 | undefined = ChainEIP712 | undefined,

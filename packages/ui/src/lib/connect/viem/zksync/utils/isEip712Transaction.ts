@@ -1,8 +1,8 @@
-import type { ExactPartial, OneOf } from '../../types/utils.js'
+import type { ExactPartial, OneOf } from '../../types/utils'
 import type {
   ZksyncTransactionRequest,
   ZksyncTransactionSerializable,
-} from '../types/transaction.js'
+} from '../types/transaction'
 
 export function isEIP712Transaction(
   transaction: ExactPartial<

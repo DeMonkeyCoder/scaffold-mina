@@ -10,9 +10,9 @@ import {
   readContract as viem_readContract,
 } from "@/lib/connect/viem/actions";
 
-import type { Config } from "../createConfig.js";
-import type { ChainIdParameter } from "../types/properties.js";
-import { getAction } from "../utils/getAction.js";
+import type { Config } from "../createConfig";
+import type { ChainIdParameter } from "../types/properties";
+import { getAction } from "../utils/getAction";
 
 export type ReadContractParameters<
   abi extends Abi | readonly unknown[] = Abi,

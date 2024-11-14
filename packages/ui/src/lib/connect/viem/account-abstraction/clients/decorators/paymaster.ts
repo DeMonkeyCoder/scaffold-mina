@@ -1,15 +1,15 @@
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
+import type { Client } from '../../../clients/createClient'
+import type { Transport } from '../../../clients/transports/createTransport'
 import {
   type GetPaymasterDataParameters,
   type GetPaymasterDataReturnType,
   getPaymasterData,
-} from '../../actions/paymaster/getPaymasterData.js'
+} from '../../actions/paymaster/getPaymasterData'
 import {
   type GetPaymasterStubDataParameters,
   type GetPaymasterStubDataReturnType,
   getPaymasterStubData,
-} from '../../actions/paymaster/getPaymasterStubData.js'
+} from '../../actions/paymaster/getPaymasterStubData'
 
 export type PaymasterActions = {
   /**

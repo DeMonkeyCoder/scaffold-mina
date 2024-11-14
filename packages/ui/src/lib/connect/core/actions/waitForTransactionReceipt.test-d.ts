@@ -3,8 +3,8 @@ import { mainnet, zkSync } from "@/lib/connect/viem/chains";
 import type { ZkSyncL2ToL1Log, ZkSyncLog } from "@/lib/connect/viem/zksync";
 import { expectTypeOf, test } from "vitest";
 
-import { createConfig } from "../createConfig.js";
-import { waitForTransactionReceipt } from "./waitForTransactionReceipt.js";
+import { createConfig } from "../createConfig";
+import { waitForTransactionReceipt } from "./waitForTransactionReceipt";
 
 test("chain formatters", async () => {
   const config = createConfig({

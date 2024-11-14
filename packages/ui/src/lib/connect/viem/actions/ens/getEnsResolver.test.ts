@@ -1,13 +1,13 @@
 import { beforeAll, expect, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { optimism } from '../../chains/index.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { optimism } from '../../chains/index'
 
-import { http } from '../../clients/transports/http.js'
+import { http } from '../../clients/transports/http'
 
-import { createClient } from '../../clients/createClient.js'
-import { reset } from '../test/reset.js'
-import { getEnsResolver } from './getEnsResolver.js'
+import { createClient } from '../../clients/createClient'
+import { reset } from '../test/reset'
+import { getEnsResolver } from './getEnsResolver'
 
 const client = anvilMainnet.getClient()
 

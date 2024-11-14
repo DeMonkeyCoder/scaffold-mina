@@ -1,6 +1,6 @@
 import type { GetProofReturnType } from "@/lib/connect/viem";
 import { expectTypeOf, test } from "vitest";
-import { useProof } from "./useProof.js";
+import { useProof } from "./useProof";
 
 test("select data", () => {
   const result = useProof({

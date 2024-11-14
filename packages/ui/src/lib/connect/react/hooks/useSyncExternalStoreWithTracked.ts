@@ -2,7 +2,7 @@
 
 import { deepEqual } from "@/lib/connect/core/exports/internal";
 import { useRef } from "react";
-import { useSyncExternalStoreWithSelector } from "use-sync-external-store/shim/with-selector.js";
+import { useSyncExternalStoreWithSelector } from "use-sync-external-store/shim/with-selector";
 
 const isPlainObject = (obj: unknown) =>
   typeof obj === "object" && !Array.isArray(obj);

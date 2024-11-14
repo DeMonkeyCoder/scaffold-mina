@@ -1,5 +1,5 @@
-import type { IsUndefined } from '../../types/utils.js'
-import type { SmartAccount } from '../accounts/types.js'
+import type { IsUndefined } from '../../types/utils'
+import type { SmartAccount } from '../accounts/types'
 
 export type DeriveSmartAccount<
   account extends SmartAccount | undefined,

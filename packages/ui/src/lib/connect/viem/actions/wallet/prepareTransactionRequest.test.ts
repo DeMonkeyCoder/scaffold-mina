@@ -1,19 +1,19 @@
 import { expect, test, vi } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { kzg } from '~test/src/kzg.js'
-import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
-import * as getBlock from '../../actions/public/getBlock.js'
-import { mine } from '../../actions/test/mine.js'
-import { setBalance } from '../../actions/test/setBalance.js'
-import { setNextBlockBaseFeePerGas } from '../../actions/test/setNextBlockBaseFeePerGas.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
-import { parseGwei } from '../../utils/unit/parseGwei.js'
+import { accounts } from '~test/src/constants'
+import { kzg } from '~test/src/kzg'
+import { privateKeyToAccount } from '../../accounts/privateKeyToAccount'
+import * as getBlock from '../../actions/public/getBlock'
+import { mine } from '../../actions/test/mine'
+import { setBalance } from '../../actions/test/setBalance'
+import { setNextBlockBaseFeePerGas } from '../../actions/test/setNextBlockBaseFeePerGas'
+import { parseEther } from '../../utils/unit/parseEther'
+import { parseGwei } from '../../utils/unit/parseGwei'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { http, createClient, toBlobs } from '../../index.js'
-import { nonceManager } from '../../utils/index.js'
-import { prepareTransactionRequest } from './prepareTransactionRequest.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { http, createClient, toBlobs } from '../../index'
+import { nonceManager } from '../../utils/index'
+import { prepareTransactionRequest } from './prepareTransactionRequest'
 
 const client = anvilMainnet.getClient()
 

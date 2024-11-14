@@ -1,11 +1,11 @@
 import type { Abi, Address } from 'abitype'
 import { expectTypeOf, test } from 'vitest'
 
-import { usdcContractConfig } from '~test/src/abis.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { usdcContractConfig } from '~test/src/abis'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import type { Log } from '../../types/log.js'
-import { watchContractEvent } from './watchContractEvent.js'
+import type { Log } from '../../types/log'
+import { watchContractEvent } from './watchContractEvent'
 
 const client = anvilMainnet.getClient()
 

@@ -6,14 +6,14 @@ import {
   bytesToNumber,
   bytesToString,
   fromBytes,
-} from "./fromBytes.js";
+} from "./fromBytes";
 import {
   boolToBytes,
   hexToBytes,
   numberToBytes,
   stringToBytes,
-} from "./toBytes.js";
-import { bytesToHex } from "./toHex.js";
+} from "./toBytes";
+import { bytesToHex } from "./toHex";
 
 describe("converts bytes to number", () => {
   test("default", () => {

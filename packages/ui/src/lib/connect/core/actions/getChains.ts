@@ -1,6 +1,6 @@
 import type { Chain } from "@/lib/connect/viem";
-import type { Config } from "../createConfig.js";
-import { deepEqual } from "../utils/deepEqual.js";
+import type { Config } from "../createConfig";
+import { deepEqual } from "../utils/deepEqual";
 
 export type GetChainsReturnType<config extends Config = Config> = readonly [
   ...config["chains"],

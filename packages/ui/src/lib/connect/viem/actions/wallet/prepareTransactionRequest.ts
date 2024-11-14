@@ -1,38 +1,38 @@
 import type { Address } from 'abitype'
-import type { Account } from '../../accounts/types.js'
+import type { Account } from '../../accounts/types'
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../accounts/utils/parseAccount.js'
+} from '../../accounts/utils/parseAccount'
 import {
   type EstimateFeesPerGasErrorType,
   internal_estimateFeesPerGas,
-} from '../../actions/public/estimateFeesPerGas.js'
+} from '../../actions/public/estimateFeesPerGas'
 import {
   type EstimateGasErrorType,
   type EstimateGasParameters,
   estimateGas,
-} from '../../actions/public/estimateGas.js'
+} from '../../actions/public/estimateGas'
 import {
   type GetBlockErrorType,
   getBlock as getBlock_,
-} from '../../actions/public/getBlock.js'
+} from '../../actions/public/getBlock'
 import {
   type GetTransactionCountErrorType,
   getTransactionCount,
-} from '../../actions/public/getTransactionCount.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { AccountNotFoundErrorType } from '../../errors/account.js'
+} from '../../actions/public/getTransactionCount'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { AccountNotFoundErrorType } from '../../errors/account'
 import {
   Eip1559FeesNotSupportedError,
   MaxFeePerGasTooLowError,
-} from '../../errors/fee.js'
-import type { DeriveAccount, GetAccountParameter } from '../../types/account.js'
-import type { Block } from '../../types/block.js'
-import type { Chain, DeriveChain } from '../../types/chain.js'
-import type { GetChainParameter } from '../../types/chain.js'
-import type { GetTransactionRequestKzgParameter } from '../../types/kzg.js'
+} from '../../errors/fee'
+import type { DeriveAccount, GetAccountParameter } from '../../types/account'
+import type { Block } from '../../types/block'
+import type { Chain, DeriveChain } from '../../types/chain'
+import type { GetChainParameter } from '../../types/chain'
+import type { GetTransactionRequestKzgParameter } from '../../types/kzg'
 import type {
   TransactionRequest,
   TransactionRequestEIP1559,
@@ -41,30 +41,30 @@ import type {
   TransactionRequestEIP7702,
   TransactionRequestLegacy,
   TransactionSerializable,
-} from '../../types/transaction.js'
+} from '../../types/transaction'
 import type {
   ExactPartial,
   IsNever,
   Prettify,
   UnionOmit,
   UnionRequiredBy,
-} from '../../types/utils.js'
-import { blobsToCommitments } from '../../utils/blob/blobsToCommitments.js'
-import { blobsToProofs } from '../../utils/blob/blobsToProofs.js'
-import { commitmentsToVersionedHashes } from '../../utils/blob/commitmentsToVersionedHashes.js'
-import { toBlobSidecars } from '../../utils/blob/toBlobSidecars.js'
-import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest.js'
-import { getAction } from '../../utils/getAction.js'
+} from '../../types/utils'
+import { blobsToCommitments } from '../../utils/blob/blobsToCommitments'
+import { blobsToProofs } from '../../utils/blob/blobsToProofs'
+import { commitmentsToVersionedHashes } from '../../utils/blob/commitmentsToVersionedHashes'
+import { toBlobSidecars } from '../../utils/blob/toBlobSidecars'
+import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest'
+import { getAction } from '../../utils/getAction'
 import {
   type AssertRequestErrorType,
   type AssertRequestParameters,
   assertRequest,
-} from '../../utils/transaction/assertRequest.js'
+} from '../../utils/transaction/assertRequest'
 import {
   type GetTransactionType,
   getTransactionType,
-} from '../../utils/transaction/getTransactionType.js'
-import { getChainId as getChainId_ } from '../public/getChainId.js'
+} from '../../utils/transaction/getTransactionType'
+import { getChainId as getChainId_ } from '../public/getChainId'
 
 export const defaultParameters = [
   'blobVersionedHashes',

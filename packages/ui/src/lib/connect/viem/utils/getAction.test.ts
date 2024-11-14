@@ -1,13 +1,13 @@
 import { expect, test, vi } from 'vitest'
 
-import { wagmiContractConfig } from '../../test/src/abis.js'
-import { anvilMainnet } from '../../test/src/anvil.js'
-import * as getChainId from '../actions/public/getChainId.js'
-import { readContract } from '../actions/public/readContract.js'
+import { wagmiContractConfig } from '../../test/src/abis'
+import { anvilMainnet } from '../../test/src/anvil'
+import * as getChainId from '../actions/public/getChainId'
+import { readContract } from '../actions/public/readContract'
 
-import { createClient } from '../clients/createClient.js'
-import { http } from '../clients/transports/http.js'
-import { getAction } from './getAction.js'
+import { createClient } from '../clients/createClient'
+import { http } from '../clients/transports/http'
+import { getAction } from './getAction'
 
 const client = anvilMainnet.getClient()
 

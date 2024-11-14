@@ -1,4 +1,4 @@
-import { defineChain } from '../../utils/chain/defineChain.js'
+import { defineChain } from '../../utils/chain/defineChain'
 
 export const inEVM = /*#__PURE__*/ defineChain({
   id: 2525,

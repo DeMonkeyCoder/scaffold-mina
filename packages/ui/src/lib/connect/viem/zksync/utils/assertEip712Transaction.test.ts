@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { assertEip712Transaction } from './assertEip712Transaction.js'
+import { assertEip712Transaction } from './assertEip712Transaction'
 
 test('default', () => {
   assertEip712Transaction({

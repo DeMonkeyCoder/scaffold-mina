@@ -2,7 +2,7 @@ import { config } from "@wagmi/test";
 import { parseEther } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { estimateGasQueryOptions } from "./estimateGas.js";
+import { estimateGasQueryOptions } from "./estimateGas";
 
 test("default", () => {
   expect(

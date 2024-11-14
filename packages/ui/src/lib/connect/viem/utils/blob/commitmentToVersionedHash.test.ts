@@ -1,9 +1,9 @@
 import { expect, test } from 'vitest'
-import { blobData, kzg } from '../../../test/src/kzg.js'
-import { hexToBytes, stringToHex } from '../index.js'
-import { blobsToCommitments } from './blobsToCommitments.js'
-import { commitmentToVersionedHash } from './commitmentToVersionedHash.js'
-import { toBlobs } from './toBlobs.js'
+import { blobData, kzg } from '../../../test/src/kzg'
+import { hexToBytes, stringToHex } from '../index'
+import { blobsToCommitments } from './blobsToCommitments'
+import { commitmentToVersionedHash } from './commitmentToVersionedHash'
+import { toBlobs } from './toBlobs'
 
 test('default', () => {
   const blobs = toBlobs({ data: stringToHex(blobData) })

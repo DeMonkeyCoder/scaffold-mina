@@ -1,9 +1,9 @@
 import { expect, test } from 'vitest'
 
-import { createHttpServer } from '~test/src/utils.js'
-import { wait } from '../wait.js'
+import { createHttpServer } from '~test/src/utils'
+import { wait } from '../wait'
 
-import { withTimeout } from './withTimeout.js'
+import { withTimeout } from './withTimeout'
 
 test('times out correctly', async () => {
   await expect(() =>

@@ -4,7 +4,7 @@ import { renderHook, waitFor } from "@wagmi/test/react";
 import { parseEther } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { useSendTransaction } from "./useSendTransaction.js";
+import { useSendTransaction } from "./useSendTransaction";
 
 const connector = config.connectors[0]!;
 

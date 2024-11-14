@@ -1,18 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
-import { PublicKey } from "o1js";
 import { MinaProviderClient } from "@mina-js/providers";
 
 export function useMinaInjectedProvider() {
   const [isConnected, setIsConnected] = useState(false);
   const [hasWallet, setHasWallet] = useState<boolean | null>(null);
   const [provider, setProvider] = useState<MinaProviderClient | null>(null);
-  const [account, setAccount] = useState<PublicKey | null>(null);
+  const [account, setAccount] = useState<string | undefined>(undefined);
   const [networkID, setNetworkID] = useState<string | null>(null);
 
   const setAccountFromWalletResponse = useCallback(
     (base58Accounts: string[]) => {
       if (base58Accounts[0]) {
-        setAccount(PublicKey.fromBase58(base58Accounts[0]));
+        setAccount(base58Accounts[0]);
       }
     },
     []

@@ -1,10 +1,10 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
+import { accounts } from '~test/src/constants'
 
-import { wagmiContractConfig } from '../../../test/src/abis.js'
-import { verifyAuthorization } from '../../experimental/eip7702/utils/verifyAuthorization.js'
-import { experimental_signAuthorization } from './signAuthorization.js'
+import { wagmiContractConfig } from '../../../test/src/abis'
+import { verifyAuthorization } from '../../experimental/eip7702/utils/verifyAuthorization'
+import { experimental_signAuthorization } from './signAuthorization'
 
 test('default', async () => {
   const signedAuthorization = await experimental_signAuthorization({

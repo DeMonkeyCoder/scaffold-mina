@@ -1,5 +1,5 @@
-import type { Compute, OneOf } from '../types/utils.js'
-import { getVersion } from '../utils/getVersion.js'
+import type { Compute, OneOf } from '../types/utils'
+import { getVersion } from '../utils/getVersion'
 
 export type ErrorType<name extends string = 'Error'> = Error & { name: name }
 

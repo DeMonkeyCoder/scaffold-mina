@@ -1,4 +1,4 @@
-import type { Chain, ChainContract } from '../../types/chain.js'
+import type { Chain, ChainContract } from '../../types/chain'
 
 export type TargetChain<
   chain extends Chain = Chain,

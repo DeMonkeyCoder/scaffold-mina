@@ -8,12 +8,12 @@ import {
   type ReadContractsErrorType,
   type ReadContractsReturnType,
   readContracts,
-} from "../actions/readContracts.js";
-import type { Config } from "../createConfig.js";
-import type { ChainIdParameter } from "../types/properties.js";
-import type { ScopeKeyParameter } from "../types/properties.js";
-import type { ExactPartial } from "../types/utils.js";
-import { filterQueryOptions } from "./utils.js";
+} from "../actions/readContracts";
+import type { Config } from "../createConfig";
+import type { ChainIdParameter } from "../types/properties";
+import type { ScopeKeyParameter } from "../types/properties";
+import type { ExactPartial } from "../types/utils";
+import { filterQueryOptions } from "./utils";
 
 export type ReadContractsOptions<
   contracts extends readonly unknown[],

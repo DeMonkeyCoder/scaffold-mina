@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { estimateMaxPriorityFeePerGasQueryOptions } from './estimateMaxPriorityFeePerGas.js'
+import { estimateMaxPriorityFeePerGasQueryOptions } from './estimateMaxPriorityFeePerGas'
 
 test('default', () => {
   expect(

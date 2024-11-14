@@ -1,75 +1,75 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import { TransactionNotFoundError } from '../../errors/transaction.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { BlockTag } from '../../types/block.js'
-import type { Chain } from '../../types/chain.js'
-import type { Hash } from '../../types/misc.js'
-import type { RpcTransaction } from '../../types/rpc.js'
-import type { Prettify } from '../../types/utils.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import { TransactionNotFoundError } from "../../errors/transaction";
+import type { ErrorType } from "../../errors/utils";
+import type { BlockTag } from "../../types/block";
+import type { Chain } from "../../types/chain";
+import type { Hash } from "../../types/misc";
+import type { RpcTransaction } from "../../types/rpc";
+import type { Prettify } from "../../types/utils";
+import type { RequestErrorType } from "../../utils/buildRequest";
 import {
   type NumberToHexErrorType,
   numberToHex,
-} from '../../utils/encoding/toHex.js'
+} from "../../utils/encoding/toHex";
 import {
   type FormattedTransaction,
   formatTransaction,
-} from '../../utils/formatters/transaction.js'
+} from "../../utils/formatters/transaction";
 
-export type GetTransactionParameters<blockTag extends BlockTag = 'latest'> =
+export type GetTransactionParameters<blockTag extends BlockTag = "latest"> =
   | {
       /** The block hash */
-      blockHash: Hash
-      blockNumber?: undefined
-      blockTag?: undefined
-      hash?: undefined
+      blockHash: Hash;
+      blockNumber?: undefined;
+      blockTag?: undefined;
+      hash?: undefined;
       /** The index of the transaction on the block. */
-      index: number
+      index: number;
     }
   | {
-      blockHash?: undefined
+      blockHash?: undefined;
       /** The block number */
-      blockNumber: bigint
-      blockTag?: undefined
-      hash?: undefined
+      blockNumber: bigint;
+      blockTag?: undefined;
+      hash?: undefined;
       /** The index of the transaction on the block. */
-      index: number
+      index: number;
     }
   | {
-      blockHash?: undefined
-      blockNumber?: undefined
+      blockHash?: undefined;
+      blockNumber?: undefined;
       /** The block tag. */
-      blockTag: blockTag | BlockTag
-      hash?: undefined
+      blockTag: blockTag | BlockTag;
+      hash?: undefined;
       /** The index of the transaction on the block. */
-      index: number
+      index: number;
     }
   | {
-      blockHash?: undefined
-      blockNumber?: undefined
-      blockTag?: undefined
+      blockHash?: undefined;
+      blockNumber?: undefined;
+      blockTag?: undefined;
       /** The hash of the transaction. */
-      hash: Hash
-      index?: number | undefined
-    }
+      hash: Hash;
+      index?: number | undefined;
+    };
 
 export type GetTransactionReturnType<
   chain extends Chain | undefined = undefined,
-  blockTag extends BlockTag = 'latest',
-> = Prettify<FormattedTransaction<chain, blockTag>>
+  blockTag extends BlockTag = "latest"
+> = Prettify<FormattedTransaction<chain, blockTag>>;
 
 export type GetTransactionErrorType =
   | NumberToHexErrorType
   | RequestErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Returns information about a [Transaction](https://viem.sh/docs/glossary/terms#transaction) given a hash or block identifier.
  *
  * - Docs: https://viem.sh/docs/actions/public/getTransaction
  * - Example: https://stackblitz.com/github/wevm/viem/tree/main/examples/transactions/fetching-transactions
- * - JSON-RPC Methods: [`eth_getTransactionByHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getTransactionByHash)
+ * - JSON-RPC Methods: [`mina_getTransactionByHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getTransactionByHash)
  *
  * @param client - Client to use
  * @param parameters - {@link GetTransactionParameters}
@@ -90,7 +90,7 @@ export type GetTransactionErrorType =
  */
 export async function getTransaction<
   chain extends Chain | undefined,
-  blockTag extends BlockTag = 'latest',
+  blockTag extends BlockTag = "latest"
 >(
   client: Client<Transport, chain>,
   {
@@ -99,38 +99,38 @@ export async function getTransaction<
     blockTag: blockTag_,
     hash,
     index,
-  }: GetTransactionParameters<blockTag>,
+  }: GetTransactionParameters<blockTag>
 ): Promise<GetTransactionReturnType<chain, blockTag>> {
-  const blockTag = blockTag_ || 'latest'
+  const blockTag = blockTag_ || "latest";
 
   const blockNumberHex =
-    blockNumber !== undefined ? numberToHex(blockNumber) : undefined
+    blockNumber !== undefined ? numberToHex(blockNumber) : undefined;
 
-  let transaction: RpcTransaction | null = null
+  let transaction: RpcTransaction | null = null;
   if (hash) {
     transaction = await client.request(
       {
-        method: 'eth_getTransactionByHash',
+        method: "mina_getTransactionByHash",
         params: [hash],
       },
-      { dedupe: true },
-    )
+      { dedupe: true }
+    );
   } else if (blockHash) {
     transaction = await client.request(
       {
-        method: 'eth_getTransactionByBlockHashAndIndex',
+        method: "mina_getTransactionByBlockHashAndIndex",
         params: [blockHash, numberToHex(index)],
       },
-      { dedupe: true },
-    )
+      { dedupe: true }
+    );
   } else if (blockNumberHex || blockTag) {
     transaction = await client.request(
       {
-        method: 'eth_getTransactionByBlockNumberAndIndex',
+        method: "mina_getTransactionByBlockNumberAndIndex",
         params: [blockNumberHex || blockTag, numberToHex(index)],
       },
-      { dedupe: Boolean(blockNumberHex) },
-    )
+      { dedupe: Boolean(blockNumberHex) }
+    );
   }
 
   if (!transaction)
@@ -140,9 +140,9 @@ export async function getTransaction<
       blockTag,
       hash,
       index,
-    })
+    });
 
   const format =
-    client.chain?.formatters?.transaction?.format || formatTransaction
-  return format(transaction)
+    client.chain?.formatters?.transaction?.format || formatTransaction;
+  return format(transaction);
 }

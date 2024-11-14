@@ -1,7 +1,7 @@
 import type { Chain, ChainFormatters } from "@/lib/connect/viem";
 
-import type { Config } from "../createConfig.js";
-import type { IsNarrowable, Merge } from "./utils.js";
+import type { Config } from "../createConfig";
+import type { IsNarrowable, Merge } from "./utils";
 
 /** Filters {@link Config} chains by {@link chainId} or simplifies if no `ChainFormatters` are present. */
 export type SelectChains<

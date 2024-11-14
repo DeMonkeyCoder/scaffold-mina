@@ -1,22 +1,22 @@
 import type { Abi } from "abitype";
 
-import type { Account } from "../../accounts/types.js";
-import type { Client } from "../../clients/createClient.js";
-import type { Transport } from "../../clients/transports/createTransport.js";
-import type { Chain } from "../../types/chain.js";
-import type { GetChainParameter } from "../../types/chain.js";
-import type { ContractConstructorArgs } from "../../types/contract.js";
-import type { Hex } from "../../types/misc.js";
-import type { UnionEvaluate, UnionOmit } from "../../types/utils.js";
-import { encodeDeployData } from "../../utils/abi/encodeDeployData.js";
+import type { Account } from "../../accounts/types";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { Chain } from "../../types/chain";
+import type { GetChainParameter } from "../../types/chain";
+import type { ContractConstructorArgs } from "../../types/contract";
+import type { Hex } from "../../types/misc";
+import type { UnionEvaluate, UnionOmit } from "../../types/utils";
+import { encodeDeployData } from "../../utils/abi/encodeDeployData";
 
-import type { ErrorType } from "../../errors/utils.js";
+import type { ErrorType } from "../../errors/utils";
 import {
   type SendTransactionErrorType,
   type SendTransactionParameters,
   type SendTransactionReturnType,
   sendTransaction,
-} from "./sendTransaction.js";
+} from "./sendTransaction";
 
 export type DeployContractParameters<
   abi extends Abi | readonly unknown[] = Abi,

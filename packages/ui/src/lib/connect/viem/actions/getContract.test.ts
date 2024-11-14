@@ -2,22 +2,22 @@ import type { AbiEvent } from 'abitype'
 
 import { describe, expect, test } from 'vitest'
 
-import { usdcContractConfig, wagmiContractConfig } from '~test/src/abis.js'
-import { accounts, address } from '~test/src/constants.js'
-import { anvilMainnet } from '../../test/src/anvil.js'
+import { usdcContractConfig, wagmiContractConfig } from '~test/src/abis'
+import { accounts, address } from '~test/src/constants'
+import { anvilMainnet } from '../../test/src/anvil'
 
 import {
   getContract,
   getEventParameters,
   getFunctionParameters,
-} from './getContract.js'
+} from './getContract'
 import {
   impersonateAccount,
   mine,
   setBalance,
   stopImpersonatingAccount,
   writeContract,
-} from './index.js'
+} from './index'
 
 const publicClient = anvilMainnet.getClient()
 const walletClient = anvilMainnet.getClient()

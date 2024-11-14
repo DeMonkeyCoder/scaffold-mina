@@ -12,9 +12,9 @@ import type {
 } from "@/lib/connect/core/exports/internal";
 import { useEffect } from "react";
 
-import type { ConfigParameter, EnabledParameter } from "../types/properties.js";
-import { useChainId } from "./useChainId.js";
-import { useConfig } from "./useConfig.js";
+import type { ConfigParameter, EnabledParameter } from "../types/properties";
+import { useChainId } from "./useChainId";
+import { useConfig } from "./useConfig";
 
 export type UseWatchPendingTransactionsParameters<
   config extends Config = Config,

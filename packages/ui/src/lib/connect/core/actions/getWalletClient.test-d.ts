@@ -2,7 +2,7 @@ import { chain, config } from "@wagmi/test";
 import { expectTypeOf, test } from "vitest";
 
 import type { Account } from "@/lib/connect/viem";
-import { getWalletClient } from "./getWalletClient.js";
+import { getWalletClient } from "./getWalletClient";
 
 test("default", async () => {
   const client = await getWalletClient(config);

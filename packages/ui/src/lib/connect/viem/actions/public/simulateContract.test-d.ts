@@ -1,14 +1,14 @@
 import { parseAbi } from 'abitype'
 import { assertType, expectTypeOf, test } from 'vitest'
 
-import { baycContractConfig, wagmiContractConfig } from '~test/src/abis.js'
+import { baycContractConfig, wagmiContractConfig } from '~test/src/abis'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { celo } from '../../chains/definitions/celo.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { celo } from '../../chains/definitions/celo'
 
-import { createClient } from '../../clients/createClient.js'
-import { http } from '../../clients/transports/http.js'
-import { simulateContract } from './simulateContract.js'
+import { createClient } from '../../clients/createClient'
+import { http } from '../../clients/transports/http'
+import { simulateContract } from './simulateContract'
 
 const args = {
   ...wagmiContractConfig,

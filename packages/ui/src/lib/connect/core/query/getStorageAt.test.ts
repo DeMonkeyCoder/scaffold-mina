@@ -1,7 +1,7 @@
 import { address, chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getStorageAtQueryOptions } from './getStorageAt.js'
+import { getStorageAtQueryOptions } from './getStorageAt'
 
 test('default', () => {
   expect(

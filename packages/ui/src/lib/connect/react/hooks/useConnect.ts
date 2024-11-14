@@ -16,16 +16,16 @@ import {
 } from "@/lib/connect/core/exports/query";
 import { useEffect } from "react";
 
-import type { ConfigParameter } from "../types/properties.js";
+import type { ConfigParameter } from "../types/properties";
 import type {
   UseMutationParameters,
   UseMutationReturnType,
-} from "../utils/query.js";
-import { useConfig } from "./useConfig.js";
+} from "../utils/query";
+import { useConfig } from "./useConfig";
 import {
   type UseConnectorsReturnType,
   useConnectors,
-} from "./useConnectors.js";
+} from "./useConnectors";
 
 export type UseConnectParameters<
   config extends Config = Config,

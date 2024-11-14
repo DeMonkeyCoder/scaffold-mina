@@ -3,16 +3,16 @@ import type { Address } from 'abitype'
 import type {
   AuthorizationList,
   SignedAuthorizationList,
-} from '../experimental/eip7702/types/authorization.js'
-import type { BlobSidecar } from './eip4844.js'
+} from '../experimental/eip7702/types/authorization'
+import type { BlobSidecar } from './eip4844'
 import type {
   FeeValuesEIP1559,
   FeeValuesEIP4844,
   FeeValuesLegacy,
-} from './fee.js'
-import type { Kzg } from './kzg.js'
-import type { Log } from './log.js'
-import type { ByteArray, Hash, Hex, Signature } from './misc.js'
+} from './fee'
+import type { Kzg } from './kzg'
+import type { Log } from './log'
+import type { ByteArray, Hash, Hex, Signature } from './misc'
 import type {
   Branded,
   ExactPartial,
@@ -20,7 +20,7 @@ import type {
   Omit,
   OneOf,
   RequiredBy,
-} from './utils.js'
+} from './utils'
 
 export type AccessList = readonly {
   address: Address

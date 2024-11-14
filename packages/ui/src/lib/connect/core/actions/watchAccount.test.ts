@@ -2,9 +2,9 @@ import { config } from "@wagmi/test";
 import type { Address } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { connect } from "./connect.js";
-import { disconnect } from "./disconnect.js";
-import { watchAccount } from "./watchAccount.js";
+import { connect } from "./connect";
+import { disconnect } from "./disconnect";
+import { watchAccount } from "./watchAccount";
 
 test("default", async () => {
   const accounts: { address: Address | undefined; status: string }[] = [];

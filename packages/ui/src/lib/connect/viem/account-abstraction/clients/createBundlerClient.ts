@@ -1,20 +1,20 @@
-import type { EstimateFeesPerGasReturnType } from '../../actions/public/estimateFeesPerGas.js'
+import type { EstimateFeesPerGasReturnType } from '../../actions/public/estimateFeesPerGas'
 import {
   type Client,
   type ClientConfig,
   type CreateClientErrorType,
   createClient,
-} from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { RpcSchema } from '../../types/eip1193.js'
-import type { BundlerRpcSchema } from '../../types/eip1193.js'
-import type { Prettify } from '../../types/utils.js'
-import type { SmartAccount } from '../accounts/types.js'
-import type { UserOperationRequest } from '../types/userOperation.js'
-import { type BundlerActions, bundlerActions } from './decorators/bundler.js'
-import type { PaymasterActions } from './decorators/paymaster.js'
+} from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { RpcSchema } from '../../types/eip1193'
+import type { BundlerRpcSchema } from '../../types/eip1193'
+import type { Prettify } from '../../types/utils'
+import type { SmartAccount } from '../accounts/types'
+import type { UserOperationRequest } from '../types/userOperation'
+import { type BundlerActions, bundlerActions } from './decorators/bundler'
+import type { PaymasterActions } from './decorators/paymaster'
 
 export type BundlerClientConfig<
   transport extends Transport = Transport,

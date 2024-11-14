@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { getApprovalBasedPaymasterInput } from './getApprovalBasedPaymasterInput.js'
+import { getApprovalBasedPaymasterInput } from './getApprovalBasedPaymasterInput'
 
 test('args: token, minAllowance and innerInput as hex', () => {
   expect(

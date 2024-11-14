@@ -1,4 +1,4 @@
-import { defineChain } from '../../utils/chain/defineChain.js'
+import { defineChain } from '../../utils/chain/defineChain'
 
 export const metachainIstanbul = /*#__PURE__*/ defineChain({
   id: 1_453,

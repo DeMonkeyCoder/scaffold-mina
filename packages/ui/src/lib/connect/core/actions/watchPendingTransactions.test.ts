@@ -9,10 +9,10 @@ import { parseEther } from "@/lib/connect/viem";
 import type { OnTransactionsParameter } from "@/lib/connect/viem/actions";
 import { expect, test } from "vitest";
 
-import { connect } from "./connect.js";
-import { disconnect } from "./disconnect.js";
-import { sendTransaction } from "./sendTransaction.js";
-import { watchPendingTransactions } from "./watchPendingTransactions.js";
+import { connect } from "./connect";
+import { disconnect } from "./disconnect";
+import { sendTransaction } from "./sendTransaction";
+import { watchPendingTransactions } from "./watchPendingTransactions";
 
 const connector = config.connectors[0]!;
 

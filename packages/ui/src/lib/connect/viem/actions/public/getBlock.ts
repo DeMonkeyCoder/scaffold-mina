@@ -1,67 +1,64 @@
-import type { Account } from '../../accounts/types.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
+import type { Account } from "../../accounts/types";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
 import {
   BlockNotFoundError,
   type BlockNotFoundErrorType,
-} from '../../errors/block.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { BlockTag } from '../../types/block.js'
-import type { Chain } from '../../types/chain.js'
-import type { Hash } from '../../types/misc.js'
-import type { RpcBlock } from '../../types/rpc.js'
-import type { Prettify } from '../../types/utils.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+} from "../../errors/block";
+import type { ErrorType } from "../../errors/utils";
+import type { BlockTag } from "../../types/block";
+import type { Chain } from "../../types/chain";
+import type { Hash } from "../../types/misc";
+import type { RpcBlock } from "../../types/rpc";
+import type { Prettify } from "../../types/utils";
+import type { RequestErrorType } from "../../utils/buildRequest";
 import {
   type NumberToHexErrorType,
   numberToHex,
-} from '../../utils/encoding/toHex.js'
-import {
-  type FormattedBlock,
-  formatBlock,
-} from '../../utils/formatters/block.js'
+} from "../../utils/encoding/toHex";
+import { type FormattedBlock, formatBlock } from "../../utils/formatters/block";
 
 export type GetBlockParameters<
   includeTransactions extends boolean = false,
-  blockTag extends BlockTag = 'latest',
+  blockTag extends BlockTag = "latest"
 > = {
   /** Whether or not to include transaction data in the response. */
-  includeTransactions?: includeTransactions | undefined
+  includeTransactions?: includeTransactions | undefined;
 } & (
   | {
       /** Hash of the block. */
-      blockHash?: Hash | undefined
-      blockNumber?: undefined
-      blockTag?: undefined
+      blockHash?: Hash | undefined;
+      blockNumber?: undefined;
+      blockTag?: undefined;
     }
   | {
-      blockHash?: undefined
+      blockHash?: undefined;
       /** The block number. */
-      blockNumber?: bigint | undefined
-      blockTag?: undefined
+      blockNumber?: bigint | undefined;
+      blockTag?: undefined;
     }
   | {
-      blockHash?: undefined
-      blockNumber?: undefined
+      blockHash?: undefined;
+      blockNumber?: undefined;
       /**
        * The block tag.
        * @default 'latest'
        */
-      blockTag?: blockTag | BlockTag | undefined
+      blockTag?: blockTag | BlockTag | undefined;
     }
-)
+);
 
 export type GetBlockReturnType<
   chain extends Chain | undefined = undefined,
   includeTransactions extends boolean = false,
-  blockTag extends BlockTag = 'latest',
-> = Prettify<FormattedBlock<chain, includeTransactions, blockTag>>
+  blockTag extends BlockTag = "latest"
+> = Prettify<FormattedBlock<chain, includeTransactions, blockTag>>;
 
 export type GetBlockErrorType =
   | BlockNotFoundErrorType
   | NumberToHexErrorType
   | RequestErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Returns information about a block at a block number, hash, or tag.
@@ -69,8 +66,8 @@ export type GetBlockErrorType =
  * - Docs: https://viem.sh/docs/actions/public/getBlock
  * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/fetching-blocks
  * - JSON-RPC Methods:
- *   - Calls [`eth_getBlockByNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getblockbynumber) for `blockNumber` & `blockTag`.
- *   - Calls [`eth_getBlockByHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getblockbyhash) for `blockHash`.
+ *   - Calls [`mina_getBlockByNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getblockbynumber) for `blockNumber` & `blockTag`.
+ *   - Calls [`mina_getBlockByHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getblockbyhash) for `blockHash`.
  *
  * @param client - Client to use
  * @param parameters - {@link GetBlockParameters}
@@ -91,7 +88,7 @@ export async function getBlock<
   chain extends Chain | undefined,
   account extends Account | undefined,
   includeTransactions extends boolean = false,
-  blockTag extends BlockTag = 'latest',
+  blockTag extends BlockTag = "latest"
 >(
   client: Client<Transport, chain, account>,
   {
@@ -99,35 +96,35 @@ export async function getBlock<
     blockNumber,
     blockTag: blockTag_,
     includeTransactions: includeTransactions_,
-  }: GetBlockParameters<includeTransactions, blockTag> = {},
+  }: GetBlockParameters<includeTransactions, blockTag> = {}
 ): Promise<GetBlockReturnType<chain, includeTransactions, blockTag>> {
-  const blockTag = blockTag_ ?? 'latest'
-  const includeTransactions = includeTransactions_ ?? false
+  const blockTag = blockTag_ ?? "latest";
+  const includeTransactions = includeTransactions_ ?? false;
 
   const blockNumberHex =
-    blockNumber !== undefined ? numberToHex(blockNumber) : undefined
+    blockNumber !== undefined ? numberToHex(blockNumber) : undefined;
 
-  let block: RpcBlock | null = null
+  let block: RpcBlock | null = null;
   if (blockHash) {
     block = await client.request(
       {
-        method: 'eth_getBlockByHash',
+        method: "mina_getBlockByHash",
         params: [blockHash, includeTransactions],
       },
-      { dedupe: true },
-    )
+      { dedupe: true }
+    );
   } else {
     block = await client.request(
       {
-        method: 'eth_getBlockByNumber',
+        method: "mina_getBlockByNumber",
         params: [blockNumberHex || blockTag, includeTransactions],
       },
-      { dedupe: Boolean(blockNumberHex) },
-    )
+      { dedupe: Boolean(blockNumberHex) }
+    );
   }
 
-  if (!block) throw new BlockNotFoundError({ blockHash, blockNumber })
+  if (!block) throw new BlockNotFoundError({ blockHash, blockNumber });
 
-  const format = client.chain?.formatters?.block?.format || formatBlock
-  return format(block)
+  const format = client.chain?.formatters?.block?.format || formatBlock;
+  return format(block);
 }

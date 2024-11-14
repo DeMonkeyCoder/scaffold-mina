@@ -1,12 +1,12 @@
 import { expect, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { accounts } from '../../../test/src/constants.js'
-import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { accounts } from '../../../test/src/constants'
+import { privateKeyToAccount } from '../../accounts/privateKeyToAccount'
 
-import { createClient } from '../../clients/createClient.js'
-import { http } from '../../clients/transports/http.js'
-import { getAddresses } from './getAddresses.js'
+import { createClient } from '../../clients/createClient'
+import { http } from '../../clients/transports/http'
+import { getAddresses } from './getAddresses'
 
 const client = anvilMainnet.getClient()
 

@@ -3,8 +3,8 @@ import { config } from "@wagmi/test";
 import { renderHook, waitFor } from "@wagmi/test/react";
 import { beforeEach, expect, test } from "vitest";
 
-import { useAccount } from "./useAccount.js";
-import { useDisconnect } from "./useDisconnect.js";
+import { useAccount } from "./useAccount";
+import { useDisconnect } from "./useDisconnect";
 
 const connector = config.connectors[0]!;
 

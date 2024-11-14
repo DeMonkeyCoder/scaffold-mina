@@ -7,7 +7,7 @@ import { config } from "@wagmi/test";
 import { expectTypeOf, test } from "vitest";
 
 import type { Address } from "@/lib/connect/viem";
-import { useReconnect } from "./useReconnect.js";
+import { useReconnect } from "./useReconnect";
 
 const connectors = [config.connectors[0]!];
 const contextValue = { foo: "bar" } as const;

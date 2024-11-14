@@ -1,7 +1,7 @@
 import { http } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
-import { unstable_connector } from "./connector.js";
-import { fallback } from "./fallback.js";
+import { unstable_connector } from "./connector";
+import { fallback } from "./fallback";
 
 test("setup", () => {
   expect(

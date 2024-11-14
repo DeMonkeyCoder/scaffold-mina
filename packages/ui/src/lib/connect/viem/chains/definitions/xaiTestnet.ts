@@ -1,4 +1,4 @@
-import { defineChain } from '../../utils/chain/defineChain.js'
+import { defineChain } from '../../utils/chain/defineChain'
 
 export const xaiTestnet = /*#__PURE__*/ defineChain({
   id: 37714555429,

@@ -1,22 +1,22 @@
 import {
   type MulticallErrorType,
   multicall,
-} from '../../actions/public/multicall.js'
-import { readContract } from '../../actions/public/readContract.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import { BaseError } from '../../errors/base.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
+} from '../../actions/public/multicall'
+import { readContract } from '../../actions/public/readContract'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import { BaseError } from '../../errors/base'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import type { Hash } from '../../types/misc.js'
-import { l2OutputOracleAbi, portal2Abi, portalAbi } from '../abis.js'
-import type { GetContractAddressParameter } from '../types/contract.js'
-import { getPortalVersion } from './getPortalVersion.js'
+} from '../../types/chain'
+import type { Hash } from '../../types/misc'
+import { l2OutputOracleAbi, portal2Abi, portalAbi } from '../abis'
+import type { GetContractAddressParameter } from '../types/contract'
+import { getPortalVersion } from './getPortalVersion'
 
 export type GetTimeToFinalizeParameters<
   chain extends Chain | undefined = Chain | undefined,

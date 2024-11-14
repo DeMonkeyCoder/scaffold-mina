@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getCallsStatusQueryOptions } from './getCallsStatus.js'
+import { getCallsStatusQueryOptions } from './getCallsStatus'
 
 test('default', () => {
   expect(

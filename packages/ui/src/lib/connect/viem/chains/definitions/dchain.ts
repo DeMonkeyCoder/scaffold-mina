@@ -1,5 +1,5 @@
-import { chainConfig } from '../../op-stack/chainConfig.js'
-import { defineChain } from '../../utils/chain/defineChain.js'
+import { chainConfig } from '../../op-stack/chainConfig'
+import { defineChain } from '../../utils/chain/defineChain'
 
 export const dchain = /*#__PURE__*/ defineChain({
   ...chainConfig,
@@ -8,7 +8,7 @@ export const dchain = /*#__PURE__*/ defineChain({
   nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
   rpcUrls: {
     default: {
-      http: ['https://dchain-2716446429837000-1.jsonrpc.sagarpc.io'],
+      http: ['https://dchain-2716446429837000-1onrpc.sagarpc.io'],
     },
   },
   blockExplorers: {

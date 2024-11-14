@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { isUri } from './utils.js'
+import { isUri } from './utils'
 
 test('isUri - default', () => {
   expect(isUri('https://example.com/foo')).toMatchInlineSnapshot(

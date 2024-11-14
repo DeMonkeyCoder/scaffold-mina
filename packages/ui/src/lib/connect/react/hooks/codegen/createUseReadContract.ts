@@ -25,14 +25,14 @@ import type {
 import type {
   ConfigParameter,
   QueryParameter,
-} from "../../types/properties.js";
-import { useAccount } from "../useAccount.js";
-import { useChainId } from "../useChainId.js";
-import { useConfig } from "../useConfig.js";
+} from "../../types/properties";
+import { useAccount } from "../useAccount";
+import { useChainId } from "../useChainId";
+import { useConfig } from "../useConfig";
 import {
   type UseReadContractReturnType,
   useReadContract,
-} from "../useReadContract.js";
+} from "../useReadContract";
 
 type stateMutability = "pure" | "view";
 

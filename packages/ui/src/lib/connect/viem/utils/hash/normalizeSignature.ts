@@ -1,5 +1,5 @@
-import { BaseError } from '../../errors/base.js'
-import type { ErrorType } from '../../errors/utils.js'
+import { BaseError } from '../../errors/base'
+import type { ErrorType } from '../../errors/utils'
 
 type NormalizeSignatureParameters = string
 type NormalizeSignatureReturnType = string

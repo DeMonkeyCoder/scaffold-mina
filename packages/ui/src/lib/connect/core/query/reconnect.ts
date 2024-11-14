@@ -5,10 +5,10 @@ import {
   type ReconnectParameters,
   type ReconnectReturnType,
   reconnect,
-} from '../actions/reconnect.js'
-import type { Config } from '../createConfig.js'
-import type { Compute } from '../types/utils.js'
-import type { Mutate, MutateAsync } from './types.js'
+} from '../actions/reconnect'
+import type { Config } from '../createConfig'
+import type { Compute } from '../types/utils'
+import type { Mutate, MutateAsync } from './types'
 
 export function reconnectMutationOptions(config: Config) {
   return {

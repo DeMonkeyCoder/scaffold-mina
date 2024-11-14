@@ -1,18 +1,18 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { SignedAuthorizationList } from '../../experimental/eip7702/types/authorization.js'
-import type { RpcAuthorizationList } from '../../experimental/eip7702/types/rpc.js'
-import type { BlockTag } from '../../types/block.js'
-import type { Chain } from '../../types/chain.js'
+import type { ErrorType } from '../../errors/utils'
+import type { SignedAuthorizationList } from '../../experimental/eip7702/types/authorization'
+import type { RpcAuthorizationList } from '../../experimental/eip7702/types/rpc'
+import type { BlockTag } from '../../types/block'
+import type { Chain } from '../../types/chain'
 import type {
   ExtractChainFormatterExclude,
   ExtractChainFormatterReturnType,
-} from '../../types/chain.js'
-import type { Hex } from '../../types/misc.js'
-import type { RpcTransaction } from '../../types/rpc.js'
-import type { Transaction, TransactionType } from '../../types/transaction.js'
-import type { ExactPartial, UnionLooseOmit } from '../../types/utils.js'
-import { hexToNumber } from '../encoding/fromHex.js'
-import { type DefineFormatterErrorType, defineFormatter } from './formatter.js'
+} from '../../types/chain'
+import type { Hex } from '../../types/misc'
+import type { RpcTransaction } from '../../types/rpc'
+import type { Transaction, TransactionType } from '../../types/transaction'
+import type { ExactPartial, UnionLooseOmit } from '../../types/utils'
+import { hexToNumber } from '../encoding/fromHex'
+import { type DefineFormatterErrorType, defineFormatter } from './formatter'
 
 type TransactionPendingDependencies =
   | 'blockHash'

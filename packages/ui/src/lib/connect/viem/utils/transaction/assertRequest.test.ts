@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
 
-import { parseGwei } from "../unit/parseGwei.js";
+import { parseGwei } from "../unit/parseGwei";
 
-import { assertRequest } from "./assertRequest.js";
+import { assertRequest } from "./assertRequest";
 
 test("invalid address", () => {
   expect(() => assertRequest({ account: { address: "0x1", type: "json-rpc" } }))

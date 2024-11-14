@@ -11,31 +11,31 @@ import {
   type DecodeLogDataMismatchErrorType,
   DecodeLogTopicsMismatch,
   type DecodeLogTopicsMismatchErrorType,
-} from '../../errors/abi.js'
-import type { ErrorType } from '../../errors/utils.js'
+} from '../../errors/abi'
+import type { ErrorType } from '../../errors/utils'
 import type {
   ContractEventArgsFromTopics,
   ContractEventName,
   EventDefinition,
-} from '../../types/contract.js'
-import type { Hex } from '../../types/misc.js'
+} from '../../types/contract'
+import type { Hex } from '../../types/misc'
 import type {
   IsNarrowable,
   Prettify,
   UnionEvaluate,
-} from '../../types/utils.js'
-import { size } from '../data/size.js'
+} from '../../types/utils'
+import { size } from '../data/size'
 import {
   type ToEventSelectorErrorType,
   toEventSelector,
-} from '../hash/toEventSelector.js'
+} from '../hash/toEventSelector'
 
-import { PositionOutOfBoundsError } from '../../errors/cursor.js'
+import { PositionOutOfBoundsError } from '../../errors/cursor'
 import {
   type DecodeAbiParametersErrorType,
   decodeAbiParameters,
-} from './decodeAbiParameters.js'
-import { type FormatAbiItemErrorType, formatAbiItem } from './formatAbiItem.js'
+} from './decodeAbiParameters'
+import { type FormatAbiItemErrorType, formatAbiItem } from './formatAbiItem'
 
 export type DecodeEventLogParameters<
   abi extends Abi | readonly unknown[] = Abi,

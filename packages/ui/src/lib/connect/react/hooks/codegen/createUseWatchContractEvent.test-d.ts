@@ -2,7 +2,7 @@ import { http, createConfig, webSocket } from "@/lib/connect/core/exports";
 import { abi, mainnet, optimism } from "@wagmi/test";
 import { expectTypeOf, test } from "vitest";
 
-import { createUseWatchContractEvent } from "./createUseWatchContractEvent.js";
+import { createUseWatchContractEvent } from "./createUseWatchContractEvent";
 
 test("default", () => {
   const useWatchErc20Event = createUseWatchContractEvent({

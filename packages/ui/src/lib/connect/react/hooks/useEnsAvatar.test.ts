@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { useEnsAvatar } from './useEnsAvatar.js'
+import { useEnsAvatar } from './useEnsAvatar'
 
 test('default', async () => {
   const { result } = renderHook(() =>

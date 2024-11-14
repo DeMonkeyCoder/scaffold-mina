@@ -2,7 +2,7 @@ import { chain } from '@wagmi/test'
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { useBlockTransactionCount } from './useBlockTransactionCount.js'
+import { useBlockTransactionCount } from './useBlockTransactionCount'
 
 test('default', async () => {
   const { result } = renderHook(() => useBlockTransactionCount({}))

@@ -1,12 +1,12 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex, Signature } from '../../types/misc.js'
-import { type IsHexErrorType, isHex } from '../data/isHex.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex, Signature } from '../../types/misc'
+import { type IsHexErrorType, isHex } from '../data/isHex'
 import {
   type HexToNumberErrorType,
   hexToBigInt,
   hexToNumber,
-} from '../encoding/fromHex.js'
-import { toHex } from '../encoding/toHex.js'
+} from '../encoding/fromHex'
+import { toHex } from '../encoding/toHex'
 
 export type RecoverPublicKeyParameters = {
   hash: Hex | ByteArray

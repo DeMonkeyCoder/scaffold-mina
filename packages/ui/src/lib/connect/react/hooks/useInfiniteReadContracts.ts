@@ -16,18 +16,18 @@ import type { ContractFunctionParameters } from "@/lib/connect/viem";
 import type {
   InfiniteReadContractsData,
   InfiniteReadContractsOptions,
-} from "../exports/query.js";
+} from "../exports/query";
 import type {
   ConfigParameter,
   InfiniteQueryParameter,
-} from "../types/properties.js";
+} from "../types/properties";
 import {
   type UseInfiniteQueryParameters,
   type UseInfiniteQueryReturnType,
   useInfiniteQuery,
-} from "../utils/query.js";
-import { useChainId } from "./useChainId.js";
-import { useConfig } from "./useConfig.js";
+} from "../utils/query";
+import { useChainId } from "./useChainId";
+import { useConfig } from "./useConfig";
 
 export type UseInfiniteContractReadsParameters<
   contracts extends readonly unknown[] = readonly ContractFunctionParameters[],

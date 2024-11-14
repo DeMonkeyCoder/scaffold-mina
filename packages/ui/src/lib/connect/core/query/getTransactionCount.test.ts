@@ -1,7 +1,7 @@
 import { accounts, chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getTransactionCountQueryOptions } from './getTransactionCount.js'
+import { getTransactionCountQueryOptions } from './getTransactionCount'
 
 const address = accounts[0]
 

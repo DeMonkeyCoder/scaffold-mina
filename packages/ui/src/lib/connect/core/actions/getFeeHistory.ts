@@ -5,10 +5,10 @@ import {
   getFeeHistory as viem_getFeeHistory,
 } from "@/lib/connect/viem/actions";
 
-import type { Config } from "../createConfig.js";
-import type { ChainIdParameter } from "../types/properties.js";
-import type { Compute } from "../types/utils.js";
-import { getAction } from "../utils/getAction.js";
+import type { Config } from "../createConfig";
+import type { ChainIdParameter } from "../types/properties";
+import type { Compute } from "../types/utils";
+import { getAction } from "../utils/getAction";
 
 export type GetFeeHistoryParameters<
   config extends Config = Config,

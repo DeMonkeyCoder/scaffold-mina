@@ -1,10 +1,10 @@
 import { secp256k1 } from '@noble/curves/secp256k1'
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex, Signature } from '../../types/misc.js'
-import { type HexToBigIntErrorType, hexToBigInt } from '../encoding/fromHex.js'
-import { hexToBytes } from '../encoding/toBytes.js'
-import type { ToHexErrorType } from '../encoding/toHex.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex, Signature } from '../../types/misc'
+import { type HexToBigIntErrorType, hexToBigInt } from '../encoding/fromHex'
+import { hexToBytes } from '../encoding/toBytes'
+import type { ToHexErrorType } from '../encoding/toHex'
 
 type To = 'bytes' | 'hex'
 

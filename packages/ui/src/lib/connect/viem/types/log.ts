@@ -9,8 +9,8 @@ import type {
 import type {
   AbiEventParametersToPrimitiveTypes,
   GetEventArgs,
-} from './contract.js'
-import type { Hash, Hex } from './misc.js'
+} from './contract'
+import type { Hash, Hex } from './misc'
 
 export type Log<
   quantity = bigint,

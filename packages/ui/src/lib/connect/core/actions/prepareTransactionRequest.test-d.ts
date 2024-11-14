@@ -3,11 +3,11 @@ import { http, parseEther } from "@/lib/connect/viem";
 import { celo, mainnet } from "@/lib/connect/viem/chains";
 import { expectTypeOf, test } from "vitest";
 
-import { createConfig } from "../createConfig.js";
+import { createConfig } from "../createConfig";
 import {
   type PrepareTransactionRequestParameters,
   prepareTransactionRequest,
-} from "./prepareTransactionRequest.js";
+} from "./prepareTransactionRequest";
 
 const targetAccount = accounts[1];
 

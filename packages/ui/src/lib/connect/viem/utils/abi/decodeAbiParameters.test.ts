@@ -1,17 +1,17 @@
 import { type Address, parseAbiParameters } from "abitype";
 import { assertType, describe, expect, test } from "vitest";
 
-import { seaportContractConfig } from "~test/src/abis.js";
-import { address } from "~test/src/constants.js";
-import { multicall3Abi } from "../../constants/abis.js";
-import type { Hex } from "../../types/misc.js";
-import { getAddress } from "../address/getAddress.js";
+import { seaportContractConfig } from "~test/src/abis";
+import { address } from "~test/src/constants";
+import { multicall3Abi } from "../../constants/abis";
+import type { Hex } from "../../types/misc";
+import { getAddress } from "../address/getAddress";
 
-import { decodeAbiParameters } from "./decodeAbiParameters.js";
-import { getAbiItem } from "./getAbiItem.js";
+import { decodeAbiParameters } from "./decodeAbiParameters";
+import { getAbiItem } from "./getAbiItem";
 
-import { hexToBytes } from "../encoding/toBytes.js";
-import { encodeAbiParameters } from "./encodeAbiParameters.js";
+import { hexToBytes } from "../encoding/toBytes";
+import { encodeAbiParameters } from "./encodeAbiParameters";
 
 describe("static", () => {
   test("blank", () => {

@@ -1,4 +1,4 @@
-import type { ErrorType } from "../../errors/utils.js";
+import type { ErrorType } from "../../errors/utils";
 
 export type FormatUnitsErrorType = ErrorType;
 

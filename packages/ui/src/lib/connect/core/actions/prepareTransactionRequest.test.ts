@@ -3,9 +3,9 @@ import { expect, test } from "vitest";
 
 import { parseEther } from "@/lib/connect/viem";
 import { privateKeyToAccount } from "@/lib/connect/viem/accounts";
-import { connect } from "./connect.js";
-import { disconnect } from "./disconnect.js";
-import { prepareTransactionRequest } from "./prepareTransactionRequest.js";
+import { connect } from "./connect";
+import { disconnect } from "./disconnect";
+import { prepareTransactionRequest } from "./prepareTransactionRequest";
 
 const connector = config.connectors[0]!;
 

@@ -5,15 +5,15 @@ import type {
   ContractFunctionName,
 } from "@/lib/connect/viem";
 
-import type { Config } from "../../createConfig.js";
-import type { UnionCompute, UnionStrictOmit } from "../../types/utils.js";
-import { getAccount } from "../getAccount.js";
-import { getChainId } from "../getChainId.js";
+import type { Config } from "../../createConfig";
+import type { UnionCompute, UnionStrictOmit } from "../../types/utils";
+import { getAccount } from "../getAccount";
+import { getChainId } from "../getChainId";
 import {
   type ReadContractParameters,
   type ReadContractReturnType,
   readContract,
-} from "../readContract.js";
+} from "../readContract";
 
 type stateMutability = "pure" | "view";
 

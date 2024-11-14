@@ -1,32 +1,32 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import type { TransactionReceipt } from '../../types/transaction.js'
-import type { OneOf } from '../../types/utils.js'
-import type { GetContractAddressParameter } from '../types/contract.js'
+} from '../../types/chain'
+import type { TransactionReceipt } from '../../types/transaction'
+import type { OneOf } from '../../types/utils'
+import type { GetContractAddressParameter } from '../types/contract'
 import {
   type GetPortalVersionErrorType,
   type GetPortalVersionParameters,
   getPortalVersion,
-} from './getPortalVersion.js'
+} from './getPortalVersion'
 import {
   type GetTimeToNextGameErrorType,
   type GetTimeToNextGameParameters,
   type GetTimeToNextGameReturnType,
   getTimeToNextGame,
-} from './getTimeToNextGame.js'
+} from './getTimeToNextGame'
 import {
   type GetTimeToNextL2OutputErrorType,
   type GetTimeToNextL2OutputParameters,
   type GetTimeToNextL2OutputReturnType,
   getTimeToNextL2Output,
-} from './getTimeToNextL2Output.js'
+} from './getTimeToNextL2Output'
 
 export type GetTimeToProveParameters<
   chain extends Chain | undefined = Chain | undefined,

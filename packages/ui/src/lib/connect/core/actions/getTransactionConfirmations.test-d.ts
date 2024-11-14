@@ -3,8 +3,8 @@ import { mainnet, zkSync } from "@/lib/connect/viem/chains";
 import { test } from "vitest";
 
 import { http } from "@/lib/connect/viem";
-import { createConfig } from "../createConfig.js";
-import { getTransactionConfirmations } from "./getTransactionConfirmations.js";
+import { createConfig } from "../createConfig";
+import { getTransactionConfirmations } from "./getTransactionConfirmations";
 
 test("default", async () => {
   getTransactionConfirmations(config, {

@@ -1,14 +1,14 @@
 import type { TypedData } from 'abitype'
 
-import type { Hex } from '../../types/misc.js'
-import type { TypedDataDefinition } from '../../types/typedData.js'
+import type { Hex } from '../../types/misc'
+import type { TypedDataDefinition } from '../../types/typedData'
 import {
   type HashTypedDataErrorType,
   hashTypedData,
-} from '../../utils/signature/hashTypedData.js'
+} from '../../utils/signature/hashTypedData'
 
-import type { ErrorType } from '../../errors/utils.js'
-import { type SignErrorType, sign } from './sign.js'
+import type { ErrorType } from '../../errors/utils'
+import { type SignErrorType, sign } from './sign'
 
 export type SignTypedDataParameters<
   typedData extends TypedData | Record<string, unknown> = TypedData,

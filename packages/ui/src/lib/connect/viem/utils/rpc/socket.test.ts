@@ -1,7 +1,7 @@
 import { expect, test, vi } from "vitest";
-import { anvilMainnet } from "../../../test/src/anvil.js";
-import { wait } from "../wait.js";
-import { getSocketRpcClient } from "./socket.js";
+import { anvilMainnet } from "../../../test/src/anvil";
+import { wait } from "../wait";
+import { getSocketRpcClient } from "./socket";
 
 test("default", async () => {
   let active = false;
@@ -319,7 +319,7 @@ test("keepAlive disabled", async () => {
   socketClient.close();
 });
 
-test("request (eth_subscribe)", async () => {
+test("request (mina_subscribe)", async () => {
   const socketClient = await getSocketRpcClient({
     key: "test-socket",
     async getSocket({ onResponse }) {
@@ -335,7 +335,7 @@ test("request (eth_subscribe)", async () => {
 
   const response = await new Promise((res) => {
     socketClient.request({
-      body: { method: "eth_subscribe" },
+      body: { method: "mina_subscribe" },
       onResponse: (data) => {
         res(data);
       },
@@ -354,7 +354,7 @@ test("request (eth_subscribe)", async () => {
   socketClient.close();
 });
 
-test("reconnect (eth_subscribe)", async () => {
+test("reconnect (mina_subscribe)", async () => {
   let active = true;
   let count = -1;
   const socketClient = await getSocketRpcClient({
@@ -398,7 +398,7 @@ test("reconnect (eth_subscribe)", async () => {
   expect(
     await new Promise((res, rej) => {
       socketClient.request({
-        body: { method: "eth_subscribe" },
+        body: { method: "mina_subscribe" },
         onResponse(data) {
           res(data);
         },
@@ -421,7 +421,7 @@ test("reconnect (eth_subscribe)", async () => {
     () =>
       new Promise((res, rej) => {
         socketClient.request({
-          body: { method: "eth_subscribe" },
+          body: { method: "mina_subscribe" },
           onResponse(data) {
             res(data);
           },
@@ -437,7 +437,7 @@ test("reconnect (eth_subscribe)", async () => {
   expect(
     await new Promise((res, rej) => {
       socketClient.request({
-        body: { method: "eth_subscribe" },
+        body: { method: "mina_subscribe" },
         onResponse(data) {
           res(data);
         },
@@ -457,7 +457,7 @@ test("reconnect (eth_subscribe)", async () => {
   socketClient.close();
 });
 
-test("request (eth_unsubscribe)", async () => {
+test("request (mina_unsubscribe)", async () => {
   const socketClient = await getSocketRpcClient({
     key: "test-socket",
     async getSocket({ onResponse }) {
@@ -473,7 +473,7 @@ test("request (eth_unsubscribe)", async () => {
 
   const response = await new Promise((res) => {
     socketClient.request({
-      body: { method: "eth_unsubscribe", params: ["0xabc"] },
+      body: { method: "mina_unsubscribe", params: ["0xabc"] },
       onResponse: (data) => {
         res(data);
       },
@@ -492,7 +492,7 @@ test("request (eth_unsubscribe)", async () => {
   socketClient.close();
 });
 
-test("request (eth_subscription)", async () => {
+test("request (mina_subscription)", async () => {
   const socketClient = await getSocketRpcClient({
     key: "test-socket",
     async getSocket({ onResponse }) {
@@ -505,7 +505,7 @@ test("request (eth_subscription)", async () => {
             onResponse({
               id: body.id ?? 1,
               jsonrpc: "2.0",
-              method: "eth_subscription",
+              method: "mina_subscription",
               params: { subscription: "0xabc", result: "ok" },
             });
           }, 50);
@@ -517,9 +517,9 @@ test("request (eth_subscription)", async () => {
 
   const response = await new Promise((res) => {
     socketClient.request({
-      body: { method: "eth_subscribe" },
+      body: { method: "mina_subscribe" },
       onResponse: (data) => {
-        if (data.method !== "eth_subscription") return;
+        if (data.method !== "mina_subscription") return;
         res(data);
       },
     });
@@ -528,7 +528,7 @@ test("request (eth_subscription)", async () => {
     {
       "id": 21,
       "jsonrpc": "2.0",
-      "method": "eth_subscription",
+      "method": "mina_subscription",
       "params": {
         "result": "ok",
         "subscription": "0xabc",
@@ -589,7 +589,7 @@ test("request (error on close - subscription)", async () => {
 
   const error = await new Promise((res) => {
     socketClient.request({
-      body: { method: "eth_subscribe" },
+      body: { method: "mina_subscribe" },
       onError: (error) => {
         res(error);
       },

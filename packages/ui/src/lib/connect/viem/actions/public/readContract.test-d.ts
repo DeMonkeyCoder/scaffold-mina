@@ -11,9 +11,9 @@ import {
 } from 'abitype/abis'
 import { assertType, expectTypeOf, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { type ReadContractParameters, readContract } from './readContract.js'
+import { type ReadContractParameters, readContract } from './readContract'
 
 const client = anvilMainnet.getClient()
 

@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getTransactionQueryOptions } from './getTransaction.js'
+import { getTransactionQueryOptions } from './getTransaction'
 
 test('default', () => {
   expect(getTransactionQueryOptions(config)).toMatchInlineSnapshot(`

@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
-import type { Signature } from "~@/lib/connect/viem/types/misc.js";
-import { signatureToCompactSignature } from "./signatureToCompactSignature.js";
+import type { Signature } from "~@/lib/connect/viem/types/misc";
+import { signatureToCompactSignature } from "./signatureToCompactSignature";
 
 test("default", () => {
   const signature0: Signature = {

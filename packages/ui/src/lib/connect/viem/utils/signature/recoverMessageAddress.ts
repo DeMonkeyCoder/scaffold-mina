@@ -5,14 +5,14 @@ import type {
   Hex,
   SignableMessage,
   Signature,
-} from '../../types/misc.js'
+} from '../../types/misc'
 
-import type { ErrorType } from '../../errors/utils.js'
-import { type HashMessageErrorType, hashMessage } from './hashMessage.js'
+import type { ErrorType } from '../../errors/utils'
+import { type HashMessageErrorType, hashMessage } from './hashMessage'
 import {
   type RecoverAddressErrorType,
   recoverAddress,
-} from './recoverAddress.js'
+} from './recoverAddress'
 
 export type RecoverMessageAddressParameters = {
   message: SignableMessage

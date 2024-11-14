@@ -1,6 +1,6 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { useFeeHistory } from './useFeeHistory.js'
+import { useFeeHistory } from './useFeeHistory'
 
 test('select data', () => {
   const result = useFeeHistory({

@@ -9,10 +9,10 @@ import {
   watchPublicClient,
 } from "@/lib/connect/core/exports";
 import type { Compute } from "@/lib/connect/core/exports/internal";
-import { useSyncExternalStoreWithSelector } from "use-sync-external-store/shim/with-selector.js";
+import { useSyncExternalStoreWithSelector } from "use-sync-external-store/shim/with-selector";
 
-import type { ConfigParameter } from "../types/properties.js";
-import { useConfig } from "./useConfig.js";
+import type { ConfigParameter } from "../types/properties";
+import { useConfig } from "./useConfig";
 
 export type UsePublicClientParameters<
   config extends Config = Config,

@@ -2,60 +2,60 @@ import type { Address, Narrow } from 'abitype'
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../../accounts/utils/parseAccount.js'
+} from '../../../accounts/utils/parseAccount'
 import {
   type EstimateFeesPerGasErrorType,
   estimateFeesPerGas,
-} from '../../../actions/public/estimateFeesPerGas.js'
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import { AccountNotFoundError } from '../../../errors/account.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { Chain } from '../../../types/chain.js'
-import type { ContractFunctionParameters } from '../../../types/contract.js'
-import type { Hex } from '../../../types/misc.js'
+} from '../../../actions/public/estimateFeesPerGas'
+import type { Client } from '../../../clients/createClient'
+import type { Transport } from '../../../clients/transports/createTransport'
+import { AccountNotFoundError } from '../../../errors/account'
+import type { ErrorType } from '../../../errors/utils'
+import type { Chain } from '../../../types/chain'
+import type { ContractFunctionParameters } from '../../../types/contract'
+import type { Hex } from '../../../types/misc'
 import type {
   Assign,
   OneOf,
   Prettify,
   UnionOmit,
-} from '../../../types/utils.js'
+} from '../../../types/utils'
 import {
   type EncodeFunctionDataErrorType,
   encodeFunctionData,
-} from '../../../utils/abi/encodeFunctionData.js'
-import { type ConcatErrorType, concat } from '../../../utils/data/concat.js'
-import { getAction } from '../../../utils/getAction.js'
-import { parseGwei } from '../../../utils/unit/parseGwei.js'
-import type { SmartAccount } from '../../accounts/types.js'
-import type { BundlerClient } from '../../clients/createBundlerClient.js'
-import type { PaymasterActions } from '../../clients/decorators/paymaster.js'
+} from '../../../utils/abi/encodeFunctionData'
+import { type ConcatErrorType, concat } from '../../../utils/data/concat'
+import { getAction } from '../../../utils/getAction'
+import { parseGwei } from '../../../utils/unit/parseGwei'
+import type { SmartAccount } from '../../accounts/types'
+import type { BundlerClient } from '../../clients/createBundlerClient'
+import type { PaymasterActions } from '../../clients/decorators/paymaster'
 import type {
   DeriveSmartAccount,
   GetSmartAccountParameter,
-} from '../../types/account.js'
+} from '../../types/account'
 import type {
   DeriveEntryPointVersion,
   EntryPointVersion,
-} from '../../types/entryPointVersion.js'
+} from '../../types/entryPointVersion'
 import type {
   UserOperation,
   UserOperationCall,
   UserOperationCalls,
   UserOperationRequest,
-} from '../../types/userOperation.js'
+} from '../../types/userOperation'
 import {
   type GetPaymasterDataErrorType,
   getPaymasterData as getPaymasterData_,
-} from '../paymaster/getPaymasterData.js'
+} from '../paymaster/getPaymasterData'
 import {
   type GetPaymasterStubDataErrorType,
   getPaymasterStubData as getPaymasterStubData_,
-} from '../paymaster/getPaymasterStubData.js'
+} from '../paymaster/getPaymasterStubData'
 import {
   type EstimateUserOperationGasParameters,
   estimateUserOperationGas,
-} from './estimateUserOperationGas.js'
+} from './estimateUserOperationGas'
 
 const defaultParameters = [
   'factory',

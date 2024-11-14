@@ -1,11 +1,11 @@
 import { expect, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { accounts } from '../../../test/src/constants.js'
-import { deploySoladyAccount_07 } from '../../../test/src/utils.js'
-import { mine, writeContract } from '../../actions/index.js'
-import { pad } from '../../utils/index.js'
-import { toSoladySmartAccount } from './implementations/toSoladySmartAccount.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { accounts } from '../../../test/src/constants'
+import { deploySoladyAccount_07 } from '../../../test/src/utils'
+import { mine, writeContract } from '../../actions/index'
+import { pad } from '../../utils/index'
+import { toSoladySmartAccount } from './implementations/toSoladySmartAccount'
 
 const client = anvilMainnet.getClient({ account: true })
 

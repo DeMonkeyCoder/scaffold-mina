@@ -1,11 +1,11 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex, SignableMessage } from '../../types/misc.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex, SignableMessage } from '../../types/misc'
 import {
   type HashMessageErrorType,
   hashMessage,
-} from '../../utils/signature/hashMessage.js'
+} from '../../utils/signature/hashMessage'
 
-import { type SignErrorType, sign } from './sign.js'
+import { type SignErrorType, sign } from './sign'
 
 export type SignMessageParameters = {
   /** The message to sign. */

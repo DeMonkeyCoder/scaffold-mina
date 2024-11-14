@@ -15,7 +15,7 @@ import { parseEther } from "@/lib/connect/viem";
 import type { OnTransactionsParameter } from "@/lib/connect/viem/actions";
 import { expect, test } from "vitest";
 
-import { useWatchPendingTransactions } from "./useWatchPendingTransactions.js";
+import { useWatchPendingTransactions } from "./useWatchPendingTransactions";
 
 const connector = config.connectors[0]!;
 

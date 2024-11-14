@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { generateMnemonic } from './generateMnemonic.js'
+import { generateMnemonic } from './generateMnemonic'
 import {
   czech,
   english,
@@ -10,7 +10,7 @@ import {
   simplifiedChinese,
   spanish,
   traditionalChinese,
-} from './index.js'
+} from './index'
 
 test('english', () => {
   const phrase = generateMnemonic(english)

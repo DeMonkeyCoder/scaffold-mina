@@ -4,33 +4,33 @@ export {
   type SignMessageParameters,
   type SignMessageReturnType,
   signMessage,
-} from './actions/signMessage.js'
+} from './actions/signMessage'
 export {
   type SignTypedDataErrorType,
   type SignTypedDataParameters,
   type SignTypedDataReturnType,
   signTypedData,
-} from './actions/signTypedData.js'
+} from './actions/signTypedData'
 export {
   type Erc7739Actions,
   type Erc7739ActionsParameters,
   erc7739Actions,
-} from './decorators/erc7739.js'
+} from './decorators/erc7739'
 export {
   type HashMessageErrorType,
   type HashMessageParameters,
   type HashMessageReturnType,
   hashMessage,
-} from './utils/hashMessage.js'
+} from './utils/hashMessage'
 export {
   type HashTypedDataErrorType,
   type HashTypedDataParameters,
   type HashTypedDataReturnType,
   hashTypedData,
-} from './utils/hashTypedData.js'
+} from './utils/hashTypedData'
 export {
   type WrapTypedDataSignatureErrorType,
   type WrapTypedDataSignatureParameters,
   type WrapTypedDataSignatureReturnType,
   wrapTypedDataSignature,
-} from './utils/wrapTypedDataSignature.js'
+} from './utils/wrapTypedDataSignature'

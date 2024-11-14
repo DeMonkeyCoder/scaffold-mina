@@ -1,10 +1,10 @@
 import type { Address } from 'abitype'
-import { erc6492MagicBytes } from '../../constants/bytes.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex } from '../../types/misc.js'
-import { encodeAbiParameters } from '../abi/encodeAbiParameters.js'
-import { concatHex } from '../data/concat.js'
-import { hexToBytes } from '../encoding/toBytes.js'
+import { erc6492MagicBytes } from '../../constants/bytes'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex } from '../../types/misc'
+import { encodeAbiParameters } from '../abi/encodeAbiParameters'
+import { concatHex } from '../data/concat'
+import { hexToBytes } from '../encoding/toBytes'
 
 type To = 'bytes' | 'hex'
 

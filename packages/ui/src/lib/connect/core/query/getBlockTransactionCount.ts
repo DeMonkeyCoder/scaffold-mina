@@ -5,11 +5,11 @@ import {
   type GetBlockTransactionCountParameters,
   type GetBlockTransactionCountReturnType,
   getBlockTransactionCount,
-} from '../actions/getBlockTransactionCount.js'
-import type { Config } from '../createConfig.js'
-import type { ScopeKeyParameter } from '../types/properties.js'
-import type { ExactPartial, UnionCompute } from '../types/utils.js'
-import { filterQueryOptions } from './utils.js'
+} from '../actions/getBlockTransactionCount'
+import type { Config } from '../createConfig'
+import type { ScopeKeyParameter } from '../types/properties'
+import type { ExactPartial, UnionCompute } from '../types/utils'
+import { filterQueryOptions } from './utils'
 
 export type GetBlockTransactionCountOptions<
   config extends Config,

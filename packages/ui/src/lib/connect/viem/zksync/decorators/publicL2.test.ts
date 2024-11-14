@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
 
 import type { Address } from 'abitype'
-import { zksyncLocalNode } from '../../../src/chains/index.js'
-import { getZksyncMockProvider } from '../../../test/src/zksync.js'
+import { zksyncLocalNode } from '../../../src/chains/index'
+import { getZksyncMockProvider } from '../../../test/src/zksync'
 import {
   mockAccountBalances,
   mockAddress,
@@ -15,15 +15,15 @@ import {
   mockTransactionDetails,
   mockedGasEstimation,
   mockedL1BatchNumber,
-} from '../../../test/src/zksync.js'
-import { createPublicClient } from '../../clients/createPublicClient.js'
-import { custom } from '../../clients/transports/custom.js'
-import { estimateFee } from '../actions/estimateFee.js'
-import { estimateGasL1ToL2 } from '../actions/estimateGasL1ToL2.js'
-import type { GetAllBalancesReturnType } from '../actions/getAllBalances.js'
-import { getLogProof } from '../actions/getLogProof.js'
-import { getTransactionDetails } from '../actions/getTransactionDetails.js'
-import { publicActionsL2 } from './publicL2.js'
+} from '../../../test/src/zksync'
+import { createPublicClient } from '../../clients/createPublicClient'
+import { custom } from '../../clients/transports/custom'
+import { estimateFee } from '../actions/estimateFee'
+import { estimateGasL1ToL2 } from '../actions/estimateGasL1ToL2'
+import type { GetAllBalancesReturnType } from '../actions/getAllBalances'
+import { getLogProof } from '../actions/getLogProof'
+import { getTransactionDetails } from '../actions/getTransactionDetails'
+import { publicActionsL2 } from './publicL2'
 
 const mockedZksyncClient = createPublicClient({
   transport: custom(

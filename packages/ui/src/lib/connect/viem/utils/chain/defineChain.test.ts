@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { defineChain } from './defineChain.js'
+import { defineChain } from './defineChain'
 
 test('default', () => {
   expect(

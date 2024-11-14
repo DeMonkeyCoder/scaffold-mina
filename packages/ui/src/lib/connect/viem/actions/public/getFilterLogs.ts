@@ -1,30 +1,27 @@
-import type { Abi, AbiEvent, ExtractAbiEvent } from 'abitype'
+import type { Abi, AbiEvent, ExtractAbiEvent } from "abitype";
 
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { BlockNumber, BlockTag } from '../../types/block.js'
-import type { Chain } from '../../types/chain.js'
-import type { Filter } from '../../types/filter.js'
-import type { Log } from '../../types/log.js'
-import type { DecodeEventLogErrorType } from '../../utils/abi/decodeEventLog.js'
-import { parseEventLogs } from '../../utils/abi/parseEventLogs.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
-import {
-  type FormatLogErrorType,
-  formatLog,
-} from '../../utils/formatters/log.js'
+import type { ErrorType } from "../../errors/utils";
+import type { BlockNumber, BlockTag } from "../../types/block";
+import type { Chain } from "../../types/chain";
+import type { Filter } from "../../types/filter";
+import type { Log } from "../../types/log";
+import type { DecodeEventLogErrorType } from "../../utils/abi/decodeEventLog";
+import { parseEventLogs } from "../../utils/abi/parseEventLogs";
+import type { RequestErrorType } from "../../utils/buildRequest";
+import { type FormatLogErrorType, formatLog } from "../../utils/formatters/log";
 
 export type GetFilterLogsParameters<
   abi extends Abi | readonly unknown[] | undefined = undefined,
   eventName extends string | undefined = undefined,
   strict extends boolean | undefined = undefined,
   fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined,
+  toBlock extends BlockNumber | BlockTag | undefined = undefined
 > = {
-  filter: Filter<'event', abi, eventName, any, strict, fromBlock, toBlock>
-}
+  filter: Filter<"event", abi, eventName, any, strict, fromBlock, toBlock>;
+};
 export type GetFilterLogsReturnType<
   abi extends Abi | readonly unknown[] | undefined = undefined,
   eventName extends string | undefined = undefined,
@@ -37,21 +34,21 @@ export type GetFilterLogsReturnType<
       : undefined
     : undefined,
   _Pending extends boolean =
-    | (fromBlock extends 'pending' ? true : false)
-    | (toBlock extends 'pending' ? true : false),
-> = Log<bigint, number, _Pending, _AbiEvent, strict, abi, eventName>[]
+    | (fromBlock extends "pending" ? true : false)
+    | (toBlock extends "pending" ? true : false)
+> = Log<bigint, number, _Pending, _AbiEvent, strict, abi, eventName>[];
 
 export type GetFilterLogsErrorType =
   | RequestErrorType
   | DecodeEventLogErrorType
   | FormatLogErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Returns a list of event logs since the filter was created.
  *
  * - Docs: https://viem.sh/docs/actions/public/getFilterLogs
- * - JSON-RPC Methods: [`eth_getFilterLogs`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getfilterlogs)
+ * - JSON-RPC Methods: [`mina_getFilterLogs`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getfilterlogs)
  *
  * `getFilterLogs` is only compatible with **event filters**.
  *
@@ -80,23 +77,23 @@ export async function getFilterLogs<
   eventName extends string | undefined,
   strict extends boolean | undefined = undefined,
   fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined,
+  toBlock extends BlockNumber | BlockTag | undefined = undefined
 >(
   _client: Client<Transport, chain>,
   {
     filter,
-  }: GetFilterLogsParameters<abi, eventName, strict, fromBlock, toBlock>,
+  }: GetFilterLogsParameters<abi, eventName, strict, fromBlock, toBlock>
 ): Promise<
   GetFilterLogsReturnType<abi, eventName, strict, fromBlock, toBlock>
 > {
-  const strict = filter.strict ?? false
+  const strict = filter.strict ?? false;
 
   const logs = await filter.request({
-    method: 'eth_getFilterLogs',
+    method: "mina_getFilterLogs",
     params: [filter.id],
-  })
+  });
 
-  const formattedLogs = logs.map((log) => formatLog(log))
+  const formattedLogs = logs.map((log) => formatLog(log));
   if (!filter.abi)
     return formattedLogs as GetFilterLogsReturnType<
       abi,
@@ -104,7 +101,7 @@ export async function getFilterLogs<
       strict,
       fromBlock,
       toBlock
-    >
+    >;
   return parseEventLogs({
     abi: filter.abi,
     logs: formattedLogs,
@@ -115,5 +112,5 @@ export async function getFilterLogs<
     strict,
     fromBlock,
     toBlock
-  >
+  >;
 }

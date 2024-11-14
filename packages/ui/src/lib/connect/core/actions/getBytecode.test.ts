@@ -1,7 +1,7 @@
 import { address, chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getBytecode } from './getBytecode.js'
+import { getBytecode } from './getBytecode'
 
 test('default', async () => {
   await expect(

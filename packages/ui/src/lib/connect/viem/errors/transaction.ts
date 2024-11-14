@@ -1,13 +1,13 @@
-import type { Account } from '../accounts/types.js'
-import type { SendTransactionParameters } from '../actions/wallet/sendTransaction.js'
-import type { BlockTag } from '../types/block.js'
-import type { Chain } from '../types/chain.js'
-import type { Hash, Hex } from '../types/misc.js'
-import type { TransactionType } from '../types/transaction.js'
-import { formatEther } from '../utils/unit/formatEther.js'
-import { formatGwei } from '../utils/unit/formatGwei.js'
+import type { Account } from '../accounts/types'
+import type { SendTransactionParameters } from '../actions/wallet/sendTransaction'
+import type { BlockTag } from '../types/block'
+import type { Chain } from '../types/chain'
+import type { Hash, Hex } from '../types/misc'
+import type { TransactionType } from '../types/transaction'
+import { formatEther } from '../utils/unit/formatEther'
+import { formatGwei } from '../utils/unit/formatGwei'
 
-import { BaseError } from './base.js'
+import { BaseError } from './base'
 
 export function prettyPrint(
   args: Record<string, bigint | number | string | undefined | false | unknown>,

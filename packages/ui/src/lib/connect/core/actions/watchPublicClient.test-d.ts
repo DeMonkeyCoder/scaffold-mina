@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expectTypeOf, test } from 'vitest'
 
-import { watchPublicClient } from './watchPublicClient.js'
+import { watchPublicClient } from './watchPublicClient'
 
 test('default', () => {
   watchPublicClient(config, {

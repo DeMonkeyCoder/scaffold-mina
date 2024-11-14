@@ -1,7 +1,7 @@
 import { abi, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { infiniteReadContractsQueryOptions } from './infiniteReadContracts.js'
+import { infiniteReadContractsQueryOptions } from './infiniteReadContracts'
 
 test('default', () => {
   expect(

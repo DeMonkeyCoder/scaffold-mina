@@ -6,7 +6,7 @@ import { config } from "@wagmi/test";
 import { expectTypeOf, test } from "vitest";
 
 import type { Address } from "@/lib/connect/viem";
-import { useSwitchAccount } from "./useSwitchAccount.js";
+import { useSwitchAccount } from "./useSwitchAccount";
 
 const connector = config.connectors[0]!;
 const contextValue = { foo: "bar" } as const;

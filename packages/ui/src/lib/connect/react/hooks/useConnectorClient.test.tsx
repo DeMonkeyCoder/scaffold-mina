@@ -4,11 +4,11 @@ import { render, renderHook, waitFor } from "@wagmi/test/react";
 import * as React from "react";
 import { expect, test } from "vitest";
 
-import { useAccount } from "./useAccount.js";
-import { useConnect } from "./useConnect.js";
-import { useConnectorClient } from "./useConnectorClient.js";
-import { useDisconnect } from "./useDisconnect.js";
-import { useSwitchChain } from "./useSwitchChain.js";
+import { useAccount } from "./useAccount";
+import { useConnect } from "./useConnect";
+import { useConnectorClient } from "./useConnectorClient";
+import { useDisconnect } from "./useDisconnect";
+import { useSwitchChain } from "./useSwitchChain";
 
 const connector = config.connectors[0]!;
 

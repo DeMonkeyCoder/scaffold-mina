@@ -1,10 +1,10 @@
 import type { Address } from 'abitype'
 
-import type { Hex } from '../types/misc.js'
-import { stringify } from '../utils/stringify.js'
+import type { Hex } from '../types/misc'
+import { stringify } from '../utils/stringify'
 
-import { BaseError } from './base.js'
-import { getUrl } from './utils.js'
+import { BaseError } from './base'
+import { getUrl } from './utils'
 
 export type OffchainLookupErrorType = OffchainLookupError & {
   name: 'OffchainLookupError'

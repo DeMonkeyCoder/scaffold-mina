@@ -1,7 +1,7 @@
 import { hexlify, toBeHex, toUtf8Bytes } from "ethers";
 import { bench, describe } from "vitest";
 
-import { bytesToHex, numberToHex, stringToHex } from "./toHex.js";
+import { bytesToHex, numberToHex, stringToHex } from "./toHex";
 
 const generateBytes = (length: number) => {
   const bytes = new Uint8Array(length);

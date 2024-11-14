@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
-import { injected } from '../connectors/injected.js'
-import { unstable_connector } from './connector.js'
+import { injected } from '../connectors/injected'
+import { unstable_connector } from './connector'
 
 test('setup', () => {
   expect(unstable_connector(injected)({})).toMatchInlineSnapshot(`

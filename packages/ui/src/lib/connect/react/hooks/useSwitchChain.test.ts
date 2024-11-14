@@ -3,8 +3,8 @@ import { chain, config } from "@wagmi/test";
 import { renderHook, waitFor } from "@wagmi/test/react";
 import { expect, test } from "vitest";
 
-import { useAccount } from "./useAccount.js";
-import { useSwitchChain } from "./useSwitchChain.js";
+import { useAccount } from "./useAccount";
+import { useSwitchChain } from "./useSwitchChain";
 
 const connector = config.connectors[0]!;
 

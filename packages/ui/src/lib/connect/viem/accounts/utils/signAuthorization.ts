@@ -1,20 +1,20 @@
-import type { ErrorType } from '../../errors/utils.js'
+import type { ErrorType } from '../../errors/utils'
 import type {
   Authorization,
   SignedAuthorization,
-} from '../../experimental/eip7702/types/authorization.js'
+} from '../../experimental/eip7702/types/authorization'
 import {
   type HashAuthorizationErrorType,
   hashAuthorization,
-} from '../../experimental/eip7702/utils/hashAuthorization.js'
-import type { Hex, Signature } from '../../types/misc.js'
-import type { Prettify } from '../../types/utils.js'
+} from '../../experimental/eip7702/utils/hashAuthorization'
+import type { Hex, Signature } from '../../types/misc'
+import type { Prettify } from '../../types/utils'
 import {
   type SignErrorType,
   type SignParameters,
   type SignReturnType,
   sign,
-} from './sign.js'
+} from './sign'
 
 type To = 'object' | 'bytes' | 'hex'
 

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
-import { RpcRequestError } from '../../../errors/request.js'
-import { getBundlerError } from './getBundlerError.js'
+import { RpcRequestError } from '../../../errors/request'
+import { getBundlerError } from './getBundlerError'
 
 test('AccountNotDeployedError', () => {
   const error = new RpcRequestError({

@@ -1,6 +1,6 @@
-import type { ByteArray, Hex } from '../types/misc.js'
+import type { ByteArray, Hex } from '../types/misc'
 
-import { BaseError } from './base.js'
+import { BaseError } from './base'
 
 export type IntegerOutOfRangeErrorType = IntegerOutOfRangeError & {
   name: 'IntegerOutOfRangeError'

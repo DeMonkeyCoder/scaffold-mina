@@ -1,7 +1,7 @@
 import { expectTypeOf, test } from 'vitest'
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { createEventFilter } from './createEventFilter.js'
+import { createEventFilter } from './createEventFilter'
 
 const client = anvilMainnet.getClient()
 

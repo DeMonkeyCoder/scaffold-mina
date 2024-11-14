@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { isBytesEqual } from './isBytesEqual.js'
+import { isBytesEqual } from './isBytesEqual'
 
 test('is bytes', () => {
   // true

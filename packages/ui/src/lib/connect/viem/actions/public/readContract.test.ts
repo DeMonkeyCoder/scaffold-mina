@@ -10,18 +10,18 @@ import {
   ErrorsExample,
   SoladyAccount07,
   SoladyAccountFactory07,
-} from '~contracts/generated.js'
-import { baycContractConfig, wagmiContractConfig } from '~test/src/abis.js'
-import { accounts, address } from '~test/src/constants.js'
-import { deployErrorExample, deploySoladyAccount_07 } from '~test/src/utils.js'
+} from '~contracts/generated'
+import { baycContractConfig, wagmiContractConfig } from '~test/src/abis'
+import { accounts, address } from '~test/src/constants'
+import { deployErrorExample, deploySoladyAccount_07 } from '~test/src/utils'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import type { Hex } from '../../types/misc.js'
-import { pad } from '../../utils/data/pad.js'
-import { toHex } from '../../utils/encoding/toHex.js'
-import { encodeFunctionData } from '../../utils/index.js'
-import { readContract } from './readContract.js'
+import type { Hex } from '../../types/misc'
+import { pad } from '../../utils/data/pad'
+import { toHex } from '../../utils/encoding/toHex'
+import { encodeFunctionData } from '../../utils/index'
+import { readContract } from './readContract'
 
 const client = anvilMainnet.getClient()
 

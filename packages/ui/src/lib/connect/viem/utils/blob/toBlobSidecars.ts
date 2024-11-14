@@ -1,14 +1,14 @@
-import type { ErrorType } from "../../errors/utils.js";
-import type { BlobSidecars } from "../../types/eip4844.js";
-import type { Kzg } from "../../types/kzg.js";
-import type { ByteArray, Hex } from "../../types/misc.js";
-import type { OneOf } from "../../types/utils.js";
+import type { ErrorType } from "../../errors/utils";
+import type { BlobSidecars } from "../../types/eip4844";
+import type { Kzg } from "../../types/kzg";
+import type { ByteArray, Hex } from "../../types/misc";
+import type { OneOf } from "../../types/utils";
 import {
   type BlobsToCommitmentsErrorType,
   blobsToCommitments,
-} from "./blobsToCommitments.js";
-import { blobsToProofs, type blobsToProofsErrorType } from "./blobsToProofs.js";
-import { type ToBlobsErrorType, toBlobs } from "./toBlobs.js";
+} from "./blobsToCommitments";
+import { blobsToProofs, type blobsToProofsErrorType } from "./blobsToProofs";
+import { type ToBlobsErrorType, toBlobs } from "./toBlobs";
 
 type To = "hex" | "bytes";
 

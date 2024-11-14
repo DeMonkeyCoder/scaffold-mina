@@ -1,20 +1,20 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { AssetGatewayUrls } from '../../types/ens.js'
-import type { Prettify } from '../../types/utils.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { AssetGatewayUrls } from '../../types/ens'
+import type { Prettify } from '../../types/utils'
 import {
   type ParseAvatarRecordErrorType,
   parseAvatarRecord,
-} from '../../utils/ens/avatar/parseAvatarRecord.js'
-import { getAction } from '../../utils/getAction.js'
+} from '../../utils/ens/avatar/parseAvatarRecord'
+import { getAction } from '../../utils/getAction'
 
 import {
   type GetEnsTextErrorType,
   type GetEnsTextParameters,
   getEnsText,
-} from './getEnsText.js'
+} from './getEnsText'
 
 export type GetEnsAvatarParameters = Prettify<
   Omit<GetEnsTextParameters, 'key'> & {

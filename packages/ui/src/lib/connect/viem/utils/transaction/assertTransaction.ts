@@ -1,9 +1,9 @@
-import { versionedHashVersionKzg } from '../../constants/kzg.js'
+import { versionedHashVersionKzg } from '../../constants/kzg'
 import {
   InvalidAddressError,
   type InvalidAddressErrorType,
-} from '../../errors/address.js'
-import { BaseError, type BaseErrorType } from '../../errors/base.js'
+} from '../../errors/address'
+import { BaseError, type BaseErrorType } from '../../errors/base'
 import {
   EmptyBlobError,
   type EmptyBlobErrorType,
@@ -11,29 +11,29 @@ import {
   type InvalidVersionedHashSizeErrorType,
   InvalidVersionedHashVersionError,
   type InvalidVersionedHashVersionErrorType,
-} from '../../errors/blob.js'
+} from '../../errors/blob'
 import {
   InvalidChainIdError,
   type InvalidChainIdErrorType,
-} from '../../errors/chain.js'
+} from '../../errors/chain'
 import {
   FeeCapTooHighError,
   type FeeCapTooHighErrorType,
   TipAboveFeeCapError,
   type TipAboveFeeCapErrorType,
-} from '../../errors/node.js'
-import type { ErrorType } from '../../errors/utils.js'
+} from '../../errors/node'
+import type { ErrorType } from '../../errors/utils'
 import type {
   TransactionSerializableEIP1559,
   TransactionSerializableEIP2930,
   TransactionSerializableEIP4844,
   TransactionSerializableEIP7702,
   TransactionSerializableLegacy,
-} from '../../types/transaction.js'
-import { type IsAddressErrorType, isAddress } from '../address/isAddress.js'
-import { size } from '../data/size.js'
-import { slice } from '../data/slice.js'
-import { hexToNumber } from '../encoding/fromHex.js'
+} from '../../types/transaction'
+import { type IsAddressErrorType, isAddress } from '../address/isAddress'
+import { size } from '../data/size'
+import { slice } from '../data/slice'
+import { hexToNumber } from '../encoding/fromHex'
 
 export type AssertTransactionEIP7702ErrorType =
   | AssertTransactionEIP1559ErrorType

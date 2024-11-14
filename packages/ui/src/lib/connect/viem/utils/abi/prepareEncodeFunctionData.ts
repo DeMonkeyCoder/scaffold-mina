@@ -8,22 +8,22 @@ import type {
 import {
   AbiFunctionNotFoundError,
   type AbiFunctionNotFoundErrorType,
-} from '../../errors/abi.js'
+} from '../../errors/abi'
 import type {
   ContractFunctionArgs,
   ContractFunctionName,
-} from '../../types/contract.js'
-import type { ConcatHexErrorType } from '../data/concat.js'
+} from '../../types/contract'
+import type { ConcatHexErrorType } from '../data/concat'
 import {
   type ToFunctionSelectorErrorType,
   toFunctionSelector,
-} from '../hash/toFunctionSelector.js'
+} from '../hash/toFunctionSelector'
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex } from '../../types/misc.js'
-import type { IsNarrowable, UnionEvaluate } from '../../types/utils.js'
-import { type FormatAbiItemErrorType, formatAbiItem } from './formatAbiItem.js'
-import { type GetAbiItemErrorType, getAbiItem } from './getAbiItem.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex } from '../../types/misc'
+import type { IsNarrowable, UnionEvaluate } from '../../types/utils'
+import { type FormatAbiItemErrorType, formatAbiItem } from './formatAbiItem'
+import { type GetAbiItemErrorType, getAbiItem } from './getAbiItem'
 
 const docsPath = '/docs/contract/encodeFunctionData'
 

@@ -1,16 +1,16 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { AuthorizationList } from '../../experimental/eip7702/types/authorization.js'
-import type { RpcAuthorizationList } from '../../experimental/eip7702/types/rpc.js'
+import type { ErrorType } from '../../errors/utils'
+import type { AuthorizationList } from '../../experimental/eip7702/types/authorization'
+import type { RpcAuthorizationList } from '../../experimental/eip7702/types/rpc'
 import type {
   Chain,
   ExtractChainFormatterParameters,
-} from '../../types/chain.js'
-import type { ByteArray } from '../../types/misc.js'
-import type { RpcTransactionRequest } from '../../types/rpc.js'
-import type { TransactionRequest } from '../../types/transaction.js'
-import type { ExactPartial } from '../../types/utils.js'
-import { bytesToHex, numberToHex } from '../encoding/toHex.js'
-import { type DefineFormatterErrorType, defineFormatter } from './formatter.js'
+} from '../../types/chain'
+import type { ByteArray } from '../../types/misc'
+import type { RpcTransactionRequest } from '../../types/rpc'
+import type { TransactionRequest } from '../../types/transaction'
+import type { ExactPartial } from '../../types/utils'
+import { bytesToHex, numberToHex } from '../encoding/toHex'
+import { type DefineFormatterErrorType, defineFormatter } from './formatter'
 
 export type FormattedTransactionRequest<
   chain extends Chain | undefined = Chain | undefined,

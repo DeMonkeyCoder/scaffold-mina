@@ -1,40 +1,40 @@
-import type { Address, Narrow } from 'abitype'
-import { parseAccount } from '../../../accounts/utils/parseAccount.js'
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import { AccountNotFoundError } from '../../../errors/account.js'
-import type { BaseError } from '../../../errors/base.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { Chain } from '../../../types/chain.js'
-import type { Hex } from '../../../types/misc.js'
-import type { Assign, OneOf } from '../../../types/utils.js'
-import type { RequestErrorType } from '../../../utils/buildRequest.js'
-import { getAction } from '../../../utils/getAction.js'
-import type { SmartAccount } from '../../accounts/types.js'
-import type { PaymasterActions } from '../../clients/decorators/paymaster.js'
+import type { Address, Narrow } from "abitype";
+import { parseAccount } from "../../../accounts/utils/parseAccount";
+import type { Client } from "../../../clients/createClient";
+import type { Transport } from "../../../clients/transports/createTransport";
+import { AccountNotFoundError } from "../../../errors/account";
+import type { BaseError } from "../../../errors/base";
+import type { ErrorType } from "../../../errors/utils";
+import type { Chain } from "../../../types/chain";
+import type { Hex } from "../../../types/misc";
+import type { Assign, OneOf } from "../../../types/utils";
+import type { RequestErrorType } from "../../../utils/buildRequest";
+import { getAction } from "../../../utils/getAction";
+import type { SmartAccount } from "../../accounts/types";
+import type { PaymasterActions } from "../../clients/decorators/paymaster";
 import type {
   DeriveSmartAccount,
   GetSmartAccountParameter,
-} from '../../types/account.js'
+} from "../../types/account";
 import type {
   DeriveEntryPointVersion,
   EntryPointVersion,
-} from '../../types/entryPointVersion.js'
+} from "../../types/entryPointVersion";
 import type {
   UserOperation,
   UserOperationCalls,
   UserOperationRequest,
-} from '../../types/userOperation.js'
-import { getUserOperationError } from '../../utils/errors/getUserOperationError.js'
+} from "../../types/userOperation";
+import { getUserOperationError } from "../../utils/errors/getUserOperationError";
 import {
   type FormatUserOperationRequestErrorType,
   formatUserOperationRequest,
-} from '../../utils/formatters/userOperationRequest.js'
+} from "../../utils/formatters/userOperationRequest";
 import {
   type PrepareUserOperationErrorType,
   type PrepareUserOperationParameters,
   prepareUserOperation,
-} from './prepareUserOperation.js'
+} from "./prepareUserOperation";
 
 export type SendUserOperationParameters<
   account extends SmartAccount | undefined = SmartAccount | undefined,
@@ -45,8 +45,7 @@ export type SendUserOperationParameters<
     account,
     accountOverride
   >,
-  _derivedVersion extends
-    EntryPointVersion = DeriveEntryPointVersion<_derivedAccount>,
+  _derivedVersion extends EntryPointVersion = DeriveEntryPointVersion<_derivedAccount>
 > = Assign<
   UserOperationRequest<_derivedVersion>,
   OneOf<{ calls: UserOperationCalls<Narrow<calls>> } | { callData: Hex }> & {
@@ -55,26 +54,26 @@ export type SendUserOperationParameters<
       | true
       | {
           /** Retrieves paymaster-related User Operation properties to be used for sending the User Operation. */
-          getPaymasterData?: PaymasterActions['getPaymasterData'] | undefined
+          getPaymasterData?: PaymasterActions["getPaymasterData"] | undefined;
           /** Retrieves paymaster-related User Operation properties to be used for gas estimation. */
           getPaymasterStubData?:
-            | PaymasterActions['getPaymasterStubData']
-            | undefined
+            | PaymasterActions["getPaymasterStubData"]
+            | undefined;
         }
-      | undefined
+      | undefined;
     /** Paymaster context to pass to `getPaymasterData` and `getPaymasterStubData` calls. */
-    paymasterContext?: unknown
+    paymasterContext?: unknown;
   }
 > &
-  GetSmartAccountParameter<account, accountOverride>
+  GetSmartAccountParameter<account, accountOverride>;
 
-export type SendUserOperationReturnType = Hex
+export type SendUserOperationReturnType = Hex;
 
 export type SendUserOperationErrorType =
   | FormatUserOperationRequestErrorType
   | PrepareUserOperationErrorType
   | RequestErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Broadcasts a User Operation to the Bundler.
@@ -106,44 +105,44 @@ export type SendUserOperationErrorType =
 export async function sendUserOperation<
   const calls extends readonly unknown[],
   account extends SmartAccount | undefined,
-  accountOverride extends SmartAccount | undefined = undefined,
+  accountOverride extends SmartAccount | undefined = undefined
 >(
   client: Client<Transport, Chain | undefined, account>,
-  parameters: SendUserOperationParameters<account, accountOverride, calls>,
+  parameters: SendUserOperationParameters<account, accountOverride, calls>
 ) {
-  const { account: account_ = client.account } = parameters
+  const { account: account_ = client.account } = parameters;
 
-  if (!account_) throw new AccountNotFoundError()
-  const account = parseAccount(account_)
+  if (!account_) throw new AccountNotFoundError();
+  const account = parseAccount(account_);
 
   const request = await getAction(
     client,
     prepareUserOperation,
-    'prepareUserOperation',
-  )(parameters as unknown as PrepareUserOperationParameters)
+    "prepareUserOperation"
+  )(parameters as unknown as PrepareUserOperationParameters);
 
   const signature =
     parameters.signature ||
-    (await account.signUserOperation(request as UserOperation))
+    (await account.signUserOperation(request as UserOperation));
 
   const rpcParameters = formatUserOperationRequest({
     ...request,
     signature,
-  } as UserOperation)
+  } as UserOperation);
 
   try {
     return await client.request(
       {
-        method: 'eth_sendUserOperation',
+        method: "mina_sendUserOperation",
         params: [rpcParameters, account.entryPoint.address],
       },
-      { retryCount: 0 },
-    )
+      { retryCount: 0 }
+    );
   } catch (error) {
     throw getUserOperationError(error as BaseError, {
       ...(request as UserOperation),
       calls: parameters.calls,
       signature,
-    })
+    });
   }
 }

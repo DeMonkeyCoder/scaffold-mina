@@ -1,5 +1,5 @@
-import type { ErrorType } from '../errors/utils.js'
-import { wait } from './wait.js'
+import type { ErrorType } from '../errors/utils'
+import { wait } from './wait'
 
 type PollOptions<data> = {
   // Whether or not to emit when the polling starts.

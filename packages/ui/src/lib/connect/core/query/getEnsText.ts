@@ -5,11 +5,11 @@ import {
   type GetEnsTextParameters,
   type GetEnsTextReturnType,
   getEnsText,
-} from '../actions/getEnsText.js'
-import type { Config } from '../createConfig.js'
-import type { ScopeKeyParameter } from '../types/properties.js'
-import type { Compute, ExactPartial } from '../types/utils.js'
-import { filterQueryOptions } from './utils.js'
+} from '../actions/getEnsText'
+import type { Config } from '../createConfig'
+import type { ScopeKeyParameter } from '../types/properties'
+import type { Compute, ExactPartial } from '../types/utils'
+import { filterQueryOptions } from './utils'
 
 export type GetEnsTextOptions<config extends Config> = Compute<
   ExactPartial<GetEnsTextParameters<config>> & ScopeKeyParameter

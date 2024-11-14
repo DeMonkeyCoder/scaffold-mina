@@ -9,17 +9,17 @@ import type {
 } from "@/lib/connect/viem";
 import { prepareTransactionRequest as viem_prepareTransactionRequest } from "@/lib/connect/viem/actions";
 
-import type { Config } from "../createConfig.js";
-import type { SelectChains } from "../types/chain.js";
-import type { ChainIdParameter } from "../types/properties.js";
+import type { Config } from "../createConfig";
+import type { SelectChains } from "../types/chain";
+import type { ChainIdParameter } from "../types/properties";
 import type {
   Compute,
   IsNarrowable,
   UnionCompute,
   UnionStrictOmit,
-} from "../types/utils.js";
-import { getAction } from "../utils/getAction.js";
-import { getAccount } from "./getAccount.js";
+} from "../types/utils";
+import { getAction } from "../utils/getAction";
+import { getAccount } from "./getAccount";
 
 export type PrepareTransactionRequestParameters<
   config extends Config = Config,

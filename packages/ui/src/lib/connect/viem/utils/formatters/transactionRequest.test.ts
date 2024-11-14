@@ -7,12 +7,12 @@ import type {
   TransactionRequestEIP4844,
   TransactionRequestEIP7702,
   TransactionRequestLegacy,
-} from '../../types/transaction.js'
+} from '../../types/transaction'
 
 import {
   formatTransactionRequest,
   rpcTransactionType,
-} from './transactionRequest.js'
+} from './transactionRequest'
 
 const base: TransactionRequest = {
   data: '0x1',

@@ -2,10 +2,10 @@ import { http } from "@/lib/connect/viem";
 import { mainnet, optimism, sepolia } from "@/lib/connect/viem/chains";
 import { expect, test } from "vitest";
 
-import { injected } from "../connectors/injected.js";
-import { unstable_connector } from "../transports/connector.js";
-import { fallback } from "../transports/fallback.js";
-import { extractRpcUrls } from "./extractRpcUrls.js";
+import { injected } from "../connectors/injected";
+import { unstable_connector } from "../transports/connector";
+import { fallback } from "../transports/fallback";
+import { extractRpcUrls } from "./extractRpcUrls";
 
 test("default", () => {
   expect(

@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { parseGwei } from "../unit/parseGwei.js";
+import { parseGwei } from "../unit/parseGwei";
 
 import {
   assertTransactionEIP1559,
@@ -8,7 +8,7 @@ import {
   assertTransactionEIP4844,
   assertTransactionEIP7702,
   assertTransactionLegacy,
-} from "./assertTransaction.js";
+} from "./assertTransaction";
 
 describe("eip7702", () => {
   test("invalid chainId", () => {

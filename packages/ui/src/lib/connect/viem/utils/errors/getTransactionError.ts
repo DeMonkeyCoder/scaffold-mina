@@ -1,19 +1,19 @@
-import type { Account } from '../../accounts/types.js'
-import type { SendTransactionParameters } from '../../actions/wallet/sendTransaction.js'
-import type { BaseError } from '../../errors/base.js'
-import { UnknownNodeError } from '../../errors/node.js'
+import type { Account } from '../../accounts/types'
+import type { SendTransactionParameters } from '../../actions/wallet/sendTransaction'
+import type { BaseError } from '../../errors/base'
+import { UnknownNodeError } from '../../errors/node'
 import {
   TransactionExecutionError,
   type TransactionExecutionErrorType,
-} from '../../errors/transaction.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
+} from '../../errors/transaction'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
 
 import {
   type GetNodeErrorParameters,
   type GetNodeErrorReturnType,
   getNodeError,
-} from './getNodeError.js'
+} from './getNodeError'
 
 export type GetTransactionErrorParameters = Omit<
   SendTransactionParameters,

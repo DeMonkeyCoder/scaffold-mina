@@ -1,25 +1,25 @@
 import {
   InvalidAddressError,
   type InvalidAddressErrorType,
-} from '../errors/address.js'
+} from '../errors/address'
 import {
   InvalidBytesLengthError,
   type InvalidBytesLengthErrorType,
-} from '../errors/data.js'
+} from '../errors/data'
 import {
   AccountStateConflictError,
   type AccountStateConflictErrorType,
   StateAssignmentConflictError,
   type StateAssignmentConflictErrorType,
-} from '../errors/stateOverride.js'
+} from '../errors/stateOverride'
 import type {
   RpcAccountStateOverride,
   RpcStateMapping,
   RpcStateOverride,
-} from '../types/rpc.js'
-import type { StateMapping, StateOverride } from '../types/stateOverride.js'
-import { isAddress } from './address/isAddress.js'
-import { type NumberToHexErrorType, numberToHex } from './encoding/toHex.js'
+} from '../types/rpc'
+import type { StateMapping, StateOverride } from '../types/stateOverride'
+import { isAddress } from './address/isAddress'
+import { type NumberToHexErrorType, numberToHex } from './encoding/toHex'
 
 type SerializeStateMappingParameters = StateMapping | undefined
 

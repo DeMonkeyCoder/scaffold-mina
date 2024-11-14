@@ -1,17 +1,17 @@
 import type { Address } from 'abitype'
 import { describe, expectTypeOf, test } from 'vitest'
 
-import type { Account, JsonRpcAccount } from '../accounts/types.js'
-import { localhost, optimism } from '../chains/index.js'
+import type { Account, JsonRpcAccount } from '../accounts/types'
+import { localhost, optimism } from '../chains/index'
 import {
   type EIP1193RequestFn,
   createPublicClient,
   publicActions,
-} from '../index.js'
-import type { Chain } from '../types/chain.js'
-import { type Client, createClient, rpcSchema } from './createClient.js'
-import { walletActions } from './decorators/wallet.js'
-import { http } from './transports/http.js'
+} from '../index'
+import type { Chain } from '../types/chain'
+import { type Client, createClient, rpcSchema } from './createClient'
+import { walletActions } from './decorators/wallet'
+import { http } from './transports/http'
 
 test('with chain', () => {
   const client = createClient({

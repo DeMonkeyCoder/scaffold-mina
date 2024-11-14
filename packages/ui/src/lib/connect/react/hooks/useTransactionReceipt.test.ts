@@ -2,7 +2,7 @@ import { chain, wait } from "@wagmi/test";
 import { renderHook, waitFor } from "@wagmi/test/react";
 import type { Hash } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
-import { useTransactionReceipt } from "./useTransactionReceipt.js";
+import { useTransactionReceipt } from "./useTransactionReceipt";
 
 test("default", async () => {
   const { result } = renderHook(() =>

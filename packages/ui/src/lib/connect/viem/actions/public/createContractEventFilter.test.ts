@@ -1,173 +1,176 @@
-import { assertType, expect, test } from 'vitest'
+import { assertType, expect, test } from "vitest";
 
-import { usdcContractConfig } from '~test/src/abis.js'
-import { accounts } from '~test/src/constants.js'
-import { createHttpServer } from '~test/src/utils.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { usdcContractConfig } from "~test/src/abis";
+import { accounts } from "~test/src/constants";
+import { createHttpServer } from "~test/src/utils";
+import { anvilMainnet } from "../../../test/src/anvil";
 
-import { createPublicClient } from '../../clients/createPublicClient.js'
-import { fallback } from '../../clients/transports/fallback.js'
-import { http } from '../../clients/transports/http.js'
-import type { EIP1193RequestFn } from '../../types/eip1193.js'
-import { createContractEventFilter } from './createContractEventFilter.js'
+import { createPublicClient } from "../../clients/createPublicClient";
+import { fallback } from "../../clients/transports/fallback";
+import { http } from "../../clients/transports/http";
+import type { EIP1193RequestFn } from "../../types/eip1193";
+import { createContractEventFilter } from "./createContractEventFilter";
 
-const request = (() => {}) as unknown as EIP1193RequestFn
+const request = (() => {}) as unknown as EIP1193RequestFn;
 
-const client = anvilMainnet.getClient()
+const client = anvilMainnet.getClient();
 
-test('default', async () => {
+test("default", async () => {
   const filter = await createContractEventFilter(client, {
     abi: usdcContractConfig.abi,
-  })
+  });
   assertType<typeof filter>({
     abi: usdcContractConfig.abi,
-    id: '0x',
-    type: 'event',
+    id: "0x",
+    type: "event",
     args: undefined,
     eventName: undefined,
     request,
     strict: undefined,
-  })
-  expect(filter.id).toBeDefined()
-  expect(filter.type).toBe('event')
-  expect(filter.args).toBeUndefined()
-  expect(filter.eventName).toBeUndefined()
-})
+  });
+  expect(filter.id).toBeDefined();
+  expect(filter.type).toBe("event");
+  expect(filter.args).toBeUndefined();
+  expect(filter.eventName).toBeUndefined();
+});
 
-test('args: address', async () => {
+test("args: address", async () => {
   const filter = await createContractEventFilter(client, {
     address: usdcContractConfig.address,
     abi: usdcContractConfig.abi,
-  })
-  expect(filter.id).toBeDefined()
-})
+  });
+  expect(filter.id).toBeDefined();
+});
 
-test('args: args', async () => {
+test("args: args", async () => {
   const filter = await createContractEventFilter(client, {
     address: usdcContractConfig.address,
     abi: usdcContractConfig.abi,
-    eventName: 'Transfer',
+    eventName: "Transfer",
     args: {
       from: accounts[0].address,
       to: accounts[0].address,
     },
-  })
-  expect(filter.abi).toEqual(usdcContractConfig.abi)
+  });
+  expect(filter.abi).toEqual(usdcContractConfig.abi);
   expect(filter.args).toEqual({
     from: accounts[0].address,
     to: accounts[0].address,
-  })
-  expect(filter.eventName).toEqual('Transfer')
+  });
+  expect(filter.eventName).toEqual("Transfer");
 
   const filter2 = await createContractEventFilter(client, {
     address: usdcContractConfig.address,
     abi: usdcContractConfig.abi,
-    eventName: 'Transfer',
+    eventName: "Transfer",
     args: {
       from: accounts[0].address,
     },
-  })
-  expect(filter.abi).toEqual(usdcContractConfig.abi)
+  });
+  expect(filter.abi).toEqual(usdcContractConfig.abi);
   expect(filter2.args).toEqual({
     from: accounts[0].address,
-  })
-  expect(filter.eventName).toEqual('Transfer')
+  });
+  expect(filter.eventName).toEqual("Transfer");
 
   const filter3 = await createContractEventFilter(client, {
     address: usdcContractConfig.address,
     abi: usdcContractConfig.abi,
-    eventName: 'Transfer',
+    eventName: "Transfer",
     args: {
       to: [accounts[0].address, accounts[1].address],
     },
-  })
-  expect(filter.abi).toEqual(usdcContractConfig.abi)
+  });
+  expect(filter.abi).toEqual(usdcContractConfig.abi);
   expect(filter3.args).toEqual({
     to: [accounts[0].address, accounts[1].address],
-  })
-  expect(filter3.eventName).toEqual('Transfer')
-})
+  });
+  expect(filter3.eventName).toEqual("Transfer");
+});
 
-test('args: fromBlock', async () => {
+test("args: fromBlock", async () => {
   expect(
     (
       await createContractEventFilter(client, {
         address: usdcContractConfig.address,
         abi: usdcContractConfig.abi,
-        eventName: 'Transfer',
-        fromBlock: 'latest',
+        eventName: "Transfer",
+        fromBlock: "latest",
       })
-    ).id,
-  ).toBeDefined()
+    ).id
+  ).toBeDefined();
   expect(
     (
       await createContractEventFilter(client, {
         address: usdcContractConfig.address,
         abi: usdcContractConfig.abi,
-        eventName: 'Transfer',
+        eventName: "Transfer",
         fromBlock: anvilMainnet.forkBlockNumber,
       })
-    ).id,
-  ).toBeDefined()
-})
+    ).id
+  ).toBeDefined();
+});
 
-test('args: toBlock', async () => {
+test("args: toBlock", async () => {
   expect(
     (
       await createContractEventFilter(client, {
         address: usdcContractConfig.address,
         abi: usdcContractConfig.abi,
-        eventName: 'Transfer',
-        toBlock: 'latest',
+        eventName: "Transfer",
+        toBlock: "latest",
       })
-    ).id,
-  ).toBeDefined()
+    ).id
+  ).toBeDefined();
   expect(
     (
       await createContractEventFilter(client, {
         address: usdcContractConfig.address,
         abi: usdcContractConfig.abi,
-        eventName: 'Transfer',
+        eventName: "Transfer",
         toBlock: anvilMainnet.forkBlockNumber,
       })
-    ).id,
-  ).toBeDefined()
-})
+    ).id
+  ).toBeDefined();
+});
 
-test('fallback client: scopes request', async () => {
-  let count1 = 0
+test("fallback client: scopes request", async () => {
+  let count1 = 0;
   const server1 = await createHttpServer((_req, res) => {
-    count1++
+    count1++;
     res.writeHead(200, {
-      'Content-Type': 'application/json',
-    })
+      "Content-Type": "application/json",
+    });
     res.end(
       JSON.stringify({
-        error: { code: -32004, message: 'method not supported' },
-      }),
-    )
-  })
+        error: { code: -32004, message: "method not supported" },
+      })
+    );
+  });
 
-  let count2 = 0
+  let count2 = 0;
   const server2 = await createHttpServer((_req, res) => {
-    count2++
+    count2++;
     res.writeHead(200, {
-      'Content-Type': 'application/json',
-    })
-    res.end(JSON.stringify({ result: '0x1' }))
-  })
+      "Content-Type": "application/json",
+    });
+    res.end(JSON.stringify({ result: "0x1" }));
+  });
 
   const fallbackClient = createPublicClient({
     transport: fallback([http(server1.url), http(server2.url)]),
-  })
+  });
   const filter = await createContractEventFilter(fallbackClient, {
     abi: usdcContractConfig.abi,
-  })
-  expect(filter).toBeDefined()
-  expect(count1).toBe(1)
-  expect(count2).toBe(1)
+  });
+  expect(filter).toBeDefined();
+  expect(count1).toBe(1);
+  expect(count2).toBe(1);
 
-  await filter.request({ method: 'eth_getFilterChanges', params: [filter.id] })
-  expect(count1).toBe(1)
-  expect(count2).toBe(2)
-})
+  await filter.request({
+    method: "mina_getFilterChanges",
+    params: [filter.id],
+  });
+  expect(count1).toBe(1);
+  expect(count2).toBe(2);
+});

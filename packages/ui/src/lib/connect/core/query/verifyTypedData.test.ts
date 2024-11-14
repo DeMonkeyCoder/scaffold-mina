@@ -1,7 +1,7 @@
 import { accounts, chain, config, typedData } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { verifyTypedDataQueryOptions } from './verifyTypedData.js'
+import { verifyTypedDataQueryOptions } from './verifyTypedData'
 
 const address = accounts[0]
 

@@ -2,7 +2,7 @@ import { chain, config } from "@wagmi/test";
 import type { Chain } from "@/lib/connect/viem";
 import { expectTypeOf, test } from "vitest";
 
-import { usePublicClient } from "./usePublicClient.js";
+import { usePublicClient } from "./usePublicClient";
 
 test("default", () => {
   const client = usePublicClient({ config });

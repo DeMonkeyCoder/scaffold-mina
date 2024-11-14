@@ -6,9 +6,9 @@ import type {
 } from "@/lib/connect/viem";
 import { multicall as viem_multicall } from "@/lib/connect/viem/actions";
 
-import type { Config } from "../createConfig.js";
-import type { ChainIdParameter } from "../types/properties.js";
-import { getAction } from "../utils/getAction.js";
+import type { Config } from "../createConfig";
+import type { ChainIdParameter } from "../types/properties";
+import { getAction } from "../utils/getAction";
 
 export type MulticallParameters<
   contracts extends readonly unknown[] = readonly ContractFunctionParameters[],

@@ -1,6 +1,6 @@
 import type { CallReturnType } from "@/lib/connect/viem";
 import { expectTypeOf, test } from "vitest";
-import { useCall } from "./useCall.js";
+import { useCall } from "./useCall";
 
 test("select data", () => {
   const result = useCall({

@@ -3,7 +3,7 @@ import { parseEther, parseGwei } from "@/lib/connect/viem";
 import { privateKeyToAccount } from "@/lib/connect/viem/accounts";
 import { expect, test } from "vitest";
 
-import { prepareTransactionRequestQueryOptions } from "./prepareTransactionRequest.js";
+import { prepareTransactionRequestQueryOptions } from "./prepareTransactionRequest";
 
 const targetAccount = accounts[0];
 

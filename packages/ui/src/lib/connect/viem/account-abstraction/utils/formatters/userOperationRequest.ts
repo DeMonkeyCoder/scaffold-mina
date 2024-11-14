@@ -1,8 +1,8 @@
-import type { ErrorType } from '../../../errors/utils.js'
-import type { ExactPartial } from '../../../types/utils.js'
-import { numberToHex } from '../../../utils/encoding/toHex.js'
-import type { RpcUserOperation } from '../../types/rpc.js'
-import type { UserOperation } from '../../types/userOperation.js'
+import type { ErrorType } from '../../../errors/utils'
+import type { ExactPartial } from '../../../types/utils'
+import { numberToHex } from '../../../utils/encoding/toHex'
+import type { RpcUserOperation } from '../../types/rpc'
+import type { UserOperation } from '../../types/userOperation'
 
 export type FormatUserOperationRequestErrorType = ErrorType
 

@@ -1,12 +1,12 @@
 import { describe, expect, test } from "vitest";
 
-import { createHttpServer } from "~test/src/utils.js";
-import { BaseError } from "../errors/base.js";
+import { createHttpServer } from "~test/src/utils";
+import { BaseError } from "../errors/base";
 import {
   HttpRequestError,
   RpcRequestError,
   TimeoutError,
-} from "../errors/request.js";
+} from "../errors/request";
 import {
   ChainDisconnectedError,
   InternalRpcError,
@@ -27,10 +27,10 @@ import {
   UnknownRpcError,
   UnsupportedProviderMethodError,
   UserRejectedRequestError,
-} from "../errors/rpc.js";
+} from "../errors/rpc";
 
-import { buildRequest, shouldRetry } from "./buildRequest.js";
-import { getHttpRpcClient } from "./rpc/http.js";
+import { buildRequest, shouldRetry } from "./buildRequest";
+import { getHttpRpcClient } from "./rpc/http";
 
 function request(url: string) {
   const httpClient = getHttpRpcClient(url);
@@ -70,14 +70,14 @@ test("default", async () => {
   const request_ = buildRequest(request(server.url));
 
   const results = await Promise.all([
-    request_({ method: "eth_a" }),
-    request_({ method: "eth_b" }),
-    request_({ method: "eth_a", params: [1] }),
-    request_({ method: "eth_c" }),
-    request_({ method: "eth_d" }),
-    request_({ method: "eth_a", params: [2] }),
-    request_({ method: "eth_a" }),
-    request_({ method: "eth_a" }),
+    request_({ method: "mina_a" }),
+    request_({ method: "mina_b" }),
+    request_({ method: "mina_a", params: [1] }),
+    request_({ method: "mina_c" }),
+    request_({ method: "mina_d" }),
+    request_({ method: "mina_a", params: [2] }),
+    request_({ method: "mina_a" }),
+    request_({ method: "mina_a" }),
   ]);
 
   expect(
@@ -87,26 +87,26 @@ test("default", async () => {
       .map((arg) => JSON.stringify(arg))
   ).toMatchInlineSnapshot(`
     [
-      "{"jsonrpc":"2.0","id":1,"method":"eth_a"}",
-      "{"jsonrpc":"2.0","id":2,"method":"eth_b"}",
-      "{"jsonrpc":"2.0","id":3,"method":"eth_a","params":[1]}",
-      "{"jsonrpc":"2.0","id":4,"method":"eth_c"}",
-      "{"jsonrpc":"2.0","id":5,"method":"eth_d"}",
-      "{"jsonrpc":"2.0","id":6,"method":"eth_a","params":[2]}",
-      "{"jsonrpc":"2.0","id":7,"method":"eth_a"}",
-      "{"jsonrpc":"2.0","id":8,"method":"eth_a"}",
+      "{"jsonrpc":"2.0","id":1,"method":"mina_a"}",
+      "{"jsonrpc":"2.0","id":2,"method":"mina_b"}",
+      "{"jsonrpc":"2.0","id":3,"method":"mina_a","params":[1]}",
+      "{"jsonrpc":"2.0","id":4,"method":"mina_c"}",
+      "{"jsonrpc":"2.0","id":5,"method":"mina_d"}",
+      "{"jsonrpc":"2.0","id":6,"method":"mina_a","params":[2]}",
+      "{"jsonrpc":"2.0","id":7,"method":"mina_a"}",
+      "{"jsonrpc":"2.0","id":8,"method":"mina_a"}",
     ]
   `);
   expect(results).toMatchInlineSnapshot(`
     [
-      "{"jsonrpc":"2.0","id":1,"method":"eth_a"}",
-      "{"jsonrpc":"2.0","id":2,"method":"eth_b"}",
-      "{"jsonrpc":"2.0","id":3,"method":"eth_a","params":[1]}",
-      "{"jsonrpc":"2.0","id":4,"method":"eth_c"}",
-      "{"jsonrpc":"2.0","id":5,"method":"eth_d"}",
-      "{"jsonrpc":"2.0","id":6,"method":"eth_a","params":[2]}",
-      "{"jsonrpc":"2.0","id":7,"method":"eth_a"}",
-      "{"jsonrpc":"2.0","id":8,"method":"eth_a"}",
+      "{"jsonrpc":"2.0","id":1,"method":"mina_a"}",
+      "{"jsonrpc":"2.0","id":2,"method":"mina_b"}",
+      "{"jsonrpc":"2.0","id":3,"method":"mina_a","params":[1]}",
+      "{"jsonrpc":"2.0","id":4,"method":"mina_c"}",
+      "{"jsonrpc":"2.0","id":5,"method":"mina_d"}",
+      "{"jsonrpc":"2.0","id":6,"method":"mina_a","params":[2]}",
+      "{"jsonrpc":"2.0","id":7,"method":"mina_a"}",
+      "{"jsonrpc":"2.0","id":8,"method":"mina_a"}",
     ]
   `);
 });
@@ -128,7 +128,7 @@ describe("args", () => {
 
     await expect(() =>
       buildRequest(request(server.url), { retryCount: 1 })({
-        method: "eth_blockNumber",
+        method: "mina_blockNumber",
       })
     ).rejects.toThrowError();
     expect(retryCount).toBe(1);
@@ -151,7 +151,7 @@ describe("args", () => {
     await expect(() =>
       buildRequest(request(server.url))(
         {
-          method: "eth_blockNumber",
+          method: "mina_blockNumber",
         },
         { retryCount: 1 }
       )
@@ -177,7 +177,7 @@ describe("args", () => {
 
     await expect(() =>
       buildRequest(request(server.url), { retryDelay: 1000, retryCount: 1 })({
-        method: "eth_blockNumber",
+        method: "mina_blockNumber",
       })
     ).rejects.toThrowError();
     expect(end > 1000 && end < 1020).toBeTruthy();
@@ -190,7 +190,7 @@ describe("behavior", () => {
       await expect(() =>
         buildRequest(() =>
           Promise.reject(new BaseError("foo", { details: "bar" }))
-        )({ method: "eth_test" })
+        )({ method: "mina_test" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [BaseError: foo
 
@@ -212,12 +212,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [ParseRpcError: Invalid JSON was received by the server. An error occurred on the server while parsing the JSON text.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -237,12 +237,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [InvalidRequestRpcError: JSON is not a valid request object.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -262,12 +262,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
-        [MethodNotFoundRpcError: The method "eth_blockNumber" does not exist / is not available.
+        [MethodNotFoundRpcError: The method "mina_blockNumber" does not exist / is not available.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -287,13 +287,13 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [InvalidParamsRpcError: Invalid parameters were provided to the RPC method.
         Double check you have provided the correct parameters.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -313,12 +313,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [InternalRpcError: An internal error was received.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -338,13 +338,13 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [InvalidInputRpcError: Missing or invalid parameters.
         Double check you have provided the correct parameters.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -364,12 +364,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [ResourceNotFoundRpcError: Requested resource not found.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -392,12 +392,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [ResourceUnavailableRpcError: Requested resource not available.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -420,13 +420,13 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(
         `
         [TransactionRejectedRpcError: Transaction creation failed.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -450,12 +450,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
-        [MethodNotSupportedRpcError: Method "eth_blockNumber" is not implemented.
+        [MethodNotSupportedRpcError: Method "mina_blockNumber" is not implemented.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -475,12 +475,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [LimitExceededRpcError: Request exceeds defined limit.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -503,12 +503,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [JsonRpcVersionUnsupportedError: Version of JSON-RPC protocol is not supported.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -528,12 +528,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [UserRejectedRequestError: User rejected the request.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -553,12 +553,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [UserRejectedRequestError: User rejected the request.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -578,12 +578,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [UnauthorizedProviderError: The requested method and/or account has not been authorized by the user.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -606,12 +606,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [UnsupportedProviderMethodError: The Provider does not support the requested method.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -631,12 +631,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [ProviderDisconnectedError: The Provider is disconnected from all chains.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: @/lib/connect/viem@x.y.z]
@@ -656,12 +656,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [ChainDisconnectedError: The Provider is not connected to the requested chain.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: viem@x.y.z]
@@ -681,12 +681,12 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [SwitchChainError: An error occurred when attempting to switch chain.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: viem@x.y.z]
@@ -706,13 +706,13 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [InvalidParamsRpcError: Invalid parameters were provided to the RPC method.
         Double check you have provided the correct parameters.
 
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: message
         Version: viem@x.y.z]
@@ -722,7 +722,7 @@ describe("behavior", () => {
     test("UnknownRpcError", async () => {
       await expect(() =>
         buildRequest(() => Promise.reject(new Error("wat")))({
-          method: "eth_test",
+          method: "mina_test",
         })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [UnknownRpcError: An unknown RPC error occurred.
@@ -742,7 +742,7 @@ describe("behavior", () => {
             })
           )
         )({
-          method: "eth_test",
+          method: "mina_test",
         })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [TimeoutError: The request took too long to respond.
@@ -776,17 +776,17 @@ describe("behavior", () => {
     const request_ = buildRequest(request(server.url), { uid });
 
     const results = await Promise.all([
-      request_({ method: "eth_blockNumber" }, { dedupe: true }),
-      request_({ method: "eth_blockNumber" }, { dedupe: true }),
+      request_({ method: "mina_blockNumber" }, { dedupe: true }),
+      request_({ method: "mina_blockNumber" }, { dedupe: true }),
       // this will not be deduped (different params).
-      request_({ method: "eth_blockNumber", params: [1] }, { dedupe: true }),
-      request_({ method: "eth_blockNumber" }, { dedupe: true }),
+      request_({ method: "mina_blockNumber", params: [1] }, { dedupe: true }),
+      request_({ method: "mina_blockNumber" }, { dedupe: true }),
       // this will not be deduped (different method).
-      request_({ method: "eth_chainId" }, { dedupe: true }),
-      request_({ method: "eth_blockNumber" }, { dedupe: true }),
+      request_({ method: "mina_chainId" }, { dedupe: true }),
+      request_({ method: "mina_blockNumber" }, { dedupe: true }),
       // this will not be deduped (dedupe: undefined).
-      request_({ method: "eth_blockNumber" }),
-      request_({ method: "eth_blockNumber" }, { dedupe: true }),
+      request_({ method: "mina_blockNumber" }),
+      request_({ method: "mina_blockNumber" }, { dedupe: true }),
     ]);
 
     expect(
@@ -796,22 +796,22 @@ describe("behavior", () => {
         .map((arg) => JSON.stringify(arg))
     ).toMatchInlineSnapshot(`
       [
-        "{"jsonrpc":"2.0","id":68,"method":"eth_blockNumber"}",
-        "{"jsonrpc":"2.0","id":69,"method":"eth_blockNumber","params":[1]}",
-        "{"jsonrpc":"2.0","id":70,"method":"eth_chainId"}",
-        "{"jsonrpc":"2.0","id":71,"method":"eth_blockNumber"}",
+        "{"jsonrpc":"2.0","id":68,"method":"mina_blockNumber"}",
+        "{"jsonrpc":"2.0","id":69,"method":"mina_blockNumber","params":[1]}",
+        "{"jsonrpc":"2.0","id":70,"method":"mina_chainId"}",
+        "{"jsonrpc":"2.0","id":71,"method":"mina_blockNumber"}",
       ]
     `);
     expect(results).toMatchInlineSnapshot(`
       [
-        "{"jsonrpc":"2.0","id":68,"method":"eth_blockNumber"}",
-        "{"jsonrpc":"2.0","id":68,"method":"eth_blockNumber"}",
-        "{"jsonrpc":"2.0","id":69,"method":"eth_blockNumber","params":[1]}",
-        "{"jsonrpc":"2.0","id":68,"method":"eth_blockNumber"}",
-        "{"jsonrpc":"2.0","id":70,"method":"eth_chainId"}",
-        "{"jsonrpc":"2.0","id":68,"method":"eth_blockNumber"}",
-        "{"jsonrpc":"2.0","id":71,"method":"eth_blockNumber"}",
-        "{"jsonrpc":"2.0","id":68,"method":"eth_blockNumber"}",
+        "{"jsonrpc":"2.0","id":68,"method":"mina_blockNumber"}",
+        "{"jsonrpc":"2.0","id":68,"method":"mina_blockNumber"}",
+        "{"jsonrpc":"2.0","id":69,"method":"mina_blockNumber","params":[1]}",
+        "{"jsonrpc":"2.0","id":68,"method":"mina_blockNumber"}",
+        "{"jsonrpc":"2.0","id":70,"method":"mina_chainId"}",
+        "{"jsonrpc":"2.0","id":68,"method":"mina_blockNumber"}",
+        "{"jsonrpc":"2.0","id":71,"method":"mina_blockNumber"}",
+        "{"jsonrpc":"2.0","id":68,"method":"mina_blockNumber"}",
       ]
     `);
   });
@@ -832,7 +832,7 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowError();
       expect(retryCount).toBe(3);
     });
@@ -852,7 +852,7 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowError();
       expect(retryCount).toBe(3);
     });
@@ -864,7 +864,7 @@ describe("behavior", () => {
           retryCount++;
           return Promise.reject(new Error("wat"));
         })({
-          method: "eth_test",
+          method: "mina_test",
         })
       ).rejects.toThrowError();
       expect(retryCount).toBe(3);
@@ -881,13 +881,13 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [HttpRequestError: HTTP request failed.
 
         Status: 500
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: Internal Server Error
         Version: viem@x.y.z]
@@ -907,13 +907,13 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [HttpRequestError: HTTP request failed.
 
         Status: 500
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: Internal Server Error
         Version: viem@x.y.z]
@@ -932,13 +932,13 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [HttpRequestError: HTTP request failed.
 
         Status: 403
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: Forbidden
         Version: viem@x.y.z]
@@ -957,13 +957,13 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [HttpRequestError: HTTP request failed.
 
         Status: 408
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: Request Timeout
         Version: viem@x.y.z]
@@ -982,13 +982,13 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [HttpRequestError: HTTP request failed.
 
         Status: 413
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: Payload Too Large
         Version: viem@x.y.z]
@@ -1007,13 +1007,13 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowErrorMatchingInlineSnapshot(`
         [HttpRequestError: HTTP request failed.
 
         Status: 408
         URL: http://localhost
-        Request body: {"method":"eth_blockNumber"}
+        Request body: {"method":"mina_blockNumber"}
 
         Details: Request Timeout
         Version: viem@x.y.z]
@@ -1032,7 +1032,7 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowError();
       expect(retryCount).toBe(0);
     });
@@ -1052,7 +1052,7 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowError();
       expect(retryCount).toBe(0);
     });
@@ -1072,7 +1072,7 @@ describe("behavior", () => {
       });
 
       await expect(() =>
-        buildRequest(request(server.url))({ method: "eth_blockNumber" })
+        buildRequest(request(server.url))({ method: "mina_blockNumber" })
       ).rejects.toThrowError();
       expect(retryCount).toBe(0);
     });

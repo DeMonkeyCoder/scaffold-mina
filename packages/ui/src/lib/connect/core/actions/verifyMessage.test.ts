@@ -1,7 +1,7 @@
 import { accounts, config } from "@wagmi/test";
 import { expect, test } from "vitest";
 
-import { verifyMessage } from "./verifyMessage.js";
+import { verifyMessage } from "./verifyMessage";
 
 const eoaAddress = accounts[0];
 const smartAccountAddress = "0x3FCf42e10CC70Fe75A62EB3aDD6D305Aa840d145";

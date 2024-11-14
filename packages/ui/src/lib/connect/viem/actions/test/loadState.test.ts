@@ -1,7 +1,7 @@
 import { test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { loadState } from './loadState.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { loadState } from './loadState'
 
 const client = anvilMainnet.getClient()
 

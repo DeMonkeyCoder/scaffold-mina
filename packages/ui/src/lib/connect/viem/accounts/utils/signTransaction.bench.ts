@@ -2,11 +2,11 @@ import { Wallet } from 'ethers'
 
 import { bench, describe } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import type { TransactionSerializableBase } from '../../types/transaction.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
+import { accounts } from '~test/src/constants'
+import type { TransactionSerializableBase } from '../../types/transaction'
+import { parseEther } from '../../utils/unit/parseEther'
 
-import { signTransaction } from './signTransaction.js'
+import { signTransaction } from './signTransaction'
 
 const base = {
   to: accounts[1].address,

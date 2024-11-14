@@ -1,8 +1,8 @@
 import type { Address } from 'abitype'
 
-import type { Hash, Hex } from './misc.js'
-import type { Transaction } from './transaction.js'
-import type { Withdrawal } from './withdrawal.js'
+import type { Hash, Hex } from './misc'
+import type { Transaction } from './transaction'
+import type { Withdrawal } from './withdrawal'
 
 export type Block<
   quantity = bigint,

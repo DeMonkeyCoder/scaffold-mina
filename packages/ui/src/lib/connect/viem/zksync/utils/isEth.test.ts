@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { isEth } from './isEth.js'
+import { isEth } from './isEth'
 
 test('true', () => {
   expect(isEth('0x0000000000000000000000000000000000000000')).toBeTruthy()

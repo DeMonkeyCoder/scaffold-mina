@@ -11,19 +11,19 @@ import {
   type DeployContractReturnType as viem_DeployContractReturnType,
   deployContract as viem_deployContract,
 } from "@/lib/connect/viem/actions";
-import type { Config } from "../createConfig.js";
-import type { BaseErrorType, ErrorType } from "../errors/base.js";
-import type { SelectChains } from "../types/chain.js";
+import type { Config } from "../createConfig";
+import type { BaseErrorType, ErrorType } from "../errors/base";
+import type { SelectChains } from "../types/chain";
 import type {
   ChainIdParameter,
   ConnectorParameter,
-} from "../types/properties.js";
-import type { Compute } from "../types/utils.js";
-import { getAction } from "../utils/getAction.js";
+} from "../types/properties";
+import type { Compute } from "../types/utils";
+import { getAction } from "../utils/getAction";
 import {
   type GetConnectorClientErrorType,
   getConnectorClient,
-} from "./getConnectorClient.js";
+} from "./getConnectorClient";
 
 export type DeployContractParameters<
   abi extends Abi | readonly unknown[] = Abi,

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { toEventSelector } from './toEventSelector.js'
+import { toEventSelector } from './toEventSelector'
 
 test('creates event signature', () => {
   expect(toEventSelector('Transfer(address,address,uint256)')).toEqual(

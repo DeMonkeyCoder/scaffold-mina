@@ -1,31 +1,31 @@
-import { assertType, describe, expect, test } from 'vitest'
+import { assertType, describe, expect, test } from "vitest";
 
-import { createHttpServer } from '~test/src/utils.js'
-import { getBlockNumber } from '../../actions/public/getBlockNumber.js'
-import { localhost } from '../../chains/index.js'
+import { createHttpServer } from "~test/src/utils";
+import { getBlockNumber } from "../../actions/public/getBlockNumber";
+import { localhost } from "../../chains/index";
 import {
   MethodNotSupportedRpcError,
   UserRejectedRequestError,
-} from '../../errors/rpc.js'
-import { wait } from '../../utils/wait.js'
-import { createClient } from '../createClient.js'
-import { createPublicClient } from '../createPublicClient.js'
-import type { Transport } from './createTransport.js'
+} from "../../errors/rpc";
+import { wait } from "../../utils/wait";
+import { createClient } from "../createClient";
+import { createPublicClient } from "../createPublicClient";
+import type { Transport } from "./createTransport";
 import {
   type FallbackTransport,
   type OnResponseFn,
   fallback,
   rankTransports,
-} from './fallback.js'
-import { http } from './http.js'
+} from "./fallback";
+import { http } from "./http";
 
-test('default', () => {
-  const alchemy = http('https://alchemy.com/rpc')
-  const infura = http('https://infura.com/rpc')
-  const transport = fallback([alchemy, infura])
+test("default", () => {
+  const alchemy = http("https://alchemy.com/rpc");
+  const infura = http("https://infura.com/rpc");
+  const transport = fallback([alchemy, infura]);
 
-  assertType<FallbackTransport>(transport)
-  assertType<'fallback'>(transport({}).config.type)
+  assertType<FallbackTransport>(transport);
+  assertType<"fallback">(transport({}).config.type);
 
   expect(transport({})).toMatchInlineSnapshot(`
     {
@@ -77,92 +77,92 @@ test('default', () => {
         ],
       },
     }
-  `)
-})
+  `);
+});
 
-describe('request', () => {
-  test('default', async () => {
+describe("request", () => {
+  test("default", async () => {
     const server = await createHttpServer((_req, res) => {
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
-    const local = http(server.url)
-    const transport = fallback([local])({ chain: localhost })
+    const local = http(server.url);
+    const transport = fallback([local])({ chain: localhost });
 
-    expect(await transport.request({ method: 'eth_blockNumber' })).toBe('0x1')
-  })
+    expect(await transport.request({ method: "mina_blockNumber" })).toBe("0x1");
+  });
 
-  test('error', async () => {
-    let count = 0
+  test("error", async () => {
+    let count = 0;
     const server1 = await createHttpServer((_req, res) => {
-      count++
-      res.writeHead(500)
-      res.end()
-    })
+      count++;
+      res.writeHead(500);
+      res.end();
+    });
     const server2 = await createHttpServer((_req, res) => {
-      count++
-      res.writeHead(500)
-      res.end()
-    })
+      count++;
+      res.writeHead(500);
+      res.end();
+    });
     const server3 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
     let transport = fallback([http(server1.url), http(server3.url)])({
       chain: localhost,
-    }) as ReturnType<FallbackTransport>
-    expect(await transport.request({ method: 'eth_blockNumber' })).toBe('0x1')
+    }) as ReturnType<FallbackTransport>;
+    expect(await transport.request({ method: "mina_blockNumber" })).toBe("0x1");
 
     // ensure `retryCount` on transport is adhered
-    expect(count).toBe(2)
+    expect(count).toBe(2);
 
-    count = 0
+    count = 0;
     transport = fallback([
       http(server1.url),
       http(server2.url),
       http(server3.url),
     ])({
       chain: localhost,
-    })
-    expect(await transport.request({ method: 'eth_blockNumber' })).toBe('0x1')
+    });
+    expect(await transport.request({ method: "mina_blockNumber" })).toBe("0x1");
 
     // ensure `retryCount` on transport is adhered
-    expect(count).toBe(3)
+    expect(count).toBe(3);
 
-    count = 0
+    count = 0;
     transport = fallback([http(server1.url), http(server2.url)])({
       chain: localhost,
-    })
+    });
     await expect(() =>
-      transport.request({ method: 'eth_blockNumber' }),
-    ).rejects.toThrowError()
+      transport.request({ method: "mina_blockNumber" })
+    ).rejects.toThrowError();
 
     // ensure `retryCount` on transport is adhered
-    expect(count).toBe(8)
-  })
+    expect(count).toBe(8);
+  });
 
-  test('onResponse', async () => {
+  test("onResponse", async () => {
     const server1 = await createHttpServer((_req, res) => {
-      res.writeHead(500)
-      res.end()
-    })
+      res.writeHead(500);
+      res.end();
+    });
     const server2 = await createHttpServer((_req, res) => {
-      res.writeHead(500)
-      res.end()
-    })
+      res.writeHead(500);
+      res.end();
+    });
     const server3 = await createHttpServer((_req, res) => {
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
     const transport = fallback([
       http(server1.url),
@@ -170,26 +170,25 @@ describe('request', () => {
       http(server3.url),
     ])({
       chain: localhost,
-    })
+    });
 
-    const args: Parameters<OnResponseFn>[0][] = []
-    transport.value?.onResponse((args_) => args.push(args_))
+    const args: Parameters<OnResponseFn>[0][] = [];
+    transport.value?.onResponse((args_) => args.push(args_));
 
-    expect(await transport.request({ method: 'eth_blockNumber' })).toBe('0x1')
-    expect(
-      args.map(({ transport: _transport, ...rest }) => rest),
-    ).toMatchInlineSnapshot(`
+    expect(await transport.request({ method: "mina_blockNumber" })).toBe("0x1");
+    expect(args.map(({ transport: _transport, ...rest }) => rest))
+      .toMatchInlineSnapshot(`
       [
         {
           "error": [HttpRequestError: HTTP request failed.
 
       Status: 500
       URL: http://localhost
-      Request body: {"method":"eth_blockNumber"}
+      Request body: {"method":"mina_blockNumber"}
 
       Details: Internal Server Error
       Version: viem@x.y.z],
-          "method": "eth_blockNumber",
+          "method": "mina_blockNumber",
           "params": undefined,
           "status": "error",
         },
@@ -198,49 +197,49 @@ describe('request', () => {
 
       Status: 500
       URL: http://localhost
-      Request body: {"method":"eth_blockNumber"}
+      Request body: {"method":"mina_blockNumber"}
 
       Details: Internal Server Error
       Version: viem@x.y.z],
-          "method": "eth_blockNumber",
+          "method": "mina_blockNumber",
           "params": undefined,
           "status": "error",
         },
         {
-          "method": "eth_blockNumber",
+          "method": "mina_blockNumber",
           "params": undefined,
           "response": "0x1",
           "status": "success",
         },
       ]
-    `)
-  })
+    `);
+  });
 
-  test('error (rpc)', async () => {
-    let count = 0
+  test("error (rpc)", async () => {
+    let count = 0;
     const server1 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
+        "Content-Type": "application/json",
+      });
       res.end(
         JSON.stringify({
-          error: { code: UserRejectedRequestError.code, message: 'sad times' },
-        }),
-      )
-    })
+          error: { code: UserRejectedRequestError.code, message: "sad times" },
+        })
+      );
+    });
     const server2 = await createHttpServer((_req, res) => {
-      count++
-      res.writeHead(500)
-      res.end()
-    })
+      count++;
+      res.writeHead(500);
+      res.end();
+    });
     const server3 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
     const transport = fallback([
       http(server1.url),
@@ -248,44 +247,44 @@ describe('request', () => {
       http(server3.url),
     ])({
       chain: localhost,
-    })
+    });
     await expect(() =>
-      transport.request({ method: 'eth_blockNumber' }),
-    ).rejects.toThrowError()
+      transport.request({ method: "mina_blockNumber" })
+    ).rejects.toThrowError();
 
-    expect(count).toBe(1)
-  })
+    expect(count).toBe(1);
+  });
 
-  test('error (rpc - fallthrough)', async () => {
-    let count = 0
+  test("error (rpc - fallthrough)", async () => {
+    let count = 0;
     const server1 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ error: 'ngmi' }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({ error: "ngmi" }));
+    });
     const server2 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
+        "Content-Type": "application/json",
+      });
       res.end(
         JSON.stringify({
           error: {
             code: MethodNotSupportedRpcError.code,
-            message: 'sad times',
+            message: "sad times",
           },
-        }),
-      )
-    })
+        })
+      );
+    });
     const server3 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
     const transport = fallback([
       http(server1.url),
@@ -293,156 +292,162 @@ describe('request', () => {
       http(server3.url),
     ])({
       chain: localhost,
-    })
+    });
     expect(
-      await transport.request({ method: 'eth_blockNumber' }),
-    ).toMatchInlineSnapshot('"0x1"')
+      await transport.request({ method: "mina_blockNumber" })
+    ).toMatchInlineSnapshot('"0x1"');
 
-    expect(count).toBe(3)
-  })
+    expect(count).toBe(3);
+  });
 
-  test('error (rpc - fallthrough)', async () => {
-    let count = 0
+  test("error (rpc - fallthrough)", async () => {
+    let count = 0;
     const server1 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ error: { code: -32603, message: 'sad times' } }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(
+        JSON.stringify({ error: { code: -32603, message: "sad times" } })
+      );
+    });
     const server2 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
     const transport = fallback([http(server1.url), http(server2.url)])({
       chain: localhost,
-    })
+    });
     expect(
-      await transport.request({ method: 'eth_blockNumber' }),
-    ).toMatchInlineSnapshot('"0x1"')
+      await transport.request({ method: "mina_blockNumber" })
+    ).toMatchInlineSnapshot('"0x1"');
 
-    expect(count).toBe(2)
-  })
+    expect(count).toBe(2);
+  });
 
-  test('error (rpc - fallthrough)', async () => {
-    let count = 0
+  test("error (rpc - fallthrough)", async () => {
+    let count = 0;
     const server1 = await createHttpServer((_req, res) => {
-      count++
-      res.writeHead(404)
-      res.end()
-    })
+      count++;
+      res.writeHead(404);
+      res.end();
+    });
     const server2 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
     const transport = fallback([http(server1.url), http(server2.url)])({
       chain: localhost,
-    })
+    });
     expect(
-      await transport.request({ method: 'eth_blockNumber' }),
-    ).toMatchInlineSnapshot('"0x1"')
+      await transport.request({ method: "mina_blockNumber" })
+    ).toMatchInlineSnapshot('"0x1"');
 
-    expect(count).toBe(2)
-  })
+    expect(count).toBe(2);
+  });
 
-  test('all error', async () => {
-    let count = 0
+  test("all error", async () => {
+    let count = 0;
     const server1 = await createHttpServer((_req, res) => {
-      count++
-      res.writeHead(500)
-      res.end()
-    })
+      count++;
+      res.writeHead(500);
+      res.end();
+    });
     const server2 = await createHttpServer((_req, res) => {
-      count++
-      res.writeHead(500)
-      res.end()
-    })
+      count++;
+      res.writeHead(500);
+      res.end();
+    });
 
     const transport = fallback([http(server1.url), http(server2.url)])({
       chain: localhost,
-    })
+    });
     await expect(() =>
-      transport.request({ method: 'eth_blockNumber' }),
-    ).rejects.toThrowError()
+      transport.request({ method: "mina_blockNumber" })
+    ).rejects.toThrowError();
 
     // ensure `retryCount` on transport is adhered
-    expect(count).toBe(8)
-  })
+    expect(count).toBe(8);
+  });
 
-  test('all error (rpc - fallthrough)', async () => {
-    let count = 0
+  test("all error (rpc - fallthrough)", async () => {
+    let count = 0;
     const server1 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ error: { code: -32603, message: 'sad times' } }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(
+        JSON.stringify({ error: { code: -32603, message: "sad times" } })
+      );
+    });
     const server2 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ error: { code: -32603, message: 'sad times' } }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(
+        JSON.stringify({ error: { code: -32603, message: "sad times" } })
+      );
+    });
 
     const transport = fallback([http(server1.url), http(server2.url)])({
       chain: localhost,
-    })
+    });
     await expect(() =>
-      transport.request({ method: 'eth_blockNumber' }),
-    ).rejects.toThrowError()
+      transport.request({ method: "mina_blockNumber" })
+    ).rejects.toThrowError();
 
-    expect(count).toBe(8)
-  })
+    expect(count).toBe(8);
+  });
 
-  test('retryCount', async () => {
-    let count = 0
+  test("retryCount", async () => {
+    let count = 0;
     const server1 = await createHttpServer((_req, res) => {
-      count++
-      res.writeHead(500)
-      res.end()
-    })
+      count++;
+      res.writeHead(500);
+      res.end();
+    });
     const server2 = await createHttpServer((_req, res) => {
-      count++
-      res.writeHead(500)
-      res.end()
-    })
+      count++;
+      res.writeHead(500);
+      res.end();
+    });
 
     const transport = fallback([http(server1.url), http(server2.url)], {
       retryCount: 1,
     })({
       chain: localhost,
-    })
+    });
     await expect(() =>
-      transport.request({ method: 'eth_blockNumber' }),
-    ).rejects.toThrowError()
+      transport.request({ method: "mina_blockNumber" })
+    ).rejects.toThrowError();
 
     // ensure `retryCount` on transport is adhered
-    expect(count).toBe(4)
-  })
+    expect(count).toBe(4);
+  });
 
-  test('retryCount (on child transport)', async () => {
-    let server1Count = 0
-    let server2Count = 0
+  test("retryCount (on child transport)", async () => {
+    let server1Count = 0;
+    let server2Count = 0;
     const server1 = await createHttpServer((_req, res) => {
-      server1Count++
-      res.writeHead(500)
-      res.end()
-    })
+      server1Count++;
+      res.writeHead(500);
+      res.end();
+    });
     const server2 = await createHttpServer((_req, res) => {
-      server2Count++
-      res.writeHead(500)
-      res.end()
-    })
+      server2Count++;
+      res.writeHead(500);
+      res.end();
+    });
 
     const transport = fallback(
       [
@@ -451,45 +456,45 @@ describe('request', () => {
       ],
       {
         retryCount: 0,
-      },
+      }
     )({
       chain: localhost,
-    })
+    });
     await expect(() =>
-      transport.request({ method: 'eth_blockNumber' }),
-    ).rejects.toThrowError()
+      transport.request({ method: "mina_blockNumber" })
+    ).rejects.toThrowError();
 
     // ensure `retryCount` on transport is adhered
-    expect(server1Count).toBe(4)
-    expect(server2Count).toBe(3)
-  })
+    expect(server1Count).toBe(4);
+    expect(server2Count).toBe(3);
+  });
 
-  test('rank', async () => {
+  test("rank", async () => {
     const server = await createHttpServer((_req, res) => {
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
-    const local = http(server.url)
+    const local = http(server.url);
     const transport = fallback([local], { rank: { interval: 500 } })({
       chain: localhost,
-    })
+    });
 
-    expect(await transport.request({ method: 'eth_blockNumber' })).toBe('0x1')
-  })
-})
+    expect(await transport.request({ method: "mina_blockNumber" })).toBe("0x1");
+  });
+});
 
-describe('client', () => {
-  test('default', () => {
-    const alchemy = http('https://alchemy.com/rpc')
-    const infura = http('https://infura.com/rpc')
-    const transport = fallback([alchemy, infura])
+describe("client", () => {
+  test("default", () => {
+    const alchemy = http("https://alchemy.com/rpc");
+    const infura = http("https://infura.com/rpc");
+    const transport = fallback([alchemy, infura]);
 
     const { uid: _uid, ...client } = createClient({
       transport,
-    })
+    });
 
     expect(client).toMatchInlineSnapshot(`
       {
@@ -549,110 +554,115 @@ describe('client', () => {
         },
         "type": "base",
       }
-    `)
-  })
+    `);
+  });
 
-  test('request', async () => {
+  test("request", async () => {
     const server = await createHttpServer((_req, res) => {
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
-    const local = http(server.url)
-    const transport = fallback([local])
-    const client = createPublicClient({ chain: localhost, transport })
+    const local = http(server.url);
+    const transport = fallback([local]);
+    const client = createPublicClient({ chain: localhost, transport });
 
-    expect(await getBlockNumber(client)).toBe(1n)
-  })
+    expect(await getBlockNumber(client)).toBe(1n);
+  });
 
-  test('request (error)', async () => {
+  test("request (error)", async () => {
     const server1 = await createHttpServer((_req, res) => {
-      res.writeHead(500)
-      res.end()
-    })
+      res.writeHead(500);
+      res.end();
+    });
     const server2 = await createHttpServer((_req, res) => {
-      res.writeHead(500)
-      res.end()
-    })
+      res.writeHead(500);
+      res.end();
+    });
     const server3 = await createHttpServer((_req, res) => {
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
     const transport = fallback([
       http(server1.url),
       http(server2.url),
       http(server3.url),
-    ])
-    const client = createPublicClient({ chain: localhost, transport })
+    ]);
+    const client = createPublicClient({ chain: localhost, transport });
 
-    expect(await getBlockNumber(client)).toBe(1n)
-  })
+    expect(await getBlockNumber(client)).toBe(1n);
+  });
 
-  test('error (non deterministic)', async () => {
-    let count = 0
+  test("error (non deterministic)", async () => {
+    let count = 0;
     const server1 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ error: { code: -32603, message: 'sad times' } }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(
+        JSON.stringify({ error: { code: -32603, message: "sad times" } })
+      );
+    });
     const server2 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
-    const transport = fallback([http(server1.url), http(server2.url)])
-    const client = createPublicClient({ chain: localhost, transport })
+    const transport = fallback([http(server1.url), http(server2.url)]);
+    const client = createPublicClient({ chain: localhost, transport });
 
-    expect(await getBlockNumber(client)).toBe(1n)
-    expect(count).toBe(2)
-  })
+    expect(await getBlockNumber(client)).toBe(1n);
+    expect(count).toBe(2);
+  });
 
-  test('all error (non deterministic)', async () => {
-    let count = 0
+  test("all error (non deterministic)", async () => {
+    let count = 0;
     const server1 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ error: { code: -32603, message: 'sad times' } }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(
+        JSON.stringify({ error: { code: -32603, message: "sad times" } })
+      );
+    });
     const server2 = await createHttpServer((_req, res) => {
-      count++
+      count++;
       res.writeHead(200, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({ error: { code: -32603, message: 'sad times' } }))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(
+        JSON.stringify({ error: { code: -32603, message: "sad times" } })
+      );
+    });
 
-    const transport = fallback([http(server1.url), http(server2.url)])
-    const client = createPublicClient({ chain: localhost, transport })
+    const transport = fallback([http(server1.url), http(server2.url)]);
+    const client = createPublicClient({ chain: localhost, transport });
 
-    await expect(
-      getBlockNumber(client),
-    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+    await expect(getBlockNumber(client)).rejects
+      .toThrowErrorMatchingInlineSnapshot(`
       [InternalRpcError: An internal error was received.
 
       URL: http://localhost
-      Request body: {"method":"eth_blockNumber"}
+      Request body: {"method":"mina_blockNumber"}
 
       Details: sad times
       Version: viem@x.y.z]
-    `)
-    expect(count).toBe(8)
-  })
-})
+    `);
+    expect(count).toBe(8);
+  });
+});
 
-describe('rankTransports', () => {
+describe("rankTransports", () => {
   const samples: [responseTime: number, success: boolean][][] = [
     [
       [100, true],
@@ -704,53 +714,53 @@ describe('rankTransports', () => {
       [20, true],
       [300, false],
     ],
-  ]
+  ];
 
-  test('default', async () => {
-    let count1 = 0
+  test("default", async () => {
+    let count1 = 0;
     const server1 = await createHttpServer((_req, res) => {
-      if (count3 >= samples.length) return
-      const [responseTime, success] = samples[count1][0]
-      count1++
+      if (count3 >= samples.length) return;
+      const [responseTime, success] = samples[count1][0];
+      count1++;
       setTimeout(() => {
         res.writeHead(success ? 200 : 500, {
-          'Content-Type': 'application/json',
-        })
-        res.end(JSON.stringify({ result: true }))
-      }, responseTime)
-    })
+          "Content-Type": "application/json",
+        });
+        res.end(JSON.stringify({ result: true }));
+      }, responseTime);
+    });
 
-    let count2 = 0
+    let count2 = 0;
     const server2 = await createHttpServer((_req, res) => {
-      if (count2 >= samples.length) return
-      const [responseTime, success] = samples[count2][1]
-      count2++
+      if (count2 >= samples.length) return;
+      const [responseTime, success] = samples[count2][1];
+      count2++;
       setTimeout(() => {
         res.writeHead(success ? 200 : 500, {
-          'Content-Type': 'application/json',
-        })
-        res.end(JSON.stringify({ result: true }))
-      }, responseTime)
-    })
+          "Content-Type": "application/json",
+        });
+        res.end(JSON.stringify({ result: true }));
+      }, responseTime);
+    });
 
-    let count3 = 0
+    let count3 = 0;
     const server3 = await createHttpServer((_req, res) => {
-      if (count3 >= samples.length) return
-      const [responseTime, success] = samples[count3][2]
-      count3++
+      if (count3 >= samples.length) return;
+      const [responseTime, success] = samples[count3][2];
+      count3++;
       setTimeout(() => {
         res.writeHead(success ? 200 : 500, {
-          'Content-Type': 'application/json',
-        })
-        res.end(JSON.stringify({ result: true }))
-      }, responseTime)
-    })
+          "Content-Type": "application/json",
+        });
+        res.end(JSON.stringify({ result: true }));
+      }, responseTime);
+    });
 
-    const transport1 = http(server1.url, { key: '1' })
-    const transport2 = http(server2.url, { key: '2' })
-    const transport3 = http(server3.url, { key: '3' })
+    const transport1 = http(server1.url, { key: "1" });
+    const transport2 = http(server2.url, { key: "2" });
+    const transport3 = http(server3.url, { key: "3" });
 
-    const rankedTransports: (readonly Transport[])[] = []
+    const rankedTransports: (readonly Transport[])[] = [];
 
     rankTransports({
       chain: localhost,
@@ -759,15 +769,15 @@ describe('rankTransports', () => {
       timeout: 500,
       transports: [transport1, transport2, transport3],
       onTransports(transports) {
-        rankedTransports.push(transports)
+        rankedTransports.push(transports);
       },
-    })
+    });
 
-    await wait(3900)
+    await wait(3900);
 
     const rankedKeys = rankedTransports.map((transports) =>
-      transports.map((transport) => transport({ chain: undefined }).config.key),
-    )
+      transports.map((transport) => transport({ chain: undefined }).config.key)
+    );
     expect(rankedKeys).toMatchInlineSnapshot(`
       [
         [
@@ -826,6 +836,6 @@ describe('rankTransports', () => {
           "3",
         ],
       ]
-    `)
-  })
-})
+    `);
+  });
+});

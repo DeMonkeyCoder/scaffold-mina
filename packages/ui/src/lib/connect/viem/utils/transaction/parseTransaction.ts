@@ -1,19 +1,19 @@
 import {
   InvalidAddressError,
   type InvalidAddressErrorType,
-} from '../../errors/address.js'
+} from '../../errors/address'
 import {
   InvalidLegacyVError,
   type InvalidLegacyVErrorType,
   InvalidSerializedTransactionError,
   type InvalidSerializedTransactionErrorType,
-} from '../../errors/transaction.js'
-import type { ErrorType } from '../../errors/utils.js'
+} from '../../errors/transaction'
+import type { ErrorType } from '../../errors/utils'
 import type {
   SerializedAuthorizationList,
   SignedAuthorizationList,
-} from '../../experimental/eip7702/types/authorization.js'
-import type { Hex, Signature } from '../../types/misc.js'
+} from '../../experimental/eip7702/types/authorization'
+import type { Hex, Signature } from '../../types/misc'
 import type {
   AccessList,
   TransactionRequestEIP2930,
@@ -31,22 +31,22 @@ import type {
   TransactionSerializedEIP7702,
   TransactionSerializedGeneric,
   TransactionType,
-} from '../../types/transaction.js'
-import type { IsNarrowable, Mutable } from '../../types/utils.js'
-import { type IsAddressErrorType, isAddress } from '../address/isAddress.js'
-import { toBlobSidecars } from '../blob/toBlobSidecars.js'
-import { type IsHexErrorType, isHex } from '../data/isHex.js'
-import { type PadHexErrorType, padHex } from '../data/pad.js'
-import { trim } from '../data/trim.js'
+} from '../../types/transaction'
+import type { IsNarrowable, Mutable } from '../../types/utils'
+import { type IsAddressErrorType, isAddress } from '../address/isAddress'
+import { toBlobSidecars } from '../blob/toBlobSidecars'
+import { type IsHexErrorType, isHex } from '../data/isHex'
+import { type PadHexErrorType, padHex } from '../data/pad'
+import { trim } from '../data/trim'
 import {
   type HexToBigIntErrorType,
   type HexToNumberErrorType,
   hexToBigInt,
   hexToNumber,
-} from '../encoding/fromHex.js'
-import { type FromRlpErrorType, fromRlp } from '../encoding/fromRlp.js'
-import type { RecursiveArray } from '../encoding/toRlp.js'
-import { isHash } from '../hash/isHash.js'
+} from '../encoding/fromHex'
+import { type FromRlpErrorType, fromRlp } from '../encoding/fromRlp'
+import type { RecursiveArray } from '../encoding/toRlp'
+import { isHash } from '../hash/isHash'
 
 import {
   type AssertTransactionEIP1559ErrorType,
@@ -59,12 +59,12 @@ import {
   assertTransactionEIP4844,
   assertTransactionEIP7702,
   assertTransactionLegacy,
-} from './assertTransaction.js'
+} from './assertTransaction'
 import {
   type GetSerializedTransactionType,
   type GetSerializedTransactionTypeErrorType,
   getSerializedTransactionType,
-} from './getSerializedTransactionType.js'
+} from './getSerializedTransactionType'
 
 export type ParseTransactionReturnType<
   serialized extends TransactionSerializedGeneric = TransactionSerialized,

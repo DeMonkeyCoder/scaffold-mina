@@ -1,7 +1,7 @@
-import { InvalidBytesBooleanError } from "../../errors/encoding.js";
-import type { ErrorType } from "../../errors/utils.js";
-import type { ByteArray, Hex } from "../../types/misc.js";
-import { type TrimErrorType, trim } from "../data/trim.js";
+import { InvalidBytesBooleanError } from "../../errors/encoding";
+import type { ErrorType } from "../../errors/utils";
+import type { ByteArray, Hex } from "../../types/misc";
+import { type TrimErrorType, trim } from "../data/trim";
 
 import {
   type AssertSizeErrorType,
@@ -10,8 +10,8 @@ import {
   assertSize,
   hexToBigInt,
   hexToNumber,
-} from "./fromHex.js";
-import { type BytesToHexErrorType, bytesToHex } from "./toHex.js";
+} from "./fromHex";
+import { type BytesToHexErrorType, bytesToHex } from "./toHex";
 
 export type FromBytesParameters<
   to extends "string" | "hex" | "bigint" | "number" | "boolean"

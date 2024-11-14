@@ -1,32 +1,32 @@
 import type { Address } from 'abitype'
 
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import { universalSignatureValidatorAbi } from '../../constants/abis.js'
-import { universalSignatureValidatorByteCode } from '../../constants/contracts.js'
-import { CallExecutionError } from '../../errors/contract.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { ByteArray, Hex, Signature } from '../../types/misc.js'
-import type { OneOf } from '../../types/utils.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import { universalSignatureValidatorAbi } from '../../constants/abis'
+import { universalSignatureValidatorByteCode } from '../../constants/contracts'
+import { CallExecutionError } from '../../errors/contract'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { ByteArray, Hex, Signature } from '../../types/misc'
+import type { OneOf } from '../../types/utils'
 import {
   type EncodeDeployDataErrorType,
   encodeDeployData,
-} from '../../utils/abi/encodeDeployData.js'
-import { getAddress } from '../../utils/address/getAddress.js'
-import { isAddressEqual } from '../../utils/address/isAddressEqual.js'
+} from '../../utils/abi/encodeDeployData'
+import { getAddress } from '../../utils/address/getAddress'
+import { isAddressEqual } from '../../utils/address/isAddressEqual'
 import {
   type IsBytesEqualErrorType,
   isBytesEqual,
-} from '../../utils/data/isBytesEqual.js'
-import { type IsHexErrorType, isHex } from '../../utils/data/isHex.js'
-import { type ToHexErrorType, bytesToHex } from '../../utils/encoding/toHex.js'
-import { getAction } from '../../utils/getAction.js'
-import { isErc6492Signature } from '../../utils/signature/isErc6492Signature.js'
-import { recoverAddress } from '../../utils/signature/recoverAddress.js'
-import { serializeErc6492Signature } from '../../utils/signature/serializeErc6492Signature.js'
-import { serializeSignature } from '../../utils/signature/serializeSignature.js'
-import { type CallErrorType, type CallParameters, call } from './call.js'
+} from '../../utils/data/isBytesEqual'
+import { type IsHexErrorType, isHex } from '../../utils/data/isHex'
+import { type ToHexErrorType, bytesToHex } from '../../utils/encoding/toHex'
+import { getAction } from '../../utils/getAction'
+import { isErc6492Signature } from '../../utils/signature/isErc6492Signature'
+import { recoverAddress } from '../../utils/signature/recoverAddress'
+import { serializeErc6492Signature } from '../../utils/signature/serializeErc6492Signature'
+import { serializeSignature } from '../../utils/signature/serializeSignature'
+import { type CallErrorType, type CallParameters, call } from './call'
 
 export type VerifyHashParameters = Pick<
   CallParameters,

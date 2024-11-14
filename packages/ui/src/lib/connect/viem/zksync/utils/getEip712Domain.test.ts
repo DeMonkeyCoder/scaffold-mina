@@ -1,12 +1,12 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { signTransaction } from '../../accounts/utils/signTransaction.js'
-import { type TransactionSerializableEIP1559, parseEther } from '../../index.js'
-import { zksync } from '../../zksync/index.js'
-import { serializeTransaction } from '../../zksync/serializers.js'
-import type { ZksyncTransactionSerializableEIP712 } from '../types/transaction.js'
-import { getEip712Domain } from './getEip712Domain.js'
+import { accounts } from '~test/src/constants'
+import { signTransaction } from '../../accounts/utils/signTransaction'
+import { type TransactionSerializableEIP1559, parseEther } from '../../index'
+import { zksync } from '../../zksync/index'
+import { serializeTransaction } from '../../zksync/serializers'
+import type { ZksyncTransactionSerializableEIP712 } from '../types/transaction'
+import { getEip712Domain } from './getEip712Domain'
 
 const baseTransaction: TransactionSerializableEIP1559 = {
   to: '0x111C3E89Ce80e62EE88318C2804920D4c96f92bb',

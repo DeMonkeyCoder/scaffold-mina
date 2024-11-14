@@ -1,7 +1,7 @@
-import { versionedHashVersionKzg } from '../constants/kzg.js'
-import type { Hash } from '../types/misc.js'
+import { versionedHashVersionKzg } from '../constants/kzg'
+import type { Hash } from '../types/misc'
 
-import { BaseError } from './base.js'
+import { BaseError } from './base'
 
 export type BlobSizeTooLargeErrorType = BlobSizeTooLargeError & {
   name: 'BlobSizeTooLargeError'

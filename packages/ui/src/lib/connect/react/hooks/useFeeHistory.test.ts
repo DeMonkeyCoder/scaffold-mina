@@ -2,7 +2,7 @@ import { chain, wait } from '@wagmi/test'
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { useFeeHistory } from './useFeeHistory.js'
+import { useFeeHistory } from './useFeeHistory'
 
 test('default', async () => {
   const { result } = renderHook(() =>

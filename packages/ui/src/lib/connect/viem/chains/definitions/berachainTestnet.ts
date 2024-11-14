@@ -1,4 +1,4 @@
-import { defineChain } from '../../utils/chain/defineChain.js'
+import { defineChain } from '../../utils/chain/defineChain'
 
 export const berachainTestnet = /*#__PURE__*/ defineChain({
   id: 80085,

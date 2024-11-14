@@ -3,7 +3,7 @@ import { config } from "@wagmi/test";
 import { renderHook, waitFor } from "@wagmi/test/react";
 import { expect, test } from "vitest";
 
-import { useWatchAsset } from "./useWatchAsset.js";
+import { useWatchAsset } from "./useWatchAsset";
 
 const connector = config.connectors[0]!;
 

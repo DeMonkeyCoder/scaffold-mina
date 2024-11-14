@@ -1,16 +1,16 @@
 import type {
   TestClient,
   TestClientMode,
-} from '../../clients/createTestClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
-import type { Chain } from '../../types/chain.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+} from "../../clients/createTestClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account } from "../../types/account";
+import type { Chain } from "../../types/chain";
+import type { RequestErrorType } from "../../utils/buildRequest";
 
-export type GetAutomineReturnType = boolean
+export type GetAutomineReturnType = boolean;
 
-export type GetAutomineErrorType = RequestErrorType | ErrorType
+export type GetAutomineErrorType = RequestErrorType | ErrorType;
 
 /**
  * Returns the automatic mining status of the node.
@@ -34,15 +34,15 @@ export type GetAutomineErrorType = RequestErrorType | ErrorType
  */
 export async function getAutomine<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(
-  client: TestClient<TestClientMode, Transport, chain, account, false>,
+  client: TestClient<TestClientMode, Transport, chain, account, false>
 ): Promise<GetAutomineReturnType> {
-  if (client.mode === 'ganache')
+  if (client.mode === "ganache")
     return await client.request({
-      method: 'eth_mining',
-    })
+      method: "mina_mining",
+    });
   return await client.request({
     method: `${client.mode}_getAutomine`,
-  })
+  });
 }

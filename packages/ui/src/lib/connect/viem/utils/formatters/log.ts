@@ -1,7 +1,7 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Log } from '../../types/log.js'
-import type { RpcLog } from '../../types/rpc.js'
-import type { ExactPartial } from '../../types/utils.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Log } from '../../types/log'
+import type { RpcLog } from '../../types/rpc'
+import type { ExactPartial } from '../../types/utils'
 
 export type FormatLogErrorType = ErrorType
 

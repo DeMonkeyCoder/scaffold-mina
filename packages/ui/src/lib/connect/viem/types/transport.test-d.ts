@@ -1,9 +1,9 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { fallback } from '../clients/transports/fallback.js'
-import { http } from '../clients/transports/http.js'
-import { webSocket } from '../clients/transports/webSocket.js'
-import type { HasTransportType } from './transport.js'
+import { fallback } from '../clients/transports/fallback'
+import { http } from '../clients/transports/http'
+import { webSocket } from '../clients/transports/webSocket'
+import type { HasTransportType } from './transport'
 
 test('HasTransportType', () => {
   {

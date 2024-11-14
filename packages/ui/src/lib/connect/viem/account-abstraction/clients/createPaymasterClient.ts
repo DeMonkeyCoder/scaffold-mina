@@ -3,15 +3,15 @@ import {
   type ClientConfig,
   type CreateClientErrorType,
   createClient,
-} from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { PaymasterRpcSchema, RpcSchema } from '../../types/eip1193.js'
-import type { Prettify } from '../../types/utils.js'
+} from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { PaymasterRpcSchema, RpcSchema } from '../../types/eip1193'
+import type { Prettify } from '../../types/utils'
 import {
   type PaymasterActions,
   paymasterActions,
-} from './decorators/paymaster.js'
+} from './decorators/paymaster'
 
 export type PaymasterClientConfig<
   transport extends Transport = Transport,

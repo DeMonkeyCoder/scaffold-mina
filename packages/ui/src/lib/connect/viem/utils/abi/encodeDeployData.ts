@@ -4,16 +4,16 @@ import {
   AbiConstructorNotFoundError,
   type AbiConstructorNotFoundErrorType,
   AbiConstructorParamsNotFoundError,
-} from '../../errors/abi.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { ContractConstructorArgs } from '../../types/contract.js'
-import type { Hex } from '../../types/misc.js'
-import type { UnionEvaluate } from '../../types/utils.js'
-import { type ConcatHexErrorType, concatHex } from '../data/concat.js'
+} from '../../errors/abi'
+import type { ErrorType } from '../../errors/utils'
+import type { ContractConstructorArgs } from '../../types/contract'
+import type { Hex } from '../../types/misc'
+import type { UnionEvaluate } from '../../types/utils'
+import { type ConcatHexErrorType, concatHex } from '../data/concat'
 import {
   type EncodeAbiParametersErrorType,
   encodeAbiParameters,
-} from './encodeAbiParameters.js'
+} from './encodeAbiParameters'
 
 const docsPath = '/docs/contract/encodeDeployData'
 

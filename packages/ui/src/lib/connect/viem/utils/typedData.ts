@@ -1,20 +1,20 @@
 import type { TypedData, TypedDataDomain, TypedDataParameter } from 'abitype'
 
-import { BytesSizeMismatchError } from '../errors/abi.js'
-import { InvalidAddressError } from '../errors/address.js'
-import type { Hex } from '../types/misc.js'
-import type { TypedDataDefinition } from '../types/typedData.js'
+import { BytesSizeMismatchError } from '../errors/abi'
+import { InvalidAddressError } from '../errors/address'
+import type { Hex } from '../types/misc'
+import type { TypedDataDefinition } from '../types/typedData'
 
-import type { ErrorType } from '../errors/utils.js'
-import { type IsAddressErrorType, isAddress } from './address/isAddress.js'
-import { type SizeErrorType, size } from './data/size.js'
-import { type NumberToHexErrorType, numberToHex } from './encoding/toHex.js'
-import { bytesRegex, integerRegex } from './regex.js'
+import type { ErrorType } from '../errors/utils'
+import { type IsAddressErrorType, isAddress } from './address/isAddress'
+import { type SizeErrorType, size } from './data/size'
+import { type NumberToHexErrorType, numberToHex } from './encoding/toHex'
+import { bytesRegex, integerRegex } from './regex'
 import {
   type HashDomainErrorType,
   hashDomain,
-} from './signature/hashTypedData.js'
-import { stringify } from './stringify.js'
+} from './signature/hashTypedData'
+import { stringify } from './stringify'
 
 export type SerializeTypedDataErrorType =
   | HashDomainErrorType

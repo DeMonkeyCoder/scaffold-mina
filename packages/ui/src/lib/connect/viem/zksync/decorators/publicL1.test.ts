@@ -1,13 +1,13 @@
 import { afterAll, expect, test, vi } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { sepolia } from '~viem/chains/index.js'
-import { createPublicClient } from '~viem/clients/createPublicClient.js'
-import { createWalletClient } from '~viem/clients/createWalletClient.js'
-import { http } from '~viem/clients/transports/http.js'
-import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
-import * as readContract from '../../actions/public/readContract.js'
-import { publicActionsL1 } from './publicL1.js'
+import { accounts } from '~test/src/constants'
+import { sepolia } from '~viem/chains/index'
+import { createPublicClient } from '~viem/clients/createPublicClient'
+import { createWalletClient } from '~viem/clients/createWalletClient'
+import { http } from '~viem/clients/transports/http'
+import { privateKeyToAccount } from '../../accounts/privateKeyToAccount'
+import * as readContract from '../../actions/public/readContract'
+import { publicActionsL1 } from './publicL1'
 
 const client = createPublicClient({
   chain: sepolia,

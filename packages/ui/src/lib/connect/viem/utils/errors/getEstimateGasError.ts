@@ -1,19 +1,19 @@
-import type { Account } from '../../accounts/types.js'
-import type { EstimateGasParameters } from '../../actions/public/estimateGas.js'
-import type { BaseError } from '../../errors/base.js'
+import type { Account } from '../../accounts/types'
+import type { EstimateGasParameters } from '../../actions/public/estimateGas'
+import type { BaseError } from '../../errors/base'
 import {
   EstimateGasExecutionError,
   type EstimateGasExecutionErrorType,
-} from '../../errors/estimateGas.js'
-import { UnknownNodeError } from '../../errors/node.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
+} from '../../errors/estimateGas'
+import { UnknownNodeError } from '../../errors/node'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
 
 import {
   type GetNodeErrorParameters,
   type GetNodeErrorReturnType,
   getNodeError,
-} from './getNodeError.js'
+} from './getNodeError'
 
 export type GetEstimateGasErrorReturnType<cause = ErrorType> = Omit<
   EstimateGasExecutionErrorType,

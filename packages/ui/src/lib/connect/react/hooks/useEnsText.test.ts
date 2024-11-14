@@ -2,7 +2,7 @@ import { wait } from '@wagmi/test'
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { useEnsText } from './useEnsText.js'
+import { useEnsText } from './useEnsText'
 
 test('default', async () => {
   const { result } = renderHook(() =>

@@ -1,6 +1,6 @@
 import { weiUnits } from "@/lib/connect/viem";
 
-import type { Unit } from "../types/unit.js";
+import type { Unit } from "../types/unit";
 
 export function getUnit(unit: Unit) {
   if (typeof unit === "number") return unit;

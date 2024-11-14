@@ -3,8 +3,8 @@ import { http, type Address } from "@/lib/connect/viem";
 import { celo } from "@/lib/connect/viem/chains";
 import { assertType, expectTypeOf, test } from "vitest";
 
-import { createConfig } from "../../createConfig.js";
-import { createSimulateContract } from "./createSimulateContract.js";
+import { createConfig } from "../../createConfig";
+import { createSimulateContract } from "./createSimulateContract";
 
 test("default", async () => {
   const simulateErc20 = createSimulateContract({

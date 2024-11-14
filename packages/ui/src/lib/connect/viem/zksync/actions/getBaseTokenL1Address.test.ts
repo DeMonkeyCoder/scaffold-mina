@@ -3,9 +3,9 @@ import {
   mockBaseTokenL1Address,
   mockClientPublicActionsL2,
   zksyncClientLocalNode,
-} from '../../../test/src/zksync.js'
+} from '../../../test/src/zksync'
 
-import { getBaseTokenL1Address } from './getBaseTokenL1Address.js'
+import { getBaseTokenL1Address } from './getBaseTokenL1Address'
 
 const client = { ...zksyncClientLocalNode }
 

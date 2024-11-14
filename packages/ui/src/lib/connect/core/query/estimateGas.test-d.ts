@@ -2,11 +2,11 @@ import { http, type Address, parseEther } from "@/lib/connect/viem";
 import { celo, mainnet } from "@/lib/connect/viem/chains";
 import { expectTypeOf, test } from "vitest";
 
-import { createConfig } from "../createConfig.js";
+import { createConfig } from "../createConfig";
 import {
   type EstimateGasOptions,
   estimateGasQueryOptions,
-} from "./estimateGas.js";
+} from "./estimateGas";
 
 test("chain formatters", () => {
   const config = createConfig({

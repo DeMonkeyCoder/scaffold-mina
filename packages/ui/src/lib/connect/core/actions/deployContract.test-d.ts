@@ -3,11 +3,11 @@ import { http } from "@/lib/connect/viem";
 import { celo, mainnet } from "@/lib/connect/viem/chains";
 import { expectTypeOf, test } from "vitest";
 
-import { createConfig } from "../createConfig.js";
+import { createConfig } from "../createConfig";
 import {
   type DeployContractParameters,
   deployContract,
-} from "./deployContract.js";
+} from "./deployContract";
 
 test("default", async () => {
   await deployContract(config, {

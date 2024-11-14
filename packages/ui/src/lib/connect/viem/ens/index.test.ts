@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import * as ens from './index.js'
+import * as ens from './index'
 
 test('exports ens', () => {
   expect(ens).toMatchInlineSnapshot(`

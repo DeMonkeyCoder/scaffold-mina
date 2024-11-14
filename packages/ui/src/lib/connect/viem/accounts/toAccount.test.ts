@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
+import { accounts } from '~test/src/constants'
 
-import { toAccount } from './toAccount.js'
+import { toAccount } from './toAccount'
 
 describe('toAccount', () => {
   test('json-rpc account', () => {

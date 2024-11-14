@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { normalizeChainId } from './normalizeChainId.js'
+import { normalizeChainId } from './normalizeChainId'
 
 test.each([
   { chainId: 1, expected: 1 },

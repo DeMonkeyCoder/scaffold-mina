@@ -1,5 +1,5 @@
 import type { Address } from 'abitype'
-import type { Hex } from '../../types/misc.js'
+import type { Hex } from '../../types/misc'
 
 export type Game = {
   index: bigint

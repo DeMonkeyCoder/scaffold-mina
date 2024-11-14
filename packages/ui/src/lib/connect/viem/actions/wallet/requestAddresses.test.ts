@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { requestAddresses } from './requestAddresses.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { requestAddresses } from './requestAddresses'
 
 const client = anvilMainnet.getClient()
 

@@ -1,19 +1,19 @@
 import type { Address, TypedData } from 'abitype'
 
-import type { SmartAccount } from '../account-abstraction/accounts/types.js'
-import type { Authorization } from '../experimental/eip7702/types/authorization.js'
-import type { HDKey } from '../types/account.js'
-import type { Hash, Hex, SignableMessage } from '../types/misc.js'
+import type { SmartAccount } from '../account-abstraction/accounts/types'
+import type { Authorization } from '../experimental/eip7702/types/authorization'
+import type { HDKey } from '../types/account'
+import type { Hash, Hex, SignableMessage } from '../types/misc'
 import type {
   TransactionSerializable,
   TransactionSerialized,
-} from '../types/transaction.js'
-import type { TypedDataDefinition } from '../types/typedData.js'
-import type { IsNarrowable, OneOf, Prettify } from '../types/utils.js'
-import type { NonceManager } from '../utils/nonceManager.js'
-import type { GetTransactionType } from '../utils/transaction/getTransactionType.js'
-import type { SerializeTransactionFn } from '../utils/transaction/serializeTransaction.js'
-import type { SignAuthorizationReturnType } from './utils/signAuthorization.js'
+} from '../types/transaction'
+import type { TypedDataDefinition } from '../types/typedData'
+import type { IsNarrowable, OneOf, Prettify } from '../types/utils'
+import type { NonceManager } from '../utils/nonceManager'
+import type { GetTransactionType } from '../utils/transaction/getTransactionType'
+import type { SerializeTransactionFn } from '../utils/transaction/serializeTransaction'
+import type { SignAuthorizationReturnType } from './utils/signAuthorization'
 
 export type Account<address extends Address = Address> = OneOf<
   JsonRpcAccount<address> | LocalAccount<string, address> | SmartAccount

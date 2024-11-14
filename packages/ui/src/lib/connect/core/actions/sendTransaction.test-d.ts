@@ -2,11 +2,11 @@ import { http, parseEther } from "@/lib/connect/viem";
 import { celo, mainnet } from "@/lib/connect/viem/chains";
 import { expectTypeOf, test } from "vitest";
 
-import { createConfig } from "../createConfig.js";
+import { createConfig } from "../createConfig";
 import {
   type SendTransactionParameters,
   sendTransaction,
-} from "./sendTransaction.js";
+} from "./sendTransaction";
 
 test("chain formatters", () => {
   const config = createConfig({

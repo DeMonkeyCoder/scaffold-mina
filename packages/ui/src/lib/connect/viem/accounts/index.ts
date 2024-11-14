@@ -15,27 +15,27 @@ export { wordlist as traditionalChinese } from '@scure/bip39/wordlists/tradition
 export {
   type GenerateMnemonicErrorType,
   generateMnemonic,
-} from './generateMnemonic.js'
+} from './generateMnemonic'
 export {
   type GeneratePrivateKeyErrorType,
   generatePrivateKey,
-} from './generatePrivateKey.js'
+} from './generatePrivateKey'
 export {
   type HDKeyToAccountOptions,
   type HDKeyToAccountErrorType,
   hdKeyToAccount,
-} from './hdKeyToAccount.js'
+} from './hdKeyToAccount'
 export {
   type MnemonicToAccountOptions,
   type MnemonicToAccountErrorType,
   mnemonicToAccount,
-} from './mnemonicToAccount.js'
+} from './mnemonicToAccount'
 export {
   type PrivateKeyToAccountOptions,
   type PrivateKeyToAccountErrorType,
   privateKeyToAccount,
-} from './privateKeyToAccount.js'
-export { type ToAccountErrorType, toAccount } from './toAccount.js'
+} from './privateKeyToAccount'
+export { type ToAccountErrorType, toAccount } from './toAccount'
 
 export type {
   Account,
@@ -46,13 +46,13 @@ export type {
   LocalAccount,
   HDAccount,
   PrivateKeyAccount,
-} from './types.js'
+} from './types'
 export {
   type SignErrorType,
   type SignParameters,
   type SignReturnType,
   sign,
-} from './utils/sign.js'
+} from './utils/sign'
 export {
   /** @deprecated Use `SignatureToHexErrorType` instead. */
   type SerializeSignatureErrorType as SignatureToHexErrorType,
@@ -60,47 +60,47 @@ export {
   serializeSignature as signatureToHex,
   type SerializeSignatureErrorType,
   serializeSignature,
-} from '../utils/signature/serializeSignature.js'
+} from '../utils/signature/serializeSignature'
 export {
   type SignAuthorizationErrorType,
   type SignAuthorizationParameters,
   type SignAuthorizationReturnType,
   experimental_signAuthorization,
-} from './utils/signAuthorization.js'
+} from './utils/signAuthorization'
 export {
   type SignMessageErrorType,
   type SignMessageParameters,
   type SignMessageReturnType,
   signMessage,
-} from './utils/signMessage.js'
+} from './utils/signMessage'
 export {
   type SignTransactionErrorType,
   type SignTransactionParameters,
   type SignTransactionReturnType,
   signTransaction,
-} from './utils/signTransaction.js'
+} from './utils/signTransaction'
 export {
   type SignTypedDataErrorType,
   type SignTypedDataParameters,
   type SignTypedDataReturnType,
   signTypedData,
-} from './utils/signTypedData.js'
+} from './utils/signTypedData'
 export {
   type ParseAccountErrorType,
   parseAccount,
-} from './utils/parseAccount.js'
+} from './utils/parseAccount'
 export {
   type PublicKeyToAddressErrorType,
   publicKeyToAddress,
-} from './utils/publicKeyToAddress.js'
+} from './utils/publicKeyToAddress'
 export {
   type PrivateKeyToAddressErrorType,
   privateKeyToAddress,
-} from './utils/privateKeyToAddress.js'
+} from './utils/privateKeyToAddress'
 export {
   type CreateNonceManagerParameters,
   type NonceManager,
   type NonceManagerSource,
   createNonceManager,
   nonceManager,
-} from '../utils/nonceManager.js'
+} from '../utils/nonceManager'

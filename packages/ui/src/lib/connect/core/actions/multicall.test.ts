@@ -1,7 +1,7 @@
 import { abi, address, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { multicall } from './multicall.js'
+import { multicall } from './multicall'
 
 test('default', async () => {
   await expect(

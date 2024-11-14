@@ -1,30 +1,30 @@
 import { expect, test } from 'vitest'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { accounts } from '../../../test/src/constants.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { accounts } from '../../../test/src/constants'
 import {
   privateKeyToAccount,
   serializeSignature,
   sign,
   signTransaction,
-} from '../../accounts/index.js'
-import { getTransaction } from '../../actions/index.js'
-import { walletActions } from '../../clients/decorators/wallet.js'
+} from '../../accounts/index'
+import { getTransaction } from '../../actions/index'
+import { walletActions } from '../../clients/decorators/wallet'
 
-import { kzg } from '../../../test/src/kzg.js'
+import { kzg } from '../../../test/src/kzg'
 import type {
   TransactionSerializable,
   TransactionSerializableEIP4844,
   TransactionSerializedLegacy,
-} from '../../types/transaction.js'
-import { sidecarsToVersionedHashes } from '../blob/sidecarsToVersionedHashes.js'
-import { toBlobSidecars } from '../blob/toBlobSidecars.js'
+} from '../../types/transaction'
+import { sidecarsToVersionedHashes } from '../blob/sidecarsToVersionedHashes'
+import { toBlobSidecars } from '../blob/toBlobSidecars'
 import {
   hexToBytes,
   keccak256,
   serializeTransaction,
   stringToHex,
-} from '../index.js'
-import { recoverTransactionAddress } from './recoverTransactionAddress.js'
+} from '../index'
+import { recoverTransactionAddress } from './recoverTransactionAddress'
 
 const client = anvilMainnet.getClient().extend(walletActions)
 

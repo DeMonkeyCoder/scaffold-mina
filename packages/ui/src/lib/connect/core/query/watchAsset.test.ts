@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { watchAssetMutationOptions } from './watchAsset.js'
+import { watchAssetMutationOptions } from './watchAsset'
 
 test('default', () => {
   expect(watchAssetMutationOptions(config)).toMatchInlineSnapshot(`

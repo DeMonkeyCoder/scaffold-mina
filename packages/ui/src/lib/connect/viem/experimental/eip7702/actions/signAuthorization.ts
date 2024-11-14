@@ -1,29 +1,29 @@
-import type { Account } from '../../../accounts/types.js'
+import type { Account } from '../../../accounts/types'
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../../accounts/utils/parseAccount.js'
+} from '../../../accounts/utils/parseAccount'
 import type {
   SignAuthorizationErrorType as SignAuthorizationErrorType_account,
   SignAuthorizationReturnType as SignAuthorizationReturnType_account,
-} from '../../../accounts/utils/signAuthorization.js'
-import { getChainId } from '../../../actions/public/getChainId.js'
-import { getTransactionCount } from '../../../actions/public/getTransactionCount.js'
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
+} from '../../../accounts/utils/signAuthorization'
+import { getChainId } from '../../../actions/public/getChainId'
+import { getTransactionCount } from '../../../actions/public/getTransactionCount'
+import type { Client } from '../../../clients/createClient'
+import type { Transport } from '../../../clients/transports/createTransport'
 import {
   AccountNotFoundError,
   type AccountNotFoundErrorType,
   AccountTypeNotSupportedError,
   type AccountTypeNotSupportedErrorType,
-} from '../../../errors/account.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { GetAccountParameter } from '../../../types/account.js'
-import type { Chain } from '../../../types/chain.js'
-import type { PartialBy } from '../../../types/utils.js'
-import type { RequestErrorType } from '../../../utils/buildRequest.js'
-import { getAction } from '../../../utils/getAction.js'
-import type { Authorization } from '../types/authorization.js'
+} from '../../../errors/account'
+import type { ErrorType } from '../../../errors/utils'
+import type { GetAccountParameter } from '../../../types/account'
+import type { Chain } from '../../../types/chain'
+import type { PartialBy } from '../../../types/utils'
+import type { RequestErrorType } from '../../../utils/buildRequest'
+import { getAction } from '../../../utils/getAction'
+import type { Authorization } from '../types/authorization'
 
 export type SignAuthorizationParameters<
   account extends Account | undefined = Account | undefined,

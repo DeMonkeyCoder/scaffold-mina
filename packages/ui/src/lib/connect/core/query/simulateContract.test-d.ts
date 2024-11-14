@@ -3,11 +3,11 @@ import { http, type Address } from "@/lib/connect/viem";
 import { celo, mainnet } from "@/lib/connect/viem/chains";
 import { expectTypeOf, test } from "vitest";
 
-import { createConfig } from "../createConfig.js";
+import { createConfig } from "../createConfig";
 import {
   type SimulateContractOptions,
   simulateContractQueryOptions,
-} from "./simulateContract.js";
+} from "./simulateContract";
 
 test("chain formatters", () => {
   const config = createConfig({

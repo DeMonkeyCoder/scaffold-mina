@@ -2,7 +2,7 @@ import { abi, config } from "@wagmi/test";
 import type { Address } from "@/lib/connect/viem";
 import { expectTypeOf, test } from "vitest";
 
-import { multicall } from "./multicall.js";
+import { multicall } from "./multicall";
 
 test("default", async () => {
   const result = await multicall(config, {

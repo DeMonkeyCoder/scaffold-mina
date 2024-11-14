@@ -5,7 +5,7 @@ import type { Address } from "@/lib/connect/viem";
 import {
   type UseVerifyTypedDataParameters,
   useVerifyTypedData,
-} from "./useVerifyTypedData.js";
+} from "./useVerifyTypedData";
 
 test("select data", () => {
   const result = useVerifyTypedData({

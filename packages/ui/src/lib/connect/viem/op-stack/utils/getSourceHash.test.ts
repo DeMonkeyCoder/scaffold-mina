@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { getSourceHash } from './getSourceHash.js'
+import { getSourceHash } from './getSourceHash'
 
 test('userDeposit', () => {
   const sourceHash = getSourceHash({

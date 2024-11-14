@@ -1,9 +1,9 @@
 import { beforeAll, expect, test, vi } from 'vitest'
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { reset } from '../../actions/index.js'
-import { optimism } from '../../op-stack/chains.js'
-import { getTimeToNextL2Output } from './getTimeToNextL2Output.js'
+import { reset } from '../../actions/index'
+import { optimism } from '../../op-stack/chains'
+import { getTimeToNextL2Output } from './getTimeToNextL2Output'
 
 const client = anvilMainnet.getClient()
 

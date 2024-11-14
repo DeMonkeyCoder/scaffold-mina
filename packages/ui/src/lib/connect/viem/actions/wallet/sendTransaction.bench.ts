@@ -2,12 +2,12 @@ import { JsonRpcSigner } from 'ethers'
 
 import { bench, describe } from 'vitest'
 
-import { ethersProvider } from '~test/src/bench.js'
-import { accounts } from '~test/src/constants.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
+import { ethersProvider } from '~test/src/bench'
+import { accounts } from '~test/src/constants'
+import { parseEther } from '../../utils/unit/parseEther'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { sendTransaction } from './sendTransaction.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { sendTransaction } from './sendTransaction'
 
 const client = anvilMainnet.getClient()
 

@@ -1,10 +1,10 @@
 import { describe, expect, test } from "vitest";
-import type { StateMapping, StateOverride } from "../types/stateOverride.js";
+import type { StateMapping, StateOverride } from "../types/stateOverride";
 import {
   serializeAccountStateOverride,
   serializeStateMapping,
   serializeStateOverride,
-} from "./stateOverride.js";
+} from "./stateOverride";
 
 const fourTwenty =
   "00000000000000000000000000000000000000000000000000000000000001a4";

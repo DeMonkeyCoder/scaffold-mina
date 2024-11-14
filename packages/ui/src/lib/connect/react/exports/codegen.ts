@@ -14,22 +14,22 @@ export {
   type CreateUseSimulateContractParameters,
   type CreateUseSimulateContractReturnType,
   createUseSimulateContract,
-} from "../hooks/codegen/createUseSimulateContract.js";
+} from "../hooks/codegen/createUseSimulateContract";
 
 export {
   type CreateUseReadContractParameters,
   type CreateUseReadContractReturnType,
   createUseReadContract,
-} from "../hooks/codegen/createUseReadContract.js";
+} from "../hooks/codegen/createUseReadContract";
 
 export {
   type CreateUseWatchContractEventParameters,
   type CreateUseWatchContractEventReturnType,
   createUseWatchContractEvent,
-} from "../hooks/codegen/createUseWatchContractEvent.js";
+} from "../hooks/codegen/createUseWatchContractEvent";
 
 export {
   type CreateUseWriteContractParameters,
   type CreateUseWriteContractReturnType,
   createUseWriteContract,
-} from "../hooks/codegen/createUseWriteContract.js";
+} from "../hooks/codegen/createUseWriteContract";

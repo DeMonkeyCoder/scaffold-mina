@@ -1,28 +1,28 @@
 import type { Abi } from 'abitype'
 
-import { zeroHash } from '../../../constants/bytes.js'
+import { zeroHash } from '../../../constants/bytes'
 import {
   AbiConstructorNotFoundError,
   AbiConstructorParamsNotFoundError,
-} from '../../../errors/abi.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { ContractConstructorArgs } from '../../../types/contract.js'
-import type { Hash } from '../../../types/misc.js'
-import type { Hex } from '../../../types/misc.js'
-import { encodeAbiParameters } from '../../../utils/abi/encodeAbiParameters.js'
+} from '../../../errors/abi'
+import type { ErrorType } from '../../../errors/utils'
+import type { ContractConstructorArgs } from '../../../types/contract'
+import type { Hash } from '../../../types/misc'
+import type { Hex } from '../../../types/misc'
+import { encodeAbiParameters } from '../../../utils/abi/encodeAbiParameters'
 import type {
   EncodeDeployDataParameters as EncodeDeployDataParameters_,
   EncodeDeployDataReturnType,
-} from '../../../utils/abi/encodeDeployData.js'
+} from '../../../utils/abi/encodeDeployData'
 import {
   type EncodeFunctionDataErrorType,
   encodeFunctionData,
-} from '../../../utils/abi/encodeFunctionData.js'
-import { toHex } from '../../../utils/encoding/toHex.js'
-import { contractDeployerAbi } from '../../constants/abis.js'
-import { accountAbstractionVersion1 } from '../../constants/contract.js'
-import type { ContractDeploymentType } from '../../types/contract.js'
-import { type HashBytecodeErrorType, hashBytecode } from '../hashBytecode.js'
+} from '../../../utils/abi/encodeFunctionData'
+import { toHex } from '../../../utils/encoding/toHex'
+import { contractDeployerAbi } from '../../constants/abis'
+import { accountAbstractionVersion1 } from '../../constants/contract'
+import type { ContractDeploymentType } from '../../types/contract'
+import { type HashBytecodeErrorType, hashBytecode } from '../hashBytecode'
 
 const docsPath = '/docs/contract/encodeDeployData'
 

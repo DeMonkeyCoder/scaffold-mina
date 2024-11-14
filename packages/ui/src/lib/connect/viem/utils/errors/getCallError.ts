@@ -1,18 +1,18 @@
-import type { CallParameters } from '../../actions/public/call.js'
-import type { BaseError } from '../../errors/base.js'
+import type { CallParameters } from '../../actions/public/call'
+import type { BaseError } from '../../errors/base'
 import {
   CallExecutionError,
   type CallExecutionErrorType,
-} from '../../errors/contract.js'
-import { UnknownNodeError } from '../../errors/node.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
+} from '../../errors/contract'
+import { UnknownNodeError } from '../../errors/node'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
 
 import {
   type GetNodeErrorParameters,
   type GetNodeErrorReturnType,
   getNodeError,
-} from './getNodeError.js'
+} from './getNodeError'
 
 export type GetCallErrorReturnType<cause = ErrorType> = Omit<
   CallExecutionErrorType,

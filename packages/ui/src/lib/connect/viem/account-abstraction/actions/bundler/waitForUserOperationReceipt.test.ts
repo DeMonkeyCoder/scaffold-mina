@@ -2,15 +2,15 @@ import { beforeEach, describe, expect, test, vi } from 'vitest'
 import {
   getSmartAccounts_06,
   getSmartAccounts_07,
-} from '../../../../test/src/account-abstraction.js'
-import { anvilMainnet } from '../../../../test/src/anvil.js'
-import { bundlerMainnet } from '../../../../test/src/bundler.js'
-import { mine } from '../../../actions/index.js'
-import { parseEther, parseGwei } from '../../../utils/index.js'
-import { wait } from '../../../utils/wait.js'
-import * as getUserOperationReceipt from './getUserOperationReceipt.js'
-import { sendUserOperation } from './sendUserOperation.js'
-import { waitForUserOperationReceipt } from './waitForUserOperationReceipt.js'
+} from '../../../../test/src/account-abstraction'
+import { anvilMainnet } from '../../../../test/src/anvil'
+import { bundlerMainnet } from '../../../../test/src/bundler'
+import { mine } from '../../../actions/index'
+import { parseEther, parseGwei } from '../../../utils/index'
+import { wait } from '../../../utils/wait'
+import * as getUserOperationReceipt from './getUserOperationReceipt'
+import { sendUserOperation } from './sendUserOperation'
+import { waitForUserOperationReceipt } from './waitForUserOperationReceipt'
 
 const client = anvilMainnet.getClient({ account: true })
 const bundlerClient = bundlerMainnet.getBundlerClient()

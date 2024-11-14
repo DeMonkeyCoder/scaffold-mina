@@ -2,8 +2,8 @@ import { http, webSocket } from "@/lib/connect/viem";
 import { mainnet, optimism } from "@/lib/connect/viem/chains";
 import { expectTypeOf, test } from "vitest";
 
-import { createConfig } from "../createConfig.js";
-import { type WatchBlocksParameters, watchBlocks } from "./watchBlocks.js";
+import { createConfig } from "../createConfig";
+import { type WatchBlocksParameters, watchBlocks } from "./watchBlocks";
 
 test("differing transports", () => {
   const config = createConfig({

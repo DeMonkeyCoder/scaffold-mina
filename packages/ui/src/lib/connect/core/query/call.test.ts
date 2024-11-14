@@ -2,7 +2,7 @@ import { accounts, address, chain, config } from "@wagmi/test";
 import { expect, test } from "vitest";
 
 import { parseEther, parseGwei } from "@/lib/connect/viem";
-import { callQueryOptions } from "./call.js";
+import { callQueryOptions } from "./call";
 
 const name4bytes = "0x06fdde03";
 const account = accounts[0];

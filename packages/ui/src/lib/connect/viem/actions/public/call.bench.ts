@@ -1,11 +1,11 @@
 import { bench, describe } from 'vitest'
 
-import { ethersProvider } from '~test/src/bench.js'
-import { accounts } from '~test/src/constants.js'
+import { ethersProvider } from '~test/src/bench'
+import { accounts } from '~test/src/constants'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { call } from './call.js'
+import { call } from './call'
 
 const client = anvilMainnet.getClient()
 

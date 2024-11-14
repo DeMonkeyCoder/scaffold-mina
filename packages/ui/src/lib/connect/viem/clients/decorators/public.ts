@@ -4,257 +4,257 @@ import {
   type GetEnsAddressParameters,
   type GetEnsAddressReturnType,
   getEnsAddress,
-} from "../../actions/ens/getEnsAddress.js";
+} from "../../actions/ens/getEnsAddress";
 import {
   type GetEnsAvatarParameters,
   type GetEnsAvatarReturnType,
   getEnsAvatar,
-} from "../../actions/ens/getEnsAvatar.js";
+} from "../../actions/ens/getEnsAvatar";
 import {
   type GetEnsNameParameters,
   type GetEnsNameReturnType,
   getEnsName,
-} from "../../actions/ens/getEnsName.js";
+} from "../../actions/ens/getEnsName";
 import {
   type GetEnsResolverParameters,
   type GetEnsResolverReturnType,
   getEnsResolver,
-} from "../../actions/ens/getEnsResolver.js";
+} from "../../actions/ens/getEnsResolver";
 import {
   type GetEnsTextParameters,
   type GetEnsTextReturnType,
   getEnsText,
-} from "../../actions/ens/getEnsText.js";
+} from "../../actions/ens/getEnsText";
 import {
   type CallParameters,
   type CallReturnType,
   call,
-} from "../../actions/public/call.js";
+} from "../../actions/public/call";
 import {
   type CreateBlockFilterReturnType,
   createBlockFilter,
-} from "../../actions/public/createBlockFilter.js";
+} from "../../actions/public/createBlockFilter";
 import {
   type CreateContractEventFilterParameters,
   type CreateContractEventFilterReturnType,
   createContractEventFilter,
-} from "../../actions/public/createContractEventFilter.js";
+} from "../../actions/public/createContractEventFilter";
 import {
   type CreateEventFilterParameters,
   type CreateEventFilterReturnType,
   createEventFilter,
-} from "../../actions/public/createEventFilter.js";
+} from "../../actions/public/createEventFilter";
 import {
   type CreatePendingTransactionFilterReturnType,
   createPendingTransactionFilter,
-} from "../../actions/public/createPendingTransactionFilter.js";
+} from "../../actions/public/createPendingTransactionFilter";
 import {
   type EstimateContractGasParameters,
   type EstimateContractGasReturnType,
   estimateContractGas,
-} from "../../actions/public/estimateContractGas.js";
+} from "../../actions/public/estimateContractGas";
 import {
   type EstimateFeesPerGasParameters,
   type EstimateFeesPerGasReturnType,
   estimateFeesPerGas,
-} from "../../actions/public/estimateFeesPerGas.js";
+} from "../../actions/public/estimateFeesPerGas";
 import {
   type EstimateGasParameters,
   type EstimateGasReturnType,
   estimateGas,
-} from "../../actions/public/estimateGas.js";
+} from "../../actions/public/estimateGas";
 import {
   type EstimateMaxPriorityFeePerGasParameters,
   type EstimateMaxPriorityFeePerGasReturnType,
   estimateMaxPriorityFeePerGas,
-} from "../../actions/public/estimateMaxPriorityFeePerGas.js";
+} from "../../actions/public/estimateMaxPriorityFeePerGas";
 import {
   type GetBalanceParameters,
   type GetBalanceReturnType,
   getBalance,
-} from "../../actions/public/getBalance.js";
+} from "../../actions/public/getBalance";
 import {
   type GetBlobBaseFeeReturnType,
   getBlobBaseFee,
-} from "../../actions/public/getBlobBaseFee.js";
+} from "../../actions/public/getBlobBaseFee";
 import {
   type GetBlockParameters,
   type GetBlockReturnType,
   getBlock,
-} from "../../actions/public/getBlock.js";
+} from "../../actions/public/getBlock";
 import {
   type GetBlockNumberParameters,
   type GetBlockNumberReturnType,
   getBlockNumber,
-} from "../../actions/public/getBlockNumber.js";
+} from "../../actions/public/getBlockNumber";
 import {
   type GetBlockTransactionCountParameters,
   type GetBlockTransactionCountReturnType,
   getBlockTransactionCount,
-} from "../../actions/public/getBlockTransactionCount.js";
+} from "../../actions/public/getBlockTransactionCount";
 import {
   type GetChainIdReturnType,
   getChainId,
-} from "../../actions/public/getChainId.js";
+} from "../../actions/public/getChainId";
 import {
   type GetCodeParameters,
   type GetCodeReturnType,
   getCode,
-} from "../../actions/public/getCode.js";
+} from "../../actions/public/getCode";
 import {
   type GetContractEventsParameters,
   type GetContractEventsReturnType,
   getContractEvents,
-} from "../../actions/public/getContractEvents.js";
+} from "../../actions/public/getContractEvents";
 import {
   type GetEip712DomainParameters,
   type GetEip712DomainReturnType,
   getEip712Domain,
-} from "../../actions/public/getEip712Domain.js";
+} from "../../actions/public/getEip712Domain";
 import {
   type GetFeeHistoryParameters,
   type GetFeeHistoryReturnType,
   getFeeHistory,
-} from "../../actions/public/getFeeHistory.js";
+} from "../../actions/public/getFeeHistory";
 import {
   type GetFilterChangesParameters,
   type GetFilterChangesReturnType,
   getFilterChanges,
-} from "../../actions/public/getFilterChanges.js";
+} from "../../actions/public/getFilterChanges";
 import {
   type GetFilterLogsParameters,
   type GetFilterLogsReturnType,
   getFilterLogs,
-} from "../../actions/public/getFilterLogs.js";
+} from "../../actions/public/getFilterLogs";
 import {
   type GetGasPriceReturnType,
   getGasPrice,
-} from "../../actions/public/getGasPrice.js";
+} from "../../actions/public/getGasPrice";
 import {
   type GetLogsParameters,
   type GetLogsReturnType,
   getLogs,
-} from "../../actions/public/getLogs.js";
+} from "../../actions/public/getLogs";
 import {
   type GetProofParameters,
   type GetProofReturnType,
   getProof,
-} from "../../actions/public/getProof.js";
+} from "../../actions/public/getProof";
 import {
   type GetStorageAtParameters,
   type GetStorageAtReturnType,
   getStorageAt,
-} from "../../actions/public/getStorageAt.js";
+} from "../../actions/public/getStorageAt";
 import {
   type GetTransactionParameters,
   type GetTransactionReturnType,
   getTransaction,
-} from "../../actions/public/getTransaction.js";
+} from "../../actions/public/getTransaction";
 import {
   type GetTransactionConfirmationsParameters,
   type GetTransactionConfirmationsReturnType,
   getTransactionConfirmations,
-} from "../../actions/public/getTransactionConfirmations.js";
+} from "../../actions/public/getTransactionConfirmations";
 import {
   type GetTransactionCountParameters,
   type GetTransactionCountReturnType,
   getTransactionCount,
-} from "../../actions/public/getTransactionCount.js";
+} from "../../actions/public/getTransactionCount";
 import {
   type GetTransactionReceiptParameters,
   type GetTransactionReceiptReturnType,
   getTransactionReceipt,
-} from "../../actions/public/getTransactionReceipt.js";
+} from "../../actions/public/getTransactionReceipt";
 import {
   type MulticallParameters,
   type MulticallReturnType,
   multicall,
-} from "../../actions/public/multicall.js";
+} from "../../actions/public/multicall";
 import {
   type ReadContractParameters,
   type ReadContractReturnType,
   readContract,
-} from "../../actions/public/readContract.js";
+} from "../../actions/public/readContract";
 import {
   type SimulateContractParameters,
   type SimulateContractReturnType,
   simulateContract,
-} from "../../actions/public/simulateContract.js";
+} from "../../actions/public/simulateContract";
 import {
   type UninstallFilterParameters,
   type UninstallFilterReturnType,
   uninstallFilter,
-} from "../../actions/public/uninstallFilter.js";
+} from "../../actions/public/uninstallFilter";
 import {
   type VerifyMessageParameters,
   type VerifyMessageReturnType,
   verifyMessage,
-} from "../../actions/public/verifyMessage.js";
+} from "../../actions/public/verifyMessage";
 import {
   type VerifyTypedDataParameters,
   type VerifyTypedDataReturnType,
   verifyTypedData,
-} from "../../actions/public/verifyTypedData.js";
+} from "../../actions/public/verifyTypedData";
 import {
   type WaitForTransactionReceiptParameters,
   type WaitForTransactionReceiptReturnType,
   waitForTransactionReceipt,
-} from "../../actions/public/waitForTransactionReceipt.js";
+} from "../../actions/public/waitForTransactionReceipt";
 import {
   type WatchBlockNumberParameters,
   type WatchBlockNumberReturnType,
   watchBlockNumber,
-} from "../../actions/public/watchBlockNumber.js";
+} from "../../actions/public/watchBlockNumber";
 import {
   type WatchBlocksParameters,
   type WatchBlocksReturnType,
   watchBlocks,
-} from "../../actions/public/watchBlocks.js";
+} from "../../actions/public/watchBlocks";
 import {
   type WatchContractEventParameters,
   type WatchContractEventReturnType,
   watchContractEvent,
-} from "../../actions/public/watchContractEvent.js";
+} from "../../actions/public/watchContractEvent";
 import {
   type WatchEventParameters,
   type WatchEventReturnType,
   watchEvent,
-} from "../../actions/public/watchEvent.js";
+} from "../../actions/public/watchEvent";
 import {
   type WatchPendingTransactionsParameters,
   type WatchPendingTransactionsReturnType,
   watchPendingTransactions,
-} from "../../actions/public/watchPendingTransactions.js";
+} from "../../actions/public/watchPendingTransactions";
 import {
   type VerifySiweMessageParameters,
   type VerifySiweMessageReturnType,
   verifySiweMessage,
-} from "../../actions/siwe/verifySiweMessage.js";
+} from "../../actions/siwe/verifySiweMessage";
 import {
   type PrepareTransactionRequestParameters,
   type PrepareTransactionRequestRequest,
   type PrepareTransactionRequestReturnType,
   prepareTransactionRequest,
-} from "../../actions/wallet/prepareTransactionRequest.js";
+} from "../../actions/wallet/prepareTransactionRequest";
 import {
   type SendRawTransactionParameters,
   type SendRawTransactionReturnType,
   sendRawTransaction,
-} from "../../actions/wallet/sendRawTransaction.js";
-import type { Account } from "../../types/account.js";
-import type { BlockNumber, BlockTag } from "../../types/block.js";
-import type { Chain } from "../../types/chain.js";
+} from "../../actions/wallet/sendRawTransaction";
+import type { Account } from "../../types/account";
+import type { BlockNumber, BlockTag } from "../../types/block";
+import type { Chain } from "../../types/chain";
 import type {
   ContractEventName,
   ContractFunctionArgs,
   ContractFunctionName,
   MaybeAbiEventName,
   MaybeExtractEventArgsFromAbi,
-} from "../../types/contract.js";
-import type { FeeValuesType } from "../../types/fee.js";
-import type { FilterType } from "../../types/filter.js";
-import type { Client } from "../createClient.js";
-import type { Transport } from "../transports/createTransport.js";
+} from "../../types/contract";
+import type { FeeValuesType } from "../../types/fee";
+import type { FilterType } from "../../types/filter";
+import type { Client } from "../createClient";
+import type { Transport } from "../transports/createTransport";
 
 export type PublicActions<
   transport extends Transport = Transport,
@@ -265,7 +265,7 @@ export type PublicActions<
    * Executes a new message call immediately without submitting a transaction to the networkID.
    *
    * - Docs: https://viem.sh/docs/actions/public/call
-   * - JSON-RPC Methods: [`eth_call`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_call)
+   * - JSON-RPC Methods: [`mina_call`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_call)
    *
    * @param args - {@link CallParameters}
    * @returns The call data. {@link CallReturnType}
@@ -289,7 +289,7 @@ export type PublicActions<
    * Creates a Filter to listen for new block hashes that can be used with [`getFilterChanges`](https://viem.sh/docs/actions/public/getFilterChanges).
    *
    * - Docs: https://viem.sh/docs/actions/public/createBlockFilter
-   * - JSON-RPC Methods: [`eth_newBlockFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_newBlockFilter)
+   * - JSON-RPC Methods: [`mina_newBlockFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_newBlockFilter)
    *
    * @returns Filter. {@link CreateBlockFilterReturnType}
    *
@@ -355,7 +355,7 @@ export type PublicActions<
    * Creates a [`Filter`](https://viem.sh/docs/glossary/types#filter) to listen for new events that can be used with [`getFilterChanges`](https://viem.sh/docs/actions/public/getFilterChanges).
    *
    * - Docs: https://viem.sh/docs/actions/public/createEventFilter
-   * - JSON-RPC Methods: [`eth_newFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_newfilter)
+   * - JSON-RPC Methods: [`mina_newFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_newfilter)
    *
    * @param args - {@link CreateEventFilterParameters}
    * @returns [`Filter`](https://viem.sh/docs/glossary/types#filter). {@link CreateEventFilterReturnType}
@@ -412,7 +412,7 @@ export type PublicActions<
    * Creates a Filter to listen for new pending transaction hashes that can be used with [`getFilterChanges`](https://viem.sh/docs/actions/public/getFilterChanges).
    *
    * - Docs: https://viem.sh/docs/actions/public/createPendingTransactionFilter
-   * - JSON-RPC Methods: [`eth_newPendingTransactionFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_newpendingtransactionfilter)
+   * - JSON-RPC Methods: [`mina_newPendingTransactionFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_newpendingtransactionfilter)
    *
    * @returns [`Filter`](https://viem.sh/docs/glossary/types#filter). {@link CreateBlockFilterReturnType}
    *
@@ -470,7 +470,7 @@ export type PublicActions<
    * Estimates the gas necessary to complete a transaction without submitting it to the networkID.
    *
    * - Docs: https://viem.sh/docs/actions/public/estimateGas
-   * - JSON-RPC Methods: [`eth_estimateGas`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_estimategas)
+   * - JSON-RPC Methods: [`mina_estimateGas`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_estimategas)
    *
    * @param args - {@link EstimateGasParameters}
    * @returns The gas estimate (in wei). {@link EstimateGasReturnType}
@@ -496,7 +496,7 @@ export type PublicActions<
    * Returns the balance of an address in wei.
    *
    * - Docs: https://viem.sh/docs/actions/public/getBalance
-   * - JSON-RPC Methods: [`eth_getBalance`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getbalance)
+   * - JSON-RPC Methods: [`mina_getBalance`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getbalance)
    *
    * @remarks
    * You can convert the balance to ether units with [`formatEther`](https://viem.sh/docs/utilities/formatEther).
@@ -531,7 +531,7 @@ export type PublicActions<
    * Returns the base fee per blob gas in wei.
    *
    * - Docs: https://viem.sh/docs/actions/public/getBlobBaseFee
-   * - JSON-RPC Methods: [`eth_blobBaseFee`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_blobBaseFee)
+   * - JSON-RPC Methods: [`mina_blobBaseFee`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blobBaseFee)
    *
    * @param client - Client to use
    * @returns The blob base fee (in wei). {@link GetBlobBaseFeeReturnType}
@@ -554,8 +554,8 @@ export type PublicActions<
    * - Docs: https://viem.sh/docs/actions/public/getBlock
    * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/fetching-blocks
    * - JSON-RPC Methods:
-   *   - Calls [`eth_getBlockByNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getblockbynumber) for `blockNumber` & `blockTag`.
-   *   - Calls [`eth_getBlockByHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getblockbyhash) for `blockHash`.
+   *   - Calls [`mina_getBlockByNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getblockbynumber) for `blockNumber` & `blockTag`.
+   *   - Calls [`mina_getBlockByHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getblockbyhash) for `blockHash`.
    *
    * @param args - {@link GetBlockParameters}
    * @returns Information about the block. {@link GetBlockReturnType}
@@ -581,7 +581,7 @@ export type PublicActions<
    *
    * - Docs: https://viem.sh/docs/actions/public/getBlockNumber
    * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/fetching-blocks
-   * - JSON-RPC Methods: [`eth_blockNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_blocknumber)
+   * - JSON-RPC Methods: [`mina_blockNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber)
    *
    * @param args - {@link GetBlockNumberParameters}
    * @returns The number of the block. {@link GetBlockNumberReturnType}
@@ -605,8 +605,8 @@ export type PublicActions<
    *
    * - Docs: https://viem.sh/docs/actions/public/getBlockTransactionCount
    * - JSON-RPC Methods:
-   *   - Calls [`eth_getBlockTransactionCountByNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getblocktransactioncountbynumber) for `blockNumber` & `blockTag`.
-   *   - Calls [`eth_getBlockTransactionCountByHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getblocktransactioncountbyhash) for `blockHash`.
+   *   - Calls [`mina_getBlockTransactionCountByNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getblocktransactioncountbynumber) for `blockNumber` & `blockTag`.
+   *   - Calls [`mina_getBlockTransactionCountByHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getblocktransactioncountbyhash) for `blockHash`.
    *
    * @param args - {@link GetBlockTransactionCountParameters}
    * @returns The block transaction count. {@link GetBlockTransactionCountReturnType}
@@ -630,7 +630,7 @@ export type PublicActions<
    * Returns the chain ID associated with the current networkID.
    *
    * - Docs: https://viem.sh/docs/actions/public/getChainId
-   * - JSON-RPC Methods: [`eth_chainId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_chainid)
+   * - JSON-RPC Methods: [`mina_chainId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_chainid)
    *
    * @returns The current chain ID. {@link GetChainIdReturnType}
    *
@@ -650,7 +650,7 @@ export type PublicActions<
    * Retrieves the bytecode at an address.
    *
    * - Docs: https://viem.sh/docs/contract/getCode
-   * - JSON-RPC Methods: [`eth_getCode`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getcode)
+   * - JSON-RPC Methods: [`mina_getCode`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getcode)
    *
    * @param args - {@link GetBytecodeParameters}
    * @returns The contract's bytecode. {@link GetBytecodeReturnType}
@@ -672,7 +672,7 @@ export type PublicActions<
    * Returns a list of event logs emitted by a contract.
    *
    * - Docs: https://viem.sh/docs/actions/public/getContractEvents
-   * - JSON-RPC Methods: [`eth_getLogs`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getlogs)
+   * - JSON-RPC Methods: [`mina_getLogs`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getlogs)
    *
    * @param client - Client to use
    * @param parameters - {@link GetContractEventsParameters}
@@ -898,7 +898,7 @@ export type PublicActions<
    * Returns a collection of historical gas information.
    *
    * - Docs: https://viem.sh/docs/actions/public/getFeeHistory
-   * - JSON-RPC Methods: [`eth_feeHistory`](https://docs.alchemy.com/reference/eth-feehistory)
+   * - JSON-RPC Methods: [`mina_feeHistory`](https://docs.alchemy.com/reference/eth-feehistory)
    *
    * @param args - {@link GetFeeHistoryParameters}
    * @returns The gas estimate (in wei). {@link GetFeeHistoryReturnType}
@@ -950,7 +950,7 @@ export type PublicActions<
    * Returns a list of logs or hashes based on a [Filter](/docs/glossary/terms#filter) since the last time it was called.
    *
    * - Docs: https://viem.sh/docs/actions/public/getFilterChanges
-   * - JSON-RPC Methods: [`eth_getFilterChanges`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getfilterchanges)
+   * - JSON-RPC Methods: [`mina_getFilterChanges`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getfilterchanges)
    *
    * @remarks
    * A Filter can be created from the following actions:
@@ -1054,7 +1054,7 @@ export type PublicActions<
    * Returns a list of event logs since the filter was created.
    *
    * - Docs: https://viem.sh/docs/actions/public/getFilterLogs
-   * - JSON-RPC Methods: [`eth_getFilterLogs`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getfilterlogs)
+   * - JSON-RPC Methods: [`mina_getFilterLogs`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getfilterlogs)
    *
    * @remarks
    * `getFilterLogs` is only compatible with **event filters**.
@@ -1091,7 +1091,7 @@ export type PublicActions<
    * Returns the current price of gas (in wei).
    *
    * - Docs: https://viem.sh/docs/actions/public/getGasPrice
-   * - JSON-RPC Methods: [`eth_gasPrice`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_gasprice)
+   * - JSON-RPC Methods: [`mina_gasPrice`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_gasprice)
    *
    * @returns The gas price (in wei). {@link GetGasPriceReturnType}
    *
@@ -1111,7 +1111,7 @@ export type PublicActions<
    *
    * - Docs: https://viem.sh/docs/actions/public/getLogs
    * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/filters-and-logs/event-logs
-   * - JSON-RPC Methods: [`eth_getLogs`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getlogs)
+   * - JSON-RPC Methods: [`mina_getLogs`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getlogs)
    *
    * @param args - {@link GetLogsParameters}
    * @returns A list of event logs. {@link GetLogsReturnType}
@@ -1147,7 +1147,7 @@ export type PublicActions<
    *
    * - Docs: https://viem.sh/docs/actions/public/getProof
    * - JSON-RPC Methods:
-   *   - Calls [`eth_getProof`](https://eips.ethereum.org/EIPS/eip-1186)
+   *   - Calls [`mina_getProof`](https://eips.ethereum.org/EIPS/eip-1186)
    *
    * @param client - Client to use
    * @param parameters - {@link GetProofParameters}
@@ -1198,7 +1198,7 @@ export type PublicActions<
    * Returns the value from a storage slot at a given address.
    *
    * - Docs: https://viem.sh/docs/contract/getStorageAt
-   * - JSON-RPC Methods: [`eth_getStorageAt`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getstorageat)
+   * - JSON-RPC Methods: [`mina_getStorageAt`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getstorageat)
    *
    * @param args - {@link GetStorageAtParameters}
    * @returns The value of the storage slot. {@link GetStorageAtReturnType}
@@ -1225,7 +1225,7 @@ export type PublicActions<
    *
    * - Docs: https://viem.sh/docs/actions/public/getTransaction
    * - Example: https://stackblitz.com/github/wevm/viem/tree/main/examples/transactions/fetching-transactions
-   * - JSON-RPC Methods: [`eth_getTransactionByHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getTransactionByHash)
+   * - JSON-RPC Methods: [`mina_getTransactionByHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getTransactionByHash)
    *
    * @param args - {@link GetTransactionParameters}
    * @returns The transaction information. {@link GetTransactionReturnType}
@@ -1250,7 +1250,7 @@ export type PublicActions<
    *
    * - Docs: https://viem.sh/docs/actions/public/getTransactionConfirmations
    * - Example: https://stackblitz.com/github/wevm/viem/tree/main/examples/transactions/fetching-transactions
-   * - JSON-RPC Methods: [`eth_getTransactionConfirmations`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getTransactionConfirmations)
+   * - JSON-RPC Methods: [`mina_getTransactionConfirmations`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getTransactionConfirmations)
    *
    * @param args - {@link GetTransactionConfirmationsParameters}
    * @returns The number of blocks passed since the transaction was processed. If confirmations is 0, then the Transaction has not been confirmed & processed yet. {@link GetTransactionConfirmationsReturnType}
@@ -1274,7 +1274,7 @@ export type PublicActions<
    * Returns the number of [Transactions](https://viem.sh/docs/glossary/terms#transaction) an Account has broadcast / sent.
    *
    * - Docs: https://viem.sh/docs/actions/public/getTransactionCount
-   * - JSON-RPC Methods: [`eth_getTransactionCount`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_gettransactioncount)
+   * - JSON-RPC Methods: [`mina_getTransactionCount`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_gettransactioncount)
    *
    * @param args - {@link GetTransactionCountParameters}
    * @returns The number of transactions an account has sent. {@link GetTransactionCountReturnType}
@@ -1299,7 +1299,7 @@ export type PublicActions<
    *
    * - Docs: https://viem.sh/docs/actions/public/getTransactionReceipt
    * - Example: https://stackblitz.com/github/wevm/viem/tree/main/examples/transactions/fetching-transactions
-   * - JSON-RPC Methods: [`eth_getTransactionReceipt`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getTransactionReceipt)
+   * - JSON-RPC Methods: [`mina_getTransactionReceipt`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getTransactionReceipt)
    *
    * @param args - {@link GetTransactionReceiptParameters}
    * @returns The transaction receipt. {@link GetTransactionReceiptReturnType}
@@ -1466,7 +1466,7 @@ export type PublicActions<
    * Sends a **signed** transaction to the networkID
    *
    * - Docs: https://viem.sh/docs/actions/wallet/sendRawTransaction
-   * - JSON-RPC Method: [`eth_sendRawTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)
+   * - JSON-RPC Method: [`mina_sendRawTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)
    *
    * @param client - Client to use
    * @param parameters - {@link SendRawTransactionParameters}
@@ -1594,7 +1594,7 @@ export type PublicActions<
    * - [`createPendingTransactionFilter`](https://viem.sh/docs/actions/public/createPendingTransactionFilter)
    *
    * - Docs: https://viem.sh/docs/actions/public/uninstallFilter
-   * - JSON-RPC Methods: [`eth_uninstallFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_uninstallFilter)
+   * - JSON-RPC Methods: [`mina_uninstallFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_uninstallFilter)
    *
    * @param args - {@link UninstallFilterParameters}
    * @returns A boolean indicating if the Filter was successfully uninstalled. {@link UninstallFilterReturnType}
@@ -1617,11 +1617,11 @@ export type PublicActions<
    * - Docs: https://viem.sh/docs/actions/public/waitForTransactionReceipt
    * - Example: https://stackblitz.com/github/wevm/viem/tree/main/examples/transactions/sending-transactions
    * - JSON-RPC Methods:
-   *   - Polls [`eth_getTransactionReceipt`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getTransactionReceipt) on each block until it has been processed.
+   *   - Polls [`mina_getTransactionReceipt`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getTransactionReceipt) on each block until it has been processed.
    *   - If a Transaction has been replaced:
-   *     - Calls [`eth_getBlockByNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getblockbynumber) and extracts the transactions
+   *     - Calls [`mina_getBlockByNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getblockbynumber) and extracts the transactions
    *     - Checks if one of the Transactions is a replacement
-   *     - If so, calls [`eth_getTransactionReceipt`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getTransactionReceipt).
+   *     - If so, calls [`mina_getTransactionReceipt`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getTransactionReceipt).
    *
    * @remarks
    * The `waitForTransactionReceipt` action additionally supports Replacement detection (e.g. sped up Transactions).
@@ -1658,8 +1658,8 @@ export type PublicActions<
    * - Docs: https://viem.sh/docs/actions/public/watchBlockNumber
    * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/watching-blocks
    * - JSON-RPC Methods:
-   *   - When `poll: true`, calls [`eth_blockNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_blocknumber) on a polling interval.
-   *   - When `poll: false` & WebSocket Transport, uses a WebSocket subscription via [`eth_subscribe`](https://docs.alchemy.com/reference/eth-subscribe-polygon) and the `"newHeads"` event.
+   *   - When `poll: true`, calls [`mina_blockNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber) on a polling interval.
+   *   - When `poll: false` & WebSocket Transport, uses a WebSocket subscription via [`mina_subscribe`](https://docs.alchemy.com/reference/eth-subscribe-polygon) and the `"newHeads"` event.
    *
    * @param args - {@link WatchBlockNumberParameters}
    * @returns A function that can be invoked to stop watching for new block numbers. {@link WatchBlockNumberReturnType}
@@ -1685,8 +1685,8 @@ export type PublicActions<
    * - Docs: https://viem.sh/docs/actions/public/watchBlocks
    * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/watching-blocks
    * - JSON-RPC Methods:
-   *   - When `poll: true`, calls [`eth_getBlockByNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getBlockByNumber) on a polling interval.
-   *   - When `poll: false` & WebSocket Transport, uses a WebSocket subscription via [`eth_subscribe`](https://docs.alchemy.com/reference/eth-subscribe-polygon) and the `"newHeads"` event.
+   *   - When `poll: true`, calls [`mina_getBlockByNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getBlockByNumber) on a polling interval.
+   *   - When `poll: false` & WebSocket Transport, uses a WebSocket subscription via [`mina_subscribe`](https://docs.alchemy.com/reference/eth-subscribe-polygon) and the `"newHeads"` event.
    *
    * @param args - {@link WatchBlocksParameters}
    * @returns A function that can be invoked to stop watching for new block numbers. {@link WatchBlocksReturnType}
@@ -1717,7 +1717,7 @@ export type PublicActions<
    * @remarks
    * This Action will batch up all the event logs found within the [`pollingInterval`](https://viem.sh/docs/contract/watchContractEvent#pollinginterval-optional), and invoke them via [`onLogs`](https://viem.sh/docs/contract/watchContractEvent#onLogs).
    *
-   * `watchContractEvent` will attempt to create an [Event Filter](https://viem.sh/docs/contract/createContractEventFilter) and listen to changes to the Filter per polling interval, however, if the RPC Provider does not support Filters (e.g. `eth_newFilter`), then `watchContractEvent` will fall back to using [`getLogs`](https://viem.sh/docs/actions/public/getLogs) instead.
+   * `watchContractEvent` will attempt to create an [Event Filter](https://viem.sh/docs/contract/createContractEventFilter) and listen to changes to the Filter per polling interval, however, if the RPC Provider does not support Filters (e.g. `mina_newFilter`), then `watchContractEvent` will fall back to using [`getLogs`](https://viem.sh/docs/actions/public/getLogs) instead.
    *
    * @param args - {@link WatchContractEventParameters}
    * @returns A function that can be invoked to stop watching for new event logs. {@link WatchContractEventReturnType}
@@ -1750,16 +1750,16 @@ export type PublicActions<
    *
    * - Docs: https://viem.sh/docs/actions/public/watchEvent
    * - JSON-RPC Methods:
-   *   - **RPC Provider supports `eth_newFilter`:**
-   *     - Calls [`eth_newFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_newfilter) to create a filter (called on initialize).
-   *     - On a polling interval, it will call [`eth_getFilterChanges`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getfilterchanges).
-   *   - **RPC Provider does not support `eth_newFilter`:**
-   *     - Calls [`eth_getLogs`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getlogs) for each block between the polling interval.
+   *   - **RPC Provider supports `mina_newFilter`:**
+   *     - Calls [`mina_newFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_newfilter) to create a filter (called on initialize).
+   *     - On a polling interval, it will call [`mina_getFilterChanges`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getfilterchanges).
+   *   - **RPC Provider does not support `mina_newFilter`:**
+   *     - Calls [`mina_getLogs`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getlogs) for each block between the polling interval.
    *
    * @remarks
    * This Action will batch up all the Event Logs found within the [`pollingInterval`](https://viem.sh/docs/actions/public/watchEvent#pollinginterval-optional), and invoke them via [`onLogs`](https://viem.sh/docs/actions/public/watchEvent#onLogs).
    *
-   * `watchEvent` will attempt to create an [Event Filter](https://viem.sh/docs/actions/public/createEventFilter) and listen to changes to the Filter per polling interval, however, if the RPC Provider does not support Filters (e.g. `eth_newFilter`), then `watchEvent` will fall back to using [`getLogs`](https://viem.sh/docs/actions/public/getLogs) instead.
+   * `watchEvent` will attempt to create an [Event Filter](https://viem.sh/docs/actions/public/createEventFilter) and listen to changes to the Filter per polling interval, however, if the RPC Provider does not support Filters (e.g. `mina_newFilter`), then `watchEvent` will fall back to using [`getLogs`](https://viem.sh/docs/actions/public/getLogs) instead.
    *
    * @param args - {@link WatchEventParameters}
    * @returns A function that can be invoked to stop watching for new Event Logs. {@link WatchEventReturnType}
@@ -1792,9 +1792,9 @@ export type PublicActions<
    * - Docs: https://viem.sh/docs/actions/public/watchPendingTransactions
    * - JSON-RPC Methods:
    *   - When `poll: true`
-   *     - Calls [`eth_newPendingTransactionFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_newpendingtransactionfilter) to initialize the filter.
-   *     - Calls [`eth_getFilterChanges`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getFilterChanges) on a polling interval.
-   *   - When `poll: false` & WebSocket Transport, uses a WebSocket subscription via [`eth_subscribe`](https://docs.alchemy.com/reference/eth-subscribe-polygon) and the `"newPendingTransactions"` event.
+   *     - Calls [`mina_newPendingTransactionFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_newpendingtransactionfilter) to initialize the filter.
+   *     - Calls [`mina_getFilterChanges`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getFilterChanges) on a polling interval.
+   *   - When `poll: false` & WebSocket Transport, uses a WebSocket subscription via [`mina_subscribe`](https://docs.alchemy.com/reference/eth-subscribe-polygon) and the `"newPendingTransactions"` event.
    *
    * @remarks
    * This Action will batch up all the pending transactions found within the [`pollingInterval`](https://viem.sh/docs/actions/public/watchPendingTransactions#pollinginterval-optional), and invoke them via [`onTransactions`](https://viem.sh/docs/actions/public/watchPendingTransactions#ontransactions).

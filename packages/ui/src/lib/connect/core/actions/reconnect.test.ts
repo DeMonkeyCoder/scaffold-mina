@@ -2,12 +2,12 @@ import { accounts, config, mainnet } from "@wagmi/test";
 import { http } from "@/lib/connect/viem";
 import { afterEach, expect, test, vi } from "vitest";
 
-import { mock } from "../connectors/mock.js";
-import { createConfig } from "../createConfig.js";
-import { createStorage } from "../createStorage.js";
-import { connect } from "./connect.js";
-import { disconnect } from "./disconnect.js";
-import { reconnect } from "./reconnect.js";
+import { mock } from "../connectors/mock";
+import { createConfig } from "../createConfig";
+import { createStorage } from "../createStorage";
+import { connect } from "./connect";
+import { disconnect } from "./disconnect";
+import { reconnect } from "./reconnect";
 
 const connector = config._internal.connectors.setup(
   mock({

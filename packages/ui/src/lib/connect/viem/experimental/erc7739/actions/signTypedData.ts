@@ -1,24 +1,24 @@
 import type { Address, TypedData, TypedDataDomain } from 'abitype'
 
-import type { Account } from '../../../accounts/types.js'
-import { parseAccount } from '../../../accounts/utils/parseAccount.js'
+import type { Account } from '../../../accounts/types'
+import { parseAccount } from '../../../accounts/utils/parseAccount'
 import {
   type GetEip712DomainParameters,
   getEip712Domain,
-} from '../../../actions/public/getEip712Domain.js'
-import { signTypedData as signTypedData_ } from '../../../actions/wallet/signTypedData.js'
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import { AccountNotFoundError } from '../../../errors/account.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { GetAccountParameter } from '../../../types/account.js'
-import type { Chain } from '../../../types/chain.js'
-import type { Hex } from '../../../types/misc.js'
-import type { TypedDataDefinition } from '../../../types/typedData.js'
-import type { OneOf, RequiredBy } from '../../../types/utils.js'
-import { getAction } from '../../../utils/getAction.js'
-import type { GetVerifierParameter } from '../types.js'
-import { wrapTypedDataSignature } from '../utils/wrapTypedDataSignature.js'
+} from '../../../actions/public/getEip712Domain'
+import { signTypedData as signTypedData_ } from '../../../actions/wallet/signTypedData'
+import type { Client } from '../../../clients/createClient'
+import type { Transport } from '../../../clients/transports/createTransport'
+import { AccountNotFoundError } from '../../../errors/account'
+import type { ErrorType } from '../../../errors/utils'
+import type { GetAccountParameter } from '../../../types/account'
+import type { Chain } from '../../../types/chain'
+import type { Hex } from '../../../types/misc'
+import type { TypedDataDefinition } from '../../../types/typedData'
+import type { OneOf, RequiredBy } from '../../../types/utils'
+import { getAction } from '../../../utils/getAction'
+import type { GetVerifierParameter } from '../types'
+import { wrapTypedDataSignature } from '../utils/wrapTypedDataSignature'
 
 export type SignTypedDataParameters<
   typedData extends TypedData | Record<string, unknown> = TypedData,

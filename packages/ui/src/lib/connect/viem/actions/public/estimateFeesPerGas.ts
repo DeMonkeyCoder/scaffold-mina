@@ -1,32 +1,32 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
 import {
   BaseFeeScalarError,
   type BaseFeeScalarErrorType,
   Eip1559FeesNotSupportedError,
   type Eip1559FeesNotSupportedErrorType,
-} from '../../errors/fee.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Block } from '../../types/block.js'
+} from '../../errors/fee'
+import type { ErrorType } from '../../errors/utils'
+import type { Block } from '../../types/block'
 import type {
   Chain,
   ChainEstimateFeesPerGasFnParameters,
   ChainFeesFnParameters,
   GetChainParameter,
-} from '../../types/chain.js'
+} from '../../types/chain'
 import type {
   FeeValuesEIP1559,
   FeeValuesLegacy,
   FeeValuesType,
-} from '../../types/fee.js'
-import { getAction } from '../../utils/getAction.js'
-import type { PrepareTransactionRequestParameters } from '../wallet/prepareTransactionRequest.js'
+} from '../../types/fee'
+import { getAction } from '../../utils/getAction'
+import type { PrepareTransactionRequestParameters } from '../wallet/prepareTransactionRequest'
 import {
   type EstimateMaxPriorityFeePerGasErrorType,
   internal_estimateMaxPriorityFeePerGas,
-} from './estimateMaxPriorityFeePerGas.js'
-import { getBlock } from './getBlock.js'
-import { type GetGasPriceErrorType, getGasPrice } from './getGasPrice.js'
+} from './estimateMaxPriorityFeePerGas'
+import { getBlock } from './getBlock'
+import { type GetGasPriceErrorType, getGasPrice } from './getGasPrice'
 
 export type EstimateFeesPerGasParameters<
   chain extends Chain | undefined = Chain | undefined,

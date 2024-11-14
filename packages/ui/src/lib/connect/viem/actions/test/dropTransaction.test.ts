@@ -1,14 +1,14 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
-import { getBalance } from '../public/getBalance.js'
-import { sendTransaction } from '../wallet/sendTransaction.js'
+import { accounts } from '~test/src/constants'
+import { parseEther } from '../../utils/unit/parseEther'
+import { getBalance } from '../public/getBalance'
+import { sendTransaction } from '../wallet/sendTransaction'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { dropTransaction } from './dropTransaction.js'
-import { mine } from './mine.js'
+import { dropTransaction } from './dropTransaction'
+import { mine } from './mine'
 
 const sourceAccount = accounts[0]
 const targetAccount = accounts[1]

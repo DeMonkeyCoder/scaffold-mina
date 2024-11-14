@@ -1,21 +1,21 @@
-import type { OpStackTransactionSerialized } from '../chains/index.js'
-import { InvalidSerializedTransactionError } from '../errors/transaction.js'
-import type { Hex } from '../types/misc.js'
-import type { ExactPartial } from '../types/utils.js'
-import { isHex } from '../utils/data/isHex.js'
-import { sliceHex } from '../utils/data/slice.js'
-import { hexToBigInt, hexToNumber } from '../utils/encoding/fromHex.js'
-import type { RecursiveArray } from '../utils/encoding/toRlp.js'
-import type { GetSerializedTransactionType } from '../utils/transaction/getSerializedTransactionType.js'
+import type { OpStackTransactionSerialized } from '../chains/index'
+import { InvalidSerializedTransactionError } from '../errors/transaction'
+import type { Hex } from '../types/misc'
+import type { ExactPartial } from '../types/utils'
+import { isHex } from '../utils/data/isHex'
+import { sliceHex } from '../utils/data/slice'
+import { hexToBigInt, hexToNumber } from '../utils/encoding/fromHex'
+import type { RecursiveArray } from '../utils/encoding/toRlp'
+import type { GetSerializedTransactionType } from '../utils/transaction/getSerializedTransactionType'
 import {
   type ParseTransactionReturnType as ParseTransactionReturnType_,
   parseAccessList,
   toTransactionArray,
-} from '../utils/transaction/parseTransaction.js'
+} from '../utils/transaction/parseTransaction'
 import {
   assertTransactionCIP42,
   assertTransactionCIP64,
-} from './serializers.js'
+} from './serializers'
 import type {
   CeloTransactionSerialized,
   CeloTransactionType,
@@ -23,9 +23,9 @@ import type {
   TransactionSerializableCIP64,
   TransactionSerializedCIP42,
   TransactionSerializedCIP64,
-} from './types.js'
+} from './types'
 
-import { parseTransaction as parseTransaction_op } from '../op-stack/parsers.js'
+import { parseTransaction as parseTransaction_op } from '../op-stack/parsers'
 
 export type ParseTransactionReturnType<
   serialized extends CeloTransactionSerialized = CeloTransactionSerialized,

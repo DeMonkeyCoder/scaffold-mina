@@ -2,8 +2,8 @@ import { expect, test } from 'vitest'
 import {
   mockClientPublicActionsL2,
   zksyncClientLocalNode,
-} from '../../../test/src/zksync.js'
-import { getMainContractAddress } from './getMainContractAddress.js'
+} from '../../../test/src/zksync'
+import { getMainContractAddress } from './getMainContractAddress'
 
 const client = { ...zksyncClientLocalNode }
 

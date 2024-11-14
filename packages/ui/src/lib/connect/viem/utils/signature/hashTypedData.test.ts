@@ -1,10 +1,10 @@
 import { expect, test } from 'vitest'
 
-import { typedData } from '~test/src/constants.js'
-import { pad } from '../data/pad.js'
-import { toHex } from '../encoding/toHex.js'
+import { typedData } from '~test/src/constants'
+import { pad } from '../data/pad'
+import { toHex } from '../encoding/toHex'
 
-import { hashTypedData } from './hashTypedData.js'
+import { hashTypedData } from './hashTypedData'
 
 test('default', () => {
   expect(

@@ -1,12 +1,12 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { getTransactionCount } from '../public/getTransactionCount.js'
+import { accounts } from '~test/src/constants'
+import { getTransactionCount } from '../public/getTransactionCount'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { mine } from './mine.js'
-import { setNonce } from './setNonce.js'
+import { mine } from './mine'
+import { setNonce } from './setNonce'
 
 const client = anvilMainnet.getClient()
 

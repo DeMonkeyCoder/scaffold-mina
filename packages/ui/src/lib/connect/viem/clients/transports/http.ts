@@ -1,27 +1,27 @@
-import { RpcRequestError } from '../../errors/request.js'
+import { RpcRequestError } from '../../errors/request'
 import {
   UrlRequiredError,
   type UrlRequiredErrorType,
-} from '../../errors/transport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { RpcRequest } from '../../types/rpc.js'
-import { createBatchScheduler } from '../../utils/promise/createBatchScheduler.js'
+} from '../../errors/transport'
+import type { ErrorType } from '../../errors/utils'
+import type { RpcRequest } from '../../types/rpc'
+import { createBatchScheduler } from '../../utils/promise/createBatchScheduler'
 import {
   type HttpRpcClientOptions,
   getHttpRpcClient,
-} from '../../utils/rpc/http.js'
+} from '../../utils/rpc/http'
 
 import {
   type CreateTransportErrorType,
   type Transport,
   type TransportConfig,
   createTransport,
-} from './createTransport.js'
+} from './createTransport'
 
 export type HttpTransportConfig = {
   /**
    * Whether to enable Batch JSON-RPC.
-   * @link https://www.jsonrpc.org/specification#batch
+   * @link https://wwwonrpc.org/specification#batch
    */
   batch?:
     | boolean

@@ -2,7 +2,7 @@ import { chain, testClient } from '@wagmi/test'
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { useGasPrice } from './useGasPrice.js'
+import { useGasPrice } from './useGasPrice'
 
 test('default', async () => {
   await testClient.mainnet.restart()

@@ -1,11 +1,11 @@
 import {
   SiweInvalidMessageFieldError,
   type SiweInvalidMessageFieldErrorType,
-} from '../../errors/siwe.js'
-import type { ErrorType } from '../../errors/utils.js'
-import { type GetAddressErrorType, getAddress } from '../address/getAddress.js'
-import type { SiweMessage } from './types.js'
-import { isUri } from './utils.js'
+} from '../../errors/siwe'
+import type { ErrorType } from '../../errors/utils'
+import { type GetAddressErrorType, getAddress } from '../address/getAddress'
+import type { SiweMessage } from './types'
+import { isUri } from './utils'
 
 export type CreateSiweMessageParameters = SiweMessage
 

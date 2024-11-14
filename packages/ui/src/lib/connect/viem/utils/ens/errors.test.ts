@@ -2,11 +2,11 @@ import { describe, expect, test } from 'vitest'
 import {
   universalResolverResolveAbi,
   universalResolverReverseAbi,
-} from '../../constants/abis.js'
-import { BaseError } from '../../errors/base.js'
-import { ContractFunctionRevertedError } from '../../errors/contract.js'
-import { encodeErrorResult } from '../index.js'
-import { isNullUniversalResolverError } from './errors.js'
+} from '../../constants/abis'
+import { BaseError } from '../../errors/base'
+import { ContractFunctionRevertedError } from '../../errors/contract'
+import { encodeErrorResult } from '../index'
+import { isNullUniversalResolverError } from './errors'
 
 describe('isNullUniversalResolverError', () => {
   describe.each([

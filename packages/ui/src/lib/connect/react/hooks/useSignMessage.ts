@@ -11,12 +11,12 @@ import {
   signMessageMutationOptions,
 } from "@/lib/connect/core/exports/query";
 
-import type { ConfigParameter } from "../types/properties.js";
+import type { ConfigParameter } from "../types/properties";
 import type {
   UseMutationParameters,
   UseMutationReturnType,
-} from "../utils/query.js";
-import { useConfig } from "./useConfig.js";
+} from "../utils/query";
+import { useConfig } from "./useConfig";
 
 export type UseSignMessageParameters<context = unknown> = Compute<
   ConfigParameter & {

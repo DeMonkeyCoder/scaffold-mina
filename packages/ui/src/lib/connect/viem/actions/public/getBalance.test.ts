@@ -1,15 +1,15 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
-import { mine } from '../test/mine.js'
-import { setBalance } from '../test/setBalance.js'
-import { sendTransaction } from '../wallet/sendTransaction.js'
+import { accounts } from '~test/src/constants'
+import { parseEther } from '../../utils/unit/parseEther'
+import { mine } from '../test/mine'
+import { setBalance } from '../test/setBalance'
+import { sendTransaction } from '../wallet/sendTransaction'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { getBalance } from './getBalance.js'
-import { getBlockNumber } from './getBlockNumber.js'
+import { getBalance } from './getBalance'
+import { getBlockNumber } from './getBlockNumber'
 
 const client = anvilMainnet.getClient()
 

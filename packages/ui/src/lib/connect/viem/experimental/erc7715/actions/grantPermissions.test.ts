@@ -1,10 +1,10 @@
 import { expect, test } from 'vitest'
-import { accounts } from '../../../../test/src/constants.js'
-import { privateKeyToAccount } from '../../../accounts/privateKeyToAccount.js'
-import { createClient } from '../../../clients/createClient.js'
-import { custom } from '../../../clients/transports/custom.js'
-import { parseEther } from '../../../utils/index.js'
-import { grantPermissions } from './grantPermissions.js'
+import { accounts } from '../../../../test/src/constants'
+import { privateKeyToAccount } from '../../../accounts/privateKeyToAccount'
+import { createClient } from '../../../clients/createClient'
+import { custom } from '../../../clients/transports/custom'
+import { parseEther } from '../../../utils/index'
+import { grantPermissions } from './grantPermissions'
 
 const getClient = ({ onRequest }: { onRequest: (params: any) => void }) =>
   createClient({

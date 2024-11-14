@@ -2,12 +2,12 @@ import { accounts, chain, wait } from "@wagmi/test";
 import { http } from "@/lib/connect/viem";
 import { expect, test, vi } from "vitest";
 
-import { connect } from "./actions/connect.js";
-import { disconnect } from "./actions/disconnect.js";
-import { switchChain } from "./actions/switchChain.js";
-import { mock } from "./connectors/mock.js";
-import { createConfig } from "./createConfig.js";
-import { createStorage } from "./createStorage.js";
+import { connect } from "./actions/connect";
+import { disconnect } from "./actions/disconnect";
+import { switchChain } from "./actions/switchChain";
+import { mock } from "./connectors/mock";
+import { createConfig } from "./createConfig";
+import { createStorage } from "./createStorage";
 
 const { mainnet, optimism } = chain;
 

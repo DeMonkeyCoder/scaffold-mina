@@ -1,15 +1,15 @@
 import { assertType, describe, expect, test, vi } from 'vitest'
 
-import { anvilMainnet } from '../../test/src/anvil.js'
-import { localhost } from '../chains/index.js'
-import type { EIP1193RequestFn, PublicRpcSchema } from '../index.js'
-import { createPublicClient } from './createPublicClient.js'
-import { testActions } from './decorators/test.js'
-import { walletActions } from './decorators/wallet.js'
-import { createTransport } from './transports/createTransport.js'
-import { custom } from './transports/custom.js'
-import { http } from './transports/http.js'
-import { webSocket } from './transports/webSocket.js'
+import { anvilMainnet } from '../../test/src/anvil'
+import { localhost } from '../chains/index'
+import type { EIP1193RequestFn, PublicRpcSchema } from '../index'
+import { createPublicClient } from './createPublicClient'
+import { testActions } from './decorators/test'
+import { walletActions } from './decorators/wallet'
+import { createTransport } from './transports/createTransport'
+import { custom } from './transports/custom'
+import { http } from './transports/http'
+import { webSocket } from './transports/webSocket'
 
 const mockTransport = () =>
   createTransport({

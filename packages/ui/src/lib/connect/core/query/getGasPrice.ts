@@ -5,11 +5,11 @@ import {
   type GetGasPriceParameters,
   type GetGasPriceReturnType,
   getGasPrice,
-} from '../actions/getGasPrice.js'
-import type { Config } from '../createConfig.js'
-import type { ScopeKeyParameter } from '../types/properties.js'
-import type { Compute, ExactPartial } from '../types/utils.js'
-import { filterQueryOptions } from './utils.js'
+} from '../actions/getGasPrice'
+import type { Config } from '../createConfig'
+import type { ScopeKeyParameter } from '../types/properties'
+import type { Compute, ExactPartial } from '../types/utils'
+import { filterQueryOptions } from './utils'
 
 export type GetGasPriceOptions<
   config extends Config,

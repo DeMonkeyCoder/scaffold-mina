@@ -5,19 +5,19 @@ import {
   AbiEventSignatureNotFoundError,
   DecodeLogDataMismatch,
   DecodeLogTopicsMismatch,
-} from "../../errors/abi.js";
-import type { ErrorType } from "../../errors/utils.js";
-import type { ContractEventName, GetEventArgs } from "../../types/contract.js";
-import type { Log } from "../../types/log.js";
-import type { RpcLog } from "../../types/rpc.js";
-import { isAddressEqual } from "../address/isAddressEqual.js";
-import { toBytes } from "../encoding/toBytes.js";
-import { keccak256 } from "../hash/keccak256.js";
+} from "../../errors/abi";
+import type { ErrorType } from "../../errors/utils";
+import type { ContractEventName, GetEventArgs } from "../../types/contract";
+import type { Log } from "../../types/log";
+import type { RpcLog } from "../../types/rpc";
+import { isAddressEqual } from "../address/isAddressEqual";
+import { toBytes } from "../encoding/toBytes";
+import { keccak256 } from "../hash/keccak256";
 import {
   type DecodeEventLogErrorType,
   decodeEventLog,
-} from "./decodeEventLog.js";
-import { getAbiItem } from "./getAbiItem.js";
+} from "./decodeEventLog";
+import { getAbiItem } from "./getAbiItem";
 
 export type ParseEventLogsParameters<
   abi extends Abi | readonly unknown[] = Abi,

@@ -1,7 +1,7 @@
 import { assertType, describe, expect, test } from "vitest";
 
-import { accounts } from "~test/src/constants.js";
-import { sign } from "../../accounts/utils/sign.js";
+import { accounts } from "~test/src/constants";
+import { sign } from "../../accounts/utils/sign";
 import type {
   TransactionSerializableBase,
   TransactionSerializableEIP1559,
@@ -14,20 +14,20 @@ import type {
   TransactionSerializedEIP4844,
   TransactionSerializedEIP7702,
   TransactionSerializedLegacy,
-} from "../../types/transaction.js";
-import { keccak256 } from "../hash/keccak256.js";
-import { parseEther } from "../unit/parseEther.js";
-import { parseGwei } from "../unit/parseGwei.js";
+} from "../../types/transaction";
+import { keccak256 } from "../hash/keccak256";
+import { parseEther } from "../unit/parseEther";
+import { parseGwei } from "../unit/parseGwei";
 
 import type { Address } from "abitype";
-import { wagmiContractConfig } from "../../../test/src/abis.js";
-import { blobData, kzg } from "../../../test/src/kzg.js";
-import { sidecarsToVersionedHashes } from "../blob/sidecarsToVersionedHashes.js";
-import { toBlobSidecars } from "../blob/toBlobSidecars.js";
-import { toBlobs } from "../blob/toBlobs.js";
-import { stringToHex } from "../index.js";
-import { parseTransaction } from "./parseTransaction.js";
-import { serializeTransaction } from "./serializeTransaction.js";
+import { wagmiContractConfig } from "../../../test/src/abis";
+import { blobData, kzg } from "../../../test/src/kzg";
+import { sidecarsToVersionedHashes } from "../blob/sidecarsToVersionedHashes";
+import { toBlobSidecars } from "../blob/toBlobSidecars";
+import { toBlobs } from "../blob/toBlobs";
+import { stringToHex } from "../index";
+import { parseTransaction } from "./parseTransaction";
+import { serializeTransaction } from "./serializeTransaction";
 
 const base = {
   to: accounts[1].address,

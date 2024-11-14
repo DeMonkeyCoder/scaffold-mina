@@ -1,7 +1,7 @@
 import { expect, expectTypeOf, test } from 'vitest'
 
-import * as chains from '../../chains/index.js'
-import { extractChain } from './extractChain.js'
+import * as chains from '../../chains/index'
+import { extractChain } from './extractChain'
 
 test('default', async () => {
   const mainnet = extractChain({

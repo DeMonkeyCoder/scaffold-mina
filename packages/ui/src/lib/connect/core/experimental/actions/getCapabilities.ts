@@ -6,9 +6,9 @@ import {
   getCapabilities as viem_getCapabilities,
 } from "@/lib/connect/viem/experimental";
 
-import { getConnectorClient } from "../../actions/getConnectorClient.js";
-import type { Config } from "../../createConfig.js";
-import type { ConnectorParameter } from "../../types/properties.js";
+import { getConnectorClient } from "../../actions/getConnectorClient";
+import type { Config } from "../../createConfig";
+import type { ConnectorParameter } from "../../types/properties";
 
 export type GetCapabilitiesParameters =
   viem_GetCapabilitiesParameters<Account> & ConnectorParameter;

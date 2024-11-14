@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { walletActionsL2 } from './walletL2.js'
+import { accounts } from '~test/src/constants'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { walletActionsL2 } from './walletL2'
 
 const client = anvilMainnet.getClient()
 const opStackClient = client.extend(walletActionsL2())

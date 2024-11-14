@@ -1,12 +1,12 @@
 import { expect, test } from 'vitest'
 
-import { mainnet } from '../chains/index.js'
+import { mainnet } from '../chains/index'
 
 import {
   ChainDoesNotSupportContract,
   ClientChainNotConfiguredError,
   InvalidChainIdError,
-} from './chain.js'
+} from './chain'
 
 test('ChainDoesNotSupportContract', () => {
   expect(

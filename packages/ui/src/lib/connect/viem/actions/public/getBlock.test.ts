@@ -1,12 +1,12 @@
 import { assertType, describe, expect, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { celo } from '../../chains/index.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { celo } from '../../chains/index'
 
-import { createPublicClient } from '../../clients/createPublicClient.js'
-import { http } from '../../clients/transports/http.js'
-import type { Block } from '../../types/block.js'
-import { getBlock } from './getBlock.js'
+import { createPublicClient } from '../../clients/createPublicClient'
+import { http } from '../../clients/transports/http'
+import type { Block } from '../../types/block'
+import { getBlock } from './getBlock'
 
 const client = anvilMainnet.getClient()
 

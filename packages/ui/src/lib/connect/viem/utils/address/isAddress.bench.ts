@@ -1,7 +1,7 @@
 import { isAddress as isAddressV6 } from "ethers";
 import { bench, describe } from "vitest";
 
-import { isAddress, isAddressCache } from "./isAddress.js";
+import { isAddress, isAddressCache } from "./isAddress";
 
 describe("Is Address", () => {
   bench("@/lib/connect/viem: isAddress", () => {

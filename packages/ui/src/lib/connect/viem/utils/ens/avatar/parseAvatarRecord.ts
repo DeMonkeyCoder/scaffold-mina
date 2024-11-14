@@ -1,8 +1,8 @@
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { Chain } from '../../../types/chain.js'
-import type { AssetGatewayUrls } from '../../../types/ens.js'
+import type { Client } from '../../../clients/createClient'
+import type { Transport } from '../../../clients/transports/createTransport'
+import type { ErrorType } from '../../../errors/utils'
+import type { Chain } from '../../../types/chain'
+import type { AssetGatewayUrls } from '../../../types/ens'
 
 import {
   type GetJsonImageErrorType,
@@ -17,7 +17,7 @@ import {
   parseAvatarUri,
   parseNftUri,
   resolveAvatarUri,
-} from './utils.js'
+} from './utils'
 
 export type ParseAvatarRecordErrorType =
   | ParseNftAvatarUriErrorType

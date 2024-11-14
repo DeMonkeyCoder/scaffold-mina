@@ -13,24 +13,24 @@ import {
   writeContract as viem_writeContract,
 } from "@/lib/connect/viem/actions";
 
-import type { Config } from "../createConfig.js";
-import type { BaseErrorType, ErrorType } from "../errors/base.js";
-import type { SelectChains } from "../types/chain.js";
+import type { Config } from "../createConfig";
+import type { BaseErrorType, ErrorType } from "../errors/base";
+import type { SelectChains } from "../types/chain";
 import type {
   ChainIdParameter,
   ConnectorParameter,
-} from "../types/properties.js";
-import type { Compute, UnionCompute } from "../types/utils.js";
-import { getAction } from "../utils/getAction.js";
-import { getAccount } from "./getAccount.js";
+} from "../types/properties";
+import type { Compute, UnionCompute } from "../types/utils";
+import { getAction } from "../utils/getAction";
+import { getAccount } from "./getAccount";
 import {
   type GetConnectorClientErrorType,
   getConnectorClient,
-} from "./getConnectorClient.js";
+} from "./getConnectorClient";
 import {
   type SimulateContractErrorType,
   simulateContract,
-} from "./simulateContract.js";
+} from "./simulateContract";
 
 export type WriteContractParameters<
   abi extends Abi | readonly unknown[] = Abi,

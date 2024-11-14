@@ -1,12 +1,12 @@
-import type { Hex } from '../../types/misc.js'
-import type { EntryPointVersion } from './entryPointVersion.js'
+import type { Hex } from '../../types/misc'
+import type { EntryPointVersion } from './entryPointVersion'
 import type {
   EstimateUserOperationGasReturnType,
   GetUserOperationByHashReturnType,
   UserOperation,
   UserOperationReceipt,
   UserOperationRequest,
-} from './userOperation.js'
+} from './userOperation'
 
 export type RpcEstimateUserOperationGasReturnType<
   entryPointVersion extends EntryPointVersion = EntryPointVersion,

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
-import { bundlerMainnet } from '../../../../test/src/bundler.js'
-import { getSupportedEntryPoints } from './getSupportedEntryPoints.js'
+import { bundlerMainnet } from '../../../../test/src/bundler'
+import { getSupportedEntryPoints } from './getSupportedEntryPoints'
 
 const client = bundlerMainnet.getBundlerClient()
 

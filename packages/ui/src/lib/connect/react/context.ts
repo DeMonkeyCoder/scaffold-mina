@@ -2,7 +2,7 @@
 
 import type { ResolvedRegister, State } from "@/lib/connect/core/exports";
 import { createContext, createElement } from "react";
-import { Hydrate } from "./hydrate.js";
+import { Hydrate } from "./hydrate";
 
 export const WagmiContext = createContext<
   ResolvedRegister["config"] | undefined

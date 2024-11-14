@@ -1,22 +1,22 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { Filter } from '../../types/filter.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
-import { createFilterRequestScope } from '../../utils/filters/createFilterRequestScope.js'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Chain } from "../../types/chain";
+import type { Filter } from "../../types/filter";
+import type { RequestErrorType } from "../../utils/buildRequest";
+import { createFilterRequestScope } from "../../utils/filters/createFilterRequestScope";
 
-export type CreatePendingTransactionFilterReturnType = Filter<'transaction'>
+export type CreatePendingTransactionFilterReturnType = Filter<"transaction">;
 
 export type CreatePendingTransactionFilterErrorType =
   | RequestErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Creates a Filter to listen for new pending transaction hashes that can be used with [`getFilterChanges`](https://viem.sh/docs/actions/public/getFilterChanges).
  *
  * - Docs: https://viem.sh/docs/actions/public/createPendingTransactionFilter
- * - JSON-RPC Methods: [`eth_newPendingTransactionFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_newpendingtransactionfilter)
+ * - JSON-RPC Methods: [`mina_newPendingTransactionFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_newpendingtransactionfilter)
  *
  * @param client - Client to use
  * @returns [`Filter`](https://viem.sh/docs/glossary/types#filter). {@link CreateBlockFilterReturnType}
@@ -35,15 +35,15 @@ export type CreatePendingTransactionFilterErrorType =
  */
 export async function createPendingTransactionFilter<
   transport extends Transport,
-  chain extends Chain | undefined,
+  chain extends Chain | undefined
 >(
-  client: Client<transport, chain>,
+  client: Client<transport, chain>
 ): Promise<CreatePendingTransactionFilterReturnType> {
   const getRequest = createFilterRequestScope(client, {
-    method: 'eth_newPendingTransactionFilter',
-  })
+    method: "mina_newPendingTransactionFilter",
+  });
   const id = await client.request({
-    method: 'eth_newPendingTransactionFilter',
-  })
-  return { id, request: getRequest(id), type: 'transaction' }
+    method: "mina_newPendingTransactionFilter",
+  });
+  return { id, request: getRequest(id), type: "transaction" };
 }

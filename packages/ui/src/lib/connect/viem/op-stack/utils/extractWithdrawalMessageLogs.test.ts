@@ -1,9 +1,9 @@
 import { expect, test } from 'vitest'
 
-import { getTransactionReceipt } from '../../actions/index.js'
-import { http, createClient } from '../../index.js'
-import { optimismSepolia } from '../chains.js'
-import { extractWithdrawalMessageLogs } from './extractWithdrawalMessageLogs.js'
+import { getTransactionReceipt } from '../../actions/index'
+import { http, createClient } from '../../index'
+import { optimismSepolia } from '../chains'
+import { extractWithdrawalMessageLogs } from './extractWithdrawalMessageLogs'
 
 const client = createClient({
   chain: optimismSepolia,

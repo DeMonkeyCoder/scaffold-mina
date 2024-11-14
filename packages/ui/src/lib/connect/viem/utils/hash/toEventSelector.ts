@@ -1,8 +1,8 @@
-import type { ErrorType } from '../../errors/utils.js'
+import type { ErrorType } from '../../errors/utils'
 import {
   type ToSignatureHashErrorType,
   toSignatureHash,
-} from './toSignatureHash.js'
+} from './toSignatureHash'
 
 export type ToEventSelectorErrorType = ToSignatureHashErrorType | ErrorType
 

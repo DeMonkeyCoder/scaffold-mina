@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 
-import { decodeFunctionResult } from "./decodeFunctionResult.js";
+import { decodeFunctionResult } from "./decodeFunctionResult";
 
 test("returns ()", () => {
   expect(

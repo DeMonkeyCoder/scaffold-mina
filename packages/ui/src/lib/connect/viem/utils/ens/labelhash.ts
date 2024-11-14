@@ -1,14 +1,14 @@
-import type { ErrorType } from "../../errors/utils.js";
+import type { ErrorType } from "../../errors/utils";
 import {
   type StringToBytesErrorType,
   stringToBytes,
-} from "../encoding/toBytes.js";
-import { type BytesToHexErrorType, bytesToHex } from "../encoding/toHex.js";
-import { type Keccak256ErrorType, keccak256 } from "../hash/keccak256.js";
+} from "../encoding/toBytes";
+import { type BytesToHexErrorType, bytesToHex } from "../encoding/toHex";
+import { type Keccak256ErrorType, keccak256 } from "../hash/keccak256";
 import {
   type EncodedLabelToLabelhashErrorType,
   encodedLabelToLabelhash,
-} from "./encodedLabelToLabelhash.js";
+} from "./encodedLabelToLabelhash";
 
 export type LabelhashErrorType =
   | BytesToHexErrorType

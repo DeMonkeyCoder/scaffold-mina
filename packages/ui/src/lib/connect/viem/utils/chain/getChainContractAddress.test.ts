@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
 
-import { mainnet, optimism, polygon } from "../../chains/index.js";
+import { mainnet, optimism, polygon } from "../../chains/index";
 
-import { getChainContractAddress } from "./getChainContractAddress.js";
+import { getChainContractAddress } from "./getChainContractAddress";
 
 test("default", () => {
   expect(

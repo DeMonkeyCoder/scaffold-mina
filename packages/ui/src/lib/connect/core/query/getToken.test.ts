@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getTokenQueryOptions } from './getToken.js'
+import { getTokenQueryOptions } from './getToken'
 
 test('default', () => {
   expect(getTokenQueryOptions(config)).toMatchInlineSnapshot(`

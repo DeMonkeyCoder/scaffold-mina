@@ -1,9 +1,9 @@
 import { config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { connect } from './connect.js'
-import { disconnect } from './disconnect.js'
-import { watchAsset } from './watchAsset.js'
+import { connect } from './connect'
+import { disconnect } from './disconnect'
+import { watchAsset } from './watchAsset'
 
 const connector = config.connectors[0]!
 

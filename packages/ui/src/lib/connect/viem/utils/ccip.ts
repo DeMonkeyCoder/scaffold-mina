@@ -1,30 +1,30 @@
 import type { Abi, Address } from 'abitype'
 
-import { type CallParameters, call } from '../actions/public/call.js'
-import type { Transport } from '../clients/transports/createTransport.js'
-import type { BaseError } from '../errors/base.js'
+import { type CallParameters, call } from '../actions/public/call'
+import type { Transport } from '../clients/transports/createTransport'
+import type { BaseError } from '../errors/base'
 import {
   OffchainLookupError,
   type OffchainLookupErrorType as OffchainLookupErrorType_,
   OffchainLookupResponseMalformedError,
   type OffchainLookupResponseMalformedErrorType,
   OffchainLookupSenderMismatchError,
-} from '../errors/ccip.js'
+} from '../errors/ccip'
 import {
   HttpRequestError,
   type HttpRequestErrorType,
-} from '../errors/request.js'
-import type { Chain } from '../types/chain.js'
-import type { Hex } from '../types/misc.js'
+} from '../errors/request'
+import type { Chain } from '../types/chain'
+import type { Hex } from '../types/misc'
 
-import type { Client } from '../clients/createClient.js'
-import type { ErrorType } from '../errors/utils.js'
-import { decodeErrorResult } from './abi/decodeErrorResult.js'
-import { encodeAbiParameters } from './abi/encodeAbiParameters.js'
-import { isAddressEqual } from './address/isAddressEqual.js'
-import { concat } from './data/concat.js'
-import { isHex } from './data/isHex.js'
-import { stringify } from './stringify.js'
+import type { Client } from '../clients/createClient'
+import type { ErrorType } from '../errors/utils'
+import { decodeErrorResult } from './abi/decodeErrorResult'
+import { encodeAbiParameters } from './abi/encodeAbiParameters'
+import { isAddressEqual } from './address/isAddressEqual'
+import { concat } from './data/concat'
+import { isHex } from './data/isHex'
+import { stringify } from './stringify'
 
 export const offchainLookupSignature = '0x556f1830'
 export const offchainLookupAbiItem = {
@@ -150,7 +150,7 @@ export async function ccipRequest({
       if (
         response.headers.get('Content-Type')?.startsWith('application/json')
       ) {
-        result = (await response.json()).data
+        result = (await responseon()).data
       } else {
         result = (await response.text()) as any
       }

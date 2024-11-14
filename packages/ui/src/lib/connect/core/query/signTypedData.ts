@@ -6,9 +6,9 @@ import {
   type SignTypedDataParameters,
   type SignTypedDataReturnType,
   signTypedData,
-} from "../actions/signTypedData.js";
-import type { Config } from "../createConfig.js";
-import type { Compute } from "../types/utils.js";
+} from "../actions/signTypedData";
+import type { Config } from "../createConfig";
+import type { Compute } from "../types/utils";
 
 export function signTypedDataMutationOptions<config extends Config>(
   config: config

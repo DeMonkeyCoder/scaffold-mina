@@ -7,10 +7,10 @@ import type {
   ProviderMessage,
 } from "@/lib/connect/viem";
 
-import type { Transport } from "../createConfig.js";
-import type { Emitter } from "../createEmitter.js";
-import type { Storage } from "../createStorage.js";
-import type { Compute, ExactPartial, StrictOmit } from "../types/utils.js";
+import type { Transport } from "../createConfig";
+import type { Emitter } from "../createEmitter";
+import type { Storage } from "../createStorage";
+import type { Compute, ExactPartial, StrictOmit } from "../types/utils";
 
 export type ConnectorEventMap = {
   change: {

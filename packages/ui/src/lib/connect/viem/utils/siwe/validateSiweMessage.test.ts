@@ -1,7 +1,7 @@
 import { expect, test, vi } from "vitest";
 
-import type { SiweMessage } from "./types.js";
-import { validateSiweMessage } from "./validateSiweMessage.js";
+import type { SiweMessage } from "./types";
+import { validateSiweMessage } from "./validateSiweMessage";
 
 const message = {
   address: "0xA0Cf798816D4b9b9866b5330EEa46a18382f251e",

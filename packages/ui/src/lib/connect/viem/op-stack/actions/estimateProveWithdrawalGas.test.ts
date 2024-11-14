@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
-import { anvilMainnet, anvilOptimism } from '../../../test/src/anvil.js'
-import { accounts } from '../../../test/src/constants.js'
+import { anvilMainnet, anvilOptimism } from '../../../test/src/anvil'
+import { accounts } from '../../../test/src/constants'
 
-import { estimateProveWithdrawalGas } from './estimateProveWithdrawalGas.js'
+import { estimateProveWithdrawalGas } from './estimateProveWithdrawalGas'
 
 const client = anvilMainnet.getClient()
 const optimismClient = anvilOptimism.getClient()

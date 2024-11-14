@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 
-import { typedData } from '../../../../test/src/constants.js'
-import { wrapTypedDataSignature } from './wrapTypedDataSignature.js'
+import { typedData } from '../../../../test/src/constants'
+import { wrapTypedDataSignature } from './wrapTypedDataSignature'
 
 test('default', () => {
   const signature = {

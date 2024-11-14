@@ -19,15 +19,15 @@ import {
 } from "@/lib/connect/core/exports/query";
 import { useEffect, useRef } from "react";
 
-import type { ConfigParameter } from "../types/properties.js";
+import type { ConfigParameter } from "../types/properties";
 import {
   type UseQueryParameters,
   type UseQueryReturnType,
   useQuery,
-} from "../utils/query.js";
-import { useAccount } from "./useAccount.js";
-import { useChainId } from "./useChainId.js";
-import { useConfig } from "./useConfig.js";
+} from "../utils/query";
+import { useAccount } from "./useAccount";
+import { useChainId } from "./useChainId";
+import { useConfig } from "./useConfig";
 
 export type UseWalletClientParameters<
   config extends Config = Config,

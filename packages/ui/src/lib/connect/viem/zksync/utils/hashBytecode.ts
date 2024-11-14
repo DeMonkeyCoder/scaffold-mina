@@ -1,9 +1,9 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex } from '../../types/misc.js'
-import { pad } from '../../utils/data/pad.js'
-import { type ToBytesErrorType, toBytes } from '../../utils/encoding/toBytes.js'
-import { type Sha256ErrorType, sha256 } from '../../utils/hash/sha256.js'
-import { maxBytecodeSize } from '../constants/number.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex } from '../../types/misc'
+import { pad } from '../../utils/data/pad'
+import { type ToBytesErrorType, toBytes } from '../../utils/encoding/toBytes'
+import { type Sha256ErrorType, sha256 } from '../../utils/hash/sha256'
+import { maxBytecodeSize } from '../constants/number'
 import {
   BytecodeLengthExceedsMaxSizeError,
   type BytecodeLengthExceedsMaxSizeErrorType,
@@ -11,7 +11,7 @@ import {
   type BytecodeLengthInWordsMustBeOddErrorType,
   BytecodeLengthMustBeDivisibleBy32Error,
   type BytecodeLengthMustBeDivisibleBy32ErrorType,
-} from '../errors/bytecode.js'
+} from '../errors/bytecode'
 
 export type HashBytecodeErrorType =
   | BytecodeLengthExceedsMaxSizeErrorType

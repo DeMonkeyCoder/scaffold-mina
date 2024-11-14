@@ -1,19 +1,19 @@
-import type { Address } from '../../accounts/index.js'
-import { parseAccount } from '../../accounts/utils/parseAccount.js'
-import { readContract } from '../../actions/index.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import { erc20Abi } from '../../constants/abis.js'
-import type { AccountNotFoundErrorType } from '../../errors/account.js'
-import type { BaseErrorType } from '../../errors/base.js'
-import type { Account, GetAccountParameter } from '../../types/account.js'
-import type { BlockTag } from '../../types/block.js'
-import type { Chain } from '../../types/chain.js'
+import type { Address } from '../../accounts/index'
+import { parseAccount } from '../../accounts/utils/parseAccount'
+import { readContract } from '../../actions/index'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import { erc20Abi } from '../../constants/abis'
+import type { AccountNotFoundErrorType } from '../../errors/account'
+import type { BaseErrorType } from '../../errors/base'
+import type { Account, GetAccountParameter } from '../../types/account'
+import type { BlockTag } from '../../types/block'
+import type { Chain } from '../../types/chain'
 import {
   TokenIsEthError,
   type TokenIsEthErrorType,
-} from '../errors/token-is-eth.js'
-import { isEth } from '../utils/isEth.js'
+} from '../errors/token-is-eth'
+import { isEth } from '../utils/isEth'
 
 export type GetL1TokenBalanceParameters<
   account extends Account | undefined = Account | undefined,

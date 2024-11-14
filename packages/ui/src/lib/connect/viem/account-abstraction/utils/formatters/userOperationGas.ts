@@ -1,6 +1,6 @@
-import type { ErrorType } from '../../../errors/utils.js'
-import type { RpcEstimateUserOperationGasReturnType } from '../../types/rpc.js'
-import type { EstimateUserOperationGasReturnType } from '../../types/userOperation.js'
+import type { ErrorType } from '../../../errors/utils'
+import type { RpcEstimateUserOperationGasReturnType } from '../../types/rpc'
+import type { EstimateUserOperationGasReturnType } from '../../types/userOperation'
 
 export type FormatUserOperationGasErrorType = ErrorType
 

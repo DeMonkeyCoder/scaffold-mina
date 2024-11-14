@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { formatLog } from './log.js'
+import { formatLog } from './log'
 
 test('formats', () => {
   expect(

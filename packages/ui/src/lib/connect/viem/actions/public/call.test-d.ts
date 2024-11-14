@@ -1,8 +1,8 @@
 import { test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { call } from './call.js'
+import { call } from './call'
 
 const client = anvilMainnet.getClient()
 

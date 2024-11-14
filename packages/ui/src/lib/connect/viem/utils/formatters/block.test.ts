@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
 
-import type { RpcBlock } from '../../types/rpc.js'
+import type { RpcBlock } from '../../types/rpc'
 
-import { formatBlock } from './block.js'
+import { formatBlock } from './block'
 
 const block: RpcBlock = {
   blobGasUsed: '0x1',

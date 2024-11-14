@@ -9,8 +9,8 @@ import {
 import { watchChains } from "@/lib/connect/core/exports/internal";
 import { useSyncExternalStore } from "react";
 
-import type { ConfigParameter } from "../types/properties.js";
-import { useConfig } from "./useConfig.js";
+import type { ConfigParameter } from "../types/properties";
+import { useConfig } from "./useConfig";
 
 export type UseChainsParameters<config extends Config = Config> =
   ConfigParameter<config>;

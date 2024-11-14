@@ -2,7 +2,7 @@ import { accounts, chain, config, testClient } from "@wagmi/test";
 import { expect, test } from "vitest";
 
 import type { BlockTag } from "@/lib/connect/viem";
-import { getTransactionCount } from "./getTransactionCount.js";
+import { getTransactionCount } from "./getTransactionCount";
 
 const address = accounts[0];
 

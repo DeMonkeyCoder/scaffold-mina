@@ -1,7 +1,7 @@
 import type { Address } from 'abitype'
 
-import type { ExactPartial, Prettify } from '../../types/utils.js'
-import type { SiweMessage } from './types.js'
+import type { ExactPartial, Prettify } from '../../types/utils'
+import type { SiweMessage } from './types'
 
 /**
  * @description Parses EIP-4361 formatted message into message fields object.

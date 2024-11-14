@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest'
 
-import { usdcContractConfig } from '~test/src/abis.js'
-import { accounts } from '~test/src/constants.js'
-import { anvilOptimism } from '../../../test/src/anvil.js'
-import { publicActionsL2 } from './publicL2.js'
+import { usdcContractConfig } from '~test/src/abis'
+import { accounts } from '~test/src/constants'
+import { anvilOptimism } from '../../../test/src/anvil'
+import { publicActionsL2 } from './publicL2'
 
 const optimismClient = anvilOptimism.getClient()
 const opStackClient = optimismClient.extend(publicActionsL2())

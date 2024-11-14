@@ -6,7 +6,7 @@ import { expectTypeOf, test } from "vitest";
 import {
   type UseWatchContractEventParameters,
   useWatchContractEvent,
-} from "./useWatchContractEvent.js";
+} from "./useWatchContractEvent";
 
 test("default", () => {
   useWatchContractEvent({

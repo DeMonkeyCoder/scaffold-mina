@@ -2,7 +2,7 @@ import type { Config } from "@/lib/connect/core/exports";
 import { config } from "@wagmi/test";
 import { expectTypeOf, test } from "vitest";
 
-import { useConfig } from "./useConfig.js";
+import { useConfig } from "./useConfig";
 
 test("default", async () => {
   const result = useConfig();

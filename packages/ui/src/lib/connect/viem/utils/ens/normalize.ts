@@ -1,5 +1,5 @@
 import { ens_normalize } from '@adraffy/ens-normalize'
-import type { ErrorType } from '../../errors/utils.js'
+import type { ErrorType } from '../../errors/utils'
 
 export type NormalizeErrorType = ErrorType
 

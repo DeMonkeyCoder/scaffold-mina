@@ -2,38 +2,38 @@ import type { Address } from 'abitype'
 import {
   type GetBlockErrorType,
   getBlock,
-} from '../../actions/public/getBlock.js'
+} from '../../actions/public/getBlock'
 import {
   type GetProofErrorType,
   getProof,
-} from '../../actions/public/getProof.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
+} from '../../actions/public/getProof'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
 import type {
   Account,
   DeriveAccount,
   GetAccountParameter,
-} from '../../types/account.js'
+} from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import type { Hex } from '../../types/misc.js'
-import type { OneOf, Prettify } from '../../types/utils.js'
-import { fromRlp } from '../../utils/encoding/fromRlp.js'
-import { toRlp } from '../../utils/encoding/toRlp.js'
-import { keccak256 } from '../../utils/hash/keccak256.js'
-import { contracts } from '../contracts.js'
-import type { Withdrawal } from '../types/withdrawal.js'
+} from '../../types/chain'
+import type { Hex } from '../../types/misc'
+import type { OneOf, Prettify } from '../../types/utils'
+import { fromRlp } from '../../utils/encoding/fromRlp'
+import { toRlp } from '../../utils/encoding/toRlp'
+import { keccak256 } from '../../utils/hash/keccak256'
+import { contracts } from '../contracts'
+import type { Withdrawal } from '../types/withdrawal'
 import {
   type GetWithdrawalHashStorageSlotErrorType,
   getWithdrawalHashStorageSlot,
-} from '../utils/getWithdrawalHashStorageSlot.js'
-import type { GetGameReturnType } from './getGame.js'
-import type { GetL2OutputReturnType } from './getL2Output.js'
-import type { ProveWithdrawalParameters } from './proveWithdrawal.js'
+} from '../utils/getWithdrawalHashStorageSlot'
+import type { GetGameReturnType } from './getGame'
+import type { GetL2OutputReturnType } from './getL2Output'
+import type { ProveWithdrawalParameters } from './proveWithdrawal'
 
 const outputRootProofVersion =
   '0x0000000000000000000000000000000000000000000000000000000000000000' as const

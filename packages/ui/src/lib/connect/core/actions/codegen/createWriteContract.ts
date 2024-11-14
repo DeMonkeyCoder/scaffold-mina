@@ -8,23 +8,23 @@ import type {
   WriteContractParameters as viem_WriteContractParameters,
 } from "@/lib/connect/viem";
 
-import type { Config } from "../../createConfig.js";
-import type { SelectChains } from "../../types/chain.js";
+import type { Config } from "../../createConfig";
+import type { SelectChains } from "../../types/chain";
 import type {
   ChainIdParameter,
   ConnectorParameter,
-} from "../../types/properties.js";
+} from "../../types/properties";
 import type {
   Compute,
   UnionCompute,
   UnionStrictOmit,
-} from "../../types/utils.js";
-import { getAccount } from "../getAccount.js";
-import { getChainId } from "../getChainId.js";
+} from "../../types/utils";
+import { getAccount } from "../getAccount";
+import { getChainId } from "../getChainId";
 import {
   type WriteContractReturnType,
   writeContract,
-} from "../writeContract.js";
+} from "../writeContract";
 
 type stateMutability = "nonpayable" | "payable";
 

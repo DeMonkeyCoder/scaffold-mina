@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { watchChainId } from './watchChainId.js'
+import { watchChainId } from './watchChainId'
 
 test('default', async () => {
   const chainIds: number[] = []

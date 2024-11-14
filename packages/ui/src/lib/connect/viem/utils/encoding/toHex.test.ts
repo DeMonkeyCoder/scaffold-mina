@@ -6,7 +6,7 @@ import {
   numberToHex,
   stringToHex,
   toHex,
-} from "./toHex.js";
+} from "./toHex";
 
 describe("converts numbers to hex", () => {
   test("default", () => {

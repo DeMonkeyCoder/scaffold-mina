@@ -1,21 +1,21 @@
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { Hash } from '../../../types/misc.js'
-import type { Prettify } from '../../../types/utils.js'
-import { getAction } from '../../../utils/getAction.js'
-import { type ObserveErrorType, observe } from '../../../utils/observe.js'
-import { type PollErrorType, poll } from '../../../utils/poll.js'
-import { stringify } from '../../../utils/stringify.js'
+import type { Client } from '../../../clients/createClient'
+import type { Transport } from '../../../clients/transports/createTransport'
+import type { ErrorType } from '../../../errors/utils'
+import type { Hash } from '../../../types/misc'
+import type { Prettify } from '../../../types/utils'
+import { getAction } from '../../../utils/getAction'
+import { type ObserveErrorType, observe } from '../../../utils/observe'
+import { type PollErrorType, poll } from '../../../utils/poll'
+import { stringify } from '../../../utils/stringify'
 import {
   WaitForUserOperationReceiptTimeoutError,
   type WaitForUserOperationReceiptTimeoutErrorType,
-} from '../../errors/userOperation.js'
-import type { UserOperationReceipt } from '../../types/userOperation.js'
+} from '../../errors/userOperation'
+import type { UserOperationReceipt } from '../../types/userOperation'
 import {
   type GetUserOperationReceiptErrorType,
   getUserOperationReceipt,
-} from './getUserOperationReceipt.js'
+} from './getUserOperationReceipt'
 
 export type WaitForUserOperationReceiptParameters = {
   /** The hash of the User Operation. */

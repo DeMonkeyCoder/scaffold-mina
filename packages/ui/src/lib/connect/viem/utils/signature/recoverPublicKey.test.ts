@@ -1,12 +1,12 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
-import { toBytes } from '../encoding/toBytes.js'
+import { accounts } from '~test/src/constants'
+import { privateKeyToAccount } from '../../accounts/privateKeyToAccount'
+import { toBytes } from '../encoding/toBytes'
 
-import { hashMessage } from './hashMessage.js'
-import { parseSignature } from './parseSignature.js'
-import { recoverPublicKey } from './recoverPublicKey.js'
+import { hashMessage } from './hashMessage'
+import { parseSignature } from './parseSignature'
+import { recoverPublicKey } from './recoverPublicKey'
 
 test('default', async () => {
   expect(

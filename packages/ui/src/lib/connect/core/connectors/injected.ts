@@ -2,23 +2,23 @@ import {
   type AddEthereumChainParameter,
   type Address,
   type EIP1193Provider,
+  getAddress,
+  numberToHex,
   type ProviderConnectInfo,
   type ProviderRpcError,
   ResourceUnavailableRpcError,
   type RpcError,
   SwitchChainError,
   UserRejectedRequestError,
-  getAddress,
-  numberToHex,
   withRetry,
   withTimeout,
 } from "@/lib/connect/viem";
 
-import type { Connector } from "../createConfig.js";
-import { ChainNotConfiguredError } from "../errors/config.js";
-import { ProviderNotFoundError } from "../errors/connector.js";
-import type { Compute } from "../types/utils.js";
-import { createConnector } from "./createConnector.js";
+import type { Connector } from "../createConfig";
+import { ChainNotConfiguredError } from "../errors/config";
+import { ProviderNotFoundError } from "../errors/connector";
+import type { Compute } from "../types/utils";
+import { createConnector } from "./createConnector";
 
 export type InjectedParameters = {
   /**
@@ -178,13 +178,13 @@ export function injected(parameters: InjectedParameters = {}) {
         try {
           const permissions = await provider.request({
             method: "wallet_requestPermissions",
-            params: [{ eth_accounts: {} }],
+            params: [{ mina_accounts: {} }],
           });
           accounts = (permissions[0]?.caveats?.[0]?.value as string[])?.map(
             (x) => getAddress(x)
           );
-          // `'wallet_requestPermissions'` can return a different order of accounts than `'eth_accounts'`
-          // switch to `'eth_accounts'` ordering if more than one account is connected
+          // `'wallet_requestPermissions'` can return a different order of accounts than `'mina_accounts'`
+          // switch to `'mina_accounts'` ordering if more than one account is connected
           // https://github.com/wevm/wagmi/issues/4140
           if (accounts.length > 0) {
             const sortedAccounts = await this.getAccounts();
@@ -200,14 +200,19 @@ export function injected(parameters: InjectedParameters = {}) {
           if (error.code === ResourceUnavailableRpcError.code) throw error;
         }
       }
-
+      console.log("hjiiiiiiaaaaaiiiiiiiiiiii");
       try {
         if (!accounts?.length && !isReconnecting) {
-          const requestedAccounts = await provider.request({
-            method: "eth_requestAccounts",
-          });
+          console.log("mewo");
+          const requestedAccounts = (
+            await provider.request({
+              method: "mina_requestAccounts",
+            })
+          ).result;
+          console.log({ requestedAccounts });
           accounts = requestedAccounts.map((x) => getAddress(x));
         }
+        console.log({ accounts });
 
         // Manage EIP-1193 event listeners
         // https://eips.ethereum.org/EIPS/eip-1193#events
@@ -284,12 +289,12 @@ export function injected(parameters: InjectedParameters = {}) {
             // TODO: Remove explicit type for @/lib/connect/viem@3
             provider.request<{
               Method: "wallet_revokePermissions";
-              Parameters: [permissions: { eth_accounts: Record<string, any> }];
+              Parameters: [permissions: { mina_accounts: Record<string, any> }];
               ReturnType: null;
             }>({
               // `'wallet_revokePermissions'` added in `@/lib/connect/viem@2.10.3`
               method: "wallet_revokePermissions",
-              params: [{ eth_accounts: {} }],
+              params: [{ mina_accounts: {} }],
             }),
           { timeout: 100 }
         );
@@ -306,13 +311,13 @@ export function injected(parameters: InjectedParameters = {}) {
     async getAccounts() {
       const provider = await this.getProvider();
       if (!provider) throw new ProviderNotFoundError();
-      const accounts = await provider.request({ method: "eth_accounts" });
+      const accounts = await provider.request({ method: "mina_accounts" });
       return accounts.map((x) => getAddress(x));
     },
     async getChainId() {
       const provider = await this.getProvider();
       if (!provider) throw new ProviderNotFoundError();
-      const hexChainId = await provider.request({ method: "eth_chainId" });
+      const hexChainId = await provider.request({ method: "mina_chainId" });
       return Number(hexChainId);
     },
     async getProvider() {

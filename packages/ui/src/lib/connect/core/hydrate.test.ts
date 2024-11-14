@@ -3,10 +3,10 @@ import { http } from "@/lib/connect/viem";
 import { mainnet } from "@/lib/connect/viem/chains";
 import { expect, test } from "vitest";
 
-import { createConfig } from "./createConfig.js";
-import { createStorage } from "./createStorage.js";
-import { hydrate } from "./hydrate.js";
-import { cookieStorage } from "./utils/cookie.js";
+import { createConfig } from "./createConfig";
+import { createStorage } from "./createStorage";
+import { hydrate } from "./hydrate";
+import { cookieStorage } from "./utils/cookie";
 
 test("default", () => {
   const { onMount } = hydrate(config, {

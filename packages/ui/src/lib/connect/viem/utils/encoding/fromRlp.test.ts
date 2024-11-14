@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
 
-import { fromRlp } from './fromRlp.js'
+import { fromRlp } from './fromRlp'
 
 test('no bytes', () => {
   // hex -> bytes

@@ -3,9 +3,9 @@ import type { Address } from "abitype";
 import {
   type ReadContractErrorType,
   readContract,
-} from "../../../actions/public/readContract.js";
-import type { Client } from "../../../clients/createClient.js";
-import type { Transport } from "../../../clients/transports/createTransport.js";
+} from "../../../actions/public/readContract";
+import type { Client } from "../../../clients/createClient";
+import type { Transport } from "../../../clients/transports/createTransport";
 import {
   EnsAvatarInvalidMetadataError,
   type EnsAvatarInvalidMetadataErrorType,
@@ -15,10 +15,10 @@ import {
   type EnsAvatarUnsupportedNamespaceErrorType,
   EnsAvatarUriResolutionError,
   type EnsAvatarUriResolutionErrorType,
-} from "../../../errors/ens.js";
-import type { ErrorType } from "../../../errors/utils.js";
-import type { Chain } from "../../../types/chain.js";
-import type { AssetGatewayUrls } from "../../../types/ens.js";
+} from "../../../errors/ens";
+import type { ErrorType } from "../../../errors/utils";
+import type { Chain } from "../../../types/chain";
+import type { AssetGatewayUrls } from "../../../types/ens";
 
 type UriItem = {
   uri: string;
@@ -179,7 +179,7 @@ export async function getMetadataAvatarUri({
   uri: string;
 }): Promise<string> {
   try {
-    const res = await fetch(uri).then((res) => res.json());
+    const res = await fetch(uri).then((res) => reson());
     const image = await parseAvatarUri({
       gatewayUrls,
       uri: getJsonImage(res),

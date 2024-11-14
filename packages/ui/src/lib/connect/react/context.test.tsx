@@ -4,9 +4,9 @@ import { config } from '@wagmi/test'
 import React from 'react'
 import { expect, test } from 'vitest'
 
-import { WagmiProvider } from './context.js'
-import { useAccount } from './hooks/useAccount.js'
-import { useConnectorClient } from './hooks/useConnectorClient.js'
+import { WagmiProvider } from './context'
+import { useAccount } from './hooks/useAccount'
+import { useConnectorClient } from './hooks/useConnectorClient'
 
 test('default', () => {
   function Component() {

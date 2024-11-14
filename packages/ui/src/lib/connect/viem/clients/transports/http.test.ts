@@ -1,18 +1,18 @@
-import { assertType, describe, expect, test } from 'vitest'
+import { assertType, describe, expect, test } from "vitest";
 
-import { createHttpServer } from '~test/src/utils.js'
-import { localhost } from '../../chains/index.js'
-import { wait } from '../../utils/wait.js'
+import { createHttpServer } from "~test/src/utils";
+import { localhost } from "../../chains/index";
+import { wait } from "../../utils/wait";
 
-import type { IncomingHttpHeaders } from 'node:http'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { http, type HttpTransport } from './http.js'
+import type { IncomingHttpHeaders } from "node:http";
+import { anvilMainnet } from "../../../test/src/anvil";
+import { http, type HttpTransport } from "./http";
 
-test('default', () => {
-  const transport = http('https://mockapi.com/rpc')
+test("default", () => {
+  const transport = http("https://mockapi.com/rpc");
 
-  assertType<HttpTransport>(transport)
-  assertType<'http'>(transport({}).config.type)
+  assertType<HttpTransport>(transport);
+  assertType<"http">(transport({}).config.type);
 
   expect(transport({})).toMatchInlineSnapshot(`
     {
@@ -31,14 +31,14 @@ test('default', () => {
         "url": "https://mockapi.com/rpc",
       },
     }
-  `)
-})
+  `);
+});
 
-describe('config', () => {
-  test('key', () => {
-    const transport = http('https://mockapi.com/rpc', {
-      key: 'mock',
-    })({})
+describe("config", () => {
+  test("key", () => {
+    const transport = http("https://mockapi.com/rpc", {
+      key: "mock",
+    })({});
 
     expect(transport).toMatchInlineSnapshot(`
       {
@@ -57,13 +57,13 @@ describe('config', () => {
           "url": "https://mockapi.com/rpc",
         },
       }
-    `)
-  })
+    `);
+  });
 
-  test('name', () => {
-    const transport = http('https://mockapi.com/rpc', {
-      name: 'Mock Transport',
-    })({})
+  test("name", () => {
+    const transport = http("https://mockapi.com/rpc", {
+      name: "Mock Transport",
+    })({});
 
     expect(transport).toMatchInlineSnapshot(`
       {
@@ -82,11 +82,11 @@ describe('config', () => {
           "url": "https://mockapi.com/rpc",
         },
       }
-    `)
-  })
+    `);
+  });
 
-  test('url', () => {
-    const transport = http('https://mockapi.com/rpc')({})
+  test("url", () => {
+    const transport = http("https://mockapi.com/rpc")({});
 
     expect(transport).toMatchInlineSnapshot(`
       {
@@ -105,13 +105,13 @@ describe('config', () => {
           "url": "https://mockapi.com/rpc",
         },
       }
-    `)
-  })
+    `);
+  });
 
-  test('fetchOptions', () => {
-    const transport = http('https://mockapi.com/rpc', {
-      fetchOptions: { headers: { Authorization: 'wagmi' } },
-    })({})
+  test("fetchOptions", () => {
+    const transport = http("https://mockapi.com/rpc", {
+      fetchOptions: { headers: { Authorization: "wagmi" } },
+    })({});
 
     expect(transport).toMatchInlineSnapshot(`
       {
@@ -134,15 +134,15 @@ describe('config', () => {
           "url": "https://mockapi.com/rpc",
         },
       }
-    `)
-  })
-})
+    `);
+  });
+});
 
-describe('request', () => {
-  test('default', async () => {
+describe("request", () => {
+  test("default", async () => {
     const transport = http(undefined, {
-      key: 'jsonRpc',
-      name: 'JSON RPC',
+      key: "jsonRpc",
+      name: "JSON RPC",
     })({
       chain: {
         ...localhost,
@@ -152,43 +152,45 @@ describe('request', () => {
           },
         },
       },
-    })
+    });
 
-    expect(await transport.request({ method: 'eth_blockNumber' })).toBeDefined()
-  })
+    expect(
+      await transport.request({ method: "mina_blockNumber" })
+    ).toBeDefined();
+  });
 
-  test('batch', async () => {
-    let count = 0
+  test("batch", async () => {
+    let count = 0;
     const server = await createHttpServer((_, res) => {
-      count++
-      res.appendHeader('Content-Type', 'application/json')
+      count++;
+      res.appendHeader("Content-Type", "application/json");
       res.end(
         JSON.stringify([
-          { result: '0x1' },
-          { result: '0x2' },
-          { result: '0x3' },
-        ]),
-      )
-    })
+          { result: "0x1" },
+          { result: "0x2" },
+          { result: "0x3" },
+        ])
+      );
+    });
 
     const transport = http(server.url, {
-      key: 'mock',
+      key: "mock",
       batch: true,
-    })({ chain: localhost })
+    })({ chain: localhost });
 
-    const p = []
-    p.push(transport.request({ method: 'eth_a' }))
-    p.push(transport.request({ method: 'eth_b' }, { dedupe: true }))
-    p.push(transport.request({ method: 'eth_c' }))
+    const p = [];
+    p.push(transport.request({ method: "mina_a" }));
+    p.push(transport.request({ method: "mina_b" }, { dedupe: true }));
+    p.push(transport.request({ method: "mina_c" }));
     // test dedupe
-    p.push(transport.request({ method: 'eth_b' }, { dedupe: true }))
-    await wait(1)
-    p.push(transport.request({ method: 'eth_d' }, { dedupe: true }))
-    p.push(transport.request({ method: 'eth_e' }))
+    p.push(transport.request({ method: "mina_b" }, { dedupe: true }));
+    await wait(1);
+    p.push(transport.request({ method: "mina_d" }, { dedupe: true }));
+    p.push(transport.request({ method: "mina_e" }));
     // test dedupe
-    p.push(transport.request({ method: 'eth_d' }, { dedupe: true }))
+    p.push(transport.request({ method: "mina_d" }, { dedupe: true }));
 
-    const results = await Promise.all(p)
+    const results = await Promise.all(p);
 
     expect(results).toMatchInlineSnapshot(`
       [
@@ -200,49 +202,49 @@ describe('request', () => {
         "0x2",
         "0x1",
       ]
-    `)
-    expect(count).toEqual(2)
+    `);
+    expect(count).toEqual(2);
 
-    await server.close()
-  })
+    await server.close();
+  });
 
-  test('batch (with wait)', async () => {
-    let count = 0
+  test("batch (with wait)", async () => {
+    let count = 0;
     const server = await createHttpServer((_, res) => {
-      count++
-      res.appendHeader('Content-Type', 'application/json')
+      count++;
+      res.appendHeader("Content-Type", "application/json");
       res.end(
         JSON.stringify([
-          { result: '0x1' },
-          { result: '0x2' },
-          { result: '0x3' },
-          { result: '0x4' },
-          { result: '0x5' },
-        ]),
-      )
-    })
+          { result: "0x1" },
+          { result: "0x2" },
+          { result: "0x3" },
+          { result: "0x4" },
+          { result: "0x5" },
+        ])
+      );
+    });
 
     const transport = http(server.url, {
-      key: 'mock',
+      key: "mock",
       batch: { wait: 16 },
-    })({ chain: localhost })
+    })({ chain: localhost });
 
-    const p = []
-    p.push(transport.request({ method: 'eth_a' }))
-    p.push(transport.request({ method: 'eth_b' }, { dedupe: true }))
-    p.push(transport.request({ method: 'eth_c' }))
+    const p = [];
+    p.push(transport.request({ method: "mina_a" }));
+    p.push(transport.request({ method: "mina_b" }, { dedupe: true }));
+    p.push(transport.request({ method: "mina_c" }));
     // test dedupe
-    p.push(transport.request({ method: 'eth_b' }, { dedupe: true }))
-    await wait(1)
-    p.push(transport.request({ method: 'eth_d' }))
-    p.push(transport.request({ method: 'eth_e' }))
-    await wait(20)
-    p.push(transport.request({ method: 'eth_f' }, { dedupe: true }))
-    p.push(transport.request({ method: 'eth_g' }))
+    p.push(transport.request({ method: "mina_b" }, { dedupe: true }));
+    await wait(1);
+    p.push(transport.request({ method: "mina_d" }));
+    p.push(transport.request({ method: "mina_e" }));
+    await wait(20);
+    p.push(transport.request({ method: "mina_f" }, { dedupe: true }));
+    p.push(transport.request({ method: "mina_g" }));
     // test dedupe
-    p.push(transport.request({ method: 'eth_f' }, { dedupe: true }))
+    p.push(transport.request({ method: "mina_f" }, { dedupe: true }));
 
-    const results = await Promise.all(p)
+    const results = await Promise.all(p);
 
     expect(results).toMatchInlineSnapshot(`
       [
@@ -256,260 +258,256 @@ describe('request', () => {
         "0x2",
         "0x1",
       ]
-    `)
-    expect(count).toEqual(2)
+    `);
+    expect(count).toEqual(2);
 
-    await server.close()
-  })
+    await server.close();
+  });
 
-  test('behavior: dedupe', async () => {
-    const args: string[] = []
+  test("behavior: dedupe", async () => {
+    const args: string[] = [];
     const server = await createHttpServer((req, res) => {
-      let body = ''
-      req.on('data', (chunk) => {
-        body += chunk
-      })
-      req.on('end', () => {
-        args.push(body)
+      let body = "";
+      req.on("data", (chunk) => {
+        body += chunk;
+      });
+      req.on("end", () => {
+        args.push(body);
         res.writeHead(200, {
-          'Content-Type': 'application/json',
-        })
-        res.end(JSON.stringify({ result: body }))
-      })
-    })
+          "Content-Type": "application/json",
+        });
+        res.end(JSON.stringify({ result: body }));
+      });
+    });
 
     const transport = http(server.url, {
-      key: 'mock',
-    })({ chain: localhost })
+      key: "mock",
+    })({ chain: localhost });
 
     const results = await Promise.all([
-      transport.request({ method: 'eth_blockNumber' }, { dedupe: true }),
-      transport.request({ method: 'eth_blockNumber' }, { dedupe: true }),
+      transport.request({ method: "mina_blockNumber" }, { dedupe: true }),
+      transport.request({ method: "mina_blockNumber" }, { dedupe: true }),
       // this will not be deduped (different params).
       transport.request(
-        { method: 'eth_blockNumber', params: [1] },
-        { dedupe: true },
+        { method: "mina_blockNumber", params: [1] },
+        { dedupe: true }
       ),
-      transport.request({ method: 'eth_blockNumber' }, { dedupe: true }),
+      transport.request({ method: "mina_blockNumber" }, { dedupe: true }),
       // this will not be deduped (different method).
-      transport.request({ method: 'eth_chainId' }, { dedupe: true }),
-      transport.request({ method: 'eth_blockNumber' }, { dedupe: true }),
+      transport.request({ method: "mina_chainId" }, { dedupe: true }),
+      transport.request({ method: "mina_blockNumber" }, { dedupe: true }),
       // this will not be deduped (dedupe: undefined).
-      transport.request({ method: 'eth_blockNumber' }),
-      transport.request({ method: 'eth_blockNumber' }, { dedupe: true }),
-    ])
+      transport.request({ method: "mina_blockNumber" }),
+      transport.request({ method: "mina_blockNumber" }, { dedupe: true }),
+    ]);
 
     expect(
       args
         .map((arg) => JSON.parse(arg))
         .sort((a, b) => a.id - b.id)
-        .map((arg) => JSON.stringify(arg)),
+        .map((arg) => JSON.stringify(arg))
     ).toMatchInlineSnapshot(`
       [
-        "{"jsonrpc":"2.0","id":22,"method":"eth_blockNumber"}",
-        "{"jsonrpc":"2.0","id":23,"method":"eth_blockNumber","params":[1]}",
-        "{"jsonrpc":"2.0","id":24,"method":"eth_chainId"}",
-        "{"jsonrpc":"2.0","id":25,"method":"eth_blockNumber"}",
+        "{"jsonrpc":"2.0","id":22,"method":"mina_blockNumber"}",
+        "{"jsonrpc":"2.0","id":23,"method":"mina_blockNumber","params":[1]}",
+        "{"jsonrpc":"2.0","id":24,"method":"mina_chainId"}",
+        "{"jsonrpc":"2.0","id":25,"method":"mina_blockNumber"}",
       ]
-    `)
+    `);
     expect(results).toMatchInlineSnapshot(`
       [
-        "{"jsonrpc":"2.0","id":22,"method":"eth_blockNumber"}",
-        "{"jsonrpc":"2.0","id":22,"method":"eth_blockNumber"}",
-        "{"jsonrpc":"2.0","id":23,"method":"eth_blockNumber","params":[1]}",
-        "{"jsonrpc":"2.0","id":22,"method":"eth_blockNumber"}",
-        "{"jsonrpc":"2.0","id":24,"method":"eth_chainId"}",
-        "{"jsonrpc":"2.0","id":22,"method":"eth_blockNumber"}",
-        "{"jsonrpc":"2.0","id":25,"method":"eth_blockNumber"}",
-        "{"jsonrpc":"2.0","id":22,"method":"eth_blockNumber"}",
+        "{"jsonrpc":"2.0","id":22,"method":"mina_blockNumber"}",
+        "{"jsonrpc":"2.0","id":22,"method":"mina_blockNumber"}",
+        "{"jsonrpc":"2.0","id":23,"method":"mina_blockNumber","params":[1]}",
+        "{"jsonrpc":"2.0","id":22,"method":"mina_blockNumber"}",
+        "{"jsonrpc":"2.0","id":24,"method":"mina_chainId"}",
+        "{"jsonrpc":"2.0","id":22,"method":"mina_blockNumber"}",
+        "{"jsonrpc":"2.0","id":25,"method":"mina_blockNumber"}",
+        "{"jsonrpc":"2.0","id":22,"method":"mina_blockNumber"}",
       ]
-    `)
-  })
+    `);
+  });
 
-  test('behavior: fetchOptions', async () => {
-    let headers: IncomingHttpHeaders = {}
+  test("behavior: fetchOptions", async () => {
+    let headers: IncomingHttpHeaders = {};
     const server = await createHttpServer((req, res) => {
-      headers = req.headers
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+      headers = req.headers;
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
     const transport = http(server.url, {
-      key: 'mock',
+      key: "mock",
       fetchOptions: {
-        headers: { 'x-wagmi': 'gm' },
-        cache: 'force-cache',
-        method: 'PATCH',
+        headers: { "x-wagmi": "gm" },
+        cache: "force-cache",
+        method: "PATCH",
         signal: null,
       },
-    })({ chain: localhost })
+    })({ chain: localhost });
 
-    await transport.request({ method: 'eth_blockNumber' })
-    expect(headers['x-wagmi']).toBeDefined()
+    await transport.request({ method: "mina_blockNumber" });
+    expect(headers["x-wagmi"]).toBeDefined();
 
-    await server.close()
-  })
+    await server.close();
+  });
 
-  test('behavior: onFetchRequest', async () => {
+  test("behavior: onFetchRequest", async () => {
     const server = await createHttpServer((_, res) => {
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
-    const requests: Request[] = []
+    const requests: Request[] = [];
     const transport = http(server.url, {
-      key: 'mock',
+      key: "mock",
       onFetchRequest(request) {
-        requests.push(request)
+        requests.push(request);
       },
-    })({ chain: localhost })
+    })({ chain: localhost });
 
-    await transport.request({ method: 'eth_blockNumber' })
+    await transport.request({ method: "mina_blockNumber" });
 
-    expect(requests.length).toBe(1)
+    expect(requests.length).toBe(1);
 
-    await server.close()
-  })
+    await server.close();
+  });
 
-  test('behavior: onFetchResponse', async () => {
+  test("behavior: onFetchResponse", async () => {
     const server = await createHttpServer((_, res) => {
-      res.end(JSON.stringify({ result: '0x1' }))
-    })
+      res.end(JSON.stringify({ result: "0x1" }));
+    });
 
-    const responses: Response[] = []
+    const responses: Response[] = [];
     const transport = http(server.url, {
-      key: 'mock',
+      key: "mock",
       onFetchResponse(response) {
-        responses.push(response)
+        responses.push(response);
       },
-    })({ chain: localhost })
+    })({ chain: localhost });
 
-    await transport.request({ method: 'eth_blockNumber' })
+    await transport.request({ method: "mina_blockNumber" });
 
-    expect(responses.length).toBe(1)
+    expect(responses.length).toBe(1);
 
-    await server.close()
-  })
+    await server.close();
+  });
 
-  test('behavior: retryCount', async () => {
-    let retryCount = -1
+  test("behavior: retryCount", async () => {
+    let retryCount = -1;
     const server = await createHttpServer((_req, res) => {
-      retryCount++
+      retryCount++;
       res.writeHead(500, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({}))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({}));
+    });
 
     const transport = http(server.url, {
-      key: 'jsonRpc',
-      name: 'JSON RPC',
+      key: "jsonRpc",
+      name: "JSON RPC",
       retryCount: 1,
-    })({ chain: localhost })
+    })({ chain: localhost });
 
-    await expect(() =>
-      transport.request({ method: 'eth_blockNumber' }),
-    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+    await expect(() => transport.request({ method: "mina_blockNumber" }))
+      .rejects.toThrowErrorMatchingInlineSnapshot(`
       [HttpRequestError: HTTP request failed.
 
       Status: 500
       URL: http://localhost
-      Request body: {"method":"eth_blockNumber"}
+      Request body: {"method":"mina_blockNumber"}
 
       Details: Internal Server Error
       Version: viem@x.y.z]
-    `)
-    expect(retryCount).toBe(1)
-  })
+    `);
+    expect(retryCount).toBe(1);
+  });
 
-  test('behavior: retryCount', async () => {
-    const start = Date.now()
-    let end = 0
+  test("behavior: retryCount", async () => {
+    const start = Date.now();
+    let end = 0;
     const server = await createHttpServer((_req, res) => {
-      end = Date.now() - start
+      end = Date.now() - start;
       res.writeHead(500, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({}))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({}));
+    });
 
     const transport = http(server.url, {
-      key: 'jsonRpc',
-      name: 'JSON RPC',
+      key: "jsonRpc",
+      name: "JSON RPC",
       retryCount: 1,
       retryDelay: 500,
-    })({ chain: localhost })
+    })({ chain: localhost });
 
-    await expect(() =>
-      transport.request({ method: 'eth_blockNumber' }),
-    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+    await expect(() => transport.request({ method: "mina_blockNumber" }))
+      .rejects.toThrowErrorMatchingInlineSnapshot(`
       [HttpRequestError: HTTP request failed.
 
       Status: 500
       URL: http://localhost
-      Request body: {"method":"eth_blockNumber"}
+      Request body: {"method":"mina_blockNumber"}
 
       Details: Internal Server Error
       Version: viem@x.y.z]
-    `)
-    expect(end > 500 && end < 520).toBeTruthy()
-  })
+    `);
+    expect(end > 500 && end < 520).toBeTruthy();
+  });
 
-  test('behavior: timeout', async () => {
+  test("behavior: timeout", async () => {
     const server = await createHttpServer(async (_req, res) => {
-      await wait(5000)
+      await wait(5000);
       res.writeHead(500, {
-        'Content-Type': 'application/json',
-      })
-      res.end(JSON.stringify({}))
-    })
+        "Content-Type": "application/json",
+      });
+      res.end(JSON.stringify({}));
+    });
 
     const transport = http(server.url, {
-      key: 'jsonRpc',
-      name: 'JSON RPC',
+      key: "jsonRpc",
+      name: "JSON RPC",
       timeout: 100,
-    })({ chain: localhost })
+    })({ chain: localhost });
 
-    await expect(() =>
-      transport.request({ method: 'eth_blockNumber' }),
-    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+    await expect(() => transport.request({ method: "mina_blockNumber" }))
+      .rejects.toThrowErrorMatchingInlineSnapshot(`
       [TimeoutError: The request took too long to respond.
 
       URL: http://localhost
-      Request body: {"method":"eth_blockNumber"}
+      Request body: {"method":"mina_blockNumber"}
 
       Details: The request timed out.
       Version: viem@x.y.z]
-    `)
-  })
+    `);
+  });
 
-  test('errors: rpc error', async () => {
+  test("errors: rpc error", async () => {
     const transport = http(anvilMainnet.rpcUrl.http, {
-      key: 'jsonRpc',
-      name: 'JSON RPC',
+      key: "jsonRpc",
+      name: "JSON RPC",
     })({
       chain: localhost,
-    })
+    });
 
-    await expect(() =>
-      transport.request({ method: 'eth_wagmi' }),
-    ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      [MethodNotFoundRpcError: The method "eth_wagmi" does not exist / is not available.
+    await expect(() => transport.request({ method: "mina_wagmi" })).rejects
+      .toThrowErrorMatchingInlineSnapshot(`
+      [MethodNotFoundRpcError: The method "mina_wagmi" does not exist / is not available.
 
       URL: http://localhost
-      Request body: {"method":"eth_wagmi"}
+      Request body: {"method":"mina_wagmi"}
 
       Details: Method not found
       Version: viem@x.y.z]
-    `)
-  })
-})
+    `);
+  });
+});
 
-test('no url', () => {
+test("no url", () => {
   expect(() => http()({})).toThrowErrorMatchingInlineSnapshot(
     `
     [UrlRequiredError: No URL was provided to the Transport. Please provide a valid RPC URL to the Transport.
 
     Docs: https://viem.sh/docs/clients/intro
     Version: viem@x.y.z]
-  `,
-  )
-})
+  `
+  );
+});

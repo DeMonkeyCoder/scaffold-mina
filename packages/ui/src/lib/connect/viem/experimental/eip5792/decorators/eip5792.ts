@@ -1,32 +1,32 @@
-import type { Client } from "../../../clients/createClient.js";
-import type { Transport } from "../../../clients/transports/createTransport.js";
-import type { Account } from "../../../types/account.js";
-import type { Chain } from "../../../types/chain.js";
+import type { Client } from "../../../clients/createClient";
+import type { Transport } from "../../../clients/transports/createTransport";
+import type { Account } from "../../../types/account";
+import type { Chain } from "../../../types/chain";
 import {
   type GetCallsStatusParameters,
   type GetCallsStatusReturnType,
   getCallsStatus,
-} from "../actions/getCallsStatus.js";
+} from "../actions/getCallsStatus";
 import {
   type GetCapabilitiesParameters,
   type GetCapabilitiesReturnType,
   getCapabilities,
-} from "../actions/getCapabilities.js";
+} from "../actions/getCapabilities";
 import {
   type SendCallsParameters,
   type SendCallsReturnType,
   sendCalls,
-} from "../actions/sendCalls.js";
+} from "../actions/sendCalls";
 import {
   type ShowCallsStatusParameters,
   type ShowCallsStatusReturnType,
   showCallsStatus,
-} from "../actions/showCallsStatus.js";
+} from "../actions/showCallsStatus";
 import {
   type WriteContractsParameters,
   type WriteContractsReturnType,
   writeContracts,
-} from "../actions/writeContracts.js";
+} from "../actions/writeContracts";
 
 export type Eip5792Actions<
   chain extends Chain | undefined = Chain | undefined,

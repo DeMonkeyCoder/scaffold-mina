@@ -1,35 +1,35 @@
 import type { Abi } from 'abitype'
 
-import type { Account } from '../../accounts/types.js'
+import type { Account } from '../../accounts/types'
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../accounts/utils/parseAccount.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { BaseError } from '../../errors/base.js'
-import type { Chain } from '../../types/chain.js'
+} from '../../accounts/utils/parseAccount'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { BaseError } from '../../errors/base'
+import type { Chain } from '../../types/chain'
 import type {
   ContractFunctionArgs,
   ContractFunctionName,
   ContractFunctionParameters,
   GetValue,
-} from '../../types/contract.js'
-import type { UnionOmit } from '../../types/utils.js'
+} from '../../types/contract'
+import type { UnionOmit } from '../../types/utils'
 import {
   type EncodeFunctionDataErrorType,
   type EncodeFunctionDataParameters,
   encodeFunctionData,
-} from '../../utils/abi/encodeFunctionData.js'
+} from '../../utils/abi/encodeFunctionData'
 import {
   type GetContractErrorReturnType,
   getContractError,
-} from '../../utils/errors/getContractError.js'
+} from '../../utils/errors/getContractError'
 import {
   type EstimateL1GasErrorType,
   type EstimateL1GasParameters,
   estimateL1Gas,
-} from './estimateL1Gas.js'
+} from './estimateL1Gas'
 
 export type EstimateContractL1GasParameters<
   abi extends Abi | readonly unknown[] = Abi,

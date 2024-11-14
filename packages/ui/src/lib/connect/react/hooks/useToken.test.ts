@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { useToken } from './useToken.js'
+import { useToken } from './useToken'
 
 test('default', async () => {
   const { result } = renderHook(() =>

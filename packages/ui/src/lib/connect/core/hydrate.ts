@@ -1,5 +1,5 @@
-import { reconnect } from './actions/reconnect.js'
-import type { Config, State } from './createConfig.js'
+import { reconnect } from './actions/reconnect'
+import type { Config, State } from './createConfig'
 
 type HydrateParameters = {
   initialState?: State | undefined

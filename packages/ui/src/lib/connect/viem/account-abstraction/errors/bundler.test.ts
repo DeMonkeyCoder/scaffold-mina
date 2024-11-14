@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { BaseError } from '../../errors/base.js'
+import { BaseError } from '../../errors/base'
 import {
   AccountNotDeployedError,
   FailedToSendToBeneficiaryError,
@@ -28,7 +28,7 @@ import {
   UserOperationSignatureError,
   VerificationGasLimitExceededError,
   VerificationGasLimitTooLowError,
-} from './bundler.js'
+} from './bundler'
 
 test('AccountNotDeployedError', () => {
   expect(

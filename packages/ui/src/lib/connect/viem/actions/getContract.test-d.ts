@@ -9,17 +9,17 @@ import {
 
 import { expectTypeOf, test } from 'vitest'
 
-import { wagmiContractConfig } from '~test/src/abis.js'
-import { anvilMainnet } from '../../test/src/anvil.js'
-import type { Account } from '../accounts/types.js'
-import { celo } from '../chains/index.js'
+import { wagmiContractConfig } from '~test/src/abis'
+import { anvilMainnet } from '../../test/src/anvil'
+import type { Account } from '../accounts/types'
+import { celo } from '../chains/index'
 
-import { createPublicClient } from '../clients/createPublicClient.js'
-import { createWalletClient } from '../clients/createWalletClient.js'
-import { http } from '../clients/transports/http.js'
-import type { Chain } from '../types/chain.js'
+import { createPublicClient } from '../clients/createPublicClient'
+import { createWalletClient } from '../clients/createWalletClient'
+import { http } from '../clients/transports/http'
+import type { Chain } from '../types/chain'
 
-import { getContract } from './getContract.js'
+import { getContract } from './getContract'
 
 const publicClient = anvilMainnet.getClient()
 const walletClient = createWalletClient({

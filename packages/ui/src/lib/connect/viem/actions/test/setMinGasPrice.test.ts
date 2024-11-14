@@ -1,9 +1,9 @@
 import { expect, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { parseGwei } from '../../utils/unit/parseGwei.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { parseGwei } from '../../utils/unit/parseGwei'
 
-import { setMinGasPrice } from './setMinGasPrice.js'
+import { setMinGasPrice } from './setMinGasPrice'
 
 const client = anvilMainnet.getClient()
 

@@ -1,13 +1,13 @@
 import { describe, expect, test } from "vitest";
 
-import { seaportContractConfig } from "~test/src/abis.js";
-import { address } from "~test/src/constants.js";
+import { seaportContractConfig } from "~test/src/abis";
+import { address } from "~test/src/constants";
 
 import {
   encodeAbiParameters,
   getArrayComponents,
-} from "./encodeAbiParameters.js";
-import { getAbiItem } from "./getAbiItem.js";
+} from "./encodeAbiParameters";
+import { getAbiItem } from "./getAbiItem";
 
 describe("static", () => {
   test("blank", () => {

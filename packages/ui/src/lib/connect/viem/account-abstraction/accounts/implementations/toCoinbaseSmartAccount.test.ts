@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest'
-import { anvilMainnet } from '../../../../test/src/anvil.js'
-import { bundlerMainnet } from '../../../../test/src/bundler.js'
-import { accounts, typedData } from '../../../../test/src/constants.js'
-import { privateKeyToAccount } from '../../../accounts/privateKeyToAccount.js'
+import { anvilMainnet } from '../../../../test/src/anvil'
+import { bundlerMainnet } from '../../../../test/src/bundler'
+import { accounts, typedData } from '../../../../test/src/constants'
+import { privateKeyToAccount } from '../../../accounts/privateKeyToAccount'
 import {
   mine,
   sendTransaction,
@@ -10,17 +10,17 @@ import {
   verifyMessage,
   verifyTypedData,
   writeContract,
-} from '../../../actions/index.js'
-import { keccak256, pad, parseEther } from '../../../utils/index.js'
-import { estimateUserOperationGas } from '../../actions/bundler/estimateUserOperationGas.js'
-import { prepareUserOperation } from '../../actions/bundler/prepareUserOperation.js'
-import { sendUserOperation } from '../../actions/bundler/sendUserOperation.js'
-import { toWebAuthnAccount } from '../toWebAuthnAccount.js'
+} from '../../../actions/index'
+import { keccak256, pad, parseEther } from '../../../utils/index'
+import { estimateUserOperationGas } from '../../actions/bundler/estimateUserOperationGas'
+import { prepareUserOperation } from '../../actions/bundler/prepareUserOperation'
+import { sendUserOperation } from '../../actions/bundler/sendUserOperation'
+import { toWebAuthnAccount } from '../toWebAuthnAccount'
 import {
   sign,
   toCoinbaseSmartAccount,
   wrapSignature,
-} from './toCoinbaseSmartAccount.js'
+} from './toCoinbaseSmartAccount'
 
 const client = anvilMainnet.getClient({ account: true })
 const bundlerClient = bundlerMainnet.getBundlerClient({ client })

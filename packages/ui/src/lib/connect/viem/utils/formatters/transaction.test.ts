@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { formatTransaction } from './transaction.js'
+import { formatTransaction } from './transaction'
 
 test('legacy transaction', () => {
   expect(

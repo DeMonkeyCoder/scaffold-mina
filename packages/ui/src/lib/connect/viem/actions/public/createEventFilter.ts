@@ -1,28 +1,28 @@
-import type { AbiEvent, Address } from 'abitype'
+import type { AbiEvent, Address } from "abitype";
 
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { BlockNumber, BlockTag } from '../../types/block.js'
-import type { Chain } from '../../types/chain.js'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { BlockNumber, BlockTag } from "../../types/block";
+import type { Chain } from "../../types/chain";
 import type {
   MaybeAbiEventName,
   MaybeExtractEventArgsFromAbi,
-} from '../../types/contract.js'
-import type { Filter } from '../../types/filter.js'
-import type { Hex, LogTopic } from '../../types/misc.js'
-import type { Prettify } from '../../types/utils.js'
+} from "../../types/contract";
+import type { Filter } from "../../types/filter";
+import type { Hex, LogTopic } from "../../types/misc";
+import type { Prettify } from "../../types/utils";
 import {
   type EncodeEventTopicsErrorType,
   type EncodeEventTopicsParameters,
   encodeEventTopics,
-} from '../../utils/abi/encodeEventTopics.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+} from "../../utils/abi/encodeEventTopics";
+import type { RequestErrorType } from "../../utils/buildRequest";
 import {
   type NumberToHexErrorType,
   numberToHex,
-} from '../../utils/encoding/toHex.js'
-import { createFilterRequestScope } from '../../utils/filters/createFilterRequestScope.js'
+} from "../../utils/encoding/toHex";
+import { createFilterRequestScope } from "../../utils/filters/createFilterRequestScope";
 
 export type CreateEventFilterParameters<
   abiEvent extends AbiEvent | undefined = undefined,
@@ -37,11 +37,11 @@ export type CreateEventFilterParameters<
   _eventName extends string | undefined = MaybeAbiEventName<abiEvent>,
   _args extends
     | MaybeExtractEventArgsFromAbi<abiEvents, _eventName>
-    | undefined = undefined,
+    | undefined = undefined
 > = {
-  address?: Address | Address[] | undefined
-  fromBlock?: fromBlock | BlockNumber | BlockTag | undefined
-  toBlock?: toBlock | BlockNumber | BlockTag | undefined
+  address?: Address | Address[] | undefined;
+  fromBlock?: fromBlock | BlockNumber | BlockTag | undefined;
+  toBlock?: toBlock | BlockNumber | BlockTag | undefined;
 } & (MaybeExtractEventArgsFromAbi<
   abiEvents,
   _eventName
@@ -50,47 +50,47 @@ export type CreateEventFilterParameters<
       | {
           args:
             | eventFilterArgs
-            | (_args extends eventFilterArgs ? _args : never)
-          event: abiEvent
-          events?: undefined
+            | (_args extends eventFilterArgs ? _args : never);
+          event: abiEvent;
+          events?: undefined;
           /**
            * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
            * @default false
            */
-          strict?: strict | undefined
+          strict?: strict | undefined;
         }
       | {
-          args?: undefined
-          event?: abiEvent | undefined
-          events?: undefined
+          args?: undefined;
+          event?: abiEvent | undefined;
+          events?: undefined;
           /**
            * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
            * @default false
            */
-          strict?: strict | undefined
+          strict?: strict | undefined;
         }
       | {
-          args?: undefined
-          event?: undefined
-          events: abiEvents | undefined
+          args?: undefined;
+          event?: undefined;
+          events: abiEvents | undefined;
           /**
            * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
            * @default false
            */
-          strict?: strict | undefined
+          strict?: strict | undefined;
         }
       | {
-          args?: undefined
-          event?: undefined
-          events?: undefined
-          strict?: undefined
+          args?: undefined;
+          event?: undefined;
+          events?: undefined;
+          strict?: undefined;
         }
   : {
-      args?: undefined
-      event?: undefined
-      events?: undefined
-      strict?: undefined
-    })
+      args?: undefined;
+      event?: undefined;
+      events?: undefined;
+      strict?: undefined;
+    });
 
 export type CreateEventFilterReturnType<
   abiEvent extends AbiEvent | undefined = undefined,
@@ -104,22 +104,22 @@ export type CreateEventFilterReturnType<
   _eventName extends string | undefined = MaybeAbiEventName<abiEvent>,
   _args extends
     | MaybeExtractEventArgsFromAbi<abiEvents, _eventName>
-    | undefined = undefined,
+    | undefined = undefined
 > = Prettify<
-  Filter<'event', abiEvents, _eventName, _args, strict, fromBlock, toBlock>
->
+  Filter<"event", abiEvents, _eventName, _args, strict, fromBlock, toBlock>
+>;
 
 export type CreateEventFilterErrorType =
   | EncodeEventTopicsErrorType
   | RequestErrorType
   | NumberToHexErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Creates a [`Filter`](https://viem.sh/docs/glossary/types#filter) to listen for new events that can be used with [`getFilterChanges`](https://viem.sh/docs/actions/public/getFilterChanges).
  *
  * - Docs: https://viem.sh/docs/actions/public/createEventFilter
- * - JSON-RPC Methods: [`eth_newFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_newfilter)
+ * - JSON-RPC Methods: [`mina_newFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_newfilter)
  *
  * @param client - Client to use
  * @param parameters - {@link CreateEventFilterParameters}
@@ -151,7 +151,7 @@ export async function createEventFilter<
   _eventName extends string | undefined = MaybeAbiEventName<abiEvent>,
   _args extends
     | MaybeExtractEventArgsFromAbi<abiEvents, _eventName>
-    | undefined = undefined,
+    | undefined = undefined
 >(
   client: Client<Transport, chain>,
   {
@@ -170,7 +170,7 @@ export async function createEventFilter<
     toBlock,
     _eventName,
     _args
-  > = {} as any,
+  > = {} as any
 ): Promise<
   CreateEventFilterReturnType<
     abiEvent,
@@ -182,38 +182,38 @@ export async function createEventFilter<
     _args
   >
 > {
-  const events = events_ ?? (event ? [event] : undefined)
+  const events = events_ ?? (event ? [event] : undefined);
 
   const getRequest = createFilterRequestScope(client, {
-    method: 'eth_newFilter',
-  })
+    method: "mina_newFilter",
+  });
 
-  let topics: LogTopic[] = []
+  let topics: LogTopic[] = [];
   if (events) {
     const encoded = (events as AbiEvent[]).flatMap((event) =>
       encodeEventTopics({
         abi: [event],
         eventName: (event as AbiEvent).name,
         args,
-      } as EncodeEventTopicsParameters),
-    )
+      } as EncodeEventTopicsParameters)
+    );
     // TODO: Clean up type casting
-    topics = [encoded as LogTopic]
-    if (event) topics = topics[0] as LogTopic[]
+    topics = [encoded as LogTopic];
+    if (event) topics = topics[0] as LogTopic[];
   }
 
   const id: Hex = await client.request({
-    method: 'eth_newFilter',
+    method: "mina_newFilter",
     params: [
       {
         address,
         fromBlock:
-          typeof fromBlock === 'bigint' ? numberToHex(fromBlock) : fromBlock,
-        toBlock: typeof toBlock === 'bigint' ? numberToHex(toBlock) : toBlock,
+          typeof fromBlock === "bigint" ? numberToHex(fromBlock) : fromBlock,
+        toBlock: typeof toBlock === "bigint" ? numberToHex(toBlock) : toBlock,
         ...(topics.length ? { topics } : {}),
       },
     ],
-  })
+  });
 
   return {
     abi: events,
@@ -224,7 +224,7 @@ export async function createEventFilter<
     request: getRequest(id),
     strict: Boolean(strict),
     toBlock,
-    type: 'event',
+    type: "event",
   } as unknown as CreateEventFilterReturnType<
     abiEvent,
     abiEvents,
@@ -233,5 +233,5 @@ export async function createEventFilter<
     toBlock,
     _eventName,
     _args
-  >
+  >;
 }

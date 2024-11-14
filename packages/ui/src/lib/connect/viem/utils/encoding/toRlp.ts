@@ -1,14 +1,14 @@
-import { BaseError } from '../../errors/base.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex } from '../../types/misc.js'
+import { BaseError } from '../../errors/base'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex } from '../../types/misc'
 import {
   type CreateCursorErrorType,
   type Cursor,
   createCursor,
-} from '../cursor.js'
+} from '../cursor'
 
-import { type HexToBytesErrorType, hexToBytes } from './toBytes.js'
-import { type BytesToHexErrorType, bytesToHex } from './toHex.js'
+import { type HexToBytesErrorType, hexToBytes } from './toBytes'
+import { type BytesToHexErrorType, bytesToHex } from './toHex'
 
 export type RecursiveArray<T> = T | readonly RecursiveArray<T>[]
 

@@ -1,11 +1,11 @@
 import { expect, test } from 'vitest'
 
-import { accounts, typedData } from '~test/src/constants.js'
-import { parseEther } from '../utils/unit/parseEther.js'
-import { parseGwei } from '../utils/unit/parseGwei.js'
+import { accounts, typedData } from '~test/src/constants'
+import { parseEther } from '../utils/unit/parseEther'
+import { parseGwei } from '../utils/unit/parseGwei'
 
-import { wagmiContractConfig } from '../../test/src/abis.js'
-import { privateKeyToAccount } from './privateKeyToAccount.js'
+import { wagmiContractConfig } from '../../test/src/abis'
+import { privateKeyToAccount } from './privateKeyToAccount'
 
 test('default', () => {
   expect(privateKeyToAccount(accounts[0].privateKey)).toMatchInlineSnapshot(`

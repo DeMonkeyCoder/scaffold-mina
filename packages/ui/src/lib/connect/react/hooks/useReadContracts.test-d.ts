@@ -1,7 +1,7 @@
 import { abi } from '@wagmi/test'
 import { assertType, expectTypeOf, test } from 'vitest'
 
-import { useReadContracts } from './useReadContracts.js'
+import { useReadContracts } from './useReadContracts'
 
 test('select data', () => {
   const result = useReadContracts({

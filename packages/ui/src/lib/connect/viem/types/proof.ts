@@ -1,5 +1,5 @@
 import type { Address } from 'abitype'
-import type { Hash } from './misc.js'
+import type { Hash } from './misc'
 
 type AccountProof = Hash
 

@@ -1,7 +1,7 @@
 import { secp256k1 } from '@noble/curves/secp256k1'
-import type { ErrorType } from '../../errors/utils.js'
-import type { CompactSignature, Hex } from '../../types/misc.js'
-import { type HexToBigIntErrorType, hexToBigInt } from '../encoding/fromHex.js'
+import type { ErrorType } from '../../errors/utils'
+import type { CompactSignature, Hex } from '../../types/misc'
+import { type HexToBigIntErrorType, hexToBigInt } from '../encoding/fromHex'
 
 export type SerializeCompactSignatureErrorType =
   | HexToBigIntErrorType

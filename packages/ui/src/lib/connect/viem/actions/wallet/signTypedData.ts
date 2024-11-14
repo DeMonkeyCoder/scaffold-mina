@@ -1,25 +1,25 @@
-import type { TypedData } from 'abitype'
+import type { TypedData } from "abitype";
 
-import type { Account } from '../../accounts/types.js'
+import type { Account } from "../../accounts/types";
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../accounts/utils/parseAccount.js'
-import type { SignTypedDataErrorType as SignTypedDataErrorType_account } from '../../accounts/utils/signTypedData.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
+} from "../../accounts/utils/parseAccount";
+import type { SignTypedDataErrorType as SignTypedDataErrorType_account } from "../../accounts/utils/signTypedData";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
 import {
   AccountNotFoundError,
   type AccountNotFoundErrorType,
-} from '../../errors/account.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { GetAccountParameter } from '../../types/account.js'
-import type { Chain } from '../../types/chain.js'
-import type { Hex } from '../../types/misc.js'
-import type { TypedDataDefinition } from '../../types/typedData.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
-import type { IsHexErrorType } from '../../utils/data/isHex.js'
-import type { StringifyErrorType } from '../../utils/stringify.js'
+} from "../../errors/account";
+import type { ErrorType } from "../../errors/utils";
+import type { GetAccountParameter } from "../../types/account";
+import type { Chain } from "../../types/chain";
+import type { Hex } from "../../types/misc";
+import type { TypedDataDefinition } from "../../types/typedData";
+import type { RequestErrorType } from "../../utils/buildRequest";
+import type { IsHexErrorType } from "../../utils/data/isHex";
+import type { StringifyErrorType } from "../../utils/stringify";
 import {
   type GetTypesForEIP712DomainErrorType,
   type SerializeTypedDataErrorType,
@@ -27,18 +27,18 @@ import {
   getTypesForEIP712Domain,
   serializeTypedData,
   validateTypedData,
-} from '../../utils/typedData.js'
+} from "../../utils/typedData";
 
 export type SignTypedDataParameters<
   typedData extends TypedData | Record<string, unknown> = TypedData,
-  primaryType extends keyof typedData | 'EIP712Domain' = keyof typedData,
+  primaryType extends keyof typedData | "EIP712Domain" = keyof typedData,
   account extends Account | undefined = undefined,
   ///
-  primaryTypes = typedData extends TypedData ? keyof typedData : string,
+  primaryTypes = typedData extends TypedData ? keyof typedData : string
 > = TypedDataDefinition<typedData, primaryType, primaryTypes> &
-  GetAccountParameter<account>
+  GetAccountParameter<account>;
 
-export type SignTypedDataReturnType = Hex
+export type SignTypedDataReturnType = Hex;
 
 export type SignTypedDataErrorType =
   | AccountNotFoundErrorType
@@ -50,14 +50,14 @@ export type SignTypedDataErrorType =
   | IsHexErrorType
   | RequestErrorType
   | SerializeTypedDataErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Signs typed data and calculates an Ethereum-specific signature in [https://eips.ethereum.org/EIPS/eip-712](https://eips.ethereum.org/EIPS/eip-712): `sign(keccak256("\x19\x01" ‖ domainSeparator ‖ hashStruct(message)))`
  *
  * - Docs: https://viem.sh/docs/actions/wallet/signTypedData
  * - JSON-RPC Methods:
- *   - JSON-RPC Accounts: [`eth_signTypedData_v4`](https://docs.metamask.io/guide/signing-data#signtypeddata-v4)
+ *   - JSON-RPC Accounts: [`mina_signTypedData_v4`](https://docs.metamask.io/guide/signing-data#signtypeddata-v4)
  *   - Local Accounts: Signs locally. No JSON-RPC request.
  *
  * @param client - Client to use
@@ -152,44 +152,44 @@ export type SignTypedDataErrorType =
  */
 export async function signTypedData<
   const typedData extends TypedData | Record<string, unknown>,
-  primaryType extends keyof typedData | 'EIP712Domain',
+  primaryType extends keyof typedData | "EIP712Domain",
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(
   client: Client<Transport, chain, account>,
-  parameters: SignTypedDataParameters<typedData, primaryType, account>,
+  parameters: SignTypedDataParameters<typedData, primaryType, account>
 ): Promise<SignTypedDataReturnType> {
   const {
     account: account_ = client.account,
     domain,
     message,
     primaryType,
-  } = parameters as unknown as SignTypedDataParameters
+  } = parameters as unknown as SignTypedDataParameters;
 
   if (!account_)
     throw new AccountNotFoundError({
-      docsPath: '/docs/actions/wallet/signTypedData',
-    })
-  const account = parseAccount(account_)
+      docsPath: "/docs/actions/wallet/signTypedData",
+    });
+  const account = parseAccount(account_);
 
   const types = {
     EIP712Domain: getTypesForEIP712Domain({ domain }),
     ...parameters.types,
-  }
+  };
 
   // Need to do a runtime validation check on addresses, byte ranges, integer ranges, etc
   // as we can't statically check this with TypeScript.
-  validateTypedData({ domain, message, primaryType, types })
+  validateTypedData({ domain, message, primaryType, types });
 
   if (account.signTypedData)
-    return account.signTypedData({ domain, message, primaryType, types })
+    return account.signTypedData({ domain, message, primaryType, types });
 
-  const typedData = serializeTypedData({ domain, message, primaryType, types })
+  const typedData = serializeTypedData({ domain, message, primaryType, types });
   return client.request(
     {
-      method: 'eth_signTypedData_v4',
+      method: "mina_signTypedData_v4",
       params: [account.address, typedData],
     },
-    { retryCount: 0 },
-  )
+    { retryCount: 0 }
+  );
 }

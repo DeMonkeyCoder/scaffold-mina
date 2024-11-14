@@ -1,11 +1,11 @@
 import { beforeAll, expect, test } from 'vitest'
-import { wagmiContractConfig } from '../../../../test/src/abis.js'
-import { anvilMainnet } from '../../../../test/src/anvil.js'
-import { accounts } from '../../../../test/src/constants.js'
-import { privateKeyToAccount } from '../../../accounts/privateKeyToAccount.js'
-import { reset } from '../../../actions/index.js'
-import { verifyAuthorization } from '../utils/verifyAuthorization.js'
-import { signAuthorization } from './signAuthorization.js'
+import { wagmiContractConfig } from '../../../../test/src/abis'
+import { anvilMainnet } from '../../../../test/src/anvil'
+import { accounts } from '../../../../test/src/constants'
+import { privateKeyToAccount } from '../../../accounts/privateKeyToAccount'
+import { reset } from '../../../actions/index'
+import { verifyAuthorization } from '../utils/verifyAuthorization'
+import { signAuthorization } from './signAuthorization'
 
 const account = privateKeyToAccount(accounts[0].privateKey)
 const client = anvilMainnet.getClient()

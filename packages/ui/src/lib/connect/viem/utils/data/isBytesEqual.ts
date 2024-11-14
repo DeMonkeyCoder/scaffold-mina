@@ -1,9 +1,9 @@
 import { equalBytes } from '@noble/curves/abstract/utils'
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex } from '../../types/misc.js'
-import { type ToBytesErrorType, toBytes } from '../encoding/toBytes.js'
-import { type IsHexErrorType, isHex } from './isHex.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex } from '../../types/misc'
+import { type ToBytesErrorType, toBytes } from '../encoding/toBytes'
+import { type IsHexErrorType, isHex } from './isHex'
 
 export type IsBytesEqualErrorType =
   | IsHexErrorType

@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expectTypeOf, test } from 'vitest'
 
-import { getConnectorClient } from './getConnectorClient.js'
+import { getConnectorClient } from './getConnectorClient'
 
 test('default', async () => {
   const client = await getConnectorClient(config)

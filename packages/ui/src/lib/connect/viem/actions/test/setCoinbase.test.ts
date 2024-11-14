@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { setCoinbase } from './setCoinbase.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { setCoinbase } from './setCoinbase'
 
 const client = anvilMainnet.getClient()
 

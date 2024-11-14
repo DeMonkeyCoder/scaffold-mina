@@ -1,14 +1,14 @@
-import { InvalidAddressError } from '../../errors/address.js'
-import { BaseError } from '../../errors/base.js'
-import { InvalidChainIdError } from '../../errors/chain.js'
-import type { ExactPartial } from '../../types/utils.js'
-import { isAddress } from '../../utils/address/isAddress.js'
-import { InvalidEip712TransactionError } from '../errors/transaction.js'
+import { InvalidAddressError } from '../../errors/address'
+import { BaseError } from '../../errors/base'
+import { InvalidChainIdError } from '../../errors/chain'
+import type { ExactPartial } from '../../types/utils'
+import { isAddress } from '../../utils/address/isAddress'
+import { InvalidEip712TransactionError } from '../errors/transaction'
 import type {
   ZksyncTransactionSerializable,
   ZksyncTransactionSerializableEIP712,
-} from '../types/transaction.js'
-import { isEIP712Transaction } from './isEip712Transaction.js'
+} from '../types/transaction'
+import { isEIP712Transaction } from './isEip712Transaction'
 
 export function assertEip712Transaction(
   transaction: ExactPartial<ZksyncTransactionSerializable>,

@@ -1,12 +1,12 @@
 import {
   IntegerOutOfRangeError,
   type IntegerOutOfRangeErrorType,
-} from "../../errors/encoding.js";
-import type { ErrorType } from "../../errors/utils.js";
-import type { ByteArray, Hex } from "../../types/misc.js";
-import { type PadErrorType, pad } from "../data/pad.js";
+} from "../../errors/encoding";
+import type { ErrorType } from "../../errors/utils";
+import type { ByteArray, Hex } from "../../types/misc";
+import { type PadErrorType, pad } from "../data/pad";
 
-import { type AssertSizeErrorType, assertSize } from "./fromHex.js";
+import { type AssertSizeErrorType, assertSize } from "./fromHex";
 
 const hexes = /*#__PURE__*/ Array.from({ length: 256 }, (_v, i) =>
   i.toString(16).padStart(2, "0")

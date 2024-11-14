@@ -3,7 +3,7 @@ import { renderHook, waitFor } from "@wagmi/test/react";
 import { expect, test } from "vitest";
 
 import type { Address } from "@/lib/connect/viem";
-import { useBytecode } from "./useBytecode.js";
+import { useBytecode } from "./useBytecode";
 
 test("default", async () => {
   const { result } = renderHook(() =>

@@ -1,9 +1,9 @@
-import type { Config } from '../createConfig.js'
-import { deepEqual } from '../utils/deepEqual.js'
+import type { Config } from '../createConfig'
+import { deepEqual } from '../utils/deepEqual'
 import {
   type GetConnectionsReturnType,
   getConnections,
-} from './getConnections.js'
+} from './getConnections'
 
 export type WatchConnectionsParameters = {
   onChange(

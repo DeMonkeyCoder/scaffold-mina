@@ -1,12 +1,12 @@
 import type { Address } from 'abitype'
-import type { Hash, Hex } from '../../types/misc.js'
-import type { ZksyncBatchDetails, ZksyncBlockDetails } from './block.js'
-import type { ZksyncFee } from './fee.js'
-import type { MessageProof } from './proof.js'
+import type { Hash, Hex } from '../../types/misc'
+import type { ZksyncBatchDetails, ZksyncBlockDetails } from './block'
+import type { ZksyncFee } from './fee'
+import type { MessageProof } from './proof'
 import type {
   TransactionRequest,
   ZksyncTransactionDetails,
-} from './transaction.js'
+} from './transaction'
 
 export type CommonDataRawBlockTransaction = {
   sender: Address

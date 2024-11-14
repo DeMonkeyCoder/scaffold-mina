@@ -3,37 +3,37 @@ import { describe, expect, test } from 'vitest'
 import {
   SoladyAccount07,
   SoladyAccountFactory07,
-} from '~contracts/generated.js'
-import { ensPublicResolverConfig, smartAccountConfig } from '~test/src/abis.js'
-import { anvilMainnet } from '~test/src/anvil.js'
-import { accounts, address } from '~test/src/constants.js'
-import { deploySoladyAccount_07 } from '~test/src/utils.js'
+} from '~contracts/generated'
+import { ensPublicResolverConfig, smartAccountConfig } from '~test/src/abis'
+import { anvilMainnet } from '~test/src/anvil'
+import { accounts, address } from '~test/src/constants'
+import { deploySoladyAccount_07 } from '~test/src/utils'
 import {
   entryPoint07Abi,
   entryPoint07Address,
   toPackedUserOperation,
-} from '~viem/account-abstraction/index.js'
-import { getSmartAccounts_07 } from '../../../test/src/account-abstraction.js'
-import { bundlerMainnet } from '../../../test/src/bundler.js'
-import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
-import { zksync } from '../../chains/index.js'
-import { createClient } from '../../clients/createClient.js'
-import { http } from '../../clients/transports/http.js'
-import { signMessage as signMessageErc1271 } from '../../experimental/erc7739/actions/signMessage.js'
-import { serializeErc6492Signature } from '../../experimental/index.js'
-import type { Hex } from '../../types/misc.js'
+} from '~viem/account-abstraction/index'
+import { getSmartAccounts_07 } from '../../../test/src/account-abstraction'
+import { bundlerMainnet } from '../../../test/src/bundler'
+import { privateKeyToAccount } from '../../accounts/privateKeyToAccount'
+import { zksync } from '../../chains/index'
+import { createClient } from '../../clients/createClient'
+import { http } from '../../clients/transports/http'
+import { signMessage as signMessageErc1271 } from '../../experimental/erc7739/actions/signMessage'
+import { serializeErc6492Signature } from '../../experimental/index'
+import type { Hex } from '../../types/misc'
 import {
   encodeFunctionData,
   hashMessage,
   pad,
   toBytes,
-} from '../../utils/index.js'
-import { parseSignature } from '../../utils/signature/parseSignature.js'
-import { mine } from '../test/mine.js'
-import { signMessage } from '../wallet/signMessage.js'
-import { writeContract } from '../wallet/writeContract.js'
-import { simulateContract } from './simulateContract.js'
-import { verifyHash } from './verifyHash.js'
+} from '../../utils/index'
+import { parseSignature } from '../../utils/signature/parseSignature'
+import { mine } from '../test/mine'
+import { signMessage } from '../wallet/signMessage'
+import { writeContract } from '../wallet/writeContract'
+import { simulateContract } from './simulateContract'
+import { verifyHash } from './verifyHash'
 
 const client = anvilMainnet.getClient()
 

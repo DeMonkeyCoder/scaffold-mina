@@ -1,4 +1,4 @@
-import { BaseError } from './base.js'
+import { BaseError } from './base'
 
 export type SliceOffsetOutOfBoundsErrorType = SliceOffsetOutOfBoundsError & {
   name: 'SliceOffsetOutOfBoundsError'

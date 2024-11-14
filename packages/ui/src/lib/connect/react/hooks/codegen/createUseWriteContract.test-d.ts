@@ -3,8 +3,8 @@ import type { Address, Hash } from "@/lib/connect/viem";
 import { mainnet, optimism } from "@/lib/connect/viem/chains";
 import { expectTypeOf, test } from "vitest";
 
-import { useSimulateContract } from "../useSimulateContract.js";
-import { createUseWriteContract } from "./createUseWriteContract.js";
+import { useSimulateContract } from "../useSimulateContract";
+import { createUseWriteContract } from "./createUseWriteContract";
 
 const contextValue = { foo: "bar" } as const;
 

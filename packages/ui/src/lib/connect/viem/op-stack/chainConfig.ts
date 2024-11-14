@@ -1,6 +1,6 @@
-import { contracts } from './contracts.js'
-import { formatters } from './formatters.js'
-import { serializers } from './serializers.js'
+import { contracts } from './contracts'
+import { formatters } from './formatters'
+import { serializers } from './serializers'
 
 export const chainConfig = {
   contracts,

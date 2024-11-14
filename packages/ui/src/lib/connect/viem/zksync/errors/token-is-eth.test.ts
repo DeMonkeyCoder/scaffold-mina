@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { TokenIsEthError } from './token-is-eth.js'
+import { TokenIsEthError } from './token-is-eth'
 
 test('TokenIsEthError', () => {
   expect(new TokenIsEthError()).toMatchInlineSnapshot(`

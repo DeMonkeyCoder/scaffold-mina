@@ -1,14 +1,14 @@
 import { WebSocket } from "isows";
 import { describe, expect, test, vi } from "vitest";
 
-import { anvilMainnet } from "../../../test/src/anvil.js";
-import { getBlockNumber } from "../../actions/public/getBlockNumber.js";
-import { mine } from "../../actions/test/mine.js";
+import { anvilMainnet } from "../../../test/src/anvil";
+import { getBlockNumber } from "../../actions/public/getBlockNumber";
+import { mine } from "../../actions/test/mine";
 
-import type { RpcResponse } from "../../types/rpc.js";
-import { numberToHex } from "../encoding/toHex.js";
-import { wait } from "../wait.js";
-import { getWebSocketRpcClient } from "./webSocket.js";
+import type { RpcResponse } from "../../types/rpc";
+import { numberToHex } from "../encoding/toHex";
+import { wait } from "../wait";
+import { getWebSocketRpcClient } from "./webSocket";
 
 const client = anvilMainnet.getClient();
 
@@ -83,7 +83,7 @@ describe("request", () => {
     const { id, ...block } = await new Promise<any>((resolve) =>
       socketClient.request({
         body: {
-          method: "eth_getBlockByNumber",
+          method: "mina_getBlockByNumber",
           params: [numberToHex(anvilMainnet.forkBlockNumber), false],
         },
         onResponse: resolve,
@@ -456,7 +456,7 @@ describe("request (subscription)", () => {
     const data_: RpcResponse[] = [];
     socketClient.request({
       body: {
-        method: "eth_subscribe",
+        method: "mina_subscribe",
         params: ["newHeads"],
       },
       onResponse: (data) => data_.push(data),
@@ -470,7 +470,7 @@ describe("request (subscription)", () => {
     expect(data_.length).toBe(3);
     await socketClient.requestAsync({
       body: {
-        method: "eth_unsubscribe",
+        method: "mina_unsubscribe",
         params: [(data_[0] as any).result],
       },
     });
@@ -488,7 +488,7 @@ describe("request (subscription)", () => {
     const s1: RpcResponse[] = [];
     socketClient.request({
       body: {
-        method: "eth_subscribe",
+        method: "mina_subscribe",
         params: ["newHeads"],
       },
       onResponse: (data) => s1.push(data),
@@ -496,7 +496,7 @@ describe("request (subscription)", () => {
     const s2: RpcResponse[] = [];
     socketClient.request({
       body: {
-        method: "eth_subscribe",
+        method: "mina_subscribe",
         params: ["newHeads"],
       },
       onResponse: (data) => s2.push(data),
@@ -504,7 +504,7 @@ describe("request (subscription)", () => {
     const s3: RpcResponse[] = [];
     socketClient.request({
       body: {
-        method: "eth_subscribe",
+        method: "mina_subscribe",
         params: ["newPendingTransactions"],
       },
       onResponse: (data) => s3.push(data),
@@ -521,7 +521,7 @@ describe("request (subscription)", () => {
     expect(s3.length).toBe(1);
     await socketClient.requestAsync({
       body: {
-        method: "eth_unsubscribe",
+        method: "mina_unsubscribe",
         params: [(s1[0] as any).result],
       },
     });
@@ -537,13 +537,13 @@ describe("request (subscription)", () => {
     expect(s3.length).toBe(1);
     await socketClient.requestAsync({
       body: {
-        method: "eth_unsubscribe",
+        method: "mina_unsubscribe",
         params: [(s2[0] as any).result],
       },
     });
     await socketClient.requestAsync({
       body: {
-        method: "eth_unsubscribe",
+        method: "mina_unsubscribe",
         params: [(s3[0] as any).result],
       },
     });
@@ -560,7 +560,7 @@ describe("request (subscription)", () => {
     let err_: RpcResponse | undefined;
     client.request({
       body: {
-        method: "eth_subscribe",
+        method: "mina_subscribe",
         params: ["fakeHeadz"],
       },
       onResponse: (err) => (err_ = err),
@@ -601,7 +601,7 @@ describe("requestAsync", () => {
     const client = await getWebSocketRpcClient(anvilMainnet.rpcUrl.ws);
     const { id, ...block } = await client.requestAsync({
       body: {
-        method: "eth_getBlockByNumber",
+        method: "mina_getBlockByNumber",
         params: [numberToHex(anvilMainnet.forkBlockNumber), false],
       },
     });
@@ -890,7 +890,7 @@ describe("requestAsync", () => {
       response.push(
         await client.requestAsync({
           body: {
-            method: "eth_getBlockByNumber",
+            method: "mina_getBlockByNumber",
             params: [
               numberToHex(anvilMainnet.forkBlockNumber - BigInt(i)),
               false,
@@ -918,7 +918,7 @@ describe("requestAsync", () => {
       Array.from({ length: 100 }).map(async (_, i) => {
         return await client_2.requestAsync({
           body: {
-            method: "eth_getBlockByNumber",
+            method: "mina_getBlockByNumber",
             params: [numberToHex(blockNumber - BigInt(i)), false],
           },
         });
@@ -961,7 +961,7 @@ describe("requestAsync", () => {
     await expect(() =>
       client.requestAsync({
         body: {
-          method: "eth_getBlockByNumber",
+          method: "mina_getBlockByNumber",
           params: [numberToHex(5115n), false],
         },
         timeout: 10,
@@ -971,7 +971,7 @@ describe("requestAsync", () => {
       [TimeoutError: The request took too long to respond.
 
       URL: http://localhost
-      Request body: {"method":"eth_getBlockByNumber","params":["0x13fb",false]}
+      Request body: {"method":"mina_getBlockByNumber","params":["0x13fb",false]}
 
       Details: The request timed out.
       Version: @/lib/connect/viem@x.y.z]

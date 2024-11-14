@@ -1,12 +1,12 @@
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import type { Account } from '../../../types/account.js'
-import type { Chain } from '../../../types/chain.js'
+import type { Client } from '../../../clients/createClient'
+import type { Transport } from '../../../clients/transports/createTransport'
+import type { Account } from '../../../types/account'
+import type { Chain } from '../../../types/chain'
 import {
   type GrantPermissionsParameters,
   type GrantPermissionsReturnType,
   grantPermissions,
-} from '../actions/grantPermissions.js'
+} from '../actions/grantPermissions'
 
 export type Erc7715Actions = {
   /**

@@ -1,20 +1,20 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { Filter } from '../../types/filter.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
-import { createFilterRequestScope } from '../../utils/filters/createFilterRequestScope.js'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Chain } from "../../types/chain";
+import type { Filter } from "../../types/filter";
+import type { RequestErrorType } from "../../utils/buildRequest";
+import { createFilterRequestScope } from "../../utils/filters/createFilterRequestScope";
 
-export type CreateBlockFilterReturnType = Filter<'block'>
+export type CreateBlockFilterReturnType = Filter<"block">;
 
-export type CreateBlockFilterErrorType = RequestErrorType | ErrorType
+export type CreateBlockFilterErrorType = RequestErrorType | ErrorType;
 
 /**
  * Creates a [`Filter`](https://viem.sh/docs/glossary/types#filter) to listen for new block hashes that can be used with [`getFilterChanges`](https://viem.sh/docs/actions/public/getFilterChanges).
  *
  * - Docs: https://viem.sh/docs/actions/public/createBlockFilter
- * - JSON-RPC Methods: [`eth_newBlockFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_newBlockFilter)
+ * - JSON-RPC Methods: [`mina_newBlockFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_newBlockFilter)
  *
  * @param client - Client to use
  * @returns [`Filter`](https://viem.sh/docs/glossary/types#filter). {@link CreateBlockFilterReturnType}
@@ -32,13 +32,13 @@ export type CreateBlockFilterErrorType = RequestErrorType | ErrorType
  * // { id: "0x345a6572337856574a76364e457a4366", type: 'block' }
  */
 export async function createBlockFilter<chain extends Chain | undefined>(
-  client: Client<Transport, chain>,
+  client: Client<Transport, chain>
 ): Promise<CreateBlockFilterReturnType> {
   const getRequest = createFilterRequestScope(client, {
-    method: 'eth_newBlockFilter',
-  })
+    method: "mina_newBlockFilter",
+  });
   const id = await client.request({
-    method: 'eth_newBlockFilter',
-  })
-  return { id, request: getRequest(id), type: 'block' }
+    method: "mina_newBlockFilter",
+  });
+  return { id, request: getRequest(id), type: "block" };
 }

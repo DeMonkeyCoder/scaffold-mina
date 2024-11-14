@@ -1,44 +1,44 @@
-import type { Address } from 'abitype'
+import type { Address } from "abitype";
 
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { BlockTag } from '../../types/block.js'
-import type { Chain } from '../../types/chain.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { BlockTag } from "../../types/block";
+import type { Chain } from "../../types/chain";
+import type { RequestErrorType } from "../../utils/buildRequest";
 import {
   type NumberToHexErrorType,
   numberToHex,
-} from '../../utils/encoding/toHex.js'
+} from "../../utils/encoding/toHex";
 
 export type GetBalanceParameters = {
   /** The address of the account. */
-  address: Address
+  address: Address;
 } & (
   | {
       /** The balance of the account at a block number. */
-      blockNumber?: bigint | undefined
-      blockTag?: undefined
+      blockNumber?: bigint | undefined;
+      blockTag?: undefined;
     }
   | {
-      blockNumber?: undefined
+      blockNumber?: undefined;
       /** The balance of the account at a block tag. */
-      blockTag?: BlockTag | undefined
+      blockTag?: BlockTag | undefined;
     }
-)
+);
 
-export type GetBalanceReturnType = bigint
+export type GetBalanceReturnType = bigint;
 
 export type GetBalanceErrorType =
   | NumberToHexErrorType
   | RequestErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Returns the balance of an address in wei.
  *
  * - Docs: https://viem.sh/docs/actions/public/getBalance
- * - JSON-RPC Methods: [`eth_getBalance`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getbalance)
+ * - JSON-RPC Methods: [`mina_getBalance`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getbalance)
  *
  * You can convert the balance to ether units with [`formatEther`](https://viem.sh/docs/utilities/formatEther).
  *
@@ -71,13 +71,13 @@ export type GetBalanceErrorType =
  */
 export async function getBalance<chain extends Chain | undefined>(
   client: Client<Transport, chain>,
-  { address, blockNumber, blockTag = 'latest' }: GetBalanceParameters,
+  { address, blockNumber, blockTag = "latest" }: GetBalanceParameters
 ): Promise<GetBalanceReturnType> {
-  const blockNumberHex = blockNumber ? numberToHex(blockNumber) : undefined
+  const blockNumberHex = blockNumber ? numberToHex(blockNumber) : undefined;
 
   const balance = await client.request({
-    method: 'eth_getBalance',
+    method: "mina_getBalance",
     params: [address, blockNumberHex || blockTag],
-  })
-  return BigInt(balance)
+  });
+  return BigInt(balance);
 }

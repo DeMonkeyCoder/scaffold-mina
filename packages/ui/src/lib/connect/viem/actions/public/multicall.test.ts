@@ -5,24 +5,24 @@
  */
 import { describe, expect, test, vi } from 'vitest'
 
-import { ErrorsExample, GH434 } from '~contracts/generated.js'
+import { ErrorsExample, GH434 } from '~contracts/generated'
 import {
   baycContractConfig,
   usdcContractConfig,
   wagmiContractConfig,
-} from '~test/src/abis.js'
-import { accounts, address } from '~test/src/constants.js'
-import { deploy, deployErrorExample } from '~test/src/utils.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { mainnet } from '../../chains/index.js'
+} from '~test/src/abis'
+import { accounts, address } from '~test/src/constants'
+import { deploy, deployErrorExample } from '~test/src/utils'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { mainnet } from '../../chains/index'
 
-import { createPublicClient } from '../../clients/createPublicClient.js'
-import { http } from '../../clients/transports/http.js'
-import type { Hex } from '../../types/misc.js'
-import { pad } from '../../utils/data/pad.js'
-import { toHex } from '../../utils/encoding/toHex.js'
-import { multicall } from './multicall.js'
-import * as readContract from './readContract.js'
+import { createPublicClient } from '../../clients/createPublicClient'
+import { http } from '../../clients/transports/http'
+import type { Hex } from '../../types/misc'
+import { pad } from '../../utils/data/pad'
+import { toHex } from '../../utils/encoding/toHex'
+import { multicall } from './multicall'
+import * as readContract from './readContract'
 
 const client = anvilMainnet.getClient()
 

@@ -8,35 +8,35 @@ export {
   type GetCallsStatusParameters,
   type GetCallsStatusReturnType,
   getCallsStatus,
-} from '../experimental/actions/getCallsStatus.js'
+} from '../experimental/actions/getCallsStatus'
 
 export {
   type GetCapabilitiesErrorType,
   type GetCapabilitiesParameters,
   type GetCapabilitiesReturnType,
   getCapabilities,
-} from '../experimental/actions/getCapabilities.js'
+} from '../experimental/actions/getCapabilities'
 
 export {
   type SendCallsErrorType,
   type SendCallsParameters,
   type SendCallsReturnType,
   sendCalls,
-} from '../experimental/actions/sendCalls.js'
+} from '../experimental/actions/sendCalls'
 
 export {
   type ShowCallsStatusErrorType,
   type ShowCallsStatusParameters,
   type ShowCallsStatusReturnType,
   showCallsStatus,
-} from '../experimental/actions/showCallsStatus.js'
+} from '../experimental/actions/showCallsStatus'
 
 export {
   type WriteContractsErrorType,
   type WriteContractsParameters,
   type WriteContractsReturnType,
   writeContracts,
-} from '../experimental/actions/writeContracts.js'
+} from '../experimental/actions/writeContracts'
 
 ////////////////////////////////////////////////////////////////////////////////
 // Tanstack Query
@@ -49,7 +49,7 @@ export {
   type GetCallsStatusQueryKey,
   getCallsStatusQueryOptions,
   getCallsStatusQueryKey,
-} from '../experimental/query/getCallsStatus.js'
+} from '../experimental/query/getCallsStatus'
 
 export {
   type GetCapabilitiesData,
@@ -58,7 +58,7 @@ export {
   type GetCapabilitiesQueryKey,
   getCapabilitiesQueryOptions,
   getCapabilitiesQueryKey,
-} from '../experimental/query/getCapabilities.js'
+} from '../experimental/query/getCapabilities'
 
 export {
   type SendCallsData,
@@ -66,7 +66,7 @@ export {
   type SendCallsMutateAsync,
   type SendCallsVariables,
   sendCallsMutationOptions,
-} from '../experimental/query/sendCalls.js'
+} from '../experimental/query/sendCalls'
 
 export {
   type ShowCallsStatusData,
@@ -74,7 +74,7 @@ export {
   type ShowCallsStatusMutateAsync,
   type ShowCallsStatusVariables,
   showCallsStatusMutationOptions,
-} from '../experimental/query/showCallsStatus.js'
+} from '../experimental/query/showCallsStatus'
 
 export {
   type WriteContractsData,
@@ -82,4 +82,4 @@ export {
   type WriteContractsMutateAsync,
   type WriteContractsVariables,
   writeContractsMutationOptions,
-} from '../experimental/query/writeContracts.js'
+} from '../experimental/query/writeContracts'

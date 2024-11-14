@@ -1,11 +1,11 @@
 import { describe, expect, test } from 'vitest'
 
-import { getBlock } from '../actions/public/getBlock.js'
-import { getTransaction } from '../actions/public/getTransaction.js'
-import { getTransactionReceipt } from '../actions/public/getTransactionReceipt.js'
-import { zksync } from '../chains/index.js'
-import { createPublicClient } from '../clients/createPublicClient.js'
-import { http } from '../clients/transports/http.js'
+import { getBlock } from '../actions/public/getBlock'
+import { getTransaction } from '../actions/public/getTransaction'
+import { getTransactionReceipt } from '../actions/public/getTransactionReceipt'
+import { zksync } from '../chains/index'
+import { createPublicClient } from '../clients/createPublicClient'
+import { http } from '../clients/transports/http'
 
 describe('block', () => {
   test('formatter', async () => {

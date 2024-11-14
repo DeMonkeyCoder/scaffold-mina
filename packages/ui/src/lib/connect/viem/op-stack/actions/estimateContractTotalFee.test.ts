@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
-import { usdcContractConfig } from '~test/src/abis.js'
-import { anvilOptimism } from '../../../test/src/anvil.js'
+import { usdcContractConfig } from '~test/src/abis'
+import { anvilOptimism } from '../../../test/src/anvil'
 
-import { estimateContractTotalFee } from './estimateContractTotalFee.js'
+import { estimateContractTotalFee } from './estimateContractTotalFee'
 
 const optimismClient = anvilOptimism.getClient()
 

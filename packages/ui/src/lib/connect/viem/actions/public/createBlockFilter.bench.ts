@@ -1,8 +1,8 @@
 import { bench, describe } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { createBlockFilter } from './createBlockFilter.js'
+import { createBlockFilter } from './createBlockFilter'
 
 const client = anvilMainnet.getClient()
 

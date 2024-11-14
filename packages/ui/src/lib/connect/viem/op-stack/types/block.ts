@@ -1,10 +1,10 @@
-import type { Block, BlockTag } from '../../types/block.js'
-import type { Hash } from '../../types/misc.js'
-import type { RpcBlock } from '../../types/rpc.js'
+import type { Block, BlockTag } from '../../types/block'
+import type { Hash } from '../../types/misc'
+import type { RpcBlock } from '../../types/rpc'
 import type {
   OpStackRpcTransaction,
   OpStackTransaction,
-} from './transaction.js'
+} from './transaction'
 
 export type OpStackBlockOverrides = {
   stateRoot: Hash

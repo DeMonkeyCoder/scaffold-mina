@@ -1,6 +1,6 @@
-import { formatters } from './formatters.js'
-import { serializers } from './serializers.js'
-import { getEip712Domain } from './utils/getEip712Domain.js'
+import { formatters } from './formatters'
+import { serializers } from './serializers'
+import { getEip712Domain } from './utils/getEip712Domain'
 
 export const chainConfig = {
   formatters,

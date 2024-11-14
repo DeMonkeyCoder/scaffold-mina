@@ -6,7 +6,7 @@ import { expectTypeOf, test } from "vitest";
 import {
   type UseWatchBlockNumberParameters,
   useWatchBlockNumber,
-} from "./useWatchBlockNumber.js";
+} from "./useWatchBlockNumber";
 
 test("default", () => {
   useWatchBlockNumber({

@@ -1,10 +1,10 @@
 import { attest } from '@ark/attest'
 import { test } from 'vitest'
 
-import { createClient } from './createClient.js'
-import { createPublicClient } from './createPublicClient.js'
-import { publicActions } from './decorators/public.js'
-import { http } from './transports/http.js'
+import { createClient } from './createClient'
+import { createPublicClient } from './createPublicClient'
+import { publicActions } from './decorators/public'
+import { http } from './transports/http'
 
 test('createPublicClient', () => {
   createPublicClient({

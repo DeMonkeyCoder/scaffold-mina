@@ -1,4 +1,4 @@
-import { uid } from '../../utils/uid.js'
+import { uid } from '../../utils/uid'
 
 /**
  * @description Generates random EIP-4361 nonce.

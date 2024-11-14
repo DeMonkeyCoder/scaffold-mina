@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expectTypeOf, test } from 'vitest'
 
-import { useConnectorClient } from './useConnectorClient.js'
+import { useConnectorClient } from './useConnectorClient'
 
 test('parameters: config', async () => {
   const client = useConnectorClient({ config })

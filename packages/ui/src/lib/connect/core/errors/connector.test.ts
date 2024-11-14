@@ -4,7 +4,7 @@ import { expect, test } from "vitest";
 import {
   ProviderNotFoundError,
   SwitchChainNotSupportedError,
-} from "./connector.js";
+} from "./connector";
 
 test("constructors", () => {
   expect(new ProviderNotFoundError()).toMatchInlineSnapshot(`

@@ -1,6 +1,6 @@
-import { gweiUnits } from "../../constants/unit.js";
+import { gweiUnits } from "../../constants/unit";
 
-import { type FormatUnitsErrorType, formatUnits } from "./formatUnits.js";
+import { type FormatUnitsErrorType, formatUnits } from "./formatUnits";
 
 export type FormatGweiErrorType = FormatUnitsErrorType;
 

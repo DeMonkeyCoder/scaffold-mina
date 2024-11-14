@@ -2,8 +2,8 @@ import { http, parseEther } from "@/lib/connect/viem";
 import { celo, mainnet } from "@/lib/connect/viem/chains";
 import { expectTypeOf, test } from "vitest";
 
-import { createConfig } from "../createConfig.js";
-import { type EstimateGasParameters, estimateGas } from "./estimateGas.js";
+import { createConfig } from "../createConfig";
+import { type EstimateGasParameters, estimateGas } from "./estimateGas";
 
 test("chain formatters", () => {
   const config = createConfig({

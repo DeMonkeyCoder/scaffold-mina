@@ -1,22 +1,22 @@
-import type { Address } from 'abitype'
+import type { Address } from "abitype";
 
-import type { Account } from '../../accounts/types.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import { getAddress } from '../../utils/address/getAddress.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+import type { Account } from "../../accounts/types";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Chain } from "../../types/chain";
+import { getAddress } from "../../utils/address/getAddress";
+import type { RequestErrorType } from "../../utils/buildRequest";
 
-export type RequestAddressesReturnType = Address[]
+export type RequestAddressesReturnType = Address[];
 
-export type RequestAddressesErrorType = RequestErrorType | ErrorType
+export type RequestAddressesErrorType = RequestErrorType | ErrorType;
 
 /**
  * Requests a list of accounts managed by a wallet.
  *
  * - Docs: https://viem.sh/docs/actions/wallet/requestAddresses
- * - JSON-RPC Methods: [`eth_requestAccounts`](https://eips.ethereum.org/EIPS/eip-1102)
+ * - JSON-RPC Methods: [`mina_requestAccounts`](https://eips.ethereum.org/EIPS/eip-1102)
  *
  * Sends a request to the wallet, asking for permission to access the user's accounts. After the user accepts the request, it will return a list of accounts (addresses).
  *
@@ -38,13 +38,13 @@ export type RequestAddressesErrorType = RequestErrorType | ErrorType
  */
 export async function requestAddresses<
   chain extends Chain | undefined,
-  account extends Account | undefined = undefined,
+  account extends Account | undefined = undefined
 >(
-  client: Client<Transport, chain, account>,
+  client: Client<Transport, chain, account>
 ): Promise<RequestAddressesReturnType> {
   const addresses = await client.request(
-    { method: 'eth_requestAccounts' },
-    { dedupe: true, retryCount: 0 },
-  )
-  return addresses.map((address) => getAddress(address))
+    { method: "mina_requestAccounts" },
+    { dedupe: true, retryCount: 0 }
+  );
+  return addresses.map((address) => getAddress(address));
 }

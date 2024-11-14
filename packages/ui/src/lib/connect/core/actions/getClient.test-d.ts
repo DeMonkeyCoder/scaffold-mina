@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expectTypeOf, test } from 'vitest'
 
-import { getClient } from './getClient.js'
+import { getClient } from './getClient'
 
 test('default', () => {
   const client = getClient(config)

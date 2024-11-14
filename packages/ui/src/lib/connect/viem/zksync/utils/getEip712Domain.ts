@@ -1,13 +1,13 @@
-import { toHex } from '../../utils/encoding/toHex.js'
-import { gasPerPubdataDefault } from '../constants/number.js'
-import type { EIP712DomainFn } from '../types/eip712.js'
+import { toHex } from '../../utils/encoding/toHex'
+import { gasPerPubdataDefault } from '../constants/number'
+import type { EIP712DomainFn } from '../types/eip712'
 import type {
   ZksyncEIP712TransactionSignable,
   ZksyncTransactionSerializable,
   ZksyncTransactionSerializableEIP712,
-} from '../types/transaction.js'
-import { assertEip712Transaction } from './assertEip712Transaction.js'
-import { hashBytecode } from './hashBytecode.js'
+} from '../types/transaction'
+import { assertEip712Transaction } from './assertEip712Transaction'
+import { hashBytecode } from './hashBytecode'
 
 export const getEip712Domain: EIP712DomainFn<
   ZksyncTransactionSerializable,

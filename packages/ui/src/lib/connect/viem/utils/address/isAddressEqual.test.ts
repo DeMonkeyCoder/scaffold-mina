@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { isAddressEqual } from "./isAddressEqual.js";
+import { isAddressEqual } from "./isAddressEqual";
 
 test("checksums address", () => {
   expect(

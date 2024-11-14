@@ -1,7 +1,7 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex, SignableMessage } from '../../types/misc.js'
-import { type Keccak256ErrorType, keccak256 } from '../hash/keccak256.js'
-import { toPrefixedMessage } from './toPrefixedMessage.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex, SignableMessage } from '../../types/misc'
+import { type Keccak256ErrorType, keccak256 } from '../hash/keccak256'
+import { toPrefixedMessage } from './toPrefixedMessage'
 
 type To = 'hex' | 'bytes'
 

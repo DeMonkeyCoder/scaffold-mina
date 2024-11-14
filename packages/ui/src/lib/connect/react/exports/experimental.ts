@@ -7,28 +7,28 @@ export {
   type UseCallsStatusParameters,
   type UseCallsStatusReturnType,
   useCallsStatus,
-} from '../experimental/hooks/useCallsStatus.js'
+} from '../experimental/hooks/useCallsStatus'
 
 export {
   type UseCapabilitiesParameters,
   type UseCapabilitiesReturnType,
   useCapabilities,
-} from '../experimental/hooks/useCapabilities.js'
+} from '../experimental/hooks/useCapabilities'
 
 export {
   type UseSendCallsParameters,
   type UseSendCallsReturnType,
   useSendCalls,
-} from '../experimental/hooks/useSendCalls.js'
+} from '../experimental/hooks/useSendCalls'
 
 export {
   type UseShowCallsStatusParameters,
   type UseShowCallsStatusReturnType,
   useShowCallsStatus,
-} from '../experimental/hooks/useShowCallsStatus.js'
+} from '../experimental/hooks/useShowCallsStatus'
 
 export {
   type UseWriteContractsParameters,
   type UseWriteContractsReturnType,
   useWriteContracts,
-} from '../experimental/hooks/useWriteContracts.js'
+} from '../experimental/hooks/useWriteContracts'

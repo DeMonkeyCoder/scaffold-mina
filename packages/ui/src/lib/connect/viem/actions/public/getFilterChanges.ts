@@ -1,21 +1,18 @@
-import type { Abi, AbiEvent, ExtractAbiEvent } from 'abitype'
+import type { Abi, AbiEvent, ExtractAbiEvent } from "abitype";
 
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { RpcLog } from '../../index.js'
-import type { BlockNumber, BlockTag } from '../../types/block.js'
-import type { Chain } from '../../types/chain.js'
-import type { Filter, FilterType } from '../../types/filter.js'
-import type { Log } from '../../types/log.js'
-import type { Hash } from '../../types/misc.js'
-import type { DecodeEventLogErrorType } from '../../utils/abi/decodeEventLog.js'
-import { parseEventLogs } from '../../utils/abi/parseEventLogs.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
-import {
-  type FormatLogErrorType,
-  formatLog,
-} from '../../utils/formatters/log.js'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { RpcLog } from "../../index";
+import type { BlockNumber, BlockTag } from "../../types/block";
+import type { Chain } from "../../types/chain";
+import type { Filter, FilterType } from "../../types/filter";
+import type { Log } from "../../types/log";
+import type { Hash } from "../../types/misc";
+import type { DecodeEventLogErrorType } from "../../utils/abi/decodeEventLog";
+import { parseEventLogs } from "../../utils/abi/parseEventLogs";
+import type { RequestErrorType } from "../../utils/buildRequest";
+import { type FormatLogErrorType, formatLog } from "../../utils/formatters/log";
 
 export type GetFilterChangesParameters<
   filterType extends FilterType = FilterType,
@@ -23,10 +20,10 @@ export type GetFilterChangesParameters<
   eventName extends string | undefined = undefined,
   strict extends boolean | undefined = undefined,
   fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined,
+  toBlock extends BlockNumber | BlockTag | undefined = undefined
 > = {
-  filter: Filter<filterType, abi, eventName, any, strict, fromBlock, toBlock>
-}
+  filter: Filter<filterType, abi, eventName, any, strict, fromBlock, toBlock>;
+};
 
 export type GetFilterChangesReturnType<
   filterType extends FilterType = FilterType,
@@ -41,23 +38,23 @@ export type GetFilterChangesReturnType<
       : undefined
     : undefined,
   _Pending extends boolean =
-    | (fromBlock extends 'pending' ? true : false)
-    | (toBlock extends 'pending' ? true : false),
-> = filterType extends 'event'
+    | (fromBlock extends "pending" ? true : false)
+    | (toBlock extends "pending" ? true : false)
+> = filterType extends "event"
   ? Log<bigint, number, _Pending, _AbiEvent, strict, abi, eventName>[]
-  : Hash[]
+  : Hash[];
 
 export type GetFilterChangesErrorType =
   | RequestErrorType
   | DecodeEventLogErrorType
   | FormatLogErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Returns a list of logs or hashes based on a [Filter](/docs/glossary/terms#filter) since the last time it was called.
  *
  * - Docs: https://viem.sh/docs/actions/public/getFilterChanges
- * - JSON-RPC Methods: [`eth_getFilterChanges`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getfilterchanges)
+ * - JSON-RPC Methods: [`mina_getFilterChanges`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getfilterchanges)
  *
  * A Filter can be created from the following actions:
  *
@@ -143,7 +140,7 @@ export async function getFilterChanges<
   eventName extends string | undefined,
   strict extends boolean | undefined = undefined,
   fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined,
+  toBlock extends BlockNumber | BlockTag | undefined = undefined
 >(
   _client: Client<transport, chain>,
   {
@@ -155,7 +152,7 @@ export async function getFilterChanges<
     strict,
     fromBlock,
     toBlock
-  >,
+  >
 ): Promise<
   GetFilterChangesReturnType<
     filterType,
@@ -166,14 +163,14 @@ export async function getFilterChanges<
     toBlock
   >
 > {
-  const strict = 'strict' in filter && filter.strict
+  const strict = "strict" in filter && filter.strict;
 
   const logs = await filter.request({
-    method: 'eth_getFilterChanges',
+    method: "mina_getFilterChanges",
     params: [filter.id],
-  })
+  });
 
-  if (typeof logs[0] === 'string')
+  if (typeof logs[0] === "string")
     return logs as GetFilterChangesReturnType<
       filterType,
       abi,
@@ -181,10 +178,10 @@ export async function getFilterChanges<
       strict,
       fromBlock,
       toBlock
-    >
+    >;
 
-  const formattedLogs = logs.map((log) => formatLog(log as RpcLog))
-  if (!('abi' in filter) || !filter.abi)
+  const formattedLogs = logs.map((log) => formatLog(log as RpcLog));
+  if (!("abi" in filter) || !filter.abi)
     return formattedLogs as GetFilterChangesReturnType<
       filterType,
       abi,
@@ -192,7 +189,7 @@ export async function getFilterChanges<
       strict,
       fromBlock,
       toBlock
-    >
+    >;
   return parseEventLogs({
     abi: filter.abi,
     logs: formattedLogs,
@@ -204,5 +201,5 @@ export async function getFilterChanges<
     strict,
     fromBlock,
     toBlock
-  >
+  >;
 }

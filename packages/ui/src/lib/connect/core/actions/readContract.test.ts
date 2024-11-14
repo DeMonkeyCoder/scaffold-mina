@@ -1,7 +1,7 @@
 import { abi, address, chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { readContract } from './readContract.js'
+import { readContract } from './readContract'
 
 test('default', async () => {
   await expect(

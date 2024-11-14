@@ -1,8 +1,8 @@
 import { expectTypeOf, test } from 'vitest'
-import { usdcContractConfig } from '~test/src/abis.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { usdcContractConfig } from '~test/src/abis'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { createContractEventFilter } from './createContractEventFilter.js'
+import { createContractEventFilter } from './createContractEventFilter'
 
 const client = anvilMainnet.getClient()
 

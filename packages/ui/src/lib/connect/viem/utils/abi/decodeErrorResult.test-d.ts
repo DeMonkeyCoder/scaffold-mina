@@ -1,6 +1,6 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { decodeErrorResult } from './decodeErrorResult.js'
+import { decodeErrorResult } from './decodeErrorResult'
 
 test('default', async () => {
   const result = decodeErrorResult({

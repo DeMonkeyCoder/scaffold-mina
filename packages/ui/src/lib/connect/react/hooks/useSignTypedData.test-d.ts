@@ -6,7 +6,7 @@ import type { SignTypedDataVariables } from "@/lib/connect/core/exports/query";
 import { typedData } from "@wagmi/test";
 import { expectTypeOf, test } from "vitest";
 
-import { useSignTypedData } from "./useSignTypedData.js";
+import { useSignTypedData } from "./useSignTypedData";
 
 const contextValue = { foo: "bar" } as const;
 

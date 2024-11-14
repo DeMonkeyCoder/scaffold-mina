@@ -16,16 +16,16 @@ import {
   BytesSizeMismatchError,
   type BytesSizeMismatchErrorType,
   UnsupportedPackedAbiType,
-} from '../../errors/abi.js'
+} from '../../errors/abi'
 import {
   InvalidAddressError,
   type InvalidAddressErrorType,
-} from '../../errors/address.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex } from '../../types/misc.js'
-import { type IsAddressErrorType, isAddress } from '../address/isAddress.js'
-import { type ConcatHexErrorType, concatHex } from '../data/concat.js'
-import { type PadErrorType, pad } from '../data/pad.js'
+} from '../../errors/address'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex } from '../../types/misc'
+import { type IsAddressErrorType, isAddress } from '../address/isAddress'
+import { type ConcatHexErrorType, concatHex } from '../data/concat'
+import { type PadErrorType, pad } from '../data/pad'
 import {
   type BoolToHexErrorType,
   type NumberToHexErrorType,
@@ -33,8 +33,8 @@ import {
   boolToHex,
   numberToHex,
   stringToHex,
-} from '../encoding/toHex.js'
-import { arrayRegex, bytesRegex, integerRegex } from '../regex.js'
+} from '../encoding/toHex'
+import { arrayRegex, bytesRegex, integerRegex } from '../regex'
 
 type PackedAbiType =
   | SolidityAddress

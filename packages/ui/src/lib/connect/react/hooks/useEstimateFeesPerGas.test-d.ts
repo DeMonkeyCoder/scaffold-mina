@@ -1,5 +1,5 @@
 import { expectTypeOf, test } from 'vitest'
-import { useEstimateFeesPerGas } from './useEstimateFeesPerGas.js'
+import { useEstimateFeesPerGas } from './useEstimateFeesPerGas'
 
 test('types', () => {
   const result = useEstimateFeesPerGas()

@@ -1,5 +1,5 @@
-import type { ErrorType } from '../../errors/utils.js'
-import { wait } from '../wait.js'
+import type { ErrorType } from '../../errors/utils'
+import { wait } from '../wait'
 
 export type WithRetryParameters = {
   // The delay (in ms) between retries.

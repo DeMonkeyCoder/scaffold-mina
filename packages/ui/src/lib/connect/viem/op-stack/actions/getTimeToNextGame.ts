@@ -1,14 +1,14 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import type { GetContractAddressParameter } from '../types/contract.js'
-import { type GetGamesErrorType, getGames } from './getGames.js'
+} from '../../types/chain'
+import type { GetContractAddressParameter } from '../types/contract'
+import { type GetGamesErrorType, getGames } from './getGames'
 
 export type GetTimeToNextGameParameters<
   chain extends Chain | undefined = Chain | undefined,

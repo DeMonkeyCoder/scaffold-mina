@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { serializeCompactSignature } from './serializeCompactSignature.js'
+import { serializeCompactSignature } from './serializeCompactSignature'
 
 test('default', () => {
   expect(

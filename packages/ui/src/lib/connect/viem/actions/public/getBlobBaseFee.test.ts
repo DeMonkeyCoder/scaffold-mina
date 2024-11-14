@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { getBlobBaseFee } from './getBlobBaseFee.js'
+import { getBlobBaseFee } from './getBlobBaseFee'
 
 const client = anvilMainnet.getClient()
 

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { toSignature } from './toSignature.js'
+import { toSignature } from './toSignature'
 
 test('creates function signature', () => {
   expect(toSignature('_compound(uint256,uint256,uint256)')).toEqual(

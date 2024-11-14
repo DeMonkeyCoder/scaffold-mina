@@ -5,11 +5,11 @@ import {
   type GetTokenParameters,
   type GetTokenReturnType,
   getToken,
-} from '../actions/getToken.js'
-import type { Config } from '../createConfig.js'
-import type { ScopeKeyParameter } from '../types/properties.js'
-import type { Compute, ExactPartial } from '../types/utils.js'
-import { filterQueryOptions } from './utils.js'
+} from '../actions/getToken'
+import type { Config } from '../createConfig'
+import type { ScopeKeyParameter } from '../types/properties'
+import type { Compute, ExactPartial } from '../types/utils'
+import { filterQueryOptions } from './utils'
 
 export type GetTokenOptions<config extends Config> = Compute<
   ExactPartial<GetTokenParameters<config>> & ScopeKeyParameter

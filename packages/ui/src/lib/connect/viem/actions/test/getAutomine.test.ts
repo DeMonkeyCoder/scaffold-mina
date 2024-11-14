@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { getAutomine } from './getAutomine.js'
-import { setAutomine } from './setAutomine.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { getAutomine } from './getAutomine'
+import { setAutomine } from './setAutomine'
 
 const client = anvilMainnet.getClient()
 

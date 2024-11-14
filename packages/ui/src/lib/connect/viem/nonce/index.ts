@@ -6,4 +6,4 @@ export {
   createNonceManager,
   jsonRpc,
   nonceManager,
-} from '../utils/nonceManager.js'
+} from '../utils/nonceManager'

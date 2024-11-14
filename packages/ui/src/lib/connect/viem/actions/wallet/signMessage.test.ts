@@ -1,10 +1,10 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
+import { accounts } from '~test/src/constants'
+import { privateKeyToAccount } from '../../accounts/privateKeyToAccount'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { signMessage } from './signMessage.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { signMessage } from './signMessage'
 
 const client = anvilMainnet.getClient()
 const clientWithAccount = anvilMainnet.getClient({

@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { formatUserOperationReceipt } from './userOperationReceipt.js'
+import { formatUserOperationReceipt } from './userOperationReceipt'
 
 test('default', () => {
   expect(

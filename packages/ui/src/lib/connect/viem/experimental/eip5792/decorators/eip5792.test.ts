@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'vitest'
 
-import { wagmiContractConfig } from '~test/src/abis.js'
-import { mainnet } from '../../../chains/index.js'
-import { createClient } from '../../../clients/createClient.js'
-import { custom } from '../../../clients/transports/custom.js'
-import { eip5792Actions } from './eip5792.js'
+import { wagmiContractConfig } from '~test/src/abis'
+import { mainnet } from '../../../chains/index'
+import { createClient } from '../../../clients/createClient'
+import { custom } from '../../../clients/transports/custom'
+import { eip5792Actions } from './eip5792'
 
 const client = createClient({
   transport: custom({

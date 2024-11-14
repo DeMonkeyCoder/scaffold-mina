@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
 
-import { mainnet, optimism } from "../../chains/index.js";
+import { mainnet, optimism } from "../../chains/index";
 
-import { assertCurrentChain } from "./assertCurrentChain.js";
+import { assertCurrentChain } from "./assertCurrentChain";
 
 test("matching chains", () => {
   assertCurrentChain({ currentChainId: mainnet.id, chain: mainnet });

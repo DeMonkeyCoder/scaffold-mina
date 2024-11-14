@@ -1,12 +1,12 @@
 import { beforeAll, describe, expect, test } from 'vitest'
 
-import { createHttpServer, setVitalikResolver } from '~test/src/utils.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { mainnet, optimism } from '../../chains/index.js'
-import { createClient } from '../../clients/createClient.js'
-import { http } from '../../clients/transports/http.js'
-import { reset } from '../test/reset.js'
-import { getEnsAddress } from './getEnsAddress.js'
+import { createHttpServer, setVitalikResolver } from '~test/src/utils'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { mainnet, optimism } from '../../chains/index'
+import { createClient } from '../../clients/createClient'
+import { http } from '../../clients/transports/http'
+import { reset } from '../test/reset'
+import { getEnsAddress } from './getEnsAddress'
 
 const client = anvilMainnet.getClient()
 

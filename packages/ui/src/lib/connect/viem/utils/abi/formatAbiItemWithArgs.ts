@@ -1,8 +1,8 @@
 import type { AbiParameter } from 'abitype'
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { AbiItem } from '../../types/contract.js'
-import { stringify } from '../stringify.js'
+import type { ErrorType } from '../../errors/utils'
+import type { AbiItem } from '../../types/contract'
+import { stringify } from '../stringify'
 
 export type FormatAbiItemWithArgsErrorType = ErrorType
 

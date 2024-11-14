@@ -1,8 +1,8 @@
-import { BaseError } from '../../errors/base.js'
-import { prettyPrint } from '../../errors/transaction.js'
-import type { Hash } from '../../types/misc.js'
-import { formatGwei } from '../../utils/index.js'
-import type { UserOperation } from '../types/userOperation.js'
+import { BaseError } from '../../errors/base'
+import { prettyPrint } from '../../errors/transaction'
+import type { Hash } from '../../types/misc'
+import { formatGwei } from '../../utils/index'
+import type { UserOperation } from '../types/userOperation'
 
 export type UserOperationExecutionErrorType = UserOperationExecutionError & {
   name: 'UserOperationExecutionError'

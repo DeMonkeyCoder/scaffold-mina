@@ -1,11 +1,11 @@
 import { describe, expect, test } from 'vitest'
 
-import { accounts, typedData } from '~test/src/constants.js'
-import { getAddress } from '../utils/address/getAddress.js'
-import { parseEther } from '../utils/unit/parseEther.js'
-import { parseGwei } from '../utils/unit/parseGwei.js'
+import { accounts, typedData } from '~test/src/constants'
+import { getAddress } from '../utils/address/getAddress'
+import { parseEther } from '../utils/unit/parseEther'
+import { parseGwei } from '../utils/unit/parseGwei'
 
-import { mnemonicToAccount } from './mnemonicToAccount.js'
+import { mnemonicToAccount } from './mnemonicToAccount'
 
 const mnemonic = 'test test test test test test test test test test test junk'
 

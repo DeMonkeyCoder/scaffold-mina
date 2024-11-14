@@ -2,7 +2,7 @@ import { chain, config } from "@wagmi/test";
 import type { Chain } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { watchChains } from "./watchChains.js";
+import { watchChains } from "./watchChains";
 
 test("default", async () => {
   let chains: readonly [Chain, ...Chain[]] = config.chains;

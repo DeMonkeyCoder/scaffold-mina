@@ -5,11 +5,11 @@ import {
   type GetEnsAddressParameters,
   type GetEnsAddressReturnType,
   getEnsAddress,
-} from '../actions/getEnsAddress.js'
-import type { Config } from '../createConfig.js'
-import type { ScopeKeyParameter } from '../types/properties.js'
-import type { Compute, ExactPartial } from '../types/utils.js'
-import { filterQueryOptions } from './utils.js'
+} from '../actions/getEnsAddress'
+import type { Config } from '../createConfig'
+import type { ScopeKeyParameter } from '../types/properties'
+import type { Compute, ExactPartial } from '../types/utils'
+import { filterQueryOptions } from './utils'
 
 export type GetEnsAddressOptions<config extends Config> = Compute<
   ExactPartial<GetEnsAddressParameters<config>> & ScopeKeyParameter

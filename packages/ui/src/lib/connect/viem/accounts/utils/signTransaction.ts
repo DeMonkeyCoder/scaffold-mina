@@ -1,20 +1,20 @@
-import type { ErrorType } from "../../errors/utils.js";
-import type { Hex } from "../../types/misc.js";
+import type { ErrorType } from "../../errors/utils";
+import type { Hex } from "../../types/misc";
 import type {
   TransactionSerializable,
   TransactionSerialized,
-} from "../../types/transaction.js";
+} from "../../types/transaction";
 import {
   type Keccak256ErrorType,
   keccak256,
-} from "../../utils/hash/keccak256.js";
-import type { GetTransactionType } from "../../utils/transaction/getTransactionType.js";
+} from "../../utils/hash/keccak256";
+import type { GetTransactionType } from "../../utils/transaction/getTransactionType";
 import {
   type SerializeTransactionFn,
   serializeTransaction,
-} from "../../utils/transaction/serializeTransaction.js";
+} from "../../utils/transaction/serializeTransaction";
 
-import { type SignErrorType, sign } from "./sign.js";
+import { type SignErrorType, sign } from "./sign";
 
 export type SignTransactionParameters<
   serializer extends SerializeTransactionFn<TransactionSerializable> = SerializeTransactionFn<TransactionSerializable>,

@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 
-import { labelhash } from './labelhash.js'
-import { normalize } from './normalize.js'
+import { labelhash } from './labelhash'
+import { normalize } from './normalize'
 
 test.each([
   {

@@ -1,80 +1,80 @@
 import { type Address, parseAbi } from "abitype";
 
-import type { Account } from "../../accounts/types.js";
+import type { Account } from "../../accounts/types";
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from "../../accounts/utils/parseAccount.js";
-import type { Client } from "../../clients/createClient.js";
-import type { Transport } from "../../clients/transports/createTransport.js";
-import { multicall3Abi } from "../../constants/abis.js";
-import { aggregate3Signature } from "../../constants/contract.js";
+} from "../../accounts/utils/parseAccount";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import { multicall3Abi } from "../../constants/abis";
+import { aggregate3Signature } from "../../constants/contract";
 import {
   deploylessCallViaBytecodeBytecode,
   deploylessCallViaFactoryBytecode,
-} from "../../constants/contracts.js";
-import { BaseError } from "../../errors/base.js";
+} from "../../constants/contracts";
+import { BaseError } from "../../errors/base";
 import {
   ChainDoesNotSupportContract,
   ClientChainNotConfiguredError,
-} from "../../errors/chain.js";
+} from "../../errors/chain";
 import {
   CounterfactualDeploymentFailedError,
   RawContractError,
   type RawContractErrorType,
-} from "../../errors/contract.js";
-import type { ErrorType } from "../../errors/utils.js";
-import type { BlockTag } from "../../types/block.js";
-import type { Chain } from "../../types/chain.js";
-import type { Hex } from "../../types/misc.js";
-import type { RpcTransactionRequest } from "../../types/rpc.js";
-import type { StateOverride } from "../../types/stateOverride.js";
-import type { TransactionRequest } from "../../types/transaction.js";
-import type { ExactPartial, UnionOmit } from "../../types/utils.js";
+} from "../../errors/contract";
+import type { ErrorType } from "../../errors/utils";
+import type { BlockTag } from "../../types/block";
+import type { Chain } from "../../types/chain";
+import type { Hex } from "../../types/misc";
+import type { RpcTransactionRequest } from "../../types/rpc";
+import type { StateOverride } from "../../types/stateOverride";
+import type { TransactionRequest } from "../../types/transaction";
+import type { ExactPartial, UnionOmit } from "../../types/utils";
 import {
   type DecodeFunctionResultErrorType,
   decodeFunctionResult,
-} from "../../utils/abi/decodeFunctionResult.js";
+} from "../../utils/abi/decodeFunctionResult";
 import {
   type EncodeDeployDataErrorType,
   encodeDeployData,
-} from "../../utils/abi/encodeDeployData.js";
+} from "../../utils/abi/encodeDeployData";
 import {
   type EncodeFunctionDataErrorType,
   encodeFunctionData,
-} from "../../utils/abi/encodeFunctionData.js";
-import type { RequestErrorType } from "../../utils/buildRequest.js";
+} from "../../utils/abi/encodeFunctionData";
+import type { RequestErrorType } from "../../utils/buildRequest";
 import {
   type GetChainContractAddressErrorType,
   getChainContractAddress,
-} from "../../utils/chain/getChainContractAddress.js";
+} from "../../utils/chain/getChainContractAddress";
 import {
   type NumberToHexErrorType,
   numberToHex,
-} from "../../utils/encoding/toHex.js";
+} from "../../utils/encoding/toHex";
 import {
   type GetCallErrorReturnType,
   getCallError,
-} from "../../utils/errors/getCallError.js";
-import { extract } from "../../utils/formatters/extract.js";
+} from "../../utils/errors/getCallError";
+import { extract } from "../../utils/formatters/extract";
 import {
   type FormatTransactionRequestErrorType,
   type FormattedTransactionRequest,
   formatTransactionRequest,
-} from "../../utils/formatters/transactionRequest.js";
+} from "../../utils/formatters/transactionRequest";
 import {
   type CreateBatchSchedulerErrorType,
   createBatchScheduler,
-} from "../../utils/promise/createBatchScheduler.js";
+} from "../../utils/promise/createBatchScheduler";
 import {
   type SerializeStateOverrideErrorType,
   serializeStateOverride,
-} from "../../utils/stateOverride.js";
-import { assertRequest } from "../../utils/transaction/assertRequest.js";
+} from "../../utils/stateOverride";
+import { assertRequest } from "../../utils/transaction/assertRequest";
 import type {
   AssertRequestErrorType,
   AssertRequestParameters,
-} from "../../utils/transaction/assertRequest.js";
+} from "../../utils/transaction/assertRequest";
 
 export type CallParameters<
   chain extends Chain | undefined = Chain | undefined
@@ -127,7 +127,7 @@ export type CallErrorType = GetCallErrorReturnType<
  * Executes a new message call immediately without submitting a transaction to the networkID.
  *
  * - Docs: https://viem.sh/docs/actions/public/call
- * - JSON-RPC Methods: [`eth_call`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_call)
+ * - JSON-RPC Methods: [`mina_call`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_call)
  *
  * @param client - Client to use
  * @param parameters - {@link CallParameters}
@@ -250,7 +250,7 @@ export async function call<chain extends Chain | undefined>(
     }
 
     const response = await client.request({
-      method: "eth_call",
+      method: "mina_call",
       params: rpcStateOverride
         ? [
             request as ExactPartial<RpcTransactionRequest>,
@@ -266,7 +266,7 @@ export async function call<chain extends Chain | undefined>(
 
     // Check for CCIP-Read offchain lookup signature.
     const { offchainLookup, offchainLookupSignature } = await import(
-      "../../utils/ccip.js"
+      "../../utils/ccip"
     );
     if (
       client.ccipRead !== false &&
@@ -376,7 +376,7 @@ async function scheduleMulticall<chain extends Chain | undefined>(
       });
 
       const data = await client.request({
-        method: "eth_call",
+        method: "mina_call",
         params: [
           {
             data: calldata,

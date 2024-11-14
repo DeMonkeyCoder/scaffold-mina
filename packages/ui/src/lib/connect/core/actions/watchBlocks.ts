@@ -10,14 +10,14 @@ import type {
   Transport,
   WebSocketTransport,
 } from "@/lib/connect/viem";
-import type { Config } from "../createConfig.js";
-import type { SelectChains } from "../types/chain.js";
+import type { Config } from "../createConfig";
+import type { SelectChains } from "../types/chain";
 import type {
   ChainIdParameter,
   SyncConnectedChainParameter,
-} from "../types/properties.js";
-import type { IsNarrowable, UnionCompute } from "../types/utils.js";
-import { getAction } from "../utils/getAction.js";
+} from "../types/properties";
+import type { IsNarrowable, UnionCompute } from "../types/utils";
+import { getAction } from "../utils/getAction";
 
 export type WatchBlocksParameters<
   includeTransactions extends boolean = false,

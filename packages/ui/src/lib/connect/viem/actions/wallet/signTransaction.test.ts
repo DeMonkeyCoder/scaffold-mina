@@ -1,11 +1,11 @@
 import { describe, expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { wagmiContractConfig } from '../../../test/src/abis.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { blobData, kzg } from '../../../test/src/kzg.js'
-import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
-import { celo, mainnet } from '../../chains/index.js'
+import { accounts } from '~test/src/constants'
+import { wagmiContractConfig } from '../../../test/src/abis'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { blobData, kzg } from '../../../test/src/kzg'
+import { privateKeyToAccount } from '../../accounts/privateKeyToAccount'
+import { celo, mainnet } from '../../chains/index'
 import {
   http,
   type TransactionRequestBase,
@@ -15,15 +15,15 @@ import {
   createWalletClient,
   parseGwei,
   stringToHex,
-} from '../../index.js'
+} from '../../index'
 import type {
   TransactionRequestEIP4844,
   TransactionRequestEIP7702,
-} from '../../types/transaction.js'
-import { toBlobs } from '../../utils/blob/toBlobs.js'
-import { mine } from '../index.js'
-import { prepareTransactionRequest } from './prepareTransactionRequest.js'
-import { signTransaction } from './signTransaction.js'
+} from '../../types/transaction'
+import { toBlobs } from '../../utils/blob/toBlobs'
+import { mine } from '../index'
+import { prepareTransactionRequest } from './prepareTransactionRequest'
+import { signTransaction } from './signTransaction'
 
 const client = anvilMainnet.getClient()
 

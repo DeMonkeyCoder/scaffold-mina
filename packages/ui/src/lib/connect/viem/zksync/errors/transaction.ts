@@ -1,4 +1,4 @@
-import { BaseError } from '../../errors/base.js'
+import { BaseError } from '../../errors/base'
 
 export type InvalidEip712TransactionErrorType =
   InvalidEip712TransactionError & {

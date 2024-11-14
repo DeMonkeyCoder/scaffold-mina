@@ -2,8 +2,8 @@ import { expect, test } from 'vitest'
 import {
   mockClientPublicActionsL2,
   zksyncClientLocalNode,
-} from '../../../test/src/zksync.js'
-import { getL1BatchBlockRange } from './getL1BatchBlockRange.js'
+} from '../../../test/src/zksync'
+import { getL1BatchBlockRange } from './getL1BatchBlockRange'
 
 const client = { ...zksyncClientLocalNode }
 

@@ -1,13 +1,13 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
-import { mine } from '../test/mine.js'
-import { sendTransaction } from '../wallet/sendTransaction.js'
+import { accounts } from '~test/src/constants'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { parseEther } from '../../utils/unit/parseEther'
+import { mine } from '../test/mine'
+import { sendTransaction } from '../wallet/sendTransaction'
 
-import { getBlock } from './getBlock.js'
-import { getBlockTransactionCount } from './getBlockTransactionCount.js'
+import { getBlock } from './getBlock'
+import { getBlockTransactionCount } from './getBlockTransactionCount'
 
 const client = anvilMainnet.getClient()
 

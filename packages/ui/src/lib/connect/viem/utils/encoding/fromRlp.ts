@@ -1,19 +1,19 @@
-import { BaseError, type BaseErrorType } from '../../errors/base.js'
+import { BaseError, type BaseErrorType } from '../../errors/base'
 import {
   InvalidHexValueError,
   type InvalidHexValueErrorType,
-} from '../../errors/encoding.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex } from '../../types/misc.js'
+} from '../../errors/encoding'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex } from '../../types/misc'
 import {
   type CreateCursorErrorType,
   type Cursor,
   createCursor,
-} from '../cursor.js'
-import { type HexToBytesErrorType, hexToBytes } from './toBytes.js'
-import { type BytesToHexErrorType, bytesToHex } from './toHex.js'
+} from '../cursor'
+import { type HexToBytesErrorType, hexToBytes } from './toBytes'
+import { type BytesToHexErrorType, bytesToHex } from './toHex'
 
-import type { RecursiveArray } from './toRlp.js'
+import type { RecursiveArray } from './toRlp'
 
 type To = 'hex' | 'bytes'
 

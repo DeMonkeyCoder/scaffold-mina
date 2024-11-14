@@ -18,7 +18,7 @@ import { http, createWalletClient, parseEther } from "@/lib/connect/viem";
 import type { WatchEventOnLogsParameter } from "@/lib/connect/viem/actions";
 import { expect, test } from "vitest";
 
-import { useWatchContractEvent } from "./useWatchContractEvent.js";
+import { useWatchContractEvent } from "./useWatchContractEvent";
 
 const connector = config.connectors[0]!;
 

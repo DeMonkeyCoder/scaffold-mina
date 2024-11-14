@@ -1,8 +1,8 @@
 import { beforeEach, expect, test, vi } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { getBlockNumber, getBlockNumberCache } from './getBlockNumber.js'
+import { getBlockNumber, getBlockNumberCache } from './getBlockNumber'
 
 const client = anvilMainnet.getClient()
 

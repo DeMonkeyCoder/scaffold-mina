@@ -1,20 +1,20 @@
 import type { Address } from 'abitype'
 
-import type { ErrorType } from '../../../errors/utils.js'
-import type { ByteArray, Hex, Signature } from '../../../types/misc.js'
-import type { OneOf } from '../../../types/utils.js'
+import type { ErrorType } from '../../../errors/utils'
+import type { ByteArray, Hex, Signature } from '../../../types/misc'
+import type { OneOf } from '../../../types/utils'
 import {
   type RecoverAddressErrorType,
   recoverAddress,
-} from '../../../utils/signature/recoverAddress.js'
+} from '../../../utils/signature/recoverAddress'
 import type {
   Authorization,
   SignedAuthorization,
-} from '../types/authorization.js'
+} from '../types/authorization'
 import {
   type HashAuthorizationErrorType,
   hashAuthorization,
-} from './hashAuthorization.js'
+} from './hashAuthorization'
 
 export type RecoverAuthorizationAddressParameters<
   authorization extends OneOf<Authorization | SignedAuthorization> = OneOf<

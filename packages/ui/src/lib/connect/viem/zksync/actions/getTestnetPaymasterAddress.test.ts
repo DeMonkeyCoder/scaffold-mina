@@ -4,9 +4,9 @@ import {
   mockClientPublicActionsL2,
   mockTestnetPaymasterAddress,
   zksyncClientLocalNode,
-} from '../../../test/src/zksync.js'
-import type { EIP1193RequestFn } from '../../types/eip1193.js'
-import { getTestnetPaymasterAddress } from './getTestnetPaymasterAddress.js'
+} from '../../../test/src/zksync'
+import type { EIP1193RequestFn } from '../../types/eip1193'
+import { getTestnetPaymasterAddress } from './getTestnetPaymasterAddress'
 
 const client = { ...zksyncClientLocalNode }
 

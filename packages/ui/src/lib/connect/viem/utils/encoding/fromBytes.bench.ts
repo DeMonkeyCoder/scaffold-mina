@@ -2,8 +2,8 @@ import { hexlify, toUtf8String } from "ethers";
 
 import { bench, describe } from "vitest";
 
-import { bytesToString } from "./fromBytes.js";
-import { bytesToHex } from "./toHex.js";
+import { bytesToString } from "./fromBytes";
+import { bytesToHex } from "./toHex";
 
 describe("Bytes to Hex", () => {
   bench("@/lib/connect/viem: `bytesToHex`", () => {

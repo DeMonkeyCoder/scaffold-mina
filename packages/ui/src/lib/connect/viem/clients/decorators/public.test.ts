@@ -4,16 +4,16 @@ import {
   smartAccountConfig,
   usdcContractConfig,
   wagmiContractConfig,
-} from '~test/src/abis.js'
-import { accounts, address, typedData } from '~test/src/constants.js'
-import { getBlockNumber } from '../../actions/public/getBlockNumber.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
+} from '~test/src/abis'
+import { accounts, address, typedData } from '~test/src/constants'
+import { getBlockNumber } from '../../actions/public/getBlockNumber'
+import { parseEther } from '../../utils/unit/parseEther'
 
-import { SoladyAccountFactory07 } from '~contracts/generated.js'
-import { anvilMainnet } from '~test/src/anvil.js'
-import { deploySoladyAccount_07 } from '~test/src/utils.js'
-import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
-import { signMessage } from '../../accounts/utils/signMessage.js'
+import { SoladyAccountFactory07 } from '~contracts/generated'
+import { anvilMainnet } from '~test/src/anvil'
+import { deploySoladyAccount_07 } from '~test/src/utils'
+import { privateKeyToAccount } from '../../accounts/privateKeyToAccount'
+import { signMessage } from '../../accounts/utils/signMessage'
 import {
   mine,
   reset,
@@ -21,14 +21,14 @@ import {
   signTransaction,
   simulateContract,
   writeContract,
-} from '../../actions/index.js'
-import { base } from '../../chains/index.js'
-import { pad } from '../../utils/index.js'
-import { createSiweMessage } from '../../utils/siwe/createSiweMessage.js'
-import { wait } from '../../utils/wait.js'
-import { createPublicClient } from '../createPublicClient.js'
-import { http } from '../transports/http.js'
-import { publicActions } from './public.js'
+} from '../../actions/index'
+import { base } from '../../chains/index'
+import { pad } from '../../utils/index'
+import { createSiweMessage } from '../../utils/siwe/createSiweMessage'
+import { wait } from '../../utils/wait'
+import { createPublicClient } from '../createPublicClient'
+import { http } from '../transports/http'
+import { publicActions } from './public'
 
 const client = anvilMainnet.getClient().extend(publicActions)
 

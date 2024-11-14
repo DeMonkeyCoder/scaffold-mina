@@ -1,72 +1,72 @@
 import type { Abi, Address } from 'abitype'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { Account } from '../../types/account.js'
-import type { Chain } from '../../types/chain.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { Account } from '../../types/account'
+import type { Chain } from '../../types/chain'
 import type {
   ContractFunctionArgs,
   ContractFunctionName,
-} from '../../types/contract.js'
+} from '../../types/contract'
 import {
   type BuildDepositTransactionParameters,
   type BuildDepositTransactionReturnType,
   buildDepositTransaction,
-} from '../actions/buildDepositTransaction.js'
+} from '../actions/buildDepositTransaction'
 import {
   type BuildProveWithdrawalParameters,
   type BuildProveWithdrawalReturnType,
   buildProveWithdrawal,
-} from '../actions/buildProveWithdrawal.js'
+} from '../actions/buildProveWithdrawal'
 import {
   type EstimateContractL1FeeParameters,
   type EstimateContractL1FeeReturnType,
   estimateContractL1Fee,
-} from '../actions/estimateContractL1Fee.js'
+} from '../actions/estimateContractL1Fee'
 import {
   type EstimateContractL1GasParameters,
   type EstimateContractL1GasReturnType,
   estimateContractL1Gas,
-} from '../actions/estimateContractL1Gas.js'
+} from '../actions/estimateContractL1Gas'
 import {
   type EstimateContractTotalFeeParameters,
   type EstimateContractTotalFeeReturnType,
   estimateContractTotalFee,
-} from '../actions/estimateContractTotalFee.js'
+} from '../actions/estimateContractTotalFee'
 import {
   type EstimateContractTotalGasParameters,
   type EstimateContractTotalGasReturnType,
   estimateContractTotalGas,
-} from '../actions/estimateContractTotalGas.js'
+} from '../actions/estimateContractTotalGas'
 import {
   type EstimateInitiateWithdrawalGasParameters,
   type EstimateInitiateWithdrawalGasReturnType,
   estimateInitiateWithdrawalGas,
-} from '../actions/estimateInitiateWithdrawalGas.js'
+} from '../actions/estimateInitiateWithdrawalGas'
 import {
   type EstimateL1FeeParameters,
   type EstimateL1FeeReturnType,
   estimateL1Fee,
-} from '../actions/estimateL1Fee.js'
+} from '../actions/estimateL1Fee'
 import {
   type EstimateL1GasParameters,
   type EstimateL1GasReturnType,
   estimateL1Gas,
-} from '../actions/estimateL1Gas.js'
+} from '../actions/estimateL1Gas'
 import {
   type EstimateTotalFeeParameters,
   type EstimateTotalFeeReturnType,
   estimateTotalFee,
-} from '../actions/estimateTotalFee.js'
+} from '../actions/estimateTotalFee'
 import {
   type EstimateTotalGasParameters,
   type EstimateTotalGasReturnType,
   estimateTotalGas,
-} from '../actions/estimateTotalGas.js'
+} from '../actions/estimateTotalGas'
 import {
   type GetL1BaseFeeParameters,
   type GetL1BaseFeeReturnType,
   getL1BaseFee,
-} from '../actions/getL1BaseFee.js'
+} from '../actions/getL1BaseFee'
 
 export type PublicActionsL2<
   chain extends Chain | undefined = Chain | undefined,

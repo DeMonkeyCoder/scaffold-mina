@@ -1,9 +1,9 @@
 import type { Address } from "@/lib/connect/viem";
 
-import type { CreateConnectorFn } from "../connectors/createConnector.js";
-import type { Config, Connection, Connector } from "../createConfig.js";
-import type { ErrorType } from "../errors/base.js";
-import type { Compute } from "../types/utils.js";
+import type { CreateConnectorFn } from "../connectors/createConnector";
+import type { Config, Connection, Connector } from "../createConfig";
+import type { ErrorType } from "../errors/base";
+import type { Compute } from "../types/utils";
 
 export type ReconnectParameters = {
   /** Connectors to attempt reconnect with */

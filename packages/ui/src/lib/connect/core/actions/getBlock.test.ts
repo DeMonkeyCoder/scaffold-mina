@@ -1,7 +1,7 @@
 import { config, mainnet } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getBlock } from './getBlock.js'
+import { getBlock } from './getBlock'
 
 test('default', async () => {
   await expect(getBlock(config)).resolves.toBeDefined()

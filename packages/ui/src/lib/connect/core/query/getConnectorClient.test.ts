@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getConnectorClientQueryOptions } from './getConnectorClient.js'
+import { getConnectorClientQueryOptions } from './getConnectorClient'
 
 test('default', () => {
   expect(getConnectorClientQueryOptions(config)).toMatchInlineSnapshot(`

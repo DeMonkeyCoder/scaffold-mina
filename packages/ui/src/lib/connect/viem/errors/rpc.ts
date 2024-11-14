@@ -1,6 +1,6 @@
-import type { Prettify } from '../types/utils.js'
-import { BaseError } from './base.js'
-import { RpcRequestError } from './request.js'
+import type { Prettify } from '../types/utils'
+import { BaseError } from './base'
+import { RpcRequestError } from './request'
 
 const unknownErrorCode = -1
 

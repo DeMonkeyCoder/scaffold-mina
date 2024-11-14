@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getEnsAvatarQueryOptions } from './getEnsAvatar.js'
+import { getEnsAvatarQueryOptions } from './getEnsAvatar'
 
 test('default', () => {
   expect(getEnsAvatarQueryOptions(config)).toMatchInlineSnapshot(`

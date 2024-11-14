@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { useTransaction } from './useTransaction.js'
+import { useTransaction } from './useTransaction'
 
 test('default', async () => {
   const { result } = renderHook(() =>

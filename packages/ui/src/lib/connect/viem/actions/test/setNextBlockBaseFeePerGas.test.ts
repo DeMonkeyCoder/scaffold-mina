@@ -1,13 +1,13 @@
 import { expect, test } from 'vitest'
 
-import { parseGwei } from '../../utils/unit/parseGwei.js'
+import { parseGwei } from '../../utils/unit/parseGwei'
 
-import { getBlock } from '../public/getBlock.js'
+import { getBlock } from '../public/getBlock'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { mine } from './mine.js'
-import { setNextBlockBaseFeePerGas } from './setNextBlockBaseFeePerGas.js'
+import { mine } from './mine'
+import { setNextBlockBaseFeePerGas } from './setNextBlockBaseFeePerGas'
 
 const client = anvilMainnet.getClient()
 

@@ -4,7 +4,7 @@ import { renderHook } from '@wagmi/test/react'
 import { Fragment, createElement } from 'react'
 import { expect, test } from 'vitest'
 
-import { useConnectors } from './useConnectors.js'
+import { useConnectors } from './useConnectors'
 
 test('default', async () => {
   const { result, rerender } = renderHook(() => useConnectors())

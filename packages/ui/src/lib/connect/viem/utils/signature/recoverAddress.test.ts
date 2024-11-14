@@ -1,12 +1,12 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { getAddress } from '../address/getAddress.js'
-import { toBytes } from '../encoding/toBytes.js'
+import { accounts } from '~test/src/constants'
+import { getAddress } from '../address/getAddress'
+import { toBytes } from '../encoding/toBytes'
 
-import { hashMessage } from './hashMessage.js'
-import { parseSignature } from './parseSignature.js'
-import { recoverAddress } from './recoverAddress.js'
+import { hashMessage } from './hashMessage'
+import { parseSignature } from './parseSignature'
+import { recoverAddress } from './recoverAddress'
 
 test('default', async () => {
   expect(

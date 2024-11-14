@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { ripemd160 } from './ripemd160.js'
+import { ripemd160 } from './ripemd160'
 
 test('to hex', () => {
   expect(ripemd160('0xdeadbeef')).toMatchInlineSnapshot(

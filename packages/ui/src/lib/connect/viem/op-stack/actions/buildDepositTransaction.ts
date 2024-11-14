@@ -2,28 +2,28 @@ import type { Address } from 'abitype'
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../accounts/utils/parseAccount.js'
+} from '../../accounts/utils/parseAccount'
 import {
   type PrepareTransactionRequestErrorType,
   type PrepareTransactionRequestParameters,
   prepareTransactionRequest,
-} from '../../actions/wallet/prepareTransactionRequest.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
+} from '../../actions/wallet/prepareTransactionRequest'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
 import type {
   Account,
   DeriveAccount,
   GetAccountParameter,
-} from '../../types/account.js'
+} from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import type { Hex } from '../../types/misc.js'
-import type { Prettify, UnionOmit } from '../../types/utils.js'
-import type { DepositTransactionParameters } from './depositTransaction.js'
+} from '../../types/chain'
+import type { Hex } from '../../types/misc'
+import type { Prettify, UnionOmit } from '../../types/utils'
+import type { DepositTransactionParameters } from './depositTransaction'
 
 export type BuildDepositTransactionParameters<
   chain extends Chain | undefined = Chain | undefined,

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useMinaProvider } from "@/lib/ZkappContext";
 import { useState } from "react";
 import { NETWORK_ID } from "@/constants/network";
+import { PublicKey } from "o1js";
 
 export default function ConnectWallet() {
   const {
@@ -50,7 +51,7 @@ export default function ConnectWallet() {
           ? isHovered
             ? "Disconnect"
             : account
-            ? formatPublicKey(account)
+            ? formatPublicKey(PublicKey.fromBase58(account))
             : "No Account"
           : "Wrong Network"
         : "Connect Wallet"}

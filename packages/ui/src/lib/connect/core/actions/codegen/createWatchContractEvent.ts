@@ -1,14 +1,14 @@
 import type { Abi, Address, ContractEventName } from "@/lib/connect/viem";
 
-import type { Config } from "../../createConfig.js";
-import type { UnionCompute, UnionStrictOmit } from "../../types/utils.js";
-import { getAccount } from "../getAccount.js";
-import { getChainId } from "../getChainId.js";
+import type { Config } from "../../createConfig";
+import type { UnionCompute, UnionStrictOmit } from "../../types/utils";
+import { getAccount } from "../getAccount";
+import { getChainId } from "../getChainId";
 import {
   type WatchContractEventParameters,
   type WatchContractEventReturnType,
   watchContractEvent,
-} from "../watchContractEvent.js";
+} from "../watchContractEvent";
 
 export type CreateWatchContractEventParameters<
   abi extends Abi | readonly unknown[],

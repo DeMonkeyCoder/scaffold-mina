@@ -11,7 +11,7 @@ import { chain } from "@wagmi/test";
 import { expectTypeOf, test } from "vitest";
 
 import type { AddEthereumChainParameter } from "@/lib/connect/viem";
-import { useSwitchChain } from "./useSwitchChain.js";
+import { useSwitchChain } from "./useSwitchChain";
 
 const chainId = chain.mainnet.id;
 const contextValue = { foo: "bar" } as const;

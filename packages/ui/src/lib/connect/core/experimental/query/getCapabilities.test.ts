@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getCapabilitiesQueryOptions } from './getCapabilities.js'
+import { getCapabilitiesQueryOptions } from './getCapabilities'
 
 test('default', () => {
   expect(getCapabilitiesQueryOptions(config)).toMatchInlineSnapshot(`

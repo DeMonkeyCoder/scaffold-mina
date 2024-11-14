@@ -1,9 +1,9 @@
 import { expect, test } from 'vitest'
 
-import { base } from '../../chains/index.js'
-import { createPublicClient } from '../../clients/createPublicClient.js'
-import { http } from '../../clients/transports/http.js'
-import { getProof } from './getProof.js'
+import { base } from '../../chains/index'
+import { createPublicClient } from '../../clients/createPublicClient'
+import { http } from '../../clients/transports/http'
+import { getProof } from './getProof'
 
 test('default', async () => {
   const client = createPublicClient({

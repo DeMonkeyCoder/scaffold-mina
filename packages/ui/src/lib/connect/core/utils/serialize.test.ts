@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { serialize } from './serialize.js'
+import { serialize } from './serialize'
 
 class Foo {
   value: string

@@ -1,15 +1,15 @@
-import type { ChainFormatters } from '../types/chain.js'
-import { hexToBigInt, hexToNumber } from '../utils/encoding/fromHex.js'
-import { hexToBytes } from '../utils/encoding/toBytes.js'
-import { toHex } from '../utils/encoding/toHex.js'
-import { defineBlock } from '../utils/formatters/block.js'
-import { formatLog } from '../utils/formatters/log.js'
-import { defineTransaction } from '../utils/formatters/transaction.js'
-import { defineTransactionReceipt } from '../utils/formatters/transactionReceipt.js'
-import { defineTransactionRequest } from '../utils/formatters/transactionRequest.js'
-import { gasPerPubdataDefault } from './constants/number.js'
-import type { ZksyncBlock, ZksyncRpcBlock } from './types/block.js'
-import type { ZksyncL2ToL1Log, ZksyncLog } from './types/log.js'
+import type { ChainFormatters } from '../types/chain'
+import { hexToBigInt, hexToNumber } from '../utils/encoding/fromHex'
+import { hexToBytes } from '../utils/encoding/toBytes'
+import { toHex } from '../utils/encoding/toHex'
+import { defineBlock } from '../utils/formatters/block'
+import { formatLog } from '../utils/formatters/log'
+import { defineTransaction } from '../utils/formatters/transaction'
+import { defineTransactionReceipt } from '../utils/formatters/transactionReceipt'
+import { defineTransactionRequest } from '../utils/formatters/transactionRequest'
+import { gasPerPubdataDefault } from './constants/number'
+import type { ZksyncBlock, ZksyncRpcBlock } from './types/block'
+import type { ZksyncL2ToL1Log, ZksyncLog } from './types/log'
 import type {
   ZksyncRpcTransaction,
   ZksyncRpcTransactionReceipt,
@@ -17,7 +17,7 @@ import type {
   ZksyncTransaction,
   ZksyncTransactionReceipt,
   ZksyncTransactionRequest,
-} from './types/transaction.js'
+} from './types/transaction'
 
 export const formatters = {
   block: /*#__PURE__*/ defineBlock({

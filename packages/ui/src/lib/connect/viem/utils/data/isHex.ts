@@ -1,5 +1,5 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex } from '../../types/misc.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex } from '../../types/misc'
 
 export type IsHexErrorType = ErrorType
 

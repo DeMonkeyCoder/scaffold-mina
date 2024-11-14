@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getEnsResolverQueryOptions } from './getEnsResolver.js'
+import { getEnsResolverQueryOptions } from './getEnsResolver'
 
 test('default', () => {
   expect(getEnsResolverQueryOptions(config)).toMatchInlineSnapshot(`

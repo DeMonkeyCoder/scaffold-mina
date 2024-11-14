@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { normalizeSignature } from "./normalizeSignature.js";
+import { normalizeSignature } from "./normalizeSignature";
 
 test("foo()", () => {
   expect(normalizeSignature("foo()")).toBe("foo()");

@@ -1,4 +1,4 @@
-import type { OneOf } from '../../../types/utils.js'
+import type { OneOf } from '../../../types/utils'
 
 /** @internal */
 export type CustomPolicy<data = unknown> = {

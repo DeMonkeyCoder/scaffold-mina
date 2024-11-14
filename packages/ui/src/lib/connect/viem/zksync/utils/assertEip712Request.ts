@@ -1,16 +1,16 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { ExactPartial } from '../../types/utils.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ExactPartial } from '../../types/utils'
 import {
   type AssertRequestErrorType,
   assertRequest,
-} from '../../utils/transaction/assertRequest.js'
-import type { zksync } from '../../zksync/chains.js'
-import type { SendTransactionParameters } from '../actions/sendTransaction.js'
+} from '../../utils/transaction/assertRequest'
+import type { zksync } from '../../zksync/chains'
+import type { SendTransactionParameters } from '../actions/sendTransaction'
 import {
   InvalidEip712TransactionError,
   type InvalidEip712TransactionErrorType,
-} from '../errors/transaction.js'
-import { isEIP712Transaction } from './isEip712Transaction.js'
+} from '../errors/transaction'
+import { isEIP712Transaction } from './isEip712Transaction'
 
 export type AssertEip712RequestParameters = ExactPartial<
   SendTransactionParameters<typeof zksync>

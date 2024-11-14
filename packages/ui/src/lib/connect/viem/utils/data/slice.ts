@@ -1,12 +1,12 @@
 import {
   SliceOffsetOutOfBoundsError,
   type SliceOffsetOutOfBoundsErrorType,
-} from '../../errors/data.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex } from '../../types/misc.js'
+} from '../../errors/data'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex } from '../../types/misc'
 
-import { type IsHexErrorType, isHex } from './isHex.js'
-import { type SizeErrorType, size } from './size.js'
+import { type IsHexErrorType, isHex } from './isHex'
+import { type SizeErrorType, size } from './size'
 
 export type SliceReturnType<value extends ByteArray | Hex> = value extends Hex
   ? Hex

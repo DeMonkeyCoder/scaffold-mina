@@ -1,5 +1,5 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { ChainFormatter } from '../../types/chain.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ChainFormatter } from '../../types/chain'
 
 export type ExtractErrorType = ErrorType
 

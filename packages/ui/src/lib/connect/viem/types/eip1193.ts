@@ -5,10 +5,10 @@ import type {
   RpcGetUserOperationByHashReturnType,
   RpcUserOperation,
   RpcUserOperationReceipt,
-} from "../account-abstraction/types/rpc.js";
-import type { BlockTag } from "./block.js";
-import type { Hash, Hex, LogTopic } from "./misc.js";
-import type { RpcStateOverride } from "./rpc.js";
+} from "../account-abstraction/types/rpc";
+import type { BlockTag } from "./block";
+import type { Hash, Hex, LogTopic } from "./misc";
+import type { RpcStateOverride } from "./rpc";
 import type {
   RpcBlock as Block,
   RpcBlockIdentifier as BlockIdentifier,
@@ -21,8 +21,8 @@ import type {
   RpcTransactionReceipt as TransactionReceipt,
   RpcTransactionRequest as TransactionRequest,
   RpcUncle as Uncle,
-} from "./rpc.js";
-import type { ExactPartial, OneOf, PartialBy, Prettify } from "./utils.js";
+} from "./rpc";
+import type { ExactPartial, OneOf, PartialBy, Prettify } from "./utils";
 
 //////////////////////////////////////////////////
 // Provider
@@ -199,7 +199,7 @@ export type WalletPermission = {
   date: number;
   id: string;
   invoker: `http://${string}` | `https://${string}`;
-  parentCapability: "eth_accounts" | string;
+  parentCapability: "mina_accounts" | string;
 };
 
 export type WalletSendCallsParameters<
@@ -244,27 +244,27 @@ export type BundlerRpcSchema = [
   /**
    * @description Returns the chain ID associated with the current networkID
    *
-   * @link https://eips.ethereum.org/EIPS/eip-4337#-eth_chainid
+   * @link https://eips.ethereum.org/EIPS/eip-4337#-mina_chainid
    */
   {
-    Method: "eth_chainId";
+    Method: "mina_chainId";
     Parameters?: undefined;
     ReturnType: Hex;
   },
   /**
    * @description Estimate the gas values for a UserOperation.
    *
-   * @link https://eips.ethereum.org/EIPS/eip-4337#-eth_estimateuseroperationgas
+   * @link https://eips.ethereum.org/EIPS/eip-4337#-mina_estimateuseroperationgas
    *
    * @example
    * provider.request({
-   *  method: 'eth_estimateUserOperationGas',
+   *  method: 'mina_estimateUserOperationGas',
    *  params: [{ ... }]
    * })
    * // => { ... }
    */
   {
-    Method: "eth_estimateUserOperationGas";
+    Method: "mina_estimateUserOperationGas";
     Parameters:
       | [userOperation: RpcUserOperation, entrypoint: Address]
       | [
@@ -277,61 +277,61 @@ export type BundlerRpcSchema = [
   /**
    * @description Return a UserOperation based on a hash.
    *
-   * @link https://eips.ethereum.org/EIPS/eip-4337#-eth_getuseroperationbyhash
+   * @link https://eips.ethereum.org/EIPS/eip-4337#-mina_getuseroperationbyhash
    *
    * @example
    * provider.request({
-   *  method: 'eth_getUserOperationByHash',
+   *  method: 'mina_getUserOperationByHash',
    *  params: ['0x...']
    * })
    * // => { ... }
    */
   {
-    Method: "eth_getUserOperationByHash";
+    Method: "mina_getUserOperationByHash";
     Parameters: [hash: Hash];
     ReturnType: RpcGetUserOperationByHashReturnType | null;
   },
   /**
    * @description Return a UserOperation receipt based on a hash.
    *
-   * @link https://eips.ethereum.org/EIPS/eip-4337#-eth_getuseroperationreceipt
+   * @link https://eips.ethereum.org/EIPS/eip-4337#-mina_getuseroperationreceipt
    *
    * @example
    * provider.request({
-   *  method: 'eth_getUserOperationReceipt',
+   *  method: 'mina_getUserOperationReceipt',
    *  params: ['0x...']
    * })
    * // => { ... }
    */
   {
-    Method: "eth_getUserOperationReceipt";
+    Method: "mina_getUserOperationReceipt";
     Parameters: [hash: Hash];
     ReturnType: RpcUserOperationReceipt | null;
   },
   /**
    * @description Submits a User Operation object to the User Operation pool of the client.
    *
-   * @link https://eips.ethereum.org/EIPS/eip-4337#-eth_senduseroperation
+   * @link https://eips.ethereum.org/EIPS/eip-4337#-mina_senduseroperation
    *
    * @example
    * provider.request({
-   *  method: 'eth_sendUserOperation',
+   *  method: 'mina_sendUserOperation',
    *  params: [{ ... }]
    * })
    * // => '0x...'
    */
   {
-    Method: "eth_sendUserOperation";
+    Method: "mina_sendUserOperation";
     Parameters: [userOperation: RpcUserOperation, entrypoint: Address];
     ReturnType: Hash;
   },
   /**
    * @description Return the list of supported entry points by the client.
    *
-   * @link https://eips.ethereum.org/EIPS/eip-4337#-eth_supportedentrypoints
+   * @link https://eips.ethereum.org/EIPS/eip-4337#-mina_supportedentrypoints
    */
   {
-    Method: "eth_supportedEntryPoints";
+    Method: "mina_supportedEntryPoints";
     Parameters?: undefined;
     ReturnType: readonly Address[];
   }
@@ -425,7 +425,7 @@ export type PaymasterRpcSchema = [
   /**
    * @description Returns the chain ID associated with the current networkID
    *
-   * @link https://eips.ethereum.org/EIPS/eip-4337#-eth_chainid
+   * @link https://eips.ethereum.org/EIPS/eip-4337#-mina_chainid
    */
   {
     Method: "pm_getPaymasterStubData";
@@ -606,11 +606,11 @@ export type PublicRpcSchema = [
    * @description Returns the base fee per blob gas in wei.
    *
    * @example
-   * provider.request({ method: 'eth_blobBaseFee' })
+   * provider.request({ method: 'mina_blobBaseFee' })
    * // => '0x09184e72a000'
    */
   {
-    Method: "eth_blobBaseFee";
+    Method: "mina_blobBaseFee";
     Parameters?: undefined;
     ReturnType: Quantity;
   },
@@ -618,11 +618,11 @@ export type PublicRpcSchema = [
    * @description Returns the number of the most recent block seen by this client
    *
    * @example
-   * provider.request({ method: 'eth_blockNumber' })
+   * provider.request({ method: 'mina_blockNumber' })
    * // => '0x1b4'
    */
   {
-    Method: "eth_blockNumber";
+    Method: "mina_blockNumber";
     Parameters?: undefined;
     ReturnType: Quantity;
   },
@@ -630,11 +630,11 @@ export type PublicRpcSchema = [
    * @description Executes a new message call immediately without submitting a transaction to the networkID
    *
    * @example
-   * provider.request({ method: 'eth_call', params: [{ to: '0x...', data: '0x...' }] })
+   * provider.request({ method: 'mina_call', params: [{ to: '0x...', data: '0x...' }] })
    * // => '0x...'
    */
   {
-    Method: "eth_call";
+    Method: "mina_call";
     Parameters:
       | [transaction: ExactPartial<TransactionRequest>]
       | [
@@ -651,22 +651,22 @@ export type PublicRpcSchema = [
   /**
    * @description Returns the chain ID associated with the current networkID
    * @example
-   * provider.request({ method: 'eth_chainId' })
+   * provider.request({ method: 'mina_chainId' })
    * // => '1'
    */
   {
-    Method: "eth_chainId";
+    Method: "mina_chainId";
     Parameters?: undefined;
     ReturnType: Quantity;
   },
   /**
    * @description Returns the client coinbase address.
    * @example
-   * provider.request({ method: 'eth_coinbase' })
+   * provider.request({ method: 'mina_coinbase' })
    * // => '0x...'
    */
   {
-    Method: "eth_coinbase";
+    Method: "mina_coinbase";
     Parameters?: undefined;
     ReturnType: Address;
   },
@@ -675,13 +675,13 @@ export type PublicRpcSchema = [
    *
    * @example
    * provider.request({
-   *  method: 'eth_estimateGas',
+   *  method: 'mina_estimateGas',
    *  params: [{ from: '0x...', to: '0x...', value: '0x...' }]
    * })
    * // => '0x5208'
    */
   {
-    Method: "eth_estimateGas";
+    Method: "mina_estimateGas";
     Parameters:
       | [transaction: TransactionRequest]
       | [transaction: TransactionRequest, block: BlockNumber | BlockTag]
@@ -697,7 +697,7 @@ export type PublicRpcSchema = [
    *
    * @example
    * provider.request({
-   *  method: 'eth_feeHistory',
+   *  method: 'mina_feeHistory',
    *  params: ['4', 'latest', ['25', '75']]
    * })
    * // => {
@@ -708,7 +708,7 @@ export type PublicRpcSchema = [
    * // }
    * */
   {
-    Method: "eth_feeHistory";
+    Method: "mina_feeHistory";
     Parameters: [
       /** Number of blocks in the requested range. Between 1 and 1024 blocks can be requested in a single query. Less than requested may be returned if not all blocks are available. */
       blockCount: Quantity,
@@ -723,11 +723,11 @@ export type PublicRpcSchema = [
    * @description Returns the current price of gas expressed in wei
    *
    * @example
-   * provider.request({ method: 'eth_gasPrice' })
+   * provider.request({ method: 'mina_gasPrice' })
    * // => '0x09184e72a000'
    */
   {
-    Method: "eth_gasPrice";
+    Method: "mina_gasPrice";
     Parameters?: undefined;
     ReturnType: Quantity;
   },
@@ -735,11 +735,11 @@ export type PublicRpcSchema = [
    * @description Returns the balance of an address in wei
    *
    * @example
-   * provider.request({ method: 'eth_getBalance', params: ['0x...', 'latest'] })
+   * provider.request({ method: 'mina_getBalance', params: ['0x...', 'latest'] })
    * // => '0x12a05...'
    */
   {
-    Method: "eth_getBalance";
+    Method: "mina_getBalance";
     Parameters: [
       address: Address,
       block: BlockNumber | BlockTag | BlockIdentifier
@@ -750,7 +750,7 @@ export type PublicRpcSchema = [
    * @description Returns information about a block specified by hash
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getBlockByHash', params: ['0x...', true] })
+   * provider.request({ method: 'mina_getBlockByHash', params: ['0x...', true] })
    * // => {
    * //   number: '0x1b4',
    * //   hash: '0x...',
@@ -759,7 +759,7 @@ export type PublicRpcSchema = [
    * // }
    */
   {
-    Method: "eth_getBlockByHash";
+    Method: "mina_getBlockByHash";
     Parameters: [
       /** hash of a block */
       hash: Hash,
@@ -772,7 +772,7 @@ export type PublicRpcSchema = [
    * @description Returns information about a block specified by number
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getBlockByNumber', params: ['0x1b4', true] })
+   * provider.request({ method: 'mina_getBlockByNumber', params: ['0x1b4', true] })
    * // => {
    * //   number: '0x1b4',
    * //   hash: '0x...',
@@ -781,7 +781,7 @@ export type PublicRpcSchema = [
    * // }
    */
   {
-    Method: "eth_getBlockByNumber";
+    Method: "mina_getBlockByNumber";
     Parameters: [
       /** block number, or one of "latest", "safe", "finalized", "earliest" or "pending" */
       block: BlockNumber | BlockTag,
@@ -794,11 +794,11 @@ export type PublicRpcSchema = [
    * @description Returns the number of transactions in a block specified by block hash
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getBlockTransactionCountByHash', params: ['0x...'] })
+   * provider.request({ method: 'mina_getBlockTransactionCountByHash', params: ['0x...'] })
    * // => '0x1'
    */
   {
-    Method: "eth_getBlockTransactionCountByHash";
+    Method: "mina_getBlockTransactionCountByHash";
     Parameters: [hash: Hash];
     ReturnType: Quantity;
   },
@@ -806,11 +806,11 @@ export type PublicRpcSchema = [
    * @description Returns the number of transactions in a block specified by block number
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getBlockTransactionCountByNumber', params: ['0x1b4'] })
+   * provider.request({ method: 'mina_getBlockTransactionCountByNumber', params: ['0x1b4'] })
    * // => '0x1'
    */
   {
-    Method: "eth_getBlockTransactionCountByNumber";
+    Method: "mina_getBlockTransactionCountByNumber";
     Parameters: [block: BlockNumber | BlockTag];
     ReturnType: Quantity;
   },
@@ -818,11 +818,11 @@ export type PublicRpcSchema = [
    * @description Returns the contract code stored at a given address
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getCode', params: ['0x...', 'latest'] })
+   * provider.request({ method: 'mina_getCode', params: ['0x...', 'latest'] })
    * // => '0x...'
    */
   {
-    Method: "eth_getCode";
+    Method: "mina_getCode";
     Parameters: [
       address: Address,
       block: BlockNumber | BlockTag | BlockIdentifier
@@ -833,11 +833,11 @@ export type PublicRpcSchema = [
    * @description Returns a list of all logs based on filter ID since the last log retrieval
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getFilterChanges', params: ['0x...'] })
+   * provider.request({ method: 'mina_getFilterChanges', params: ['0x...'] })
    * // => [{ ... }, { ... }]
    */
   {
-    Method: "eth_getFilterChanges";
+    Method: "mina_getFilterChanges";
     Parameters: [filterId: Quantity];
     ReturnType: Log[] | Hex[];
   },
@@ -845,11 +845,11 @@ export type PublicRpcSchema = [
    * @description Returns a list of all logs based on filter ID
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getFilterLogs', params: ['0x...'] })
+   * provider.request({ method: 'mina_getFilterLogs', params: ['0x...'] })
    * // => [{ ... }, { ... }]
    */
   {
-    Method: "eth_getFilterLogs";
+    Method: "mina_getFilterLogs";
     Parameters: [filterId: Quantity];
     ReturnType: Log[];
   },
@@ -857,11 +857,11 @@ export type PublicRpcSchema = [
    * @description Returns a list of all logs based on a filter object
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getLogs', params: [{ fromBlock: '0x...', toBlock: '0x...', address: '0x...', topics: ['0x...'] }] })
+   * provider.request({ method: 'mina_getLogs', params: [{ fromBlock: '0x...', toBlock: '0x...', address: '0x...', topics: ['0x...'] }] })
    * // => [{ ... }, { ... }]
    */
   {
-    Method: "eth_getLogs";
+    Method: "mina_getLogs";
     Parameters: [
       {
         address?: Address | Address[] | undefined;
@@ -885,13 +885,13 @@ export type PublicRpcSchema = [
    * @description Returns the account and storage values of the specified account including the Merkle-proof.
    * @link https://eips.ethereum.org/EIPS/eip-1186
    * @example
-   * provider.request({ method: 'eth_getProof', params: ['0x...', ['0x...'], 'latest'] })
+   * provider.request({ method: 'mina_getProof', params: ['0x...', ['0x...'], 'latest'] })
    * // => {
    * //   ...
    * // }
    */
   {
-    Method: "eth_getProof";
+    Method: "mina_getProof";
     Parameters: [
       /** Address of the account. */
       address: Address,
@@ -905,11 +905,11 @@ export type PublicRpcSchema = [
    * @description Returns the value from a storage position at an address
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getStorageAt', params: ['0x...', '0x...', 'latest'] })
+   * provider.request({ method: 'mina_getStorageAt', params: ['0x...', '0x...', 'latest'] })
    * // => '0x...'
    */
   {
-    Method: "eth_getStorageAt";
+    Method: "mina_getStorageAt";
     Parameters: [
       address: Address,
       index: Quantity,
@@ -921,11 +921,11 @@ export type PublicRpcSchema = [
    * @description Returns information about a transaction specified by block hash and transaction index
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getTransactionByBlockHashAndIndex', params: ['0x...', '0x...'] })
+   * provider.request({ method: 'mina_getTransactionByBlockHashAndIndex', params: ['0x...', '0x...'] })
    * // => { ... }
    */
   {
-    Method: "eth_getTransactionByBlockHashAndIndex";
+    Method: "mina_getTransactionByBlockHashAndIndex";
     Parameters: [hash: Hash, index: Quantity];
     ReturnType: Transaction | null;
   },
@@ -933,11 +933,11 @@ export type PublicRpcSchema = [
    * @description Returns information about a transaction specified by block number and transaction index
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getTransactionByBlockNumberAndIndex', params: ['0x...', '0x...'] })
+   * provider.request({ method: 'mina_getTransactionByBlockNumberAndIndex', params: ['0x...', '0x...'] })
    * // => { ... }
    */
   {
-    Method: "eth_getTransactionByBlockNumberAndIndex";
+    Method: "mina_getTransactionByBlockNumberAndIndex";
     Parameters: [block: BlockNumber | BlockTag, index: Quantity];
     ReturnType: Transaction | null;
   },
@@ -945,11 +945,11 @@ export type PublicRpcSchema = [
    * @description Returns information about a transaction specified by hash
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getTransactionByHash', params: ['0x...'] })
+   * provider.request({ method: 'mina_getTransactionByHash', params: ['0x...'] })
    * // => { ... }
    */
   {
-    Method: "eth_getTransactionByHash";
+    Method: "mina_getTransactionByHash";
     Parameters: [hash: Hash];
     ReturnType: Transaction | null;
   },
@@ -957,11 +957,11 @@ export type PublicRpcSchema = [
    * @description Returns the number of transactions sent from an address
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getTransactionCount', params: ['0x...', 'latest'] })
+   * provider.request({ method: 'mina_getTransactionCount', params: ['0x...', 'latest'] })
    * // => '0x1'
    */
   {
-    Method: "eth_getTransactionCount";
+    Method: "mina_getTransactionCount";
     Parameters: [
       address: Address,
       block: BlockNumber | BlockTag | BlockIdentifier
@@ -972,11 +972,11 @@ export type PublicRpcSchema = [
    * @description Returns the receipt of a transaction specified by hash
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getTransactionReceipt', params: ['0x...'] })
+   * provider.request({ method: 'mina_getTransactionReceipt', params: ['0x...'] })
    * // => { ... }
    */
   {
-    Method: "eth_getTransactionReceipt";
+    Method: "mina_getTransactionReceipt";
     Parameters: [hash: Hash];
     ReturnType: TransactionReceipt | null;
   },
@@ -984,11 +984,11 @@ export type PublicRpcSchema = [
    * @description Returns information about an uncle specified by block hash and uncle index position
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getUncleByBlockHashAndIndex', params: ['0x...', '0x...'] })
+   * provider.request({ method: 'mina_getUncleByBlockHashAndIndex', params: ['0x...', '0x...'] })
    * // => { ... }
    */
   {
-    Method: "eth_getUncleByBlockHashAndIndex";
+    Method: "mina_getUncleByBlockHashAndIndex";
     Parameters: [hash: Hash, index: Quantity];
     ReturnType: Uncle | null;
   },
@@ -996,11 +996,11 @@ export type PublicRpcSchema = [
    * @description Returns information about an uncle specified by block number and uncle index position
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getUncleByBlockNumberAndIndex', params: ['0x...', '0x...'] })
+   * provider.request({ method: 'mina_getUncleByBlockNumberAndIndex', params: ['0x...', '0x...'] })
    * // => { ... }
    */
   {
-    Method: "eth_getUncleByBlockNumberAndIndex";
+    Method: "mina_getUncleByBlockNumberAndIndex";
     Parameters: [block: BlockNumber | BlockTag, index: Quantity];
     ReturnType: Uncle | null;
   },
@@ -1008,11 +1008,11 @@ export type PublicRpcSchema = [
    * @description Returns the number of uncles in a block specified by block hash
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getUncleCountByBlockHash', params: ['0x...'] })
+   * provider.request({ method: 'mina_getUncleCountByBlockHash', params: ['0x...'] })
    * // => '0x1'
    */
   {
-    Method: "eth_getUncleCountByBlockHash";
+    Method: "mina_getUncleCountByBlockHash";
     Parameters: [hash: Hash];
     ReturnType: Quantity;
   },
@@ -1020,11 +1020,11 @@ export type PublicRpcSchema = [
    * @description Returns the number of uncles in a block specified by block number
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_getUncleCountByBlockNumber', params: ['0x...'] })
+   * provider.request({ method: 'mina_getUncleCountByBlockNumber', params: ['0x...'] })
    * // => '0x1'
    */
   {
-    Method: "eth_getUncleCountByBlockNumber";
+    Method: "mina_getUncleCountByBlockNumber";
     Parameters: [block: BlockNumber | BlockTag];
     ReturnType: Quantity;
   },
@@ -1032,35 +1032,35 @@ export type PublicRpcSchema = [
    * @description Returns the current maxPriorityFeePerGas in wei.
    * @link https://ethereum.github.io/execution-apis/api-documentation/
    * @example
-   * provider.request({ method: 'eth_maxPriorityFeePerGas' })
+   * provider.request({ method: 'mina_maxPriorityFeePerGas' })
    * // => '0x5f5e100'
    */
   {
-    Method: "eth_maxPriorityFeePerGas";
+    Method: "mina_maxPriorityFeePerGas";
     Parameters?: undefined;
     ReturnType: Quantity;
   },
   /**
-   * @description Creates a filter to listen for new blocks that can be used with `eth_getFilterChanges`
+   * @description Creates a filter to listen for new blocks that can be used with `mina_getFilterChanges`
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_newBlockFilter' })
+   * provider.request({ method: 'mina_newBlockFilter' })
    * // => '0x1'
    */
   {
-    Method: "eth_newBlockFilter";
+    Method: "mina_newBlockFilter";
     Parameters?: undefined;
     ReturnType: Quantity;
   },
   /**
-   * @description Creates a filter to listen for specific state changes that can then be used with `eth_getFilterChanges`
+   * @description Creates a filter to listen for specific state changes that can then be used with `mina_getFilterChanges`
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_newFilter', params: [{ fromBlock: '0x...', toBlock: '0x...', address: '0x...', topics: ['0x...'] }] })
+   * provider.request({ method: 'mina_newFilter', params: [{ fromBlock: '0x...', toBlock: '0x...', address: '0x...', topics: ['0x...'] }] })
    * // => '0x1'
    */
   {
-    Method: "eth_newFilter";
+    Method: "mina_newFilter";
     Parameters: [
       filter: {
         fromBlock?: BlockNumber | BlockTag | undefined;
@@ -1072,14 +1072,14 @@ export type PublicRpcSchema = [
     ReturnType: Quantity;
   },
   /**
-   * @description Creates a filter to listen for new pending transactions that can be used with `eth_getFilterChanges`
+   * @description Creates a filter to listen for new pending transactions that can be used with `mina_getFilterChanges`
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_newPendingTransactionFilter' })
+   * provider.request({ method: 'mina_newPendingTransactionFilter' })
    * // => '0x1'
    */
   {
-    Method: "eth_newPendingTransactionFilter";
+    Method: "mina_newPendingTransactionFilter";
     Parameters?: undefined;
     ReturnType: Quantity;
   },
@@ -1087,11 +1087,11 @@ export type PublicRpcSchema = [
    * @description Returns the current Ethereum protocol version
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_protocolVersion' })
+   * provider.request({ method: 'mina_protocolVersion' })
    * // => '54'
    */
   {
-    Method: "eth_protocolVersion";
+    Method: "mina_protocolVersion";
     Parameters?: undefined;
     ReturnType: string;
   },
@@ -1099,11 +1099,11 @@ export type PublicRpcSchema = [
    * @description Sends a **signed** transaction to the networkID
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_sendRawTransaction', params: ['0x...'] })
+   * provider.request({ method: 'mina_sendRawTransaction', params: ['0x...'] })
    * // => '0x...'
    */
   {
-    Method: "eth_sendRawTransaction";
+    Method: "mina_sendRawTransaction";
     Parameters: [signedTransaction: Hex];
     ReturnType: Hash;
   },
@@ -1111,11 +1111,11 @@ export type PublicRpcSchema = [
    * @description Destroys a filter based on filter ID
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_uninstallFilter', params: ['0x1'] })
+   * provider.request({ method: 'mina_uninstallFilter', params: ['0x1'] })
    * // => true
    */
   {
-    Method: "eth_uninstallFilter";
+    Method: "mina_uninstallFilter";
     Parameters: [filterId: Quantity];
     ReturnType: boolean;
   }
@@ -1479,11 +1479,11 @@ export type TestRpcSchema<mode extends string> = [
    * @description Returns whether the client is actively mining new blocks.
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_mining' })
+   * provider.request({ method: 'mina_mining' })
    * // => true
    */
   {
-    Method: "eth_mining";
+    Method: "mina_mining";
     Parameters?: undefined;
     ReturnType: boolean;
   },
@@ -1507,11 +1507,11 @@ export type TestRpcSchema<mode extends string> = [
    * @description Creates, signs, and sends a new transaction to the networkID regardless of the signature.
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_sendTransaction', params: [{ from: '0x...', to: '0x...', value: '0x...' }] })
+   * provider.request({ method: 'mina_sendTransaction', params: [{ from: '0x...', to: '0x...', value: '0x...' }] })
    * // => '0x...'
    */
   {
-    Method: "eth_sendUnsignedTransaction";
+    Method: "mina_sendUnsignedTransaction";
     Parameters: [transaction: TransactionRequest];
     ReturnType: Hash;
   }
@@ -1522,22 +1522,22 @@ export type WalletRpcSchema = [
    * @description Returns a list of addresses owned by this client
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_accounts' })
+   * provider.request({ method: 'mina_accounts' })
    * // => ['0x0fB69...']
    */
   {
-    Method: "eth_accounts";
+    Method: "mina_accounts";
     Parameters?: undefined;
     ReturnType: Address[];
   },
   /**
    * @description Returns the current chain ID associated with the wallet.
    * @example
-   * provider.request({ method: 'eth_chainId' })
+   * provider.request({ method: 'mina_chainId' })
    * // => '1'
    */
   {
-    Method: "eth_chainId";
+    Method: "mina_chainId";
     Parameters?: undefined;
     ReturnType: Quantity;
   },
@@ -1546,13 +1546,13 @@ export type WalletRpcSchema = [
    *
    * @example
    * provider.request({
-   *  method: 'eth_estimateGas',
+   *  method: 'mina_estimateGas',
    *  params: [{ from: '0x...', to: '0x...', value: '0x...' }]
    * })
    * // => '0x5208'
    */
   {
-    Method: "eth_estimateGas";
+    Method: "mina_estimateGas";
     Parameters:
       | [transaction: TransactionRequest]
       | [transaction: TransactionRequest, block: BlockNumber | BlockTag]
@@ -1567,11 +1567,11 @@ export type WalletRpcSchema = [
    * @description Requests that the user provides an Ethereum address to be identified by. Typically causes a browser extension popup to appear.
    * @link https://eips.ethereum.org/EIPS/eip-1102
    * @example
-   * provider.request({ method: 'eth_requestAccounts' }] })
+   * provider.request({ method: 'mina_requestAccounts' }] })
    * // => ['0x...', '0x...']
    */
   {
-    Method: "eth_requestAccounts";
+    Method: "mina_requestAccounts";
     Parameters?: undefined;
     ReturnType: Address[];
   },
@@ -1579,11 +1579,11 @@ export type WalletRpcSchema = [
    * @description Creates, signs, and sends a new transaction to the networkID
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_sendTransaction', params: [{ from: '0x...', to: '0x...', value: '0x...' }] })
+   * provider.request({ method: 'mina_sendTransaction', params: [{ from: '0x...', to: '0x...', value: '0x...' }] })
    * // => '0x...'
    */
   {
-    Method: "eth_sendTransaction";
+    Method: "mina_sendTransaction";
     Parameters: [transaction: TransactionRequest];
     ReturnType: Hash;
   },
@@ -1591,11 +1591,11 @@ export type WalletRpcSchema = [
    * @description Sends and already-signed transaction to the networkID
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_sendRawTransaction', params: ['0x...'] })
+   * provider.request({ method: 'mina_sendRawTransaction', params: ['0x...'] })
    * // => '0x...'
    */
   {
-    Method: "eth_sendRawTransaction";
+    Method: "mina_sendRawTransaction";
     Parameters: [signedTransaction: Hex];
     ReturnType: Hash;
   },
@@ -1603,11 +1603,11 @@ export type WalletRpcSchema = [
    * @description Calculates an Ethereum-specific signature in the form of `keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))`
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_sign', params: ['0x...', '0x...'] })
+   * provider.request({ method: 'mina_sign', params: ['0x...', '0x...'] })
    * // => '0x...'
    */
   {
-    Method: "eth_sign";
+    Method: "mina_sign";
     Parameters: [
       /** Address to use for signing */
       address: Address,
@@ -1617,14 +1617,14 @@ export type WalletRpcSchema = [
     ReturnType: Hex;
   },
   /**
-   * @description Signs a transaction that can be submitted to the networkID at a later time using with `eth_sendRawTransaction`
+   * @description Signs a transaction that can be submitted to the networkID at a later time using with `mina_sendRawTransaction`
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_signTransaction', params: [{ from: '0x...', to: '0x...', value: '0x...' }] })
+   * provider.request({ method: 'mina_signTransaction', params: [{ from: '0x...', to: '0x...', value: '0x...' }] })
    * // => '0x...'
    */
   {
-    Method: "eth_signTransaction";
+    Method: "mina_signTransaction";
     Parameters: [request: TransactionRequest];
     ReturnType: Hex;
   },
@@ -1632,11 +1632,11 @@ export type WalletRpcSchema = [
    * @description Calculates an Ethereum-specific signature in the form of `keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))`
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_signTypedData_v4', params: [{ from: '0x...', data: [{ type: 'string', name: 'message', value: 'hello world' }] }] })
+   * provider.request({ method: 'mina_signTypedData_v4', params: [{ from: '0x...', data: [{ type: 'string', name: 'message', value: 'hello world' }] }] })
    * // => '0x...'
    */
   {
-    Method: "eth_signTypedData_v4";
+    Method: "mina_signTypedData_v4";
     Parameters: [
       /** Address to use for signing */
       address: Address,
@@ -1649,11 +1649,11 @@ export type WalletRpcSchema = [
    * @description Returns information about the status of this client’s networkID synchronization
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'eth_syncing' })
+   * provider.request({ method: 'mina_syncing' })
    * // => { startingBlock: '0x...', currentBlock: '0x...', highestBlock: '0x...' }
    */
   {
-    Method: "eth_syncing";
+    Method: "mina_syncing";
     Parameters?: undefined;
     ReturnType: NetworkSync | false;
   },
@@ -1738,24 +1738,24 @@ export type WalletRpcSchema = [
    * @description Requests the given permissions from the user.
    * @link https://eips.ethereum.org/EIPS/eip-2255
    * @example
-   * provider.request({ method: 'wallet_requestPermissions', params: [{ eth_accounts: {} }] })
+   * provider.request({ method: 'wallet_requestPermissions', params: [{ mina_accounts: {} }] })
    * // => { ... }
    */
   {
     Method: "wallet_requestPermissions";
-    Parameters: [permissions: { eth_accounts: Record<string, any> }];
+    Parameters: [permissions: { mina_accounts: Record<string, any> }];
     ReturnType: WalletPermission[];
   },
   /**
    * @description Revokes the given permissions from the user.
    * @link https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-2.md
    * @example
-   * provider.request({ method: 'wallet_revokePermissions', params: [{ eth_accounts: {} }] })
+   * provider.request({ method: 'wallet_revokePermissions', params: [{ mina_accounts: {} }] })
    * // => { ... }
    */
   {
     Method: "wallet_revokePermissions";
-    Parameters: [permissions: { eth_accounts: Record<string, any> }];
+    Parameters: [permissions: { mina_accounts: Record<string, any> }];
     ReturnType: null;
   },
   /**

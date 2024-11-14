@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { signTransaction } from '../accounts/utils/signTransaction.js'
+import { accounts } from '~test/src/constants'
+import { signTransaction } from '../accounts/utils/signTransaction'
 import {
   FeeCapTooHighError,
   InvalidAddressError,
@@ -10,15 +10,15 @@ import {
   parseEther,
   parseGwei,
   parseTransaction as parseTransaction_,
-} from '../index.js'
-import { parseTransaction } from './parsers.js'
-import { serializeTransaction } from './serializers.js'
+} from '../index'
+import { parseTransaction } from './parsers'
+import { serializeTransaction } from './serializers'
 import type {
   TransactionSerializableCIP42,
   TransactionSerializableCIP64,
-} from './types.js'
+} from './types'
 
-import type { TransactionSerializableDeposit } from '../op-stack/types/transaction.js'
+import type { TransactionSerializableDeposit } from '../op-stack/types/transaction'
 
 const commonBaseTx = {
   to: accounts[0].address,

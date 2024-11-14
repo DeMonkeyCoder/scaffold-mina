@@ -1,12 +1,12 @@
 import type { Address } from 'abitype'
-import type { Hash } from '../../../types/misc.js'
-import { encodeAbiParameters } from '../../../utils/abi/encodeAbiParameters.js'
-import { concat } from '../../../utils/data/concat.js'
-import { pad } from '../../../utils/data/pad.js'
-import { numberToHex } from '../../../utils/encoding/toHex.js'
-import { keccak256 } from '../../../utils/hash/keccak256.js'
-import type { EntryPointVersion } from '../../types/entryPointVersion.js'
-import type { UserOperation } from '../../types/userOperation.js'
+import type { Hash } from '../../../types/misc'
+import { encodeAbiParameters } from '../../../utils/abi/encodeAbiParameters'
+import { concat } from '../../../utils/data/concat'
+import { pad } from '../../../utils/data/pad'
+import { numberToHex } from '../../../utils/encoding/toHex'
+import { keccak256 } from '../../../utils/hash/keccak256'
+import type { EntryPointVersion } from '../../types/entryPointVersion'
+import type { UserOperation } from '../../types/userOperation'
 
 export type GetUserOperationHashParameters<
   entryPointVersion extends EntryPointVersion = EntryPointVersion,

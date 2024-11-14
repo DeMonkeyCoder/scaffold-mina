@@ -1,11 +1,11 @@
 import { attest } from '@ark/attest'
 import { test } from 'vitest'
 
-import { usdcContractConfig } from '../../../test/src/abis.js'
-import { mainnet } from '../../chains/index.js'
-import { createClient } from '../../clients/createClient.js'
-import { http } from '../../clients/transports/http.js'
-import { readContract } from './readContract.js'
+import { usdcContractConfig } from '../../../test/src/abis'
+import { mainnet } from '../../chains/index'
+import { createClient } from '../../clients/createClient'
+import { http } from '../../clients/transports/http'
+import { readContract } from './readContract'
 
 const client = createClient({ chain: mainnet, transport: http() })
 

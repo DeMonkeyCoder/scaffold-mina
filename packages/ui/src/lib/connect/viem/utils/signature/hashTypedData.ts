@@ -2,22 +2,22 @@
 
 import type { AbiParameter, TypedData, TypedDataDomain } from 'abitype'
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex } from '../../types/misc.js'
-import type { TypedDataDefinition } from '../../types/typedData.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex } from '../../types/misc'
+import type { TypedDataDefinition } from '../../types/typedData'
 import {
   type EncodeAbiParametersErrorType,
   encodeAbiParameters,
-} from '../abi/encodeAbiParameters.js'
-import { concat } from '../data/concat.js'
-import { type ToHexErrorType, toHex } from '../encoding/toHex.js'
-import { type Keccak256ErrorType, keccak256 } from '../hash/keccak256.js'
+} from '../abi/encodeAbiParameters'
+import { concat } from '../data/concat'
+import { type ToHexErrorType, toHex } from '../encoding/toHex'
+import { type Keccak256ErrorType, keccak256 } from '../hash/keccak256'
 import {
   type GetTypesForEIP712DomainErrorType,
   type ValidateTypedDataErrorType,
   getTypesForEIP712Domain,
   validateTypedData,
-} from '../typedData.js'
+} from '../typedData'
 
 type MessageTypeProperty = {
   name: string

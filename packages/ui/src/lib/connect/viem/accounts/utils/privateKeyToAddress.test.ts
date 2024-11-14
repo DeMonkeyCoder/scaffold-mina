@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { privateKeyToAddress } from './privateKeyToAddress.js'
+import { accounts } from '~test/src/constants'
+import { privateKeyToAddress } from './privateKeyToAddress'
 
 test('default', () => {
   expect(privateKeyToAddress(accounts[0].privateKey).toLowerCase()).toEqual(

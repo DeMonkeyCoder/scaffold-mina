@@ -1,16 +1,16 @@
 import type { Abi, Address, TypedData } from 'abitype'
 import type { SignReturnType as WebAuthnSignReturnType } from 'webauthn-p256'
 
-import type { Client } from '../../clients/createClient.js'
-import type { Hash, Hex, SignableMessage } from '../../types/misc.js'
-import type { TypedDataDefinition } from '../../types/typedData.js'
-import type { Assign, ExactPartial, UnionPartialBy } from '../../types/utils.js'
-import type { EntryPointVersion } from '../types/entryPointVersion.js'
+import type { Client } from '../../clients/createClient'
+import type { Hash, Hex, SignableMessage } from '../../types/misc'
+import type { TypedDataDefinition } from '../../types/typedData'
+import type { Assign, ExactPartial, UnionPartialBy } from '../../types/utils'
+import type { EntryPointVersion } from '../types/entryPointVersion'
 import type {
   EstimateUserOperationGasReturnType,
   UserOperation,
   UserOperationRequest,
-} from '../types/userOperation.js'
+} from '../types/userOperation'
 
 type Call = {
   to: Hex

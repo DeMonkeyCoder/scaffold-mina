@@ -1,13 +1,13 @@
 import type { MutateOptions, MutationOptions } from '@tanstack/query-core'
 
-import type { Config } from '../../createConfig.js'
-import type { Compute } from '../../types/utils.js'
+import type { Config } from '../../createConfig'
+import type { Compute } from '../../types/utils'
 import {
   type WriteContractsErrorType,
   type WriteContractsParameters,
   type WriteContractsReturnType,
   writeContracts,
-} from '../actions/writeContracts.js'
+} from '../actions/writeContracts'
 
 export function writeContractsMutationOptions<
   const contracts extends readonly unknown[],

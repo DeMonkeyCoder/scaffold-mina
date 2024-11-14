@@ -1,4 +1,4 @@
-import { defineChain } from '../../utils/chain/defineChain.js'
+import { defineChain } from '../../utils/chain/defineChain'
 
 export const bitkubTestnet = /*#__PURE__*/ defineChain({
   id: 25925,

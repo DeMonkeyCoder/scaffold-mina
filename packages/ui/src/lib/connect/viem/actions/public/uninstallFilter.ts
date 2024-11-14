@@ -1,22 +1,22 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { Filter } from '../../types/filter.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Chain } from "../../types/chain";
+import type { Filter } from "../../types/filter";
+import type { RequestErrorType } from "../../utils/buildRequest";
 
 export type UninstallFilterParameters = {
-  filter: Filter<any>
-}
-export type UninstallFilterReturnType = boolean
+  filter: Filter<any>;
+};
+export type UninstallFilterReturnType = boolean;
 
-export type UninstallFilterErrorType = RequestErrorType | ErrorType
+export type UninstallFilterErrorType = RequestErrorType | ErrorType;
 
 /**
  * Destroys a [`Filter`](https://viem.sh/docs/glossary/types#filter).
  *
  * - Docs: https://viem.sh/docs/actions/public/uninstallFilter
- * - JSON-RPC Methods: [`eth_uninstallFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_uninstallFilter)
+ * - JSON-RPC Methods: [`mina_uninstallFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_uninstallFilter)
  *
  * Destroys a Filter that was created from one of the following Actions:
  * - [`createBlockFilter`](https://viem.sh/docs/actions/public/createBlockFilter)
@@ -38,13 +38,13 @@ export type UninstallFilterErrorType = RequestErrorType | ErrorType
  */
 export async function uninstallFilter<
   transport extends Transport,
-  chain extends Chain | undefined,
+  chain extends Chain | undefined
 >(
   _client: Client<transport, chain>,
-  { filter }: UninstallFilterParameters,
+  { filter }: UninstallFilterParameters
 ): Promise<UninstallFilterReturnType> {
   return filter.request({
-    method: 'eth_uninstallFilter',
+    method: "mina_uninstallFilter",
     params: [filter.id],
-  })
+  });
 }

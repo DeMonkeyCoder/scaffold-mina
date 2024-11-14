@@ -5,9 +5,9 @@ import {
   type SwitchChainParameters,
   type SwitchChainReturnType,
   switchChain,
-} from '../actions/switchChain.js'
-import type { Config } from '../createConfig.js'
-import type { Compute } from '../types/utils.js'
+} from '../actions/switchChain'
+import type { Config } from '../createConfig'
+import type { Compute } from '../types/utils'
 
 export function switchChainMutationOptions<config extends Config>(
   config: config,

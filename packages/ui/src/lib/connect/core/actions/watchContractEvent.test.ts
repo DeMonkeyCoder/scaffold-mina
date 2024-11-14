@@ -11,11 +11,11 @@ import { http, createWalletClient, parseEther } from "@/lib/connect/viem";
 import type { WatchEventOnLogsParameter } from "@/lib/connect/viem/actions";
 import { beforeEach, expect, test } from "vitest";
 
-import { connect } from "./connect.js";
-import { disconnect } from "./disconnect.js";
-import { getBalance } from "./getBalance.js";
-import { watchContractEvent } from "./watchContractEvent.js";
-import { writeContract } from "./writeContract.js";
+import { connect } from "./connect";
+import { disconnect } from "./disconnect";
+import { getBalance } from "./getBalance";
+import { watchContractEvent } from "./watchContractEvent";
+import { writeContract } from "./writeContract";
 
 const connector = config.connectors[0]!;
 

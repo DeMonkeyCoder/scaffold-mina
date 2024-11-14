@@ -1,11 +1,11 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
+import { accounts } from '~test/src/constants'
 
-import { wagmiContractConfig } from '../../../../test/src/abis.js'
-import { experimental_signAuthorization } from '../../../accounts/utils/signAuthorization.js'
-import { getAddress } from '../../../utils/address/getAddress.js'
-import { recoverAuthorizationAddress } from './recoverAuthorizationAddress.js'
+import { wagmiContractConfig } from '../../../../test/src/abis'
+import { experimental_signAuthorization } from '../../../accounts/utils/signAuthorization'
+import { getAddress } from '../../../utils/address/getAddress'
+import { recoverAuthorizationAddress } from './recoverAuthorizationAddress'
 
 test('default', async () => {
   const signedAuthorization = await experimental_signAuthorization({

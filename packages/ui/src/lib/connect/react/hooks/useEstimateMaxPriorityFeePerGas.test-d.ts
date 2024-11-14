@@ -1,5 +1,5 @@
 import { expectTypeOf, test } from 'vitest'
-import { useEstimateMaxPriorityFeePerGas } from './useEstimateMaxPriorityFeePerGas.js'
+import { useEstimateMaxPriorityFeePerGas } from './useEstimateMaxPriorityFeePerGas'
 
 test('select data', () => {
   const result = useEstimateMaxPriorityFeePerGas({

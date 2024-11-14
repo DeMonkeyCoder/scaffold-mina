@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
-import { accounts } from '../../../test/src/constants.js'
-import { signMessage } from '../../accounts/index.js'
-import { parseErc6492Signature } from './parseErc6492Signature.js'
+import { accounts } from '../../../test/src/constants'
+import { signMessage } from '../../accounts/index'
+import { parseErc6492Signature } from './parseErc6492Signature'
 
 test('default', async () => {
   const signature = await signMessage({

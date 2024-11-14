@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { compactSignatureToSignature } from './compactSignatureToSignature.js'
+import { compactSignatureToSignature } from './compactSignatureToSignature'
 
 test('default', () => {
   expect(

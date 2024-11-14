@@ -1,6 +1,6 @@
 import type { Address } from "@/lib/connect/viem";
 import { test } from "vitest";
-import { createConnector } from "./createConnector.js";
+import { createConnector } from "./createConnector";
 
 test("default", () => {
   createConnector(() => {

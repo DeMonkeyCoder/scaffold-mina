@@ -1,19 +1,19 @@
 import type { Address } from 'abitype'
 
-import type { ErrorType } from '../../../errors/utils.js'
+import type { ErrorType } from '../../../errors/utils'
 import {
   type GetAddressErrorType,
   getAddress,
-} from '../../../utils/address/getAddress.js'
+} from '../../../utils/address/getAddress'
 import {
   type IsAddressEqualErrorType,
   isAddressEqual,
-} from '../../../utils/address/isAddressEqual.js'
+} from '../../../utils/address/isAddressEqual'
 import {
   type RecoverAuthorizationAddressErrorType,
   type RecoverAuthorizationAddressParameters,
   recoverAuthorizationAddress,
-} from './recoverAuthorizationAddress.js'
+} from './recoverAuthorizationAddress'
 
 export type VerifyAuthorizationParameters =
   RecoverAuthorizationAddressParameters & {

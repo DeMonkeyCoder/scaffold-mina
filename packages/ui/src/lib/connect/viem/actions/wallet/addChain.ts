@@ -1,29 +1,29 @@
-import type { Account } from '../../accounts/types.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+import type { Account } from "../../accounts/types";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Chain } from "../../types/chain";
+import type { RequestErrorType } from "../../utils/buildRequest";
 import {
   type NumberToHexErrorType,
   numberToHex,
-} from '../../utils/encoding/toHex.js'
+} from "../../utils/encoding/toHex";
 
 export type AddChainParameters = {
   /** The chain to add to the wallet. */
-  chain: Chain
-}
+  chain: Chain;
+};
 
 export type AddChainErrorType =
   | RequestErrorType
   | NumberToHexErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Adds an EVM chain to the wallet.
  *
  * - Docs: https://viem.sh/docs/actions/wallet/addChain
- * - JSON-RPC Methods: [`eth_addEthereumChain`](https://eips.ethereum.org/EIPS/eip-3085)
+ * - JSON-RPC Methods: [`mina_addEthereumChain`](https://eips.ethereum.org/EIPS/eip-3085)
  *
  * @param client - Client to use
  * @param parameters - {@link AddChainParameters}
@@ -40,12 +40,12 @@ export type AddChainErrorType =
  */
 export async function addChain<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(client: Client<Transport, chain, account>, { chain }: AddChainParameters) {
-  const { id, name, nativeCurrency, rpcUrls, blockExplorers } = chain
+  const { id, name, nativeCurrency, rpcUrls, blockExplorers } = chain;
   await client.request(
     {
-      method: 'wallet_addEthereumChain',
+      method: "wallet_addEthereumChain",
       params: [
         {
           chainId: numberToHex(id),
@@ -58,6 +58,6 @@ export async function addChain<
         },
       ],
     },
-    { dedupe: true, retryCount: 0 },
-  )
+    { dedupe: true, retryCount: 0 }
+  );
 }

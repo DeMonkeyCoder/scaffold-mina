@@ -3,8 +3,8 @@ import {
   mockClientPublicActionsL2,
   zksyncClientLocalNode,
   zksyncClientLocalNodeWithAccount,
-} from '../../../test/src/zksync.js'
-import { estimateGasL1ToL2 } from './estimateGasL1ToL2.js'
+} from '../../../test/src/zksync'
+import { estimateGasL1ToL2 } from './estimateGasL1ToL2'
 
 const client = { ...zksyncClientLocalNode }
 

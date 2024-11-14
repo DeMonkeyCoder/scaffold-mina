@@ -1,20 +1,20 @@
 import type { Address } from 'abitype'
 import { beforeAll, describe, expect, test } from 'vitest'
 
-import { SoladyAccountFactory07 } from '~contracts/generated.js'
-import { anvilMainnet } from '~test/src/anvil.js'
-import { accounts, typedData } from '~test/src/constants.js'
-import { deploySoladyAccount_07 } from '../../../../test/src/utils.js'
-import { privateKeyToAccount } from '../../../accounts/privateKeyToAccount.js'
+import { SoladyAccountFactory07 } from '~contracts/generated'
+import { anvilMainnet } from '~test/src/anvil'
+import { accounts, typedData } from '~test/src/constants'
+import { deploySoladyAccount_07 } from '../../../../test/src/utils'
+import { privateKeyToAccount } from '../../../accounts/privateKeyToAccount'
 import {
   mine,
   readContract,
   simulateContract,
   verifyTypedData,
   writeContract,
-} from '../../../actions/index.js'
-import { encodeFunctionData, pad } from '../../../utils/index.js'
-import { signTypedData } from './signTypedData.js'
+} from '../../../actions/index'
+import { encodeFunctionData, pad } from '../../../utils/index'
+import { signTypedData } from './signTypedData'
 
 const client = anvilMainnet.getClient()
 

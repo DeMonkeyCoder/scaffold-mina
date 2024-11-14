@@ -4,7 +4,7 @@ import { renderHook } from "@wagmi/test/react";
 import { Fragment, createElement } from "react";
 import { expect, test } from "vitest";
 
-import { useAccount } from "./useAccount.js";
+import { useAccount } from "./useAccount";
 
 test("default", async () => {
   const { result, rerender } = renderHook(() => useAccount());

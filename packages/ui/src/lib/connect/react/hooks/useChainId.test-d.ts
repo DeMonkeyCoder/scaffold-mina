@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expectTypeOf, test } from 'vitest'
 
-import { useChainId } from './useChainId.js'
+import { useChainId } from './useChainId'
 
 test('default', () => {
   const chainId = useChainId()

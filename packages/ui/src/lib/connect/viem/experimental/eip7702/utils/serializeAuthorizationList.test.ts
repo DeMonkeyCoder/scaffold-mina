@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
-import { wagmiContractConfig } from '../../../../test/src/abis.js'
-import { serializeAuthorizationList } from './serializeAuthorizationList.js'
+import { wagmiContractConfig } from '../../../../test/src/abis'
+import { serializeAuthorizationList } from './serializeAuthorizationList'
 
 test('default', () => {
   expect(serializeAuthorizationList()).toMatchInlineSnapshot('[]')

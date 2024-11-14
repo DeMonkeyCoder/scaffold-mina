@@ -1,12 +1,12 @@
 import type { Address } from 'abitype'
-import type { FeeValuesEIP1559 } from '../../types/fee.js'
-import type { Hash, Hex } from '../../types/misc.js'
+import type { FeeValuesEIP1559 } from '../../types/fee'
+import type { Hash, Hex } from '../../types/misc'
 import type {
   Index,
   Quantity,
   RpcTransactionReceipt,
   RpcTransactionRequest as RpcTransactionRequest_,
-} from '../../types/rpc.js'
+} from '../../types/rpc'
 import type {
   TransactionBase,
   TransactionEIP1559 as TransactionEIP1559_,
@@ -20,16 +20,16 @@ import type {
   TransactionSerialized,
   TransactionType,
   Transaction as Transaction_,
-} from '../../types/transaction.js'
-import type { ExactPartial, OneOf, UnionOmit } from '../../types/utils.js'
-import type { ZksyncEip712Meta } from './eip712.js'
-import type { ZksyncFee, ZksyncFeeValues } from './fee.js'
+} from '../../types/transaction'
+import type { ExactPartial, OneOf, UnionOmit } from '../../types/utils'
+import type { ZksyncEip712Meta } from './eip712'
+import type { ZksyncFee, ZksyncFeeValues } from './fee'
 import type {
   ZksyncL2ToL1Log,
   ZksyncLog,
   ZksyncRpcL2ToL1Log,
   ZksyncRpcLog,
-} from './log.js'
+} from './log'
 
 type EIP712Type = '0x71'
 type PriorityType = '0xff'

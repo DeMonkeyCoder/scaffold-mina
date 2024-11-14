@@ -1,19 +1,19 @@
-import type { Account } from '../../accounts/types.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+import type { Account } from "../../accounts/types";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Chain } from "../../types/chain";
+import type { RequestErrorType } from "../../utils/buildRequest";
 
-export type GetBlobBaseFeeReturnType = bigint
+export type GetBlobBaseFeeReturnType = bigint;
 
-export type GetBlobBaseFeeErrorType = RequestErrorType | ErrorType
+export type GetBlobBaseFeeErrorType = RequestErrorType | ErrorType;
 
 /**
  * Returns the base fee per blob gas in wei.
  *
  * - Docs: https://viem.sh/docs/actions/public/getBlobBaseFee
- * - JSON-RPC Methods: [`eth_blobBaseFee`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_blobBaseFee)
+ * - JSON-RPC Methods: [`mina_blobBaseFee`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blobBaseFee)
  *
  * @param client - Client to use
  * @returns The blob base fee (in wei). {@link GetBlobBaseFeeReturnType}
@@ -31,12 +31,12 @@ export type GetBlobBaseFeeErrorType = RequestErrorType | ErrorType
  */
 export async function getBlobBaseFee<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(
-  client: Client<Transport, chain, account>,
+  client: Client<Transport, chain, account>
 ): Promise<GetBlobBaseFeeReturnType> {
   const baseFee = await client.request({
-    method: 'eth_blobBaseFee',
-  })
-  return BigInt(baseFee)
+    method: "mina_blobBaseFee",
+  });
+  return BigInt(baseFee);
 }

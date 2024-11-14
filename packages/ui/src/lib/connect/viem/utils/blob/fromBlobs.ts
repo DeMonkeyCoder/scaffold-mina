@@ -1,8 +1,8 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex } from '../../types/misc.js'
-import { type CreateCursorErrorType, createCursor } from '../cursor.js'
-import { type HexToBytesErrorType, hexToBytes } from '../encoding/toBytes.js'
-import { type BytesToHexErrorType, bytesToHex } from '../encoding/toHex.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex } from '../../types/misc'
+import { type CreateCursorErrorType, createCursor } from '../cursor'
+import { type HexToBytesErrorType, hexToBytes } from '../encoding/toBytes'
+import { type BytesToHexErrorType, bytesToHex } from '../encoding/toHex'
 
 type To = 'hex' | 'bytes'
 

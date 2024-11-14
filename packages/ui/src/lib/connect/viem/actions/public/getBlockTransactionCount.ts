@@ -1,55 +1,55 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { BlockTag } from '../../types/block.js'
-import type { Chain } from '../../types/chain.js'
-import type { Hash } from '../../types/misc.js'
-import type { Quantity } from '../../types/rpc.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { BlockTag } from "../../types/block";
+import type { Chain } from "../../types/chain";
+import type { Hash } from "../../types/misc";
+import type { Quantity } from "../../types/rpc";
+import type { RequestErrorType } from "../../utils/buildRequest";
 import {
   type HexToNumberErrorType,
   hexToNumber,
-} from '../../utils/encoding/fromHex.js'
+} from "../../utils/encoding/fromHex";
 import {
   type NumberToHexErrorType,
   numberToHex,
-} from '../../utils/encoding/toHex.js'
+} from "../../utils/encoding/toHex";
 
 export type GetBlockTransactionCountParameters =
   | {
       /** Hash of the block. */
-      blockHash?: Hash | undefined
-      blockNumber?: undefined
-      blockTag?: undefined
+      blockHash?: Hash | undefined;
+      blockNumber?: undefined;
+      blockTag?: undefined;
     }
   | {
-      blockHash?: undefined
+      blockHash?: undefined;
       /** The block number. */
-      blockNumber?: bigint | undefined
-      blockTag?: undefined
+      blockNumber?: bigint | undefined;
+      blockTag?: undefined;
     }
   | {
-      blockHash?: undefined
-      blockNumber?: undefined
+      blockHash?: undefined;
+      blockNumber?: undefined;
       /** The block tag. Defaults to 'latest'. */
-      blockTag?: BlockTag | undefined
-    }
+      blockTag?: BlockTag | undefined;
+    };
 
-export type GetBlockTransactionCountReturnType = number
+export type GetBlockTransactionCountReturnType = number;
 
 export type GetBlockTransactionCountErrorType =
   | NumberToHexErrorType
   | HexToNumberErrorType
   | RequestErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Returns the number of Transactions at a block number, hash, or tag.
  *
  * - Docs: https://viem.sh/docs/actions/public/getBlockTransactionCount
  * - JSON-RPC Methods:
- *   - Calls [`eth_getBlockTransactionCountByNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getblocktransactioncountbynumber) for `blockNumber` & `blockTag`.
- *   - Calls [`eth_getBlockTransactionCountByHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getblocktransactioncountbyhash) for `blockHash`.
+ *   - Calls [`mina_getBlockTransactionCountByNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getblocktransactioncountbynumber) for `blockNumber` & `blockTag`.
+ *   - Calls [`mina_getBlockTransactionCountByHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getblocktransactioncountbyhash) for `blockHash`.
  *
  * @param client - Client to use
  * @param parameters - {@link GetBlockTransactionCountParameters}
@@ -71,30 +71,30 @@ export async function getBlockTransactionCount<chain extends Chain | undefined>(
   {
     blockHash,
     blockNumber,
-    blockTag = 'latest',
-  }: GetBlockTransactionCountParameters = {},
+    blockTag = "latest",
+  }: GetBlockTransactionCountParameters = {}
 ): Promise<GetBlockTransactionCountReturnType> {
   const blockNumberHex =
-    blockNumber !== undefined ? numberToHex(blockNumber) : undefined
+    blockNumber !== undefined ? numberToHex(blockNumber) : undefined;
 
-  let count: Quantity
+  let count: Quantity;
   if (blockHash) {
     count = await client.request(
       {
-        method: 'eth_getBlockTransactionCountByHash',
+        method: "mina_getBlockTransactionCountByHash",
         params: [blockHash],
       },
-      { dedupe: true },
-    )
+      { dedupe: true }
+    );
   } else {
     count = await client.request(
       {
-        method: 'eth_getBlockTransactionCountByNumber',
+        method: "mina_getBlockTransactionCountByNumber",
         params: [blockNumberHex || blockTag],
       },
-      { dedupe: Boolean(blockNumberHex) },
-    )
+      { dedupe: Boolean(blockNumberHex) }
+    );
   }
 
-  return hexToNumber(count)
+  return hexToNumber(count);
 }

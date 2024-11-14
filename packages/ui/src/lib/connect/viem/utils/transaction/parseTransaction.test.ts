@@ -1,7 +1,7 @@
 import { assertType, describe, expect, test } from "vitest";
 
-import { accounts } from "~test/src/constants.js";
-import { sign } from "../../accounts/utils/sign.js";
+import { accounts } from "~test/src/constants";
+import { sign } from "../../accounts/utils/sign";
 import type {
   TransactionSerializableBase,
   TransactionSerializableEIP1559,
@@ -9,21 +9,21 @@ import type {
   TransactionSerializableEIP4844,
   TransactionSerializableEIP7702,
   TransactionSerializableLegacy,
-} from "../../types/transaction.js";
-import { toHex } from "../encoding/toHex.js";
-import { toRlp } from "../encoding/toRlp.js";
-import { keccak256 } from "../hash/keccak256.js";
-import { parseEther } from "../unit/parseEther.js";
-import { parseGwei } from "../unit/parseGwei.js";
+} from "../../types/transaction";
+import { toHex } from "../encoding/toHex";
+import { toRlp } from "../encoding/toRlp";
+import { keccak256 } from "../hash/keccak256";
+import { parseEther } from "../unit/parseEther";
+import { parseGwei } from "../unit/parseGwei";
 
 import type { Address } from "abitype";
-import { wagmiContractConfig } from "../../../test/src/abis.js";
+import { wagmiContractConfig } from "../../../test/src/abis";
 import {
   parseAccessList,
   parseTransaction,
   toTransactionArray,
-} from "./parseTransaction.js";
-import { serializeTransaction } from "./serializeTransaction.js";
+} from "./parseTransaction";
+import { serializeTransaction } from "./serializeTransaction";
 
 const base = {
   to: accounts[1].address,

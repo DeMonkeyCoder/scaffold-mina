@@ -5,10 +5,10 @@ import {
   type SwitchAccountParameters,
   type SwitchAccountReturnType,
   switchAccount,
-} from '../actions/switchAccount.js'
-import type { Config } from '../createConfig.js'
-import type { Compute } from '../types/utils.js'
-import type { Mutate, MutateAsync } from './types.js'
+} from '../actions/switchAccount'
+import type { Config } from '../createConfig'
+import type { Compute } from '../types/utils'
+import type { Mutate, MutateAsync } from './types'
 
 export function switchAccountMutationOptions<config extends Config>(
   config: config,

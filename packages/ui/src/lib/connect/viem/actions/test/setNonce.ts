@@ -3,13 +3,13 @@ import type { Address } from 'abitype'
 import type {
   TestClient,
   TestClientMode,
-} from '../../clients/createTestClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
-import type { Chain } from '../../types/chain.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
-import { numberToHex } from '../../utils/encoding/toHex.js'
+} from '../../clients/createTestClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../../types/account'
+import type { Chain } from '../../types/chain'
+import type { RequestErrorType } from '../../utils/buildRequest'
+import { numberToHex } from '../../utils/encoding/toHex'
 
 export type SetNonceParameters = {
   /** The account address. */

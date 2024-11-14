@@ -1,11 +1,11 @@
 import { beforeAll, describe, expect, test, vi } from 'vitest'
 
-import { ERC20InvalidTransferEvent } from '~contracts/generated.js'
-import { usdcContractConfig, wagmiContractConfig } from '~test/src/abis.js'
-import { accounts, address } from '~test/src/constants.js'
-import { deployErc20InvalidTransferEvent } from '~test/src/utils.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import type { Client } from '../../index.js'
+import { ERC20InvalidTransferEvent } from '~contracts/generated'
+import { usdcContractConfig, wagmiContractConfig } from '~test/src/abis'
+import { accounts, address } from '~test/src/constants'
+import { deployErc20InvalidTransferEvent } from '~test/src/utils'
+import { anvilMainnet } from '../../../test/src/anvil'
+import type { Client } from '../../index'
 
 import {
   http,
@@ -14,18 +14,18 @@ import {
   createClient,
   fallback,
   webSocket,
-} from '../../index.js'
-import { getAddress } from '../../utils/address/getAddress.js'
-import { wait } from '../../utils/wait.js'
-import { impersonateAccount } from '../test/impersonateAccount.js'
-import { mine } from '../test/mine.js'
-import { setBalance } from '../test/setBalance.js'
-import { writeContract } from '../wallet/writeContract.js'
-import * as createEventFilter from './createEventFilter.js'
-import * as getBlockNumber from './getBlockNumber.js'
-import * as getFilterChanges from './getFilterChanges.js'
-import * as getLogs from './getLogs.js'
-import { type WatchEventOnLogsParameter, watchEvent } from './watchEvent.js'
+} from '../../index'
+import { getAddress } from '../../utils/address/getAddress'
+import { wait } from '../../utils/wait'
+import { impersonateAccount } from '../test/impersonateAccount'
+import { mine } from '../test/mine'
+import { setBalance } from '../test/setBalance'
+import { writeContract } from '../wallet/writeContract'
+import * as createEventFilter from './createEventFilter'
+import * as getBlockNumber from './getBlockNumber'
+import * as getFilterChanges from './getFilterChanges'
+import * as getLogs from './getLogs'
+import { type WatchEventOnLogsParameter, watchEvent } from './watchEvent'
 
 const event = {
   transfer: {

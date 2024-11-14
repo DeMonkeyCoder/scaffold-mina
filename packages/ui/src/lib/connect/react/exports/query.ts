@@ -16,4 +16,4 @@ export {
   useInfiniteQuery,
   useMutation,
   useQuery,
-} from "../utils/query.js";
+} from "../utils/query";

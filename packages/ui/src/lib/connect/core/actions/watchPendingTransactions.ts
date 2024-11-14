@@ -5,14 +5,14 @@ import {
   watchPendingTransactions as viem_watchPendingTransactions,
 } from "@/lib/connect/viem/actions";
 
-import type { Config } from "../createConfig.js";
-import type { SelectChains } from "../types/chain.js";
+import type { Config } from "../createConfig";
+import type { SelectChains } from "../types/chain";
 import type {
   ChainIdParameter,
   SyncConnectedChainParameter,
-} from "../types/properties.js";
-import type { UnionCompute } from "../types/utils.js";
-import { getAction } from "../utils/getAction.js";
+} from "../types/properties";
+import type { UnionCompute } from "../types/utils";
+import { getAction } from "../utils/getAction";
 
 export type WatchPendingTransactionsParameters<
   config extends Config = Config,

@@ -1,5 +1,5 @@
-import { defineChain } from '../../utils/chain/defineChain.js'
-import { chainConfig } from '../../zksync/chainConfig.js'
+import { defineChain } from '../../utils/chain/defineChain'
+import { chainConfig } from '../../zksync/chainConfig'
 
 export const zksyncSepoliaTestnet = /*#__PURE__*/ defineChain({
   ...chainConfig,

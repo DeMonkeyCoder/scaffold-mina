@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
-import { mainnetClient } from '../../../test/src/utils.js'
-import { optimism } from '../../chains/index.js'
-import { waitForNextL2Output } from './waitForNextL2Output.js'
+import { mainnetClient } from '../../../test/src/utils'
+import { optimism } from '../../chains/index'
+import { waitForNextL2Output } from './waitForNextL2Output'
 
 test('default', async () => {
   const output = await waitForNextL2Output(mainnetClient, {

@@ -1,23 +1,23 @@
-import { InvalidAddressError } from '../errors/address.js'
-import { BaseError } from '../errors/base.js'
-import { InvalidChainIdError } from '../errors/chain.js'
-import { FeeCapTooHighError, TipAboveFeeCapError } from '../errors/node.js'
-import { serializeTransaction as serializeTransaction_op } from '../op-stack/serializers.js'
-import type { ChainSerializers } from '../types/chain.js'
-import type { Signature } from '../types/misc.js'
-import { isAddress } from '../utils/address/isAddress.js'
-import { concatHex } from '../utils/data/concat.js'
-import { toHex } from '../utils/encoding/toHex.js'
-import { toRlp } from '../utils/encoding/toRlp.js'
-import { serializeAccessList } from '../utils/transaction/serializeAccessList.js'
-import { toYParitySignatureArray } from '../utils/transaction/serializeTransaction.js'
+import { InvalidAddressError } from '../errors/address'
+import { BaseError } from '../errors/base'
+import { InvalidChainIdError } from '../errors/chain'
+import { FeeCapTooHighError, TipAboveFeeCapError } from '../errors/node'
+import { serializeTransaction as serializeTransaction_op } from '../op-stack/serializers'
+import type { ChainSerializers } from '../types/chain'
+import type { Signature } from '../types/misc'
+import { isAddress } from '../utils/address/isAddress'
+import { concatHex } from '../utils/data/concat'
+import { toHex } from '../utils/encoding/toHex'
+import { toRlp } from '../utils/encoding/toRlp'
+import { serializeAccessList } from '../utils/transaction/serializeAccessList'
+import { toYParitySignatureArray } from '../utils/transaction/serializeTransaction'
 import type {
   CeloTransactionSerializable,
   TransactionSerializableCIP42,
   TransactionSerializableCIP64,
   TransactionSerializedCIP64,
-} from './types.js'
-import { isCIP64, isEmpty, isPresent } from './utils.js'
+} from './types'
+import { isCIP64, isEmpty, isPresent } from './utils'
 
 export function serializeTransaction(
   transaction: CeloTransactionSerializable,

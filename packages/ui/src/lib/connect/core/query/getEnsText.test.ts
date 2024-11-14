@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getEnsTextQueryOptions } from './getEnsText.js'
+import { getEnsTextQueryOptions } from './getEnsText'
 
 test('default', () => {
   expect(

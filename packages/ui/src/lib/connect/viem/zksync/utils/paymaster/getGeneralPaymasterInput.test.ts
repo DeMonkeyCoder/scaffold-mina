@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { getGeneralPaymasterInput } from './getGeneralPaymasterInput.js'
+import { getGeneralPaymasterInput } from './getGeneralPaymasterInput'
 
 test('args: innerInput field as hex', () => {
   expect(

@@ -1,12 +1,12 @@
 import type { TypedData, TypedDataDomain } from 'abitype'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { Hex } from '../../../types/misc.js'
-import type { TypedDataDefinition } from '../../../types/typedData.js'
-import type { RequiredBy } from '../../../types/utils.js'
+import type { ErrorType } from '../../../errors/utils'
+import type { Hex } from '../../../types/misc'
+import type { TypedDataDefinition } from '../../../types/typedData'
+import type { RequiredBy } from '../../../types/utils'
 import {
   type HashTypedDataErrorType as HashTypedDataErrorType_,
   hashTypedData as hashTypedData_,
-} from '../../../utils/signature/hashTypedData.js'
+} from '../../../utils/signature/hashTypedData'
 
 export type HashTypedDataParameters<
   typedData extends TypedData | Record<string, unknown> = TypedData,

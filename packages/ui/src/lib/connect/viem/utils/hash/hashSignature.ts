@@ -1,7 +1,7 @@
-import { type ToBytesErrorType, toBytes } from '../encoding/toBytes.js'
+import { type ToBytesErrorType, toBytes } from '../encoding/toBytes'
 
-import type { ErrorType } from '../../errors/utils.js'
-import { type Keccak256ErrorType, keccak256 } from './keccak256.js'
+import type { ErrorType } from '../../errors/utils'
+import { type Keccak256ErrorType, keccak256 } from './keccak256'
 
 const hash = (value: string) => keccak256(toBytes(value))
 

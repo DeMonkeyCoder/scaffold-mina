@@ -8,9 +8,9 @@ import {
 import { parseEther } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { connect } from "./connect.js";
-import { deployContract } from "./deployContract.js";
-import { disconnect } from "./disconnect.js";
+import { connect } from "./connect";
+import { deployContract } from "./deployContract";
+import { disconnect } from "./disconnect";
 
 const connector = config.connectors[0]!;
 

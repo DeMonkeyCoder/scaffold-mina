@@ -1,10 +1,10 @@
 import { attest } from '@ark/attest'
 import { test } from 'vitest'
 
-import { createClient } from './createClient.js'
-import { createWalletClient } from './createWalletClient.js'
-import { walletActions } from './decorators/wallet.js'
-import { http } from './transports/http.js'
+import { createClient } from './createClient'
+import { createWalletClient } from './createWalletClient'
+import { walletActions } from './decorators/wallet'
+import { http } from './transports/http'
 
 test('createWalletClient', () => {
   createWalletClient({

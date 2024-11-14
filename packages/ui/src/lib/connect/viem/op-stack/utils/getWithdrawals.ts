@@ -1,10 +1,10 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Log } from '../../types/log.js'
-import type { Withdrawal } from '../types/withdrawal.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Log } from '../../types/log'
+import type { Withdrawal } from '../types/withdrawal'
 import {
   type ExtractWithdrawalMessageLogsErrorType,
   extractWithdrawalMessageLogs,
-} from './extractWithdrawalMessageLogs.js'
+} from './extractWithdrawalMessageLogs'
 
 export type GetWithdrawalsParameters = {
   /** The L2 transaction receipt logs. */

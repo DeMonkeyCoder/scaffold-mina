@@ -10,10 +10,10 @@ import { createWrapper, renderHook, waitFor } from "@wagmi/test/react";
 import { Fragment, createElement } from "react";
 import { expect, test, vi } from "vitest";
 
-import { WagmiProvider } from "../context.js";
-import { useAccountEffect } from "./useAccountEffect.js";
-import { useConnect } from "./useConnect.js";
-import { useDisconnect } from "./useDisconnect.js";
+import { WagmiProvider } from "../context";
+import { useAccountEffect } from "./useAccountEffect";
+import { useConnect } from "./useConnect";
+import { useDisconnect } from "./useDisconnect";
 
 test("parameters: config", () => {
   const { result } = renderHook(() => useAccountEffect({ config }), {

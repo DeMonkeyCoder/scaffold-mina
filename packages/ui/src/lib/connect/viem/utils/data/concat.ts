@@ -1,5 +1,5 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex } from '../../types/misc.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex } from '../../types/misc'
 
 export type ConcatReturnType<value extends Hex | ByteArray> = value extends Hex
   ? Hex

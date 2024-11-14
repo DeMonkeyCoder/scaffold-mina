@@ -4,11 +4,11 @@ import { test } from 'vitest'
 import {
   baycContractConfig,
   usdcContractConfig,
-} from '../../../test/src/abis.js'
-import { mainnet } from '../../chains/index.js'
-import { createClient } from '../../clients/createClient.js'
-import { http } from '../../clients/transports/http.js'
-import { multicall } from './multicall.js'
+} from '../../../test/src/abis'
+import { mainnet } from '../../chains/index'
+import { createClient } from '../../clients/createClient'
+import { http } from '../../clients/transports/http'
+import { multicall } from './multicall'
 
 const client = createClient({ chain: mainnet, transport: http() })
 

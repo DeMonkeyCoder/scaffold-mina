@@ -2,7 +2,7 @@ import type { Connector } from "@/lib/connect/core/exports";
 import type { Address, Chain } from "@/lib/connect/viem";
 import { expectTypeOf, test } from "vitest";
 
-import { useAccount } from "./useAccount.js";
+import { useAccount } from "./useAccount";
 
 test("states", () => {
   const result = useAccount();

@@ -2,7 +2,7 @@ import { config, testClient, wait } from "@wagmi/test";
 import { expect, test } from "vitest";
 
 import type { Block } from "@/lib/connect/viem";
-import { watchBlocks } from "./watchBlocks.js";
+import { watchBlocks } from "./watchBlocks";
 
 test("default", async () => {
   const blocks: Block[] = [];

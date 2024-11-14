@@ -5,10 +5,10 @@ import {
   type WatchAssetParameters,
   type WatchAssetReturnType,
   watchAsset,
-} from '../actions/watchAsset.js'
-import type { Config } from '../createConfig.js'
-import type { Compute } from '../types/utils.js'
-import type { Mutate, MutateAsync } from './types.js'
+} from '../actions/watchAsset'
+import type { Config } from '../createConfig'
+import type { Compute } from '../types/utils'
+import type { Mutate, MutateAsync } from './types'
 
 export function watchAssetMutationOptions(config: Config) {
   return {

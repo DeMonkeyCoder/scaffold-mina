@@ -7,21 +7,21 @@ import {
   test,
 } from 'vitest'
 
-import { ERC20InvalidTransferEvent } from '~contracts/generated.js'
-import { usdcContractConfig } from '~test/src/abis.js'
-import { accounts, address } from '~test/src/constants.js'
-import { deployErc20InvalidTransferEvent } from '~test/src/utils.js'
-import type { Log } from '../../types/log.js'
-import { getAddress } from '../../utils/address/getAddress.js'
-import { impersonateAccount } from '../test/impersonateAccount.js'
-import { mine } from '../test/mine.js'
-import { setBalance } from '../test/setBalance.js'
-import { writeContract } from '../wallet/writeContract.js'
+import { ERC20InvalidTransferEvent } from '~contracts/generated'
+import { usdcContractConfig } from '~test/src/abis'
+import { accounts, address } from '~test/src/constants'
+import { deployErc20InvalidTransferEvent } from '~test/src/utils'
+import type { Log } from '../../types/log'
+import { getAddress } from '../../utils/address/getAddress'
+import { impersonateAccount } from '../test/impersonateAccount'
+import { mine } from '../test/mine'
+import { setBalance } from '../test/setBalance'
+import { writeContract } from '../wallet/writeContract'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { getBlock } from './getBlock.js'
-import { getLogs } from './getLogs.js'
+import { getBlock } from './getBlock'
+import { getLogs } from './getLogs'
 
 const client = anvilMainnet.getClient()
 

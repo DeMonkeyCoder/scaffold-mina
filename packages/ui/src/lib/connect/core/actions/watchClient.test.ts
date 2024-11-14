@@ -2,8 +2,8 @@ import { config } from "@wagmi/test";
 import type { Client } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { switchChain } from "./switchChain.js";
-import { watchClient } from "./watchClient.js";
+import { switchChain } from "./switchChain";
+import { watchClient } from "./watchClient";
 
 test("default", async () => {
   const clients: Client[] = [];

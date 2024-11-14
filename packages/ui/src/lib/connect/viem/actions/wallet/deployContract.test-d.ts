@@ -1,10 +1,10 @@
 import { test } from 'vitest'
 
-import { wagmiContractConfig } from '~test/src/abis.js'
+import { wagmiContractConfig } from '~test/src/abis'
 
 import { type Abi, parseAbi } from 'abitype'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { deployContract } from './deployContract.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { deployContract } from './deployContract'
 
 const client = anvilMainnet.getClient()
 const clientWithAccount = anvilMainnet.getClient({

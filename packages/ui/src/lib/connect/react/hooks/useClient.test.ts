@@ -4,7 +4,7 @@ import { renderHook } from "@wagmi/test/react";
 import { Fragment, createElement } from "react";
 import { expect, test } from "vitest";
 
-import { useClient } from "./useClient.js";
+import { useClient } from "./useClient";
 
 test("default", async () => {
   const { result, rerender } = renderHook(() => useClient());

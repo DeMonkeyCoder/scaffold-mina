@@ -3,7 +3,7 @@ import { renderHook, waitFor } from "@wagmi/test/react";
 import { type Address, parseEther } from "@/lib/connect/viem";
 import { beforeEach, expect, test } from "vitest";
 
-import { useBalance } from "./useBalance.js";
+import { useBalance } from "./useBalance";
 
 const address = accounts[0];
 

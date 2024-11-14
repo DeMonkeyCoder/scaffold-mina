@@ -1,4 +1,4 @@
-import { defineChain } from '../../utils/chain/defineChain.js'
+import { defineChain } from '../../utils/chain/defineChain'
 
 export const palmTestnet = /*#__PURE__*/ defineChain({
   id: 11_297_108_099,

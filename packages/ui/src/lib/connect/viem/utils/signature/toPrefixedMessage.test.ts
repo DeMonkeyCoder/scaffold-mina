@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
-import { stringToBytes } from '../encoding/toBytes.js'
-import { stringToHex } from '../encoding/toHex.js'
-import { toPrefixedMessage } from './toPrefixedMessage.js'
+import { stringToBytes } from '../encoding/toBytes'
+import { stringToHex } from '../encoding/toHex'
+import { toPrefixedMessage } from './toPrefixedMessage'
 
 test('default', () => {
   expect(toPrefixedMessage('hello world')).toMatchInlineSnapshot(

@@ -2,7 +2,7 @@ import { accounts, chain, config, testClient } from "@wagmi/test";
 import { parseEther } from "@/lib/connect/viem";
 import { beforeEach, describe, expect, test } from "vitest";
 
-import { getBalance } from "./getBalance.js";
+import { getBalance } from "./getBalance";
 
 const address = accounts[0];
 

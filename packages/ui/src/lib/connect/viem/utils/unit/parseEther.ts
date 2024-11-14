@@ -1,7 +1,7 @@
-import { etherUnits } from "../../constants/unit.js";
-import type { ErrorType } from "../../errors/utils.js";
+import { etherUnits } from "../../constants/unit";
+import type { ErrorType } from "../../errors/utils";
 
-import { type ParseUnitsErrorType, parseUnits } from "./parseUnits.js";
+import { type ParseUnitsErrorType, parseUnits } from "./parseUnits";
 
 export type ParseEtherErrorType = ParseUnitsErrorType | ErrorType;
 

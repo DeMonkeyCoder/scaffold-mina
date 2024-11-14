@@ -1,10 +1,10 @@
 import type { Address } from 'abitype'
 
-import { publicKeyToAddress } from '../../accounts/utils/publicKeyToAddress.js'
-import type { ByteArray, Hex, Signature } from '../../types/misc.js'
+import { publicKeyToAddress } from '../../accounts/utils/publicKeyToAddress'
+import type { ByteArray, Hex, Signature } from '../../types/misc'
 
-import type { ErrorType } from '../../errors/utils.js'
-import { recoverPublicKey } from './recoverPublicKey.js'
+import type { ErrorType } from '../../errors/utils'
+import { recoverPublicKey } from './recoverPublicKey'
 
 export type RecoverAddressParameters = {
   hash: Hex | ByteArray

@@ -2,7 +2,7 @@ import { accounts, address, chain } from '@wagmi/test'
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { useCall } from './useCall.js'
+import { useCall } from './useCall'
 
 const name4bytes = '0x06fdde03'
 

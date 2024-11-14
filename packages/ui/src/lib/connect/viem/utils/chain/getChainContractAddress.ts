@@ -1,8 +1,8 @@
 import {
   ChainDoesNotSupportContract,
   type ChainDoesNotSupportContractErrorType,
-} from '../../errors/chain.js'
-import type { Chain, ChainContract } from '../../types/chain.js'
+} from '../../errors/chain'
+import type { Chain, ChainContract } from '../../types/chain'
 
 export type GetChainContractAddressErrorType =
   ChainDoesNotSupportContractErrorType

@@ -1,16 +1,16 @@
 import type { Address } from 'abitype'
 
-import type { ByteArray, Hex } from '../../types/misc.js'
-import { type ConcatErrorType, concat } from '../data/concat.js'
-import { type IsBytesErrorType, isBytes } from '../data/isBytes.js'
-import { type PadErrorType, pad } from '../data/pad.js'
-import { type SliceErrorType, slice } from '../data/slice.js'
-import { type ToBytesErrorType, toBytes } from '../encoding/toBytes.js'
-import { type ToRlpErrorType, toRlp } from '../encoding/toRlp.js'
-import { type Keccak256ErrorType, keccak256 } from '../hash/keccak256.js'
+import type { ByteArray, Hex } from '../../types/misc'
+import { type ConcatErrorType, concat } from '../data/concat'
+import { type IsBytesErrorType, isBytes } from '../data/isBytes'
+import { type PadErrorType, pad } from '../data/pad'
+import { type SliceErrorType, slice } from '../data/slice'
+import { type ToBytesErrorType, toBytes } from '../encoding/toBytes'
+import { type ToRlpErrorType, toRlp } from '../encoding/toRlp'
+import { type Keccak256ErrorType, keccak256 } from '../hash/keccak256'
 
-import type { ErrorType } from '../../errors/utils.js'
-import { type GetAddressErrorType, getAddress } from './getAddress.js'
+import type { ErrorType } from '../../errors/utils'
+import { type GetAddressErrorType, getAddress } from './getAddress'
 
 export type GetCreateAddressOptions = {
   from: Address

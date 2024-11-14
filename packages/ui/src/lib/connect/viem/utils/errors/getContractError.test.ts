@@ -1,12 +1,12 @@
 import { describe, expect, test } from "vitest";
 
-import { baycContractConfig } from "~test/src/abis.js";
-import { accounts } from "~test/src/constants.js";
-import { AbiDecodingZeroDataError } from "../../errors/abi.js";
-import { BaseError } from "../../errors/base.js";
-import { RawContractError } from "../../errors/contract.js";
+import { baycContractConfig } from "~test/src/abis";
+import { accounts } from "~test/src/constants";
+import { AbiDecodingZeroDataError } from "../../errors/abi";
+import { BaseError } from "../../errors/base";
+import { RawContractError } from "../../errors/contract";
 
-import { getContractError } from "./getContractError.js";
+import { getContractError } from "./getContractError";
 
 describe("getContractError", () => {
   test("default", () => {

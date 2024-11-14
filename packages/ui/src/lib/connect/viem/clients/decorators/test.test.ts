@@ -1,14 +1,14 @@
 import { describe, expect, test } from 'vitest'
 
-import { accounts, address } from '~test/src/constants.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
-import { parseGwei } from '../../utils/unit/parseGwei.js'
+import { accounts, address } from '~test/src/constants'
+import { parseEther } from '../../utils/unit/parseEther'
+import { parseGwei } from '../../utils/unit/parseGwei'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { createTestClient } from '../createTestClient.js'
-import { publicActions } from './public.js'
-import { testActions } from './test.js'
-import { walletActions } from './wallet.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { createTestClient } from '../createTestClient'
+import { publicActions } from './public'
+import { testActions } from './test'
+import { walletActions } from './wallet'
 
 const client = anvilMainnet
   .getClient()

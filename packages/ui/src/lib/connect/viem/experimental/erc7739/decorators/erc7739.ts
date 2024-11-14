@@ -1,18 +1,18 @@
 import type { Address, TypedData } from 'abitype'
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import type { Account } from '../../../types/account.js'
-import type { Chain } from '../../../types/chain.js'
+import type { Client } from '../../../clients/createClient'
+import type { Transport } from '../../../clients/transports/createTransport'
+import type { Account } from '../../../types/account'
+import type { Chain } from '../../../types/chain'
 import {
   type SignMessageParameters,
   type SignMessageReturnType,
   signMessage,
-} from '../actions/signMessage.js'
+} from '../actions/signMessage'
 import {
   type SignTypedDataParameters,
   type SignTypedDataReturnType,
   signTypedData,
-} from '../actions/signTypedData.js'
+} from '../actions/signTypedData'
 
 export type Erc7739Actions<
   account extends Account | undefined = Account | undefined,

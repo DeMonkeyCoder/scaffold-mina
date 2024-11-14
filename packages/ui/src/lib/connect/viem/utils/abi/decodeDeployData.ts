@@ -5,15 +5,15 @@ import {
   type AbiConstructorNotFoundErrorType,
   AbiConstructorParamsNotFoundError,
   type AbiConstructorParamsNotFoundErrorType,
-} from '../../errors/abi.js'
-import type { ContractConstructorArgs } from '../../types/contract.js'
-import type { Hex } from '../../types/misc.js'
+} from '../../errors/abi'
+import type { ContractConstructorArgs } from '../../types/contract'
+import type { Hex } from '../../types/misc'
 
-import type { ErrorType } from '../../errors/utils.js'
+import type { ErrorType } from '../../errors/utils'
 import {
   type DecodeAbiParametersErrorType,
   decodeAbiParameters,
-} from './decodeAbiParameters.js'
+} from './decodeAbiParameters'
 
 const docsPath = '/docs/contract/decodeDeployData'
 

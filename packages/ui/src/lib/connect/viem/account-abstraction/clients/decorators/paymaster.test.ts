@@ -1,8 +1,8 @@
 import { beforeEach, expect, test } from 'vitest'
-import { bundlerMainnet } from '../../../../test/src/bundler.js'
-import { createClient } from '../../../clients/createClient.js'
-import { http } from '../../../clients/transports/http.js'
-import { paymasterActions } from './paymaster.js'
+import { bundlerMainnet } from '../../../../test/src/bundler'
+import { createClient } from '../../../clients/createClient'
+import { http } from '../../../clients/transports/http'
+import { paymasterActions } from './paymaster'
 
 const client = createClient({
   transport: http('https://'),

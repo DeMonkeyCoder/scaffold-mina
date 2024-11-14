@@ -1,27 +1,27 @@
 import type { Address } from 'abitype'
 
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import { universalResolverReverseAbi } from '../../constants/abis.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { Prettify } from '../../types/utils.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import { universalResolverReverseAbi } from '../../constants/abis'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { Prettify } from '../../types/utils'
 import {
   type GetChainContractAddressErrorType,
   getChainContractAddress,
-} from '../../utils/chain/getChainContractAddress.js'
-import { type ToHexErrorType, toHex } from '../../utils/encoding/toHex.js'
-import { isNullUniversalResolverError } from '../../utils/ens/errors.js'
+} from '../../utils/chain/getChainContractAddress'
+import { type ToHexErrorType, toHex } from '../../utils/encoding/toHex'
+import { isNullUniversalResolverError } from '../../utils/ens/errors'
 import {
   type PacketToBytesErrorType,
   packetToBytes,
-} from '../../utils/ens/packetToBytes.js'
-import { getAction } from '../../utils/getAction.js'
+} from '../../utils/ens/packetToBytes'
+import { getAction } from '../../utils/getAction'
 import {
   type ReadContractErrorType,
   type ReadContractParameters,
   readContract,
-} from '../public/readContract.js'
+} from '../public/readContract'
 
 export type GetEnsNameParameters = Prettify<
   Pick<ReadContractParameters, 'blockNumber' | 'blockTag'> & {

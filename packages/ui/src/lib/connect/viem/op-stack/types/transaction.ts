@@ -1,11 +1,11 @@
-import type { FeeValuesEIP1559 } from '../../types/fee.js'
-import type { Hex } from '../../types/misc.js'
+import type { FeeValuesEIP1559 } from '../../types/fee'
+import type { Hex } from '../../types/misc'
 import type {
   Index,
   Quantity,
   RpcTransactionReceipt,
   RpcTransaction as RpcTransaction_,
-} from '../../types/rpc.js'
+} from '../../types/rpc'
 import type {
   TransactionBase,
   TransactionReceipt,
@@ -14,8 +14,8 @@ import type {
   TransactionSerialized,
   TransactionType,
   Transaction as Transaction_,
-} from '../../types/transaction.js'
-import type { OneOf } from '../../types/utils.js'
+} from '../../types/transaction'
+import type { OneOf } from '../../types/utils'
 
 type RpcTransaction<pending extends boolean = boolean> =
   RpcTransaction_<pending> & {

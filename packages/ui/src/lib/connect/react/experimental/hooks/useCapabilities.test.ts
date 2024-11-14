@@ -3,7 +3,7 @@ import { accounts, config } from "@wagmi/test";
 import { renderHook, waitFor } from "@wagmi/test/react";
 import { expect, test } from "vitest";
 
-import { useCapabilities } from "./useCapabilities.js";
+import { useCapabilities } from "./useCapabilities";
 
 const connector = config.connectors[0]!;
 

@@ -1,8 +1,8 @@
 import type { AbiEvent, AbiFunction } from 'abitype'
 
-import type { ErrorType } from '../../errors/utils.js'
-import { type HashSignatureErrorType, hashSignature } from './hashSignature.js'
-import { type ToSignatureErrorType, toSignature } from './toSignature.js'
+import type { ErrorType } from '../../errors/utils'
+import { type HashSignatureErrorType, hashSignature } from './hashSignature'
+import { type ToSignatureErrorType, toSignature } from './toSignature'
 
 export type ToSignatureHashErrorType =
   | HashSignatureErrorType

@@ -1,13 +1,13 @@
 import { HDKey } from '@scure/bip32'
 import { mnemonicToSeedSync } from '@scure/bip39'
 
-import type { ErrorType } from '../errors/utils.js'
+import type { ErrorType } from '../errors/utils'
 import {
   type HDKeyToAccountErrorType,
   type HDKeyToAccountOptions,
   hdKeyToAccount,
-} from './hdKeyToAccount.js'
-import type { HDAccount, HDOptions } from './types.js'
+} from './hdKeyToAccount'
+import type { HDAccount, HDOptions } from './types'
 
 export type MnemonicToAccountOptions = HDKeyToAccountOptions
 

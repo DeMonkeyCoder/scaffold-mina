@@ -1,9 +1,9 @@
 import type { Address } from 'abitype'
-import type { Block, BlockTag } from '../../types/block.js'
-import type { Hash, Hex } from '../../types/misc.js'
-import type { RpcBlock } from '../../types/rpc.js'
-import type { Assign } from '../../types/utils.js'
-import type { ZksyncRpcTransaction, ZksyncTransaction } from './transaction.js'
+import type { Block, BlockTag } from '../../types/block'
+import type { Hash, Hex } from '../../types/misc'
+import type { RpcBlock } from '../../types/rpc'
+import type { Assign } from '../../types/utils'
+import type { ZksyncRpcTransaction, ZksyncTransaction } from './transaction'
 
 export type ZksyncBatchDetails = Omit<
   ZksyncBlockDetails,

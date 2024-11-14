@@ -1,8 +1,8 @@
 import type { Address } from 'abitype'
 
-import type { Chain } from '../../types/chain.js'
-import type { Prettify } from '../../types/utils.js'
-import type { TargetChain } from './chain.js'
+import type { Chain } from '../../types/chain'
+import type { Prettify } from '../../types/utils'
+import type { TargetChain } from './chain'
 
 export type GetContractAddressParameter<
   chain extends Chain | undefined,

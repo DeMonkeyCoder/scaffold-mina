@@ -2,13 +2,13 @@ import type { Address } from 'abitype'
 
 import { test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import type { Account } from '../../accounts/types.js'
-import { createWalletClient } from '../../clients/createWalletClient.js'
-import { http } from '../../clients/transports/http.js'
-import type { Chain } from '../../types/chain.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import type { Account } from '../../accounts/types'
+import { createWalletClient } from '../../clients/createWalletClient'
+import { http } from '../../clients/transports/http'
+import type { Chain } from '../../types/chain'
 
-import { sendTransaction } from './sendTransaction.js'
+import { sendTransaction } from './sendTransaction'
 
 const walletClient = createWalletClient({
   account: '0x',

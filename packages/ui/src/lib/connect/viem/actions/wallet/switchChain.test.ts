@@ -1,9 +1,9 @@
 import { expect, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { avalanche, fantom } from '../../chains/index.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { avalanche, fantom } from '../../chains/index'
 
-import { switchChain } from './switchChain.js'
+import { switchChain } from './switchChain'
 
 const client = anvilMainnet.getClient()
 

@@ -6,18 +6,18 @@
  */
 import { describe, expect, test } from 'vitest'
 
-import { ErrorsExample } from '~contracts/generated.js'
-import { baycContractConfig, wagmiContractConfig } from '~test/src/abis.js'
-import { accounts } from '~test/src/constants.js'
-import { deployBAYC, deployErrorExample } from '~test/src/utils.js'
-import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
-import { encodeFunctionData } from '../../utils/abi/encodeFunctionData.js'
-import { mine } from '../test/mine.js'
-import { sendTransaction } from '../wallet/sendTransaction.js'
+import { ErrorsExample } from '~contracts/generated'
+import { baycContractConfig, wagmiContractConfig } from '~test/src/abis'
+import { accounts } from '~test/src/constants'
+import { deployBAYC, deployErrorExample } from '~test/src/utils'
+import { privateKeyToAccount } from '../../accounts/privateKeyToAccount'
+import { encodeFunctionData } from '../../utils/abi/encodeFunctionData'
+import { mine } from '../test/mine'
+import { sendTransaction } from '../wallet/sendTransaction'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { estimateContractGas } from './estimateContractGas.js'
+import { estimateContractGas } from './estimateContractGas'
 
 const client = anvilMainnet.getClient()
 

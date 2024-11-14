@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest'
 
-import { createClient } from '../../../clients/createClient.js'
-import { custom } from '../../../clients/transports/custom.js'
-import { erc7715Actions } from './erc7715.js'
+import { createClient } from '../../../clients/createClient'
+import { custom } from '../../../clients/transports/custom'
+import { erc7715Actions } from './erc7715'
 
 const client = createClient({
   transport: custom({

@@ -1,6 +1,6 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { useTransactionConfirmations } from './useTransactionConfirmations.js'
+import { useTransactionConfirmations } from './useTransactionConfirmations'
 
 test('select data', () => {
   const result = useTransactionConfirmations({

@@ -1,18 +1,18 @@
 import {
   type ReadContractErrorType,
   readContract,
-} from '../../actions/public/readContract.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
+} from '../../actions/public/readContract'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import { withCache } from '../../utils/promise/withCache.js'
-import { portal2Abi } from '../abis.js'
-import type { GetContractAddressParameter } from '../types/contract.js'
+} from '../../types/chain'
+import { withCache } from '../../utils/promise/withCache'
+import { portal2Abi } from '../abis'
+import type { GetContractAddressParameter } from '../types/contract'
 
 export type GetPortalVersionParameters<
   chain extends Chain | undefined = Chain | undefined,

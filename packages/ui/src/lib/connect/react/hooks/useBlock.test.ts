@@ -2,7 +2,7 @@ import { testClient } from '@wagmi/test'
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { useBlock } from './useBlock.js'
+import { useBlock } from './useBlock'
 
 test('mounts', async () => {
   const { result } = renderHook(() => useBlock())

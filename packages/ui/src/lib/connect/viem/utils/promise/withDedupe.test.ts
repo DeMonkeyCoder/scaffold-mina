@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
 
-import { wait } from '../wait.js'
+import { wait } from '../wait'
 
-import { promiseCache, withDedupe } from './withDedupe.js'
+import { promiseCache, withDedupe } from './withDedupe'
 
 test('default', async () => {
   let count = 0

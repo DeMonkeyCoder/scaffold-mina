@@ -1,7 +1,7 @@
 import { formatUnits as formatUnitsV6 } from "ethers";
 import { bench, describe } from "vitest";
 
-import { formatUnits } from "./formatUnits.js";
+import { formatUnits } from "./formatUnits";
 
 describe("Format Unit", () => {
   bench("@/lib/connect/viem: `formatUnits`", () => {

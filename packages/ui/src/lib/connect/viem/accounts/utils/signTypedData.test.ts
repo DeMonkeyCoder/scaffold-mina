@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
 
-import { accounts, typedData } from '~test/src/constants.js'
+import { accounts, typedData } from '~test/src/constants'
 
-import { signTypedData } from './signTypedData.js'
+import { signTypedData } from './signTypedData'
 
 test('default', async () => {
   expect(

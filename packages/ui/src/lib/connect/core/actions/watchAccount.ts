@@ -1,6 +1,6 @@
-import type { Config } from '../createConfig.js'
-import { deepEqual } from '../utils/deepEqual.js'
-import { type GetAccountReturnType, getAccount } from './getAccount.js'
+import type { Config } from '../createConfig'
+import { deepEqual } from '../utils/deepEqual'
+import { type GetAccountReturnType, getAccount } from './getAccount'
 
 export type WatchAccountParameters<config extends Config = Config> = {
   onChange(

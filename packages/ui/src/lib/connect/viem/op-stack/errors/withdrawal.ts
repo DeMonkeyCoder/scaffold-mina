@@ -1,5 +1,5 @@
-import { BaseError } from '../../errors/base.js'
-import type { Hex } from '../../types/misc.js'
+import { BaseError } from '../../errors/base'
+import type { Hex } from '../../types/misc'
 
 export type GameNotFoundErrorType = GameNotFoundError & {
   name: 'GameNotFoundError'

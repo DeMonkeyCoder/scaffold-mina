@@ -1,6 +1,6 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { useBlockTransactionCount } from './useBlockTransactionCount.js'
+import { useBlockTransactionCount } from './useBlockTransactionCount'
 
 test('select data', () => {
   const result = useBlockTransactionCount({

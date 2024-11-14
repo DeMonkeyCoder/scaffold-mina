@@ -6,7 +6,7 @@ import { expectTypeOf, test } from "vitest";
 import {
   type UseWatchPendingTransactionsParameters,
   useWatchPendingTransactions,
-} from "./useWatchPendingTransactions.js";
+} from "./useWatchPendingTransactions";
 
 test("default", () => {
   useWatchPendingTransactions({

@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
-import { anvilSepolia } from '../../../test/src/anvil.js'
-import { optimismSepolia } from '../../op-stack/chains.js'
-import { getGame } from './getGame.js'
+import { anvilSepolia } from '../../../test/src/anvil'
+import { optimismSepolia } from '../../op-stack/chains'
+import { getGame } from './getGame'
 
 const sepoliaClient = anvilSepolia.getClient()
 

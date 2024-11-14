@@ -1,9 +1,9 @@
 import { type P256Credential, type SignParameters, sign } from 'webauthn-p256'
 
-import type { ErrorType } from '../../errors/utils.js'
-import { hashMessage } from '../../utils/signature/hashMessage.js'
-import { hashTypedData } from '../../utils/signature/hashTypedData.js'
-import type { WebAuthnAccount } from './types.js'
+import type { ErrorType } from '../../errors/utils'
+import { hashMessage } from '../../utils/signature/hashMessage'
+import { hashTypedData } from '../../utils/signature/hashTypedData'
+import type { WebAuthnAccount } from './types'
 
 export type ToWebAuthnAccountParameters = {
   /**

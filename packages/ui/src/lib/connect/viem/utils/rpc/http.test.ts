@@ -2,15 +2,15 @@ import { describe, expect, test, vi } from "vitest";
 
 import type { IncomingHttpHeaders } from "node:http";
 
-import { createHttpServer } from "~test/src/utils.js";
+import { createHttpServer } from "~test/src/utils";
 
-import { anvilMainnet } from "../../../test/src/anvil.js";
-import { getBlockNumber, mine } from "../../actions/index.js";
+import { anvilMainnet } from "../../../test/src/anvil";
+import { getBlockNumber, mine } from "../../actions/index";
 
-import { numberToHex } from "../encoding/toHex.js";
-import * as withTimeout from "../promise/withTimeout.js";
-import { wait } from "../wait.js";
-import { getHttpRpcClient } from "./http.js";
+import { numberToHex } from "../encoding/toHex";
+import * as withTimeout from "../promise/withTimeout";
+import { wait } from "../wait";
+import { getHttpRpcClient } from "./http";
 
 const client = anvilMainnet.getClient();
 
@@ -49,7 +49,7 @@ describe("request", () => {
     const client = getHttpRpcClient(anvilMainnet.rpcUrl.http);
     await expect(
       client.request({
-        body: { method: "eth_getBlockByHash", params: ["0x0", false] },
+        body: { method: "mina_getBlockByHash", params: ["0x0", false] },
       })
     ).resolves.toMatchInlineSnapshot(
       `
@@ -69,7 +69,7 @@ describe("request", () => {
     const client = getHttpRpcClient(anvilMainnet.rpcUrl.http);
     await expect(
       client.request({
-        body: { method: "eth_wagmi" },
+        body: { method: "mina_wagmi" },
       })
     ).resolves.toMatchInlineSnapshot(`
       {
@@ -90,7 +90,7 @@ describe("request", () => {
       response.push(
         await client.request({
           body: {
-            method: "eth_getBlockByNumber",
+            method: "mina_getBlockByNumber",
             params: [
               numberToHex(anvilMainnet.forkBlockNumber - BigInt(i)),
               false,
@@ -118,7 +118,7 @@ describe("request", () => {
       Array.from({ length: 50 }).map(async (_, i) => {
         return await rpcClient.request({
           body: {
-            method: "eth_getBlockByNumber",
+            method: "mina_getBlockByNumber",
             params: [numberToHex(blockNumber - BigInt(i)), false],
           },
         });
@@ -258,7 +258,7 @@ describe("request", () => {
     await expect(() =>
       client.request({
         body: {
-          method: "eth_getBlockByNumber",
+          method: "mina_getBlockByNumber",
           params: [numberToHex(anvilMainnet.forkBlockNumber), false],
         },
       })
@@ -267,7 +267,7 @@ describe("request", () => {
 
       Status: 500
       URL: http://localhost
-      Request body: {"method":"eth_getBlockByNumber","params":["0x12f2974",false]}
+      Request body: {"method":"mina_getBlockByNumber","params":["0x12f2974",false]}
 
       Details: "ngmi"
       Version: @/lib/connect/viem@x.y.z]
@@ -285,7 +285,7 @@ describe("request", () => {
     await expect(() =>
       client.request({
         body: {
-          method: "eth_getBlockByNumber",
+          method: "mina_getBlockByNumber",
           params: [numberToHex(anvilMainnet.forkBlockNumber), false],
         },
       })
@@ -295,7 +295,7 @@ describe("request", () => {
 
       Status: 500
       URL: http://localhost
-      Request body: {"method":"eth_getBlockByNumber","params":["0x12f2974",false]}
+      Request body: {"method":"mina_getBlockByNumber","params":["0x12f2974",false]}
 
       Details: Internal Server Error
       Version: @/lib/connect/viem@x.y.z]
@@ -313,7 +313,7 @@ describe("request", () => {
     try {
       await client.request({
         body: {
-          method: "eth_getBlockByNumber",
+          method: "mina_getBlockByNumber",
           params: [numberToHex(anvilMainnet.forkBlockNumber), false],
         },
       });
@@ -331,7 +331,7 @@ describe("request", () => {
     await expect(() =>
       client.request({
         body: {
-          method: "eth_getBlockByNumber",
+          method: "mina_getBlockByNumber",
           params: [numberToHex(anvilMainnet.forkBlockNumber), false],
         },
         timeout: 1,
@@ -341,7 +341,7 @@ describe("request", () => {
       "The request took too long to respond.
 
       URL: http://localhost
-      Request body: {\\"method\\":\\"eth_getBlockByNumber\\",\\"params\\":[\\"0xf86cc2\\",false]}
+      Request body: {\\"method\\":\\"mina_getBlockByNumber\\",\\"params\\":[\\"0xf86cc2\\",false]}
 
       Details: The request timed out.
       Version: @/lib/connect/viem@x.y.z"
@@ -359,7 +359,7 @@ describe("request", () => {
     await expect(() =>
       client.request({
         body: {
-          method: "eth_getBlockByNumber",
+          method: "mina_getBlockByNumber",
           params: [numberToHex(anvilMainnet.forkBlockNumber), false],
         },
         timeout: 10000,
@@ -368,7 +368,7 @@ describe("request", () => {
       [HttpRequestError: HTTP request failed.
 
       URL: http://localhost
-      Request body: {"method":"eth_getBlockByNumber","params":["0x12f2974",false]}
+      Request body: {"method":"mina_getBlockByNumber","params":["0x12f2974",false]}
 
       Details: foo
       Version: @/lib/connect/viem@x.y.z]
@@ -412,7 +412,7 @@ describe("http (batch)", () => {
       await client.request({
         body: [
           { method: "web3_clientVersion" },
-          { method: "eth_getBlockByHash", params: ["0x0", false] },
+          { method: "mina_getBlockByHash", params: ["0x0", false] },
         ],
       })
     ).toMatchInlineSnapshot(`
@@ -439,7 +439,7 @@ describe("http (batch)", () => {
 
     expect(
       await client.request({
-        body: [{ method: "web3_clientVersion" }, { method: "eth_wagmi" }],
+        body: [{ method: "web3_clientVersion" }, { method: "mina_wagmi" }],
       })
     ).toMatchInlineSnapshot(`
       [
@@ -475,7 +475,7 @@ describe("http (batch)", () => {
         body: [
           { method: "web3_clientVersion" },
           {
-            method: "eth_getBlockByNumber",
+            method: "mina_getBlockByNumber",
             params: [numberToHex(anvilMainnet.forkBlockNumber), false],
           },
         ],
@@ -485,7 +485,7 @@ describe("http (batch)", () => {
 
       Status: 500
       URL: http://localhost
-      Request body: [{"method":"web3_clientVersion"},{"method":"eth_getBlockByNumber","params":["0x12f2974",false]}]
+      Request body: [{"method":"web3_clientVersion"},{"method":"mina_getBlockByNumber","params":["0x12f2974",false]}]
 
       Details: "ngmi"
       Version: @/lib/connect/viem@x.y.z]
@@ -505,7 +505,7 @@ describe("http (batch)", () => {
         body: [
           { method: "web3_clientVersion" },
           {
-            method: "eth_getBlockByNumber",
+            method: "mina_getBlockByNumber",
             params: [numberToHex(anvilMainnet.forkBlockNumber), false],
           },
         ],
@@ -516,7 +516,7 @@ describe("http (batch)", () => {
 
       Status: 500
       URL: http://localhost
-      Request body: [{"method":"web3_clientVersion"},{"method":"eth_getBlockByNumber","params":["0x12f2974",false]}]
+      Request body: [{"method":"web3_clientVersion"},{"method":"mina_getBlockByNumber","params":["0x12f2974",false]}]
 
       Details: Internal Server Error
       Version: @/lib/connect/viem@x.y.z]
@@ -536,7 +536,7 @@ describe("http (batch)", () => {
         body: [
           { method: "web3_clientVersion" },
           {
-            method: "eth_getBlockByNumber",
+            method: "mina_getBlockByNumber",
             params: [numberToHex(anvilMainnet.forkBlockNumber), false],
           },
         ],
@@ -546,7 +546,7 @@ describe("http (batch)", () => {
       [HttpRequestError: HTTP request failed.
 
       URL: http://localhost
-      Request body: [{"method":"web3_clientVersion"},{"method":"eth_getBlockByNumber","params":["0x12f2974",false]}]
+      Request body: [{"method":"web3_clientVersion"},{"method":"mina_getBlockByNumber","params":["0x12f2974",false]}]
 
       Details: foo
       Version: @/lib/connect/viem@x.y.z]

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { formatTransactionReceipt } from './transactionReceipt.js'
+import { formatTransactionReceipt } from './transactionReceipt'
 
 test('formats', () => {
   expect(

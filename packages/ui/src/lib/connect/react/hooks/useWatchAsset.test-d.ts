@@ -2,7 +2,7 @@ import type { WatchAssetErrorType } from "@/lib/connect/core/exports";
 import type { WatchAssetVariables } from "@/lib/connect/core/exports/query";
 import { expectTypeOf, test } from "vitest";
 
-import { useWatchAsset } from "./useWatchAsset.js";
+import { useWatchAsset } from "./useWatchAsset";
 
 const tokenInfo = {
   address: "0x0000000000000000000000000000000000000000",

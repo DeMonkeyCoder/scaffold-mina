@@ -1,8 +1,8 @@
-import type { Config } from '../createConfig.js'
+import type { Config } from '../createConfig'
 import {
   type GetPublicClientReturnType,
   getPublicClient,
-} from './getPublicClient.js'
+} from './getPublicClient'
 
 export type WatchPublicClientParameters<
   config extends Config = Config,

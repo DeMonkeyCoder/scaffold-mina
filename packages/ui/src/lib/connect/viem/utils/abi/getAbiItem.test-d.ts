@@ -1,9 +1,9 @@
 import { type Abi, parseAbi } from 'abitype'
 import { expectTypeOf, test } from 'vitest'
 
-import { wagmiContractConfig } from '~test/src/abis.js'
-import type { AbiItem } from '../../types/contract.js'
-import { getAbiItem } from './getAbiItem.js'
+import { wagmiContractConfig } from '~test/src/abis'
+import type { AbiItem } from '../../types/contract'
+import { getAbiItem } from './getAbiItem'
 
 test('function', () => {
   const res = getAbiItem({

@@ -2,7 +2,7 @@ import { stripZerosLeft } from "ethers";
 
 import { bench, describe } from "vitest";
 
-import { trim } from "./trim.js";
+import { trim } from "./trim";
 
 describe.skip("Trim Hex", () => {
   bench("@/lib/connect/viem: `trimHex`", () => {

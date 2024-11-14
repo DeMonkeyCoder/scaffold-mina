@@ -1,5 +1,5 @@
-import type { StateMapping, StateOverride } from '../types/stateOverride.js'
-import { BaseError } from './base.js'
+import type { StateMapping, StateOverride } from '../types/stateOverride'
+import { BaseError } from './base'
 
 export type AccountStateConflictErrorType = AccountStateConflictError & {
   name: 'AccountStateConflictError'

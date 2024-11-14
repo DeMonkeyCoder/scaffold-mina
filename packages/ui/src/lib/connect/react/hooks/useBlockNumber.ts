@@ -19,14 +19,14 @@ import {
   getBlockNumberQueryOptions,
 } from "@/lib/connect/core/exports/query";
 
-import type { ConfigParameter, QueryParameter } from "../types/properties.js";
-import { type UseQueryReturnType, useQuery } from "../utils/query.js";
-import { useChainId } from "./useChainId.js";
-import { useConfig } from "./useConfig.js";
+import type { ConfigParameter, QueryParameter } from "../types/properties";
+import { type UseQueryReturnType, useQuery } from "../utils/query";
+import { useChainId } from "./useChainId";
+import { useConfig } from "./useConfig";
 import {
   type UseWatchBlockNumberParameters,
   useWatchBlockNumber,
-} from "./useWatchBlockNumber.js";
+} from "./useWatchBlockNumber";
 
 export type UseBlockNumberParameters<
   config extends Config = Config,

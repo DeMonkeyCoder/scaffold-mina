@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getTransaction } from './getTransaction.js'
+import { getTransaction } from './getTransaction'
 
 test('default', async () => {
   await expect(

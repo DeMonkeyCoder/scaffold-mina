@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getProof } from './getProof.js'
+import { getProof } from './getProof'
 
 test('default', async () => {
   await expect(

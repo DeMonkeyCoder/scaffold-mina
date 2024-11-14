@@ -1,9 +1,9 @@
 import { AbiCoder } from "ethers";
 import { bench, describe } from "vitest";
 
-import { address } from "~test/src/constants.js";
+import { address } from "~test/src/constants";
 
-import { encodeAbiParameters } from "./encodeAbiParameters.js";
+import { encodeAbiParameters } from "./encodeAbiParameters";
 
 describe("ABI Encode", () => {
   bench("@/lib/connect/viem: `encodeAbiParameters`", () => {

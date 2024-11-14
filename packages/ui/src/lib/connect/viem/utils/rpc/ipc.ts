@@ -1,11 +1,11 @@
 import { type Socket as NetSocket, connect } from 'node:net'
-import { WebSocketRequestError } from '../../index.js'
+import { WebSocketRequestError } from '../../index'
 import {
   type GetSocketRpcClientParameters,
   type Socket,
   type SocketRpcClient,
   getSocketRpcClient,
-} from './socket.js'
+} from './socket'
 
 export type GetIpcRpcClientOptions = Pick<
   GetSocketRpcClientParameters,

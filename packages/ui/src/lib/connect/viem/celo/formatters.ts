@@ -1,12 +1,12 @@
-import type { ChainFormatters } from '../types/chain.js'
-import type { RpcTransaction } from '../types/rpc.js'
-import { hexToBigInt } from '../utils/encoding/fromHex.js'
-import { defineBlock } from '../utils/formatters/block.js'
+import type { ChainFormatters } from '../types/chain'
+import type { RpcTransaction } from '../types/rpc'
+import { hexToBigInt } from '../utils/encoding/fromHex'
+import { defineBlock } from '../utils/formatters/block'
 import {
   defineTransaction,
   formatTransaction,
-} from '../utils/formatters/transaction.js'
-import { defineTransactionRequest } from '../utils/formatters/transactionRequest.js'
+} from '../utils/formatters/transaction'
+import { defineTransactionRequest } from '../utils/formatters/transactionRequest'
 import type {
   CeloBlock,
   CeloRpcBlock,
@@ -14,8 +14,8 @@ import type {
   CeloRpcTransactionRequest,
   CeloTransaction,
   CeloTransactionRequest,
-} from './types.js'
-import { isCIP64 } from './utils.js'
+} from './types'
+import { isCIP64 } from './utils'
 
 export const formatters = {
   block: /*#__PURE__*/ defineBlock({

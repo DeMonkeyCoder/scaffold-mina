@@ -4,11 +4,11 @@ import { render, renderHook, waitFor } from "@wagmi/test/react";
 import * as React from "react";
 import { expect, test } from "vitest";
 
-import { useAccount } from "./useAccount.js";
-import { useConnect } from "./useConnect.js";
-import { useDisconnect } from "./useDisconnect.js";
-import { useSwitchChain } from "./useSwitchChain.js";
-import { useWalletClient } from "./useWalletClient.js";
+import { useAccount } from "./useAccount";
+import { useConnect } from "./useConnect";
+import { useDisconnect } from "./useDisconnect";
+import { useSwitchChain } from "./useSwitchChain";
+import { useWalletClient } from "./useWalletClient";
 
 // Almost identical implementation to `useConnectorClient` (except for return type)
 // Should update both in tandem

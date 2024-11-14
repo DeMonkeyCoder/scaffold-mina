@@ -1,13 +1,13 @@
-import { type ToHexErrorType, toHex } from '../utils/encoding/toHex.js'
+import { type ToHexErrorType, toHex } from '../utils/encoding/toHex'
 
-import type { ErrorType } from '../errors/utils.js'
-import type { HDKey } from '../types/account.js'
+import type { ErrorType } from '../errors/utils'
+import type { HDKey } from '../types/account'
 import {
   type PrivateKeyToAccountErrorType,
   type PrivateKeyToAccountOptions,
   privateKeyToAccount,
-} from './privateKeyToAccount.js'
-import type { HDAccount, HDOptions } from './types.js'
+} from './privateKeyToAccount'
+import type { HDAccount, HDOptions } from './types'
 
 export type HDKeyToAccountOptions = HDOptions & PrivateKeyToAccountOptions
 

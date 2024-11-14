@@ -1,7 +1,7 @@
 import { abi, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { simulateContractQueryOptions } from './simulateContract.js'
+import { simulateContractQueryOptions } from './simulateContract'
 
 test('default', () => {
   expect(

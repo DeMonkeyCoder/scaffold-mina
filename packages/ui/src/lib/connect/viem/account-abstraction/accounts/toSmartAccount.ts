@@ -1,12 +1,12 @@
 import type { Abi } from 'abitype'
 
-import { getCode } from '../../actions/public/getCode.js'
-import type { Prettify } from '../../types/utils.js'
-import { getAction } from '../../utils/getAction.js'
-import { createNonceManager } from '../../utils/nonceManager.js'
-import { serializeErc6492Signature } from '../../utils/signature/serializeErc6492Signature.js'
-import type { EntryPointVersion } from '../types/entryPointVersion.js'
-import type { SmartAccount, SmartAccountImplementation } from './types.js'
+import { getCode } from '../../actions/public/getCode'
+import type { Prettify } from '../../types/utils'
+import { getAction } from '../../utils/getAction'
+import { createNonceManager } from '../../utils/nonceManager'
+import { serializeErc6492Signature } from '../../utils/signature/serializeErc6492Signature'
+import type { EntryPointVersion } from '../types/entryPointVersion'
+import type { SmartAccount, SmartAccountImplementation } from './types'
 
 export type ToSmartAccountParameters<
   entryPointAbi extends Abi | readonly unknown[] = Abi,

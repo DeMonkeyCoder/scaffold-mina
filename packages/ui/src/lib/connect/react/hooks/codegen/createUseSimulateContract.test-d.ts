@@ -2,7 +2,7 @@ import { abi, mainnet, optimism } from "@wagmi/test";
 import type { Address } from "@/lib/connect/viem";
 import { assertType, expectTypeOf, test } from "vitest";
 
-import { createUseSimulateContract } from "./createUseSimulateContract.js";
+import { createUseSimulateContract } from "./createUseSimulateContract";
 
 test("default", () => {
   const useSimulateErc20 = createUseSimulateContract({

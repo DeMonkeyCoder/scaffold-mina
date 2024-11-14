@@ -6,11 +6,11 @@ import {
   type VerifyTypedDataParameters,
   type VerifyTypedDataReturnType,
   verifyTypedData,
-} from "../actions/verifyTypedData.js";
-import type { Config } from "../createConfig.js";
-import type { ScopeKeyParameter } from "../types/properties.js";
-import type { ExactPartial } from "../types/utils.js";
-import { filterQueryOptions } from "./utils.js";
+} from "../actions/verifyTypedData";
+import type { Config } from "../createConfig";
+import type { ScopeKeyParameter } from "../types/properties";
+import type { ExactPartial } from "../types/utils";
+import { filterQueryOptions } from "./utils";
 
 export type VerifyTypedDataOptions<
   typedData extends TypedData | Record<string, unknown>,

@@ -1,10 +1,10 @@
-import { parseAccount } from '../../accounts/utils/parseAccount.js'
-import type { SendTransactionParameters } from '../../actions/wallet/sendTransaction.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { Account } from '../../types/account.js'
-import type { ChainEIP712 } from '../types/chain.js'
-import type { PublicZksyncRpcSchema } from '../types/eip1193.js'
+import { parseAccount } from '../../accounts/utils/parseAccount'
+import type { SendTransactionParameters } from '../../actions/wallet/sendTransaction'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { Account } from '../../types/account'
+import type { ChainEIP712 } from '../types/chain'
+import type { PublicZksyncRpcSchema } from '../types/eip1193'
 
 export type EstimateGasL1ToL2Parameters<
   chain extends ChainEIP712 | undefined = ChainEIP712 | undefined,

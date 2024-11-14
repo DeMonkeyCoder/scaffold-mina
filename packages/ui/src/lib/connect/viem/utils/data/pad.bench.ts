@@ -2,7 +2,7 @@ import { zeroPadValue } from "ethers";
 
 import { bench, describe } from "vitest";
 
-import { padBytes, padHex } from "./pad.js";
+import { padBytes, padHex } from "./pad";
 
 describe("Pad Hex", () => {
   bench("@/lib/connect/viem: `padHex`", () => {

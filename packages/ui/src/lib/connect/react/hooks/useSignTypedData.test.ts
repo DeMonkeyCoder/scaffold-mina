@@ -5,7 +5,7 @@ import { recoverTypedDataAddress } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
 import { privateKeyToAccount } from "@/lib/connect/viem/accounts";
-import { useSignTypedData } from "./useSignTypedData.js";
+import { useSignTypedData } from "./useSignTypedData";
 
 const connector = config.connectors[0]!;
 

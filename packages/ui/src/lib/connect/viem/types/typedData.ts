@@ -4,7 +4,7 @@ import type {
   TypedDataToPrimitiveTypes,
 } from 'abitype'
 
-import type { Prettify } from './utils.js'
+import type { Prettify } from './utils'
 
 export type TypedDataDefinition<
   typedData extends TypedData | Record<string, unknown> = TypedData,

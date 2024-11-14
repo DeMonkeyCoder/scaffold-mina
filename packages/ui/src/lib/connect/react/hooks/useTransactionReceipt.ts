@@ -13,10 +13,10 @@ import {
   getTransactionReceiptQueryOptions,
 } from "@/lib/connect/core/exports/query";
 import type { GetTransactionReceiptQueryFnData } from "@/lib/connect/core/exports/query";
-import type { ConfigParameter, QueryParameter } from "../types/properties.js";
-import { type UseQueryReturnType, useQuery } from "../utils/query.js";
-import { useChainId } from "./useChainId.js";
-import { useConfig } from "./useConfig.js";
+import type { ConfigParameter, QueryParameter } from "../types/properties";
+import { type UseQueryReturnType, useQuery } from "../utils/query";
+import { useChainId } from "./useChainId";
+import { useConfig } from "./useConfig";
 
 export type UseTransactionReceiptParameters<
   config extends Config = Config,

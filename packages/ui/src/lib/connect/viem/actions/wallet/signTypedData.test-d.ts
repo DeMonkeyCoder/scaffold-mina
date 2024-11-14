@@ -1,9 +1,9 @@
 import type { TypedData } from 'abitype'
 import { expectTypeOf, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { walletActions } from '../../clients/decorators/wallet.js'
-import { type SignTypedDataParameters, signTypedData } from './signTypedData.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { walletActions } from '../../clients/decorators/wallet'
+import { type SignTypedDataParameters, signTypedData } from './signTypedData'
 
 const client = anvilMainnet.getClient().extend(walletActions)
 

@@ -1,18 +1,18 @@
 import type { Address, TypedData } from "abitype";
 
-import type { ByteArray, Hex, Signature } from "../../types/misc.js";
-import type { TypedDataDefinition } from "../../types/typedData.js";
-import { type GetAddressErrorType, getAddress } from "../address/getAddress.js";
+import type { ByteArray, Hex, Signature } from "../../types/misc";
+import type { TypedDataDefinition } from "../../types/typedData";
+import { type GetAddressErrorType, getAddress } from "../address/getAddress";
 import {
   type IsAddressEqualErrorType,
   isAddressEqual,
-} from "../address/isAddressEqual.js";
+} from "../address/isAddressEqual";
 
-import type { ErrorType } from "../../errors/utils.js";
+import type { ErrorType } from "../../errors/utils";
 import {
   type RecoverTypedDataAddressParameters,
   recoverTypedDataAddress,
-} from "./recoverTypedDataAddress.js";
+} from "./recoverTypedDataAddress";
 
 export type VerifyTypedDataParameters<
   typedData extends TypedData | Record<string, unknown> = TypedData,

@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
 
-import { address } from "~test/src/constants.js";
+import { address } from "~test/src/constants";
 
-import { encodePacked } from "./encodePacked.js";
+import { encodePacked } from "./encodePacked";
 
 test.each([
   {

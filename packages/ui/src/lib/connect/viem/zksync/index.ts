@@ -4,98 +4,98 @@ export {
   type DeployContractParameters,
   type DeployContractReturnType,
   deployContract,
-} from './actions/deployContract.js'
+} from './actions/deployContract'
 export {
   type EstimateFeeParameters,
   type EstimateFeeReturnType,
   estimateFee,
-} from './actions/estimateFee.js'
+} from './actions/estimateFee'
 export {
   type GetAllBalancesParameters,
   type GetAllBalancesReturnType,
   getAllBalances,
-} from './actions/getAllBalances.js'
+} from './actions/getAllBalances'
 export {
   type GetBlockDetailsParameters,
   type GetBlockDetailsReturnType,
   getBlockDetails,
-} from './actions/getBlockDetails.js'
+} from './actions/getBlockDetails'
 export {
   type GetDefaultBridgeAddressesReturnType,
   getDefaultBridgeAddresses,
-} from './actions/getDefaultBridgeAddresses.js'
-export { getBridgehubContractAddress } from './actions/getBridgehubContractAddress.js'
+} from './actions/getDefaultBridgeAddresses'
+export { getBridgehubContractAddress } from './actions/getBridgehubContractAddress'
 export {
   type GetL1AllowanceErrorType,
   type GetL1AllowanceParameters,
   type GetL1AllowanceReturnType,
   getL1Allowance,
-} from './actions/getL1Allowance.js'
+} from './actions/getL1Allowance'
 export {
   type GetL1BalanceErrorType,
   type GetL1BalanceParameters,
   type GetL1BalanceReturnType,
   getL1Balance,
-} from './actions/getL1Balance.js'
+} from './actions/getL1Balance'
 export {
   type GetL1BatchBlockRangeParameters,
   type GetL1BatchBlockRangeReturnParameters,
   getL1BatchBlockRange,
-} from './actions/getL1BatchBlockRange.js'
+} from './actions/getL1BatchBlockRange'
 export {
   type GetL1BatchDetailsParameters,
   type GetL1BatchDetailsReturnType,
   getL1BatchDetails,
-} from './actions/getL1BatchDetails.js'
-export { getL1BatchNumber } from './actions/getL1BatchNumber.js'
-export { getL1ChainId } from './actions/getL1ChainId.js'
+} from './actions/getL1BatchDetails'
+export { getL1BatchNumber } from './actions/getL1BatchNumber'
+export { getL1ChainId } from './actions/getL1ChainId'
 export {
   type GetL1TokenBalanceErrorType,
   type GetL1TokenBalanceParameters,
   type GetL1TokenBalanceReturnType,
   getL1TokenBalance,
-} from './actions/getL1TokenBalance.js'
+} from './actions/getL1TokenBalance'
 export {
   type GetLogProofReturnType,
   type GetLogProofParameters,
   getLogProof,
-} from './actions/getLogProof.js'
-export { getMainContractAddress } from './actions/getMainContractAddress.js'
+} from './actions/getLogProof'
+export { getMainContractAddress } from './actions/getMainContractAddress'
 export {
   type GetRawBlockTransactionsParameters,
   type GetRawBlockTransactionsReturnType,
   getRawBlockTransactions,
-} from './actions/getRawBlockTransactions.js'
-export { getTestnetPaymasterAddress } from './actions/getTestnetPaymasterAddress.js'
+} from './actions/getRawBlockTransactions'
+export { getTestnetPaymasterAddress } from './actions/getTestnetPaymasterAddress'
 export {
   type GetTransactionDetailsParameters,
   type GetTransactionDetailsReturnType,
   getTransactionDetails,
-} from './actions/getTransactionDetails.js'
+} from './actions/getTransactionDetails'
 export {
   type SendTransactionErrorType,
   type SendTransactionParameters,
   type SendTransactionReturnType,
   sendTransaction,
-} from './actions/sendTransaction.js'
+} from './actions/sendTransaction'
 export {
   type SendEip712TransactionErrorType,
   type SendEip712TransactionParameters,
   type SendEip712TransactionReturnType,
   sendEip712Transaction,
-} from './actions/sendEip712Transaction.js'
+} from './actions/sendEip712Transaction'
 export {
   type SignEip712TransactionErrorType,
   type SignEip712TransactionParameters,
   type SignEip712TransactionReturnType,
   signEip712Transaction,
-} from './actions/signEip712Transaction.js'
+} from './actions/signEip712Transaction'
 export {
   type SignTransactionErrorType,
   type SignTransactionParameters,
   type SignTransactionReturnType,
   signTransaction,
-} from './actions/signTransaction.js'
+} from './actions/signTransaction'
 
 export {
   /** @deprecated Use `zksync` instead */
@@ -110,26 +110,26 @@ export {
   /** @deprecated Use `zksync` instead */
   zksyncSepoliaTestnet as zkSyncSepoliaTestnet,
   zksyncSepoliaTestnet,
-} from './chains.js'
+} from './chains'
 
-export { chainConfig } from './chainConfig.js'
+export { chainConfig } from './chainConfig'
 
 export {
   eip712WalletActions,
   type Eip712WalletActions,
-} from './decorators/eip712.js'
+} from './decorators/eip712'
 
 export {
   publicActionsL1,
   type PublicActionsL1,
-} from './decorators/publicL1.js'
+} from './decorators/publicL1'
 
 export {
   publicActionsL2,
   type PublicActionsL2,
-} from './decorators/publicL2.js'
+} from './decorators/publicL2'
 
-export { serializeTransaction } from './serializers.js'
+export { serializeTransaction } from './serializers'
 
 export type {
   /** @deprecated Use `ZksyncBlock` instead */
@@ -141,27 +141,27 @@ export type {
   ZksyncBatchDetails,
   ZksyncBlockDetails,
   ZksyncNumberParameter,
-} from './types/block.js'
-export type { ChainEIP712 } from './types/chain.js'
+} from './types/block'
+export type { ChainEIP712 } from './types/chain'
 export type {
   EIP712Domain,
   EIP712DomainFn,
   /** @deprecated Use `ZksyncEip712Meta` instead */
   ZksyncEip712Meta as ZkSyncEip712Meta,
   ZksyncEip712Meta,
-} from './types/eip712.js'
+} from './types/eip712'
 export type {
   CommonDataRawBlockTransaction,
   RawBlockTransactions,
   PublicZksyncRpcSchema,
   /** @deprecated Use `PublicZksyncRpcSchema` instead */
   PublicZksyncRpcSchema as PublicZkSyncRpcSchema,
-} from './types/eip1193.js'
+} from './types/eip1193'
 export type {
   /** @deprecated Use `ZksyncFeeValues` instead */
   ZksyncFeeValues as ZkSyncFeeValues,
   ZksyncFeeValues,
-} from './types/fee.js'
+} from './types/fee'
 export type {
   /** @deprecated Use `ZksyncL2ToL1Log` instead */
   ZksyncL2ToL1Log as ZkSyncL2ToL1Log,
@@ -175,7 +175,7 @@ export type {
   /** @deprecated Use `ZkSyncRpcLog` instead */
   ZksyncRpcLog as ZkSyncRpcLog,
   ZksyncRpcLog,
-} from './types/log.js'
+} from './types/log'
 
 export type {
   TransactionRequestEIP712,
@@ -245,15 +245,15 @@ export type {
   /** @deprecated Use `ZksyncTransactionDetails` instead */
   ZksyncTransactionDetails as ZkSyncTransactionDetails,
   ZksyncTransactionDetails,
-} from './types/transaction.js'
+} from './types/transaction'
 
 export {
   type GetApprovalBasedPaymasterInputParameters,
   type GetApprovalBasedPaymasterInputReturnType,
   getApprovalBasedPaymasterInput,
-} from './utils/paymaster/getApprovalBasedPaymasterInput.js'
+} from './utils/paymaster/getApprovalBasedPaymasterInput'
 export {
   type GetGeneralPaymasterInputParameters,
   type GetGeneralPaymasterInputReturnType,
   getGeneralPaymasterInput,
-} from './utils/paymaster/getGeneralPaymasterInput.js'
+} from './utils/paymaster/getGeneralPaymasterInput'

@@ -1,9 +1,9 @@
 import { config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { connect } from './connect.js'
-import { disconnect } from './disconnect.js'
-import { getAccount } from './getAccount.js'
+import { connect } from './connect'
+import { disconnect } from './disconnect'
+import { getAccount } from './getAccount'
 
 test('default', () => {
   expect(getAccount(config)).toMatchInlineSnapshot(`

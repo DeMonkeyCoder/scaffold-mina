@@ -4,7 +4,7 @@ import { accounts, config } from "@wagmi/test";
 import { renderHook, waitFor } from "@wagmi/test/react";
 import { afterEach, expect, test } from "vitest";
 
-import { useReconnect } from "./useReconnect.js";
+import { useReconnect } from "./useReconnect";
 
 const connector = config._internal.connectors.setup(
   mock({

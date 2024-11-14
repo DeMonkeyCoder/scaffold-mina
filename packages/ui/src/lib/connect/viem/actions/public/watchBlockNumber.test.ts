@@ -1,20 +1,20 @@
 import { describe, expect, test, vi } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { localhost } from '../../chains/index.js'
-import { type Client, createClient } from '../../clients/createClient.js'
-import { createPublicClient } from '../../clients/createPublicClient.js'
-import { http } from '../../clients/transports/http.js'
-import { wait } from '../../utils/wait.js'
-import { mine } from '../test/mine.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { localhost } from '../../chains/index'
+import { type Client, createClient } from '../../clients/createClient'
+import { createPublicClient } from '../../clients/createPublicClient'
+import { http } from '../../clients/transports/http'
+import { wait } from '../../utils/wait'
+import { mine } from '../test/mine'
 
-import { fallback } from '../../clients/transports/fallback.js'
-import { webSocket } from '../../clients/transports/webSocket.js'
-import * as getBlockNumber from './getBlockNumber.js'
+import { fallback } from '../../clients/transports/fallback'
+import { webSocket } from '../../clients/transports/webSocket'
+import * as getBlockNumber from './getBlockNumber'
 import {
   type OnBlockNumberParameter,
   watchBlockNumber,
-} from './watchBlockNumber.js'
+} from './watchBlockNumber'
 
 const client = anvilMainnet.getClient()
 const httpClient = createClient({

@@ -3,7 +3,7 @@ import { renderHook } from '@wagmi/test/react'
 import { Fragment, createElement } from 'react'
 import { expect, test } from 'vitest'
 
-import { useChains } from './useChains.js'
+import { useChains } from './useChains'
 
 test('default', async () => {
   const { result } = renderHook(() => useChains())

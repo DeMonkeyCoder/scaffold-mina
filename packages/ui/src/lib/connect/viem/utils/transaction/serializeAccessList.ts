@@ -1,16 +1,16 @@
 import {
   InvalidAddressError,
   type InvalidAddressErrorType,
-} from '../../errors/address.js'
+} from '../../errors/address'
 import {
   InvalidStorageKeySizeError,
   type InvalidStorageKeySizeErrorType,
-} from '../../errors/transaction.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex } from '../../types/misc.js'
-import type { AccessList } from '../../types/transaction.js'
-import { type IsAddressErrorType, isAddress } from '../address/isAddress.js'
-import type { RecursiveArray } from '../encoding/toRlp.js'
+} from '../../errors/transaction'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex } from '../../types/misc'
+import type { AccessList } from '../../types/transaction'
+import { type IsAddressErrorType, isAddress } from '../address/isAddress'
+import type { RecursiveArray } from '../encoding/toRlp'
 
 export type SerializeAccessListErrorType =
   | InvalidStorageKeySizeErrorType

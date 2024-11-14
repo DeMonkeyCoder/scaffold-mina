@@ -1,7 +1,7 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex } from '../../types/misc.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex } from '../../types/misc'
 
-import { type IsHexErrorType, isHex } from './isHex.js'
+import { type IsHexErrorType, isHex } from './isHex'
 
 export type SizeErrorType = IsHexErrorType | ErrorType
 

@@ -1,10 +1,10 @@
-import type { ErrorType } from "../../errors/utils.js";
+import type { ErrorType } from "../../errors/utils";
 import {
   type DefineKzgErrorType,
   type DefineKzgParameters,
   type DefineKzgReturnType,
   defineKzg,
-} from "./defineKzg.js";
+} from "./defineKzg";
 
 export type SetupKzgParameters = DefineKzgParameters & {
   loadTrustedSetup(path: string): void;

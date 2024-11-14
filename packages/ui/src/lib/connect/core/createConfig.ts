@@ -18,24 +18,20 @@ import { createStore, type Mutate, type StoreApi } from "zustand/vanilla";
 import type {
   ConnectorEventMap,
   CreateConnectorFn,
-} from "./connectors/createConnector.js";
-import { injected } from "./connectors/injected.js";
-import {
-  createEmitter,
-  type Emitter,
-  type EventData,
-} from "./createEmitter.js";
-import { createStorage, noopStorage, type Storage } from "./createStorage.js";
-import { ChainNotConfiguredError } from "./errors/config.js";
+} from "./connectors/createConnector";
+import { injected } from "./connectors/injected";
+import { createEmitter, type Emitter, type EventData } from "./createEmitter";
+import { createStorage, noopStorage, type Storage } from "./createStorage";
+import { ChainNotConfiguredError } from "./errors/config";
 import type {
   Compute,
   ExactPartial,
   LooseOmit,
   OneOf,
   RemoveUndefined,
-} from "./types/utils.js";
-import { uid } from "./utils/uid.js";
-import { version } from "./version.js";
+} from "./types/utils";
+import { uid } from "./utils/uid";
+import { version } from "./version";
 
 export type CreateConfigParameters<
   chains extends readonly [Chain, ...Chain[]] = readonly [Chain, ...Chain[]],
@@ -93,9 +89,18 @@ export function createConfig<
     typeof window !== "undefined" && multiInjectedProviderDiscovery
       ? createMipd()
       : undefined;
-
+  console.log("hiiii");
+  console.log(mipd?.getProviders());
   const chains = createStore(() => rest.chains);
   const connectors = createStore(() =>
+    [
+      ...(rest.connectors ?? []),
+      ...(!ssr
+        ? mipd?.getProviders().map(providerDetailToConnector) ?? []
+        : []),
+    ].map(setup)
+  );
+  console.log(
     [
       ...(rest.connectors ?? []),
       ...(!ssr
@@ -129,7 +134,11 @@ export function createConfig<
   function providerDetailToConnector(providerDetail: MinaProviderDetail) {
     const { info } = providerDetail;
     const provider = providerDetail.provider as any;
-    return injected({ target: { ...info, id: info.rdns, provider } });
+    return injected({
+      target: { ...info, id: info.rdns, provider },
+      //TODO: change this after implementing wallet_requestPermissions in Pallad
+      shimDisconnect: false,
+    });
   }
 
   const clients = new Map<number, Client<Transport, chains[number]>>();

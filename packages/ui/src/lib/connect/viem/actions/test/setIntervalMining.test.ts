@@ -1,12 +1,12 @@
 import { expect, test } from 'vitest'
 
-import { wait } from '../../utils/wait.js'
-import { getBlockNumber } from '../public/getBlockNumber.js'
+import { wait } from '../../utils/wait'
+import { getBlockNumber } from '../public/getBlockNumber'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { mine } from './mine.js'
-import { setIntervalMining } from './setIntervalMining.js'
+import { mine } from './mine'
+import { setIntervalMining } from './setIntervalMining'
 
 const client = anvilMainnet.getClient()
 

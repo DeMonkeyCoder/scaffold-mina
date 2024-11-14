@@ -1,7 +1,7 @@
 import type { Abi, AbiEvent } from 'abitype'
-import type { Log as Log_ } from '../../types/log.js'
-import type { Hex } from '../../types/misc.js'
-import type { RpcLog as RpcLog_ } from '../../types/rpc.js'
+import type { Log as Log_ } from '../../types/log'
+import type { Hex } from '../../types/misc'
+import type { RpcLog as RpcLog_ } from '../../types/rpc'
 
 export type ZksyncLog<
   quantity = bigint,

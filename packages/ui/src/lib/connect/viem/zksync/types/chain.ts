@@ -1,7 +1,7 @@
-import type { ChainFormatters } from '../../types/chain.js'
-import type { Chain, ChainFormatter } from '../../types/chain.js'
-import type { EIP712DomainFn } from './eip712.js'
-import type { ZksyncTransactionSerializable } from './transaction.js'
+import type { ChainFormatters } from '../../types/chain'
+import type { Chain, ChainFormatter } from '../../types/chain'
+import type { EIP712DomainFn } from './eip712'
+import type { ZksyncTransactionSerializable } from './transaction'
 
 export type ChainEIP712<
   formatters extends ChainFormatters | undefined = ChainFormatters | undefined,

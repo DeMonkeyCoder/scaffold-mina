@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { setLoggingEnabled } from './setLoggingEnabled.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { setLoggingEnabled } from './setLoggingEnabled'
 
 const client = anvilMainnet.getClient()
 

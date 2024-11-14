@@ -1,10 +1,10 @@
 import type { AbiEvent } from 'abitype'
 import { expectTypeOf, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import type { Hash, Hex } from '../../types/misc.js'
-import { getLogs } from './getLogs.js'
+import type { Hash, Hex } from '../../types/misc'
+import { getLogs } from './getLogs'
 
 const client = anvilMainnet.getClient()
 

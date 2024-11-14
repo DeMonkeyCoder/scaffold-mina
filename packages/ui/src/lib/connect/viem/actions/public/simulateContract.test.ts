@@ -9,22 +9,22 @@
  */
 import { describe, expect, test, vi } from 'vitest'
 
-import { ErrorsExample } from '~contracts/generated.js'
-import { baycContractConfig, wagmiContractConfig } from '~test/src/abis.js'
-import { accounts } from '~test/src/constants.js'
+import { ErrorsExample } from '~contracts/generated'
+import { baycContractConfig, wagmiContractConfig } from '~test/src/abis'
+import { accounts } from '~test/src/constants'
 import {
   deployBAYC,
   deployErrorExample,
   mainnetClient,
-} from '~test/src/utils.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { publicActions } from '../../clients/decorators/public.js'
-import { walletActions } from '../../clients/decorators/wallet.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
-import { parseGwei } from '../../utils/unit/parseGwei.js'
-import { mine } from '../test/mine.js'
+} from '~test/src/utils'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { publicActions } from '../../clients/decorators/public'
+import { walletActions } from '../../clients/decorators/wallet'
+import { parseEther } from '../../utils/unit/parseEther'
+import { parseGwei } from '../../utils/unit/parseGwei'
+import { mine } from '../test/mine'
 
-import { simulateContract } from './simulateContract.js'
+import { simulateContract } from './simulateContract'
 
 const client = anvilMainnet
   .getClient()

@@ -1,18 +1,18 @@
-import type { Signature } from '../index.js'
-import type { ChainSerializers } from '../types/chain.js'
-import type { TransactionSerializable } from '../types/transaction.js'
-import { concatHex } from '../utils/data/concat.js'
-import { toHex } from '../utils/encoding/toHex.js'
-import { toRlp } from '../utils/encoding/toRlp.js'
-import { serializeTransaction as serializeTransaction_ } from '../utils/transaction/serializeTransaction.js'
-import { gasPerPubdataDefault } from './constants/number.js'
+import type { Signature } from '../index'
+import type { ChainSerializers } from '../types/chain'
+import type { TransactionSerializable } from '../types/transaction'
+import { concatHex } from '../utils/data/concat'
+import { toHex } from '../utils/encoding/toHex'
+import { toRlp } from '../utils/encoding/toRlp'
+import { serializeTransaction as serializeTransaction_ } from '../utils/transaction/serializeTransaction'
+import { gasPerPubdataDefault } from './constants/number'
 import type {
   ZksyncTransactionSerializable,
   ZksyncTransactionSerializableEIP712,
   ZksyncTransactionSerializedEIP712,
-} from './types/transaction.js'
-import { assertEip712Transaction } from './utils/assertEip712Transaction.js'
-import { isEIP712Transaction } from './utils/isEip712Transaction.js'
+} from './types/transaction'
+import { assertEip712Transaction } from './utils/assertEip712Transaction'
+import { isEIP712Transaction } from './utils/isEip712Transaction'
 
 export function serializeTransaction(
   transaction: ZksyncTransactionSerializable,

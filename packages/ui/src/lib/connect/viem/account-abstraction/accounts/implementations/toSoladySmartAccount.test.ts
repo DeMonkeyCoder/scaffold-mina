@@ -1,18 +1,18 @@
 import type { Address } from 'abitype'
 import { beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
 
-import { anvilMainnet } from '../../../../test/src/anvil.js'
-import { accounts, typedData } from '../../../../test/src/constants.js'
-import { deploySoladyAccount_07 } from '../../../../test/src/utils.js'
-import { privateKeyToAccount } from '../../../accounts/privateKeyToAccount.js'
+import { anvilMainnet } from '../../../../test/src/anvil'
+import { accounts, typedData } from '../../../../test/src/constants'
+import { deploySoladyAccount_07 } from '../../../../test/src/utils'
+import { privateKeyToAccount } from '../../../accounts/privateKeyToAccount'
 import {
   mine,
   verifyMessage,
   verifyTypedData,
   writeContract,
-} from '../../../actions/index.js'
-import { pad } from '../../../utils/data/pad.js'
-import { toSoladySmartAccount } from './toSoladySmartAccount.js'
+} from '../../../actions/index'
+import { pad } from '../../../utils/data/pad'
+import { toSoladySmartAccount } from './toSoladySmartAccount'
 
 const client = anvilMainnet.getClient({ account: true })
 

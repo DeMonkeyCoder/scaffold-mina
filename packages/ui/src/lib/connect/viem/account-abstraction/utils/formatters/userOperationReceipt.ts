@@ -1,8 +1,8 @@
-import type { ErrorType } from '../../../errors/utils.js'
-import { formatLog } from '../../../utils/formatters/log.js'
-import { formatTransactionReceipt } from '../../../utils/formatters/transactionReceipt.js'
-import type { RpcUserOperationReceipt } from '../../types/rpc.js'
-import type { UserOperationReceipt } from '../../types/userOperation.js'
+import type { ErrorType } from '../../../errors/utils'
+import { formatLog } from '../../../utils/formatters/log'
+import { formatTransactionReceipt } from '../../../utils/formatters/transactionReceipt'
+import type { RpcUserOperationReceipt } from '../../types/rpc'
+import type { UserOperationReceipt } from '../../types/userOperation'
 
 export type FormatUserOperationReceiptErrorType = ErrorType
 

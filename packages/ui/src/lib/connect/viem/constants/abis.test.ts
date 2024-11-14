@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import * as abis from './abis.js'
+import * as abis from './abis'
 
 test('exports abis', () => {
   expect(abis).toMatchInlineSnapshot(`

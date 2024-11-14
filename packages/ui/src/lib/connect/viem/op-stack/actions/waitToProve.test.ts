@@ -4,10 +4,10 @@ import {
   anvilOptimism,
   anvilOptimismSepolia,
   anvilSepolia,
-} from '../../../test/src/anvil.js'
-import { getTransactionReceipt, reset } from '../../actions/index.js'
+} from '../../../test/src/anvil'
+import { getTransactionReceipt, reset } from '../../actions/index'
 
-import { waitToProve } from './waitToProve.js'
+import { waitToProve } from './waitToProve'
 
 const client = anvilMainnet.getClient()
 const sepoliaClient = anvilSepolia.getClient()

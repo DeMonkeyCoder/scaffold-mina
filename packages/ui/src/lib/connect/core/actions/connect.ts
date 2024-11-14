@@ -4,15 +4,15 @@ import type {
   UserRejectedRequestErrorType,
 } from "@/lib/connect/viem";
 
-import type { CreateConnectorFn } from "../connectors/createConnector.js";
-import type { Config, Connector } from "../createConfig.js";
-import type { BaseErrorType, ErrorType } from "../errors/base.js";
+import type { CreateConnectorFn } from "../connectors/createConnector";
+import type { Config, Connector } from "../createConfig";
+import type { BaseErrorType, ErrorType } from "../errors/base";
 import {
   ConnectorAlreadyConnectedError,
   type ConnectorAlreadyConnectedErrorType,
-} from "../errors/config.js";
-import type { ChainIdParameter } from "../types/properties.js";
-import type { Compute } from "../types/utils.js";
+} from "../errors/config";
+import type { ChainIdParameter } from "../types/properties";
+import type { Compute } from "../types/utils";
 
 export type ConnectParameters<config extends Config = Config> = Compute<
   ChainIdParameter<config> & {

@@ -1,38 +1,38 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
 import {
   TransactionReceiptNotFoundError,
   type TransactionReceiptNotFoundErrorType,
-} from '../../errors/transaction.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { Hash } from '../../types/misc.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+} from "../../errors/transaction";
+import type { ErrorType } from "../../errors/utils";
+import type { Chain } from "../../types/chain";
+import type { Hash } from "../../types/misc";
+import type { RequestErrorType } from "../../utils/buildRequest";
 import {
   type FormattedTransactionReceipt,
   formatTransactionReceipt,
-} from '../../utils/formatters/transactionReceipt.js'
+} from "../../utils/formatters/transactionReceipt";
 
 export type GetTransactionReceiptParameters = {
   /** The hash of the transaction. */
-  hash: Hash
-}
+  hash: Hash;
+};
 
 export type GetTransactionReceiptReturnType<
-  chain extends Chain | undefined = undefined,
-> = FormattedTransactionReceipt<chain>
+  chain extends Chain | undefined = undefined
+> = FormattedTransactionReceipt<chain>;
 
 export type GetTransactionReceiptErrorType =
   | RequestErrorType
   | TransactionReceiptNotFoundErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Returns the [Transaction Receipt](https://viem.sh/docs/glossary/terms#transaction-receipt) given a [Transaction](https://viem.sh/docs/glossary/terms#transaction) hash.
  *
  * - Docs: https://viem.sh/docs/actions/public/getTransactionReceipt
  * - Example: https://stackblitz.com/github/wevm/viem/tree/main/examples/transactions/fetching-transactions
- * - JSON-RPC Methods: [`eth_getTransactionReceipt`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_gettransactionreceipt)
+ * - JSON-RPC Methods: [`mina_getTransactionReceipt`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_gettransactionreceipt)
  *
  * @param client - Client to use
  * @param parameters - {@link GetTransactionReceiptParameters}
@@ -53,20 +53,20 @@ export type GetTransactionReceiptErrorType =
  */
 export async function getTransactionReceipt<chain extends Chain | undefined>(
   client: Client<Transport, chain>,
-  { hash }: GetTransactionReceiptParameters,
+  { hash }: GetTransactionReceiptParameters
 ) {
   const receipt = await client.request(
     {
-      method: 'eth_getTransactionReceipt',
+      method: "mina_getTransactionReceipt",
       params: [hash],
     },
-    { dedupe: true },
-  )
+    { dedupe: true }
+  );
 
-  if (!receipt) throw new TransactionReceiptNotFoundError({ hash })
+  if (!receipt) throw new TransactionReceiptNotFoundError({ hash });
 
   const format =
     client.chain?.formatters?.transactionReceipt?.format ||
-    formatTransactionReceipt
-  return format(receipt) as GetTransactionReceiptReturnType<chain>
+    formatTransactionReceipt;
+  return format(receipt) as GetTransactionReceiptReturnType<chain>;
 }

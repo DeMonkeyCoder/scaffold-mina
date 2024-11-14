@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { parseEther } from './parseEther.js'
+import { parseEther } from './parseEther'
 
 test('converts ether to wei', () => {
   expect(parseEther('6942069420.12345678912345')).toMatchInlineSnapshot(

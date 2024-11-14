@@ -1,9 +1,9 @@
 import { assertType, describe, expect, test } from "vitest";
 
-import { getAddress } from "../address/getAddress.js";
-import { toEventSelector } from "../hash/toEventSelector.js";
+import { getAddress } from "../address/getAddress";
+import { toEventSelector } from "../hash/toEventSelector";
 
-import { decodeEventLog } from "./decodeEventLog.js";
+import { decodeEventLog } from "./decodeEventLog";
 
 test("Transfer()", () => {
   const event = decodeEventLog({

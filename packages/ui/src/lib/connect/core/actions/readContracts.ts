@@ -5,10 +5,10 @@ import type {
 } from "@/lib/connect/viem";
 import { ContractFunctionExecutionError } from "@/lib/connect/viem";
 
-import type { Config } from "../createConfig.js";
-import type { ChainIdParameter } from "../types/properties.js";
-import { type MulticallErrorType, multicall } from "./multicall.js";
-import { type ReadContractErrorType, readContract } from "./readContract.js";
+import type { Config } from "../createConfig";
+import type { ChainIdParameter } from "../types/properties";
+import { type MulticallErrorType, multicall } from "./multicall";
+import { type ReadContractErrorType, readContract } from "./readContract";
 
 export type ReadContractsParameters<
   contracts extends readonly unknown[] = readonly ContractFunctionParameters[],

@@ -1,11 +1,11 @@
 import { secp256k1 } from '@noble/curves/secp256k1'
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex, Signature } from '../../types/misc.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex, Signature } from '../../types/misc'
 import {
   type NumberToHexErrorType,
   numberToHex,
-} from '../../utils/encoding/toHex.js'
+} from '../../utils/encoding/toHex'
 
 export type ParseSignatureErrorType = NumberToHexErrorType | ErrorType
 

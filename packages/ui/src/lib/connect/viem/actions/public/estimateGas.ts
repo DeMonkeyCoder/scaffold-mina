@@ -1,46 +1,46 @@
 import type { Address } from "abitype";
-import type { Account } from "../../accounts/types.js";
+import type { Account } from "../../accounts/types";
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from "../../accounts/utils/parseAccount.js";
-import type { Client } from "../../clients/createClient.js";
-import type { Transport } from "../../clients/transports/createTransport.js";
-import { BaseError } from "../../errors/base.js";
+} from "../../accounts/utils/parseAccount";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import { BaseError } from "../../errors/base";
 import {
   type RecoverAuthorizationAddressErrorType,
   recoverAuthorizationAddress,
-} from "../../experimental/eip7702/utils/recoverAuthorizationAddress.js";
-import type { BlockTag } from "../../types/block.js";
-import type { Chain } from "../../types/chain.js";
-import type { StateOverride } from "../../types/stateOverride.js";
-import type { TransactionRequest } from "../../types/transaction.js";
-import type { UnionOmit } from "../../types/utils.js";
-import type { RequestErrorType } from "../../utils/buildRequest.js";
+} from "../../experimental/eip7702/utils/recoverAuthorizationAddress";
+import type { BlockTag } from "../../types/block";
+import type { Chain } from "../../types/chain";
+import type { StateOverride } from "../../types/stateOverride";
+import type { TransactionRequest } from "../../types/transaction";
+import type { UnionOmit } from "../../types/utils";
+import type { RequestErrorType } from "../../utils/buildRequest";
 import {
   type NumberToHexErrorType,
   numberToHex,
-} from "../../utils/encoding/toHex.js";
+} from "../../utils/encoding/toHex";
 import {
   type GetEstimateGasErrorReturnType,
   getEstimateGasError,
-} from "../../utils/errors/getEstimateGasError.js";
-import { extract } from "../../utils/formatters/extract.js";
+} from "../../utils/errors/getEstimateGasError";
+import { extract } from "../../utils/formatters/extract";
 import {
   type FormattedTransactionRequest,
   formatTransactionRequest,
-} from "../../utils/formatters/transactionRequest.js";
-import { serializeStateOverride } from "../../utils/stateOverride.js";
+} from "../../utils/formatters/transactionRequest";
+import { serializeStateOverride } from "../../utils/stateOverride";
 import {
   type AssertRequestErrorType,
   type AssertRequestParameters,
   assertRequest,
-} from "../../utils/transaction/assertRequest.js";
+} from "../../utils/transaction/assertRequest";
 import {
   type PrepareTransactionRequestParameters,
   prepareTransactionRequest,
-} from "../wallet/prepareTransactionRequest.js";
-import { getBalance } from "./getBalance.js";
+} from "../wallet/prepareTransactionRequest";
+import { getBalance } from "./getBalance";
 
 export type EstimateGasParameters<
   chain extends Chain | undefined = Chain | undefined
@@ -79,7 +79,7 @@ export type EstimateGasErrorType = GetEstimateGasErrorReturnType<
  * Estimates the gas necessary to complete a transaction without submitting it to the networkID.
  *
  * - Docs: https://viem.sh/docs/actions/public/estimateGas
- * - JSON-RPC Methods: [`eth_estimateGas`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_estimategas)
+ * - JSON-RPC Methods: [`mina_estimateGas`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_estimategas)
  *
  * @param client - Client to use
  * @param parameters - {@link EstimateGasParameters}
@@ -191,7 +191,7 @@ export async function estimateGas<
     }) {
       const { block, request, rpcStateOverride } = parameters;
       return client.request({
-        method: "eth_estimateGas",
+        method: "mina_estimateGas",
         params: rpcStateOverride
           ? [request, block ?? "latest", rpcStateOverride]
           : block

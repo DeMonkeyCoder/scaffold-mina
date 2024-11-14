@@ -1,7 +1,7 @@
-import { panicReasons } from '../../constants/solidity.js'
-import { BaseError } from '../../errors/base.js'
-import { ContractFunctionRevertedError } from '../../errors/contract.js'
-import type { ErrorType } from '../../errors/utils.js'
+import { panicReasons } from '../../constants/solidity'
+import { BaseError } from '../../errors/base'
+import { ContractFunctionRevertedError } from '../../errors/contract'
+import type { ErrorType } from '../../errors/utils'
 
 /** @internal */
 export type IsNullUniversalResolverErrorErrorType = ErrorType

@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
-import { blobData } from "../../../test/src/kzg.js";
-import { stringToHex } from "../encoding/toHex.js";
-import { fromBlobs } from "./fromBlobs.js";
-import { toBlobs } from "./toBlobs.js";
+import { blobData } from "../../../test/src/kzg";
+import { stringToHex } from "../encoding/toHex";
+import { fromBlobs } from "./fromBlobs";
+import { toBlobs } from "./toBlobs";
 
 test("default", () => {
   const data = stringToHex("we are all gonna make it".repeat(5));

@@ -6,9 +6,9 @@ import {
   hexToBool,
   hexToNumber,
   hexToString,
-} from "./fromHex.js";
-import { hexToBytes } from "./toBytes.js";
-import { boolToHex, bytesToHex, numberToHex, stringToHex } from "./toHex.js";
+} from "./fromHex";
+import { hexToBytes } from "./toBytes";
+import { boolToHex, bytesToHex, numberToHex, stringToHex } from "./toHex";
 
 describe("converts hex to number", () => {
   test("default", () => {

@@ -15,19 +15,19 @@ import {
   type InvalidAbiEncodingTypeErrorType,
   InvalidArrayError,
   type InvalidArrayErrorType,
-} from "../../errors/abi.js";
+} from "../../errors/abi";
 import {
   InvalidAddressError,
   type InvalidAddressErrorType,
-} from "../../errors/address.js";
-import { BaseError } from "../../errors/base.js";
-import type { ErrorType } from "../../errors/utils.js";
-import type { Hex } from "../../types/misc.js";
-import { type IsAddressErrorType, isAddress } from "../address/isAddress.js";
-import { type ConcatErrorType, concat } from "../data/concat.js";
-import { type PadHexErrorType, padHex } from "../data/pad.js";
-import { type SizeErrorType, size } from "../data/size.js";
-import { type SliceErrorType, slice } from "../data/slice.js";
+} from "../../errors/address";
+import { BaseError } from "../../errors/base";
+import type { ErrorType } from "../../errors/utils";
+import type { Hex } from "../../types/misc";
+import { type IsAddressErrorType, isAddress } from "../address/isAddress";
+import { type ConcatErrorType, concat } from "../data/concat";
+import { type PadHexErrorType, padHex } from "../data/pad";
+import { type SizeErrorType, size } from "../data/size";
+import { type SliceErrorType, slice } from "../data/slice";
 import {
   type BoolToHexErrorType,
   type NumberToHexErrorType,
@@ -35,7 +35,7 @@ import {
   boolToHex,
   numberToHex,
   stringToHex,
-} from "../encoding/toHex.js";
+} from "../encoding/toHex";
 
 export type EncodeAbiParametersReturnType = Hex;
 

@@ -5,18 +5,18 @@ import type {
   Hex,
   SignableMessage,
   Signature,
-} from "../../types/misc.js";
-import { type GetAddressErrorType, getAddress } from "../address/getAddress.js";
+} from "../../types/misc";
+import { type GetAddressErrorType, getAddress } from "../address/getAddress";
 import {
   type IsAddressEqualErrorType,
   isAddressEqual,
-} from "../address/isAddressEqual.js";
+} from "../address/isAddressEqual";
 
-import type { ErrorType } from "../../errors/utils.js";
+import type { ErrorType } from "../../errors/utils";
 import {
   type RecoverMessageAddressErrorType,
   recoverMessageAddress,
-} from "./recoverMessageAddress.js";
+} from "./recoverMessageAddress";
 
 export type VerifyMessageParameters = {
   /** The address that signed the original message. */

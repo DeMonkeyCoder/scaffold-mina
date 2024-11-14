@@ -1,4 +1,4 @@
-import type { Config, Connector } from '../createConfig.js'
+import type { Config, Connector } from '../createConfig'
 
 export type ChainIdParameter<
   config extends Config,

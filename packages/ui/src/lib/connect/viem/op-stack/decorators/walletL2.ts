@@ -1,12 +1,12 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { Account } from '../../types/account.js'
-import type { Chain } from '../../types/chain.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { Account } from '../../types/account'
+import type { Chain } from '../../types/chain'
 import {
   type InitiateWithdrawalParameters,
   type InitiateWithdrawalReturnType,
   initiateWithdrawal,
-} from '../actions/initiateWithdrawal.js'
+} from '../actions/initiateWithdrawal'
 
 export type WalletActionsL2<
   chain extends Chain | undefined = Chain | undefined,

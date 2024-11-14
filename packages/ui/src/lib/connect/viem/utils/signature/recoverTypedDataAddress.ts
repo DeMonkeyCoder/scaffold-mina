@@ -1,14 +1,14 @@
 import type { Address, TypedData } from 'abitype'
 
-import type { ByteArray, Hex, Signature } from '../../types/misc.js'
-import type { TypedDataDefinition } from '../../types/typedData.js'
+import type { ByteArray, Hex, Signature } from '../../types/misc'
+import type { TypedDataDefinition } from '../../types/typedData'
 
-import type { ErrorType } from '../../errors/utils.js'
-import { type HashTypedDataErrorType, hashTypedData } from './hashTypedData.js'
+import type { ErrorType } from '../../errors/utils'
+import { type HashTypedDataErrorType, hashTypedData } from './hashTypedData'
 import {
   type RecoverAddressErrorType,
   recoverAddress,
-} from './recoverAddress.js'
+} from './recoverAddress'
 
 export type RecoverTypedDataAddressParameters<
   typedData extends TypedData | Record<string, unknown> = TypedData,

@@ -3,7 +3,7 @@ import { abi, bytecode } from "@wagmi/test";
 import type { Abi, Hash } from "@/lib/connect/viem";
 import { expectTypeOf, test } from "vitest";
 
-import { useDeployContract } from "./useDeployContract.js";
+import { useDeployContract } from "./useDeployContract";
 
 const contextValue = { foo: "bar" } as const;
 

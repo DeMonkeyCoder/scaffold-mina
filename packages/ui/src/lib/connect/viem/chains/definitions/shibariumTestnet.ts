@@ -1,4 +1,4 @@
-import { defineChain } from '../../utils/chain/defineChain.js'
+import { defineChain } from '../../utils/chain/defineChain'
 
 export const shibariumTestnet = /*#__PURE__*/ defineChain({
   id: 157,

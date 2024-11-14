@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { estimateFeesPerGas } from './estimateFeesPerGas.js'
+import { estimateFeesPerGas } from './estimateFeesPerGas'
 
 test('default', async () => {
   const result = await estimateFeesPerGas(config)

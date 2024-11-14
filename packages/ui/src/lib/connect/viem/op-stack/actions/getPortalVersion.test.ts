@@ -1,8 +1,8 @@
 import { beforeAll, expect, test } from 'vitest'
-import { anvilOptimismSepolia, anvilSepolia } from '../../../test/src/anvil.js'
-import { mainnetClient } from '../../../test/src/utils.js'
-import { base, optimismSepolia } from '../../op-stack/chains.js'
-import { getPortalVersion } from './getPortalVersion.js'
+import { anvilOptimismSepolia, anvilSepolia } from '../../../test/src/anvil'
+import { mainnetClient } from '../../../test/src/utils'
+import { base, optimismSepolia } from '../../op-stack/chains'
+import { getPortalVersion } from './getPortalVersion'
 
 const sepoliaClient = anvilSepolia.getClient()
 

@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getWalletClientQueryOptions } from './getWalletClient.js'
+import { getWalletClientQueryOptions } from './getWalletClient'
 
 test('default', () => {
   expect(getWalletClientQueryOptions(config)).toMatchInlineSnapshot(`

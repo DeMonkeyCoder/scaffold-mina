@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getEnsNameQueryOptions } from './getEnsName.js'
+import { getEnsNameQueryOptions } from './getEnsName'
 
 test('default', () => {
   expect(getEnsNameQueryOptions(config)).toMatchInlineSnapshot(`

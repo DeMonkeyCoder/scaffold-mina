@@ -1,16 +1,16 @@
 import { expectTypeOf, test } from "vitest";
 
-import type { base } from "~@/lib/connect/viem/chains/index.js";
-import type { celo } from "../chains/definitions/celo.js";
-import type { mainnet } from "../chains/definitions/mainnet.js";
-import type { optimism } from "../chains/definitions/optimism.js";
+import type { base } from "~@/lib/connect/viem/chains/index";
+import type { celo } from "../chains/definitions/celo";
+import type { mainnet } from "../chains/definitions/mainnet";
+import type { optimism } from "../chains/definitions/optimism";
 import type {
   Chain,
   DeriveChain,
   ExtractChainFormatterParameters,
   GetChainParameter,
-} from "./chain.js";
-import type { TransactionRequest } from "./transaction.js";
+} from "./chain";
+import type { TransactionRequest } from "./transaction";
 
 test("DeriveChain", () => {
   type Result = DeriveChain<Chain | undefined, Chain | undefined>;

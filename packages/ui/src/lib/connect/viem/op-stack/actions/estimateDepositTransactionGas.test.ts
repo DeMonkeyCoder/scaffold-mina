@@ -1,10 +1,10 @@
 import { beforeAll, expect, test } from 'vitest'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { accounts } from '../../../test/src/constants.js'
-import { reset, setBalance } from '../../actions/index.js'
-import { parseEther } from '../../index.js'
-import { base } from '../../op-stack/chains.js'
-import { estimateDepositTransactionGas } from './estimateDepositTransactionGas.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { accounts } from '../../../test/src/constants'
+import { reset, setBalance } from '../../actions/index'
+import { parseEther } from '../../index'
+import { base } from '../../op-stack/chains'
+import { estimateDepositTransactionGas } from './estimateDepositTransactionGas'
 
 const client = anvilMainnet.getClient()
 

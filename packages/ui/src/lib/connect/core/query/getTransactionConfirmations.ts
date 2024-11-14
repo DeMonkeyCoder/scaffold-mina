@@ -5,11 +5,11 @@ import {
   type GetTransactionConfirmationsParameters,
   type GetTransactionConfirmationsReturnType,
   getTransactionConfirmations,
-} from '../actions/getTransactionConfirmations.js'
-import type { Config } from '../createConfig.js'
-import type { ScopeKeyParameter } from '../types/properties.js'
-import type { UnionExactPartial } from '../types/utils.js'
-import { filterQueryOptions } from './utils.js'
+} from '../actions/getTransactionConfirmations'
+import type { Config } from '../createConfig'
+import type { ScopeKeyParameter } from '../types/properties'
+import type { UnionExactPartial } from '../types/utils'
+import { filterQueryOptions } from './utils'
 
 export type GetTransactionConfirmationsOptions<
   config extends Config,

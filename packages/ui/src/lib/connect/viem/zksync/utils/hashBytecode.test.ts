@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { hashBytecode } from './hashBytecode.js'
+import { hashBytecode } from './hashBytecode'
 
 const validBytecode =
   '0x00050000000000020000008003000039000000400030043f0000000003010019'

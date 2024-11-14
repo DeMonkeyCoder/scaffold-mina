@@ -4,15 +4,15 @@ import {
   daiContractConfig,
   erc20Abi,
   usdcContractConfig,
-} from '~test/src/abis.js'
-import { accounts, address } from '~test/src/constants.js'
-import { impersonateAccount } from '../test/impersonateAccount.js'
-import { mine } from '../test/mine.js'
+} from '~test/src/abis'
+import { accounts, address } from '~test/src/constants'
+import { impersonateAccount } from '../test/impersonateAccount'
+import { mine } from '../test/mine'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { getAddress } from '../../index.js'
-import { setBalance, writeContract } from '../index.js'
-import { getContractEvents } from './getContractEvents.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { getAddress } from '../../index'
+import { setBalance, writeContract } from '../index'
+import { getContractEvents } from './getContractEvents'
 
 const client = anvilMainnet.getClient()
 

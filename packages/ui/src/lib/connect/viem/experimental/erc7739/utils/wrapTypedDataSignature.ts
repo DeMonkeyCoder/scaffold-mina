@@ -1,16 +1,16 @@
 import type { TypedData } from 'abitype'
-import { serializeSignature } from '../../../accounts/index.js'
-import type { ByteArray, Hex, Signature } from '../../../types/misc.js'
-import type { TypedDataDefinition } from '../../../types/typedData.js'
-import { encodePacked } from '../../../utils/abi/encodePacked.js'
-import { type IsHexErrorType, isHex } from '../../../utils/data/isHex.js'
-import { size } from '../../../utils/data/size.js'
-import { bytesToHex, stringToHex } from '../../../utils/encoding/toHex.js'
+import { serializeSignature } from '../../../accounts/index'
+import type { ByteArray, Hex, Signature } from '../../../types/misc'
+import type { TypedDataDefinition } from '../../../types/typedData'
+import { encodePacked } from '../../../utils/abi/encodePacked'
+import { type IsHexErrorType, isHex } from '../../../utils/data/isHex'
+import { size } from '../../../utils/data/size'
+import { bytesToHex, stringToHex } from '../../../utils/encoding/toHex'
 import {
   encodeType,
   hashStruct,
-} from '../../../utils/signature/hashTypedData.js'
-import { getTypesForEIP712Domain } from '../../../utils/typedData.js'
+} from '../../../utils/signature/hashTypedData'
+import { getTypesForEIP712Domain } from '../../../utils/typedData'
 
 export type WrapTypedDataSignatureParameters<
   typedData extends TypedData | Record<string, unknown> = TypedData,

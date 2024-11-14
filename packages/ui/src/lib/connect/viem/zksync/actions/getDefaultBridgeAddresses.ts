@@ -1,9 +1,9 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { Account } from '../../types/account.js'
-import type { Chain } from '../../types/chain.js'
-import type { BridgeContractAddresses } from '../types/contract.js'
-import type { PublicZksyncRpcSchema } from '../types/eip1193.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { Account } from '../../types/account'
+import type { Chain } from '../../types/chain'
+import type { BridgeContractAddresses } from '../types/contract'
+import type { PublicZksyncRpcSchema } from '../types/eip1193'
 
 export type GetDefaultBridgeAddressesReturnType = BridgeContractAddresses
 

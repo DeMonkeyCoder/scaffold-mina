@@ -2,7 +2,7 @@ import { abi, address } from '@wagmi/test'
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { useInfiniteReadContracts } from './useInfiniteReadContracts.js'
+import { useInfiniteReadContracts } from './useInfiniteReadContracts'
 
 test(
   'default',

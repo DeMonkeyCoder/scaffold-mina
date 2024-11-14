@@ -1,8 +1,8 @@
 import { bench, describe } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { createPendingTransactionFilter } from './createPendingTransactionFilter.js'
+import { createPendingTransactionFilter } from './createPendingTransactionFilter'
 
 const client = anvilMainnet.getClient()
 

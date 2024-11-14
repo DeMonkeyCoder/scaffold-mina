@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
 
-import { createHttpServer } from '~test/src/utils.js'
+import { createHttpServer } from '~test/src/utils'
 
-import { withRetry } from './withRetry.js'
+import { withRetry } from './withRetry'
 
 test('default', async () => {
   let retryTimes = -1
@@ -62,7 +62,7 @@ test('shouldRetry: retries, and then succeeds', async () => {
     async () => {
       const response = await fetch(server.url)
       if (response.status === 500) throw new Error('test')
-      return (await response).json()
+      return (await response)on()
     },
     {
       retryCount: 3,

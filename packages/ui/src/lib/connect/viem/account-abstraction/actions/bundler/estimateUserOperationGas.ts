@@ -1,48 +1,48 @@
-import type { Address, Narrow } from 'abitype'
+import type { Address, Narrow } from "abitype";
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../../accounts/utils/parseAccount.js'
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import { AccountNotFoundError } from '../../../errors/account.js'
-import type { BaseError } from '../../../errors/base.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { Chain } from '../../../types/chain.js'
-import type { Hex } from '../../../types/misc.js'
-import type { Assign, OneOf, Prettify } from '../../../types/utils.js'
-import type { RequestErrorType } from '../../../utils/buildRequest.js'
-import { getAction } from '../../../utils/getAction.js'
-import type { SmartAccount } from '../../accounts/types.js'
-import type { PaymasterActions } from '../../clients/decorators/paymaster.js'
+} from "../../../accounts/utils/parseAccount";
+import type { Client } from "../../../clients/createClient";
+import type { Transport } from "../../../clients/transports/createTransport";
+import { AccountNotFoundError } from "../../../errors/account";
+import type { BaseError } from "../../../errors/base";
+import type { ErrorType } from "../../../errors/utils";
+import type { Chain } from "../../../types/chain";
+import type { Hex } from "../../../types/misc";
+import type { Assign, OneOf, Prettify } from "../../../types/utils";
+import type { RequestErrorType } from "../../../utils/buildRequest";
+import { getAction } from "../../../utils/getAction";
+import type { SmartAccount } from "../../accounts/types";
+import type { PaymasterActions } from "../../clients/decorators/paymaster";
 import type {
   DeriveSmartAccount,
   GetSmartAccountParameter,
-} from '../../types/account.js'
+} from "../../types/account";
 import type {
   DeriveEntryPointVersion,
   EntryPointVersion,
-} from '../../types/entryPointVersion.js'
+} from "../../types/entryPointVersion";
 import type {
   EstimateUserOperationGasReturnType as EstimateUserOperationGasReturnType_,
   UserOperation,
   UserOperationCalls,
   UserOperationRequest,
-} from '../../types/userOperation.js'
-import { getUserOperationError } from '../../utils/errors/getUserOperationError.js'
+} from "../../types/userOperation";
+import { getUserOperationError } from "../../utils/errors/getUserOperationError";
 import {
   type FormatUserOperationGasErrorType,
   formatUserOperationGas,
-} from '../../utils/formatters/userOperationGas.js'
+} from "../../utils/formatters/userOperationGas";
 import {
   type FormatUserOperationRequestErrorType,
   formatUserOperationRequest,
-} from '../../utils/formatters/userOperationRequest.js'
+} from "../../utils/formatters/userOperationRequest";
 import {
   type PrepareUserOperationErrorType,
   type PrepareUserOperationParameters,
   prepareUserOperation,
-} from './prepareUserOperation.js'
+} from "./prepareUserOperation";
 
 export type EstimateUserOperationGasParameters<
   account extends SmartAccount | undefined = SmartAccount | undefined,
@@ -53,8 +53,7 @@ export type EstimateUserOperationGasParameters<
     account,
     accountOverride
   >,
-  _derivedVersion extends
-    EntryPointVersion = DeriveEntryPointVersion<_derivedAccount>,
+  _derivedVersion extends EntryPointVersion = DeriveEntryPointVersion<_derivedAccount>
 > = Assign<
   UserOperationRequest<_derivedVersion>,
   OneOf<{ calls: UserOperationCalls<Narrow<calls>> } | { callData: Hex }> & {
@@ -63,18 +62,18 @@ export type EstimateUserOperationGasParameters<
       | true
       | {
           /** Retrieves paymaster-related User Operation properties to be used for sending the User Operation. */
-          getPaymasterData?: PaymasterActions['getPaymasterData'] | undefined
+          getPaymasterData?: PaymasterActions["getPaymasterData"] | undefined;
           /** Retrieves paymaster-related User Operation properties to be used for gas estimation. */
           getPaymasterStubData?:
-            | PaymasterActions['getPaymasterStubData']
-            | undefined
+            | PaymasterActions["getPaymasterStubData"]
+            | undefined;
         }
-      | undefined
+      | undefined;
     /** Paymaster context to pass to `getPaymasterData` and `getPaymasterStubData` calls. */
-    paymasterContext?: unknown | undefined
+    paymasterContext?: unknown | undefined;
   }
 > &
-  GetSmartAccountParameter<account, accountOverride>
+  GetSmartAccountParameter<account, accountOverride>;
 
 export type EstimateUserOperationGasReturnType<
   account extends SmartAccount | undefined = SmartAccount | undefined,
@@ -84,9 +83,8 @@ export type EstimateUserOperationGasReturnType<
     account,
     accountOverride
   >,
-  _derivedVersion extends
-    EntryPointVersion = DeriveEntryPointVersion<_derivedAccount>,
-> = Prettify<EstimateUserOperationGasReturnType_<_derivedVersion>>
+  _derivedVersion extends EntryPointVersion = DeriveEntryPointVersion<_derivedAccount>
+> = Prettify<EstimateUserOperationGasReturnType_<_derivedVersion>>;
 
 export type EstimateUserOperationGasErrorType =
   | ParseAccountErrorType
@@ -94,7 +92,7 @@ export type EstimateUserOperationGasErrorType =
   | FormatUserOperationRequestErrorType
   | FormatUserOperationGasErrorType
   | RequestErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Returns an estimate of gas values necessary to execute the User Operation.
@@ -126,45 +124,45 @@ export type EstimateUserOperationGasErrorType =
 export async function estimateUserOperationGas<
   const calls extends readonly unknown[],
   account extends SmartAccount | undefined,
-  accountOverride extends SmartAccount | undefined = undefined,
+  accountOverride extends SmartAccount | undefined = undefined
 >(
   client: Client<Transport, Chain | undefined, account>,
   parameters: EstimateUserOperationGasParameters<
     account,
     accountOverride,
     calls
-  >,
+  >
 ): Promise<EstimateUserOperationGasReturnType<account, accountOverride>> {
-  const { account: account_ = client.account } = parameters
+  const { account: account_ = client.account } = parameters;
 
-  if (!account_) throw new AccountNotFoundError()
-  const account = parseAccount(account_)
+  if (!account_) throw new AccountNotFoundError();
+  const account = parseAccount(account_);
 
   const request = await getAction(
     client,
     prepareUserOperation,
-    'prepareUserOperation',
+    "prepareUserOperation"
   )({
     ...parameters,
-    parameters: ['factory', 'nonce', 'paymaster', 'signature'],
-  } as unknown as PrepareUserOperationParameters)
+    parameters: ["factory", "nonce", "paymaster", "signature"],
+  } as unknown as PrepareUserOperationParameters);
 
   try {
     const result = await client.request({
-      method: 'eth_estimateUserOperationGas',
+      method: "mina_estimateUserOperationGas",
       params: [
         formatUserOperationRequest(request as UserOperation),
         account.entryPoint.address,
       ],
-    })
+    });
     return formatUserOperationGas(result) as EstimateUserOperationGasReturnType<
       account,
       accountOverride
-    >
+    >;
   } catch (error) {
     throw getUserOperationError(error as BaseError, {
       ...(request as UserOperation),
       calls: parameters.calls,
-    })
+    });
   }
 }

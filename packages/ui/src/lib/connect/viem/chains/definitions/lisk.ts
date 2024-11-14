@@ -1,5 +1,5 @@
-import { chainConfig } from '../../op-stack/chainConfig.js'
-import { defineChain } from '../../utils/chain/defineChain.js'
+import { chainConfig } from '../../op-stack/chainConfig'
+import { defineChain } from '../../utils/chain/defineChain'
 
 export const lisk = /*#__PURE__*/ defineChain({
   ...chainConfig,

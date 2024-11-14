@@ -1,7 +1,7 @@
-import type { ErrorType } from "../../errors/utils.js";
-import type { ByteArray, Hex } from "../../types/misc.js";
-import { type BytesToHexErrorType, bytesToHex } from "../encoding/toHex.js";
-import { type Sha256ErrorType, sha256 } from "../hash/sha256.js";
+import type { ErrorType } from "../../errors/utils";
+import type { ByteArray, Hex } from "../../types/misc";
+import { type BytesToHexErrorType, bytesToHex } from "../encoding/toHex";
+import { type Sha256ErrorType, sha256 } from "../hash/sha256";
 
 type To = "hex" | "bytes";
 

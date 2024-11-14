@@ -1,14 +1,14 @@
 import {
   InvalidLegacyVError,
   type InvalidLegacyVErrorType,
-} from '../../errors/transaction.js'
-import type { ErrorType } from '../../errors/utils.js'
+} from '../../errors/transaction'
+import type { ErrorType } from '../../errors/utils'
 import type {
   ByteArray,
   Hex,
   Signature,
   SignatureLegacy,
-} from '../../types/misc.js'
+} from '../../types/misc'
 import type {
   TransactionSerializable,
   TransactionSerializableEIP1559,
@@ -24,33 +24,33 @@ import type {
   TransactionSerializedEIP7702,
   TransactionSerializedLegacy,
   TransactionType,
-} from '../../types/transaction.js'
-import type { OneOf } from '../../types/utils.js'
+} from '../../types/transaction'
+import type { OneOf } from '../../types/utils'
 import {
   type BlobsToCommitmentsErrorType,
   blobsToCommitments,
-} from '../blob/blobsToCommitments.js'
+} from '../blob/blobsToCommitments'
 import {
   blobsToProofs,
   type blobsToProofsErrorType,
-} from '../blob/blobsToProofs.js'
+} from '../blob/blobsToProofs'
 import {
   type CommitmentsToVersionedHashesErrorType,
   commitmentsToVersionedHashes,
-} from '../blob/commitmentsToVersionedHashes.js'
+} from '../blob/commitmentsToVersionedHashes'
 import {
   type ToBlobSidecarsErrorType,
   toBlobSidecars,
-} from '../blob/toBlobSidecars.js'
-import { type ConcatHexErrorType, concatHex } from '../data/concat.js'
-import { trim } from '../data/trim.js'
-import { type ToHexErrorType, bytesToHex, toHex } from '../encoding/toHex.js'
-import { type ToRlpErrorType, toRlp } from '../encoding/toRlp.js'
+} from '../blob/toBlobSidecars'
+import { type ConcatHexErrorType, concatHex } from '../data/concat'
+import { trim } from '../data/trim'
+import { type ToHexErrorType, bytesToHex, toHex } from '../encoding/toHex'
+import { type ToRlpErrorType, toRlp } from '../encoding/toRlp'
 
 import {
   type SerializeAuthorizationListErrorType,
   serializeAuthorizationList,
-} from '../../experimental/eip7702/utils/serializeAuthorizationList.js'
+} from '../../experimental/eip7702/utils/serializeAuthorizationList'
 import {
   type AssertTransactionEIP1559ErrorType,
   type AssertTransactionEIP2930ErrorType,
@@ -62,16 +62,16 @@ import {
   assertTransactionEIP4844,
   assertTransactionEIP7702,
   assertTransactionLegacy,
-} from './assertTransaction.js'
+} from './assertTransaction'
 import {
   type GetTransactionType,
   type GetTransactionTypeErrorType,
   getTransactionType,
-} from './getTransactionType.js'
+} from './getTransactionType'
 import {
   type SerializeAccessListErrorType,
   serializeAccessList,
-} from './serializeAccessList.js'
+} from './serializeAccessList'
 
 export type SerializedTransactionReturnType<
   transaction extends TransactionSerializable = TransactionSerializable,

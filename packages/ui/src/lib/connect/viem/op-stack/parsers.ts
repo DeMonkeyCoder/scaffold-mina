@@ -1,22 +1,22 @@
-import { InvalidSerializedTransactionError } from '../errors/transaction.js'
-import type { ErrorType } from '../errors/utils.js'
-import { isHex } from '../utils/data/isHex.js'
-import { sliceHex } from '../utils/data/slice.js'
-import { hexToBigInt, hexToBool } from '../utils/encoding/fromHex.js'
-import type { GetSerializedTransactionType } from '../utils/transaction/getSerializedTransactionType.js'
+import { InvalidSerializedTransactionError } from '../errors/transaction'
+import type { ErrorType } from '../errors/utils'
+import { isHex } from '../utils/data/isHex'
+import { sliceHex } from '../utils/data/slice'
+import { hexToBigInt, hexToBool } from '../utils/encoding/fromHex'
+import type { GetSerializedTransactionType } from '../utils/transaction/getSerializedTransactionType'
 import {
   type ParseTransactionErrorType as ParseTransactionErrorType_,
   type ParseTransactionReturnType as ParseTransactionReturnType_,
   parseTransaction as parseTransaction_,
   toTransactionArray,
-} from '../utils/transaction/parseTransaction.js'
-import { assertTransactionDeposit } from './serializers.js'
+} from '../utils/transaction/parseTransaction'
+import { assertTransactionDeposit } from './serializers'
 import type {
   OpStackTransactionSerialized,
   OpStackTransactionType,
   TransactionSerializableDeposit,
   TransactionSerializedDeposit,
-} from './types/transaction.js'
+} from './types/transaction'
 
 export type ParseTransactionReturnType<
   serialized extends

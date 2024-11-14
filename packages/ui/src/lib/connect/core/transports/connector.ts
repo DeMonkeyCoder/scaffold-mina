@@ -12,7 +12,7 @@ import {
   withTimeout,
 } from "@/lib/connect/viem";
 
-import type { Connector, Transport } from "../createConfig.js";
+import type { Connector, Transport } from "../createConfig";
 
 export type ConnectorTransportConfig = {
   /** The key of the transport. */
@@ -59,7 +59,7 @@ export function unstable_connector(
       // immediately resolve a JSON-RPC request on page load.
       const chainId = hexToNumber(
         await withRetry(() =>
-          withTimeout(() => provider.request({ method: "eth_chainId" }), {
+          withTimeout(() => provider.request({ method: "mina_chainId" }), {
             timeout: 100,
           })
         )

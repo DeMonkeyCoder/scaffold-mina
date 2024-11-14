@@ -1,10 +1,10 @@
 import { test } from 'vitest'
 
-import { baycContractConfig, wagmiContractConfig } from '~test/src/abis.js'
-import { accounts } from '~test/src/constants.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { baycContractConfig, wagmiContractConfig } from '~test/src/abis'
+import { accounts } from '~test/src/constants'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { estimateContractGas } from './estimateContractGas.js'
+import { estimateContractGas } from './estimateContractGas'
 
 const client = anvilMainnet.getClient()
 const clientWithAccount = anvilMainnet.getClient({ account: true })

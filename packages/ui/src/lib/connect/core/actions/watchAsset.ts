@@ -5,15 +5,15 @@ import {
   watchAsset as viem_watchAsset,
 } from "@/lib/connect/viem/actions";
 
-import type { Config } from "../createConfig.js";
-import type { BaseErrorType, ErrorType } from "../errors/base.js";
-import type { ConnectorParameter } from "../types/properties.js";
-import type { Compute } from "../types/utils.js";
-import { getAction } from "../utils/getAction.js";
+import type { Config } from "../createConfig";
+import type { BaseErrorType, ErrorType } from "../errors/base";
+import type { ConnectorParameter } from "../types/properties";
+import type { Compute } from "../types/utils";
+import { getAction } from "../utils/getAction";
 import {
   type GetConnectorClientErrorType,
   getConnectorClient,
-} from "./getConnectorClient.js";
+} from "./getConnectorClient";
 
 export type WatchAssetParameters = Compute<
   viem_WatchAssetParameters & ConnectorParameter

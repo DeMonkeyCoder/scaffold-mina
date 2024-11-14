@@ -1,8 +1,8 @@
 import { expect, test, vi } from "vitest";
 
-import { mainnet } from "../../chains/definitions/mainnet.js";
-import { createSiweMessage } from "./createSiweMessage.js";
-import type { SiweMessage } from "./types.js";
+import { mainnet } from "../../chains/definitions/mainnet";
+import { createSiweMessage } from "./createSiweMessage";
+import type { SiweMessage } from "./types";
 
 const message = {
   address: "0xA0Cf798816D4b9b9866b5330EEa46a18382f251e",

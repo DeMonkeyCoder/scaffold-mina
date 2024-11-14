@@ -1,22 +1,22 @@
 import {
   type MulticallErrorType,
   multicall,
-} from '../../actions/public/multicall.js'
+} from '../../actions/public/multicall'
 import {
   type ReadContractErrorType,
   readContract,
-} from '../../actions/public/readContract.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
+} from '../../actions/public/readContract'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import { l2OutputOracleAbi } from '../abis.js'
-import type { GetContractAddressParameter } from '../types/contract.js'
+} from '../../types/chain'
+import { l2OutputOracleAbi } from '../abis'
+import type { GetContractAddressParameter } from '../types/contract'
 
 export type GetTimeToNextL2OutputParameters<
   chain extends Chain | undefined = Chain | undefined,

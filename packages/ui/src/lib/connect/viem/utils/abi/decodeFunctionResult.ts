@@ -5,22 +5,22 @@ import {
   type AbiFunctionNotFoundErrorType,
   AbiFunctionOutputsNotFoundError,
   type AbiFunctionOutputsNotFoundErrorType,
-} from '../../errors/abi.js'
+} from '../../errors/abi'
 import type {
   ContractFunctionArgs,
   ContractFunctionName,
   ContractFunctionReturnType,
   Widen,
-} from '../../types/contract.js'
-import type { Hex } from '../../types/misc.js'
+} from '../../types/contract'
+import type { Hex } from '../../types/misc'
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { IsNarrowable, UnionEvaluate } from '../../types/utils.js'
+import type { ErrorType } from '../../errors/utils'
+import type { IsNarrowable, UnionEvaluate } from '../../types/utils'
 import {
   type DecodeAbiParametersErrorType,
   decodeAbiParameters,
-} from './decodeAbiParameters.js'
-import { type GetAbiItemErrorType, getAbiItem } from './getAbiItem.js'
+} from './decodeAbiParameters'
+import { type GetAbiItemErrorType, getAbiItem } from './getAbiItem'
 
 const docsPath = '/docs/contract/decodeFunctionResult'
 

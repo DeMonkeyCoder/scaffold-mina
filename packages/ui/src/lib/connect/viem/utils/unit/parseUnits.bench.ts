@@ -1,7 +1,7 @@
 import { parseUnits as parseUnitsV6 } from "ethers";
 import { bench, describe } from "vitest";
 
-import { parseUnits } from "./parseUnits.js";
+import { parseUnits } from "./parseUnits";
 
 describe("Parse Unit", () => {
   bench("@/lib/connect/viem: `parseUnits`", () => {

@@ -1,6 +1,6 @@
 import type { Address, Chain } from "@/lib/connect/viem";
 
-import type { Config, Connector } from "../createConfig.js";
+import type { Config, Connector } from "../createConfig";
 
 export type GetAccountReturnType<
   config extends Config = Config,

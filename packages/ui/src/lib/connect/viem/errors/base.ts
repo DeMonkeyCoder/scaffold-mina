@@ -1,4 +1,4 @@
-import { version } from "./version.js";
+import { version } from "./version";
 
 type ErrorConfig = {
   getDocsUrl?: ((args: BaseErrorParameters) => string | undefined) | undefined;

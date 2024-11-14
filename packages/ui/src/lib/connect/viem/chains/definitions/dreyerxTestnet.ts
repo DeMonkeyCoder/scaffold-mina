@@ -1,4 +1,4 @@
-import { defineChain } from '../utils.js'
+import { defineChain } from '../utils'
 
 export const dreyerxTestnet = /*#__PURE__*/ defineChain({
   id: 23452,

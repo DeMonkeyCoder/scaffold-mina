@@ -1,6 +1,6 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { useWaitForTransactionReceipt } from './useWaitForTransactionReceipt.js'
+import { useWaitForTransactionReceipt } from './useWaitForTransactionReceipt'
 
 test('select data', () => {
   const result = useWaitForTransactionReceipt({

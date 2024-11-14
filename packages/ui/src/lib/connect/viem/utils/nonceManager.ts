@@ -1,9 +1,9 @@
 import type { Address } from "abitype";
 
-import { getTransactionCount } from "../actions/public/getTransactionCount.js";
-import type { Client } from "../clients/createClient.js";
-import type { MaybePromise } from "../types/utils.js";
-import { LruMap } from "./lru.js";
+import { getTransactionCount } from "../actions/public/getTransactionCount";
+import type { Client } from "../clients/createClient";
+import type { MaybePromise } from "../types/utils";
+import { LruMap } from "./lru";
 
 export type CreateNonceManagerParameters = {
   source: NonceManagerSource;

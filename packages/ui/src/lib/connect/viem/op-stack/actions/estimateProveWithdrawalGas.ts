@@ -3,21 +3,21 @@ import {
   type EstimateContractGasErrorType,
   type EstimateContractGasParameters,
   estimateContractGas,
-} from '../../actions/public/estimateContractGas.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account, GetAccountParameter } from '../../types/account.js'
+} from '../../actions/public/estimateContractGas'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account, GetAccountParameter } from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import type { Hex } from '../../types/misc.js'
-import type { UnionEvaluate, UnionOmit } from '../../types/utils.js'
-import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest.js'
-import { portalAbi } from '../abis.js'
-import type { GetContractAddressParameter } from '../types/contract.js'
+} from '../../types/chain'
+import type { Hex } from '../../types/misc'
+import type { UnionEvaluate, UnionOmit } from '../../types/utils'
+import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest'
+import { portalAbi } from '../abis'
+import type { GetContractAddressParameter } from '../types/contract'
 
 export type EstimateProveWithdrawalGasParameters<
   chain extends Chain | undefined = Chain | undefined,

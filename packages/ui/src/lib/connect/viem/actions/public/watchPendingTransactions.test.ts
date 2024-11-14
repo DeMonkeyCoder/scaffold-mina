@@ -1,20 +1,20 @@
 import { describe, expect, test, vi } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { type Client, createClient } from '../../clients/createClient.js'
-import { webSocket } from '../../clients/transports/webSocket.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
-import { wait } from '../../utils/wait.js'
-import { mine } from '../test/mine.js'
-import { sendTransaction } from '../wallet/sendTransaction.js'
+import { accounts } from '~test/src/constants'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { type Client, createClient } from '../../clients/createClient'
+import { webSocket } from '../../clients/transports/webSocket'
+import { parseEther } from '../../utils/unit/parseEther'
+import { wait } from '../../utils/wait'
+import { mine } from '../test/mine'
+import { sendTransaction } from '../wallet/sendTransaction'
 
-import * as createPendingTransactionFilter from './createPendingTransactionFilter.js'
-import * as getFilterChanges from './getFilterChanges.js'
+import * as createPendingTransactionFilter from './createPendingTransactionFilter'
+import * as getFilterChanges from './getFilterChanges'
 import {
   type OnTransactionsParameter,
   watchPendingTransactions,
-} from './watchPendingTransactions.js'
+} from './watchPendingTransactions'
 
 const client = anvilMainnet.getClient()
 const webSocketClient = createClient({

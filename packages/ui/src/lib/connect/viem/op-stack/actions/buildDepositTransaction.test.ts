@@ -1,12 +1,12 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { baycContractConfig } from '../../../test/src/abis.js'
-import { anvilMainnet, anvilOptimism } from '../../../test/src/anvil.js'
-import { parseEther } from '../../index.js'
-import { base } from '../chains.js'
-import { buildDepositTransaction } from './buildDepositTransaction.js'
-import { depositTransaction } from './depositTransaction.js'
+import { accounts } from '~test/src/constants'
+import { baycContractConfig } from '../../../test/src/abis'
+import { anvilMainnet, anvilOptimism } from '../../../test/src/anvil'
+import { parseEther } from '../../index'
+import { base } from '../chains'
+import { buildDepositTransaction } from './buildDepositTransaction'
+import { depositTransaction } from './depositTransaction'
 
 const client = anvilMainnet.getClient()
 const clientWithAccount = anvilMainnet.getClient({

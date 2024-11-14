@@ -1,4 +1,4 @@
-import type { Chain } from '../types/chain.js'
+import type { Chain } from '../types/chain'
 
 /**
  * Predeploy contracts for OP Stack.

@@ -1,6 +1,6 @@
 import type { Address, TypedDataDomain } from 'abitype'
-import type { Hex } from '../../types/misc.js'
-import type { ZksyncTransactionSerializable } from './transaction.js'
+import type { Hex } from '../../types/misc'
+import type { ZksyncTransactionSerializable } from './transaction'
 
 type PaymasterParams = {
   paymaster: Address

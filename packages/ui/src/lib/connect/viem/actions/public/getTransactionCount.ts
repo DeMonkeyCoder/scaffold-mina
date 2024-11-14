@@ -1,49 +1,49 @@
-import type { Address } from 'abitype'
+import type { Address } from "abitype";
 
-import type { Account } from '../../accounts/types.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { BlockTag } from '../../types/block.js'
-import type { Chain } from '../../types/chain.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+import type { Account } from "../../accounts/types";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { BlockTag } from "../../types/block";
+import type { Chain } from "../../types/chain";
+import type { RequestErrorType } from "../../utils/buildRequest";
 import {
   type HexToNumberErrorType,
   hexToNumber,
-} from '../../utils/encoding/fromHex.js'
+} from "../../utils/encoding/fromHex";
 import {
   type NumberToHexErrorType,
   numberToHex,
-} from '../../utils/encoding/toHex.js'
+} from "../../utils/encoding/toHex";
 
 export type GetTransactionCountParameters = {
   /** The account address. */
-  address: Address
+  address: Address;
 } & (
   | {
       /** The block number. */
-      blockNumber?: bigint | undefined
-      blockTag?: undefined
+      blockNumber?: bigint | undefined;
+      blockTag?: undefined;
     }
   | {
-      blockNumber?: undefined
+      blockNumber?: undefined;
       /** The block tag. Defaults to 'latest'. */
-      blockTag?: BlockTag | undefined
+      blockTag?: BlockTag | undefined;
     }
-)
-export type GetTransactionCountReturnType = number
+);
+export type GetTransactionCountReturnType = number;
 
 export type GetTransactionCountErrorType =
   | RequestErrorType
   | NumberToHexErrorType
   | HexToNumberErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Returns the number of [Transactions](https://viem.sh/docs/glossary/terms#transaction) an Account has sent.
  *
  * - Docs: https://viem.sh/docs/actions/public/getTransactionCount
- * - JSON-RPC Methods: [`eth_getTransactionCount`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_gettransactioncount)
+ * - JSON-RPC Methods: [`mina_getTransactionCount`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_gettransactioncount)
  *
  * @param client - Client to use
  * @param parameters - {@link GetTransactionCountParameters}
@@ -64,17 +64,17 @@ export type GetTransactionCountErrorType =
  */
 export async function getTransactionCount<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(
   client: Client<Transport, chain, account>,
-  { address, blockTag = 'latest', blockNumber }: GetTransactionCountParameters,
+  { address, blockTag = "latest", blockNumber }: GetTransactionCountParameters
 ): Promise<GetTransactionCountReturnType> {
   const count = await client.request(
     {
-      method: 'eth_getTransactionCount',
+      method: "mina_getTransactionCount",
       params: [address, blockNumber ? numberToHex(blockNumber) : blockTag],
     },
-    { dedupe: Boolean(blockNumber) },
-  )
-  return hexToNumber(count)
+    { dedupe: Boolean(blockNumber) }
+  );
+  return hexToNumber(count);
 }

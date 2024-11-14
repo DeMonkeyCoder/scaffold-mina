@@ -1,4 +1,4 @@
-import { LruMap } from '../lru.js'
+import { LruMap } from '../lru'
 
 /** @internal */
 export const promiseCache = /*#__PURE__*/ new LruMap<Promise<any>>(8192)

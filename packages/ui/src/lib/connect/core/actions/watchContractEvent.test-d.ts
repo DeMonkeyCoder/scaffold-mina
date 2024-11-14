@@ -3,11 +3,11 @@ import { http, webSocket } from "@/lib/connect/viem";
 import { mainnet, optimism } from "@/lib/connect/viem/chains";
 import { expectTypeOf, test } from "vitest";
 
-import { createConfig } from "../createConfig.js";
+import { createConfig } from "../createConfig";
 import {
   type WatchContractEventParameters,
   watchContractEvent,
-} from "./watchContractEvent.js";
+} from "./watchContractEvent";
 
 test("default", () => {
   watchContractEvent(config, {

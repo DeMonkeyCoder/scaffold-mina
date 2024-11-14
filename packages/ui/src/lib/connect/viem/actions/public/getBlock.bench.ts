@@ -1,10 +1,10 @@
 import { bench, describe } from 'vitest'
 
-import { ethersProvider } from '~test/src/bench.js'
+import { ethersProvider } from '~test/src/bench'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { getBlock } from './getBlock.js'
+import { getBlock } from './getBlock'
 
 const client = anvilMainnet.getClient()
 

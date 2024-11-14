@@ -1,13 +1,13 @@
 // Adapted from https://github.com/ethereum-optimism/optimism/blob/develop/packages/core-utils/src/optimism/deposit-transaction.ts#L117
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { Log } from '../../types/log.js'
-import type { Hex } from '../../types/misc.js'
-import { keccak256 } from '../../utils/hash/keccak256.js'
-import type { portalAbi } from '../abis.js'
-import { serializeTransaction } from '../serializers.js'
-import { getSourceHash } from './getSourceHash.js'
-import { opaqueDataToDepositData } from './opaqueDataToDepositData.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Log } from '../../types/log'
+import type { Hex } from '../../types/misc'
+import { keccak256 } from '../../utils/hash/keccak256'
+import type { portalAbi } from '../abis'
+import { serializeTransaction } from '../serializers'
+import { getSourceHash } from './getSourceHash'
+import { opaqueDataToDepositData } from './opaqueDataToDepositData'
 
 export type GetL2TransactionHashParameters = {
   /** The "TransactionDeposited" log to compute the L2 hash from. */

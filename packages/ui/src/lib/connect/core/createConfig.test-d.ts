@@ -3,8 +3,8 @@ import { http, createClient, webSocket } from "@/lib/connect/viem";
 import { mainnet, sepolia } from "@/lib/connect/viem/chains";
 import { expectTypeOf, test } from "vitest";
 
-import { mock } from "./connectors/mock.js";
-import { type CreateConfigParameters, createConfig } from "./createConfig.js";
+import { mock } from "./connectors/mock";
+import { type CreateConfigParameters, createConfig } from "./createConfig";
 
 test("high-level config", () => {
   // Create config without needing to import @/lib/connect/viem modules.

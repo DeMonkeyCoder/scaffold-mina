@@ -1,19 +1,19 @@
 import type { Address, TypedDataDomain } from 'abitype'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
 import {
   Eip712DomainNotFoundError,
   type Eip712DomainNotFoundErrorType,
-} from '../../errors/eip712.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex } from '../../types/misc.js'
-import type { RequiredBy } from '../../types/utils.js'
-import { getAction } from '../../utils/getAction.js'
+} from '../../errors/eip712'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex } from '../../types/misc'
+import type { RequiredBy } from '../../types/utils'
+import { getAction } from '../../utils/getAction'
 import {
   type ReadContractErrorType,
   type ReadContractParameters,
   readContract,
-} from './readContract.js'
+} from './readContract'
 
 export type GetEip712DomainParameters = {
   address: Address

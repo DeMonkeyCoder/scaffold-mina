@@ -1,4 +1,4 @@
-import type { Hash } from '../../types/misc.js'
+import type { Hash } from '../../types/misc'
 
 export type MessageProof = {
   id: number

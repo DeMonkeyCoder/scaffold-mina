@@ -16,8 +16,8 @@ import type {
   ResolvedRegister,
 } from 'abitype'
 
-import type { Hex, LogTopic } from './misc.js'
-import type { TransactionRequest } from './transaction.js'
+import type { Hex, LogTopic } from './misc'
+import type { TransactionRequest } from './transaction'
 import type {
   Filter,
   IsNarrowable,
@@ -26,7 +26,7 @@ import type {
   NoInfer,
   Prettify,
   UnionToTuple,
-} from './utils.js'
+} from './utils'
 
 export type ContractFunctionName<
   abi extends Abi | readonly unknown[] = Abi,

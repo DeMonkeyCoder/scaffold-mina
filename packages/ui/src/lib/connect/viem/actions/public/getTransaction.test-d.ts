@@ -1,20 +1,20 @@
 import { describe, expectTypeOf, test } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { optimism } from '../../chains/index.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { optimism } from '../../chains/index'
 
-import { createPublicClient } from '../../clients/createPublicClient.js'
-import { http } from '../../clients/transports/http.js'
-import type { Hex } from '../../types/misc.js'
+import { createPublicClient } from '../../clients/createPublicClient'
+import { http } from '../../clients/transports/http'
+import type { Hex } from '../../types/misc'
 import type {
   Transaction,
   TransactionEIP1559,
   TransactionEIP2930,
   TransactionEIP4844,
   TransactionLegacy,
-} from '../../types/transaction.js'
-import type { Prettify } from '../../types/utils.js'
-import { getTransaction } from './getTransaction.js'
+} from '../../types/transaction'
+import type { Prettify } from '../../types/utils'
+import { getTransaction } from './getTransaction'
 
 const client = anvilMainnet.getClient()
 

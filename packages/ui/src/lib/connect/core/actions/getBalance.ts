@@ -12,13 +12,13 @@ import {
   getBalance as viem_getBalance,
 } from "@/lib/connect/viem/actions";
 
-import type { Config } from "../createConfig.js";
-import type { ChainIdParameter } from "../types/properties.js";
-import type { Unit } from "../types/unit.js";
-import type { Compute } from "../types/utils.js";
-import { getAction } from "../utils/getAction.js";
-import { getUnit } from "../utils/getUnit.js";
-import { readContracts } from "./readContracts.js";
+import type { Config } from "../createConfig";
+import type { ChainIdParameter } from "../types/properties";
+import type { Unit } from "../types/unit";
+import type { Compute } from "../types/utils";
+import { getAction } from "../utils/getAction";
+import { getUnit } from "../utils/getUnit";
+import { readContracts } from "./readContracts";
 
 export type GetBalanceParameters<config extends Config = Config> = Compute<
   ChainIdParameter<config> &

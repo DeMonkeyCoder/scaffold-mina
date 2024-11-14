@@ -1,22 +1,22 @@
-import type { Account } from '../../accounts/types.js'
+import type { Account } from '../../accounts/types'
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../accounts/utils/parseAccount.js'
-import type { SignMessageErrorType as SignMessageErrorType_account } from '../../accounts/utils/signMessage.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import { AccountNotFoundError } from '../../errors/account.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { GetAccountParameter } from '../../types/account.js'
-import type { Chain } from '../../types/chain.js'
-import type { Hex, SignableMessage } from '../../types/misc.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+} from '../../accounts/utils/parseAccount'
+import type { SignMessageErrorType as SignMessageErrorType_account } from '../../accounts/utils/signMessage'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import { AccountNotFoundError } from '../../errors/account'
+import type { ErrorType } from '../../errors/utils'
+import type { GetAccountParameter } from '../../types/account'
+import type { Chain } from '../../types/chain'
+import type { Hex, SignableMessage } from '../../types/misc'
+import type { RequestErrorType } from '../../utils/buildRequest'
 import {
   type ToHexErrorType,
   stringToHex,
   toHex,
-} from '../../utils/encoding/toHex.js'
+} from '../../utils/encoding/toHex'
 
 export type SignMessageParameters<
   account extends Account | undefined = Account | undefined,

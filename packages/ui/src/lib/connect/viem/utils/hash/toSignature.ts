@@ -1,10 +1,10 @@
 import { type AbiEvent, type AbiFunction, formatAbiItem } from 'abitype'
 
-import type { ErrorType } from '../../errors/utils.js'
+import type { ErrorType } from '../../errors/utils'
 import {
   type NormalizeSignatureErrorType,
   normalizeSignature,
-} from './normalizeSignature.js'
+} from './normalizeSignature'
 
 export type ToSignatureErrorType = NormalizeSignatureErrorType | ErrorType
 

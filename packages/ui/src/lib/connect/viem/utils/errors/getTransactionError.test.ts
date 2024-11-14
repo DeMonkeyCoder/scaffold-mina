@@ -1,17 +1,17 @@
 import { expect, test } from "vitest";
 
-import { address } from "~test/src/constants.js";
-import { parseAccount } from "../../accounts/utils/parseAccount.js";
-import { BaseError } from "../../errors/base.js";
-import { RpcRequestError } from "../../errors/request.js";
+import { address } from "~test/src/constants";
+import { parseAccount } from "../../accounts/utils/parseAccount";
+import { BaseError } from "../../errors/base";
+import { RpcRequestError } from "../../errors/request";
 import {
   InvalidInputRpcError,
   TransactionRejectedRpcError,
-} from "../../errors/rpc.js";
-import { parseEther } from "../unit/parseEther.js";
-import { parseGwei } from "../unit/parseGwei.js";
+} from "../../errors/rpc";
+import { parseEther } from "../unit/parseEther";
+import { parseGwei } from "../unit/parseGwei";
 
-import { getTransactionError } from "./getTransactionError.js";
+import { getTransactionError } from "./getTransactionError";
 
 test("default", () => {
   const error = new BaseError("Unknown error");

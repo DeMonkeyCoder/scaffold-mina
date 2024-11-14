@@ -3,7 +3,7 @@ import { renderHook } from "@wagmi/test/react";
 import type { WatchEventOnLogsParameter } from "@/lib/connect/viem";
 import { test } from "vitest";
 
-import { createUseWatchContractEvent } from "./createUseWatchContractEvent.js";
+import { createUseWatchContractEvent } from "./createUseWatchContractEvent";
 
 test("default", async () => {
   const useWatchErc20Event = createUseWatchContractEvent({

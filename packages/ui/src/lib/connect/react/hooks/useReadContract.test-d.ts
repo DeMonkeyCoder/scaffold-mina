@@ -6,7 +6,7 @@ import {
   type UseReadContractParameters,
   type UseReadContractReturnType,
   useReadContract,
-} from "./useReadContract.js";
+} from "./useReadContract";
 
 test("select data", () => {
   const result = useReadContract({

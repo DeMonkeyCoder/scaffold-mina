@@ -2,9 +2,9 @@ import { http } from "@/lib/connect/viem";
 import { mainnet } from "@/lib/connect/viem/chains";
 import { expect, test } from "vitest";
 
-import { createConfig } from "../createConfig.js";
-import { createStorage } from "../createStorage.js";
-import { cookieStorage, cookieToInitialState, parseCookie } from "./cookie.js";
+import { createConfig } from "../createConfig";
+import { createStorage } from "../createStorage";
+import { cookieStorage, cookieToInitialState, parseCookie } from "./cookie";
 
 test("cookieStorage", () => {
   expect(cookieStorage.getItem("recentConnectorId")).toMatchInlineSnapshot(

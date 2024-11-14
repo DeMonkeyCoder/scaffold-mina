@@ -5,10 +5,10 @@ import {
   type ConnectParameters,
   type ConnectReturnType,
   connect,
-} from '../actions/connect.js'
-import type { Config } from '../createConfig.js'
+} from '../actions/connect'
+import type { Config } from '../createConfig'
 
-import type { Mutate, MutateAsync } from './types.js'
+import type { Mutate, MutateAsync } from './types'
 
 export function connectMutationOptions<config extends Config>(config: config) {
   return {

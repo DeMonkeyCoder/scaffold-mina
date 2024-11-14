@@ -1,10 +1,10 @@
 import { beforeEach, expect, test } from 'vitest'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { accounts } from '../../../test/src/constants.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { accounts } from '../../../test/src/constants'
 
-import { reset } from '../../actions/index.js'
-import { optimism } from '../chains.js'
-import { estimateFinalizeWithdrawalGas } from './estimateFinalizeWithdrawalGas.js'
+import { reset } from '../../actions/index'
+import { optimism } from '../chains'
+import { estimateFinalizeWithdrawalGas } from './estimateFinalizeWithdrawalGas'
 
 const client = anvilMainnet.getClient()
 

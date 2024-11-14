@@ -2,13 +2,13 @@ import { beforeEach, describe, expect, test } from 'vitest'
 import {
   getSmartAccounts_06,
   getSmartAccounts_07,
-} from '../../../../test/src/account-abstraction.js'
-import { anvilMainnet } from '../../../../test/src/anvil.js'
-import { bundlerMainnet } from '../../../../test/src/bundler.js'
-import { mine } from '../../../actions/index.js'
-import { parseEther, parseGwei } from '../../../utils/index.js'
-import { getUserOperationReceipt } from './getUserOperationReceipt.js'
-import { sendUserOperation } from './sendUserOperation.js'
+} from '../../../../test/src/account-abstraction'
+import { anvilMainnet } from '../../../../test/src/anvil'
+import { bundlerMainnet } from '../../../../test/src/bundler'
+import { mine } from '../../../actions/index'
+import { parseEther, parseGwei } from '../../../utils/index'
+import { getUserOperationReceipt } from './getUserOperationReceipt'
+import { sendUserOperation } from './sendUserOperation'
 
 const client = anvilMainnet.getClient({ account: true })
 const bundlerClient = bundlerMainnet.getBundlerClient()

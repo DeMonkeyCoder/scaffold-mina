@@ -3,7 +3,7 @@ import { renderHook, waitFor } from "@wagmi/test/react";
 import { expect, test } from "vitest";
 
 import type { Hex } from "@/lib/connect/viem";
-import { useVerifyMessage } from "./useVerifyMessage.js";
+import { useVerifyMessage } from "./useVerifyMessage";
 
 const address = accounts[0];
 

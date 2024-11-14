@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expectTypeOf, test } from 'vitest'
 
-import { watchClient } from './watchClient.js'
+import { watchClient } from './watchClient'
 
 test('default', () => {
   watchClient(config, {

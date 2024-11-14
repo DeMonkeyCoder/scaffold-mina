@@ -1,5 +1,5 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Prettify } from '../../types/utils.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Prettify } from '../../types/utils'
 
 export type DefineFormatterErrorType = ErrorType
 

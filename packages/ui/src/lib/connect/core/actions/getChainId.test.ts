@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getChainId } from './getChainId.js'
+import { getChainId } from './getChainId'
 
 test('default', async () => {
   expect(getChainId(config)).toEqual(chain.mainnet.id)

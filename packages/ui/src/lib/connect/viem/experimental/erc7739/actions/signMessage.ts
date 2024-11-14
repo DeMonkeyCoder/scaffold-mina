@@ -1,22 +1,22 @@
 import type { Address, TypedDataDomain } from 'abitype'
-import type { Account } from '../../../accounts/types.js'
-import { parseAccount } from '../../../accounts/utils/parseAccount.js'
+import type { Account } from '../../../accounts/types'
+import { parseAccount } from '../../../accounts/utils/parseAccount'
 import {
   type GetEip712DomainParameters,
   getEip712Domain,
-} from '../../../actions/public/getEip712Domain.js'
-import { signTypedData } from '../../../actions/wallet/signTypedData.js'
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import { AccountNotFoundError } from '../../../errors/account.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { GetAccountParameter } from '../../../types/account.js'
-import type { Chain } from '../../../types/chain.js'
-import type { Hex, SignableMessage } from '../../../types/misc.js'
-import type { OneOf, RequiredBy } from '../../../types/utils.js'
-import { getAction } from '../../../utils/getAction.js'
-import { toPrefixedMessage } from '../../../utils/signature/toPrefixedMessage.js'
-import type { GetVerifierParameter } from '../types.js'
+} from '../../../actions/public/getEip712Domain'
+import { signTypedData } from '../../../actions/wallet/signTypedData'
+import type { Client } from '../../../clients/createClient'
+import type { Transport } from '../../../clients/transports/createTransport'
+import { AccountNotFoundError } from '../../../errors/account'
+import type { ErrorType } from '../../../errors/utils'
+import type { GetAccountParameter } from '../../../types/account'
+import type { Chain } from '../../../types/chain'
+import type { Hex, SignableMessage } from '../../../types/misc'
+import type { OneOf, RequiredBy } from '../../../types/utils'
+import { getAction } from '../../../utils/getAction'
+import { toPrefixedMessage } from '../../../utils/signature/toPrefixedMessage'
+import type { GetVerifierParameter } from '../types'
 
 export type SignMessageParameters<
   account extends Account | undefined = Account | undefined,

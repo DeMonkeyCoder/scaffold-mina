@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getEnsAvatar } from './getEnsAvatar.js'
+import { getEnsAvatar } from './getEnsAvatar'
 
 test('default', async () => {
   await expect(

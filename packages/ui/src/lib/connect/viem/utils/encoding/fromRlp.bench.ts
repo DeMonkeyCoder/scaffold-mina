@@ -2,8 +2,8 @@ import { RLP } from "@ethereumjs/rlp";
 import { decodeRlp } from "ethers";
 import { bench, describe } from "vitest";
 
-import { fromRlp } from "./fromRlp.js";
-import { bytesToRlp } from "./toRlp.js";
+import { fromRlp } from "./fromRlp";
+import { bytesToRlp } from "./toRlp";
 
 const generateBytes = (length: number) => {
   const bytes = new Uint8Array(length);

@@ -1,6 +1,6 @@
 import { erc20Abi } from "abitype/abis";
 import { expect, test } from "vitest";
-import { prepareEncodeFunctionData } from "./prepareEncodeFunctionData.js";
+import { prepareEncodeFunctionData } from "./prepareEncodeFunctionData";
 
 test("default", () => {
   const prepared = prepareEncodeFunctionData({

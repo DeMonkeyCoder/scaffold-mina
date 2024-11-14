@@ -1,8 +1,8 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex } from '../../types/misc.js'
-import { type SizeErrorType, size } from '../../utils/data/size.js'
-import { type SliceErrorType, slice } from '../../utils/data/slice.js'
-import { hexToBigInt } from '../../utils/encoding/fromHex.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex } from '../../types/misc'
+import { type SizeErrorType, size } from '../../utils/data/size'
+import { type SliceErrorType, slice } from '../../utils/data/slice'
+import { hexToBigInt } from '../../utils/encoding/fromHex'
 
 export type OpaqueDataToDepositDataParameters = Hex
 

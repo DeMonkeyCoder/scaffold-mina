@@ -1,5 +1,5 @@
 import { generateMnemonic as generateMnemonic_ } from '@scure/bip39'
-import type { ErrorType } from '../errors/utils.js'
+import type { ErrorType } from '../errors/utils'
 
 export type GenerateMnemonicErrorType = ErrorType
 

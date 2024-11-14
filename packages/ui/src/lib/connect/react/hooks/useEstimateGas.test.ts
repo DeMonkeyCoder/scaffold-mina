@@ -3,7 +3,7 @@ import { renderHook, waitFor } from "@wagmi/test/react";
 import { type Address, parseEther } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { useEstimateGas } from "./useEstimateGas.js";
+import { useEstimateGas } from "./useEstimateGas";
 
 test("default", async () => {
   const { result } = renderHook(() =>

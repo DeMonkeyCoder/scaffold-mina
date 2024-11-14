@@ -4,32 +4,32 @@ import {
   parseSignature as parseP256Signature,
 } from 'webauthn-p256'
 
-import type { LocalAccount } from '../../../accounts/types.js'
-import { readContract } from '../../../actions/public/readContract.js'
-import type { Client } from '../../../clients/createClient.js'
-import { entryPoint06Address } from '../../../constants/address.js'
-import { BaseError } from '../../../errors/base.js'
-import type { Hash, Hex } from '../../../types/misc.js'
-import type { TypedDataDefinition } from '../../../types/typedData.js'
-import type { Assign, OneOf, Prettify } from '../../../types/utils.js'
-import { encodeAbiParameters } from '../../../utils/abi/encodeAbiParameters.js'
-import { encodeFunctionData } from '../../../utils/abi/encodeFunctionData.js'
-import { encodePacked } from '../../../utils/abi/encodePacked.js'
-import { pad } from '../../../utils/data/pad.js'
-import { size } from '../../../utils/data/size.js'
-import { stringToHex } from '../../../utils/encoding/toHex.js'
-import { hashMessage } from '../../../utils/signature/hashMessage.js'
-import { hashTypedData } from '../../../utils/signature/hashTypedData.js'
-import { parseSignature } from '../../../utils/signature/parseSignature.js'
-import { entryPoint06Abi } from '../../constants/abis.js'
-import type { UserOperation } from '../../types/userOperation.js'
-import { getUserOperationHash } from '../../utils/userOperation/getUserOperationHash.js'
-import { toSmartAccount } from '../toSmartAccount.js'
+import type { LocalAccount } from '../../../accounts/types'
+import { readContract } from '../../../actions/public/readContract'
+import type { Client } from '../../../clients/createClient'
+import { entryPoint06Address } from '../../../constants/address'
+import { BaseError } from '../../../errors/base'
+import type { Hash, Hex } from '../../../types/misc'
+import type { TypedDataDefinition } from '../../../types/typedData'
+import type { Assign, OneOf, Prettify } from '../../../types/utils'
+import { encodeAbiParameters } from '../../../utils/abi/encodeAbiParameters'
+import { encodeFunctionData } from '../../../utils/abi/encodeFunctionData'
+import { encodePacked } from '../../../utils/abi/encodePacked'
+import { pad } from '../../../utils/data/pad'
+import { size } from '../../../utils/data/size'
+import { stringToHex } from '../../../utils/encoding/toHex'
+import { hashMessage } from '../../../utils/signature/hashMessage'
+import { hashTypedData } from '../../../utils/signature/hashTypedData'
+import { parseSignature } from '../../../utils/signature/parseSignature'
+import { entryPoint06Abi } from '../../constants/abis'
+import type { UserOperation } from '../../types/userOperation'
+import { getUserOperationHash } from '../../utils/userOperation/getUserOperationHash'
+import { toSmartAccount } from '../toSmartAccount'
 import type {
   SmartAccount,
   SmartAccountImplementation,
   WebAuthnAccount,
-} from '../types.js'
+} from '../types'
 
 export type ToCoinbaseSmartAccountParameters = {
   address?: Address | undefined
@@ -60,7 +60,7 @@ export type CoinbaseSmartAccountImplementation = Assign<
  * @example
  * import { toCoinbaseSmartAccount } from 'viem/account-abstraction'
  * import { privateKeyToAccount } from 'viem/accounts'
- * import { client } from './client.js'
+ * import { client } from './client'
  *
  * const account = toCoinbaseSmartAccount({
  *   client,

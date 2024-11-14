@@ -1,14 +1,14 @@
 import { expect, test } from 'vitest'
 
-import { baycContractConfig, payableContractConfig } from '~test/src/abis.js'
-import { accounts } from '~test/src/constants.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
-import { getBalance } from '../public/getBalance.js'
-import { mine } from '../test/mine.js'
-import { setBalance } from '../test/setBalance.js'
+import { baycContractConfig, payableContractConfig } from '~test/src/abis'
+import { accounts } from '~test/src/constants'
+import { parseEther } from '../../utils/unit/parseEther'
+import { getBalance } from '../public/getBalance'
+import { mine } from '../test/mine'
+import { setBalance } from '../test/setBalance'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { deployContract } from './deployContract.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { deployContract } from './deployContract'
 
 const client = anvilMainnet.getClient()
 const clientWithAccount = anvilMainnet.getClient({

@@ -1,17 +1,17 @@
 import { describe, expect, test } from 'vitest'
-import { accounts } from '../../test/src/constants.js'
-import { getTransaction } from '../actions/index.js'
-import { base } from '../chains/index.js'
+import { accounts } from '../../test/src/constants'
+import { getTransaction } from '../actions/index'
+import { base } from '../chains/index'
 import {
   http,
   createPublicClient,
   keccak256,
   parseEther,
   parseGwei,
-} from '../index.js'
-import { parseTransaction } from './parsers.js'
-import { serializeTransaction } from './serializers.js'
-import type { TransactionSerializableDeposit } from './types/transaction.js'
+} from '../index'
+import { parseTransaction } from './parsers'
+import { serializeTransaction } from './serializers'
+import type { TransactionSerializableDeposit } from './types/transaction'
 
 describe('deposit', async () => {
   const baseTransaction = {

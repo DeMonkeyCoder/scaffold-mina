@@ -5,9 +5,9 @@ import {
   hexToBytes,
   numberToBytes,
   stringToBytes,
-} from './toBytes.js'
-import { boolToHex, bytesToHex, numberToHex, stringToHex } from './toHex.js'
-import { bytesToRlp, hexToRlp, toRlp } from './toRlp.js'
+} from './toBytes'
+import { boolToHex, bytesToHex, numberToHex, stringToHex } from './toHex'
+import { bytesToRlp, hexToRlp, toRlp } from './toRlp'
 
 const generateBytes = (length: number) => {
   const bytes = new Uint8Array(length)

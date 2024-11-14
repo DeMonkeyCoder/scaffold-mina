@@ -3,45 +3,45 @@ import type { Abi, AbiFunction, AbiStateMutability, Address } from 'abitype'
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../accounts/utils/parseAccount.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { BaseError } from '../../errors/base.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account, ParseAccount } from '../../types/account.js'
-import type { Chain, DeriveChain } from '../../types/chain.js'
+} from '../../accounts/utils/parseAccount'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { BaseError } from '../../errors/base'
+import type { ErrorType } from '../../errors/utils'
+import type { Account, ParseAccount } from '../../types/account'
+import type { Chain, DeriveChain } from '../../types/chain'
 import type {
   ContractFunctionArgs,
   ContractFunctionName,
   ContractFunctionParameters,
   ContractFunctionReturnType,
   ExtractAbiFunctionForArgs,
-} from '../../types/contract.js'
-import type { Hex } from '../../types/misc.js'
+} from '../../types/contract'
+import type { Hex } from '../../types/misc'
 import type {
   IsNarrowable,
   NoInfer,
   Prettify,
   UnionEvaluate,
   UnionOmit,
-} from '../../types/utils.js'
+} from '../../types/utils'
 import {
   type DecodeFunctionResultErrorType,
   decodeFunctionResult,
-} from '../../utils/abi/decodeFunctionResult.js'
+} from '../../utils/abi/decodeFunctionResult'
 import {
   type EncodeFunctionDataErrorType,
   encodeFunctionData,
-} from '../../utils/abi/encodeFunctionData.js'
+} from '../../utils/abi/encodeFunctionData'
 import {
   type GetContractErrorReturnType,
   getContractError,
-} from '../../utils/errors/getContractError.js'
-import type { WriteContractParameters } from '../wallet/writeContract.js'
+} from '../../utils/errors/getContractError'
+import type { WriteContractParameters } from '../wallet/writeContract'
 
-import type { TransactionRequest } from '../../types/transaction.js'
-import { getAction } from '../../utils/getAction.js'
-import { type CallErrorType, type CallParameters, call } from './call.js'
+import type { TransactionRequest } from '../../types/transaction'
+import { getAction } from '../../utils/getAction'
+import { type CallErrorType, type CallParameters, call } from './call'
 
 export type GetMutabilityAwareValue<
   abi extends Abi | readonly unknown[],

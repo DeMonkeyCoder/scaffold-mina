@@ -1,20 +1,20 @@
 import type { Address, TypedData } from 'abitype'
 
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { ByteArray, Hex, Signature } from '../../types/misc.js'
-import type { TypedDataDefinition } from '../../types/typedData.js'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { ByteArray, Hex, Signature } from '../../types/misc'
+import type { TypedDataDefinition } from '../../types/typedData'
 import {
   type HashTypedDataErrorType,
   hashTypedData,
-} from '../../utils/signature/hashTypedData.js'
+} from '../../utils/signature/hashTypedData'
 import {
   type VerifyHashErrorType,
   type VerifyHashParameters,
   verifyHash,
-} from './verifyHash.js'
+} from './verifyHash'
 
 export type VerifyTypedDataParameters<
   typedData extends TypedData | Record<string, unknown> = TypedData,

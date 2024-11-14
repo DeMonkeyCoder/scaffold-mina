@@ -1,16 +1,16 @@
-import type { ErrorType } from '../../errors/utils.js'
+import type { ErrorType } from '../../errors/utils'
 import type {
   Chain,
   ExtractChainFormatterReturnType,
-} from '../../types/chain.js'
-import type { RpcTransactionReceipt } from '../../types/rpc.js'
-import type { TransactionReceipt } from '../../types/transaction.js'
-import type { ExactPartial } from '../../types/utils.js'
-import { hexToNumber } from '../encoding/fromHex.js'
+} from '../../types/chain'
+import type { RpcTransactionReceipt } from '../../types/rpc'
+import type { TransactionReceipt } from '../../types/transaction'
+import type { ExactPartial } from '../../types/utils'
+import { hexToNumber } from '../encoding/fromHex'
 
-import { type DefineFormatterErrorType, defineFormatter } from './formatter.js'
-import { formatLog } from './log.js'
-import { transactionType } from './transaction.js'
+import { type DefineFormatterErrorType, defineFormatter } from './formatter'
+import { formatLog } from './log'
+import { transactionType } from './transaction'
 
 export type FormattedTransactionReceipt<
   chain extends Chain | undefined = undefined,

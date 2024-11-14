@@ -1,8 +1,8 @@
 import { bench, describe } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { getBlockTransactionCount } from './getBlockTransactionCount.js'
+import { getBlockTransactionCount } from './getBlockTransactionCount'
 
 const client = anvilMainnet.getClient()
 

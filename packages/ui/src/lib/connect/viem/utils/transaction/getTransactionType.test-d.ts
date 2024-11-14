@@ -4,12 +4,12 @@ import type {
   TransactionSerializableEIP1559,
   TransactionSerializableEIP2930,
   TransactionSerializableLegacy,
-} from '../../index.js'
+} from '../../index'
 import type {
   TransactionSerializableEIP4844,
   TransactionSerializableEIP7702,
-} from '../../types/transaction.js'
-import { getTransactionType } from './getTransactionType.js'
+} from '../../types/transaction'
+import { getTransactionType } from './getTransactionType'
 
 test('empty', () => {
   expectTypeOf(getTransactionType({})).toEqualTypeOf<string>()

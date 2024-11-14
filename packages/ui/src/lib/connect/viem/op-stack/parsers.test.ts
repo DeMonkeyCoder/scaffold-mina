@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest'
-import { accounts } from '../../test/src/constants.js'
-import { parseEther, parseGwei } from '../index.js'
-import { parseTransaction } from './parsers.js'
-import { serializeTransaction } from './serializers.js'
-import type { TransactionSerializableDeposit } from './types/transaction.js'
+import { accounts } from '../../test/src/constants'
+import { parseEther, parseGwei } from '../index'
+import { parseTransaction } from './parsers'
+import { serializeTransaction } from './serializers'
+import type { TransactionSerializableDeposit } from './types/transaction'
 
 describe('deposit', () => {
   const baseTransaction = {

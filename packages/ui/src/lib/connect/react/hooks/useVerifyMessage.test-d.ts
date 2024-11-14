@@ -1,6 +1,6 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { useVerifyMessage } from './useVerifyMessage.js'
+import { useVerifyMessage } from './useVerifyMessage'
 
 test('select data', () => {
   const result = useVerifyMessage({

@@ -1,8 +1,8 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Log } from '../../types/log.js'
-import type { Hex } from '../../types/misc.js'
-import { extractTransactionDepositedLogs } from './extractTransactionDepositedLogs.js'
-import { getL2TransactionHash } from './getL2TransactionHash.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Log } from '../../types/log'
+import type { Hex } from '../../types/misc'
+import { extractTransactionDepositedLogs } from './extractTransactionDepositedLogs'
+import { getL2TransactionHash } from './getL2TransactionHash'
 
 export type GetL2TransactionHashesParameters = {
   /** The L1 transaction receipt logs. */

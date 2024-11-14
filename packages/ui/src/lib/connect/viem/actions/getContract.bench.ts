@@ -2,11 +2,11 @@ import { Contract } from 'ethers'
 
 import { bench, describe } from 'vitest'
 
-import { wagmiContractConfig } from '~test/src/abis.js'
-import { ethersProvider } from '~test/src/bench.js'
+import { wagmiContractConfig } from '~test/src/abis'
+import { ethersProvider } from '~test/src/bench'
 
-import { anvilMainnet } from '../../test/src/anvil.js'
-import { getContract } from './getContract.js'
+import { anvilMainnet } from '../../test/src/anvil'
+import { getContract } from './getContract'
 
 const client = anvilMainnet.getClient()
 

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import * as connectors from './connectors.js'
+import * as connectors from './connectors'
 
 test('exports', () => {
   expect(Object.keys(connectors)).toMatchInlineSnapshot(`

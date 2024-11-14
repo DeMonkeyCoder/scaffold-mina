@@ -5,11 +5,11 @@ import {
   type EstimateGasParameters,
   type EstimateGasReturnType,
   estimateGas,
-} from '../actions/estimateGas.js'
-import type { Config } from '../createConfig.js'
-import type { ScopeKeyParameter } from '../types/properties.js'
-import type { UnionExactPartial } from '../types/utils.js'
-import { filterQueryOptions } from './utils.js'
+} from '../actions/estimateGas'
+import type { Config } from '../createConfig'
+import type { ScopeKeyParameter } from '../types/properties'
+import type { UnionExactPartial } from '../types/utils'
+import { filterQueryOptions } from './utils'
 
 export type EstimateGasOptions<
   config extends Config,

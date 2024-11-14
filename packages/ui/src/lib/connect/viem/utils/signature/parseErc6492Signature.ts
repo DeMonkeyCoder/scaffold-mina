@@ -1,15 +1,15 @@
 import type { Address } from 'abitype'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex } from '../../types/misc.js'
-import type { OneOf, Prettify } from '../../types/utils.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex } from '../../types/misc'
+import type { OneOf, Prettify } from '../../types/utils'
 import {
   type DecodeAbiParametersErrorType,
   decodeAbiParameters,
-} from '../abi/decodeAbiParameters.js'
+} from '../abi/decodeAbiParameters'
 import {
   type IsErc6492SignatureErrorType,
   isErc6492Signature,
-} from './isErc6492Signature.js'
+} from './isErc6492Signature'
 
 export type ParseErc6492SignatureParameters = Hex
 

@@ -3,9 +3,9 @@ import {
   mockClientPublicActionsL2,
   mockDetails,
   zksyncClientLocalNode,
-} from '../../../test/src/zksync.js'
+} from '../../../test/src/zksync'
 
-import { getL1BatchDetails } from './getL1BatchDetails.js'
+import { getL1BatchDetails } from './getL1BatchDetails'
 
 const client = { ...zksyncClientLocalNode }
 

@@ -1,17 +1,17 @@
 import { assertType, beforeAll, describe, expect, test, vi } from 'vitest'
 
-import { ERC20InvalidTransferEvent } from '~contracts/generated.js'
-import { usdcContractConfig } from '~test/src/abis.js'
-import { accounts, address } from '~test/src/constants.js'
-import { deployErc20InvalidTransferEvent } from '~test/src/utils.js'
-import { getAddress } from '../../utils/address/getAddress.js'
-import { wait } from '../../utils/wait.js'
-import { impersonateAccount } from '../test/impersonateAccount.js'
-import { mine } from '../test/mine.js'
-import { setBalance } from '../test/setBalance.js'
-import { writeContract } from '../wallet/writeContract.js'
+import { ERC20InvalidTransferEvent } from '~contracts/generated'
+import { usdcContractConfig } from '~test/src/abis'
+import { accounts, address } from '~test/src/constants'
+import { deployErc20InvalidTransferEvent } from '~test/src/utils'
+import { getAddress } from '../../utils/address/getAddress'
+import { wait } from '../../utils/wait'
+import { impersonateAccount } from '../test/impersonateAccount'
+import { mine } from '../test/mine'
+import { setBalance } from '../test/setBalance'
+import { writeContract } from '../wallet/writeContract'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 import {
   http,
   type Client,
@@ -20,15 +20,15 @@ import {
   createClient,
   fallback,
   webSocket,
-} from '../../index.js'
-import * as createContractEventFilter from './createContractEventFilter.js'
-import * as getBlockNumber from './getBlockNumber.js'
-import * as getFilterChanges from './getFilterChanges.js'
-import * as getLogs from './getLogs.js'
+} from '../../index'
+import * as createContractEventFilter from './createContractEventFilter'
+import * as getBlockNumber from './getBlockNumber'
+import * as getFilterChanges from './getFilterChanges'
+import * as getLogs from './getLogs'
 import {
   type WatchContractEventOnLogsParameter,
   watchContractEvent,
-} from './watchContractEvent.js'
+} from './watchContractEvent'
 
 const client = anvilMainnet.getClient()
 const httpClient = createClient({

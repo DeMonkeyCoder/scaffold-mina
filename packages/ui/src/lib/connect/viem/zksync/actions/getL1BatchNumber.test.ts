@@ -3,8 +3,8 @@ import {
   mockClientPublicActionsL2,
   mockedL1BatchNumber,
   zksyncClientLocalNode,
-} from '../../../test/src/zksync.js'
-import { getL1BatchNumber } from './getL1BatchNumber.js'
+} from '../../../test/src/zksync'
+import { getL1BatchNumber } from './getL1BatchNumber'
 
 const client = { ...zksyncClientLocalNode }
 

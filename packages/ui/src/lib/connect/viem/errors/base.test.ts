@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 
-import { BaseError, setErrorConfig } from "./base.js";
+import { BaseError, setErrorConfig } from "./base";
 
 test("BaseError", () => {
   expect(new BaseError("An error occurred.")).toMatchInlineSnapshot(`

@@ -1,7 +1,7 @@
 import type { Address } from 'abitype'
 
-import type { OneOf } from '../../../types/utils.js'
-import type { Policy } from './policy.js'
+import type { OneOf } from '../../../types/utils'
+import type { Policy } from './policy'
 
 /** @internal */
 export type CustomPermission<data = unknown, type = { custom: string }> = {

@@ -1,10 +1,10 @@
-import { concat } from '../../../utils/data/concat.js'
-import { pad } from '../../../utils/data/pad.js'
-import { numberToHex } from '../../../utils/index.js'
+import { concat } from '../../../utils/data/concat'
+import { pad } from '../../../utils/data/pad'
+import { numberToHex } from '../../../utils/index'
 import type {
   PackedUserOperation,
   UserOperation,
-} from '../../types/userOperation.js'
+} from '../../types/userOperation'
 
 export function toPackedUserOperation(
   userOperation: UserOperation,

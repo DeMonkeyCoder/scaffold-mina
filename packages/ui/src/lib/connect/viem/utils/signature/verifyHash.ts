@@ -1,17 +1,17 @@
 import type { Address } from "abitype";
 
-import type { ByteArray, Hash, Hex, Signature } from "../../types/misc.js";
-import { type GetAddressErrorType, getAddress } from "../address/getAddress.js";
+import type { ByteArray, Hash, Hex, Signature } from "../../types/misc";
+import { type GetAddressErrorType, getAddress } from "../address/getAddress";
 import {
   type IsAddressEqualErrorType,
   isAddressEqual,
-} from "../address/isAddressEqual.js";
+} from "../address/isAddressEqual";
 
-import type { ErrorType } from "../../errors/utils.js";
+import type { ErrorType } from "../../errors/utils";
 import {
   type RecoverAddressErrorType,
   recoverAddress,
-} from "./recoverAddress.js";
+} from "./recoverAddress";
 
 export type VerifyHashParameters = {
   /** The address that signed the original message. */

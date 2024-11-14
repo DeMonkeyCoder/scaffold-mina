@@ -5,13 +5,13 @@
 import type {
     TimeoutErrorType,
     WebSocketRequestError,
-} from '../../errors/request.js'
-import type {ErrorType} from '../../errors/utils.js'
-import type {RpcResponse} from '../../types/rpc.js'
-import type {WithTimeoutErrorType} from '../promise/withTimeout.js'
-import {type HttpRequestParameters, getHttpRpcClient} from './http.js'
-import type {SocketRpcClient} from './socket.js'
-import {getWebSocketRpcClient} from './webSocket.js'
+} from '../../errors/request'
+import type {ErrorType} from '../../errors/utils'
+import type {RpcResponse} from '../../types/rpc'
+import type {WithTimeoutErrorType} from '../promise/withTimeout'
+import {type HttpRequestParameters, getHttpRpcClient} from './http'
+import type {SocketRpcClient} from './socket'
+import {getWebSocketRpcClient} from './webSocket'
 
 export type WebSocketOptions = Parameters<
     SocketRpcClient<WebSocket>['request']

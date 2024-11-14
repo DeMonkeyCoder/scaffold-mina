@@ -1,10 +1,10 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Log } from '../../types/log.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Log } from '../../types/log'
 import {
   type ParseEventLogsErrorType,
   parseEventLogs,
-} from '../../utils/abi/parseEventLogs.js'
-import { l2ToL1MessagePasserAbi } from '../abis.js'
+} from '../../utils/abi/parseEventLogs'
+import { l2ToL1MessagePasserAbi } from '../abis'
 
 export type ExtractWithdrawalMessageLogsParameters = {
   /** An opaque array of logs. */

@@ -1,16 +1,16 @@
 import { assertType, expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { accounts } from '~test/src/constants'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import type { EIP1193RequestFn } from '../../types/eip1193.js'
-import type { Hash } from '../../types/misc.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
-import { mine } from '../test/mine.js'
-import { sendTransaction } from '../wallet/sendTransaction.js'
-import { createPendingTransactionFilter } from './createPendingTransactionFilter.js'
-import { getFilterChanges } from './getFilterChanges.js'
-import { uninstallFilter } from './uninstallFilter.js'
+import type { EIP1193RequestFn } from '../../types/eip1193'
+import type { Hash } from '../../types/misc'
+import { parseEther } from '../../utils/unit/parseEther'
+import { mine } from '../test/mine'
+import { sendTransaction } from '../wallet/sendTransaction'
+import { createPendingTransactionFilter } from './createPendingTransactionFilter'
+import { getFilterChanges } from './getFilterChanges'
+import { uninstallFilter } from './uninstallFilter'
 
 const client = anvilMainnet.getClient()
 

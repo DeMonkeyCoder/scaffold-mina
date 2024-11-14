@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
 
-import { toHex } from '../encoding/toHex.js'
+import { toHex } from '../encoding/toHex'
 
-import { serializeSignature } from './serializeSignature.js'
+import { serializeSignature } from './serializeSignature'
 
 test('default', () => {
   expect(

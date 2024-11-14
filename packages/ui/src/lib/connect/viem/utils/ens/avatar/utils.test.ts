@@ -1,8 +1,8 @@
 import { describe, expect, test, vi } from "vitest";
 
-import { createHttpServer } from "~test/src/utils.js";
+import { createHttpServer } from "~test/src/utils";
 
-import { anvilMainnet } from "../../../../test/src/anvil.js";
+import { anvilMainnet } from "../../../../test/src/anvil";
 
 import {
   getGateway,
@@ -13,7 +13,7 @@ import {
   parseAvatarUri,
   parseNftUri,
   resolveAvatarUri,
-} from "./utils.js";
+} from "./utils";
 
 const client = anvilMainnet.getClient();
 
@@ -158,14 +158,14 @@ describe("resolveAvatarUri()", () => {
         "https://ipfs.io/ipfs/zdj7WWeQ43G6JJvLWQWZpyHuAMq6uYWRjkBXFad11vE2LHhQ7",
     },
     {
-      uri: "zdj7WWeQ43G6JJvLWQWZpyHuAMq6uYWRjkBXFad11vE2LHhQ7/test.json", // v1 Base58btc
+      uri: "zdj7WWeQ43G6JJvLWQWZpyHuAMq6uYWRjkBXFad11vE2LHhQ7/teston", // v1 Base58btc
       expected:
-        "https://ipfs.io/ipfs/zdj7WWeQ43G6JJvLWQWZpyHuAMq6uYWRjkBXFad11vE2LHhQ7/test.json",
+        "https://ipfs.io/ipfs/zdj7WWeQ43G6JJvLWQWZpyHuAMq6uYWRjkBXFad11vE2LHhQ7/teston",
     },
     {
-      uri: "ipfs://QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB/1.json",
+      uri: "ipfs://QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB/1on",
       expected:
-        "https://ipfs.io/ipfs/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB/1.json",
+        "https://ipfs.io/ipfs/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB/1on",
     },
     {
       uri: "ipns://QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB",
@@ -173,9 +173,9 @@ describe("resolveAvatarUri()", () => {
         "https://ipfs.io/ipns/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB",
     },
     {
-      uri: "/ipfs/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB/1.json",
+      uri: "/ipfs/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB/1on",
       expected:
-        "https://ipfs.io/ipfs/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB/1.json",
+        "https://ipfs.io/ipfs/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB/1on",
     },
     {
       uri: "/ipns/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB",
@@ -188,9 +188,9 @@ describe("resolveAvatarUri()", () => {
         "https://ipfs.io/ipfs/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB",
     },
     {
-      uri: "ipns/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB/1.json",
+      uri: "ipns/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB/1on",
       expected:
-        "https://ipfs.io/ipns/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB/1.json",
+        "https://ipfs.io/ipns/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB/1on",
     },
     {
       uri: "ipns/ipns.com",
@@ -238,9 +238,9 @@ describe("resolveAvatarUri()", () => {
         "https://arweave.net/rgW4h3ffQQzOD8ynnwdl3_YlHxtssqV3aXOregPr7yI/1",
     },
     {
-      uri: "ar://rgW4h3ffQQzOD8ynnwdl3_YlHxtssqV3aXOregPr7yI/1.json",
+      uri: "ar://rgW4h3ffQQzOD8ynnwdl3_YlHxtssqV3aXOregPr7yI/1on",
       expected:
-        "https://arweave.net/rgW4h3ffQQzOD8ynnwdl3_YlHxtssqV3aXOregPr7yI/1.json",
+        "https://arweave.net/rgW4h3ffQQzOD8ynnwdl3_YlHxtssqV3aXOregPr7yI/1on",
     },
     {
       uri: "ar://tnLgkAg70wsn9fSr1sxJKG_qcka1gJtmUwXm_3_lDaI/1.png",

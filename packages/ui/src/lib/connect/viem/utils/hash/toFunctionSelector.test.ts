@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { toFunctionSelector } from './toFunctionSelector.js'
+import { toFunctionSelector } from './toFunctionSelector'
 
 test('creates function signature', () => {
   expect(toFunctionSelector('_compound(uint256,uint256,uint256)')).toEqual(

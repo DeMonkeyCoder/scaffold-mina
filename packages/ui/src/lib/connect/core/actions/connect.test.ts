@@ -1,9 +1,9 @@
 import { accounts, chain, config } from "@wagmi/test";
 import { beforeEach, expect, test } from "vitest";
 
-import { mock } from "../connectors/mock.js";
-import { connect } from "./connect.js";
-import { disconnect } from "./disconnect.js";
+import { mock } from "../connectors/mock";
+import { connect } from "./connect";
+import { disconnect } from "./disconnect";
 
 const connector = config._internal.connectors.setup(mock({ accounts }));
 

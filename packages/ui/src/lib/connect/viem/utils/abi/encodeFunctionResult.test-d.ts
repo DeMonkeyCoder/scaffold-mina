@@ -1,11 +1,11 @@
 import { type Abi, parseAbi } from 'abitype'
 import { expectTypeOf, test } from 'vitest'
 
-import { wagmiContractConfig } from '~test/src/abis.js'
+import { wagmiContractConfig } from '~test/src/abis'
 import {
   type EncodeFunctionResultParameters,
   encodeFunctionResult,
-} from './encodeFunctionResult.js'
+} from './encodeFunctionResult'
 
 test('default', () => {
   encodeFunctionResult({

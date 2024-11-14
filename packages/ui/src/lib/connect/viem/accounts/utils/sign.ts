@@ -2,13 +2,13 @@
 
 import { secp256k1 } from '@noble/curves/secp256k1'
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex, Signature } from '../../types/misc.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex, Signature } from '../../types/misc'
 import {
   type NumberToHexErrorType,
   numberToHex,
-} from '../../utils/encoding/toHex.js'
-import { serializeSignature } from '../../utils/signature/serializeSignature.js'
+} from '../../utils/encoding/toHex'
+import { serializeSignature } from '../../utils/signature/serializeSignature'
 
 type To = 'object' | 'bytes' | 'hex'
 

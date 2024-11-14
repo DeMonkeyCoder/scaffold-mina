@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import * as unit from './unit.js'
+import * as unit from './unit'
 
 test('exports unit', () => {
   expect(unit).toMatchInlineSnapshot(`

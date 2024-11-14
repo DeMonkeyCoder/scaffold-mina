@@ -1,22 +1,22 @@
 import type { Address } from 'abitype'
-import { parseAccount } from '../../accounts/utils/parseAccount.js'
+import { parseAccount } from '../../accounts/utils/parseAccount'
 import {
   type GetBalanceParameters,
   getBalance,
-} from '../../actions/public/getBalance.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { AccountNotFoundError } from '../../errors/account.js'
-import type { BaseError } from '../../errors/base.js'
-import type { Account, GetAccountParameter } from '../../types/account.js'
-import type { BlockTag } from '../../types/block.js'
-import type { Chain } from '../../types/chain.js'
-import { legacyEthAddress } from '../constants/address.js'
-import { isEth } from '../utils/isEth.js'
+} from '../../actions/public/getBalance'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { AccountNotFoundError } from '../../errors/account'
+import type { BaseError } from '../../errors/base'
+import type { Account, GetAccountParameter } from '../../types/account'
+import type { BlockTag } from '../../types/block'
+import type { Chain } from '../../types/chain'
+import { legacyEthAddress } from '../constants/address'
+import { isEth } from '../utils/isEth'
 import {
   type GetL1TokenBalanceParameters,
   getL1TokenBalance,
-} from './getL1TokenBalance.js'
+} from './getL1TokenBalance'
 
 export type GetL1BalanceParameters<
   account extends Account | undefined = Account | undefined,

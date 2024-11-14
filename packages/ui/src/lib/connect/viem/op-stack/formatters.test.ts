@@ -1,12 +1,12 @@
 import { describe, expect, test } from 'vitest'
 
-import { anvilOptimism } from '../../test/src/anvil.js'
-import { getBlock } from '../actions/public/getBlock.js'
-import { getTransaction } from '../actions/public/getTransaction.js'
-import { getTransactionReceipt } from '../actions/public/getTransactionReceipt.js'
-import { optimism } from '../chains/index.js'
-import { createClient } from '../clients/createClient.js'
-import { http } from '../clients/transports/http.js'
+import { anvilOptimism } from '../../test/src/anvil'
+import { getBlock } from '../actions/public/getBlock'
+import { getTransaction } from '../actions/public/getTransaction'
+import { getTransactionReceipt } from '../actions/public/getTransactionReceipt'
+import { optimism } from '../chains/index'
+import { createClient } from '../clients/createClient'
+import { http } from '../clients/transports/http'
 
 const optimismClient = anvilOptimism.getClient()
 

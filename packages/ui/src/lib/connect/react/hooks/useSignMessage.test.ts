@@ -5,7 +5,7 @@ import { recoverMessageAddress } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
 import { privateKeyToAccount } from "@/lib/connect/viem/accounts";
-import { useSignMessage } from "./useSignMessage.js";
+import { useSignMessage } from "./useSignMessage";
 
 const connector = config.connectors[0]!;
 

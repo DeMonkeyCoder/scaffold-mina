@@ -4,59 +4,59 @@ export {
   type CreateWebAuthnCredentialReturnType,
   type P256Credential,
   createWebAuthnCredential,
-} from './accounts/createWebAuthnCredential.js'
+} from './accounts/createWebAuthnCredential'
 export {
   type CoinbaseSmartAccountImplementation,
   type ToCoinbaseSmartAccountParameters,
   type ToCoinbaseSmartAccountReturnType,
   toCoinbaseSmartAccount,
-} from './accounts/implementations/toCoinbaseSmartAccount.js'
+} from './accounts/implementations/toCoinbaseSmartAccount'
 export {
   type SoladySmartAccountImplementation,
   type ToSoladySmartAccountParameters,
   type ToSoladySmartAccountReturnType,
   toSoladySmartAccount,
-} from './accounts/implementations/toSoladySmartAccount.js'
+} from './accounts/implementations/toSoladySmartAccount'
 export {
   type ToSmartAccountParameters,
   type ToSmartAccountReturnType,
   toSmartAccount,
-} from './accounts/toSmartAccount.js'
+} from './accounts/toSmartAccount'
 export {
   type ToWebAuthnAccountParameters,
   type ToWebAuthnAccountReturnType,
   type ToWebAuthnAccountErrorType,
   toWebAuthnAccount,
-} from './accounts/toWebAuthnAccount.js'
+} from './accounts/toWebAuthnAccount'
 export {
   type SmartAccount,
   type SmartAccountImplementation,
   type WebAuthnAccount,
-} from './accounts/types.js'
+} from './accounts/types'
 
 export {
   type EstimateUserOperationGasErrorType,
   type EstimateUserOperationGasParameters,
   type EstimateUserOperationGasReturnType,
   estimateUserOperationGas,
-} from './actions/bundler/estimateUserOperationGas.js'
+} from './actions/bundler/estimateUserOperationGas'
 export {
   type GetSupportedEntryPointsErrorType,
   type GetSupportedEntryPointsReturnType,
   getSupportedEntryPoints,
-} from './actions/bundler/getSupportedEntryPoints.js'
+} from './actions/bundler/getSupportedEntryPoints'
 export {
   type GetUserOperationErrorType,
   type GetUserOperationParameters,
   type GetUserOperationReturnType,
   getUserOperation,
-} from './actions/bundler/getUserOperation.js'
+} from './actions/bundler/getUserOperation'
 export {
   type GetUserOperationReceiptErrorType,
   type GetUserOperationReceiptParameters,
   type GetUserOperationReceiptReturnType,
   getUserOperationReceipt,
-} from './actions/bundler/getUserOperationReceipt.js'
+} from './actions/bundler/getUserOperationReceipt'
 export {
   type PrepareUserOperationParameters,
   type PrepareUserOperationParameterType,
@@ -64,46 +64,46 @@ export {
   type PrepareUserOperationErrorType,
   type PrepareUserOperationRequest,
   prepareUserOperation,
-} from './actions/bundler/prepareUserOperation.js'
+} from './actions/bundler/prepareUserOperation'
 export {
   type SendUserOperationErrorType,
   type SendUserOperationParameters,
   type SendUserOperationReturnType,
   sendUserOperation,
-} from './actions/bundler/sendUserOperation.js'
+} from './actions/bundler/sendUserOperation'
 export {
   type WaitForUserOperationReceiptErrorType,
   type WaitForUserOperationReceiptParameters,
   type WaitForUserOperationReceiptReturnType,
   waitForUserOperationReceipt,
-} from './actions/bundler/waitForUserOperationReceipt.js'
+} from './actions/bundler/waitForUserOperationReceipt'
 
 export {
   type BundlerActions,
   bundlerActions,
-} from './clients/decorators/bundler.js'
+} from './clients/decorators/bundler'
 export {
   type PaymasterActions,
   paymasterActions,
-} from './clients/decorators/paymaster.js'
+} from './clients/decorators/paymaster'
 export {
   type BundlerClient,
   type BundlerClientConfig,
   type CreateBundlerClientErrorType,
   createBundlerClient,
-} from './clients/createBundlerClient.js'
+} from './clients/createBundlerClient'
 export {
   type PaymasterClient,
   type PaymasterClientConfig,
   type CreatePaymasterClientErrorType,
   createPaymasterClient,
-} from './clients/createPaymasterClient.js'
+} from './clients/createPaymasterClient'
 
-export { entryPoint06Abi, entryPoint07Abi } from './constants/abis.js'
+export { entryPoint06Abi, entryPoint07Abi } from './constants/abis'
 export {
   entryPoint06Address,
   entryPoint07Address,
-} from './constants/address.js'
+} from './constants/address'
 
 export {
   AccountNotDeployedError,
@@ -156,7 +156,7 @@ export {
   type VerificationGasLimitTooLowErrorType,
   UnknownBundlerError,
   type UnknownBundlerErrorType,
-} from './errors/bundler.js'
+} from './errors/bundler'
 export {
   UserOperationExecutionError,
   type UserOperationExecutionErrorType,
@@ -166,24 +166,24 @@ export {
   type UserOperationReceiptNotFoundErrorType,
   WaitForUserOperationReceiptTimeoutError,
   type WaitForUserOperationReceiptTimeoutErrorType,
-} from './errors/userOperation.js'
+} from './errors/userOperation'
 
 export type {
   DeriveSmartAccount,
   GetSmartAccountParameter,
-} from './types/account.js'
+} from './types/account'
 export type {
   DeriveEntryPointVersion,
   EntryPointVersion,
   GetEntryPointVersionParameter,
-} from './types/entryPointVersion.js'
+} from './types/entryPointVersion'
 export type {
   RpcEstimateUserOperationGasReturnType,
   RpcGetUserOperationByHashReturnType,
   RpcUserOperation,
   RpcUserOperationReceipt,
   RpcUserOperationRequest,
-} from './types/rpc.js'
+} from './types/rpc'
 export type {
   UserOperation,
   UserOperationReceipt,
@@ -191,38 +191,38 @@ export type {
   PackedUserOperation,
   UserOperationCall,
   UserOperationCalls,
-} from './types/userOperation.js'
+} from './types/userOperation'
 
 export {
   type GetBundlerErrorParameters,
   type GetBundlerErrorReturnType,
   getBundlerError,
-} from './utils/errors/getBundlerError.js'
+} from './utils/errors/getBundlerError'
 export {
   type GetUserOperationErrorParameters,
   type GetUserOperationErrorReturnType,
   type GetUserOperationErrorErrorType,
   getUserOperationError,
-} from './utils/errors/getUserOperationError.js'
+} from './utils/errors/getUserOperationError'
 export {
   type FormatUserOperationErrorType,
   formatUserOperation,
-} from './utils/formatters/userOperation.js'
+} from './utils/formatters/userOperation'
 export {
   type FormatUserOperationGasErrorType,
   formatUserOperationGas,
-} from './utils/formatters/userOperationGas.js'
+} from './utils/formatters/userOperationGas'
 export {
   type FormatUserOperationReceiptErrorType,
   formatUserOperationReceipt,
-} from './utils/formatters/userOperationReceipt.js'
+} from './utils/formatters/userOperationReceipt'
 export {
   type FormatUserOperationRequestErrorType,
   formatUserOperationRequest,
-} from './utils/formatters/userOperationRequest.js'
+} from './utils/formatters/userOperationRequest'
 export {
   type GetUserOperationHashParameters,
   type GetUserOperationHashReturnType,
   getUserOperationHash,
-} from './utils/userOperation/getUserOperationHash.js'
-export { toPackedUserOperation } from './utils/userOperation/toPackedUserOperation.js'
+} from './utils/userOperation/getUserOperationHash'
+export { toPackedUserOperation } from './utils/userOperation/toPackedUserOperation'

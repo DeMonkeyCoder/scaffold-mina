@@ -1,14 +1,14 @@
 import type { Address } from 'abitype'
 
-import { InvalidAddressError } from '../../errors/address.js'
-import type { ErrorType } from '../../errors/utils.js'
+import { InvalidAddressError } from '../../errors/address'
+import type { ErrorType } from '../../errors/utils'
 import {
   type StringToBytesErrorType,
   stringToBytes,
-} from '../encoding/toBytes.js'
-import { type Keccak256ErrorType, keccak256 } from '../hash/keccak256.js'
-import { LruMap } from '../lru.js'
-import { type IsAddressErrorType, isAddress } from './isAddress.js'
+} from '../encoding/toBytes'
+import { type Keccak256ErrorType, keccak256 } from '../hash/keccak256'
+import { LruMap } from '../lru'
+import { type IsAddressErrorType, isAddress } from './isAddress'
 
 const checksumAddressCache = /*#__PURE__*/ new LruMap<Address>(8192)
 

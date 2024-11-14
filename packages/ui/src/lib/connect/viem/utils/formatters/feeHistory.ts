@@ -1,6 +1,6 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { FeeHistory } from '../../types/fee.js'
-import type { RpcFeeHistory } from '../../types/rpc.js'
+import type { ErrorType } from '../../errors/utils'
+import type { FeeHistory } from '../../types/fee'
+import type { RpcFeeHistory } from '../../types/rpc'
 
 export type FormatFeeHistoryErrorType = ErrorType
 

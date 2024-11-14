@@ -1,12 +1,12 @@
 import { describe, expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { mainnetClient } from '~test/src/utils.js'
-import { anvilSepolia } from '../../../test/src/anvil.js'
-import { http, createPublicClient } from '../../index.js'
-import { optimism, optimismSepolia } from '../../op-stack/chains.js'
-import { getWithdrawals } from '../../op-stack/index.js'
-import { publicActionsL1 } from './publicL1.js'
+import { accounts } from '~test/src/constants'
+import { mainnetClient } from '~test/src/utils'
+import { anvilSepolia } from '../../../test/src/anvil'
+import { http, createPublicClient } from '../../index'
+import { optimism, optimismSepolia } from '../../op-stack/chains'
+import { getWithdrawals } from '../../op-stack/index'
+import { publicActionsL1 } from './publicL1'
 
 const client = mainnetClient.extend(publicActionsL1())
 const l2Client = createPublicClient({

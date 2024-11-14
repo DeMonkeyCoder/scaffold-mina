@@ -1,7 +1,7 @@
 import { abi, config, mainnet, optimism } from "@wagmi/test";
 import { assertType, expectTypeOf, test } from "vitest";
 
-import { createReadContract } from "./createReadContract.js";
+import { createReadContract } from "./createReadContract";
 
 test("default", async () => {
   const readErc20 = createReadContract({

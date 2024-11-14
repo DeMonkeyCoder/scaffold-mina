@@ -1,25 +1,25 @@
 import type { Abi } from "abitype";
 
-import type { Account } from "../../accounts/types.js";
-import type { DeployContractParameters as DeployContractParameters_ } from "../../actions/wallet/deployContract.js";
-import type { Client } from "../../clients/createClient.js";
-import type { Transport } from "../../clients/transports/createTransport.js";
-import type { ErrorType } from "../../errors/utils.js";
-import type { ContractConstructorArgs } from "../../types/contract.js";
-import type { Hash, Hex } from "../../types/misc.js";
-import { contractDeployerAddress } from "../constants/address.js";
-import type { ChainEIP712 } from "../types/chain.js";
-import type { ContractDeploymentType } from "../types/contract.js";
+import type { Account } from "../../accounts/types";
+import type { DeployContractParameters as DeployContractParameters_ } from "../../actions/wallet/deployContract";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { ContractConstructorArgs } from "../../types/contract";
+import type { Hash, Hex } from "../../types/misc";
+import { contractDeployerAddress } from "../constants/address";
+import type { ChainEIP712 } from "../types/chain";
+import type { ContractDeploymentType } from "../types/contract";
 import {
   type EncodeDeployDataErrorType,
   encodeDeployData,
-} from "../utils/abi/encodeDeployData.js";
+} from "../utils/abi/encodeDeployData";
 import {
   type SendEip712TransactionErrorType,
   type SendEip712TransactionParameters,
   type SendEip712TransactionReturnType,
   sendEip712Transaction,
-} from "./sendEip712Transaction.js";
+} from "./sendEip712Transaction";
 
 export type DeployContractParameters<
   abi extends Abi | readonly unknown[] = Abi,

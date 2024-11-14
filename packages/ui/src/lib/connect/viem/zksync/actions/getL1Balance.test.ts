@@ -1,13 +1,13 @@
 import { afterAll, expect, test, vi } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
+import { accounts } from '~test/src/constants'
+import { privateKeyToAccount } from '../../accounts/privateKeyToAccount'
 
-import * as readContract from '../../actions/public/readContract.js'
-import { sepolia } from '../../chains/index.js'
-import { erc20Abi } from '../../constants/abis.js'
-import { http, createClient, createPublicClient } from '../../index.js'
-import { getL1Balance } from './getL1Balance.js'
+import * as readContract from '../../actions/public/readContract'
+import { sepolia } from '../../chains/index'
+import { erc20Abi } from '../../constants/abis'
+import { http, createClient, createPublicClient } from '../../index'
+import { getL1Balance } from './getL1Balance'
 
 const sourceAccount = accounts[0]
 const tokenL1 = '0x5C221E77624690fff6dd741493D735a17716c26B'

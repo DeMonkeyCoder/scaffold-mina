@@ -1,10 +1,10 @@
 import { config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import type { Connection } from '../createConfig.js'
-import { connect } from './connect.js'
-import { disconnect } from './disconnect.js'
-import { watchConnections } from './watchConnections.js'
+import type { Connection } from '../createConfig'
+import { connect } from './connect'
+import { disconnect } from './disconnect'
+import { watchConnections } from './watchConnections'
 
 test('default', async () => {
   const connections: Connection[][] = []

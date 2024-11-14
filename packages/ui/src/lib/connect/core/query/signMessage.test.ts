@@ -1,7 +1,7 @@
 import { config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { signMessageMutationOptions } from './signMessage.js'
+import { signMessageMutationOptions } from './signMessage'
 
 test('default', () => {
   expect(signMessageMutationOptions(config)).toMatchInlineSnapshot(`

@@ -2,7 +2,7 @@ import { abi, address, chain } from '@wagmi/test'
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { createUseReadContract } from './createUseReadContract.js'
+import { createUseReadContract } from './createUseReadContract'
 
 test('default', async () => {
   const useReadWagmiMintExample = createUseReadContract({

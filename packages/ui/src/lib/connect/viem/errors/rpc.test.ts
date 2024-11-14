@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 
-import { RpcRequestError } from "./request.js";
+import { RpcRequestError } from "./request";
 import {
   ChainDisconnectedError,
   InternalRpcError,
@@ -23,7 +23,7 @@ import {
   UnknownRpcError,
   UnsupportedProviderMethodError,
   UserRejectedRequestError,
-} from "./rpc.js";
+} from "./rpc";
 
 test("RpcError", () => {
   expect(

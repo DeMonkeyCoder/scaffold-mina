@@ -3,12 +3,12 @@ import { http, type Address, parseAbi } from "@/lib/connect/viem";
 import { celo, mainnet } from "@/lib/connect/viem/chains";
 import { expectTypeOf, test } from "vitest";
 
-import { createConfig } from "../createConfig.js";
-import { simulateContract } from "./simulateContract.js";
+import { createConfig } from "../createConfig";
+import { simulateContract } from "./simulateContract";
 import {
   type WriteContractParameters,
   writeContract,
-} from "./writeContract.js";
+} from "./writeContract";
 
 test("default", async () => {
   await writeContract(config, {

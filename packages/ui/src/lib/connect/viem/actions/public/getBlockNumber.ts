@@ -1,31 +1,31 @@
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Chain } from "../../types/chain";
+import type { RequestErrorType } from "../../utils/buildRequest";
 import {
   type GetCacheErrorType,
   getCache,
   withCache,
-} from '../../utils/promise/withCache.js'
+} from "../../utils/promise/withCache";
 
 export type GetBlockNumberParameters = {
   /** Time (in ms) that cached block number will remain in memory. */
-  cacheTime?: number | undefined
-}
+  cacheTime?: number | undefined;
+};
 
-export type GetBlockNumberReturnType = bigint
+export type GetBlockNumberReturnType = bigint;
 
-export type GetBlockNumberErrorType = RequestErrorType | ErrorType
+export type GetBlockNumberErrorType = RequestErrorType | ErrorType;
 
-const cacheKey = (id: string) => `blockNumber.${id}`
+const cacheKey = (id: string) => `blockNumber.${id}`;
 
 /** @internal */
-export type GetBlockNumberCacheErrorType = GetCacheErrorType | ErrorType
+export type GetBlockNumberCacheErrorType = GetCacheErrorType | ErrorType;
 
 /** @internal */
 export function getBlockNumberCache(id: string) {
-  return getCache(cacheKey(id))
+  return getCache(cacheKey(id));
 }
 
 /**
@@ -33,7 +33,7 @@ export function getBlockNumberCache(id: string) {
  *
  * - Docs: https://viem.sh/docs/actions/public/getBlockNumber
  * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/fetching-blocks
- * - JSON-RPC Methods: [`eth_blockNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_blocknumber)
+ * - JSON-RPC Methods: [`mina_blockNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber)
  *
  * @param client - Client to use
  * @param parameters - {@link GetBlockNumberParameters}
@@ -53,14 +53,14 @@ export function getBlockNumberCache(id: string) {
  */
 export async function getBlockNumber<chain extends Chain | undefined>(
   client: Client<Transport, chain>,
-  { cacheTime = client.cacheTime }: GetBlockNumberParameters = {},
+  { cacheTime = client.cacheTime }: GetBlockNumberParameters = {}
 ): Promise<GetBlockNumberReturnType> {
   const blockNumberHex = await withCache(
     () =>
       client.request({
-        method: 'eth_blockNumber',
+        method: "mina_blockNumber",
       }),
-    { cacheKey: cacheKey(client.uid), cacheTime },
-  )
-  return BigInt(blockNumberHex)
+    { cacheKey: cacheKey(client.uid), cacheTime }
+  );
+  return BigInt(blockNumberHex);
 }

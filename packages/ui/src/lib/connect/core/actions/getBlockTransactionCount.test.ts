@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getBlockTransactionCount } from './getBlockTransactionCount.js'
+import { getBlockTransactionCount } from './getBlockTransactionCount'
 
 test('default', async () => {
   await expect(getBlockTransactionCount(config)).resolves.toBeTypeOf('number')

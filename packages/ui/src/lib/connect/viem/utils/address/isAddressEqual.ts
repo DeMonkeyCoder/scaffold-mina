@@ -3,9 +3,9 @@ import type { Address } from 'abitype'
 import {
   InvalidAddressError,
   type InvalidAddressErrorType,
-} from '../../errors/address.js'
-import type { ErrorType } from '../../errors/utils.js'
-import { isAddress } from './isAddress.js'
+} from '../../errors/address'
+import type { ErrorType } from '../../errors/utils'
+import { isAddress } from './isAddress'
 
 export type IsAddressEqualReturnType = boolean
 export type IsAddressEqualErrorType = InvalidAddressErrorType | ErrorType

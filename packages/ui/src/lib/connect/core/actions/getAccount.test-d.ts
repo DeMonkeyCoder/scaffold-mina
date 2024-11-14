@@ -2,8 +2,8 @@ import { config } from "@wagmi/test";
 import type { Address } from "@/lib/connect/viem";
 import { expectTypeOf, test } from "vitest";
 
-import type { Connector } from "../createConfig.js";
-import { getAccount } from "./getAccount.js";
+import type { Connector } from "../createConfig";
+import { getAccount } from "./getAccount";
 
 test("states", () => {
   const result = getAccount(config);

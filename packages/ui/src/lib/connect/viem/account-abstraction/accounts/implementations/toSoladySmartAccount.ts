@@ -1,24 +1,24 @@
 import { type Abi, type Address, type TypedData, parseAbi } from 'abitype'
 
-import { parseAccount } from '../../../accounts/utils/parseAccount.js'
-import { readContract } from '../../../actions/public/readContract.js'
-import { signMessage as signMessage_ } from '../../../actions/wallet/signMessage.js'
-import type { Client } from '../../../clients/createClient.js'
-import { entryPoint07Address } from '../../../constants/address.js'
-import { signMessage } from '../../../experimental/erc7739/actions/signMessage.js'
-import { signTypedData } from '../../../experimental/erc7739/actions/signTypedData.js'
-import type { Account } from '../../../types/account.js'
-import type { Hex } from '../../../types/misc.js'
-import type { TypedDataDefinition } from '../../../types/typedData.js'
-import type { Prettify } from '../../../types/utils.js'
-import { encodeFunctionData } from '../../../utils/abi/encodeFunctionData.js'
-import { pad } from '../../../utils/data/pad.js'
-import { getAction } from '../../../utils/getAction.js'
-import { entryPoint07Abi } from '../../constants/abis.js'
-import type { EntryPointVersion } from '../../types/entryPointVersion.js'
-import { getUserOperationHash } from '../../utils/userOperation/getUserOperationHash.js'
-import { toSmartAccount } from '../toSmartAccount.js'
-import type { SmartAccount, SmartAccountImplementation } from '../types.js'
+import { parseAccount } from '../../../accounts/utils/parseAccount'
+import { readContract } from '../../../actions/public/readContract'
+import { signMessage as signMessage_ } from '../../../actions/wallet/signMessage'
+import type { Client } from '../../../clients/createClient'
+import { entryPoint07Address } from '../../../constants/address'
+import { signMessage } from '../../../experimental/erc7739/actions/signMessage'
+import { signTypedData } from '../../../experimental/erc7739/actions/signTypedData'
+import type { Account } from '../../../types/account'
+import type { Hex } from '../../../types/misc'
+import type { TypedDataDefinition } from '../../../types/typedData'
+import type { Prettify } from '../../../types/utils'
+import { encodeFunctionData } from '../../../utils/abi/encodeFunctionData'
+import { pad } from '../../../utils/data/pad'
+import { getAction } from '../../../utils/getAction'
+import { entryPoint07Abi } from '../../constants/abis'
+import type { EntryPointVersion } from '../../types/entryPointVersion'
+import { getUserOperationHash } from '../../utils/userOperation/getUserOperationHash'
+import { toSmartAccount } from '../toSmartAccount'
+import type { SmartAccount, SmartAccountImplementation } from '../types'
 
 export type ToSoladySmartAccountParameters<
   entryPointAbi extends Abi = Abi,
@@ -64,7 +64,7 @@ export type SoladySmartAccountImplementation<
  *
  * @example
  * import { toSoladySmartAccount } from 'viem/account-abstraction'
- * import { client } from './client.js'
+ * import { client } from './client'
  *
  * const implementation = toSoladySmartAccount({
  *   client,

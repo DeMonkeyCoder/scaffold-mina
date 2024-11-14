@@ -1,16 +1,16 @@
 import type { Address } from 'abitype'
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { Hex } from '../../../types/misc.js'
-import type { OneOf, PartialBy, Prettify } from '../../../types/utils.js'
-import { hexToBigInt } from '../../../utils/encoding/fromHex.js'
-import { numberToHex } from '../../../utils/encoding/toHex.js'
-import type { UserOperation } from '../../types/userOperation.js'
+import type { Client } from '../../../clients/createClient'
+import type { Transport } from '../../../clients/transports/createTransport'
+import type { ErrorType } from '../../../errors/utils'
+import type { Hex } from '../../../types/misc'
+import type { OneOf, PartialBy, Prettify } from '../../../types/utils'
+import { hexToBigInt } from '../../../utils/encoding/fromHex'
+import { numberToHex } from '../../../utils/encoding/toHex'
+import type { UserOperation } from '../../types/userOperation'
 import {
   type FormatUserOperationRequestErrorType,
   formatUserOperationRequest,
-} from '../../utils/formatters/userOperationRequest.js'
+} from '../../utils/formatters/userOperationRequest'
 
 export type GetPaymasterStubDataParameters = OneOf<
   | PartialBy<

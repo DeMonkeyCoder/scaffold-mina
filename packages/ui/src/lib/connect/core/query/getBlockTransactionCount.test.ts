@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getBlockTransactionCountQueryOptions } from './getBlockTransactionCount.js'
+import { getBlockTransactionCountQueryOptions } from './getBlockTransactionCount'
 
 test('default', () => {
   expect(getBlockTransactionCountQueryOptions(config)).toMatchInlineSnapshot(`

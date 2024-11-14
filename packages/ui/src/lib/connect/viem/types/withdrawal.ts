@@ -1,4 +1,4 @@
-import type { Hex } from './misc.js'
+import type { Hex } from './misc'
 
 export type Withdrawal = {
   address: Hex

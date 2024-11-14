@@ -2,14 +2,14 @@ import { seaportAbi } from 'abitype/abis'
 import { assertType, expectTypeOf, test } from 'vitest'
 
 import { type Address, parseAbi } from 'abitype'
-import { baycContractConfig, wagmiContractConfig } from '~test/src/abis.js'
-import { accounts } from '~test/src/constants.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { mainnet } from '../../chains/definitions/mainnet.js'
-import { createWalletClient } from '../../clients/createWalletClient.js'
-import { custom } from '../../clients/transports/custom.js'
-import { http } from '../../clients/transports/http.js'
-import { type WriteContractParameters, writeContract } from './writeContract.js'
+import { baycContractConfig, wagmiContractConfig } from '~test/src/abis'
+import { accounts } from '~test/src/constants'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { mainnet } from '../../chains/definitions/mainnet'
+import { createWalletClient } from '../../clients/createWalletClient'
+import { custom } from '../../clients/transports/custom'
+import { http } from '../../clients/transports/http'
+import { type WriteContractParameters, writeContract } from './writeContract'
 
 const clientWithAccount = anvilMainnet.getClient({
   account: true,

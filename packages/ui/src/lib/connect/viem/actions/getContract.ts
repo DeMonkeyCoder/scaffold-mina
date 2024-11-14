@@ -10,17 +10,17 @@ import type {
   ExtractAbiFunctionNames,
 } from "abitype";
 
-import type { Account } from "../accounts/types.js";
-import type { Client } from "../clients/createClient.js";
-import type { Transport } from "../clients/transports/createTransport.js";
-import type { Chain } from "../types/chain.js";
+import type { Account } from "../accounts/types";
+import type { Client } from "../clients/createClient";
+import type { Transport } from "../clients/transports/createTransport";
+import type { Chain } from "../types/chain";
 import type {
   AbiEventParametersToPrimitiveTypes,
   ContractEventName,
   ContractFunctionArgs,
   ContractFunctionName,
   MaybeExtractEventArgsFromAbi,
-} from "../types/contract.js";
+} from "../types/contract";
 import type {
   IsNarrowable,
   IsNever,
@@ -28,45 +28,45 @@ import type {
   Or,
   Prettify,
   UnionOmit,
-} from "../types/utils.js";
+} from "../types/utils";
 
-import type { ErrorType } from "../errors/utils.js";
-import { getAction } from "../utils/getAction.js";
+import type { ErrorType } from "../errors/utils";
+import { getAction } from "../utils/getAction";
 import {
   type CreateContractEventFilterParameters,
   type CreateContractEventFilterReturnType,
   createContractEventFilter,
-} from "./public/createContractEventFilter.js";
+} from "./public/createContractEventFilter";
 import {
   type EstimateContractGasParameters,
   type EstimateContractGasReturnType,
   estimateContractGas,
-} from "./public/estimateContractGas.js";
+} from "./public/estimateContractGas";
 import {
   type GetContractEventsParameters,
   type GetContractEventsReturnType,
   getContractEvents,
-} from "./public/getContractEvents.js";
+} from "./public/getContractEvents";
 import {
   type ReadContractParameters,
   type ReadContractReturnType,
   readContract,
-} from "./public/readContract.js";
+} from "./public/readContract";
 import {
   type SimulateContractParameters,
   type SimulateContractReturnType,
   simulateContract,
-} from "./public/simulateContract.js";
+} from "./public/simulateContract";
 import {
   type WatchContractEventParameters,
   type WatchContractEventReturnType,
   watchContractEvent,
-} from "./public/watchContractEvent.js";
+} from "./public/watchContractEvent";
 import {
   type WriteContractParameters,
   type WriteContractReturnType,
   writeContract,
-} from "./wallet/writeContract.js";
+} from "./wallet/writeContract";
 
 type KeyedClient<
   transport extends Transport = Transport,
@@ -328,7 +328,7 @@ export type GetContractReturnType<
                  *
                  * This Action will batch up all the event logs found within the [`pollingInterval`](https://viem.sh/docs/contract/watchContractEvent#pollinginterval-optional), and invoke them via [`onLogs`](https://viem.sh/docs/contract/watchContractEvent#onLogs).
                  *
-                 * `watchEvent` will attempt to create an [Event Filter](https://viem.sh/docs/contract/createContractEventFilter) and listen to changes to the Filter per polling interval, however, if the RPC Provider does not support Filters (e.g. `eth_newFilter`), then `watchEvent` will fall back to using [`getLogs`](https://viem.sh/docs/actions/public/getLogs) instead.
+                 * `watchEvent` will attempt to create an [Event Filter](https://viem.sh/docs/contract/createContractEventFilter) and listen to changes to the Filter per polling interval, however, if the RPC Provider does not support Filters (e.g. `mina_newFilter`), then `watchEvent` will fall back to using [`getLogs`](https://viem.sh/docs/actions/public/getLogs) instead.
                  *
                  * @example
                  * import { createPublicClient, getContract, http, parseAbi } from 'viem'

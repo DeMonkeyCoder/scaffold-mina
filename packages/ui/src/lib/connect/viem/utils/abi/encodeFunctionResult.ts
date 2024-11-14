@@ -3,20 +3,20 @@ import type { Abi, AbiStateMutability, ExtractAbiFunctions } from 'abitype'
 import {
   AbiFunctionNotFoundError,
   AbiFunctionOutputsNotFoundError,
-} from '../../errors/abi.js'
+} from '../../errors/abi'
 import type {
   ContractFunctionName,
   ContractFunctionReturnType,
-} from '../../types/contract.js'
+} from '../../types/contract'
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex } from '../../types/misc.js'
-import type { IsNarrowable, UnionEvaluate } from '../../types/utils.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex } from '../../types/misc'
+import type { IsNarrowable, UnionEvaluate } from '../../types/utils'
 import {
   type EncodeAbiParametersErrorType,
   encodeAbiParameters,
-} from './encodeAbiParameters.js'
-import { type GetAbiItemErrorType, getAbiItem } from './getAbiItem.js'
+} from './encodeAbiParameters'
+import { type GetAbiItemErrorType, getAbiItem } from './getAbiItem'
 
 const docsPath = '/docs/contract/encodeFunctionResult'
 

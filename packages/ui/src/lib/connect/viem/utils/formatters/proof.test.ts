@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
 
-import type { RpcProof } from '../../types/rpc.js'
+import type { RpcProof } from '../../types/rpc'
 
-import { formatProof } from './proof.js'
+import { formatProof } from './proof'
 
 const proof: RpcProof = {
   accountProof: [

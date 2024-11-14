@@ -1,5 +1,5 @@
-import type { ErrorType } from '../errors/utils.js'
-import type { MaybePromise } from '../types/utils.js'
+import type { ErrorType } from '../errors/utils'
+import type { MaybePromise } from '../types/utils'
 
 type Callback = ((...args: any[]) => any) | undefined
 type Callbacks = Record<string, Callback>

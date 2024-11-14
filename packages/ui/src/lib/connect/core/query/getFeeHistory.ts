@@ -5,11 +5,11 @@ import {
   type GetFeeHistoryParameters,
   type GetFeeHistoryReturnType,
   getFeeHistory,
-} from '../actions/getFeeHistory.js'
-import type { Config } from '../createConfig.js'
-import type { ScopeKeyParameter } from '../types/properties.js'
-import type { Compute, PartialBy } from '../types/utils.js'
-import { filterQueryOptions } from './utils.js'
+} from '../actions/getFeeHistory'
+import type { Config } from '../createConfig'
+import type { ScopeKeyParameter } from '../types/properties'
+import type { Compute, PartialBy } from '../types/utils'
+import { filterQueryOptions } from './utils'
 
 export type GetFeeHistoryOptions<
   config extends Config,

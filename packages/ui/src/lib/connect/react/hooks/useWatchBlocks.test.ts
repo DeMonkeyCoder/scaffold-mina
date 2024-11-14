@@ -3,7 +3,7 @@ import { renderHook } from "@wagmi/test/react";
 import type { Block } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { useWatchBlocks } from "./useWatchBlocks.js";
+import { useWatchBlocks } from "./useWatchBlocks";
 
 test("default", async () => {
   const blocks: Block[] = [];

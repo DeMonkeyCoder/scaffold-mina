@@ -1,27 +1,27 @@
-import type { Abi, Address } from 'abitype'
+import type { Abi, Address } from "abitype";
 
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { BlockNumber, BlockTag } from '../../types/block.js'
-import type { Chain } from '../../types/chain.js'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { BlockNumber, BlockTag } from "../../types/block";
+import type { Chain } from "../../types/chain";
 import type {
   ContractEventArgs,
   ContractEventName,
-} from '../../types/contract.js'
-import type { Log } from '../../types/log.js'
-import type { Hash } from '../../types/misc.js'
+} from "../../types/contract";
+import type { Log } from "../../types/log";
+import type { Hash } from "../../types/misc";
 import {
   type GetAbiItemErrorType,
   type GetAbiItemParameters,
   getAbiItem,
-} from '../../utils/abi/getAbiItem.js'
-import { getAction } from '../../utils/getAction.js'
+} from "../../utils/abi/getAbiItem";
+import { getAction } from "../../utils/getAction";
 import {
   type GetLogsErrorType,
   type GetLogsParameters,
   getLogs,
-} from './getLogs.js'
+} from "./getLogs";
 
 export type GetContractEventsParameters<
   abi extends Abi | readonly unknown[] = Abi,
@@ -30,12 +30,12 @@ export type GetContractEventsParameters<
     | undefined,
   strict extends boolean | undefined = undefined,
   fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined,
+  toBlock extends BlockNumber | BlockTag | undefined = undefined
 > = {
   /** The address of the contract. */
-  address?: Address | Address[] | undefined
+  address?: Address | Address[] | undefined;
   /** Contract ABI. */
-  abi: abi
+  abi: abi;
   args?:
     | ContractEventArgs<
         abi,
@@ -43,29 +43,29 @@ export type GetContractEventsParameters<
           ? eventName
           : ContractEventName<abi>
       >
-    | undefined
+    | undefined;
   /** Contract event. */
-  eventName?: eventName | ContractEventName<abi> | undefined
+  eventName?: eventName | ContractEventName<abi> | undefined;
   /**
    * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
    * @default false
    */
-  strict?: strict | boolean | undefined
+  strict?: strict | boolean | undefined;
 } & (
   | {
       /** Block number or tag after which to include logs */
-      fromBlock?: fromBlock | BlockNumber | BlockTag | undefined
+      fromBlock?: fromBlock | BlockNumber | BlockTag | undefined;
       /** Block number or tag before which to include logs */
-      toBlock?: toBlock | BlockNumber | BlockTag | undefined
-      blockHash?: undefined
+      toBlock?: toBlock | BlockNumber | BlockTag | undefined;
+      blockHash?: undefined;
     }
   | {
-      fromBlock?: undefined
-      toBlock?: undefined
+      fromBlock?: undefined;
+      toBlock?: undefined;
       /** Hash of block to include logs from */
-      blockHash?: Hash | undefined
+      blockHash?: Hash | undefined;
     }
-)
+);
 
 export type GetContractEventsReturnType<
   abi extends Abi | readonly unknown[] = readonly unknown[],
@@ -77,20 +77,20 @@ export type GetContractEventsReturnType<
   toBlock extends BlockNumber | BlockTag | undefined = undefined,
   ///
   isPending extends boolean =
-    | (fromBlock extends 'pending' ? true : false)
-    | (toBlock extends 'pending' ? true : false),
-> = Log<bigint, number, isPending, undefined, strict, abi, eventName>[]
+    | (fromBlock extends "pending" ? true : false)
+    | (toBlock extends "pending" ? true : false)
+> = Log<bigint, number, isPending, undefined, strict, abi, eventName>[];
 
 export type GetContractEventsErrorType =
   | GetAbiItemErrorType
   | GetLogsErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Returns a list of event logs emitted by a contract.
  *
  * - Docs: https://viem.sh/docs/actions/public/getContractEvents
- * - JSON-RPC Methods: [`eth_getLogs`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getlogs)
+ * - JSON-RPC Methods: [`mina_getLogs`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getlogs)
  *
  * @param client - Client to use
  * @param parameters - {@link GetContractEventsParameters}
@@ -118,7 +118,7 @@ export async function getContractEvents<
   eventName extends ContractEventName<abi> | undefined = undefined,
   strict extends boolean | undefined = undefined,
   fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined,
+  toBlock extends BlockNumber | BlockTag | undefined = undefined
 >(
   client: Client<Transport, chain>,
   parameters: GetContractEventsParameters<
@@ -127,7 +127,7 @@ export async function getContractEvents<
     strict,
     fromBlock,
     toBlock
-  >,
+  >
 ): Promise<
   GetContractEventsReturnType<abi, eventName, strict, fromBlock, toBlock>
 > {
@@ -140,17 +140,17 @@ export async function getContractEvents<
     fromBlock,
     toBlock,
     strict,
-  } = parameters
+  } = parameters;
   const event = eventName
     ? getAbiItem({ abi, name: eventName } as GetAbiItemParameters)
-    : undefined
+    : undefined;
   const events = !event
-    ? (abi as Abi).filter((x) => x.type === 'event')
-    : undefined
+    ? (abi as Abi).filter((x) => x.type === "event")
+    : undefined;
   return getAction(
     client,
     getLogs,
-    'getLogs',
+    "getLogs"
   )({
     address,
     args,
@@ -166,5 +166,5 @@ export async function getContractEvents<
     strict,
     fromBlock,
     toBlock
-  >
+  >;
 }

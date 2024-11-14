@@ -1,12 +1,17 @@
 import React, {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
 import ZkappWorkerClient from "./zkappWorkerClient";
 import { useMinaInjectedProvider } from "@/lib/useMinaInjectedProvider";
+import { useAccount } from "@/lib/connect/react/hooks/useAccount";
+import { PublicKey } from "o1js";
+import { useConnect } from "@/lib/connect/react/hooks/useConnect";
+import { useConnectors } from "@/lib/connect/react/hooks/useConnectors";
 
 type MinaAccountData = {
   accountExists: boolean | null;
@@ -22,7 +27,20 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
   const [zkappWorkerClient, setZkappWorkerClient] =
     useState<ZkappWorkerClient | null>(null);
 
-  const { account, ...minaInjectedProviderHookData } =
+  const { address: account, isConnected } = useAccount();
+  const { connect: wagmiConnect } = useConnect();
+  const connectors = useConnectors();
+  const connect = useCallback(() => {
+    try {
+      wagmiConnect({
+        connector: connectors[0],
+      });
+    } catch (e) {
+      console.log("errrr");
+      console.log(e);
+    }
+  }, [connectors, wagmiConnect]);
+  const { networkID, hasWallet, switchNetwork, disconnect, sendTransaction } =
     useMinaInjectedProvider();
 
   useEffect(() => {
@@ -41,7 +59,7 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
     (async () => {
       if (account && zkappWorkerClient) {
         const res = await zkappWorkerClient.fetchAccount({
-          publicKey: account,
+          publicKey: PublicKey.fromBase58(account),
         });
         setAccountExists(res.error == null);
       }
@@ -53,8 +71,14 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
       value={{
         zkappWorkerClient,
         accountExists,
+        networkID,
+        hasWallet,
+        switchNetwork,
+        isConnected,
+        connect,
+        disconnect,
+        sendTransaction,
         account,
-        ...minaInjectedProviderHookData,
       }}
     >
       {children}

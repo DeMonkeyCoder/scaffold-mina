@@ -1,10 +1,10 @@
-import type { ByteArray, Hex } from '../../../types/misc.js'
+import type { ByteArray, Hex } from '../../../types/misc'
 import {
   type EncodeFunctionDataReturnType,
   encodeFunctionData,
-} from '../../../utils/abi/encodeFunctionData.js'
-import { bytesToHex } from '../../../utils/encoding/toHex.js'
-import { paymasterAbi } from '../../constants/abis.js'
+} from '../../../utils/abi/encodeFunctionData'
+import { bytesToHex } from '../../../utils/encoding/toHex'
+import { paymasterAbi } from '../../constants/abis'
 
 export type GetGeneralPaymasterInputParameters = {
   innerInput: Hex | ByteArray

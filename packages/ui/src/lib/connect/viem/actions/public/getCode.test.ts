@@ -1,9 +1,9 @@
 import { expect, test } from 'vitest'
 
-import { wagmiContractConfig } from '~test/src/abis.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { wagmiContractConfig } from '~test/src/abis'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { getCode } from './getCode.js'
+import { getCode } from './getCode'
 
 const client = anvilMainnet.getClient()
 

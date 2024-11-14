@@ -1,7 +1,7 @@
 import { chain, config, testClient } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getGasPrice } from './getGasPrice.js'
+import { getGasPrice } from './getGasPrice'
 
 test('default', async () => {
   await testClient.mainnet.setNextBlockBaseFeePerGas({

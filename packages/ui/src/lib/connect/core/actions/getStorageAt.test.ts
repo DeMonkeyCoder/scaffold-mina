@@ -1,7 +1,7 @@
 import { address, chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getStorageAt } from './getStorageAt.js'
+import { getStorageAt } from './getStorageAt'
 
 test('default', async () => {
   await expect(

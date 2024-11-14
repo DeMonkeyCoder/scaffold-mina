@@ -1,4 +1,4 @@
-import type { Config } from '../createConfig.js'
+import type { Config } from '../createConfig'
 
 // biome-ignore lint/suspicious/noEmptyInterface: <explanation>
 export interface Register {}

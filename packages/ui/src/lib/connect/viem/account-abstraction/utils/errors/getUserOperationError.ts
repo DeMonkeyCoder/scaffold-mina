@@ -1,29 +1,29 @@
 import type { Address } from 'abitype'
-import { BaseError } from '../../../errors/base.js'
+import { BaseError } from '../../../errors/base'
 import {
   ContractFunctionExecutionError,
   ContractFunctionRevertedError,
   ContractFunctionZeroDataError,
-} from '../../../errors/contract.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { ContractFunctionParameters } from '../../../types/contract.js'
-import type { Hex } from '../../../types/misc.js'
-import type { OneOf } from '../../../types/utils.js'
-import { decodeErrorResult } from '../../../utils/abi/decodeErrorResult.js'
-import type { GetContractErrorReturnType } from '../../../utils/errors/getContractError.js'
-import { ExecutionRevertedError } from '../../errors/bundler.js'
+} from '../../../errors/contract'
+import type { ErrorType } from '../../../errors/utils'
+import type { ContractFunctionParameters } from '../../../types/contract'
+import type { Hex } from '../../../types/misc'
+import type { OneOf } from '../../../types/utils'
+import { decodeErrorResult } from '../../../utils/abi/decodeErrorResult'
+import type { GetContractErrorReturnType } from '../../../utils/errors/getContractError'
+import { ExecutionRevertedError } from '../../errors/bundler'
 import {
   UserOperationExecutionError,
   type UserOperationExecutionErrorType,
-} from '../../errors/userOperation.js'
+} from '../../errors/userOperation'
 import type {
   UserOperation,
   UserOperationCall,
-} from '../../types/userOperation.js'
+} from '../../types/userOperation'
 import {
   type GetBundlerErrorParameters,
   getBundlerError,
-} from './getBundlerError.js'
+} from './getBundlerError'
 
 type Call = OneOf<
   | UserOperationCall

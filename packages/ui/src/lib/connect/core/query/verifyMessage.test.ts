@@ -1,7 +1,7 @@
 import { accounts, chain, config } from "@wagmi/test";
 import { expect, test } from "vitest";
 
-import { verifyMessageQueryOptions } from "./verifyMessage.js";
+import { verifyMessageQueryOptions } from "./verifyMessage";
 
 const address = accounts[0];
 

@@ -1,11 +1,11 @@
-import { expect, test } from 'vitest'
+import { expect, test } from "vitest";
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { getPermissions } from './getPermissions.js'
+import { anvilMainnet } from "../../../test/src/anvil";
+import { getPermissions } from "./getPermissions";
 
-const client = anvilMainnet.getClient()
+const client = anvilMainnet.getClient();
 
-test('default', async () => {
+test("default", async () => {
   expect(await getPermissions(client!)).toMatchInlineSnapshot(`
     [
       {
@@ -18,8 +18,8 @@ test('default', async () => {
           },
         ],
         "invoker": "https://example.com",
-        "parentCapability": "eth_accounts",
+        "parentCapability": "mina_accounts",
       },
     ]
-  `)
-})
+  `);
+});

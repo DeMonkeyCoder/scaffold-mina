@@ -1,4 +1,4 @@
-import type { SmartAccount } from '../accounts/types.js'
+import type { SmartAccount } from '../accounts/types'
 
 /** @link https://github.com/eth-infinitism/account-abstraction/releases */
 export type EntryPointVersion = '0.6' | '0.7'

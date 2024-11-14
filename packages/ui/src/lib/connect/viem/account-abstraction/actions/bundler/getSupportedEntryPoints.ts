@@ -1,11 +1,11 @@
-import type { Address } from 'abitype'
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { RequestErrorType } from '../../../utils/buildRequest.js'
+import type { Address } from "abitype";
+import type { Client } from "../../../clients/createClient";
+import type { Transport } from "../../../clients/transports/createTransport";
+import type { ErrorType } from "../../../errors/utils";
+import type { RequestErrorType } from "../../../utils/buildRequest";
 
-export type GetSupportedEntryPointsReturnType = readonly Address[]
-export type GetSupportedEntryPointsErrorType = RequestErrorType | ErrorType
+export type GetSupportedEntryPointsReturnType = readonly Address[];
+export type GetSupportedEntryPointsErrorType = RequestErrorType | ErrorType;
 
 /**
  * Returns the EntryPoints that the bundler supports.
@@ -29,5 +29,5 @@ export type GetSupportedEntryPointsErrorType = RequestErrorType | ErrorType
  * const addresses = await getSupportedEntryPoints(bundlerClient)
  */
 export function getSupportedEntryPoints(client: Client<Transport>) {
-  return client.request({ method: 'eth_supportedEntryPoints' })
+  return client.request({ method: "mina_supportedEntryPoints" });
 }

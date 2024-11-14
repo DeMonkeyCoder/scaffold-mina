@@ -1,17 +1,17 @@
 import {
   TransactionRejectedRpcError,
   UserRejectedRequestError,
-} from '../../errors/rpc.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import { wait } from '../../utils/wait.js'
+} from '../../errors/rpc'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import { wait } from '../../utils/wait'
 
 import {
   type CreateTransportErrorType,
   type Transport,
   type TransportConfig,
   createTransport,
-} from './createTransport.js'
+} from './createTransport'
 // TODO: Narrow `method` & `params` types.
 export type OnResponseFn = (
   args: {

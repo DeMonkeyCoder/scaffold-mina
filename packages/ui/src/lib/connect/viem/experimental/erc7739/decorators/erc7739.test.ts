@@ -1,19 +1,19 @@
 import type { Address } from 'abitype'
 import { beforeAll, expect, test } from 'vitest'
 
-import { SoladyAccountFactory07 } from '~contracts/generated.js'
-import { anvilMainnet } from '~test/src/anvil.js'
-import { accounts, typedData } from '~test/src/constants.js'
-import { deploySoladyAccount_07 } from '../../../../test/src/utils.js'
+import { SoladyAccountFactory07 } from '~contracts/generated'
+import { anvilMainnet } from '~test/src/anvil'
+import { accounts, typedData } from '~test/src/constants'
+import { deploySoladyAccount_07 } from '../../../../test/src/utils'
 import {
   mine,
   simulateContract,
   verifyMessage,
   verifyTypedData,
   writeContract,
-} from '../../../actions/index.js'
-import { pad } from '../../../utils/index.js'
-import { erc7739Actions } from './erc7739.js'
+} from '../../../actions/index'
+import { pad } from '../../../utils/index'
+import { erc7739Actions } from './erc7739'
 
 const client = anvilMainnet.getClient().extend(erc7739Actions())
 

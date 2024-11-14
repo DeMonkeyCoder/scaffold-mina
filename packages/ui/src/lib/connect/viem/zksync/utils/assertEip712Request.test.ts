@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { assertEip712Request } from './assertEip712Request.js'
+import { assertEip712Request } from './assertEip712Request'
 
 test('default', () => {
   assertEip712Request({

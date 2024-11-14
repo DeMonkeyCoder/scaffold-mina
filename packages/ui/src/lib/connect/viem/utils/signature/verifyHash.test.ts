@@ -1,11 +1,11 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { signMessage } from '../../actions/wallet/signMessage.js'
+import { accounts } from '~test/src/constants'
+import { signMessage } from '../../actions/wallet/signMessage'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { hashMessage } from './hashMessage.js'
-import { verifyHash } from './verifyHash.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { hashMessage } from './hashMessage'
+import { verifyHash } from './verifyHash'
 
 const client = anvilMainnet.getClient()
 

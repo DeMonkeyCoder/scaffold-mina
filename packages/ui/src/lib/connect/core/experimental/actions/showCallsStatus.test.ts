@@ -2,10 +2,10 @@ import { accounts, config, testClient } from "@wagmi/test";
 import { parseEther } from "@/lib/connect/viem";
 import { test } from "vitest";
 
-import { connect } from "../../actions/connect.js";
-import { disconnect } from "../../actions/disconnect.js";
-import { sendCalls } from "./sendCalls.js";
-import { showCallsStatus } from "./showCallsStatus.js";
+import { connect } from "../../actions/connect";
+import { disconnect } from "../../actions/disconnect";
+import { sendCalls } from "./sendCalls";
+import { showCallsStatus } from "./showCallsStatus";
 
 const connector = config.connectors[0]!;
 

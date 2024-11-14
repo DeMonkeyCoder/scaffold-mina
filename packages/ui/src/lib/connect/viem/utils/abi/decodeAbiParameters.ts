@@ -1,26 +1,26 @@
 import type { AbiParameter, AbiParametersToPrimitiveTypes } from 'abitype'
 
-import type { ByteArray, Hex } from '../../types/misc.js'
+import type { ByteArray, Hex } from '../../types/misc'
 
 import {
   AbiDecodingDataSizeTooSmallError,
   AbiDecodingZeroDataError,
   InvalidAbiDecodingTypeError,
   type InvalidAbiDecodingTypeErrorType,
-} from '../../errors/abi.js'
-import type { ErrorType } from '../../errors/utils.js'
+} from '../../errors/abi'
+import type { ErrorType } from '../../errors/utils'
 import {
   type ChecksumAddressErrorType,
   checksumAddress,
-} from '../address/getAddress.js'
+} from '../address/getAddress'
 import {
   type CreateCursorErrorType,
   type Cursor,
   createCursor,
-} from '../cursor.js'
-import { type SizeErrorType, size } from '../data/size.js'
-import { type SliceBytesErrorType, sliceBytes } from '../data/slice.js'
-import { type TrimErrorType, trim } from '../data/trim.js'
+} from '../cursor'
+import { type SizeErrorType, size } from '../data/size'
+import { type SliceBytesErrorType, sliceBytes } from '../data/slice'
+import { type TrimErrorType, trim } from '../data/trim'
 import {
   type BytesToBigIntErrorType,
   type BytesToBoolErrorType,
@@ -30,10 +30,10 @@ import {
   bytesToBool,
   bytesToNumber,
   bytesToString,
-} from '../encoding/fromBytes.js'
-import { type HexToBytesErrorType, hexToBytes } from '../encoding/toBytes.js'
-import { type BytesToHexErrorType, bytesToHex } from '../encoding/toHex.js'
-import { getArrayComponents } from './encodeAbiParameters.js'
+} from '../encoding/fromBytes'
+import { type HexToBytesErrorType, hexToBytes } from '../encoding/toBytes'
+import { type BytesToHexErrorType, bytesToHex } from '../encoding/toHex'
+import { getArrayComponents } from './encodeAbiParameters'
 
 export type DecodeAbiParametersReturnType<
   params extends readonly AbiParameter[] = readonly AbiParameter[],

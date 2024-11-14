@@ -1,5 +1,5 @@
-import { chainConfig } from '../../celo/chainConfig.js'
-import { defineChain } from '../../utils/chain/defineChain.js'
+import { chainConfig } from '../../celo/chainConfig'
+import { defineChain } from '../../utils/chain/defineChain'
 
 export const celoAlfajores = /*#__PURE__*/ defineChain({
   ...chainConfig,

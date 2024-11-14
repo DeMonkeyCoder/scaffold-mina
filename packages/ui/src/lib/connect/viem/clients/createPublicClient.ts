@@ -1,17 +1,17 @@
 import type { Address } from 'abitype'
-import type { ErrorType } from '../errors/utils.js'
-import type { Account, ParseAccount } from '../types/account.js'
-import type { Chain } from '../types/chain.js'
-import type { PublicRpcSchema, RpcSchema } from '../types/eip1193.js'
-import type { Prettify } from '../types/utils.js'
+import type { ErrorType } from '../errors/utils'
+import type { Account, ParseAccount } from '../types/account'
+import type { Chain } from '../types/chain'
+import type { PublicRpcSchema, RpcSchema } from '../types/eip1193'
+import type { Prettify } from '../types/utils'
 import {
   type Client,
   type ClientConfig,
   type CreateClientErrorType,
   createClient,
-} from './createClient.js'
-import { type PublicActions, publicActions } from './decorators/public.js'
-import type { Transport } from './transports/createTransport.js'
+} from './createClient'
+import { type PublicActions, publicActions } from './decorators/public'
+import type { Transport } from './transports/createTransport'
 
 export type PublicClientConfig<
   transport extends Transport = Transport,

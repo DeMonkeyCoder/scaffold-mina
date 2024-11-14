@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from "vitest";
-import { celo } from "~@/lib/connect/viem/chains/index.js";
-import { http, createTestClient } from "~@/lib/connect/viem/index.js";
+import { celo } from "~@/lib/connect/viem/chains/index";
+import { http, createTestClient } from "~@/lib/connect/viem/index";
 
 const client = createTestClient({
   transport: http(),
@@ -30,8 +30,8 @@ describe("celo/fees", () => {
     const requestMock = vi.spyOn(client, "request");
     // @ts-ignore
     requestMock.mockImplementation((request) => {
-      if (request.method === "eth_gasPrice") return "11619349802";
-      if (request.method === "eth_maxPriorityFeePerGas") return "2323869960";
+      if (request.method === "mina_gasPrice") return "11619349802";
+      if (request.method === "mina_maxPriorityFeePerGas") return "2323869960";
       return;
     });
 
@@ -51,11 +51,11 @@ describe("celo/fees", () => {
         }
       `);
     expect(requestMock).toHaveBeenCalledWith({
-      method: "eth_maxPriorityFeePerGas",
+      method: "mina_maxPriorityFeePerGas",
       params: ["0xfee"],
     });
     expect(requestMock).toHaveBeenCalledWith({
-      method: "eth_gasPrice",
+      method: "mina_gasPrice",
       params: ["0xfee"],
     });
   });

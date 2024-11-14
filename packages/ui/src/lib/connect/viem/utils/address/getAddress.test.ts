@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { getAddress } from "./getAddress.js";
+import { getAddress } from "./getAddress";
 
 test("checksums address", () => {
   expect(

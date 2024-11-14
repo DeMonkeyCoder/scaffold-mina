@@ -1,10 +1,10 @@
 import { expect, test } from 'vitest'
 
-import { getBlockNumber } from '../public/getBlockNumber.js'
+import { getBlockNumber } from '../public/getBlockNumber'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { mine } from './mine.js'
+import { mine } from './mine'
 
 const client = anvilMainnet.getClient()
 

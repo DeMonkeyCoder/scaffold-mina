@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { hashMessage } from './hashMessage.js'
+import { hashMessage } from './hashMessage'
 
 test('to hex', () => {
   expect(hashMessage('hello world')).toMatchInlineSnapshot(

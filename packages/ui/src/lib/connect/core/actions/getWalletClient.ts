@@ -4,14 +4,14 @@ import {
   walletActions,
 } from "@/lib/connect/viem";
 
-import type { Config } from "../createConfig.js";
-import type { BaseErrorType, ErrorType } from "../errors/base.js";
-import type { Compute } from "../types/utils.js";
+import type { Config } from "../createConfig";
+import type { BaseErrorType, ErrorType } from "../errors/base";
+import type { Compute } from "../types/utils";
 import {
   type GetConnectorClientErrorType,
   type GetConnectorClientParameters,
   getConnectorClient,
-} from "./getConnectorClient.js";
+} from "./getConnectorClient";
 
 export type GetWalletClientParameters<
   config extends Config = Config,

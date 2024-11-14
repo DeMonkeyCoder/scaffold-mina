@@ -1,7 +1,7 @@
 import { abi } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { createWriteContract } from './createWriteContract.js'
+import { createWriteContract } from './createWriteContract'
 
 test('default', () => {
   const writeErc20 = createWriteContract({

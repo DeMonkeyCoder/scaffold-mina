@@ -27,14 +27,14 @@ import type {
 } from "@/lib/connect/viem";
 import type { WriteContractParameters as viem_WriteContractParameters } from "@/lib/connect/viem/actions";
 
-import { useAccount } from "../useAccount.js";
-import { useChainId } from "../useChainId.js";
-import { useConfig } from "../useConfig.js";
+import { useAccount } from "../useAccount";
+import { useChainId } from "../useChainId";
+import { useConfig } from "../useConfig";
 import {
   type UseWriteContractParameters,
   useWriteContract,
   type UseWriteContractReturnType as wagmi_UseWriteContractReturnType,
-} from "../useWriteContract.js";
+} from "../useWriteContract";
 
 type stateMutability = "nonpayable" | "payable";
 

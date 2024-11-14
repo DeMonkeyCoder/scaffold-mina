@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 
-import { encodeErrorResult } from "./encodeErrorResult.js";
+import { encodeErrorResult } from "./encodeErrorResult";
 
 test("revert SoldOutError()", () => {
   expect(

@@ -1,23 +1,20 @@
 import { describe, expect, test } from "vitest";
 
-import { OffchainLookupExample } from "~contracts/generated.js";
-import { createCcipServer } from "~test/src/ccip.js";
-import { accounts } from "~test/src/constants.js";
-import {
-  createHttpServer,
-  deployOffchainLookupExample,
-} from "~test/src/utils.js";
-import { getUrl } from "../errors/utils.js";
-import type { Hex } from "../types/misc.js";
+import { OffchainLookupExample } from "~contracts/generated";
+import { createCcipServer } from "~test/src/ccip";
+import { accounts } from "~test/src/constants";
+import { createHttpServer, deployOffchainLookupExample } from "~test/src/utils";
+import { getUrl } from "../errors/utils";
+import type { Hex } from "../types/misc";
 
-import { anvilMainnet } from "../../test/src/anvil.js";
+import { anvilMainnet } from "../../test/src/anvil";
 
-import { createClient } from "../clients/createClient.js";
-import { http } from "../clients/transports/http.js";
-import { encodeErrorResult } from "./abi/encodeErrorResult.js";
-import { encodeFunctionData } from "./abi/encodeFunctionData.js";
-import { ccipRequest, offchainLookup, offchainLookupAbiItem } from "./ccip.js";
-import { trim } from "./data/trim.js";
+import { createClient } from "../clients/createClient";
+import { http } from "../clients/transports/http";
+import { encodeErrorResult } from "./abi/encodeErrorResult";
+import { encodeFunctionData } from "./abi/encodeFunctionData";
+import { ccipRequest, offchainLookup, offchainLookupAbiItem } from "./ccip";
+import { trim } from "./data/trim";
 
 const client = anvilMainnet.getClient();
 
@@ -37,7 +34,7 @@ describe("offchainLookup", () => {
           args: ["jxom.@/lib/connect/viem"],
         });
         await client.request({
-          method: "eth_call",
+          method: "mina_call",
           params: [{ data, to: contractAddress! }, "latest"],
         });
       } catch (err) {
@@ -68,7 +65,7 @@ describe("offchainLookup", () => {
           args: ["jxom.@/lib/connect/viem"],
         });
         await client.request({
-          method: "eth_call",
+          method: "mina_call",
           params: [{ data, to: contractAddress! }, "latest"],
         });
       } catch (err) {
@@ -111,7 +108,7 @@ describe("offchainLookup", () => {
           args: ["fake.@/lib/connect/viem"],
         });
         await client.request({
-          method: "eth_call",
+          method: "mina_call",
           params: [{ data, to: contractAddress! }, "latest"],
         });
       } catch (err) {

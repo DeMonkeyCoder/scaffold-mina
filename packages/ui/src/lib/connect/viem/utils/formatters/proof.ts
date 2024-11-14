@@ -1,8 +1,8 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Proof } from '../../types/proof.js'
-import type { RpcProof } from '../../types/rpc.js'
-import type { ExactPartial } from '../../types/utils.js'
-import { hexToNumber } from '../index.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Proof } from '../../types/proof'
+import type { RpcProof } from '../../types/rpc'
+import type { ExactPartial } from '../../types/utils'
+import { hexToNumber } from '../index'
 
 export type FormatProofErrorType = ErrorType
 

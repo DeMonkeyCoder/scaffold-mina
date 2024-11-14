@@ -1,8 +1,8 @@
-import type { ErrorType } from "../../errors/utils.js";
-import type { Kzg } from "../../types/kzg.js";
-import type { ByteArray, Hex } from "../../types/misc.js";
-import { type HexToBytesErrorType, hexToBytes } from "../encoding/toBytes.js";
-import { type BytesToHexErrorType, bytesToHex } from "../encoding/toHex.js";
+import type { ErrorType } from "../../errors/utils";
+import type { Kzg } from "../../types/kzg";
+import type { ByteArray, Hex } from "../../types/misc";
+import { type HexToBytesErrorType, hexToBytes } from "../encoding/toBytes";
+import { type BytesToHexErrorType, bytesToHex } from "../encoding/toHex";
 
 type To = "hex" | "bytes";
 

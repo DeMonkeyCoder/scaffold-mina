@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { getUserOperationHash } from './getUserOperationHash.js'
+import { getUserOperationHash } from './getUserOperationHash'
 
 describe('entryPoint: 0.7', () => {
   test('default', () => {

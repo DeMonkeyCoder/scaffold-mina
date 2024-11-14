@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 
-import { deserialize } from './deserialize.js'
-import { serialize } from './serialize.js'
+import { deserialize } from './deserialize'
+import { serialize } from './serialize'
 
 test('deserializes', () => {
   const deserializedCache = deserialize(

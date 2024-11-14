@@ -1,39 +1,39 @@
-import type { Address } from 'abitype'
-import type { Client } from '../../../clients/createClient.js'
-import type { Transport } from '../../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../../errors/utils.js'
-import type { Hash } from '../../../types/misc.js'
-import type { Prettify } from '../../../types/utils.js'
-import type { RequestErrorType } from '../../../utils/buildRequest.js'
+import type { Address } from "abitype";
+import type { Client } from "../../../clients/createClient";
+import type { Transport } from "../../../clients/transports/createTransport";
+import type { ErrorType } from "../../../errors/utils";
+import type { Hash } from "../../../types/misc";
+import type { Prettify } from "../../../types/utils";
+import type { RequestErrorType } from "../../../utils/buildRequest";
 import {
   UserOperationNotFoundError,
   type UserOperationNotFoundErrorType,
-} from '../../errors/userOperation.js'
-import type { UserOperation } from '../../types/userOperation.js'
-import { formatUserOperation } from '../../utils/formatters/userOperation.js'
+} from "../../errors/userOperation";
+import type { UserOperation } from "../../types/userOperation";
+import { formatUserOperation } from "../../utils/formatters/userOperation";
 
 export type GetUserOperationParameters = {
   /** The hash of the User Operation. */
-  hash: Hash
-}
+  hash: Hash;
+};
 
 export type GetUserOperationReturnType = Prettify<{
   /** The block hash the User Operation was included on. */
-  blockHash: Hash
+  blockHash: Hash;
   /** The block number the User Operation was included on. */
-  blockNumber: bigint
+  blockNumber: bigint;
   /** The EntryPoint which handled the User Operation. */
-  entryPoint: Address
+  entryPoint: Address;
   /** The hash of the transaction which included the User Operation. */
-  transactionHash: Hash
+  transactionHash: Hash;
   /** The User Operation. */
-  userOperation: UserOperation
-}>
+  userOperation: UserOperation;
+}>;
 
 export type GetUserOperationErrorType =
   | RequestErrorType
   | UserOperationNotFoundErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Retrieves information about a User Operation given a hash.
@@ -60,20 +60,20 @@ export type GetUserOperationErrorType =
  */
 export async function getUserOperation(
   client: Client<Transport>,
-  { hash }: GetUserOperationParameters,
+  { hash }: GetUserOperationParameters
 ) {
   const result = await client.request(
     {
-      method: 'eth_getUserOperationByHash',
+      method: "mina_getUserOperationByHash",
       params: [hash],
     },
-    { dedupe: true },
-  )
+    { dedupe: true }
+  );
 
-  if (!result) throw new UserOperationNotFoundError({ hash })
+  if (!result) throw new UserOperationNotFoundError({ hash });
 
   const { blockHash, blockNumber, entryPoint, transactionHash, userOperation } =
-    result
+    result;
 
   return {
     blockHash,
@@ -81,5 +81,5 @@ export async function getUserOperation(
     entryPoint,
     transactionHash,
     userOperation: formatUserOperation(userOperation),
-  }
+  };
 }

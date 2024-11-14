@@ -3,9 +3,9 @@ import type { AbiParameter } from 'abitype'
 import {
   InvalidDefinitionTypeError,
   type InvalidDefinitionTypeErrorType,
-} from '../../errors/abi.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { AbiItem } from '../../types/contract.js'
+} from '../../errors/abi'
+import type { ErrorType } from '../../errors/utils'
+import type { AbiItem } from '../../types/contract'
 
 export type FormatAbiItemErrorType =
   | FormatAbiParamsErrorType

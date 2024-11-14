@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 
-import { anvilOptimism } from '../../../test/src/anvil.js'
-import { getL1BaseFee } from './getL1BaseFee.js'
+import { anvilOptimism } from '../../../test/src/anvil'
+import { getL1BaseFee } from './getL1BaseFee'
 
 const optimismClient = anvilOptimism.getClient()
 const optimismClientWithAccount = anvilOptimism.getClient({ account: true })

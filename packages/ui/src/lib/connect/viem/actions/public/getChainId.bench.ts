@@ -1,8 +1,8 @@
 import { bench, describe } from 'vitest'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { getChainId } from './getChainId.js'
+import { getChainId } from './getChainId'
 
 const client = anvilMainnet.getClient()
 

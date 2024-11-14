@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
-import { mainnetClient } from '~test/src/utils.js'
+import { mainnetClient } from '~test/src/utils'
 
-import { extractTransactionDepositedLogs } from './extractTransactionDepositedLogs.js'
-import { getL2TransactionHash } from './getL2TransactionHash.js'
+import { extractTransactionDepositedLogs } from './extractTransactionDepositedLogs'
+import { getL2TransactionHash } from './getL2TransactionHash'
 
 test('default', async () => {
   const log = {

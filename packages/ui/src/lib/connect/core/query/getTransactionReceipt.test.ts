@@ -1,7 +1,7 @@
 import { chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getTransactionReceiptQueryOptions } from './getTransactionReceipt.js'
+import { getTransactionReceiptQueryOptions } from './getTransactionReceipt'
 
 test('default', () => {
   expect(

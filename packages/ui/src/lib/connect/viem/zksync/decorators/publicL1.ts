@@ -1,22 +1,22 @@
-import type { Chain } from "../../chains/index.js";
-import type { Client } from "../../clients/createClient.js";
-import type { Transport } from "../../clients/transports/createTransport.js";
-import type { Account } from "../../types/account.js";
+import type { Chain } from "../../chains/index";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { Account } from "../../types/account";
 import {
   type GetL1AllowanceParameters,
   type GetL1AllowanceReturnType,
   getL1Allowance,
-} from "../actions/getL1Allowance.js";
+} from "../actions/getL1Allowance";
 import {
   type GetL1BalanceParameters,
   type GetL1BalanceReturnType,
   getL1Balance,
-} from "../actions/getL1Balance.js";
+} from "../actions/getL1Balance";
 import {
   type GetL1TokenBalanceParameters,
   type GetL1TokenBalanceReturnType,
   getL1TokenBalance,
-} from "../actions/getL1TokenBalance.js";
+} from "../actions/getL1TokenBalance";
 
 export type PublicActionsL1<
   account extends Account | undefined = Account | undefined

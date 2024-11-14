@@ -1,17 +1,17 @@
 import { beforeAll, describe, expect, test } from 'vitest'
 
-import { ensPublicResolverConfig } from '~test/src/abis.js'
-import { address } from '~test/src/constants.js'
-import { deployEnsAvatarTokenUri } from '~test/src/utils.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
+import { ensPublicResolverConfig } from '~test/src/abis'
+import { address } from '~test/src/constants'
+import { deployEnsAvatarTokenUri } from '~test/src/utils'
+import { anvilMainnet } from '../../../test/src/anvil'
 
-import { namehash } from '../../utils/ens/namehash.js'
-import { impersonateAccount } from '../test/impersonateAccount.js'
-import { mine } from '../test/mine.js'
-import { writeContract } from '../wallet/writeContract.js'
+import { namehash } from '../../utils/ens/namehash'
+import { impersonateAccount } from '../test/impersonateAccount'
+import { mine } from '../test/mine'
+import { writeContract } from '../wallet/writeContract'
 
-import { reset } from '../test/reset.js'
-import { getEnsAvatar } from './getEnsAvatar.js'
+import { reset } from '../test/reset'
+import { getEnsAvatar } from './getEnsAvatar'
 
 const client = anvilMainnet.getClient()
 

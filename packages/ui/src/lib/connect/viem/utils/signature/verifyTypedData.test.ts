@@ -1,11 +1,11 @@
 import type { Address } from "abitype";
 import { expect, test } from "vitest";
 
-import { accounts, typedData } from "~test/src/constants.js";
+import { accounts, typedData } from "~test/src/constants";
 
-import { anvilMainnet } from "../../../test/src/anvil.js";
-import { signTypedData } from "../../actions/index.js";
-import { verifyTypedData } from "./verifyTypedData.js";
+import { anvilMainnet } from "../../../test/src/anvil";
+import { signTypedData } from "../../actions/index";
+import { verifyTypedData } from "./verifyTypedData";
 
 const client = anvilMainnet.getClient();
 

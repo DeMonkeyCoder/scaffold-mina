@@ -20,8 +20,8 @@ import { rpc } from "@/lib/connect/viem/utils";
 import {
   ChainNotConfiguredError,
   ConnectorNotConnectedError,
-} from "../errors/config.js";
-import { createConnector } from "./createConnector.js";
+} from "../errors/config";
+import { createConnector } from "./createConnector";
 
 export type MockParameters = {
   accounts: readonly [Address, ...Address[]];
@@ -65,7 +65,7 @@ export function mock(parameters: MockParameters) {
 
       const provider = await this.getProvider();
       const accounts = await provider.request({
-        method: "eth_requestAccounts",
+        method: "mina_requestAccounts",
       });
 
       let currentChainId = await this.getChainId();
@@ -87,12 +87,12 @@ export function mock(parameters: MockParameters) {
     async getAccounts() {
       if (!connected) throw new ConnectorNotConnectedError();
       const provider = await this.getProvider();
-      const accounts = await provider.request({ method: "eth_accounts" });
+      const accounts = await provider.request({ method: "mina_accounts" });
       return accounts.map((x) => getAddress(x));
     },
     async getChainId() {
       const provider = await this.getProvider();
-      const hexChainId = await provider.request({ method: "eth_chainId" });
+      const hexChainId = await provider.request({ method: "mina_chainId" });
       return fromHex(hexChainId, "number");
     },
     async isAuthorized() {
@@ -134,9 +134,9 @@ export function mock(parameters: MockParameters) {
 
       const request: EIP1193RequestFn = async ({ method, params }) => {
         // eth methods
-        if (method === "eth_chainId") return numberToHex(connectedChainId);
-        if (method === "eth_requestAccounts") return parameters.accounts;
-        if (method === "eth_signTypedData_v4")
+        if (method === "mina_chainId") return numberToHex(connectedChainId);
+        if (method === "mina_requestAccounts") return parameters.accounts;
+        if (method === "mina_signTypedData_v4")
           if (features.signTypedDataError) {
             if (typeof features.signTypedDataError === "boolean")
               throw new UserRejectedRequestError(
@@ -198,7 +198,7 @@ export function mock(parameters: MockParameters) {
           for (const call of calls) {
             const { result, error } = await rpc.http(url, {
               body: {
-                method: "eth_sendTransaction",
+                method: "mina_sendTransaction",
                 params: [call],
               },
             });
@@ -222,7 +222,7 @@ export function mock(parameters: MockParameters) {
             hashes.map(async (hash) => {
               const { result, error } = await rpc.http(url, {
                 body: {
-                  method: "eth_getTransactionReceipt",
+                  method: "mina_getTransactionReceipt",
                   params: [hash],
                   id: 0,
                 },
@@ -260,8 +260,8 @@ export function mock(parameters: MockParameters) {
               );
             throw features.signMessageError;
           }
-          // Change `personal_sign` to `eth_sign` and swap params
-          method = "eth_sign";
+          // Change `personal_sign` to `mina_sign` and swap params
+          method = "mina_sign";
           type Params = [data: Hex, address: Address];
           params = [(params as Params)[1], (params as Params)[0]];
         }

@@ -1,10 +1,10 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/constants.js'
-import { anvilOptimism } from '../../../test/src/anvil.js'
-import { type TransactionRequestEIP1559, parseGwei } from '../../index.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
-import { estimateL1Gas } from './estimateL1Gas.js'
+import { accounts } from '~test/src/constants'
+import { anvilOptimism } from '../../../test/src/anvil'
+import { type TransactionRequestEIP1559, parseGwei } from '../../index'
+import { parseEther } from '../../utils/unit/parseEther'
+import { estimateL1Gas } from './estimateL1Gas'
 
 const optimismClient = anvilOptimism.getClient()
 const optimismClientWithAccount = anvilOptimism.getClient({ account: true })

@@ -2,7 +2,7 @@ import type { SignMessageErrorType } from "@/lib/connect/core/exports";
 import type { SignMessageVariables } from "@/lib/connect/core/exports/query";
 import { expectTypeOf, test } from "vitest";
 
-import { useSignMessage } from "./useSignMessage.js";
+import { useSignMessage } from "./useSignMessage";
 
 const message = "hello world";
 const contextValue = { foo: "bar" } as const;

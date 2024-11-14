@@ -1,17 +1,17 @@
 import { expect, test } from 'vitest'
 
-import { accounts, address } from '~test/src/constants.js'
-import { celo } from '../../chains/index.js'
-import { createTestClient } from '../../clients/createTestClient.js'
-import { defineChain } from '../../utils/chain/defineChain.js'
-import { parseEther } from '../../utils/unit/parseEther.js'
-import { getBalance } from '../public/getBalance.js'
+import { accounts, address } from '~test/src/constants'
+import { celo } from '../../chains/index'
+import { createTestClient } from '../../clients/createTestClient'
+import { defineChain } from '../../utils/chain/defineChain'
+import { parseEther } from '../../utils/unit/parseEther'
+import { getBalance } from '../public/getBalance'
 
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import { http } from '../../index.js'
-import { mine } from './mine.js'
-import { sendUnsignedTransaction } from './sendUnsignedTransaction.js'
-import { setBalance } from './setBalance.js'
+import { anvilMainnet } from '../../../test/src/anvil'
+import { http } from '../../index'
+import { mine } from './mine'
+import { sendUnsignedTransaction } from './sendUnsignedTransaction'
+import { setBalance } from './setBalance'
 
 const client = anvilMainnet.getClient()
 

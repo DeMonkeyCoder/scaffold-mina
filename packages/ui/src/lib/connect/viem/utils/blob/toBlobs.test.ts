@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
-import { blobData } from "../../../test/src/kzg.js";
-import { stringToBytes, stringToHex } from "../index.js";
-import { fromBlobs } from "./fromBlobs.js";
-import { toBlobs } from "./toBlobs.js";
+import { blobData } from "../../../test/src/kzg";
+import { stringToBytes, stringToHex } from "../index";
+import { fromBlobs } from "./fromBlobs";
+import { toBlobs } from "./toBlobs";
 
 test("default", () => {
   const data_hex = stringToHex(blobData);

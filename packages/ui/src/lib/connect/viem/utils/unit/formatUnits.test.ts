@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { formatUnits } from './formatUnits.js'
+import { formatUnits } from './formatUnits'
 
 test('converts value to number', () => {
   expect(formatUnits(69n, 0)).toMatchInlineSnapshot('"69"')

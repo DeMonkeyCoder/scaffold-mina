@@ -1,26 +1,26 @@
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../accounts/utils/parseAccount.js'
-import type { SendTransactionParameters } from '../../actions/wallet/sendTransaction.js'
+} from '../../accounts/utils/parseAccount'
+import type { SendTransactionParameters } from '../../actions/wallet/sendTransaction'
 import {
   InvalidAddressError,
   type InvalidAddressErrorType,
-} from '../../errors/address.js'
+} from '../../errors/address'
 import {
   FeeCapTooHighError,
   type FeeCapTooHighErrorType,
   TipAboveFeeCapError,
   type TipAboveFeeCapErrorType,
-} from '../../errors/node.js'
+} from '../../errors/node'
 import {
   FeeConflictError,
   type FeeConflictErrorType,
-} from '../../errors/transaction.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
-import type { ExactPartial } from '../../types/utils.js'
-import { isAddress } from '../address/isAddress.js'
+} from '../../errors/transaction'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { ExactPartial } from '../../types/utils'
+import { isAddress } from '../address/isAddress'
 
 export type AssertRequestParameters = ExactPartial<
   SendTransactionParameters<Chain>

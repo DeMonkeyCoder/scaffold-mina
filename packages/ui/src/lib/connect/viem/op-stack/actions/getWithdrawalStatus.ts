@@ -1,49 +1,49 @@
 import {
   type ReadContractErrorType,
   readContract,
-} from '../../actions/public/readContract.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import { ContractFunctionRevertedError } from '../../errors/contract.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../../types/account.js'
+} from '../../actions/public/readContract'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import { ContractFunctionRevertedError } from '../../errors/contract'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
-import type { TransactionReceipt } from '../../types/transaction.js'
-import type { OneOf } from '../../types/utils.js'
-import { portal2Abi, portalAbi } from '../abis.js'
+} from '../../types/chain'
+import type { TransactionReceipt } from '../../types/transaction'
+import type { OneOf } from '../../types/utils'
+import { portal2Abi, portalAbi } from '../abis'
 import {
   ReceiptContainsNoWithdrawalsError,
   type ReceiptContainsNoWithdrawalsErrorType,
-} from '../errors/withdrawal.js'
-import type { TargetChain } from '../types/chain.js'
-import type { GetContractAddressParameter } from '../types/contract.js'
+} from '../errors/withdrawal'
+import type { TargetChain } from '../types/chain'
+import type { GetContractAddressParameter } from '../types/contract'
 import {
   type GetWithdrawalsErrorType,
   getWithdrawals,
-} from '../utils/getWithdrawals.js'
+} from '../utils/getWithdrawals'
 import {
   type GetGameErrorType,
   type GetGameParameters,
   getGame,
-} from './getGame.js'
+} from './getGame'
 import {
   type GetL2OutputErrorType,
   type GetL2OutputParameters,
   getL2Output,
-} from './getL2Output.js'
+} from './getL2Output'
 import {
   type GetPortalVersionParameters,
   getPortalVersion,
-} from './getPortalVersion.js'
+} from './getPortalVersion'
 import {
   type GetTimeToFinalizeErrorType,
   type GetTimeToFinalizeParameters,
   getTimeToFinalize,
-} from './getTimeToFinalize.js'
+} from './getTimeToFinalize'
 
 export type GetWithdrawalStatusParameters<
   chain extends Chain | undefined = Chain | undefined,

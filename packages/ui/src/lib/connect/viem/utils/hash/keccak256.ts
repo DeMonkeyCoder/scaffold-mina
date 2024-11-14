@@ -1,10 +1,10 @@
 import { keccak_256 } from '@noble/hashes/sha3'
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { ByteArray, Hex } from '../../types/misc.js'
-import { type IsHexErrorType, isHex } from '../data/isHex.js'
-import { type ToBytesErrorType, toBytes } from '../encoding/toBytes.js'
-import { type ToHexErrorType, toHex } from '../encoding/toHex.js'
+import type { ErrorType } from '../../errors/utils'
+import type { ByteArray, Hex } from '../../types/misc'
+import { type IsHexErrorType, isHex } from '../data/isHex'
+import { type ToBytesErrorType, toBytes } from '../encoding/toBytes'
+import { type ToHexErrorType, toHex } from '../encoding/toHex'
 
 type To = 'hex' | 'bytes'
 

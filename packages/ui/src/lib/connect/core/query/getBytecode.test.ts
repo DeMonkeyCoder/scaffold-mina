@@ -1,7 +1,7 @@
 import { address, chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getBytecodeQueryOptions } from './getBytecode.js'
+import { getBytecodeQueryOptions } from './getBytecode'
 
 test('default', () => {
   expect(

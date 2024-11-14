@@ -1,7 +1,7 @@
 import type { Address } from 'abitype'
 
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account } from '../types.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Account } from '../types'
 
 export type ParseAccountErrorType = ErrorType
 

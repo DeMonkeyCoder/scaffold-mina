@@ -2,10 +2,10 @@ import { config, testClient, wait } from "@wagmi/test";
 import { parseEther } from "@/lib/connect/viem";
 import { expect, test } from "vitest";
 
-import { connect } from "./connect.js";
-import { disconnect } from "./disconnect.js";
-import { sendTransaction } from "./sendTransaction.js";
-import { waitForTransactionReceipt } from "./waitForTransactionReceipt.js";
+import { connect } from "./connect";
+import { disconnect } from "./disconnect";
+import { sendTransaction } from "./sendTransaction";
+import { waitForTransactionReceipt } from "./waitForTransactionReceipt";
 
 const connector = config.connectors[0]!;
 

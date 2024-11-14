@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
-import { kzg } from '../../../test/src/kzg.js'
-import { stringToBytes, stringToHex } from '../index.js'
-import { sidecarsToVersionedHashes } from './sidecarsToVersionedHashes.js'
-import { toBlobSidecars } from './toBlobSidecars.js'
+import { kzg } from '../../../test/src/kzg'
+import { stringToBytes, stringToHex } from '../index'
+import { sidecarsToVersionedHashes } from './sidecarsToVersionedHashes'
+import { toBlobSidecars } from './toBlobSidecars'
 
 test('default', () => {
   expect(

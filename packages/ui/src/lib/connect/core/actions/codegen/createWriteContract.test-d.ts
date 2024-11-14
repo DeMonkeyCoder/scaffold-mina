@@ -1,8 +1,8 @@
 import { abi, config, mainnet, optimism } from '@wagmi/test'
 import { test } from 'vitest'
 
-import { simulateContract } from '../simulateContract.js'
-import { createWriteContract } from './createWriteContract.js'
+import { simulateContract } from '../simulateContract'
+import { createWriteContract } from './createWriteContract'
 
 test('default', () => {
   const writeErc20 = createWriteContract({

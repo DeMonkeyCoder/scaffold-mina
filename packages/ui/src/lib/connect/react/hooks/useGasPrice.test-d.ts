@@ -1,6 +1,6 @@
 import { expectTypeOf, test } from 'vitest'
 
-import { useGasPrice } from './useGasPrice.js'
+import { useGasPrice } from './useGasPrice'
 
 test('select data', () => {
   const result = useGasPrice({

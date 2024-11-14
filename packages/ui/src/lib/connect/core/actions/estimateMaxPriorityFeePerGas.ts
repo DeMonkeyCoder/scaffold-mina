@@ -6,10 +6,10 @@ import {
   estimateMaxPriorityFeePerGas as viem_estimateMaxPriorityFeePerGas,
 } from "@/lib/connect/viem/actions";
 
-import type { Config } from "../createConfig.js";
-import type { ChainIdParameter } from "../types/properties.js";
-import type { Compute, UnionLooseOmit } from "../types/utils.js";
-import { getAction } from "../utils/getAction.js";
+import type { Config } from "../createConfig";
+import type { ChainIdParameter } from "../types/properties";
+import type { Compute, UnionLooseOmit } from "../types/utils";
+import { getAction } from "../utils/getAction";
 
 export type EstimateMaxPriorityFeePerGasParameters<
   config extends Config = Config,

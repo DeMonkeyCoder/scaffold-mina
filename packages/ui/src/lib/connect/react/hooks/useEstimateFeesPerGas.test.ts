@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { useEstimateFeesPerGas } from './useEstimateFeesPerGas.js'
+import { useEstimateFeesPerGas } from './useEstimateFeesPerGas'
 
 test('default', async () => {
   const { result } = renderHook(() => useEstimateFeesPerGas())

@@ -1,6 +1,6 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Hex } from '../../types/misc.js'
-import { type IsHexErrorType, isHex } from '../data/isHex.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Hex } from '../../types/misc'
+import { type IsHexErrorType, isHex } from '../data/isHex'
 
 export type EncodedLabelToLabelhashErrorType = IsHexErrorType | ErrorType
 

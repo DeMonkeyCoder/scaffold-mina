@@ -1,35 +1,35 @@
 import type { Abi } from 'abitype'
 
-import type { Account } from '../../accounts/types.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { GetAccountParameter } from '../../types/account.js'
+import type { Account } from '../../accounts/types'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { GetAccountParameter } from '../../types/account'
 import type {
   Chain,
   DeriveChain,
   GetChainParameter,
-} from '../../types/chain.js'
+} from '../../types/chain'
 import type {
   ContractFunctionArgs,
   ContractFunctionName,
   ContractFunctionParameters,
-} from '../../types/contract.js'
-import type { Hex } from '../../types/misc.js'
-import type { Prettify, UnionEvaluate, UnionOmit } from '../../types/utils.js'
+} from '../../types/contract'
+import type { Hex } from '../../types/misc'
+import type { Prettify, UnionEvaluate, UnionOmit } from '../../types/utils'
 import {
   type EncodeFunctionDataErrorType,
   type EncodeFunctionDataParameters,
   encodeFunctionData,
-} from '../../utils/abi/encodeFunctionData.js'
-import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest.js'
-import { getAction } from '../../utils/getAction.js'
-import type { GetMutabilityAwareValue } from '../public/simulateContract.js'
+} from '../../utils/abi/encodeFunctionData'
+import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest'
+import { getAction } from '../../utils/getAction'
+import type { GetMutabilityAwareValue } from '../public/simulateContract'
 import {
   type SendTransactionErrorType,
   type SendTransactionReturnType,
   sendTransaction,
-} from './sendTransaction.js'
+} from './sendTransaction'
 
 export type WriteContractParameters<
   abi extends Abi | readonly unknown[] = Abi,

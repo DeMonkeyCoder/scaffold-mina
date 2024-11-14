@@ -1,10 +1,10 @@
-import type { ErrorType } from '../../errors/utils.js'
-import type { Log } from '../../types/log.js'
+import type { ErrorType } from '../../errors/utils'
+import type { Log } from '../../types/log'
 import {
   type ParseEventLogsErrorType,
   parseEventLogs,
-} from '../../utils/abi/parseEventLogs.js'
-import { portalAbi } from '../abis.js'
+} from '../../utils/abi/parseEventLogs'
+import { portalAbi } from '../abis'
 
 export type ExtractTransactionDepositedLogsParameters = {
   /** An opaque array of logs. */

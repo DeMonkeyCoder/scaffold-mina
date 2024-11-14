@@ -1,60 +1,60 @@
-import type { Account } from "../../accounts/types.js";
+import type { Account } from "../../accounts/types";
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from "../../accounts/utils/parseAccount.js";
-import type { SignTransactionErrorType } from "../../accounts/utils/signTransaction.js";
-import type { Client } from "../../clients/createClient.js";
-import type { Transport } from "../../clients/transports/createTransport.js";
+} from "../../accounts/utils/parseAccount";
+import type { SignTransactionErrorType } from "../../accounts/utils/signTransaction";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
 import {
   AccountNotFoundError,
   type AccountNotFoundErrorType,
   AccountTypeNotSupportedError,
   type AccountTypeNotSupportedErrorType,
-} from "../../errors/account.js";
-import { BaseError } from "../../errors/base.js";
-import type { ErrorType } from "../../errors/utils.js";
+} from "../../errors/account";
+import { BaseError } from "../../errors/base";
+import type { ErrorType } from "../../errors/utils";
 import {
   type RecoverAuthorizationAddressErrorType,
   recoverAuthorizationAddress,
-} from "../../experimental/eip7702/utils/recoverAuthorizationAddress.js";
-import type { GetAccountParameter } from "../../types/account.js";
-import type { Chain, DeriveChain } from "../../types/chain.js";
-import type { GetChainParameter } from "../../types/chain.js";
-import type { GetTransactionRequestKzgParameter } from "../../types/kzg.js";
-import type { Hash } from "../../types/misc.js";
-import type { TransactionRequest } from "../../types/transaction.js";
-import type { UnionOmit } from "../../types/utils.js";
-import type { RequestErrorType } from "../../utils/buildRequest.js";
+} from "../../experimental/eip7702/utils/recoverAuthorizationAddress";
+import type { GetAccountParameter } from "../../types/account";
+import type { Chain, DeriveChain } from "../../types/chain";
+import type { GetChainParameter } from "../../types/chain";
+import type { GetTransactionRequestKzgParameter } from "../../types/kzg";
+import type { Hash } from "../../types/misc";
+import type { TransactionRequest } from "../../types/transaction";
+import type { UnionOmit } from "../../types/utils";
+import type { RequestErrorType } from "../../utils/buildRequest";
 import {
   type AssertCurrentChainErrorType,
   assertCurrentChain,
-} from "../../utils/chain/assertCurrentChain.js";
+} from "../../utils/chain/assertCurrentChain";
 import {
   type GetTransactionErrorReturnType,
   getTransactionError,
-} from "../../utils/errors/getTransactionError.js";
-import { extract } from "../../utils/formatters/extract.js";
+} from "../../utils/errors/getTransactionError";
+import { extract } from "../../utils/formatters/extract";
 import {
   type FormattedTransactionRequest,
   formatTransactionRequest,
-} from "../../utils/formatters/transactionRequest.js";
-import { getAction } from "../../utils/getAction.js";
+} from "../../utils/formatters/transactionRequest";
+import { getAction } from "../../utils/getAction";
 import {
   type AssertRequestErrorType,
   type AssertRequestParameters,
   assertRequest,
-} from "../../utils/transaction/assertRequest.js";
-import { type GetChainIdErrorType, getChainId } from "../public/getChainId.js";
+} from "../../utils/transaction/assertRequest";
+import { type GetChainIdErrorType, getChainId } from "../public/getChainId";
 import {
   type PrepareTransactionRequestErrorType,
   defaultParameters,
   prepareTransactionRequest,
-} from "./prepareTransactionRequest.js";
+} from "./prepareTransactionRequest";
 import {
   type SendRawTransactionErrorType,
   sendRawTransaction,
-} from "./sendRawTransaction.js";
+} from "./sendRawTransaction";
 
 export type SendTransactionRequest<
   chain extends Chain | undefined = Chain | undefined,
@@ -101,8 +101,8 @@ export type SendTransactionErrorType =
  * - Docs: https://viem.sh/docs/actions/wallet/sendTransaction
  * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/transactions/sending-transactions
  * - JSON-RPC Methods:
- *   - JSON-RPC Accounts: [`eth_sendTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendtransaction)
- *   - Local Accounts: [`eth_sendRawTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendrawtransaction)
+ *   - JSON-RPC Accounts: [`mina_sendTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_sendtransaction)
+ *   - Local Accounts: [`mina_sendRawTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_sendrawtransaction)
  *
  * @param client - Client to use
  * @param parameters - {@link SendTransactionParameters}
@@ -227,7 +227,7 @@ export async function sendTransaction<
       } as TransactionRequest);
       return await client.request(
         {
-          method: "eth_sendTransaction",
+          method: "mina_sendTransaction",
           params: [request],
         },
         { retryCount: 0 }

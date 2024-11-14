@@ -2,7 +2,7 @@ import { chain, testClient } from '@wagmi/test'
 import { renderHook, waitFor } from '@wagmi/test/react'
 import { expect, test } from 'vitest'
 
-import { useEstimateMaxPriorityFeePerGas } from './useEstimateMaxPriorityFeePerGas.js'
+import { useEstimateMaxPriorityFeePerGas } from './useEstimateMaxPriorityFeePerGas'
 
 test('default', async () => {
   await testClient.mainnet.restart()

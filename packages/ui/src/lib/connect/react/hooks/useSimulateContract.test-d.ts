@@ -6,7 +6,7 @@ import {
   type UseSimulateContractParameters,
   type UseSimulateContractReturnType,
   useSimulateContract,
-} from "./useSimulateContract.js";
+} from "./useSimulateContract";
 
 test("default", () => {
   const result = useSimulateContract({

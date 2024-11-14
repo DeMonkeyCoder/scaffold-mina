@@ -5,7 +5,7 @@ import type {
 import { config } from "@wagmi/test";
 import { expectTypeOf, test } from "vitest";
 
-import { useDisconnect } from "./useDisconnect.js";
+import { useDisconnect } from "./useDisconnect";
 
 const connector = config.connectors[0]!;
 const contextValue = { foo: "bar" } as const;

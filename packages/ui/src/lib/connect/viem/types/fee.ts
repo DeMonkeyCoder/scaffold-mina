@@ -1,4 +1,4 @@
-import type { OneOf } from './utils.js'
+import type { OneOf } from './utils'
 
 export type FeeHistory<quantity = bigint> = {
   /**

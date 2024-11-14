@@ -1,7 +1,7 @@
 import { accounts, chain, config } from '@wagmi/test'
 import { expect, test } from 'vitest'
 
-import { getBalanceQueryOptions } from './getBalance.js'
+import { getBalanceQueryOptions } from './getBalance'
 
 const address = accounts[0]
 

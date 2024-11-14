@@ -1,21 +1,21 @@
-import type { Account } from '../../accounts/types.js'
-import { signTransaction as signTransaction_ } from '../../actions/wallet/signTransaction.js'
+import type { Account } from '../../accounts/types'
+import { signTransaction as signTransaction_ } from '../../actions/wallet/signTransaction'
 import type {
   SignTransactionErrorType as SignTransactionErrorType_,
   SignTransactionReturnType as SignTransactionReturnType_,
-} from '../../actions/wallet/signTransaction.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { GetAccountParameter } from '../../types/account.js'
+} from '../../actions/wallet/signTransaction'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { GetAccountParameter } from '../../types/account'
 import type {
   ExtractChainFormatterParameters,
   GetChainParameter,
-} from '../../types/chain.js'
-import type { UnionOmit } from '../../types/utils.js'
-import type { ChainEIP712 } from '../types/chain.js'
-import type { TransactionRequestEIP712 } from '../types/transaction.js'
-import { isEIP712Transaction } from '../utils/isEip712Transaction.js'
-import { signEip712Transaction } from './signEip712Transaction.js'
+} from '../../types/chain'
+import type { UnionOmit } from '../../types/utils'
+import type { ChainEIP712 } from '../types/chain'
+import type { TransactionRequestEIP712 } from '../types/transaction'
+import { isEIP712Transaction } from '../utils/isEip712Transaction'
+import { signEip712Transaction } from './signEip712Transaction'
 
 type FormattedTransactionRequest<
   chain extends ChainEIP712 | undefined = ChainEIP712 | undefined,

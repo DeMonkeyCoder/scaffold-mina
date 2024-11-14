@@ -1,13 +1,13 @@
 import { expectTypeOf, test } from 'vitest'
-import { kzg } from '~test/src/kzg.js'
-import { anvilMainnet } from '../../../test/src/anvil.js'
-import type { BlobSidecar, Hex, TransactionRequest } from '../../index.js'
-import type { Kzg } from '../../types/kzg.js'
-import type { ByteArray } from '../../types/misc.js'
+import { kzg } from '~test/src/kzg'
+import { anvilMainnet } from '../../../test/src/anvil'
+import type { BlobSidecar, Hex, TransactionRequest } from '../../index'
+import type { Kzg } from '../../types/kzg'
+import type { ByteArray } from '../../types/misc'
 import {
   defaultParameters,
   prepareTransactionRequest,
-} from './prepareTransactionRequest.js'
+} from './prepareTransactionRequest'
 
 const client = anvilMainnet.getClient()
 const clientWithAccount = anvilMainnet.getClient({

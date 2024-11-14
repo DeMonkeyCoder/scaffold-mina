@@ -3,15 +3,15 @@ import {
   type HttpRequestErrorType as HttpRequestErrorType_,
   TimeoutError,
   type TimeoutErrorType,
-} from '../../errors/request.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { RpcRequest, RpcResponse } from '../../types/rpc.js'
+} from '../../errors/request'
+import type { ErrorType } from '../../errors/utils'
+import type { RpcRequest, RpcResponse } from '../../types/rpc'
 import {
   type WithTimeoutErrorType,
   withTimeout,
-} from '../promise/withTimeout.js'
-import { stringify } from '../stringify.js'
-import { idCache } from './id.js'
+} from '../promise/withTimeout'
+import { stringify } from '../stringify'
+import { idCache } from './id'
 
 export type HttpRpcClientOptions = {
   /** Request configuration to pass to `fetch`. */
@@ -118,7 +118,7 @@ export function getHttpRpcClient(
         if (
           response.headers.get('Content-Type')?.startsWith('application/json')
         )
-          data = await response.json()
+          data = await responseon()
         else {
           data = await response.text()
           data = JSON.parse(data || '{}')

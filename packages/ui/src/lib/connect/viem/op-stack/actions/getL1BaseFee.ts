@@ -3,18 +3,18 @@ import type { Address } from 'abitype'
 import {
   type ReadContractErrorType,
   readContract,
-} from '../../actions/public/readContract.js'
-import type { PrepareTransactionRequestErrorType } from '../../actions/wallet/prepareTransactionRequest.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain, GetChainParameter } from '../../types/chain.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
-import { getChainContractAddress } from '../../utils/chain/getChainContractAddress.js'
-import type { HexToNumberErrorType } from '../../utils/encoding/fromHex.js'
+} from '../../actions/public/readContract'
+import type { PrepareTransactionRequestErrorType } from '../../actions/wallet/prepareTransactionRequest'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain, GetChainParameter } from '../../types/chain'
+import type { RequestErrorType } from '../../utils/buildRequest'
+import { getChainContractAddress } from '../../utils/chain/getChainContractAddress'
+import type { HexToNumberErrorType } from '../../utils/encoding/fromHex'
 
-import { gasPriceOracleAbi } from '../abis.js'
-import { contracts } from '../contracts.js'
+import { gasPriceOracleAbi } from '../abis'
+import { contracts } from '../contracts'
 
 export type GetL1BaseFeeParameters<
   chain extends Chain | undefined = Chain | undefined,

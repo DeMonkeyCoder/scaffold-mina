@@ -3,19 +3,19 @@ import {
   bytesPerFieldElement,
   fieldElementsPerBlob,
   maxBytesPerTransaction,
-} from "../../constants/blob.js";
+} from "../../constants/blob";
 import {
   BlobSizeTooLargeError,
   type BlobSizeTooLargeErrorType,
   EmptyBlobError,
   type EmptyBlobErrorType,
-} from "../../errors/blob.js";
-import type { ErrorType } from "../../errors/utils.js";
-import type { ByteArray, Hex } from "../../types/misc.js";
-import { type CreateCursorErrorType, createCursor } from "../cursor.js";
-import { type SizeErrorType, size } from "../data/size.js";
-import { type HexToBytesErrorType, hexToBytes } from "../encoding/toBytes.js";
-import { type BytesToHexErrorType, bytesToHex } from "../encoding/toHex.js";
+} from "../../errors/blob";
+import type { ErrorType } from "../../errors/utils";
+import type { ByteArray, Hex } from "../../types/misc";
+import { type CreateCursorErrorType, createCursor } from "../cursor";
+import { type SizeErrorType, size } from "../data/size";
+import { type HexToBytesErrorType, hexToBytes } from "../encoding/toBytes";
+import { type BytesToHexErrorType, bytesToHex } from "../encoding/toHex";
 
 type To = "hex" | "bytes";
 

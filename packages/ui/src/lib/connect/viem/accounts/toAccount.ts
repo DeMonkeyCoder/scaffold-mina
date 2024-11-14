@@ -5,19 +5,19 @@ import type { Address } from 'abitype'
 import {
   InvalidAddressError,
   type InvalidAddressErrorType,
-} from '../errors/address.js'
+} from '../errors/address'
 import {
   type IsAddressErrorType,
   isAddress,
-} from '../utils/address/isAddress.js'
+} from '../utils/address/isAddress'
 
-import type { ErrorType } from '../errors/utils.js'
+import type { ErrorType } from '../errors/utils'
 import type {
   AccountSource,
   CustomSource,
   JsonRpcAccount,
   LocalAccount,
-} from './types.js'
+} from './types'
 
 type GetAccountReturnType<accountSource extends AccountSource> =
   | (accountSource extends Address ? JsonRpcAccount : never)

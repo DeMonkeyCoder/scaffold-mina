@@ -1,8 +1,8 @@
 import { type Abi, parseAbi } from 'abitype'
 import { test } from 'vitest'
 
-import { wagmiContractConfig } from '~test/src/abis.js'
-import { encodeDeployData } from './encodeDeployData.js'
+import { wagmiContractConfig } from '~test/src/abis'
+import { encodeDeployData } from './encodeDeployData'
 
 test('default', () => {
   encodeDeployData({

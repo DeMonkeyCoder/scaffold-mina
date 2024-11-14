@@ -1,23 +1,23 @@
-import type { ErrorType } from '../../../errors/utils.js'
-import type { ByteArray, Hex } from '../../../types/misc.js'
+import type { ErrorType } from '../../../errors/utils'
+import type { ByteArray, Hex } from '../../../types/misc'
 import {
   type ConcatHexErrorType,
   concatHex,
-} from '../../../utils/data/concat.js'
+} from '../../../utils/data/concat'
 import {
   type HexToBytesErrorType,
   hexToBytes,
-} from '../../../utils/encoding/toBytes.js'
+} from '../../../utils/encoding/toBytes'
 import {
   type NumberToHexErrorType,
   numberToHex,
-} from '../../../utils/encoding/toHex.js'
-import { type ToRlpErrorType, toRlp } from '../../../utils/encoding/toRlp.js'
+} from '../../../utils/encoding/toHex'
+import { type ToRlpErrorType, toRlp } from '../../../utils/encoding/toRlp'
 import {
   type Keccak256ErrorType,
   keccak256,
-} from '../../../utils/hash/keccak256.js'
-import type { Authorization } from '../types/authorization.js'
+} from '../../../utils/hash/keccak256'
+import type { Authorization } from '../types/authorization'
 
 type To = 'hex' | 'bytes'
 

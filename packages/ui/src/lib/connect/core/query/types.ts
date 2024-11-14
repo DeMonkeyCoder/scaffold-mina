@@ -6,7 +6,7 @@ import type {
   QueryKey,
 } from '@tanstack/query-core'
 
-import type { Compute, StrictOmit } from '../types/utils.js'
+import type { Compute, StrictOmit } from '../types/utils'
 
 export type InfiniteQueryOptions<
   queryFnData = unknown,

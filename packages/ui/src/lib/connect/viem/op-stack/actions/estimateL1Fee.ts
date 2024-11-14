@@ -3,35 +3,35 @@ import type { Address } from 'abitype'
 import {
   type ReadContractErrorType,
   readContract,
-} from '../../actions/public/readContract.js'
+} from '../../actions/public/readContract'
 import {
   type PrepareTransactionRequestErrorType,
   type PrepareTransactionRequestParameters,
   prepareTransactionRequest,
-} from '../../actions/wallet/prepareTransactionRequest.js'
-import type { Client } from '../../clients/createClient.js'
-import type { Transport } from '../../clients/transports/createTransport.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Account, GetAccountParameter } from '../../types/account.js'
-import type { Chain, GetChainParameter } from '../../types/chain.js'
+} from '../../actions/wallet/prepareTransactionRequest'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Account, GetAccountParameter } from '../../types/account'
+import type { Chain, GetChainParameter } from '../../types/chain'
 import type {
   TransactionRequestEIP1559,
   TransactionSerializable,
-} from '../../types/transaction.js'
-import type { RequestErrorType } from '../../utils/buildRequest.js'
-import { getChainContractAddress } from '../../utils/chain/getChainContractAddress.js'
-import type { HexToNumberErrorType } from '../../utils/encoding/fromHex.js'
+} from '../../types/transaction'
+import type { RequestErrorType } from '../../utils/buildRequest'
+import { getChainContractAddress } from '../../utils/chain/getChainContractAddress'
+import type { HexToNumberErrorType } from '../../utils/encoding/fromHex'
 import {
   type AssertRequestErrorType,
   type AssertRequestParameters,
   assertRequest,
-} from '../../utils/transaction/assertRequest.js'
+} from '../../utils/transaction/assertRequest'
 import {
   type SerializeTransactionErrorType,
   serializeTransaction,
-} from '../../utils/transaction/serializeTransaction.js'
-import { gasPriceOracleAbi } from '../abis.js'
-import { contracts } from '../contracts.js'
+} from '../../utils/transaction/serializeTransaction'
+import { gasPriceOracleAbi } from '../abis'
+import { contracts } from '../contracts'
 
 export type EstimateL1FeeParameters<
   TChain extends Chain | undefined = Chain | undefined,

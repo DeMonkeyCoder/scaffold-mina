@@ -1,6 +1,6 @@
 import type { Address } from 'abitype'
-import type { Hex } from './misc.js'
-import type { OneOf } from './utils.js'
+import type { Hex } from './misc'
+import type { OneOf } from './utils'
 
 export type StateMapping = Array<{
   slot: Hex

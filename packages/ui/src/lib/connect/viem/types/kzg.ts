@@ -1,9 +1,9 @@
 import type { Address } from 'abitype'
 
-import type { LocalAccount } from '../accounts/types.js'
-import type { ByteArray } from './misc.js'
-import type { TransactionRequestEIP4844 } from './transaction.js'
-import type { MaybeRequired } from './utils.js'
+import type { LocalAccount } from '../accounts/types'
+import type { ByteArray } from './misc'
+import type { TransactionRequestEIP4844 } from './transaction'
+import type { MaybeRequired } from './utils'
 
 export type Kzg = {
   /**

@@ -3,13 +3,13 @@ import {
   type InvalidHexBooleanErrorType,
   SizeOverflowError,
   type SizeOverflowErrorType,
-} from "../../errors/encoding.js";
-import type { ErrorType } from "../../errors/utils.js";
-import type { ByteArray, Hex } from "../../types/misc.js";
-import { type SizeErrorType, size as size_ } from "../data/size.js";
-import { type TrimErrorType, trim } from "../data/trim.js";
+} from "../../errors/encoding";
+import type { ErrorType } from "../../errors/utils";
+import type { ByteArray, Hex } from "../../types/misc";
+import { type SizeErrorType, size as size_ } from "../data/size";
+import { type TrimErrorType, trim } from "../data/trim";
 
-import { type HexToBytesErrorType, hexToBytes } from "./toBytes.js";
+import { type HexToBytesErrorType, hexToBytes } from "./toBytes";
 
 export type AssertSizeErrorType =
   | SizeOverflowErrorType
