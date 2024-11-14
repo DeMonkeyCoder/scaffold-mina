@@ -2,80 +2,80 @@ import type { Abi, Address, TypedData } from "abitype";
 
 import type { Account } from "../../accounts/types";
 import {
-  type GetChainIdReturnType,
   getChainId,
+  type GetChainIdReturnType,
 } from "../../actions/public/getChainId";
 import {
-  type AddChainParameters,
   addChain,
+  type AddChainParameters,
 } from "../../actions/wallet/addChain";
 import {
+  deployContract,
   type DeployContractParameters,
   type DeployContractReturnType,
-  deployContract,
 } from "../../actions/wallet/deployContract";
 import {
-  type GetAddressesReturnType,
   getAddresses,
+  type GetAddressesReturnType,
 } from "../../actions/wallet/getAddresses";
 import {
-  type GetPermissionsReturnType,
   getPermissions,
+  type GetPermissionsReturnType,
 } from "../../actions/wallet/getPermissions";
 import {
+  prepareTransactionRequest,
   type PrepareTransactionRequestParameters,
   type PrepareTransactionRequestRequest,
   type PrepareTransactionRequestReturnType,
-  prepareTransactionRequest,
 } from "../../actions/wallet/prepareTransactionRequest";
 import {
-  type RequestAddressesReturnType,
   requestAddresses,
+  type RequestAddressesReturnType,
 } from "../../actions/wallet/requestAddresses";
 import {
+  requestPermissions,
   type RequestPermissionsParameters,
   type RequestPermissionsReturnType,
-  requestPermissions,
 } from "../../actions/wallet/requestPermissions";
 import {
+  sendRawTransaction,
   type SendRawTransactionParameters,
   type SendRawTransactionReturnType,
-  sendRawTransaction,
 } from "../../actions/wallet/sendRawTransaction";
 import {
+  sendTransaction,
   type SendTransactionParameters,
   type SendTransactionRequest,
   type SendTransactionReturnType,
-  sendTransaction,
 } from "../../actions/wallet/sendTransaction";
 import {
+  signMessage,
   type SignMessageParameters,
   type SignMessageReturnType,
-  signMessage,
 } from "../../actions/wallet/signMessage";
 import {
+  signTransaction,
   type SignTransactionParameters,
   type SignTransactionReturnType,
-  signTransaction,
 } from "../../actions/wallet/signTransaction";
 import {
+  signTypedData,
   type SignTypedDataParameters,
   type SignTypedDataReturnType,
-  signTypedData,
 } from "../../actions/wallet/signTypedData";
 import {
-  type SwitchChainParameters,
   switchChain,
+  type SwitchChainParameters,
 } from "../../actions/wallet/switchChain";
 import {
+  watchAsset,
   type WatchAssetParameters,
   type WatchAssetReturnType,
-  watchAsset,
 } from "../../actions/wallet/watchAsset";
 import {
+  writeContract,
   type WriteContractParameters,
   type WriteContractReturnType,
-  writeContract,
 } from "../../actions/wallet/writeContract";
 import type { Chain } from "../../types/chain";
 import type {
@@ -161,7 +161,7 @@ export type WalletActions<
    * Returns the chain ID associated with the current networkID.
    *
    * - Docs: https://viem.sh/docs/actions/public/getChainId
-   * - JSON-RPC Methods: [`mina_chainId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_chainid)
+   * - JSON-RPC Methods: [`mina_networkId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_networkId)
    *
    * @returns The current chain ID. {@link GetChainIdReturnType}
    *

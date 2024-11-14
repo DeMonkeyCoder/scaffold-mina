@@ -7,7 +7,6 @@ export {
   type AbiStateMutability,
   type AbiParameterKind,
   type AbiParameterToPrimitiveType,
-  type Address,
   type Narrow,
   type ParseAbi,
   type ParseAbiItem,
@@ -35,116 +34,116 @@ export {
   parseAbiItem,
   parseAbiParameter,
   parseAbiParameters,
-} from 'abitype'
+} from "abitype";
 
 export {
   getContract,
   type GetContractErrorType,
   type GetContractParameters,
   type GetContractReturnType,
-} from './actions/getContract'
+} from "./actions/getContract";
 export {
   type GetContractEventsErrorType,
   type GetContractEventsParameters,
   type GetContractEventsReturnType,
-} from './actions/public/getContractEvents'
+} from "./actions/public/getContractEvents";
 export {
   type GetEip712DomainErrorType,
   type GetEip712DomainParameters,
   type GetEip712DomainReturnType,
-} from './actions/public/getEip712Domain'
+} from "./actions/public/getEip712Domain";
 export {
   type AddChainErrorType,
   type AddChainParameters,
-} from './actions/wallet/addChain'
+} from "./actions/wallet/addChain";
 export {
   type CallErrorType,
   type CallParameters,
   type CallReturnType,
-} from './actions/public/call'
+} from "./actions/public/call";
 export type {
   CreateBlockFilterErrorType,
   CreateBlockFilterReturnType,
-} from './actions/public/createBlockFilter'
+} from "./actions/public/createBlockFilter";
 export type {
   CreateContractEventFilterErrorType,
   CreateContractEventFilterParameters,
   CreateContractEventFilterReturnType,
-} from './actions/public/createContractEventFilter'
+} from "./actions/public/createContractEventFilter";
 export type {
   CreateEventFilterErrorType,
   CreateEventFilterParameters,
   CreateEventFilterReturnType,
-} from './actions/public/createEventFilter'
+} from "./actions/public/createEventFilter";
 export type {
   CreatePendingTransactionFilterErrorType,
   CreatePendingTransactionFilterReturnType,
-} from './actions/public/createPendingTransactionFilter'
+} from "./actions/public/createPendingTransactionFilter";
 export type {
   DeployContractErrorType,
   DeployContractParameters,
   DeployContractReturnType,
-} from './actions/wallet/deployContract'
+} from "./actions/wallet/deployContract";
 export type {
   DropTransactionErrorType,
   DropTransactionParameters,
-} from './actions/test/dropTransaction'
+} from "./actions/test/dropTransaction";
 export type {
   DumpStateErrorType,
   DumpStateReturnType,
-} from './actions/test/dumpState'
+} from "./actions/test/dumpState";
 export type {
   GetAutomineErrorType,
   GetAutomineReturnType,
-} from './actions/test/getAutomine'
+} from "./actions/test/getAutomine";
 export type {
   EstimateContractGasErrorType,
   EstimateContractGasParameters,
   EstimateContractGasReturnType,
-} from './actions/public/estimateContractGas'
+} from "./actions/public/estimateContractGas";
 export type {
   EstimateGasErrorType,
   EstimateGasParameters,
   EstimateGasReturnType,
-} from './actions/public/estimateGas'
+} from "./actions/public/estimateGas";
 export type {
   EstimateFeesPerGasErrorType,
   EstimateFeesPerGasParameters,
   EstimateFeesPerGasReturnType,
-} from './actions/public/estimateFeesPerGas'
+} from "./actions/public/estimateFeesPerGas";
 export type {
   EstimateMaxPriorityFeePerGasErrorType,
   EstimateMaxPriorityFeePerGasParameters,
   EstimateMaxPriorityFeePerGasReturnType,
-} from './actions/public/estimateMaxPriorityFeePerGas'
+} from "./actions/public/estimateMaxPriorityFeePerGas";
 export type {
   GetAddressesErrorType,
   GetAddressesReturnType,
-} from './actions/wallet/getAddresses'
+} from "./actions/wallet/getAddresses";
 export type {
   GetBalanceErrorType,
   GetBalanceParameters,
   GetBalanceReturnType,
-} from './actions/public/getBalance'
+} from "./actions/public/getBalance";
 export type {
   GetBlobBaseFeeErrorType,
   GetBlobBaseFeeReturnType,
-} from './actions/public/getBlobBaseFee'
+} from "./actions/public/getBlobBaseFee";
 export type {
   GetBlockNumberErrorType,
   GetBlockNumberParameters,
   GetBlockNumberReturnType,
-} from './actions/public/getBlockNumber'
+} from "./actions/public/getBlockNumber";
 export type {
   GetBlockErrorType,
   GetBlockParameters,
   GetBlockReturnType,
-} from './actions/public/getBlock'
+} from "./actions/public/getBlock";
 export type {
   GetBlockTransactionCountErrorType,
   GetBlockTransactionCountParameters,
   GetBlockTransactionCountReturnType,
-} from './actions/public/getBlockTransactionCount'
+} from "./actions/public/getBlockTransactionCount";
 export type {
   /** @deprecated Use `GetCodeErrorType` instead */
   GetCodeErrorType as GetBytecodeErrorType,
@@ -155,316 +154,313 @@ export type {
   GetCodeErrorType,
   GetCodeParameters,
   GetCodeReturnType,
-} from './actions/public/getCode'
+} from "./actions/public/getCode";
 export type {
   GetChainIdErrorType,
   GetChainIdReturnType,
-} from './actions/public/getChainId'
+} from "./actions/public/getChainId";
 export type {
   GetEnsAddressErrorType,
   GetEnsAddressParameters,
   GetEnsAddressReturnType,
-} from './actions/ens/getEnsAddress'
+} from "./actions/ens/getEnsAddress";
 export type {
   GetEnsAvatarErrorType,
   GetEnsAvatarParameters,
   GetEnsAvatarReturnType,
-} from './actions/ens/getEnsAvatar'
+} from "./actions/ens/getEnsAvatar";
 export type {
   GetEnsNameErrorType,
   GetEnsNameParameters,
   GetEnsNameReturnType,
-} from './actions/ens/getEnsName'
+} from "./actions/ens/getEnsName";
 export type {
   GetEnsResolverErrorType,
   GetEnsResolverParameters,
   GetEnsResolverReturnType,
-} from './actions/ens/getEnsResolver'
+} from "./actions/ens/getEnsResolver";
 export type {
   GetEnsTextErrorType,
   GetEnsTextParameters,
   GetEnsTextReturnType,
-} from './actions/ens/getEnsText'
+} from "./actions/ens/getEnsText";
 export type {
   GetFeeHistoryErrorType,
   GetFeeHistoryParameters,
   GetFeeHistoryReturnType,
-} from './actions/public/getFeeHistory'
+} from "./actions/public/getFeeHistory";
 export type {
   GetFilterChangesErrorType,
   GetFilterChangesParameters,
   GetFilterChangesReturnType,
-} from './actions/public/getFilterChanges'
+} from "./actions/public/getFilterChanges";
 export type {
   GetFilterLogsErrorType,
   GetFilterLogsParameters,
   GetFilterLogsReturnType,
-} from './actions/public/getFilterLogs'
+} from "./actions/public/getFilterLogs";
 export type {
   GetGasPriceErrorType,
   GetGasPriceReturnType,
-} from './actions/public/getGasPrice'
+} from "./actions/public/getGasPrice";
 export type {
   GetLogsErrorType,
   GetLogsParameters,
   GetLogsReturnType,
-} from './actions/public/getLogs'
+} from "./actions/public/getLogs";
 export type {
   GetPermissionsErrorType,
   GetPermissionsReturnType,
-} from './actions/wallet/getPermissions'
+} from "./actions/wallet/getPermissions";
 export type {
   GetProofErrorType,
   GetProofParameters,
   GetProofReturnType,
-} from './actions/public/getProof'
+} from "./actions/public/getProof";
 export type {
   GetStorageAtErrorType,
   GetStorageAtParameters,
   GetStorageAtReturnType,
-} from './actions/public/getStorageAt'
+} from "./actions/public/getStorageAt";
 export type {
   GetTransactionConfirmationsErrorType,
   GetTransactionConfirmationsParameters,
   GetTransactionConfirmationsReturnType,
-} from './actions/public/getTransactionConfirmations'
+} from "./actions/public/getTransactionConfirmations";
 export type {
   GetTransactionCountErrorType,
   GetTransactionCountParameters,
   GetTransactionCountReturnType,
-} from './actions/public/getTransactionCount'
+} from "./actions/public/getTransactionCount";
 export type {
   GetTransactionErrorType,
   GetTransactionParameters,
   GetTransactionReturnType,
-} from './actions/public/getTransaction'
+} from "./actions/public/getTransaction";
 export type {
   GetTransactionReceiptErrorType,
   GetTransactionReceiptParameters,
   GetTransactionReceiptReturnType,
-} from './actions/public/getTransactionReceipt'
+} from "./actions/public/getTransactionReceipt";
 export type {
   ImpersonateAccountErrorType,
   ImpersonateAccountParameters,
-} from './actions/test/impersonateAccount'
+} from "./actions/test/impersonateAccount";
 export type {
   IncreaseTimeErrorType,
   IncreaseTimeParameters,
-} from './actions/test/increaseTime'
+} from "./actions/test/increaseTime";
 export type {
   LoadStateErrorType,
   LoadStateParameters,
   LoadStateReturnType,
-} from './actions/test/loadState'
-export type { MineErrorType, MineParameters } from './actions/test/mine'
+} from "./actions/test/loadState";
+export type { MineErrorType, MineParameters } from "./actions/test/mine";
 export type {
   MulticallErrorType,
   MulticallParameters,
   MulticallReturnType,
-} from './actions/public/multicall'
-export type { SnapshotErrorType } from './actions/test/snapshot'
+} from "./actions/public/multicall";
+export type { SnapshotErrorType } from "./actions/test/snapshot";
 export type {
   OnBlock,
   OnBlockParameter,
   WatchBlocksErrorType,
   WatchBlocksParameters,
   WatchBlocksReturnType,
-} from './actions/public/watchBlocks'
+} from "./actions/public/watchBlocks";
 export type {
   OnBlockNumberFn,
   OnBlockNumberParameter,
   WatchBlockNumberErrorType,
   WatchBlockNumberParameters,
   WatchBlockNumberReturnType,
-} from './actions/public/watchBlockNumber'
+} from "./actions/public/watchBlockNumber";
 export type {
   WatchEventOnLogsFn,
   WatchEventOnLogsParameter,
   WatchEventErrorType,
   WatchEventParameters,
   WatchEventReturnType,
-} from './actions/public/watchEvent'
+} from "./actions/public/watchEvent";
 export type {
   OnTransactionsFn,
   OnTransactionsParameter,
   WatchPendingTransactionsErrorType,
   WatchPendingTransactionsParameters,
   WatchPendingTransactionsReturnType,
-} from './actions/public/watchPendingTransactions'
+} from "./actions/public/watchPendingTransactions";
 export type {
   ReadContractErrorType,
   ReadContractParameters,
   ReadContractReturnType,
-} from './actions/public/readContract'
+} from "./actions/public/readContract";
 export type {
   ReplacementReason,
   ReplacementReturnType,
   WaitForTransactionReceiptErrorType,
   WaitForTransactionReceiptParameters,
   WaitForTransactionReceiptReturnType,
-} from './actions/public/waitForTransactionReceipt'
+} from "./actions/public/waitForTransactionReceipt";
 export type {
   RequestAddressesErrorType,
   RequestAddressesReturnType,
-} from './actions/wallet/requestAddresses'
+} from "./actions/wallet/requestAddresses";
 export type {
   RequestPermissionsErrorType,
   RequestPermissionsReturnType,
   RequestPermissionsParameters,
-} from './actions/wallet/requestPermissions'
+} from "./actions/wallet/requestPermissions";
 export type {
   GetTxpoolContentErrorType,
   GetTxpoolContentReturnType,
-} from './actions/test/getTxpoolContent'
+} from "./actions/test/getTxpoolContent";
 export type {
   GetTxpoolStatusErrorType,
   GetTxpoolStatusReturnType,
-} from './actions/test/getTxpoolStatus'
+} from "./actions/test/getTxpoolStatus";
 export type {
   InspectTxpoolErrorType,
   InspectTxpoolReturnType,
-} from './actions/test/inspectTxpool'
-export type { RemoveBlockTimestampIntervalErrorType } from './actions/test/removeBlockTimestampInterval'
-export type { ResetErrorType, ResetParameters } from './actions/test/reset'
-export type {
-  RevertErrorType,
-  RevertParameters,
-} from './actions/test/revert'
+} from "./actions/test/inspectTxpool";
+export type { RemoveBlockTimestampIntervalErrorType } from "./actions/test/removeBlockTimestampInterval";
+export type { ResetErrorType, ResetParameters } from "./actions/test/reset";
+export type { RevertErrorType, RevertParameters } from "./actions/test/revert";
 export type {
   SendRawTransactionErrorType,
   SendRawTransactionParameters,
   SendRawTransactionReturnType,
-} from './actions/wallet/sendRawTransaction'
+} from "./actions/wallet/sendRawTransaction";
 export type {
   SendTransactionErrorType,
   SendTransactionParameters,
   SendTransactionRequest,
   SendTransactionReturnType,
-} from './actions/wallet/sendTransaction'
+} from "./actions/wallet/sendTransaction";
 export type {
   SignTransactionErrorType,
   SignTransactionParameters,
   SignTransactionReturnType,
-} from './actions/wallet/signTransaction'
+} from "./actions/wallet/signTransaction";
 export type {
   PrepareTransactionRequestErrorType,
   PrepareTransactionRequestParameters,
   PrepareTransactionRequestParameterType,
   PrepareTransactionRequestRequest,
   PrepareTransactionRequestReturnType,
-} from './actions/wallet/prepareTransactionRequest'
+} from "./actions/wallet/prepareTransactionRequest";
 export type {
   SendUnsignedTransactionErrorType,
   SendUnsignedTransactionParameters,
   SendUnsignedTransactionReturnType,
-} from './actions/test/sendUnsignedTransaction'
-export type { SetAutomineErrorType } from './actions/test/setAutomine'
+} from "./actions/test/sendUnsignedTransaction";
+export type { SetAutomineErrorType } from "./actions/test/setAutomine";
 export type {
   SetBalanceErrorType,
   SetBalanceParameters,
-} from './actions/test/setBalance'
+} from "./actions/test/setBalance";
 export type {
   SetBlockGasLimitErrorType,
   SetBlockGasLimitParameters,
-} from './actions/test/setBlockGasLimit'
+} from "./actions/test/setBlockGasLimit";
 export type {
   SetBlockTimestampIntervalErrorType,
   SetBlockTimestampIntervalParameters,
-} from './actions/test/setBlockTimestampInterval'
+} from "./actions/test/setBlockTimestampInterval";
 export type {
   SetCodeErrorType,
   SetCodeParameters,
-} from './actions/test/setCode'
+} from "./actions/test/setCode";
 export type {
   SetCoinbaseErrorType,
   SetCoinbaseParameters,
-} from './actions/test/setCoinbase'
+} from "./actions/test/setCoinbase";
 export type {
   SetIntervalMiningErrorType,
   SetIntervalMiningParameters,
-} from './actions/test/setIntervalMining'
-export type { SetLoggingEnabledErrorType } from './actions/test/setLoggingEnabled'
+} from "./actions/test/setIntervalMining";
+export type { SetLoggingEnabledErrorType } from "./actions/test/setLoggingEnabled";
 export type {
   SetMinGasPriceErrorType,
   SetMinGasPriceParameters,
-} from './actions/test/setMinGasPrice'
+} from "./actions/test/setMinGasPrice";
 export type {
   SetNextBlockBaseFeePerGasErrorType,
   SetNextBlockBaseFeePerGasParameters,
-} from './actions/test/setNextBlockBaseFeePerGas'
+} from "./actions/test/setNextBlockBaseFeePerGas";
 export type {
   SetNextBlockTimestampErrorType,
   SetNextBlockTimestampParameters,
-} from './actions/test/setNextBlockTimestamp'
+} from "./actions/test/setNextBlockTimestamp";
 export type {
   SetNonceErrorType,
   SetNonceParameters,
-} from './actions/test/setNonce'
-export type { SetRpcUrlErrorType } from './actions/test/setRpcUrl'
+} from "./actions/test/setNonce";
+export type { SetRpcUrlErrorType } from "./actions/test/setRpcUrl";
 export type {
   SetStorageAtErrorType,
   SetStorageAtParameters,
-} from './actions/test/setStorageAt'
+} from "./actions/test/setStorageAt";
 export type {
   SignMessageErrorType,
   SignMessageParameters,
   SignMessageReturnType,
-} from './actions/wallet/signMessage'
+} from "./actions/wallet/signMessage";
 export type {
   SignTypedDataErrorType,
   SignTypedDataParameters,
   SignTypedDataReturnType,
-} from './actions/wallet/signTypedData'
+} from "./actions/wallet/signTypedData";
 export type {
   SimulateContractErrorType,
   SimulateContractParameters,
   SimulateContractReturnType,
-} from './actions/public/simulateContract'
+} from "./actions/public/simulateContract";
 export type {
   StopImpersonatingAccountErrorType,
   StopImpersonatingAccountParameters,
-} from './actions/test/stopImpersonatingAccount'
+} from "./actions/test/stopImpersonatingAccount";
 export type {
   SwitchChainErrorType,
   SwitchChainParameters,
-} from './actions/wallet/switchChain'
+} from "./actions/wallet/switchChain";
 export type {
   UninstallFilterErrorType,
   UninstallFilterParameters,
   UninstallFilterReturnType,
-} from './actions/public/uninstallFilter'
+} from "./actions/public/uninstallFilter";
 export type {
   WatchAssetErrorType,
   WatchAssetParameters,
   WatchAssetReturnType,
-} from './actions/wallet/watchAsset'
+} from "./actions/wallet/watchAsset";
 export type {
   VerifyHashErrorType as VerifyHashActionErrorType,
   VerifyHashParameters as VerifyHashActionParameters,
   VerifyHashReturnType as VerifyHashActionReturnType,
-} from './actions/public/verifyHash'
+} from "./actions/public/verifyHash";
 export type {
   VerifyTypedDataErrorType as VerifyTypedDataActionErrorType,
   VerifyTypedDataParameters as VerifyTypedDataActionParameters,
   VerifyTypedDataReturnType as VerifyTypedDataActionReturnType,
-} from './actions/public/verifyTypedData'
+} from "./actions/public/verifyTypedData";
 export type {
   VerifyMessageErrorType as VerifyMessageActionErrorType,
   VerifyMessageParameters as VerifyMessageActionParameters,
   VerifyMessageReturnType as VerifyMessageActionReturnType,
-} from './actions/public/verifyMessage'
+} from "./actions/public/verifyMessage";
 export type {
   WatchContractEventOnLogsFn,
   WatchContractEventOnLogsParameter,
   WatchContractEventErrorType,
   WatchContractEventParameters,
   WatchContractEventReturnType,
-} from './actions/public/watchContractEvent'
+} from "./actions/public/watchContractEvent";
 export type {
   WriteContractErrorType,
   WriteContractParameters,
   WriteContractReturnType,
-} from './actions/wallet/writeContract'
+} from "./actions/wallet/writeContract";
 export type {
   Chain,
   ChainContract,
@@ -479,8 +475,8 @@ export type {
   ExtractChainFormatterExclude,
   ExtractChainFormatterParameters,
   ExtractChainFormatterReturnType,
-} from './types/chain'
-export type { GetTransactionRequestKzgParameter, Kzg } from './types/kzg'
+} from "./types/chain";
+export type { GetTransactionRequestKzgParameter, Kzg } from "./types/kzg";
 export {
   type Client,
   type ClientConfig,
@@ -488,81 +484,72 @@ export {
   type MulticallBatchOptions,
   createClient,
   rpcSchema,
-} from './clients/createClient'
+} from "./clients/createClient";
 export {
   type CustomTransport,
   type CustomTransportConfig,
   type CustomTransportErrorType,
   custom,
-} from './clients/transports/custom'
+} from "./clients/transports/custom";
 export {
   type FallbackTransport,
   type FallbackTransportConfig,
   type FallbackTransportErrorType,
   fallback,
-} from './clients/transports/fallback'
+} from "./clients/transports/fallback";
 export {
   type HttpTransport,
   type HttpTransportConfig,
   type HttpTransportErrorType,
   http,
-} from './clients/transports/http'
+} from "./clients/transports/http";
 export {
   type PublicClient,
   type PublicClientConfig,
   type CreatePublicClientErrorType,
   createPublicClient,
-} from './clients/createPublicClient'
+} from "./clients/createPublicClient";
 export {
   type TestClient,
   type TestClientConfig,
   type CreateTestClientErrorType,
   createTestClient,
-} from './clients/createTestClient'
-export {
-  type PublicActions,
-  publicActions,
-} from './clients/decorators/public'
-export {
-  type TestActions,
-  testActions,
-} from './clients/decorators/test'
-export {
-  type WalletActions,
-  walletActions,
-} from './clients/decorators/wallet'
+} from "./clients/createTestClient";
+export { type PublicActions, publicActions } from "./clients/decorators/public";
+export { type TestActions, testActions } from "./clients/decorators/test";
+export { type WalletActions, walletActions } from "./clients/decorators/wallet";
 export {
   type Transport,
   type TransportConfig,
   type CreateTransportErrorType,
   createTransport,
-} from './clients/transports/createTransport'
+} from "./clients/transports/createTransport";
 export {
   type WalletClient,
   type WalletClientConfig,
   type CreateWalletClientErrorType,
   createWalletClient,
-} from './clients/createWalletClient'
+} from "./clients/createWalletClient";
 export {
   type WebSocketTransport,
   type WebSocketTransportConfig,
   type WebSocketTransportErrorType,
   webSocket,
-} from './clients/transports/webSocket'
+} from "./clients/transports/webSocket";
 export {
   multicall3Abi,
   erc20Abi,
   erc20Abi_bytes32,
   erc721Abi,
   erc4626Abi,
-} from './constants/abis'
-export { zeroAddress } from './constants/address'
+} from "./constants/abis";
+export { zeroAddress } from "./constants/address";
 export {
   deploylessCallViaBytecodeBytecode,
   deploylessCallViaFactoryBytecode,
   universalSignatureValidatorByteCode,
-} from './constants/contracts'
-export { etherUnits, gweiUnits, weiUnits } from './constants/unit'
+} from "./constants/contracts";
+export { etherUnits, gweiUnits, weiUnits } from "./constants/unit";
 export {
   maxInt8,
   maxInt16,
@@ -660,9 +647,9 @@ export {
   minInt240,
   minInt248,
   minInt256,
-} from './constants/number'
-export { zeroHash } from './constants/bytes'
-export { presignMessagePrefix } from './constants/strings'
+} from "./constants/number";
+export { zeroHash } from "./constants/bytes";
+export { presignMessagePrefix } from "./constants/strings";
 export {
   AbiConstructorNotFoundError,
   type AbiConstructorNotFoundErrorType,
@@ -714,12 +701,12 @@ export {
   type InvalidDefinitionTypeErrorType,
   UnsupportedPackedAbiType,
   type UnsupportedPackedAbiTypeErrorType,
-} from './errors/abi'
-export { BaseError, type BaseErrorType, setErrorConfig } from './errors/base'
+} from "./errors/abi";
+export { BaseError, type BaseErrorType, setErrorConfig } from "./errors/base";
 export {
   BlockNotFoundError,
   type BlockNotFoundErrorType,
-} from './errors/block'
+} from "./errors/block";
 export {
   CallExecutionError,
   type CallExecutionErrorType,
@@ -733,7 +720,7 @@ export {
   type RawContractErrorType,
   CounterfactualDeploymentFailedError,
   type CounterfactualDeploymentFailedErrorType,
-} from './errors/contract'
+} from "./errors/contract";
 export {
   BaseFeeScalarError,
   type BaseFeeScalarErrorType,
@@ -741,7 +728,7 @@ export {
   type Eip1559FeesNotSupportedErrorType,
   MaxFeePerGasTooLowError,
   type MaxFeePerGasTooLowErrorType,
-} from './errors/fee'
+} from "./errors/fee";
 export {
   ChainDisconnectedError,
   type ChainDisconnectedErrorType,
@@ -786,7 +773,7 @@ export {
   type UnsupportedProviderMethodErrorType,
   UserRejectedRequestError,
   type UserRejectedRequestErrorType,
-} from './errors/rpc'
+} from "./errors/rpc";
 export {
   ChainDoesNotSupportContract,
   type ChainDoesNotSupportContractErrorType,
@@ -798,7 +785,7 @@ export {
   type ClientChainNotConfiguredErrorType,
   InvalidChainIdError,
   type InvalidChainIdErrorType,
-} from './errors/chain'
+} from "./errors/chain";
 export {
   InvalidBytesBooleanError,
   type InvalidBytesBooleanErrorType,
@@ -810,7 +797,7 @@ export {
   type InvalidHexValueErrorType,
   SizeOverflowError,
   type SizeOverflowErrorType,
-} from './errors/encoding'
+} from "./errors/encoding";
 export {
   type EnsAvatarInvalidMetadataError,
   EnsAvatarUriResolutionError,
@@ -820,11 +807,11 @@ export {
   EnsAvatarUnsupportedNamespaceError,
   type EnsAvatarUnsupportedNamespaceErrorType,
   type EnsAvatarUriResolutionErrorType,
-} from './errors/ens'
+} from "./errors/ens";
 export {
   EstimateGasExecutionError,
   type EstimateGasExecutionErrorType,
-} from './errors/estimateGas'
+} from "./errors/estimateGas";
 export {
   ExecutionRevertedError,
   type ExecutionRevertedErrorType,
@@ -850,11 +837,11 @@ export {
   type TransactionTypeNotSupportedErrorType,
   UnknownNodeError,
   type UnknownNodeErrorType,
-} from './errors/node'
+} from "./errors/node";
 export {
   FilterTypeNotSupportedError,
   type FilterTypeNotSupportedErrorType,
-} from './errors/log'
+} from "./errors/log";
 export {
   HttpRequestError,
   type HttpRequestErrorType,
@@ -866,11 +853,11 @@ export {
   type SocketClosedErrorType,
   WebSocketRequestError,
   type WebSocketRequestErrorType,
-} from './errors/request'
+} from "./errors/request";
 export {
   InvalidAddressError,
   type InvalidAddressErrorType,
-} from './errors/address'
+} from "./errors/address";
 export {
   FeeConflictError,
   type FeeConflictErrorType,
@@ -892,23 +879,23 @@ export {
   type TransactionReceiptNotFoundErrorType,
   WaitForTransactionReceiptTimeoutError,
   type WaitForTransactionReceiptTimeoutErrorType,
-} from './errors/transaction'
+} from "./errors/transaction";
 export {
   SizeExceedsPaddingSizeError,
   type SizeExceedsPaddingSizeErrorType,
   SliceOffsetOutOfBoundsError,
   type SliceOffsetOutOfBoundsErrorType,
-} from './errors/data'
+} from "./errors/data";
 export {
   UrlRequiredError,
   type UrlRequiredErrorType,
-} from './errors/transport'
+} from "./errors/transport";
 export {
   AccountStateConflictError,
   type AccountStateConflictErrorType,
   StateAssignmentConflictError,
   type StateAssignmentConflictErrorType,
-} from './errors/stateOverride'
+} from "./errors/stateOverride";
 export type {
   AbiEventParameterToPrimitiveType,
   AbiEventParametersToPrimitiveTypes,
@@ -938,7 +925,7 @@ export type {
   MaybeExtractEventArgsFromAbi,
   UnionWiden,
   Widen,
-} from './types/contract'
+} from "./types/contract";
 export type {
   AccessList,
   Transaction,
@@ -973,7 +960,7 @@ export type {
   TransactionSerializedGeneric,
   TransactionSerializedLegacy,
   TransactionType,
-} from './types/transaction'
+} from "./types/transaction";
 export type {
   Assign,
   Branded,
@@ -1006,7 +993,7 @@ export type {
   UnionPick,
   UnionRequiredBy,
   UnionToTuple,
-} from './types/utils'
+} from "./types/utils";
 export type {
   Account,
   AccountSource,
@@ -1016,15 +1003,15 @@ export type {
   JsonRpcAccount,
   LocalAccount,
   PrivateKeyAccount,
-} from './accounts/types'
-export type { AssetGateway, AssetGatewayUrls } from './types/ens'
+} from "./accounts/types";
+export type { AssetGateway, AssetGatewayUrls } from "./types/ens";
 export type {
   Block,
   BlockIdentifier,
   BlockNumber,
   BlockTag,
   Uncle,
-} from './types/block'
+} from "./types/block";
 export type {
   ByteArray,
   Hash,
@@ -1033,7 +1020,7 @@ export type {
   Signature,
   CompactSignature,
   SignableMessage,
-} from './types/misc'
+} from "./types/misc";
 export type {
   AddEthereumChainParameter,
   BundlerRpcSchema,
@@ -1063,9 +1050,9 @@ export type {
   WalletPermission,
   WalletRpcSchema,
   WatchAssetParams,
-} from './types/eip1193'
-export { ProviderRpcError as EIP1193ProviderRpcError } from './types/eip1193'
-export type { BlobSidecar, BlobSidecars } from './types/eip4844'
+} from "./types/eip1193";
+export { ProviderRpcError as EIP1193ProviderRpcError } from "./types/eip1193";
+export type { BlobSidecar, BlobSidecars } from "./types/eip4844";
 export type {
   FeeHistory,
   FeeValues,
@@ -1073,21 +1060,17 @@ export type {
   FeeValuesEIP4844,
   FeeValuesLegacy,
   FeeValuesType,
-} from './types/fee'
-export type { Filter, FilterType } from './types/filter'
-export type { TypedDataDefinition } from './types/typedData'
-export type { GetTransportConfig, GetPollOptions } from './types/transport'
-export type { Log } from './types/log'
+} from "./types/fee";
+export type { Filter, FilterType } from "./types/filter";
+export type { TypedDataDefinition } from "./types/typedData";
+export type { GetTransportConfig, GetPollOptions } from "./types/transport";
+export type { Log } from "./types/log";
 export type {
   MulticallContracts,
   MulticallResponse,
   MulticallResults,
-} from './types/multicall'
-export type {
-  ParseAccount,
-  DeriveAccount,
-  HDKey,
-} from './types/account'
+} from "./types/multicall";
+export type { ParseAccount, DeriveAccount, HDKey } from "./types/account";
 export type {
   Index,
   Quantity,
@@ -1106,104 +1089,101 @@ export type {
   RpcAccountStateOverride,
   RpcStateOverride,
   RpcStateMapping,
-} from './types/rpc'
-export type { Withdrawal } from './types/withdrawal'
-export type {
-  StateMapping,
-  StateOverride,
-} from './types/stateOverride'
-export { labelhash, type LabelhashErrorType } from './utils/ens/labelhash'
-export { namehash, type NamehashErrorType } from './utils/ens/namehash'
+} from "./types/rpc";
+export type { Withdrawal } from "./types/withdrawal";
+export type { StateMapping, StateOverride } from "./types/stateOverride";
+export { labelhash, type LabelhashErrorType } from "./utils/ens/labelhash";
+export { namehash, type NamehashErrorType } from "./utils/ens/namehash";
 export {
   type FormattedBlock,
   defineBlock,
   type DefineBlockErrorType,
   formatBlock,
   type FormatBlockErrorType,
-} from './utils/formatters/block'
-export { formatLog, type FormatLogErrorType } from './utils/formatters/log'
+} from "./utils/formatters/block";
+export { formatLog, type FormatLogErrorType } from "./utils/formatters/log";
 export {
   type DecodeAbiParametersErrorType,
   type DecodeAbiParametersReturnType,
   decodeAbiParameters,
-} from './utils/abi/decodeAbiParameters'
+} from "./utils/abi/decodeAbiParameters";
 export {
   type DecodeDeployDataErrorType,
   type DecodeDeployDataParameters,
   type DecodeDeployDataReturnType,
   decodeDeployData,
-} from './utils/abi/decodeDeployData'
+} from "./utils/abi/decodeDeployData";
 export {
   type DecodeErrorResultErrorType,
   type DecodeErrorResultParameters,
   type DecodeErrorResultReturnType,
   decodeErrorResult,
-} from './utils/abi/decodeErrorResult'
+} from "./utils/abi/decodeErrorResult";
 export {
   type DecodeEventLogErrorType,
   type DecodeEventLogParameters,
   type DecodeEventLogReturnType,
   decodeEventLog,
-} from './utils/abi/decodeEventLog'
+} from "./utils/abi/decodeEventLog";
 export {
   type DecodeFunctionDataErrorType,
   type DecodeFunctionDataParameters,
   type DecodeFunctionDataReturnType,
   decodeFunctionData,
-} from './utils/abi/decodeFunctionData'
+} from "./utils/abi/decodeFunctionData";
 export {
   type DecodeFunctionResultErrorType,
   type DecodeFunctionResultParameters,
   type DecodeFunctionResultReturnType,
   decodeFunctionResult,
-} from './utils/abi/decodeFunctionResult'
+} from "./utils/abi/decodeFunctionResult";
 export {
   type EncodeAbiParametersErrorType,
   type EncodeAbiParametersReturnType,
   encodeAbiParameters,
-} from './utils/abi/encodeAbiParameters'
+} from "./utils/abi/encodeAbiParameters";
 export {
   type EncodeDeployDataErrorType,
   type EncodeDeployDataParameters,
   type EncodeDeployDataReturnType,
   encodeDeployData,
-} from './utils/abi/encodeDeployData'
+} from "./utils/abi/encodeDeployData";
 export {
   type EncodeErrorResultErrorType,
   type EncodeErrorResultParameters,
   type EncodeErrorResultReturnType,
   encodeErrorResult,
-} from './utils/abi/encodeErrorResult'
+} from "./utils/abi/encodeErrorResult";
 export {
   type EncodeEventTopicsErrorType,
   type EncodeEventTopicsParameters,
   type EncodeEventTopicsReturnType,
   encodeEventTopics,
-} from './utils/abi/encodeEventTopics'
+} from "./utils/abi/encodeEventTopics";
 export {
   type EncodeFunctionDataErrorType,
   type EncodeFunctionDataParameters,
   type EncodeFunctionDataReturnType,
   encodeFunctionData,
-} from './utils/abi/encodeFunctionData'
+} from "./utils/abi/encodeFunctionData";
 export {
   type PrepareEncodeFunctionDataErrorType,
   type PrepareEncodeFunctionDataParameters,
   type PrepareEncodeFunctionDataReturnType,
   prepareEncodeFunctionData,
-} from './utils/abi/prepareEncodeFunctionData'
+} from "./utils/abi/prepareEncodeFunctionData";
 export {
   type EncodeFunctionResultErrorType,
   type EncodeFunctionResultParameters,
   type EncodeFunctionResultReturnType,
   encodeFunctionResult,
-} from './utils/abi/encodeFunctionResult'
+} from "./utils/abi/encodeFunctionResult";
 export {
   type ParseEventLogsErrorType,
   type ParseEventLogsParameters,
   type ParseEventLogsReturnType,
   parseEventLogs,
-} from './utils/abi/parseEventLogs'
+} from "./utils/abi/parseEventLogs";
 export {
   type FormattedTransaction,
   defineTransaction,
@@ -1211,14 +1191,14 @@ export {
   formatTransaction,
   type FormatTransactionErrorType,
   transactionType,
-} from './utils/formatters/transaction'
+} from "./utils/formatters/transaction";
 export {
   type FormattedTransactionReceipt,
   defineTransactionReceipt,
   type DefineTransactionReceiptErrorType,
   formatTransactionReceipt,
   type FormatTransactionReceiptErrorType,
-} from './utils/formatters/transactionReceipt'
+} from "./utils/formatters/transactionReceipt";
 export {
   type FormattedTransactionRequest,
   defineTransactionRequest,
@@ -1226,13 +1206,13 @@ export {
   formatTransactionRequest,
   type FormatTransactionRequestErrorType,
   rpcTransactionType,
-} from './utils/formatters/transactionRequest'
+} from "./utils/formatters/transactionRequest";
 export {
   type GetAbiItemErrorType,
   type GetAbiItemParameters,
   type GetAbiItemReturnType,
   getAbiItem,
-} from './utils/abi/getAbiItem'
+} from "./utils/abi/getAbiItem";
 export {
   type GetContractAddressOptions,
   type GetCreate2AddressOptions,
@@ -1242,17 +1222,17 @@ export {
   getContractAddress,
   getCreate2Address,
   getCreateAddress,
-} from './utils/address/getContractAddress'
+} from "./utils/address/getContractAddress";
 export {
   type GetSerializedTransactionType,
   type GetSerializedTransactionTypeErrorType,
   getSerializedTransactionType,
-} from './utils/transaction/getSerializedTransactionType'
+} from "./utils/transaction/getSerializedTransactionType";
 export {
   type GetTransactionType,
   type GetTransactionTypeErrorType,
   getTransactionType,
-} from './utils/transaction/getTransactionType'
+} from "./utils/transaction/getTransactionType";
 export {
   type HashDomainErrorType,
   type HashTypedDataErrorType,
@@ -1260,11 +1240,11 @@ export {
   type HashTypedDataReturnType,
   hashDomain,
   hashTypedData,
-} from './utils/signature/hashTypedData'
+} from "./utils/signature/hashTypedData";
 export {
   type CompactSignatureToSignatureErrorType,
   compactSignatureToSignature,
-} from './utils/signature/compactSignatureToSignature'
+} from "./utils/signature/compactSignatureToSignature";
 export {
   /** @deprecated Use `ParseCompactSignatureErrorType`. */
   type ParseCompactSignatureErrorType as HexToCompactSignatureErrorType,
@@ -1272,7 +1252,7 @@ export {
   parseCompactSignature as hexToCompactSignature,
   type ParseCompactSignatureErrorType,
   parseCompactSignature,
-} from './utils/signature/parseCompactSignature'
+} from "./utils/signature/parseCompactSignature";
 export {
   /** @deprecated Use `ParseSignatureErrorType`. */
   type ParseSignatureErrorType as HexToSignatureErrorType,
@@ -1280,41 +1260,41 @@ export {
   parseSignature as hexToSignature,
   type ParseSignatureErrorType,
   parseSignature,
-} from './utils/signature/parseSignature'
+} from "./utils/signature/parseSignature";
 export {
   type RecoverAddressErrorType,
   type RecoverAddressParameters,
   type RecoverAddressReturnType,
   recoverAddress,
-} from './utils/signature/recoverAddress'
+} from "./utils/signature/recoverAddress";
 export {
   type RecoverMessageAddressErrorType,
   type RecoverMessageAddressParameters,
   type RecoverMessageAddressReturnType,
   recoverMessageAddress,
-} from './utils/signature/recoverMessageAddress'
+} from "./utils/signature/recoverMessageAddress";
 export {
   type RecoverPublicKeyErrorType,
   type RecoverPublicKeyParameters,
   type RecoverPublicKeyReturnType,
   recoverPublicKey,
-} from './utils/signature/recoverPublicKey'
+} from "./utils/signature/recoverPublicKey";
 export {
   type RecoverTransactionAddressErrorType,
   type RecoverTransactionAddressParameters,
   type RecoverTransactionAddressReturnType,
   recoverTransactionAddress,
-} from './utils/signature/recoverTransactionAddress'
+} from "./utils/signature/recoverTransactionAddress";
 export {
   type RecoverTypedDataAddressErrorType,
   type RecoverTypedDataAddressParameters,
   type RecoverTypedDataAddressReturnType,
   recoverTypedDataAddress,
-} from './utils/signature/recoverTypedDataAddress'
+} from "./utils/signature/recoverTypedDataAddress";
 export {
   type SignatureToCompactSignatureErrorType,
   signatureToCompactSignature,
-} from './utils/signature/signatureToCompactSignature'
+} from "./utils/signature/signatureToCompactSignature";
 export {
   /** @deprecated Use `SignatureToHexErrorType` instead. */
   type SerializeCompactSignatureErrorType as CompactSignatureToHexErrorType,
@@ -1322,7 +1302,7 @@ export {
   serializeCompactSignature as compactSignatureToHex,
   type SerializeCompactSignatureErrorType,
   serializeCompactSignature,
-} from './utils/signature/serializeCompactSignature'
+} from "./utils/signature/serializeCompactSignature";
 export {
   /** @deprecated Use `SignatureToHexErrorType` instead. */
   type SerializeSignatureErrorType as SignatureToHexErrorType,
@@ -1332,7 +1312,7 @@ export {
   type SerializeSignatureReturnType,
   type SerializeSignatureErrorType,
   serializeSignature,
-} from './utils/signature/serializeSignature'
+} from "./utils/signature/serializeSignature";
 export {
   bytesToRlp,
   type BytesToRlpErrorType,
@@ -1341,47 +1321,47 @@ export {
   toRlp,
   type ToRlpErrorType,
   type ToRlpReturnType,
-} from './utils/encoding/toRlp'
+} from "./utils/encoding/toRlp";
 export {
   type VerifyHashErrorType,
   type VerifyHashParameters,
   type VerifyHashReturnType,
   verifyHash,
-} from './utils/signature/verifyHash'
+} from "./utils/signature/verifyHash";
 export {
   type VerifyMessageErrorType,
   type VerifyMessageParameters,
   type VerifyMessageReturnType,
   verifyMessage,
-} from './utils/signature/verifyMessage'
+} from "./utils/signature/verifyMessage";
 export {
   type VerifyTypedDataErrorType,
   type VerifyTypedDataParameters,
   type VerifyTypedDataReturnType,
   verifyTypedData,
-} from './utils/signature/verifyTypedData'
+} from "./utils/signature/verifyTypedData";
 export {
   type ParseErc6492SignatureErrorType,
   type ParseErc6492SignatureParameters,
   type ParseErc6492SignatureReturnType,
   parseErc6492Signature,
-} from './utils/signature/parseErc6492Signature'
+} from "./utils/signature/parseErc6492Signature";
 export {
   type IsErc6492SignatureErrorType,
   type IsErc6492SignatureParameters,
   type IsErc6492SignatureReturnType,
   isErc6492Signature,
-} from './utils/signature/isErc6492Signature'
+} from "./utils/signature/isErc6492Signature";
 export {
   type SerializeErc6492SignatureErrorType,
   type SerializeErc6492SignatureParameters,
   type SerializeErc6492SignatureReturnType,
   serializeErc6492Signature,
-} from './utils/signature/serializeErc6492Signature'
+} from "./utils/signature/serializeErc6492Signature";
 export {
   type AssertRequestErrorType,
   assertRequest,
-} from './utils/transaction/assertRequest'
+} from "./utils/transaction/assertRequest";
 export {
   type AssertTransactionEIP1559ErrorType,
   assertTransactionEIP1559,
@@ -1389,7 +1369,7 @@ export {
   assertTransactionEIP2930,
   type AssertTransactionLegacyErrorType,
   assertTransactionLegacy,
-} from './utils/transaction/assertTransaction'
+} from "./utils/transaction/assertTransaction";
 export {
   type BoolToBytesErrorType,
   type BoolToBytesOpts,
@@ -1405,7 +1385,7 @@ export {
   type ToBytesErrorType,
   type ToBytesParameters,
   toBytes,
-} from './utils/encoding/toBytes'
+} from "./utils/encoding/toBytes";
 export {
   type BoolToHexErrorType,
   type BoolToHexOpts,
@@ -1422,7 +1402,7 @@ export {
   type ToHexErrorType,
   type ToHexParameters,
   toHex,
-} from './utils/encoding/toHex'
+} from "./utils/encoding/toHex";
 export {
   type BytesToBigIntErrorType,
   type BytesToBigIntOpts,
@@ -1439,7 +1419,7 @@ export {
   type FromBytesErrorType,
   type FromBytesParameters,
   fromBytes,
-} from './utils/encoding/fromBytes'
+} from "./utils/encoding/fromBytes";
 export {
   type CcipRequestParameters,
   type CcipRequestErrorType,
@@ -1450,67 +1430,67 @@ export {
   offchainLookup,
   offchainLookupAbiItem,
   offchainLookupSignature,
-} from './utils/ccip'
+} from "./utils/ccip";
 export {
   type BlobsToCommitmentsErrorType,
   type BlobsToCommitmentsParameters,
   type BlobsToCommitmentsReturnType,
   blobsToCommitments,
-} from './utils/blob/blobsToCommitments'
+} from "./utils/blob/blobsToCommitments";
 export {
   type CommitmentToVersionedHashErrorType,
   type CommitmentToVersionedHashParameters,
   type CommitmentToVersionedHashReturnType,
   commitmentToVersionedHash,
-} from './utils/blob/commitmentToVersionedHash'
+} from "./utils/blob/commitmentToVersionedHash";
 export {
   type CommitmentsToVersionedHashesErrorType,
   type CommitmentsToVersionedHashesParameters,
   type CommitmentsToVersionedHashesReturnType,
   commitmentsToVersionedHashes,
-} from './utils/blob/commitmentsToVersionedHashes'
+} from "./utils/blob/commitmentsToVersionedHashes";
 export {
   type SidecarsToVersionedHashesErrorType,
   type SidecarsToVersionedHashesParameters,
   type SidecarsToVersionedHashesReturnType,
   sidecarsToVersionedHashes,
-} from './utils/blob/sidecarsToVersionedHashes'
+} from "./utils/blob/sidecarsToVersionedHashes";
 export {
   type blobsToProofsErrorType,
   type blobsToProofsParameters,
   type blobsToProofsReturnType,
   blobsToProofs,
-} from './utils/blob/blobsToProofs'
+} from "./utils/blob/blobsToProofs";
 export {
   type FromBlobsErrorType,
   type FromBlobsParameters,
   type FromBlobsReturnType,
   fromBlobs,
-} from './utils/blob/fromBlobs'
+} from "./utils/blob/fromBlobs";
 export {
   type ToBlobSidecarsErrorType,
   type ToBlobSidecarsParameters,
   type ToBlobSidecarsReturnType,
   toBlobSidecars,
-} from './utils/blob/toBlobSidecars'
+} from "./utils/blob/toBlobSidecars";
 export {
   type ToBlobsErrorType,
   type ToBlobsParameters,
   type ToBlobsReturnType,
   toBlobs,
-} from './utils/blob/toBlobs'
+} from "./utils/blob/toBlobs";
 export {
   type DefineKzgErrorType,
   type DefineKzgParameters,
   type DefineKzgReturnType,
   defineKzg,
-} from './utils/kzg/defineKzg'
+} from "./utils/kzg/defineKzg";
 export {
   type SetupKzgErrorType,
   type SetupKzgParameters,
   type SetupKzgReturnType,
   setupKzg,
-} from './utils/kzg/setupKzg'
+} from "./utils/kzg/setupKzg";
 export {
   type ConcatBytesErrorType,
   type ConcatErrorType,
@@ -1519,47 +1499,41 @@ export {
   concat,
   concatBytes,
   concatHex,
-} from './utils/data/concat'
+} from "./utils/data/concat";
 export {
   type AssertCurrentChainErrorType,
   type AssertCurrentChainParameters,
   assertCurrentChain,
-} from './utils/chain/assertCurrentChain'
-export { defineChain } from './utils/chain/defineChain'
+} from "./utils/chain/assertCurrentChain";
+export { defineChain } from "./utils/chain/defineChain";
 export {
   type ExtractChainErrorType,
   type ExtractChainParameters,
   type ExtractChainReturnType,
   extractChain,
-} from './utils/chain/extractChain'
+} from "./utils/chain/extractChain";
 export {
   type GetChainContractAddressErrorType,
   getChainContractAddress,
-} from './utils/chain/getChainContractAddress'
+} from "./utils/chain/getChainContractAddress";
 export {
   type EncodePackedErrorType,
   encodePacked,
-} from './utils/abi/encodePacked'
-export {
-  type WithRetryErrorType,
-  withRetry,
-} from './utils/promise/withRetry'
+} from "./utils/abi/encodePacked";
+export { type WithRetryErrorType, withRetry } from "./utils/promise/withRetry";
 export {
   type WithTimeoutErrorType,
   withTimeout,
-} from './utils/promise/withTimeout'
+} from "./utils/promise/withTimeout";
 export {
   type FormatEtherErrorType,
   formatEther,
-} from './utils/unit/formatEther'
-export {
-  type FormatGweiErrorType,
-  formatGwei,
-} from './utils/unit/formatGwei'
+} from "./utils/unit/formatEther";
+export { type FormatGweiErrorType, formatGwei } from "./utils/unit/formatGwei";
 export {
   type FormatUnitsErrorType,
   formatUnits,
-} from './utils/unit/formatUnits'
+} from "./utils/unit/formatUnits";
 export {
   type FromHexErrorType,
   fromHex,
@@ -1571,22 +1545,22 @@ export {
   hexToNumber,
   type HexToStringErrorType,
   hexToString,
-} from './utils/encoding/fromHex'
+} from "./utils/encoding/fromHex";
 export {
   type FromRlpErrorType,
   type FromRlpReturnType,
   fromRlp,
-} from './utils/encoding/fromRlp'
+} from "./utils/encoding/fromRlp";
 export {
   type ChecksumAddressErrorType,
   type GetAddressErrorType,
   checksumAddress,
   getAddress,
-} from './utils/address/getAddress'
+} from "./utils/address/getAddress";
 export {
   type GetContractErrorReturnType,
   getContractError,
-} from './utils/errors/getContractError'
+} from "./utils/errors/getContractError";
 export {
   type ToEventSelectorErrorType,
   toEventSelector,
@@ -1594,7 +1568,7 @@ export {
   type ToEventSelectorErrorType as GetEventSelectorErrorType,
   /** @deprecated use `toEventSelector`. */
   toEventSelector as getEventSelector,
-} from './utils/hash/toEventSelector'
+} from "./utils/hash/toEventSelector";
 export {
   type ToFunctionSelectorErrorType,
   toFunctionSelector,
@@ -1602,7 +1576,7 @@ export {
   type ToFunctionSelectorErrorType as GetFunctionSelectorErrorType,
   /** @deprecated use `toFunctionSelector`. */
   toFunctionSelector as getFunctionSelector,
-} from './utils/hash/toFunctionSelector'
+} from "./utils/hash/toFunctionSelector";
 export {
   type ToEventSignatureErrorType,
   toEventSignature,
@@ -1610,7 +1584,7 @@ export {
   type ToEventSignatureErrorType as GetEventSignatureErrorType,
   /** @deprecated use `toEventSignature`. */
   toEventSignature as getEventSignature,
-} from './utils/hash/toEventSignature'
+} from "./utils/hash/toEventSignature";
 export {
   type ToFunctionSignatureErrorType,
   toFunctionSignature,
@@ -1618,51 +1592,51 @@ export {
   type ToFunctionSignatureErrorType as GetFunctionSignatureErrorType,
   /** @deprecated use `toFunctionSignature`. */
   toFunctionSignature as getFunctionSignature,
-} from './utils/hash/toFunctionSignature'
+} from "./utils/hash/toFunctionSignature";
 export {
   type ToEventHashErrorType,
   toEventHash,
-} from './utils/hash/toEventHash'
+} from "./utils/hash/toEventHash";
 export {
   type ToFunctionHashErrorType,
   toFunctionHash,
-} from './utils/hash/toFunctionHash'
+} from "./utils/hash/toFunctionHash";
 export {
   type HashMessageErrorType,
   hashMessage,
-} from './utils/signature/hashMessage'
+} from "./utils/signature/hashMessage";
 export {
   type ToPrefixedMessageErrorType,
   toPrefixedMessage,
-} from './utils/signature/toPrefixedMessage'
+} from "./utils/signature/toPrefixedMessage";
 export {
   type IsAddressOptions,
   type IsAddressErrorType,
   isAddress,
-} from './utils/address/isAddress'
+} from "./utils/address/isAddress";
 export {
   type IsAddressEqualReturnType,
   type IsAddressEqualErrorType,
   isAddressEqual,
-} from './utils/address/isAddressEqual'
-export { type IsBytesErrorType, isBytes } from './utils/data/isBytes'
-export { type IsHashErrorType, isHash } from './utils/hash/isHash'
-export { type IsHexErrorType, isHex } from './utils/data/isHex'
+} from "./utils/address/isAddressEqual";
+export { type IsBytesErrorType, isBytes } from "./utils/data/isBytes";
+export { type IsHashErrorType, isHash } from "./utils/hash/isHash";
+export { type IsHexErrorType, isHex } from "./utils/data/isHex";
 export {
   type Keccak256Hash,
   type Keccak256ErrorType,
   keccak256,
-} from './utils/hash/keccak256'
+} from "./utils/hash/keccak256";
 export {
   type Sha256Hash,
   type Sha256ErrorType,
   sha256,
-} from './utils/hash/sha256'
+} from "./utils/hash/sha256";
 export {
   type Ripemd160Hash,
   type Ripemd160ErrorType,
   ripemd160,
-} from './utils/hash/ripemd160'
+} from "./utils/hash/ripemd160";
 export {
   type PadBytesErrorType,
   type PadErrorType,
@@ -1671,32 +1645,26 @@ export {
   pad,
   padBytes,
   padHex,
-} from './utils/data/pad'
-export {
-  type ParseEtherErrorType,
-  parseEther,
-} from './utils/unit/parseEther'
-export { type ParseGweiErrorType, parseGwei } from './utils/unit/parseGwei'
+} from "./utils/data/pad";
+export { type ParseEtherErrorType, parseEther } from "./utils/unit/parseEther";
+export { type ParseGweiErrorType, parseGwei } from "./utils/unit/parseGwei";
 export {
   type ParseTransactionErrorType,
   type ParseTransactionReturnType,
   parseTransaction,
-} from './utils/transaction/parseTransaction'
-export {
-  type ParseUnitsErrorType,
-  parseUnits,
-} from './utils/unit/parseUnits'
+} from "./utils/transaction/parseTransaction";
+export { type ParseUnitsErrorType, parseUnits } from "./utils/unit/parseUnits";
 export {
   type SerializeAccessListErrorType,
   serializeAccessList,
-} from './utils/transaction/serializeAccessList'
+} from "./utils/transaction/serializeAccessList";
 export {
   serializeTransaction,
   type SerializeTransactionErrorType,
   type SerializedTransactionReturnType,
   type SerializeTransactionFn,
-} from './utils/transaction/serializeTransaction'
-export { type SizeErrorType, size } from './utils/data/size'
+} from "./utils/transaction/serializeTransaction";
+export { type SizeErrorType, size } from "./utils/data/size";
 export {
   type SliceBytesErrorType,
   type SliceErrorType,
@@ -1704,13 +1672,13 @@ export {
   slice,
   sliceBytes,
   sliceHex,
-} from './utils/data/slice'
-export { type StringifyErrorType, stringify } from './utils/stringify'
+} from "./utils/data/slice";
+export { type StringifyErrorType, stringify } from "./utils/stringify";
 export {
   type TrimErrorType,
   type TrimReturnType,
   trim,
-} from './utils/data/trim'
+} from "./utils/data/trim";
 export {
   type DomainSeparatorErrorType,
   type GetTypesForEIP712DomainErrorType,
@@ -1720,18 +1688,20 @@ export {
   validateTypedData,
   domainSeparator,
   getTypesForEIP712Domain,
-} from './utils/typedData'
+} from "./utils/typedData";
 export {
   type CreateNonceManagerParameters,
   type NonceManager,
   type NonceManagerSource,
   createNonceManager,
   nonceManager,
-} from './utils/nonceManager'
+} from "./utils/nonceManager";
 export type {
   RpcEstimateUserOperationGasReturnType,
   RpcGetUserOperationByHashReturnType,
   RpcUserOperation,
   RpcUserOperationReceipt,
   RpcUserOperationRequest,
-} from './account-abstraction/types/rpc'
+} from "./account-abstraction/types/rpc";
+
+export type Address = string;

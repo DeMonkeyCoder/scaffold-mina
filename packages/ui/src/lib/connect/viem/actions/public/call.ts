@@ -1,9 +1,10 @@
-import { type Address, parseAbi } from "abitype";
+import { parseAbi } from "abitype";
+import { type Address } from "@/lib/connect/viem";
 
 import type { Account } from "../../accounts/types";
 import {
-  type ParseAccountErrorType,
   parseAccount,
+  type ParseAccountErrorType,
 } from "../../accounts/utils/parseAccount";
 import type { Client } from "../../clients/createClient";
 import type { Transport } from "../../clients/transports/createTransport";
@@ -32,49 +33,49 @@ import type { StateOverride } from "../../types/stateOverride";
 import type { TransactionRequest } from "../../types/transaction";
 import type { ExactPartial, UnionOmit } from "../../types/utils";
 import {
-  type DecodeFunctionResultErrorType,
   decodeFunctionResult,
+  type DecodeFunctionResultErrorType,
 } from "../../utils/abi/decodeFunctionResult";
 import {
-  type EncodeDeployDataErrorType,
   encodeDeployData,
+  type EncodeDeployDataErrorType,
 } from "../../utils/abi/encodeDeployData";
 import {
-  type EncodeFunctionDataErrorType,
   encodeFunctionData,
+  type EncodeFunctionDataErrorType,
 } from "../../utils/abi/encodeFunctionData";
 import type { RequestErrorType } from "../../utils/buildRequest";
 import {
-  type GetChainContractAddressErrorType,
   getChainContractAddress,
+  type GetChainContractAddressErrorType,
 } from "../../utils/chain/getChainContractAddress";
 import {
-  type NumberToHexErrorType,
   numberToHex,
+  type NumberToHexErrorType,
 } from "../../utils/encoding/toHex";
 import {
-  type GetCallErrorReturnType,
   getCallError,
+  type GetCallErrorReturnType,
 } from "../../utils/errors/getCallError";
 import { extract } from "../../utils/formatters/extract";
 import {
-  type FormatTransactionRequestErrorType,
   type FormattedTransactionRequest,
   formatTransactionRequest,
+  type FormatTransactionRequestErrorType,
 } from "../../utils/formatters/transactionRequest";
 import {
-  type CreateBatchSchedulerErrorType,
   createBatchScheduler,
+  type CreateBatchSchedulerErrorType,
 } from "../../utils/promise/createBatchScheduler";
 import {
-  type SerializeStateOverrideErrorType,
   serializeStateOverride,
+  type SerializeStateOverrideErrorType,
 } from "../../utils/stateOverride";
-import { assertRequest } from "../../utils/transaction/assertRequest";
 import type {
   AssertRequestErrorType,
   AssertRequestParameters,
 } from "../../utils/transaction/assertRequest";
+import { assertRequest } from "../../utils/transaction/assertRequest";
 
 export type CallParameters<
   chain extends Chain | undefined = Chain | undefined

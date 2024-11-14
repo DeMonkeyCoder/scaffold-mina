@@ -3,11 +3,11 @@ import { accounts } from "~test/src/constants";
 import { privateKeyToAccount } from "~@/lib/connect/viem/accounts/privateKeyToAccount";
 import { celo } from "../chains/index";
 import {
+  createTransport,
+  createWalletClient,
   type EIP1193RequestFn,
   type PublicRpcSchema,
   type WalletRpcSchema,
-  createTransport,
-  createWalletClient,
 } from "../index";
 
 describe("sendTransaction()", () => {
@@ -17,7 +17,7 @@ describe("sendTransaction()", () => {
   const transactionHash = "0xtransaction-hash";
   const feeCurrencyAddress = "0x0000000000000000000000000000000000000fee";
   const transportRequestMock = vi.fn(async (request) => {
-    if (request.method === "mina_chainId") {
+    if (request.method === "mina_networkId") {
       return celo.id;
     }
 

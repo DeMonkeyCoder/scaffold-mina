@@ -294,7 +294,7 @@ describe("request", () => {
       ),
       transport.request({ method: "mina_blockNumber" }, { dedupe: true }),
       // this will not be deduped (different method).
-      transport.request({ method: "mina_chainId" }, { dedupe: true }),
+      transport.request({ method: "mina_networkId" }, { dedupe: true }),
       transport.request({ method: "mina_blockNumber" }, { dedupe: true }),
       // this will not be deduped (dedupe: undefined).
       transport.request({ method: "mina_blockNumber" }),
@@ -310,7 +310,7 @@ describe("request", () => {
       [
         "{"jsonrpc":"2.0","id":22,"method":"mina_blockNumber"}",
         "{"jsonrpc":"2.0","id":23,"method":"mina_blockNumber","params":[1]}",
-        "{"jsonrpc":"2.0","id":24,"method":"mina_chainId"}",
+        "{"jsonrpc":"2.0","id":24,"method":"mina_networkId"}",
         "{"jsonrpc":"2.0","id":25,"method":"mina_blockNumber"}",
       ]
     `);
@@ -320,7 +320,7 @@ describe("request", () => {
         "{"jsonrpc":"2.0","id":22,"method":"mina_blockNumber"}",
         "{"jsonrpc":"2.0","id":23,"method":"mina_blockNumber","params":[1]}",
         "{"jsonrpc":"2.0","id":22,"method":"mina_blockNumber"}",
-        "{"jsonrpc":"2.0","id":24,"method":"mina_chainId"}",
+        "{"jsonrpc":"2.0","id":24,"method":"mina_networkId"}",
         "{"jsonrpc":"2.0","id":22,"method":"mina_blockNumber"}",
         "{"jsonrpc":"2.0","id":25,"method":"mina_blockNumber"}",
         "{"jsonrpc":"2.0","id":22,"method":"mina_blockNumber"}",

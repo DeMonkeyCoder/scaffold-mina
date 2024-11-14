@@ -5,8 +5,8 @@ import type { ErrorType } from "../../errors/utils";
 import type { Chain } from "../../types/chain";
 import type { RequestErrorType } from "../../utils/buildRequest";
 import {
-  type HexToNumberErrorType,
   hexToNumber,
+  type HexToNumberErrorType,
 } from "../../utils/encoding/fromHex";
 
 export type GetChainIdReturnType = number;
@@ -20,7 +20,7 @@ export type GetChainIdErrorType =
  * Returns the chain ID associated with the current networkID.
  *
  * - Docs: https://viem.sh/docs/actions/public/getChainId
- * - JSON-RPC Methods: [`mina_chainId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_chainid)
+ * - JSON-RPC Methods: [`mina_networkId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_networkId)
  *
  * @param client - Client to use
  * @returns The current chain ID. {@link GetChainIdReturnType}
@@ -43,7 +43,7 @@ export async function getChainId<
 >(client: Client<Transport, chain, account>): Promise<GetChainIdReturnType> {
   const chainIdHex = await client.request(
     {
-      method: "mina_chainId",
+      method: "mina_networkId",
     },
     { dedupe: true }
   );

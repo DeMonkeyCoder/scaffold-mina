@@ -1,19 +1,19 @@
 import {
   type Address,
+  custom,
   type EIP1193RequestFn,
+  fromHex,
+  getAddress,
   type Hex,
+  keccak256,
+  numberToHex,
   RpcRequestError,
+  stringToHex,
   SwitchChainError,
   type Transport,
   UserRejectedRequestError,
   type WalletCallReceipt,
   type WalletRpcSchema,
-  custom,
-  fromHex,
-  getAddress,
-  keccak256,
-  numberToHex,
-  stringToHex,
 } from "@/lib/connect/viem";
 import { rpc } from "@/lib/connect/viem/utils";
 
@@ -92,7 +92,7 @@ export function mock(parameters: MockParameters) {
     },
     async getChainId() {
       const provider = await this.getProvider();
-      const hexChainId = await provider.request({ method: "mina_chainId" });
+      const hexChainId = await provider.request({ method: "mina_networkId" });
       return fromHex(hexChainId, "number");
     },
     async isAuthorized() {
@@ -134,7 +134,7 @@ export function mock(parameters: MockParameters) {
 
       const request: EIP1193RequestFn = async ({ method, params }) => {
         // eth methods
-        if (method === "mina_chainId") return numberToHex(connectedChainId);
+        if (method === "mina_networkId") return numberToHex(connectedChainId);
         if (method === "mina_requestAccounts") return parameters.accounts;
         if (method === "mina_signTypedData_v4")
           if (features.signTypedDataError) {

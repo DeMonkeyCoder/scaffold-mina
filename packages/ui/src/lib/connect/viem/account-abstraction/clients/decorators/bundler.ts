@@ -1,45 +1,45 @@
 import {
-  type GetChainIdReturnType,
   getChainId,
+  type GetChainIdReturnType,
 } from "../../../actions/public/getChainId";
 import type { Client } from "../../../clients/createClient";
 import type { Transport } from "../../../clients/transports/createTransport";
 import type { Chain } from "../../../types/chain";
 import type { SmartAccount } from "../../accounts/types";
 import {
+  estimateUserOperationGas,
   type EstimateUserOperationGasParameters,
   type EstimateUserOperationGasReturnType,
-  estimateUserOperationGas,
 } from "../../actions/bundler/estimateUserOperationGas";
 import {
-  type GetSupportedEntryPointsReturnType,
   getSupportedEntryPoints,
+  type GetSupportedEntryPointsReturnType,
 } from "../../actions/bundler/getSupportedEntryPoints";
 import {
+  getUserOperation,
   type GetUserOperationParameters,
   type GetUserOperationReturnType,
-  getUserOperation,
 } from "../../actions/bundler/getUserOperation";
 import {
+  getUserOperationReceipt,
   type GetUserOperationReceiptParameters,
   type GetUserOperationReceiptReturnType,
-  getUserOperationReceipt,
 } from "../../actions/bundler/getUserOperationReceipt";
 import {
+  prepareUserOperation,
   type PrepareUserOperationParameters,
   type PrepareUserOperationRequest,
   type PrepareUserOperationReturnType,
-  prepareUserOperation,
 } from "../../actions/bundler/prepareUserOperation";
 import {
+  sendUserOperation,
   type SendUserOperationParameters,
   type SendUserOperationReturnType,
-  sendUserOperation,
 } from "../../actions/bundler/sendUserOperation";
 import {
+  waitForUserOperationReceipt,
   type WaitForUserOperationReceiptParameters,
   type WaitForUserOperationReceiptReturnType,
-  waitForUserOperationReceipt,
 } from "../../actions/bundler/waitForUserOperationReceipt";
 
 export type BundlerActions<
@@ -85,7 +85,7 @@ export type BundlerActions<
    * Returns the chain ID associated with the bundler.
    *
    * - Docs: https://viem.sh/docs/actions/public/getChainId
-   * - JSON-RPC Methods: [`mina_chainId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_chainid)
+   * - JSON-RPC Methods: [`mina_networkId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_networkId)
    *
    * @returns The current chain ID. {@link GetChainIdReturnType}
    *

@@ -1,13 +1,13 @@
 import {
   ChainDisconnectedError,
+  createTransport,
   type EIP1193Parameters,
   type EIP1193Provider,
   type EIP1193RequestFn,
+  hexToNumber,
   ProviderDisconnectedError,
   type TransportConfig,
   type WalletRpcSchema,
-  createTransport,
-  hexToNumber,
   withRetry,
   withTimeout,
 } from "@/lib/connect/viem";
@@ -59,7 +59,7 @@ export function unstable_connector(
       // immediately resolve a JSON-RPC request on page load.
       const chainId = hexToNumber(
         await withRetry(() =>
-          withTimeout(() => provider.request({ method: "mina_chainId" }), {
+          withTimeout(() => provider.request({ method: "mina_networkId" }), {
             timeout: 100,
           })
         )

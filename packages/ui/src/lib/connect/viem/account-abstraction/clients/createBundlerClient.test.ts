@@ -44,7 +44,7 @@ test("smoke", async () => {
     transport: http(bundlerMainnet.rpcUrl.http),
   });
 
-  const chainId = await bundlerClient.request({ method: "mina_chainId" });
+  const chainId = await bundlerClient.request({ method: "mina_networkId" });
 
   expect(chainId).toMatchInlineSnapshot(`"0x1"`);
 });

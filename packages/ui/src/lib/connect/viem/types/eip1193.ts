@@ -8,15 +8,15 @@ import type {
 } from "../account-abstraction/types/rpc";
 import type { BlockTag } from "./block";
 import type { Hash, Hex, LogTopic } from "./misc";
-import type { RpcStateOverride } from "./rpc";
 import type {
+  Quantity,
   RpcBlock as Block,
   RpcBlockIdentifier as BlockIdentifier,
   RpcBlockNumber as BlockNumber,
   RpcFeeHistory as FeeHistory,
   RpcLog as Log,
   RpcProof as Proof,
-  Quantity,
+  RpcStateOverride,
   RpcTransaction as Transaction,
   RpcTransactionReceipt as TransactionReceipt,
   RpcTransactionRequest as TransactionRequest,
@@ -244,10 +244,10 @@ export type BundlerRpcSchema = [
   /**
    * @description Returns the chain ID associated with the current networkID
    *
-   * @link https://eips.ethereum.org/EIPS/eip-4337#-mina_chainid
+   * @link https://eips.ethereum.org/EIPS/eip-4337#-mina_networkId
    */
   {
-    Method: "mina_chainId";
+    Method: "mina_networkId";
     Parameters?: undefined;
     ReturnType: Hex;
   },
@@ -425,7 +425,7 @@ export type PaymasterRpcSchema = [
   /**
    * @description Returns the chain ID associated with the current networkID
    *
-   * @link https://eips.ethereum.org/EIPS/eip-4337#-mina_chainid
+   * @link https://eips.ethereum.org/EIPS/eip-4337#-mina_networkId
    */
   {
     Method: "pm_getPaymasterStubData";
@@ -651,11 +651,11 @@ export type PublicRpcSchema = [
   /**
    * @description Returns the chain ID associated with the current networkID
    * @example
-   * provider.request({ method: 'mina_chainId' })
+   * provider.request({ method: 'mina_networkId' })
    * // => '1'
    */
   {
-    Method: "mina_chainId";
+    Method: "mina_networkId";
     Parameters?: undefined;
     ReturnType: Quantity;
   },
@@ -1533,11 +1533,11 @@ export type WalletRpcSchema = [
   /**
    * @description Returns the current chain ID associated with the wallet.
    * @example
-   * provider.request({ method: 'mina_chainId' })
+   * provider.request({ method: 'mina_networkId' })
    * // => '1'
    */
   {
-    Method: "mina_chainId";
+    Method: "mina_networkId";
     Parameters?: undefined;
     ReturnType: Quantity;
   },

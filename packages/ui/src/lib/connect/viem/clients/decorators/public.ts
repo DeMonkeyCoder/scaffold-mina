@@ -1,245 +1,245 @@
 import type { Abi, AbiEvent, Address } from "abitype";
 
 import {
+  getEnsAddress,
   type GetEnsAddressParameters,
   type GetEnsAddressReturnType,
-  getEnsAddress,
 } from "../../actions/ens/getEnsAddress";
 import {
+  getEnsAvatar,
   type GetEnsAvatarParameters,
   type GetEnsAvatarReturnType,
-  getEnsAvatar,
 } from "../../actions/ens/getEnsAvatar";
 import {
+  getEnsName,
   type GetEnsNameParameters,
   type GetEnsNameReturnType,
-  getEnsName,
 } from "../../actions/ens/getEnsName";
 import {
+  getEnsResolver,
   type GetEnsResolverParameters,
   type GetEnsResolverReturnType,
-  getEnsResolver,
 } from "../../actions/ens/getEnsResolver";
 import {
+  getEnsText,
   type GetEnsTextParameters,
   type GetEnsTextReturnType,
-  getEnsText,
 } from "../../actions/ens/getEnsText";
 import {
+  call,
   type CallParameters,
   type CallReturnType,
-  call,
 } from "../../actions/public/call";
 import {
-  type CreateBlockFilterReturnType,
   createBlockFilter,
+  type CreateBlockFilterReturnType,
 } from "../../actions/public/createBlockFilter";
 import {
+  createContractEventFilter,
   type CreateContractEventFilterParameters,
   type CreateContractEventFilterReturnType,
-  createContractEventFilter,
 } from "../../actions/public/createContractEventFilter";
 import {
+  createEventFilter,
   type CreateEventFilterParameters,
   type CreateEventFilterReturnType,
-  createEventFilter,
 } from "../../actions/public/createEventFilter";
 import {
-  type CreatePendingTransactionFilterReturnType,
   createPendingTransactionFilter,
+  type CreatePendingTransactionFilterReturnType,
 } from "../../actions/public/createPendingTransactionFilter";
 import {
+  estimateContractGas,
   type EstimateContractGasParameters,
   type EstimateContractGasReturnType,
-  estimateContractGas,
 } from "../../actions/public/estimateContractGas";
 import {
+  estimateFeesPerGas,
   type EstimateFeesPerGasParameters,
   type EstimateFeesPerGasReturnType,
-  estimateFeesPerGas,
 } from "../../actions/public/estimateFeesPerGas";
 import {
+  estimateGas,
   type EstimateGasParameters,
   type EstimateGasReturnType,
-  estimateGas,
 } from "../../actions/public/estimateGas";
 import {
+  estimateMaxPriorityFeePerGas,
   type EstimateMaxPriorityFeePerGasParameters,
   type EstimateMaxPriorityFeePerGasReturnType,
-  estimateMaxPriorityFeePerGas,
 } from "../../actions/public/estimateMaxPriorityFeePerGas";
 import {
+  getBalance,
   type GetBalanceParameters,
   type GetBalanceReturnType,
-  getBalance,
 } from "../../actions/public/getBalance";
 import {
-  type GetBlobBaseFeeReturnType,
   getBlobBaseFee,
+  type GetBlobBaseFeeReturnType,
 } from "../../actions/public/getBlobBaseFee";
 import {
+  getBlock,
   type GetBlockParameters,
   type GetBlockReturnType,
-  getBlock,
 } from "../../actions/public/getBlock";
 import {
+  getBlockNumber,
   type GetBlockNumberParameters,
   type GetBlockNumberReturnType,
-  getBlockNumber,
 } from "../../actions/public/getBlockNumber";
 import {
+  getBlockTransactionCount,
   type GetBlockTransactionCountParameters,
   type GetBlockTransactionCountReturnType,
-  getBlockTransactionCount,
 } from "../../actions/public/getBlockTransactionCount";
 import {
-  type GetChainIdReturnType,
   getChainId,
+  type GetChainIdReturnType,
 } from "../../actions/public/getChainId";
 import {
+  getCode,
   type GetCodeParameters,
   type GetCodeReturnType,
-  getCode,
 } from "../../actions/public/getCode";
 import {
+  getContractEvents,
   type GetContractEventsParameters,
   type GetContractEventsReturnType,
-  getContractEvents,
 } from "../../actions/public/getContractEvents";
 import {
+  getEip712Domain,
   type GetEip712DomainParameters,
   type GetEip712DomainReturnType,
-  getEip712Domain,
 } from "../../actions/public/getEip712Domain";
 import {
+  getFeeHistory,
   type GetFeeHistoryParameters,
   type GetFeeHistoryReturnType,
-  getFeeHistory,
 } from "../../actions/public/getFeeHistory";
 import {
+  getFilterChanges,
   type GetFilterChangesParameters,
   type GetFilterChangesReturnType,
-  getFilterChanges,
 } from "../../actions/public/getFilterChanges";
 import {
+  getFilterLogs,
   type GetFilterLogsParameters,
   type GetFilterLogsReturnType,
-  getFilterLogs,
 } from "../../actions/public/getFilterLogs";
 import {
-  type GetGasPriceReturnType,
   getGasPrice,
+  type GetGasPriceReturnType,
 } from "../../actions/public/getGasPrice";
 import {
+  getLogs,
   type GetLogsParameters,
   type GetLogsReturnType,
-  getLogs,
 } from "../../actions/public/getLogs";
 import {
+  getProof,
   type GetProofParameters,
   type GetProofReturnType,
-  getProof,
 } from "../../actions/public/getProof";
 import {
+  getStorageAt,
   type GetStorageAtParameters,
   type GetStorageAtReturnType,
-  getStorageAt,
 } from "../../actions/public/getStorageAt";
 import {
+  getTransaction,
   type GetTransactionParameters,
   type GetTransactionReturnType,
-  getTransaction,
 } from "../../actions/public/getTransaction";
 import {
+  getTransactionConfirmations,
   type GetTransactionConfirmationsParameters,
   type GetTransactionConfirmationsReturnType,
-  getTransactionConfirmations,
 } from "../../actions/public/getTransactionConfirmations";
 import {
+  getTransactionCount,
   type GetTransactionCountParameters,
   type GetTransactionCountReturnType,
-  getTransactionCount,
 } from "../../actions/public/getTransactionCount";
 import {
+  getTransactionReceipt,
   type GetTransactionReceiptParameters,
   type GetTransactionReceiptReturnType,
-  getTransactionReceipt,
 } from "../../actions/public/getTransactionReceipt";
 import {
+  multicall,
   type MulticallParameters,
   type MulticallReturnType,
-  multicall,
 } from "../../actions/public/multicall";
 import {
+  readContract,
   type ReadContractParameters,
   type ReadContractReturnType,
-  readContract,
 } from "../../actions/public/readContract";
 import {
+  simulateContract,
   type SimulateContractParameters,
   type SimulateContractReturnType,
-  simulateContract,
 } from "../../actions/public/simulateContract";
 import {
+  uninstallFilter,
   type UninstallFilterParameters,
   type UninstallFilterReturnType,
-  uninstallFilter,
 } from "../../actions/public/uninstallFilter";
 import {
+  verifyMessage,
   type VerifyMessageParameters,
   type VerifyMessageReturnType,
-  verifyMessage,
 } from "../../actions/public/verifyMessage";
 import {
+  verifyTypedData,
   type VerifyTypedDataParameters,
   type VerifyTypedDataReturnType,
-  verifyTypedData,
 } from "../../actions/public/verifyTypedData";
 import {
+  waitForTransactionReceipt,
   type WaitForTransactionReceiptParameters,
   type WaitForTransactionReceiptReturnType,
-  waitForTransactionReceipt,
 } from "../../actions/public/waitForTransactionReceipt";
 import {
+  watchBlockNumber,
   type WatchBlockNumberParameters,
   type WatchBlockNumberReturnType,
-  watchBlockNumber,
 } from "../../actions/public/watchBlockNumber";
 import {
+  watchBlocks,
   type WatchBlocksParameters,
   type WatchBlocksReturnType,
-  watchBlocks,
 } from "../../actions/public/watchBlocks";
 import {
+  watchContractEvent,
   type WatchContractEventParameters,
   type WatchContractEventReturnType,
-  watchContractEvent,
 } from "../../actions/public/watchContractEvent";
 import {
+  watchEvent,
   type WatchEventParameters,
   type WatchEventReturnType,
-  watchEvent,
 } from "../../actions/public/watchEvent";
 import {
+  watchPendingTransactions,
   type WatchPendingTransactionsParameters,
   type WatchPendingTransactionsReturnType,
-  watchPendingTransactions,
 } from "../../actions/public/watchPendingTransactions";
 import {
+  verifySiweMessage,
   type VerifySiweMessageParameters,
   type VerifySiweMessageReturnType,
-  verifySiweMessage,
 } from "../../actions/siwe/verifySiweMessage";
 import {
+  prepareTransactionRequest,
   type PrepareTransactionRequestParameters,
   type PrepareTransactionRequestRequest,
   type PrepareTransactionRequestReturnType,
-  prepareTransactionRequest,
 } from "../../actions/wallet/prepareTransactionRequest";
 import {
+  sendRawTransaction,
   type SendRawTransactionParameters,
   type SendRawTransactionReturnType,
-  sendRawTransaction,
 } from "../../actions/wallet/sendRawTransaction";
 import type { Account } from "../../types/account";
 import type { BlockNumber, BlockTag } from "../../types/block";
@@ -630,7 +630,7 @@ export type PublicActions<
    * Returns the chain ID associated with the current networkID.
    *
    * - Docs: https://viem.sh/docs/actions/public/getChainId
-   * - JSON-RPC Methods: [`mina_chainId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_chainid)
+   * - JSON-RPC Methods: [`mina_networkId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_networkId)
    *
    * @returns The current chain ID. {@link GetChainIdReturnType}
    *

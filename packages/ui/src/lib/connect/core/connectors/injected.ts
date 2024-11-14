@@ -317,7 +317,7 @@ export function injected(parameters: InjectedParameters = {}) {
     async getChainId() {
       const provider = await this.getProvider();
       if (!provider) throw new ProviderNotFoundError();
-      const hexChainId = await provider.request({ method: "mina_chainId" });
+      const hexChainId = await provider.request({ method: "mina_networkId" });
       return Number(hexChainId);
     },
     async getProvider() {
