@@ -1,55 +1,55 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
 import {
   textResolverAbi,
   universalResolverResolveAbi,
-} from '../../constants/abis'
-import type { Chain } from '../../types/chain'
-import type { Prettify } from '../../types/utils'
+} from "../../constants/abis";
+import type { Chain } from "../../types/chain";
+import type { Prettify } from "../../types/utils";
 import {
   type DecodeFunctionResultErrorType,
   decodeFunctionResult,
-} from '../../utils/abi/decodeFunctionResult'
+} from "../../utils/abi/decodeFunctionResult";
 import {
   type EncodeFunctionDataErrorType,
   encodeFunctionData,
-} from '../../utils/abi/encodeFunctionData'
+} from "../../utils/abi/encodeFunctionData";
 import {
   type GetChainContractAddressErrorType,
   getChainContractAddress,
-} from '../../utils/chain/getChainContractAddress'
-import { type ToHexErrorType, toHex } from '../../utils/encoding/toHex'
-import { isNullUniversalResolverError } from '../../utils/ens/errors'
-import { type NamehashErrorType, namehash } from '../../utils/ens/namehash'
+} from "../../utils/chain/getChainContractAddress";
+import { type ToHexErrorType, toHex } from "../../utils/encoding/toHex";
+import { isNullUniversalResolverError } from "../../utils/ens/errors";
+import { type NamehashErrorType, namehash } from "../../utils/ens/namehash";
 import {
   type PacketToBytesErrorType,
   packetToBytes,
-} from '../../utils/ens/packetToBytes'
-import { getAction } from '../../utils/getAction'
+} from "../../utils/ens/packetToBytes";
+import { getAction } from "../../utils/getAction";
 import {
   type ReadContractErrorType,
   type ReadContractParameters,
   readContract,
-} from '../public/readContract'
+} from "../public/readContract";
 
 export type GetEnsTextParameters = Prettify<
-  Pick<ReadContractParameters, 'blockNumber' | 'blockTag'> & {
+  Pick<ReadContractParameters, "blockNumber" | "blockTag"> & {
     /** ENS name to get Text for. */
-    name: string
+    name: string;
     /** Universal Resolver gateway URLs to use for resolving CCIP-read requests. */
-    gatewayUrls?: string[] | undefined
+    gatewayUrls?: string[] | undefined;
     /** Text record to retrieve. */
-    key: string
+    key: string;
     /** Whether or not to throw errors propagated from the ENS Universal Resolver Contract. */
-    strict?: boolean | undefined
+    strict?: boolean | undefined;
     /** Address of ENS Universal Resolver Contract. */
-    universalResolverAddress?: Address | undefined
+    universalResolverAddress?: Address | undefined;
   }
->
+>;
 
-export type GetEnsTextReturnType = string | null
+export type GetEnsTextReturnType = string | null;
 
 export type GetEnsTextErrorType =
   | GetChainContractAddressErrorType
@@ -58,7 +58,7 @@ export type GetEnsTextErrorType =
   | PacketToBytesErrorType
   | EncodeFunctionDataErrorType
   | NamehashErrorType
-  | DecodeFunctionResultErrorType
+  | DecodeFunctionResultErrorType;
 
 /**
  * Gets a text record for specified ENS name.
@@ -99,60 +99,60 @@ export async function getEnsText<chain extends Chain | undefined>(
     gatewayUrls,
     strict,
     universalResolverAddress: universalResolverAddress_,
-  }: GetEnsTextParameters,
+  }: GetEnsTextParameters
 ): Promise<GetEnsTextReturnType> {
-  let universalResolverAddress = universalResolverAddress_
+  let universalResolverAddress = universalResolverAddress_;
   if (!universalResolverAddress) {
     if (!client.chain)
       throw new Error(
-        'client chain not configured. universalResolverAddress is required.',
-      )
+        "client chain not configured. universalResolverAddress is required."
+      );
 
     universalResolverAddress = getChainContractAddress({
       blockNumber,
       chain: client.chain,
-      contract: 'ensUniversalResolver',
-    })
+      contract: "ensUniversalResolver",
+    });
   }
 
   try {
     const readContractParameters = {
       address: universalResolverAddress,
       abi: universalResolverResolveAbi,
-      functionName: 'resolve',
+      functionName: "resolve",
       args: [
         toHex(packetToBytes(name)),
         encodeFunctionData({
           abi: textResolverAbi,
-          functionName: 'text',
+          functionName: "text",
           args: [namehash(name), key],
         }),
       ],
       blockNumber,
       blockTag,
-    } as const
+    } as const;
 
-    const readContractAction = getAction(client, readContract, 'readContract')
+    const readContractAction = getAction(client, readContract, "readContract");
 
     const res = gatewayUrls
       ? await readContractAction({
           ...readContractParameters,
           args: [...readContractParameters.args, gatewayUrls],
         })
-      : await readContractAction(readContractParameters)
+      : await readContractAction(readContractParameters);
 
-    if (res[0] === '0x') return null
+    if (res[0] === "0x") return null;
 
     const record = decodeFunctionResult({
       abi: textResolverAbi,
-      functionName: 'text',
+      functionName: "text",
       data: res[0],
-    })
+    });
 
-    return record === '' ? null : record
+    return record === "" ? null : record;
   } catch (err) {
-    if (strict) throw err
-    if (isNullUniversalResolverError(err, 'resolve')) return null
-    throw err
+    if (strict) throw err;
+    if (isNullUniversalResolverError(err, "resolve")) return null;
+    throw err;
   }
 }

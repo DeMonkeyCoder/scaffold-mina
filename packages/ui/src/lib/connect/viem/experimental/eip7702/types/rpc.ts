@@ -1,12 +1,12 @@
-import type { Address } from 'abitype'
-import type { Hex, Signature } from '../../../types/misc'
+import type { Address } from "@/lib/connect/viem";
+import type { Hex, Signature } from "../../../types/misc";
 
 export type RpcAuthorization = {
   /** Address of the contract to set as code for the Authority. */
-  address: Address
+  address: Address;
   /** Chain ID to authorize. */
-  chainId: Hex
+  chainId: Hex;
   /** Nonce of the Authority to authorize. */
-  nonce: Hex
-} & Signature
-export type RpcAuthorizationList = readonly RpcAuthorization[]
+  nonce: Hex;
+} & Signature;
+export type RpcAuthorizationList = readonly RpcAuthorization[];

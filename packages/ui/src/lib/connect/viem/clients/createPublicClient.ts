@@ -1,43 +1,43 @@
-import type { Address } from 'abitype'
-import type { ErrorType } from '../errors/utils'
-import type { Account, ParseAccount } from '../types/account'
-import type { Chain } from '../types/chain'
-import type { PublicRpcSchema, RpcSchema } from '../types/eip1193'
-import type { Prettify } from '../types/utils'
+import type { Address } from "@/lib/connect/viem";
+import type { ErrorType } from "../errors/utils";
+import type { Account, ParseAccount } from "../types/account";
+import type { Chain } from "../types/chain";
+import type { PublicRpcSchema, RpcSchema } from "../types/eip1193";
+import type { Prettify } from "../types/utils";
 import {
   type Client,
   type ClientConfig,
   type CreateClientErrorType,
   createClient,
-} from './createClient'
-import { type PublicActions, publicActions } from './decorators/public'
-import type { Transport } from './transports/createTransport'
+} from "./createClient";
+import { type PublicActions, publicActions } from "./decorators/public";
+import type { Transport } from "./transports/createTransport";
 
 export type PublicClientConfig<
   transport extends Transport = Transport,
   chain extends Chain | undefined = Chain | undefined,
   accountOrAddress extends Account | Address | undefined = undefined,
-  rpcSchema extends RpcSchema | undefined = undefined,
+  rpcSchema extends RpcSchema | undefined = undefined
 > = Prettify<
   Pick<
     ClientConfig<transport, chain, accountOrAddress, rpcSchema>,
-    | 'batch'
-    | 'cacheTime'
-    | 'ccipRead'
-    | 'chain'
-    | 'key'
-    | 'name'
-    | 'pollingInterval'
-    | 'rpcSchema'
-    | 'transport'
+    | "batch"
+    | "cacheTime"
+    | "ccipRead"
+    | "chain"
+    | "key"
+    | "name"
+    | "pollingInterval"
+    | "rpcSchema"
+    | "transport"
   >
->
+>;
 
 export type PublicClient<
   transport extends Transport = Transport,
   chain extends Chain | undefined = Chain | undefined,
   accountOrAddress extends Account | undefined = undefined,
-  rpcSchema extends RpcSchema | undefined = undefined,
+  rpcSchema extends RpcSchema | undefined = undefined
 > = Prettify<
   Client<
     transport,
@@ -48,9 +48,9 @@ export type PublicClient<
       : PublicRpcSchema,
     PublicActions<transport, chain>
   >
->
+>;
 
-export type CreatePublicClientErrorType = CreateClientErrorType | ErrorType
+export type CreatePublicClientErrorType = CreateClientErrorType | ErrorType;
 
 /**
  * Creates a Public Client with a given [Transport](https://viem.sh/docs/clients/intro) configured for a [Chain](https://viem.sh/docs/clients/chains).
@@ -75,16 +75,16 @@ export function createPublicClient<
   transport extends Transport,
   chain extends Chain | undefined = undefined,
   accountOrAddress extends Account | Address | undefined = undefined,
-  rpcSchema extends RpcSchema | undefined = undefined,
+  rpcSchema extends RpcSchema | undefined = undefined
 >(
-  parameters: PublicClientConfig<transport, chain, accountOrAddress, rpcSchema>,
+  parameters: PublicClientConfig<transport, chain, accountOrAddress, rpcSchema>
 ): PublicClient<transport, chain, ParseAccount<accountOrAddress>, rpcSchema> {
-  const { key = 'public', name = 'Public Client' } = parameters
+  const { key = "public", name = "Public Client" } = parameters;
   const client = createClient({
     ...parameters,
     key,
     name,
-    type: 'publicClient',
-  })
-  return client.extend(publicActions) as any
+    type: "publicClient",
+  });
+  return client.extend(publicActions) as any;
 }

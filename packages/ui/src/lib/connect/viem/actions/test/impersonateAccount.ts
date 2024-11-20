@@ -1,21 +1,21 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
 import type {
   TestClient,
   TestClientMode,
-} from '../../clients/createTestClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account } from '../../types/account'
-import type { Chain } from '../../types/chain'
-import type { RequestErrorType } from '../../utils/buildRequest'
+} from "../../clients/createTestClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account } from "../../types/account";
+import type { Chain } from "../../types/chain";
+import type { RequestErrorType } from "../../utils/buildRequest";
 
 export type ImpersonateAccountParameters = {
   /** The account to impersonate. */
-  address: Address
-}
+  address: Address;
+};
 
-export type ImpersonateAccountErrorType = RequestErrorType | ErrorType
+export type ImpersonateAccountErrorType = RequestErrorType | ErrorType;
 
 /**
  * Impersonate an account or contract address. This lets you send transactions from that account even if you don't have access to its private key.
@@ -41,13 +41,13 @@ export type ImpersonateAccountErrorType = RequestErrorType | ErrorType
  */
 export async function impersonateAccount<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(
   client: TestClient<TestClientMode, Transport, chain, account, false>,
-  { address }: ImpersonateAccountParameters,
+  { address }: ImpersonateAccountParameters
 ) {
   await client.request({
     method: `${client.mode}_impersonateAccount`,
     params: [address],
-  })
+  });
 }

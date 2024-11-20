@@ -1,26 +1,26 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
-import type { Chain } from '../../types/chain'
-import type { Prettify } from '../../types/utils'
-import type { TargetChain } from './chain'
+import type { Chain } from "../../types/chain";
+import type { Prettify } from "../../types/utils";
+import type { TargetChain } from "./chain";
 
 export type GetContractAddressParameter<
   chain extends Chain | undefined,
-  contractName extends string,
+  contractName extends string
 > =
   | (chain extends Chain
       ? Prettify<
           {
-            targetChain: Prettify<TargetChain<chain, contractName>>
+            targetChain: Prettify<TargetChain<chain, contractName>>;
           } & {
-            [_ in `${contractName}Address`]?: undefined
+            [_ in `${contractName}Address`]?: undefined;
           }
         >
       : never)
   | Prettify<
       {
-        targetChain?: undefined
+        targetChain?: undefined;
       } & {
-        [_ in `${contractName}Address`]: Address
+        [_ in `${contractName}Address`]: Address;
       }
-    >
+    >;

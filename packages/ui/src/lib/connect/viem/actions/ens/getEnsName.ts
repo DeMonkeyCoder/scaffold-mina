@@ -1,49 +1,49 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import { universalResolverReverseAbi } from '../../constants/abis'
-import type { ErrorType } from '../../errors/utils'
-import type { Chain } from '../../types/chain'
-import type { Prettify } from '../../types/utils'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import { universalResolverReverseAbi } from "../../constants/abis";
+import type { ErrorType } from "../../errors/utils";
+import type { Chain } from "../../types/chain";
+import type { Prettify } from "../../types/utils";
 import {
   type GetChainContractAddressErrorType,
   getChainContractAddress,
-} from '../../utils/chain/getChainContractAddress'
-import { type ToHexErrorType, toHex } from '../../utils/encoding/toHex'
-import { isNullUniversalResolverError } from '../../utils/ens/errors'
+} from "../../utils/chain/getChainContractAddress";
+import { type ToHexErrorType, toHex } from "../../utils/encoding/toHex";
+import { isNullUniversalResolverError } from "../../utils/ens/errors";
 import {
   type PacketToBytesErrorType,
   packetToBytes,
-} from '../../utils/ens/packetToBytes'
-import { getAction } from '../../utils/getAction'
+} from "../../utils/ens/packetToBytes";
+import { getAction } from "../../utils/getAction";
 import {
   type ReadContractErrorType,
   type ReadContractParameters,
   readContract,
-} from '../public/readContract'
+} from "../public/readContract";
 
 export type GetEnsNameParameters = Prettify<
-  Pick<ReadContractParameters, 'blockNumber' | 'blockTag'> & {
+  Pick<ReadContractParameters, "blockNumber" | "blockTag"> & {
     /** Address to get ENS name for. */
-    address: Address
+    address: Address;
     /** Universal Resolver gateway URLs to use for resolving CCIP-read requests. */
-    gatewayUrls?: string[] | undefined
+    gatewayUrls?: string[] | undefined;
     /** Whether or not to throw errors propagated from the ENS Universal Resolver Contract. */
-    strict?: boolean | undefined
+    strict?: boolean | undefined;
     /** Address of ENS Universal Resolver Contract. */
-    universalResolverAddress?: Address | undefined
+    universalResolverAddress?: Address | undefined;
   }
->
+>;
 
-export type GetEnsNameReturnType = string | null
+export type GetEnsNameReturnType = string | null;
 
 export type GetEnsNameErrorType =
   | GetChainContractAddressErrorType
   | ReadContractErrorType
   | ToHexErrorType
   | PacketToBytesErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Gets primary name for specified address.
@@ -80,47 +80,47 @@ export async function getEnsName<chain extends Chain | undefined>(
     gatewayUrls,
     strict,
     universalResolverAddress: universalResolverAddress_,
-  }: GetEnsNameParameters,
+  }: GetEnsNameParameters
 ): Promise<GetEnsNameReturnType> {
-  let universalResolverAddress = universalResolverAddress_
+  let universalResolverAddress = universalResolverAddress_;
   if (!universalResolverAddress) {
     if (!client.chain)
       throw new Error(
-        'client chain not configured. universalResolverAddress is required.',
-      )
+        "client chain not configured. universalResolverAddress is required."
+      );
 
     universalResolverAddress = getChainContractAddress({
       blockNumber,
       chain: client.chain,
-      contract: 'ensUniversalResolver',
-    })
+      contract: "ensUniversalResolver",
+    });
   }
 
-  const reverseNode = `${address.toLowerCase().substring(2)}.addr.reverse`
+  const reverseNode = `${address.toLowerCase().substring(2)}.addr.reverse`;
   try {
     const readContractParameters = {
       address: universalResolverAddress,
       abi: universalResolverReverseAbi,
-      functionName: 'reverse',
+      functionName: "reverse",
       args: [toHex(packetToBytes(reverseNode))],
       blockNumber,
       blockTag,
-    } as const
+    } as const;
 
-    const readContractAction = getAction(client, readContract, 'readContract')
+    const readContractAction = getAction(client, readContract, "readContract");
 
     const [name, resolvedAddress] = gatewayUrls
       ? await readContractAction({
           ...readContractParameters,
           args: [...readContractParameters.args, gatewayUrls],
         })
-      : await readContractAction(readContractParameters)
+      : await readContractAction(readContractParameters);
 
-    if (address.toLowerCase() !== resolvedAddress.toLowerCase()) return null
-    return name
+    if (address.toLowerCase() !== resolvedAddress.toLowerCase()) return null;
+    return name;
   } catch (err) {
-    if (strict) throw err
-    if (isNullUniversalResolverError(err, 'reverse')) return null
-    throw err
+    if (strict) throw err;
+    if (isNullUniversalResolverError(err, "reverse")) return null;
+    throw err;
   }
 }

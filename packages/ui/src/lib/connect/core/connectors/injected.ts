@@ -200,19 +200,15 @@ export function injected(parameters: InjectedParameters = {}) {
           if (error.code === ResourceUnavailableRpcError.code) throw error;
         }
       }
-      console.log("hjiiiiiiaaaaaiiiiiiiiiiii");
       try {
         if (!accounts?.length && !isReconnecting) {
-          console.log("mewo");
           const requestedAccounts = (
             await provider.request({
               method: "mina_requestAccounts",
             })
           ).result;
-          console.log({ requestedAccounts });
           accounts = requestedAccounts.map((x) => getAddress(x));
         }
-        console.log({ accounts });
 
         // Manage EIP-1193 event listeners
         // https://eips.ethereum.org/EIPS/eip-1193#events
@@ -423,7 +419,7 @@ export function injected(parameters: InjectedParameters = {}) {
           provider
             .request({
               method: "wallet_switchEthereumChain",
-              params: [{ chainId: numberToHex(chainId) }],
+              params: [{ chainId: stringToHex(chainId) }],
             })
             // During `'wallet_switchEthereumChain'`, MetaMask makes a `'net_version'` RPC call to the target chain.
             // If this request fails, MetaMask does not emit the `'chainChanged'` event, but will still switch the chain.
@@ -472,7 +468,7 @@ export function injected(parameters: InjectedParameters = {}) {
 
             const addEthereumChain = {
               blockExplorerUrls,
-              chainId: numberToHex(chainId),
+              chainId: stringToHex(chainId),
               chainName: addEthereumChainParameter?.chainName ?? chain.name,
               iconUrls: addEthereumChainParameter?.iconUrls,
               nativeCurrency:

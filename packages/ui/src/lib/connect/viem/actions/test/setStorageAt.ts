@@ -1,27 +1,27 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
 import type {
   TestClient,
   TestClientMode,
-} from '../../clients/createTestClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account } from '../../types/account'
-import type { Chain } from '../../types/chain'
-import type { Hash, Hex } from '../../types/misc'
-import type { RequestErrorType } from '../../utils/buildRequest'
-import { numberToHex } from '../../utils/encoding/toHex'
+} from "../../clients/createTestClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account } from "../../types/account";
+import type { Chain } from "../../types/chain";
+import type { Hash, Hex } from "../../types/misc";
+import type { RequestErrorType } from "../../utils/buildRequest";
+import { numberToHex } from "../../utils/encoding/toHex";
 
 export type SetStorageAtParameters = {
   /** The account address. */
-  address: Address
+  address: Address;
   /** The storage slot (index). Can either be a number or hash value. */
-  index: number | Hash
+  index: number | Hash;
   /** The value to store as a 32 byte hex string. */
-  value: Hex
-}
+  value: Hex;
+};
 
-export type SetStorageAtErrorType = RequestErrorType | ErrorType
+export type SetStorageAtErrorType = RequestErrorType | ErrorType;
 
 /**
  * Writes to a slot of an account's storage.
@@ -49,17 +49,17 @@ export type SetStorageAtErrorType = RequestErrorType | ErrorType
  */
 export async function setStorageAt<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(
   client: TestClient<TestClientMode, Transport, chain, account, false>,
-  { address, index, value }: SetStorageAtParameters,
+  { address, index, value }: SetStorageAtParameters
 ) {
   await client.request({
     method: `${client.mode}_setStorageAt`,
     params: [
       address,
-      typeof index === 'number' ? numberToHex(index) : index,
+      typeof index === "number" ? numberToHex(index) : index,
       value,
     ],
-  })
+  });
 }

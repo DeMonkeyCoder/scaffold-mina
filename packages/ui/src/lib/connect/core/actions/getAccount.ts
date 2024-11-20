@@ -11,7 +11,7 @@ export type GetAccountReturnType<
       address: Address;
       addresses: readonly [Address, ...Address[]];
       chain: chain | undefined;
-      chainId: number;
+      chainId: string;
       connector: Connector;
       isConnected: true;
       isConnecting: false;
@@ -23,7 +23,7 @@ export type GetAccountReturnType<
       address: Address | undefined;
       addresses: readonly Address[] | undefined;
       chain: chain | undefined;
-      chainId: number | undefined;
+      chainId: string | undefined;
       connector: Connector | undefined;
       isConnected: boolean;
       isConnecting: false;
@@ -35,7 +35,7 @@ export type GetAccountReturnType<
       address: Address | undefined;
       addresses: readonly Address[] | undefined;
       chain: chain | undefined;
-      chainId: number | undefined;
+      chainId: string | undefined;
       connector: Connector | undefined;
       isConnected: false;
       isReconnecting: false;

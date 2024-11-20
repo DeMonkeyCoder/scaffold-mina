@@ -89,8 +89,6 @@ export function createConfig<
     typeof window !== "undefined" && multiInjectedProviderDiscovery
       ? createMipd()
       : undefined;
-  console.log("hiiii");
-  console.log(mipd?.getProviders());
   const chains = createStore(() => rest.chains);
   const connectors = createStore(() =>
     [
@@ -592,7 +590,7 @@ export type PartializedState = Compute<
 
 export type Connection = {
   accounts: readonly [Address, ...Address[]];
-  chainId: number;
+  chainId: string;
   connector: Connector;
 };
 

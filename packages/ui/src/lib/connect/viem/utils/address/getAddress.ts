@@ -1,4 +1,4 @@
-import type { Address } from "abitype";
+import type { Address } from "@/lib/connect/viem";
 
 import { InvalidAddressError } from "../../errors/address";
 import type { ErrorType } from "../../errors/utils";

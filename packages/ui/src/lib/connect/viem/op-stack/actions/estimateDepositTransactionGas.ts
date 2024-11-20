@@ -1,59 +1,55 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
 import {
   type EstimateContractGasErrorType,
   type EstimateContractGasParameters,
   estimateContractGas,
-} from '../../actions/public/estimateContractGas'
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import { zeroAddress } from '../../constants/address'
-import type { ErrorType } from '../../errors/utils'
-import type { Account, GetAccountParameter } from '../../types/account'
-import type {
-  Chain,
-  DeriveChain,
-  GetChainParameter,
-} from '../../types/chain'
-import type { UnionEvaluate, UnionOmit } from '../../types/utils'
-import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest'
-import { portalAbi } from '../abis'
-import type { GetContractAddressParameter } from '../types/contract'
-import type { DepositRequest } from '../types/deposit'
+} from "../../actions/public/estimateContractGas";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import { zeroAddress } from "../../constants/address";
+import type { ErrorType } from "../../errors/utils";
+import type { Account, GetAccountParameter } from "../../types/account";
+import type { Chain, DeriveChain, GetChainParameter } from "../../types/chain";
+import type { UnionEvaluate, UnionOmit } from "../../types/utils";
+import type { FormattedTransactionRequest } from "../../utils/formatters/transactionRequest";
+import { portalAbi } from "../abis";
+import type { GetContractAddressParameter } from "../types/contract";
+import type { DepositRequest } from "../types/deposit";
 
 export type EstimateDepositTransactionGasParameters<
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
   chainOverride extends Chain | undefined = Chain | undefined,
   ///
-  derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>,
+  derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>
 > = UnionEvaluate<
   UnionOmit<
     FormattedTransactionRequest<derivedChain>,
-    | 'accessList'
-    | 'data'
-    | 'from'
-    | 'gas'
-    | 'gasPrice'
-    | 'to'
-    | 'type'
-    | 'value'
+    | "accessList"
+    | "data"
+    | "from"
+    | "gas"
+    | "gasPrice"
+    | "to"
+    | "type"
+    | "value"
   >
 > &
   GetAccountParameter<account, Account | Address> &
   GetChainParameter<chain, chainOverride> &
-  GetContractAddressParameter<derivedChain, 'portal'> & {
+  GetContractAddressParameter<derivedChain, "portal"> & {
     /** L2 transaction request. */
-    request: DepositRequest
+    request: DepositRequest;
     /** Gas limit for transaction execution on the L1. */
-    gas?: bigint | undefined
-  }
+    gas?: bigint | undefined;
+  };
 
-export type EstimateDepositTransactionGasReturnType = bigint
+export type EstimateDepositTransactionGasReturnType = bigint;
 
 export type EstimateDepositTransactionGasErrorType =
   | EstimateContractGasErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Estimates gas required to initiate a [deposit transaction](https://github.com/ethereum-optimism/optimism/blob/develop/specs/deposits.md) on an L1, which executes a transaction on L2.
@@ -87,14 +83,14 @@ export type EstimateDepositTransactionGasErrorType =
 export async function estimateDepositTransactionGas<
   chain extends Chain | undefined,
   account extends Account | undefined,
-  chainOverride extends Chain | undefined = undefined,
+  chainOverride extends Chain | undefined = undefined
 >(
   client: Client<Transport, chain, account>,
   parameters: EstimateDepositTransactionGasParameters<
     chain,
     account,
     chainOverride
-  >,
+  >
 ) {
   const {
     account,
@@ -104,27 +100,27 @@ export async function estimateDepositTransactionGas<
     maxPriorityFeePerGas,
     nonce,
     request: {
-      data = '0x',
+      data = "0x",
       gas: l2Gas,
       isCreation = false,
       mint,
-      to = '0x',
+      to = "0x",
       value,
     },
     targetChain,
-  } = parameters
+  } = parameters;
 
   const portalAddress = (() => {
-    if (parameters.portalAddress) return parameters.portalAddress
-    if (chain) return targetChain!.contracts.portal[chain.id].address
-    return Object.values(targetChain!.contracts.portal)[0].address
-  })()
+    if (parameters.portalAddress) return parameters.portalAddress;
+    if (chain) return targetChain!.contracts.portal[chain.id].address;
+    return Object.values(targetChain!.contracts.portal)[0].address;
+  })();
 
   const params = {
     account,
     abi: portalAbi,
     address: portalAddress,
-    functionName: 'depositTransaction',
+    functionName: "depositTransaction",
     args: [
       isCreation ? zeroAddress : to,
       value ?? mint ?? 0n,
@@ -143,7 +139,7 @@ export async function estimateDepositTransactionGas<
     chain,
   } satisfies EstimateContractGasParameters<
     typeof portalAbi,
-    'depositTransaction'
-  >
-  return estimateContractGas(client, params as any)
+    "depositTransaction"
+  >;
+  return estimateContractGas(client, params as any);
 }

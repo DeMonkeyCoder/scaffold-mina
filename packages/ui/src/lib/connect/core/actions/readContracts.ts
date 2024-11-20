@@ -42,7 +42,7 @@ export async function readContracts<
 
   try {
     const contractsByChainId: {
-      [chainId: number]: {
+      [chainId: string]: {
         contract: ContractFunctionParameters;
         index: number;
       }[];
@@ -59,7 +59,7 @@ export async function readContracts<
           allowFailure,
           blockNumber,
           blockTag,
-          chainId: Number.parseInt(chainId),
+          chainId: string.parseInt(chainId),
           contracts: contracts.map(({ contract }) => contract),
         })
       );

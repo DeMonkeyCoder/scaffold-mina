@@ -49,7 +49,7 @@ export function watchPendingTransactions<
     parameters;
 
   let unwatch: WatchPendingTransactionsReturnType | undefined;
-  const listener = (chainId: number | undefined) => {
+  const listener = (chainId: string | undefined) => {
     if (unwatch) unwatch();
 
     const client = config.getClient({ chainId });

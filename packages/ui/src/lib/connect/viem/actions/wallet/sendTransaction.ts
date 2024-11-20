@@ -175,7 +175,7 @@ export async function sendTransaction<
   try {
     assertRequest(parameters as AssertRequestParameters);
 
-    let chainId: number | undefined;
+    let chainId: string | undefined;
     if (chain !== null) {
       chainId = await getAction(client, getChainId, "getChainId")({});
       assertCurrentChain({

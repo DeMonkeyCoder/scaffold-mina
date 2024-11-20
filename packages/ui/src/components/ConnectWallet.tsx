@@ -1,20 +1,31 @@
 import { formatPublicKey } from "@/utils";
 import Image from "next/image";
 import { useMinaProvider } from "@/lib/ZkappContext";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { NETWORK_ID } from "@/constants/network";
 import { PublicKey } from "o1js";
+import { useConnect } from "@/lib/connect/react/hooks/useConnect";
+import { useConnectors } from "@/lib/connect/react/hooks/useConnectors";
+import { useDisconnect } from "@/lib/connect/react/hooks/useDisconnect";
+import { useAccount } from "@/lib/connect/react/hooks/useAccount";
 
 export default function ConnectWallet() {
-  const {
-    connect,
-    hasWallet,
-    isConnected,
-    account,
-    networkID,
-    switchNetwork,
-    disconnect,
-  } = useMinaProvider();
+  const { address, isConnected } = useAccount();
+  const { hasWallet, networkID, switchNetwork } = useMinaProvider();
+
+  const { connect: wagmiConnect } = useConnect();
+  const connectors = useConnectors();
+  const connect = useCallback(() => {
+    try {
+      wagmiConnect({
+        connector: connectors[0],
+      });
+    } catch (e) {
+      console.log("errrr");
+      console.log(e);
+    }
+  }, [connectors, wagmiConnect]);
+  const { disconnect } = useDisconnect();
   const [isHovered, setIsHovered] = useState(false);
 
   if (!hasWallet) {
@@ -50,8 +61,8 @@ export default function ConnectWallet() {
         ? networkID === NETWORK_ID
           ? isHovered
             ? "Disconnect"
-            : account
-            ? formatPublicKey(PublicKey.fromBase58(account))
+            : address
+            ? formatPublicKey(PublicKey.fromBase58(address))
             : "No Account"
           : "Wrong Network"
         : "Connect Wallet"}

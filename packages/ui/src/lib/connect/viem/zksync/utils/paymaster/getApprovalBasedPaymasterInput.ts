@@ -1,32 +1,32 @@
-import type { Address } from 'abitype'
-import type { ByteArray, Hex } from '../../../types/misc'
+import type { Address } from "@/lib/connect/viem";
+import type { ByteArray, Hex } from "../../../types/misc";
 import {
   type EncodeFunctionDataReturnType,
   encodeFunctionData,
-} from '../../../utils/abi/encodeFunctionData'
-import { bytesToHex } from '../../../utils/encoding/toHex'
-import { paymasterAbi } from '../../constants/abis'
+} from "../../../utils/abi/encodeFunctionData";
+import { bytesToHex } from "../../../utils/encoding/toHex";
+import { paymasterAbi } from "../../constants/abis";
 
 export type GetApprovalBasedPaymasterInputParameters = {
-  innerInput: Hex | ByteArray
-  minAllowance: bigint
-  token: Address
-}
+  innerInput: Hex | ByteArray;
+  minAllowance: bigint;
+  token: Address;
+};
 
 export type GetApprovalBasedPaymasterInputReturnType =
-  EncodeFunctionDataReturnType
+  EncodeFunctionDataReturnType;
 
 export function getApprovalBasedPaymasterInput(
-  parameters: GetApprovalBasedPaymasterInputParameters,
+  parameters: GetApprovalBasedPaymasterInputParameters
 ): GetApprovalBasedPaymasterInputReturnType {
-  const { innerInput, minAllowance, token } = parameters
+  const { innerInput, minAllowance, token } = parameters;
 
   const innerInputHex =
-    typeof innerInput === 'string' ? innerInput : bytesToHex(innerInput)
+    typeof innerInput === "string" ? innerInput : bytesToHex(innerInput);
 
   return encodeFunctionData({
     abi: paymasterAbi,
-    functionName: 'approvalBased',
+    functionName: "approvalBased",
     args: [token, minAllowance, innerInputHex],
-  })
+  });
 }

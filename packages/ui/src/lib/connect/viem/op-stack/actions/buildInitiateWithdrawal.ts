@@ -1,21 +1,21 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../accounts/utils/parseAccount'
+} from "../../accounts/utils/parseAccount";
 import {
   type PrepareTransactionRequestErrorType,
   type PrepareTransactionRequestParameters,
   prepareTransactionRequest,
-} from '../../actions/wallet/prepareTransactionRequest'
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account, GetAccountParameter } from '../../types/account'
-import type { Chain, GetChainParameter } from '../../types/chain'
-import type { Hex } from '../../types/misc'
-import type { Prettify, UnionOmit } from '../../types/utils'
-import type { InitiateWithdrawalParameters } from './initiateWithdrawal'
+} from "../../actions/wallet/prepareTransactionRequest";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account, GetAccountParameter } from "../../types/account";
+import type { Chain, GetChainParameter } from "../../types/chain";
+import type { Hex } from "../../types/misc";
+import type { Prettify, UnionOmit } from "../../types/utils";
+import type { InitiateWithdrawalParameters } from "./initiateWithdrawal";
 
 export type BuildInitiateWithdrawalParameters<
   chain extends Chain | undefined = Chain | undefined,
@@ -24,34 +24,34 @@ export type BuildInitiateWithdrawalParameters<
   accountOverride extends Account | Address | undefined =
     | Account
     | Address
-    | undefined,
+    | undefined
 > = GetAccountParameter<account, accountOverride, false> &
   GetChainParameter<chain, chainOverride> & {
     /** Encoded contract method & arguments. */
-    data?: Hex | undefined
+    data?: Hex | undefined;
     /** Gas limit for transaction execution on the L1. */
-    gas?: bigint | undefined
+    gas?: bigint | undefined;
     /** L1 Transaction recipient. */
-    to: Address
+    to: Address;
     /** Value in wei to withdrawal to the L1. Debited from the caller's L2 balance. */
-    value?: bigint | undefined
-  }
+    value?: bigint | undefined;
+  };
 
 export type BuildInitiateWithdrawalReturnType<
   account extends Account | undefined = Account | undefined,
   accountOverride extends Account | Address | undefined =
     | Account
     | Address
-    | undefined,
+    | undefined
 > = Prettify<
-  UnionOmit<InitiateWithdrawalParameters<Chain, account, Chain>, 'account'> &
+  UnionOmit<InitiateWithdrawalParameters<Chain, account, Chain>, "account"> &
     GetAccountParameter<account, accountOverride>
->
+>;
 
 export type BuildInitiateWithdrawalErrorType =
   | ParseAccountErrorType
   | PrepareTransactionRequestErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Prepares parameters for a [withdrawal](https://community.optimism.io/docs/protocol/withdrawal-flow/#withdrawal-initiating-transaction) from an L2 to the L1.
@@ -82,7 +82,7 @@ export async function buildInitiateWithdrawal<
   chain extends Chain | undefined,
   account extends Account | undefined,
   chainOverride extends Chain | undefined = undefined,
-  accountOverride extends Account | Address | undefined = undefined,
+  accountOverride extends Account | Address | undefined = undefined
 >(
   client: Client<Transport, chain, account>,
   args: BuildInitiateWithdrawalParameters<
@@ -90,21 +90,28 @@ export async function buildInitiateWithdrawal<
     account,
     chainOverride,
     accountOverride
-  >,
+  >
 ): Promise<BuildInitiateWithdrawalReturnType<account, accountOverride>> {
-  const { account: account_, chain = client.chain, gas, data, to, value } = args
+  const {
+    account: account_,
+    chain = client.chain,
+    gas,
+    data,
+    to,
+    value,
+  } = args;
 
-  const account = account_ ? parseAccount(account_) : undefined
+  const account = account_ ? parseAccount(account_) : undefined;
 
   const request = await prepareTransactionRequest(client, {
     account,
     chain,
     gas,
     data,
-    parameters: ['gas'],
+    parameters: ["gas"],
     to,
     value,
-  } as PrepareTransactionRequestParameters)
+  } as PrepareTransactionRequestParameters);
 
   return {
     account,
@@ -114,5 +121,5 @@ export async function buildInitiateWithdrawal<
       to: request.to,
       value: request.value,
     },
-  } as BuildInitiateWithdrawalReturnType<account, accountOverride>
+  } as BuildInitiateWithdrawalReturnType<account, accountOverride>;
 }

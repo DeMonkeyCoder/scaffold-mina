@@ -1,79 +1,75 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 import {
   type WriteContractErrorType,
   type WriteContractParameters,
   writeContract,
-} from '../../actions/wallet/writeContract'
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account, GetAccountParameter } from '../../types/account'
-import type {
-  Chain,
-  DeriveChain,
-  GetChainParameter,
-} from '../../types/chain'
-import type { Hash, Hex } from '../../types/misc'
-import type { UnionEvaluate, UnionOmit } from '../../types/utils'
-import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest'
-import { portalAbi } from '../abis'
-import type { GetContractAddressParameter } from '../types/contract'
+} from "../../actions/wallet/writeContract";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account, GetAccountParameter } from "../../types/account";
+import type { Chain, DeriveChain, GetChainParameter } from "../../types/chain";
+import type { Hash, Hex } from "../../types/misc";
+import type { UnionEvaluate, UnionOmit } from "../../types/utils";
+import type { FormattedTransactionRequest } from "../../utils/formatters/transactionRequest";
+import { portalAbi } from "../abis";
+import type { GetContractAddressParameter } from "../types/contract";
 import {
   type EstimateProveWithdrawalGasErrorType,
   type EstimateProveWithdrawalGasParameters,
   estimateProveWithdrawalGas,
-} from './estimateProveWithdrawalGas'
+} from "./estimateProveWithdrawalGas";
 
 export type ProveWithdrawalParameters<
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
   chainOverride extends Chain | undefined = Chain | undefined,
-  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>,
+  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>
 > = UnionEvaluate<
   UnionOmit<
     FormattedTransactionRequest<_derivedChain>,
-    | 'accessList'
-    | 'blobs'
-    | 'data'
-    | 'from'
-    | 'gas'
-    | 'maxFeePerBlobGas'
-    | 'gasPrice'
-    | 'to'
-    | 'type'
-    | 'value'
+    | "accessList"
+    | "blobs"
+    | "data"
+    | "from"
+    | "gas"
+    | "maxFeePerBlobGas"
+    | "gasPrice"
+    | "to"
+    | "type"
+    | "value"
   >
 > &
   GetAccountParameter<account, Account | Address> &
   GetChainParameter<chain, chainOverride> &
-  GetContractAddressParameter<_derivedChain, 'portal'> & {
+  GetContractAddressParameter<_derivedChain, "portal"> & {
     /**
      * Gas limit for transaction execution on the L1.
      * `null` to skip gas estimation & defer calculation to signer.
      */
-    gas?: bigint | null | undefined
-    l2OutputIndex: bigint
+    gas?: bigint | null | undefined;
+    l2OutputIndex: bigint;
     outputRootProof: {
-      version: Hex
-      stateRoot: Hex
-      messagePasserStorageRoot: Hex
-      latestBlockhash: Hex
-    }
-    withdrawalProof: readonly Hex[]
+      version: Hex;
+      stateRoot: Hex;
+      messagePasserStorageRoot: Hex;
+      latestBlockhash: Hex;
+    };
+    withdrawalProof: readonly Hex[];
     withdrawal: {
-      data: Hex
-      gasLimit: bigint
-      nonce: bigint
-      sender: Address
-      target: Address
-      value: bigint
-    }
-  }
-export type ProveWithdrawalReturnType = Hash
+      data: Hex;
+      gasLimit: bigint;
+      nonce: bigint;
+      sender: Address;
+      target: Address;
+      value: bigint;
+    };
+  };
+export type ProveWithdrawalReturnType = Hash;
 export type ProveWithdrawalErrorType =
   | EstimateProveWithdrawalGasErrorType
   | WriteContractErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Proves a withdrawal that occurred on an L2. Used in the Withdrawal flow.
@@ -106,10 +102,10 @@ export type ProveWithdrawalErrorType =
 export async function proveWithdrawal<
   chain extends Chain | undefined,
   account extends Account | undefined,
-  chainOverride extends Chain | undefined = undefined,
+  chainOverride extends Chain | undefined = undefined
 >(
   client: Client<Transport, chain, account>,
-  parameters: ProveWithdrawalParameters<chain, account, chainOverride>,
+  parameters: ProveWithdrawalParameters<chain, account, chainOverride>
 ): Promise<ProveWithdrawalReturnType> {
   const {
     account,
@@ -123,32 +119,32 @@ export async function proveWithdrawal<
     targetChain,
     withdrawalProof,
     withdrawal,
-  } = parameters
+  } = parameters;
 
   const portalAddress = (() => {
-    if (parameters.portalAddress) return parameters.portalAddress
-    if (chain) return targetChain!.contracts.portal[chain.id].address
-    return Object.values(targetChain!.contracts.portal)[0].address
-  })()
+    if (parameters.portalAddress) return parameters.portalAddress;
+    if (chain) return targetChain!.contracts.portal[chain.id].address;
+    return Object.values(targetChain!.contracts.portal)[0].address;
+  })();
 
   const gas_ =
-    typeof gas !== 'bigint' && gas !== null
+    typeof gas !== "bigint" && gas !== null
       ? await estimateProveWithdrawalGas(
           client,
-          parameters as EstimateProveWithdrawalGasParameters,
+          parameters as EstimateProveWithdrawalGasParameters
         )
-      : gas ?? undefined
+      : gas ?? undefined;
 
   return writeContract(client, {
     account: account!,
     abi: portalAbi,
     address: portalAddress,
     chain,
-    functionName: 'proveWithdrawalTransaction',
+    functionName: "proveWithdrawalTransaction",
     args: [withdrawal, l2OutputIndex, outputRootProof, withdrawalProof],
     gas: gas_,
     maxFeePerGas,
     maxPriorityFeePerGas,
     nonce,
-  } satisfies WriteContractParameters as any)
+  } satisfies WriteContractParameters as any);
 }

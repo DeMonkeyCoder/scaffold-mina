@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useMinaProvider } from "@/lib/ZkappContext";
 import { isSupportedNetwork } from "@/constants/network";
 import AccountDoesNotExist from "@/components/AccountDoesNotExist";
+import { useAccount } from "@/lib/connect/react/hooks/useAccount";
 
 enum TransactionState {
   INITIAL,
@@ -20,9 +21,9 @@ enum TransactionState {
 
 function HomeBody() {
   const { loading, prepareTransaction } = useQuestContract();
+  const { isConnected } = useAccount();
 
-  const { isConnected, accountExists, sendTransaction, networkID } =
-    useMinaProvider();
+  const { accountExists, sendTransaction, networkID } = useMinaProvider();
 
   const { data: currentNum } = useGetQuestContractState({
     stateVariable: "counter",

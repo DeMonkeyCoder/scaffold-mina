@@ -47,7 +47,7 @@ export function mock(parameters: MockParameters) {
     Transport<"custom", unknown, EIP1193RequestFn<WalletRpcSchema>>
   >;
   let connected = false;
-  let connectedChainId: number;
+  let connectedchainId: string;
 
   return createConnector<Provider>((config) => ({
     id: "mock",
@@ -108,7 +108,7 @@ export function mock(parameters: MockParameters) {
 
       await provider.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: numberToHex(chainId) }],
+        params: [{ chainId: stringToHex(chainId) }],
       });
       return chain;
     },

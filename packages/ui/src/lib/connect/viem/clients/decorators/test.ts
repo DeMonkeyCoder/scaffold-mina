@@ -1,97 +1,94 @@
 import {
-  type DropTransactionParameters,
   dropTransaction,
+  type DropTransactionParameters,
 } from "../../actions/test/dropTransaction";
 import {
-  type DumpStateReturnType,
   dumpState,
+  type DumpStateReturnType,
 } from "../../actions/test/dumpState";
 import {
-  type GetAutomineReturnType,
   getAutomine,
+  type GetAutomineReturnType,
 } from "../../actions/test/getAutomine";
 import {
-  type GetTxpoolContentReturnType,
   getTxpoolContent,
+  type GetTxpoolContentReturnType,
 } from "../../actions/test/getTxpoolContent";
 import {
-  type GetTxpoolStatusReturnType,
   getTxpoolStatus,
+  type GetTxpoolStatusReturnType,
 } from "../../actions/test/getTxpoolStatus";
 import {
-  type ImpersonateAccountParameters,
   impersonateAccount,
+  type ImpersonateAccountParameters,
 } from "../../actions/test/impersonateAccount";
 import {
-  type IncreaseTimeParameters,
   increaseTime,
+  type IncreaseTimeParameters,
 } from "../../actions/test/increaseTime";
 import {
-  type InspectTxpoolReturnType,
   inspectTxpool,
+  type InspectTxpoolReturnType,
 } from "../../actions/test/inspectTxpool";
 import {
+  loadState,
   type LoadStateParameters,
   type LoadStateReturnType,
-  loadState,
 } from "../../actions/test/loadState";
-import { type MineParameters, mine } from "../../actions/test/mine";
+import { mine, type MineParameters } from "../../actions/test/mine";
 import { removeBlockTimestampInterval } from "../../actions/test/removeBlockTimestampInterval";
-import { type ResetParameters, reset } from "../../actions/test/reset";
-import { type RevertParameters, revert } from "../../actions/test/revert";
+import { reset, type ResetParameters } from "../../actions/test/reset";
+import { revert, type RevertParameters } from "../../actions/test/revert";
 import {
+  sendUnsignedTransaction,
   type SendUnsignedTransactionParameters,
   type SendUnsignedTransactionReturnType,
-  sendUnsignedTransaction,
 } from "../../actions/test/sendUnsignedTransaction";
 import { setAutomine } from "../../actions/test/setAutomine";
 import {
-  type SetBalanceParameters,
   setBalance,
+  type SetBalanceParameters,
 } from "../../actions/test/setBalance";
 import {
-  type SetBlockGasLimitParameters,
   setBlockGasLimit,
+  type SetBlockGasLimitParameters,
 } from "../../actions/test/setBlockGasLimit";
 import {
-  type SetBlockTimestampIntervalParameters,
   setBlockTimestampInterval,
+  type SetBlockTimestampIntervalParameters,
 } from "../../actions/test/setBlockTimestampInterval";
-import { type SetCodeParameters, setCode } from "../../actions/test/setCode";
+import { setCode, type SetCodeParameters } from "../../actions/test/setCode";
 import {
-  type SetCoinbaseParameters,
   setCoinbase,
+  type SetCoinbaseParameters,
 } from "../../actions/test/setCoinbase";
 import {
-  type SetIntervalMiningParameters,
   setIntervalMining,
+  type SetIntervalMiningParameters,
 } from "../../actions/test/setIntervalMining";
 import { setLoggingEnabled } from "../../actions/test/setLoggingEnabled";
 import {
-  type SetMinGasPriceParameters,
   setMinGasPrice,
+  type SetMinGasPriceParameters,
 } from "../../actions/test/setMinGasPrice";
 import {
-  type SetNextBlockBaseFeePerGasParameters,
   setNextBlockBaseFeePerGas,
+  type SetNextBlockBaseFeePerGasParameters,
 } from "../../actions/test/setNextBlockBaseFeePerGas";
 import {
-  type SetNextBlockTimestampParameters,
   setNextBlockTimestamp,
+  type SetNextBlockTimestampParameters,
 } from "../../actions/test/setNextBlockTimestamp";
-import {
-  type SetNonceParameters,
-  setNonce,
-} from "../../actions/test/setNonce";
+import { setNonce, type SetNonceParameters } from "../../actions/test/setNonce";
 import { setRpcUrl } from "../../actions/test/setRpcUrl";
 import {
-  type SetStorageAtParameters,
   setStorageAt,
+  type SetStorageAtParameters,
 } from "../../actions/test/setStorageAt";
 import { snapshot } from "../../actions/test/snapshot";
 import {
-  type StopImpersonatingAccountParameters,
   stopImpersonatingAccount,
+  type StopImpersonatingAccountParameters,
 } from "../../actions/test/stopImpersonatingAccount";
 import type { Account } from "../../types/account";
 import type { Chain } from "../../types/chain";
@@ -382,7 +379,7 @@ export type TestActions = {
     args: SendUnsignedTransactionParameters<chain>
   ) => Promise<SendUnsignedTransactionReturnType>;
   /**
-   * Enables or disables the automatic mining of new blocks with each new transaction submitted to the networkID.
+   * Enables or disables the automatic mining of new blocks with each new transaction submitted to the network.
    *
    * - Docs: https://viem.sh/docs/actions/test/setAutomine
    *
@@ -523,7 +520,7 @@ export type TestActions = {
    */
   setIntervalMining: (args: SetIntervalMiningParameters) => Promise<void>;
   /**
-   * Enable or disable logging on the test node networkID.
+   * Enable or disable logging on the test node network.
    *
    * - Docs: https://viem.sh/docs/actions/test/setLoggingEnabled
    *
@@ -542,7 +539,7 @@ export type TestActions = {
    */
   setLoggingEnabled: (args: boolean) => Promise<void>;
   /**
-   * Change the minimum gas price accepted by the networkID (in wei).
+   * Change the minimum gas price accepted by the network (in wei).
    *
    * - Docs: https://viem.sh/docs/actions/test/setMinGasPrice
    *

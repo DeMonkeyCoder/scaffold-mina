@@ -1,84 +1,84 @@
-import type { Address } from 'abitype'
-import type { Client } from '../../../clients/createClient'
-import type { Transport } from '../../../clients/transports/createTransport'
-import type { ErrorType } from '../../../errors/utils'
-import type { Hex } from '../../../types/misc'
-import type { OneOf, PartialBy, Prettify } from '../../../types/utils'
-import { hexToBigInt } from '../../../utils/encoding/fromHex'
-import { numberToHex } from '../../../utils/encoding/toHex'
-import type { UserOperation } from '../../types/userOperation'
+import type { Address } from "@/lib/connect/viem";
+import type { Client } from "../../../clients/createClient";
+import type { Transport } from "../../../clients/transports/createTransport";
+import type { ErrorType } from "../../../errors/utils";
+import type { Hex } from "../../../types/misc";
+import type { OneOf, PartialBy, Prettify } from "../../../types/utils";
+import { hexToBigInt } from "../../../utils/encoding/fromHex";
+import { numberToHex } from "../../../utils/encoding/toHex";
+import type { UserOperation } from "../../types/userOperation";
 import {
   type FormatUserOperationRequestErrorType,
   formatUserOperationRequest,
-} from '../../utils/formatters/userOperationRequest'
+} from "../../utils/formatters/userOperationRequest";
 
 export type GetPaymasterStubDataParameters = OneOf<
   | PartialBy<
       Pick<
-        UserOperation<'0.6'>,
-        | 'callData'
-        | 'callGasLimit'
-        | 'initCode'
-        | 'maxFeePerGas'
-        | 'maxPriorityFeePerGas'
-        | 'nonce'
-        | 'sender'
-        | 'preVerificationGas'
-        | 'verificationGasLimit'
+        UserOperation<"0.6">,
+        | "callData"
+        | "callGasLimit"
+        | "initCode"
+        | "maxFeePerGas"
+        | "maxPriorityFeePerGas"
+        | "nonce"
+        | "sender"
+        | "preVerificationGas"
+        | "verificationGasLimit"
       >,
-      | 'callGasLimit'
-      | 'initCode'
-      | 'maxFeePerGas'
-      | 'maxPriorityFeePerGas'
-      | 'preVerificationGas'
-      | 'verificationGasLimit'
+      | "callGasLimit"
+      | "initCode"
+      | "maxFeePerGas"
+      | "maxPriorityFeePerGas"
+      | "preVerificationGas"
+      | "verificationGasLimit"
     >
   | PartialBy<
       Pick<
-        UserOperation<'0.7'>,
-        | 'callData'
-        | 'callGasLimit'
-        | 'factory'
-        | 'factoryData'
-        | 'maxFeePerGas'
-        | 'maxPriorityFeePerGas'
-        | 'nonce'
-        | 'sender'
-        | 'preVerificationGas'
-        | 'verificationGasLimit'
+        UserOperation<"0.7">,
+        | "callData"
+        | "callGasLimit"
+        | "factory"
+        | "factoryData"
+        | "maxFeePerGas"
+        | "maxPriorityFeePerGas"
+        | "nonce"
+        | "sender"
+        | "preVerificationGas"
+        | "verificationGasLimit"
       >,
-      | 'callGasLimit'
-      | 'factory'
-      | 'factoryData'
-      | 'maxFeePerGas'
-      | 'maxPriorityFeePerGas'
-      | 'preVerificationGas'
-      | 'verificationGasLimit'
+      | "callGasLimit"
+      | "factory"
+      | "factoryData"
+      | "maxFeePerGas"
+      | "maxPriorityFeePerGas"
+      | "preVerificationGas"
+      | "verificationGasLimit"
     >
 > & {
-  context?: unknown | undefined
-  chainId: number
-  entryPointAddress: Address
-}
+  context?: unknown | undefined;
+  chainId: string;
+  entryPointAddress: Address;
+};
 
 export type GetPaymasterStubDataReturnType = Prettify<
   OneOf<
     | { paymasterAndData: Hex }
     | {
-        paymaster: Address
-        paymasterData: Hex
-        paymasterVerificationGasLimit: bigint
-        paymasterPostOpGasLimit: bigint
+        paymaster: Address;
+        paymasterData: Hex;
+        paymasterVerificationGasLimit: bigint;
+        paymasterPostOpGasLimit: bigint;
       }
   > & {
-    sponsor?: { name: string; icon?: string | undefined } | undefined
-    isFinal?: boolean | undefined
+    sponsor?: { name: string; icon?: string | undefined } | undefined;
+    isFinal?: boolean | undefined;
   }
->
+>;
 
 export type GetPaymasterStubDataErrorType =
   | FormatUserOperationRequestErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Retrieves paymaster-related User Operation properties to be used for gas estimation.
@@ -107,25 +107,25 @@ export type GetPaymasterStubDataErrorType =
  */
 export async function getPaymasterStubData(
   client: Client<Transport>,
-  parameters: GetPaymasterStubDataParameters,
+  parameters: GetPaymasterStubDataParameters
 ): Promise<GetPaymasterStubDataReturnType> {
-  const { chainId, entryPointAddress, context, ...userOperation } = parameters
-  const request = formatUserOperationRequest(userOperation)
+  const { chainId, entryPointAddress, context, ...userOperation } = parameters;
+  const request = formatUserOperationRequest(userOperation);
   const { paymasterPostOpGasLimit, paymasterVerificationGasLimit, ...rest } =
     await client.request({
-      method: 'pm_getPaymasterStubData',
+      method: "pm_getPaymasterStubData",
       params: [
         {
           ...request,
-          callGasLimit: request.callGasLimit ?? '0x0',
-          verificationGasLimit: request.verificationGasLimit ?? '0x0',
-          preVerificationGas: request.preVerificationGas ?? '0x0',
+          callGasLimit: request.callGasLimit ?? "0x0",
+          verificationGasLimit: request.verificationGasLimit ?? "0x0",
+          preVerificationGas: request.preVerificationGas ?? "0x0",
         },
         entryPointAddress,
         numberToHex(chainId),
         context,
       ],
-    })
+    });
   return {
     ...rest,
     ...(paymasterPostOpGasLimit && {
@@ -134,5 +134,5 @@ export async function getPaymasterStubData(
     ...(paymasterVerificationGasLimit && {
       paymasterVerificationGasLimit: hexToBigInt(paymasterVerificationGasLimit),
     }),
-  } as unknown as GetPaymasterStubDataReturnType
+  } as unknown as GetPaymasterStubDataReturnType;
 }

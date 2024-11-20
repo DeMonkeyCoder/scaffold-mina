@@ -109,7 +109,7 @@ export async function sendEip712Transaction<
       parameters: ["gas", "nonce", "fees"],
     } as any);
 
-    let chainId: number | undefined;
+    let chainId: string | undefined;
     if (chain !== null) {
       chainId = await getAction(client, getChainId, "getChainId")({});
       assertCurrentChain({

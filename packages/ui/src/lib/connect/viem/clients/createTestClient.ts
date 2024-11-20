@@ -1,21 +1,21 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
-import type { Account } from '../accounts/types'
-import type { ErrorType } from '../errors/utils'
-import type { ParseAccount } from '../types/account'
-import type { Chain } from '../types/chain'
-import type { RpcSchema, TestRpcSchema } from '../types/eip1193'
-import type { Prettify } from '../types/utils'
+import type { Account } from "../accounts/types";
+import type { ErrorType } from "../errors/utils";
+import type { ParseAccount } from "../types/account";
+import type { Chain } from "../types/chain";
+import type { RpcSchema, TestRpcSchema } from "../types/eip1193";
+import type { Prettify } from "../types/utils";
 import {
   type Client,
   type ClientConfig,
   type CreateClientErrorType,
   createClient,
-} from './createClient'
-import { type TestActions, testActions } from './decorators/test'
-import type { Transport } from './transports/createTransport'
+} from "./createClient";
+import { type TestActions, testActions } from "./decorators/test";
+import type { Transport } from "./transports/createTransport";
 
-export type TestClientMode = 'anvil' | 'hardhat' | 'ganache'
+export type TestClientMode = "anvil" | "hardhat" | "ganache";
 
 export type TestClientConfig<
   mode extends TestClientMode = TestClientMode,
@@ -25,23 +25,23 @@ export type TestClientConfig<
     | Account
     | Address
     | undefined,
-  rpcSchema extends RpcSchema | undefined = undefined,
+  rpcSchema extends RpcSchema | undefined = undefined
 > = Prettify<
   Pick<
     ClientConfig<transport, chain, accountOrAddress, rpcSchema>,
-    | 'account'
-    | 'cacheTime'
-    | 'chain'
-    | 'key'
-    | 'name'
-    | 'pollingInterval'
-    | 'rpcSchema'
-    | 'transport'
+    | "account"
+    | "cacheTime"
+    | "chain"
+    | "key"
+    | "name"
+    | "pollingInterval"
+    | "rpcSchema"
+    | "transport"
   > & {
     /** Mode of the test client. */
-    mode: mode | ('anvil' | 'hardhat' | 'ganache') // TODO: Type utility that expands `TestClientMode`
+    mode: mode | ("anvil" | "hardhat" | "ganache"); // TODO: Type utility that expands `TestClientMode`
   }
->
+>;
 
 export type TestClient<
   mode extends TestClientMode = TestClientMode,
@@ -49,7 +49,7 @@ export type TestClient<
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
   includeActions extends boolean = true,
-  rpcSchema extends RpcSchema | undefined = undefined,
+  rpcSchema extends RpcSchema | undefined = undefined
 > = Prettify<
   { mode: mode } & Client<
     transport,
@@ -60,9 +60,9 @@ export type TestClient<
       : TestRpcSchema<mode>,
     includeActions extends true ? TestActions : Record<string, unknown>
   >
->
+>;
 
-export type CreateTestClientErrorType = CreateClientErrorType | ErrorType
+export type CreateTestClientErrorType = CreateClientErrorType | ErrorType;
 
 /**
  * @description Creates a test client with a given transport.
@@ -88,11 +88,11 @@ export type CreateTestClientErrorType = CreateClientErrorType | ErrorType
  * })
  */
 export function createTestClient<
-  mode extends 'anvil' | 'hardhat' | 'ganache', // TODO: Type utility that expands `TestClientMode`
+  mode extends "anvil" | "hardhat" | "ganache", // TODO: Type utility that expands `TestClientMode`
   transport extends Transport,
   chain extends Chain | undefined = undefined,
   accountOrAddress extends Account | Address | undefined = undefined,
-  rpcSchema extends RpcSchema | undefined = undefined,
+  rpcSchema extends RpcSchema | undefined = undefined
 >(
   parameters: TestClientConfig<
     mode,
@@ -100,7 +100,7 @@ export function createTestClient<
     chain,
     accountOrAddress,
     rpcSchema
-  >,
+  >
 ): TestClient<
   mode,
   transport,
@@ -108,18 +108,18 @@ export function createTestClient<
   ParseAccount<accountOrAddress>,
   true,
   rpcSchema
->
+>;
 
 export function createTestClient(parameters: TestClientConfig): TestClient {
-  const { key = 'test', name = 'Test Client', mode } = parameters
+  const { key = "test", name = "Test Client", mode } = parameters;
   const client = createClient({
     ...parameters,
     key,
     name,
-    type: 'testClient',
-  })
+    type: "testClient",
+  });
   return client.extend((config) => ({
     mode,
     ...testActions({ mode })(config),
-  }))
+  }));
 }

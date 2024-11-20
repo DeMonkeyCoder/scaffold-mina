@@ -166,7 +166,7 @@ export async function signTransaction<
       params: [
         {
           ...format(transaction as unknown as TransactionRequest),
-          chainId: numberToHex(chainId),
+          chainId: stringToHex(chainId),
           from: account.address,
         } as unknown as RpcTransactionRequest,
       ],

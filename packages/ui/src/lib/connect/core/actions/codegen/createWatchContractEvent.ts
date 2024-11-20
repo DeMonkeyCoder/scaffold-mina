@@ -5,30 +5,30 @@ import type { UnionCompute, UnionStrictOmit } from "../../types/utils";
 import { getAccount } from "../getAccount";
 import { getChainId } from "../getChainId";
 import {
+  watchContractEvent,
   type WatchContractEventParameters,
   type WatchContractEventReturnType,
-  watchContractEvent,
 } from "../watchContractEvent";
 
 export type CreateWatchContractEventParameters<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined = undefined,
+  address extends Address | Record<string, Address> | undefined = undefined,
   eventName extends ContractEventName<abi> | undefined = undefined
 > = {
   abi: abi | Abi | readonly unknown[];
-  address?: address | Address | Record<number, Address> | undefined;
+  address?: address | Address | Record<string, Address> | undefined;
   eventName?: eventName | ContractEventName<abi> | undefined;
 };
 
 export type CreateWatchContractEventReturnType<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined,
+  address extends Address | Record<string, Address> | undefined,
   eventName extends ContractEventName<abi> | undefined,
   ///
   omittedProperties extends "abi" | "address" | "chainId" | "eventName" =
     | "abi"
     | (address extends undefined ? never : "address")
-    | (address extends Record<number, Address> ? "chainId" : never)
+    | (address extends Record<string, Address> ? "chainId" : never)
     | (eventName extends undefined ? never : "eventName")
 > = <
   config extends Config,
@@ -45,7 +45,7 @@ export type CreateWatchContractEventReturnType<
       omittedProperties
     >
   > &
-    (address extends Record<number, Address>
+    (address extends Record<string, Address>
       ? { chainId?: keyof address | undefined }
       : unknown)
 ) => WatchContractEventReturnType;
@@ -54,7 +54,7 @@ export function createWatchContractEvent<
   const abi extends Abi | readonly unknown[],
   const address extends
     | Address
-    | Record<number, Address>
+    | Record<string, Address>
     | undefined = undefined,
   eventName extends ContractEventName<abi> | undefined = undefined
 >(
@@ -71,7 +71,7 @@ export function createWatchContractEvent<
       return watchContractEvent(config, {
         ...(parameters as any),
         ...(c.eventName ? { functionName: c.eventName } : {}),
-        address: c.address?.[chainId],
+        address: (c.address as Record<string, Address> | undefined)?.[chainId],
         abi: c.abi,
       });
     };

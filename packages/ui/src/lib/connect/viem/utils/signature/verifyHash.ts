@@ -1,4 +1,4 @@
-import type { Address } from "abitype";
+import type { Address } from "@/lib/connect/viem";
 
 import type { ByteArray, Hash, Hex, Signature } from "../../types/misc";
 import { type GetAddressErrorType, getAddress } from "../address/getAddress";
@@ -8,10 +8,7 @@ import {
 } from "../address/isAddressEqual";
 
 import type { ErrorType } from "../../errors/utils";
-import {
-  type RecoverAddressErrorType,
-  recoverAddress,
-} from "./recoverAddress";
+import { type RecoverAddressErrorType, recoverAddress } from "./recoverAddress";
 
 export type VerifyHashParameters = {
   /** The address that signed the original message. */

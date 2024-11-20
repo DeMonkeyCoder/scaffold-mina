@@ -10,22 +10,22 @@ import type { UnionCompute, UnionStrictOmit } from "../../types/utils";
 import { getAccount } from "../getAccount";
 import { getChainId } from "../getChainId";
 import {
+  readContract,
   type ReadContractParameters,
   type ReadContractReturnType,
-  readContract,
 } from "../readContract";
 
 type stateMutability = "pure" | "view";
 
 export type CreateReadContractParameters<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined = undefined,
+  address extends Address | Record<string, Address> | undefined = undefined,
   functionName extends
     | ContractFunctionName<abi, stateMutability>
     | undefined = undefined
 > = {
   abi: abi | Abi | readonly unknown[];
-  address?: address | Address | Record<number, Address> | undefined;
+  address?: address | Address | Record<string, Address> | undefined;
   functionName?:
     | functionName
     | ContractFunctionName<abi, stateMutability>
@@ -34,13 +34,13 @@ export type CreateReadContractParameters<
 
 export type CreateReadContractReturnType<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined,
+  address extends Address | Record<string, Address> | undefined,
   functionName extends ContractFunctionName<abi, stateMutability> | undefined,
   ///
   omittedProperties extends "abi" | "address" | "chainId" | "functionName" =
     | "abi"
     | (address extends undefined ? never : "address")
-    | (address extends Record<number, Address> ? "chainId" : never)
+    | (address extends Record<string, Address> ? "chainId" : never)
     | (functionName extends undefined ? never : "functionName")
 > = <
   config extends Config,
@@ -56,7 +56,7 @@ export type CreateReadContractReturnType<
       omittedProperties
     >
   > &
-    (address extends Record<number, Address>
+    (address extends Record<string, Address>
       ? { chainId?: keyof address | undefined }
       : unknown)
 ) => Promise<ReadContractReturnType<abi, name, args>>;
@@ -65,7 +65,7 @@ export function createReadContract<
   const abi extends Abi | readonly unknown[],
   const address extends
     | Address
-    | Record<number, Address>
+    | Record<string, Address>
     | undefined = undefined,
   functionName extends
     | ContractFunctionName<abi, stateMutability>
@@ -78,13 +78,13 @@ export function createReadContract<
       const configChainId = getChainId(config);
       const account = getAccount(config);
       const chainId =
-        (parameters as { chainId?: number })?.chainId ??
+        (parameters as { chainId?: string })?.chainId ??
         account.chainId ??
         configChainId;
       return readContract(config, {
         ...(parameters as any),
         ...(c.functionName ? { functionName: c.functionName } : {}),
-        address: c.address?.[chainId],
+        address: (c.address as Record<string, Address> | undefined)?.[chainId],
         abi: c.abi,
       });
     };

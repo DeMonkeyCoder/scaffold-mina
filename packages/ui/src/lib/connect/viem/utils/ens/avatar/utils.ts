@@ -1,4 +1,4 @@
-import type { Address } from "abitype";
+import type { Address } from "@/lib/connect/viem";
 
 import {
   type ReadContractErrorType,
@@ -217,7 +217,7 @@ export async function parseAvatarUri({
 }
 
 type ParsedNft = {
-  chainID: number;
+  chainId: string;
   namespace: string;
   contractAddress: Address;
   tokenID: string;
@@ -254,7 +254,7 @@ export function parseNftUri(uri_: string): ParsedNft {
     });
 
   return {
-    chainID: Number.parseInt(chainID),
+    chainId: string.parseInt(chainID),
     namespace: erc_namespace.toLowerCase(),
     contractAddress: contractAddress as Address,
     tokenID,

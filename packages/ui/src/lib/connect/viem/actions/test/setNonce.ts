@@ -1,24 +1,24 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
 import type {
   TestClient,
   TestClientMode,
-} from '../../clients/createTestClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account } from '../../types/account'
-import type { Chain } from '../../types/chain'
-import type { RequestErrorType } from '../../utils/buildRequest'
-import { numberToHex } from '../../utils/encoding/toHex'
+} from "../../clients/createTestClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account } from "../../types/account";
+import type { Chain } from "../../types/chain";
+import type { RequestErrorType } from "../../utils/buildRequest";
+import { numberToHex } from "../../utils/encoding/toHex";
 
 export type SetNonceParameters = {
   /** The account address. */
-  address: Address
+  address: Address;
   /** The nonce to set. */
-  nonce: number
-}
+  nonce: number;
+};
 
-export type SetNonceErrorType = RequestErrorType | ErrorType
+export type SetNonceErrorType = RequestErrorType | ErrorType;
 
 /**
  * Modifies (overrides) the nonce of an account.
@@ -45,13 +45,13 @@ export type SetNonceErrorType = RequestErrorType | ErrorType
  */
 export async function setNonce<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(
   client: TestClient<TestClientMode, Transport, chain, account, false>,
-  { address, nonce }: SetNonceParameters,
+  { address, nonce }: SetNonceParameters
 ) {
   await client.request({
     method: `${client.mode}_setNonce`,
     params: [address, numberToHex(nonce)],
-  })
+  });
 }

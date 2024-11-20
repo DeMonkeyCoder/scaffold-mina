@@ -1,63 +1,59 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 import {
   type WriteContractErrorType,
   type WriteContractParameters,
   writeContract,
-} from '../../actions/wallet/writeContract'
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account, GetAccountParameter } from '../../types/account'
-import type {
-  Chain,
-  DeriveChain,
-  GetChainParameter,
-} from '../../types/chain'
-import type { Hash } from '../../types/misc'
-import type { UnionEvaluate, UnionOmit } from '../../types/utils'
-import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest'
-import { portalAbi } from '../abis'
-import type { GetContractAddressParameter } from '../types/contract'
-import type { Withdrawal } from '../types/withdrawal'
+} from "../../actions/wallet/writeContract";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account, GetAccountParameter } from "../../types/account";
+import type { Chain, DeriveChain, GetChainParameter } from "../../types/chain";
+import type { Hash } from "../../types/misc";
+import type { UnionEvaluate, UnionOmit } from "../../types/utils";
+import type { FormattedTransactionRequest } from "../../utils/formatters/transactionRequest";
+import { portalAbi } from "../abis";
+import type { GetContractAddressParameter } from "../types/contract";
+import type { Withdrawal } from "../types/withdrawal";
 import {
   type EstimateFinalizeWithdrawalGasErrorType,
   type EstimateFinalizeWithdrawalGasParameters,
   estimateFinalizeWithdrawalGas,
-} from './estimateFinalizeWithdrawalGas'
+} from "./estimateFinalizeWithdrawalGas";
 
 export type FinalizeWithdrawalParameters<
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
   chainOverride extends Chain | undefined = Chain | undefined,
-  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>,
+  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>
 > = UnionEvaluate<
   UnionOmit<
     FormattedTransactionRequest<_derivedChain>,
-    | 'accessList'
-    | 'data'
-    | 'from'
-    | 'gas'
-    | 'gasPrice'
-    | 'to'
-    | 'type'
-    | 'value'
+    | "accessList"
+    | "data"
+    | "from"
+    | "gas"
+    | "gasPrice"
+    | "to"
+    | "type"
+    | "value"
   >
 > &
   GetAccountParameter<account, Account | Address> &
   GetChainParameter<chain, chainOverride> &
-  GetContractAddressParameter<_derivedChain, 'portal'> & {
+  GetContractAddressParameter<_derivedChain, "portal"> & {
     /**
      * Gas limit for transaction execution on the L1.
      * `null` to skip gas estimation & defer calculation to signer.
      */
-    gas?: bigint | null | undefined
-    withdrawal: Withdrawal
-  }
-export type FinalizeWithdrawalReturnType = Hash
+    gas?: bigint | null | undefined;
+    withdrawal: Withdrawal;
+  };
+export type FinalizeWithdrawalReturnType = Hash;
 export type FinalizeWithdrawalErrorType =
   | EstimateFinalizeWithdrawalGasErrorType
   | WriteContractErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Finalizes a withdrawal that occurred on an L2. Used in the Withdrawal flow.
@@ -86,10 +82,10 @@ export type FinalizeWithdrawalErrorType =
 export async function finalizeWithdrawal<
   chain extends Chain | undefined,
   account extends Account | undefined,
-  chainOverride extends Chain | undefined = undefined,
+  chainOverride extends Chain | undefined = undefined
 >(
   client: Client<Transport, chain, account>,
-  parameters: FinalizeWithdrawalParameters<chain, account, chainOverride>,
+  parameters: FinalizeWithdrawalParameters<chain, account, chainOverride>
 ): Promise<FinalizeWithdrawalReturnType> {
   const {
     account,
@@ -100,32 +96,32 @@ export async function finalizeWithdrawal<
     nonce,
     targetChain,
     withdrawal,
-  } = parameters
+  } = parameters;
 
   const portalAddress = (() => {
-    if (parameters.portalAddress) return parameters.portalAddress
-    if (chain) return targetChain!.contracts.portal[chain.id].address
-    return Object.values(targetChain!.contracts.portal)[0].address
-  })()
+    if (parameters.portalAddress) return parameters.portalAddress;
+    if (chain) return targetChain!.contracts.portal[chain.id].address;
+    return Object.values(targetChain!.contracts.portal)[0].address;
+  })();
 
   const gas_ =
-    typeof gas !== 'number' && gas !== null
+    typeof gas !== "number" && gas !== null
       ? await estimateFinalizeWithdrawalGas(
           client,
-          parameters as EstimateFinalizeWithdrawalGasParameters,
+          parameters as EstimateFinalizeWithdrawalGasParameters
         )
-      : undefined
+      : undefined;
 
   return writeContract(client, {
     account: account!,
     abi: portalAbi,
     address: portalAddress,
     chain,
-    functionName: 'finalizeWithdrawalTransaction',
+    functionName: "finalizeWithdrawalTransaction",
     args: [withdrawal],
     gas: gas_,
     maxFeePerGas,
     maxPriorityFeePerGas,
     nonce,
-  } satisfies WriteContractParameters as any)
+  } satisfies WriteContractParameters as any);
 }

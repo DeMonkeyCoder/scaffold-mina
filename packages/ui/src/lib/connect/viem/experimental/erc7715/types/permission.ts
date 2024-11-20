@@ -1,44 +1,44 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
-import type { OneOf } from '../../../types/utils'
-import type { Policy } from './policy'
+import type { OneOf } from "../../../types/utils";
+import type { Policy } from "./policy";
 
 /** @internal */
 export type CustomPermission<data = unknown, type = { custom: string }> = {
-  data: data
-  type: type
-}
+  data: data;
+  type: type;
+};
 
 /** @internal */
 export type NativeTokenTransferPermission = {
-  type: 'native-token-transfer'
+  type: "native-token-transfer";
   data: {
     /** Native token ticker (e.g. ETH). */
-    ticker: string
-  }
-}
+    ticker: string;
+  };
+};
 
 /** @internal */
 export type Erc20TokenTransferPermission = {
-  type: 'erc20-token-transfer'
+  type: "erc20-token-transfer";
   data: {
     /** ERC20 address. */
-    address: Address
+    address: Address;
     /** Native token ticker (e.g. ETH). */
-    ticker: string
-  }
-}
+    ticker: string;
+  };
+};
 
 /** @internal */
 export type ContractCallPermission = {
-  type: 'contract-call'
+  type: "contract-call";
   data: {
     /** Contract address. */
-    address: Address
+    address: Address;
     /** Set of contract signatures to permit. */
-    calls: string[]
-  }
-}
+    calls: string[];
+  };
+};
 
 export type Permission<uint256 = bigint> = OneOf<
   | NativeTokenTransferPermission
@@ -47,7 +47,7 @@ export type Permission<uint256 = bigint> = OneOf<
   | CustomPermission
 > & {
   /** Set of policies for the permission. */
-  policies: readonly Policy<uint256>[]
+  policies: readonly Policy<uint256>[];
   /** Whether or not the wallet must grant the permission. */
-  required?: boolean | undefined
-}
+  required?: boolean | undefined;
+};

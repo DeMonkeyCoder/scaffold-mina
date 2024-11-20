@@ -1,17 +1,17 @@
-import type { Address } from 'abitype'
-import type { ErrorType } from '../../errors/utils'
-import type { Hex } from '../../types/misc'
-import type { OneOf, Prettify } from '../../types/utils'
+import type { Address } from "@/lib/connect/viem";
+import type { ErrorType } from "../../errors/utils";
+import type { Hex } from "../../types/misc";
+import type { OneOf, Prettify } from "../../types/utils";
 import {
   type DecodeAbiParametersErrorType,
   decodeAbiParameters,
-} from '../abi/decodeAbiParameters'
+} from "../abi/decodeAbiParameters";
 import {
   type IsErc6492SignatureErrorType,
   isErc6492Signature,
-} from './isErc6492Signature'
+} from "./isErc6492Signature";
 
-export type ParseErc6492SignatureParameters = Hex
+export type ParseErc6492SignatureParameters = Hex;
 
 export type ParseErc6492SignatureReturnType = Prettify<
   OneOf<
@@ -20,26 +20,26 @@ export type ParseErc6492SignatureReturnType = Prettify<
          * The ERC-4337 Account Factory or preparation address to use for counterfactual verification.
          * `undefined` if the signature is not in ERC-6492 format.
          */
-        address: Address
+        address: Address;
         /**
          * Calldata to pass to deploy account (if not deployed) for counterfactual verification.
          * `undefined` if the signature is not in ERC-6492 format.
          */
-        data: Hex
+        data: Hex;
         /** The original signature. */
-        signature: Hex
+        signature: Hex;
       }
     | {
         /** The original signature. */
-        signature: Hex
+        signature: Hex;
       }
   >
->
+>;
 
 export type ParseErc6492SignatureErrorType =
   | IsErc6492SignatureErrorType
   | DecodeAbiParametersErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * @description Parses a hex-formatted ERC-6492 flavoured signature.
@@ -53,13 +53,13 @@ export type ParseErc6492SignatureErrorType =
  * // { address: '0x...', data: '0x...', signature: '0x...' }
  */
 export function parseErc6492Signature(
-  signature: ParseErc6492SignatureParameters,
+  signature: ParseErc6492SignatureParameters
 ): ParseErc6492SignatureReturnType {
-  if (!isErc6492Signature(signature)) return { signature }
+  if (!isErc6492Signature(signature)) return { signature };
 
   const [address, data, signature_] = decodeAbiParameters(
-    [{ type: 'address' }, { type: 'bytes' }, { type: 'bytes' }],
-    signature,
-  )
-  return { address, data, signature: signature_ }
+    [{ type: "address" }, { type: "bytes" }, { type: "bytes" }],
+    signature
+  );
+  return { address, data, signature: signature_ };
 }

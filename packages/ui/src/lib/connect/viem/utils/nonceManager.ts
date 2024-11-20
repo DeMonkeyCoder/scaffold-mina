@@ -1,4 +1,4 @@
-import type { Address } from "abitype";
+import type { Address } from "@/lib/connect/viem";
 
 import { getTransactionCount } from "../actions/public/getTransactionCount";
 import type { Client } from "../clients/createClient";
@@ -11,7 +11,7 @@ export type CreateNonceManagerParameters = {
 
 type FunctionParameters = {
   address: Address;
-  chainId: number;
+  chainId: string;
 };
 
 export type NonceManager = {

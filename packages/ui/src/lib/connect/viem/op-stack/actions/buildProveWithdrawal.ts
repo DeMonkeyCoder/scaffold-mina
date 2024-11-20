@@ -1,42 +1,38 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 import {
   type GetBlockErrorType,
   getBlock,
-} from '../../actions/public/getBlock'
+} from "../../actions/public/getBlock";
 import {
   type GetProofErrorType,
   getProof,
-} from '../../actions/public/getProof'
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
+} from "../../actions/public/getProof";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
 import type {
   Account,
   DeriveAccount,
   GetAccountParameter,
-} from '../../types/account'
-import type {
-  Chain,
-  DeriveChain,
-  GetChainParameter,
-} from '../../types/chain'
-import type { Hex } from '../../types/misc'
-import type { OneOf, Prettify } from '../../types/utils'
-import { fromRlp } from '../../utils/encoding/fromRlp'
-import { toRlp } from '../../utils/encoding/toRlp'
-import { keccak256 } from '../../utils/hash/keccak256'
-import { contracts } from '../contracts'
-import type { Withdrawal } from '../types/withdrawal'
+} from "../../types/account";
+import type { Chain, DeriveChain, GetChainParameter } from "../../types/chain";
+import type { Hex } from "../../types/misc";
+import type { OneOf, Prettify } from "../../types/utils";
+import { fromRlp } from "../../utils/encoding/fromRlp";
+import { toRlp } from "../../utils/encoding/toRlp";
+import { keccak256 } from "../../utils/hash/keccak256";
+import { contracts } from "../contracts";
+import type { Withdrawal } from "../types/withdrawal";
 import {
   type GetWithdrawalHashStorageSlotErrorType,
   getWithdrawalHashStorageSlot,
-} from '../utils/getWithdrawalHashStorageSlot'
-import type { GetGameReturnType } from './getGame'
-import type { GetL2OutputReturnType } from './getL2Output'
-import type { ProveWithdrawalParameters } from './proveWithdrawal'
+} from "../utils/getWithdrawalHashStorageSlot";
+import type { GetGameReturnType } from "./getGame";
+import type { GetL2OutputReturnType } from "./getL2Output";
+import type { ProveWithdrawalParameters } from "./proveWithdrawal";
 
 const outputRootProofVersion =
-  '0x0000000000000000000000000000000000000000000000000000000000000000' as const
+  "0x0000000000000000000000000000000000000000000000000000000000000000" as const;
 
 export type BuildProveWithdrawalParameters<
   chain extends Chain | undefined = Chain | undefined,
@@ -46,11 +42,11 @@ export type BuildProveWithdrawalParameters<
     | Account
     | Address
     | undefined,
-  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>,
+  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>
 > = GetAccountParameter<account, accountOverride, false> &
   GetChainParameter<chain, chainOverride> & {
-    withdrawal: Withdrawal
-  } & OneOf<{ output: GetL2OutputReturnType } | { game: GetGameReturnType }>
+    withdrawal: Withdrawal;
+  } & OneOf<{ output: GetL2OutputReturnType } | { game: GetGameReturnType }>;
 
 export type BuildProveWithdrawalReturnType<
   chain extends Chain | undefined = Chain | undefined,
@@ -59,22 +55,22 @@ export type BuildProveWithdrawalReturnType<
   accountOverride extends Account | Address | undefined =
     | Account
     | Address
-    | undefined,
+    | undefined
 > = Prettify<
   Pick<
     ProveWithdrawalParameters,
-    'l2OutputIndex' | 'outputRootProof' | 'withdrawalProof' | 'withdrawal'
+    "l2OutputIndex" | "outputRootProof" | "withdrawalProof" | "withdrawal"
   > & {
-    account: DeriveAccount<account, accountOverride>
-    targetChain: DeriveChain<chain, chainOverride>
+    account: DeriveAccount<account, accountOverride>;
+    targetChain: DeriveChain<chain, chainOverride>;
   }
->
+>;
 
 export type BuildProveWithdrawalErrorType =
   | GetBlockErrorType
   | GetProofErrorType
   | GetWithdrawalHashStorageSlotErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Builds the transaction that proves a withdrawal was initiated on an L2. Used in the Withdrawal flow.
@@ -104,7 +100,7 @@ export async function buildProveWithdrawal<
   chain extends Chain | undefined,
   account extends Account | undefined,
   chainOverride extends Chain | undefined = undefined,
-  accountOverride extends Account | Address | undefined = undefined,
+  accountOverride extends Account | Address | undefined = undefined
 >(
   client: Client<Transport, chain, account>,
   args: BuildProveWithdrawalParameters<
@@ -112,16 +108,16 @@ export async function buildProveWithdrawal<
     account,
     chainOverride,
     accountOverride
-  >,
+  >
 ): Promise<
   BuildProveWithdrawalReturnType<chain, account, chainOverride, accountOverride>
 > {
-  const { account, chain = client.chain, game, output, withdrawal } = args
+  const { account, chain = client.chain, game, output, withdrawal } = args;
 
-  const { withdrawalHash } = withdrawal
-  const { l2BlockNumber } = game ?? output
+  const { withdrawalHash } = withdrawal;
+  const { l2BlockNumber } = game ?? output;
 
-  const slot = getWithdrawalHashStorageSlot({ withdrawalHash })
+  const slot = getWithdrawalHashStorageSlot({ withdrawalHash });
   const [proof, block] = await Promise.all([
     getProof(client, {
       address: contracts.l2ToL1MessagePasser.address,
@@ -131,7 +127,7 @@ export async function buildProveWithdrawal<
     getBlock(client, {
       blockNumber: l2BlockNumber,
     }),
-  ])
+  ]);
 
   return {
     account,
@@ -145,7 +141,7 @@ export async function buildProveWithdrawal<
     targetChain: chain,
     withdrawalProof: maybeAddProofNode(
       keccak256(slot),
-      proof.storageProof[0].proof,
+      proof.storageProof[0].proof
     ),
     withdrawal,
   } as unknown as BuildProveWithdrawalReturnType<
@@ -153,19 +149,19 @@ export async function buildProveWithdrawal<
     account,
     chainOverride,
     accountOverride
-  >
+  >;
 }
 
 /** @internal */
 export function maybeAddProofNode(key: string, proof: readonly Hex[]) {
-  const lastProofRlp = proof[proof.length - 1]
-  const lastProof = fromRlp(lastProofRlp)
-  if (lastProof.length !== 17) return proof
+  const lastProofRlp = proof[proof.length - 1];
+  const lastProof = fromRlp(lastProofRlp);
+  if (lastProof.length !== 17) return proof;
 
-  const modifiedProof = [...proof]
+  const modifiedProof = [...proof];
   for (const item of lastProof) {
     // Find any nodes located inside of the branch node.
-    if (!Array.isArray(item)) continue
+    if (!Array.isArray(item)) continue;
     // Check if the key inside the node matches the key we're looking for. We remove the first
     // two characters (0x) and then we remove one more character (the first nibble) since this
     // is the identifier for the type of node we're looking at. In this case we don't actually
@@ -173,9 +169,9 @@ export function maybeAddProofNode(key: string, proof: readonly Hex[]) {
     // element if (1) it includes the leaf node we're looking for or (2) it stores the value
     // within itself. If (1) then this logic will work, if (2) then this won't find anything
     // and we won't append any proof elements, which is exactly what we would want.
-    const suffix = item[0].slice(3)
-    if (typeof suffix !== 'string' || !key.endsWith(suffix)) continue
-    modifiedProof.push(toRlp(item))
+    const suffix = item[0].slice(3);
+    if (typeof suffix !== "string" || !key.endsWith(suffix)) continue;
+    modifiedProof.push(toRlp(item));
   }
-  return modifiedProof
+  return modifiedProof;
 }

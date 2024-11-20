@@ -1,4 +1,4 @@
-import type { Address } from "abitype";
+import type { Address } from "@/lib/connect/viem";
 import type { Client } from "../../clients/createClient";
 import type { Transport } from "../../clients/transports/createTransport";
 import type { Account } from "../../types/account";

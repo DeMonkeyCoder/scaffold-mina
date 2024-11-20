@@ -1,45 +1,45 @@
-import type { Address } from 'abitype'
-import { trim } from '../utils/data/trim'
+import type { Address } from "@/lib/connect/viem";
+import { trim } from "../utils/data/trim";
 import type {
   CeloTransactionRequest,
   CeloTransactionSerializable,
   TransactionSerializableCIP64,
-} from './types'
+} from "./types";
 
 export function isEmpty(
-  value: string | undefined | number | BigInt,
+  value: string | undefined | number | BigInt
 ): value is undefined {
   return (
     value === 0 ||
     value === 0n ||
     value === undefined ||
     value === null ||
-    value === '0' ||
-    value === '' ||
-    (typeof value === 'string' &&
-      (trim(value as Address).toLowerCase() === '0x' ||
-        trim(value as Address).toLowerCase() === '0x00'))
-  )
+    value === "0" ||
+    value === "" ||
+    (typeof value === "string" &&
+      (trim(value as Address).toLowerCase() === "0x" ||
+        trim(value as Address).toLowerCase() === "0x00"))
+  );
 }
 
 export function isPresent(
-  value: string | undefined | number | BigInt,
+  value: string | undefined | number | BigInt
 ): value is string | number | BigInt {
-  return !isEmpty(value)
+  return !isEmpty(value);
 }
 
 /** @internal */
 export function isEIP1559(
-  transaction: CeloTransactionSerializable | CeloTransactionRequest,
+  transaction: CeloTransactionSerializable | CeloTransactionRequest
 ): boolean {
   return (
-    typeof transaction.maxFeePerGas !== 'undefined' &&
-    typeof transaction.maxPriorityFeePerGas !== 'undefined'
-  )
+    typeof transaction.maxFeePerGas !== "undefined" &&
+    typeof transaction.maxPriorityFeePerGas !== "undefined"
+  );
 }
 
 export function isCIP64(
-  transaction: CeloTransactionSerializable | CeloTransactionRequest,
+  transaction: CeloTransactionSerializable | CeloTransactionRequest
 ): transaction is TransactionSerializableCIP64 {
   /*
    * Enable end user to force the tx to be considered as a CIP-64.
@@ -51,9 +51,9 @@ export function isCIP64(
    *
    * Modify with caution and according to https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0064.md
    */
-  if (transaction.type === 'cip64') {
-    return true
+  if (transaction.type === "cip64") {
+    return true;
   }
 
-  return isEIP1559(transaction) && isPresent(transaction.feeCurrency)
+  return isEIP1559(transaction) && isPresent(transaction.feeCurrency);
 }

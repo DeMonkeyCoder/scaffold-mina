@@ -1,19 +1,19 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
-import type { Account } from '../accounts/types'
-import type { ErrorType } from '../errors/utils'
-import type { ParseAccount } from '../types/account'
-import type { Chain } from '../types/chain'
-import type { RpcSchema, WalletRpcSchema } from '../types/eip1193'
-import type { Prettify } from '../types/utils'
+import type { Account } from "../accounts/types";
+import type { ErrorType } from "../errors/utils";
+import type { ParseAccount } from "../types/account";
+import type { Chain } from "../types/chain";
+import type { RpcSchema, WalletRpcSchema } from "../types/eip1193";
+import type { Prettify } from "../types/utils";
 import {
   type Client,
   type ClientConfig,
   type CreateClientErrorType,
   createClient,
-} from './createClient'
-import { type WalletActions, walletActions } from './decorators/wallet'
-import type { Transport } from './transports/createTransport'
+} from "./createClient";
+import { type WalletActions, walletActions } from "./decorators/wallet";
+import type { Transport } from "./transports/createTransport";
 
 export type WalletClientConfig<
   transport extends Transport = Transport,
@@ -22,27 +22,27 @@ export type WalletClientConfig<
     | Account
     | Address
     | undefined,
-  rpcSchema extends RpcSchema | undefined = undefined,
+  rpcSchema extends RpcSchema | undefined = undefined
 > = Prettify<
   Pick<
     ClientConfig<transport, chain, accountOrAddress, rpcSchema>,
-    | 'account'
-    | 'cacheTime'
-    | 'ccipRead'
-    | 'chain'
-    | 'key'
-    | 'name'
-    | 'pollingInterval'
-    | 'rpcSchema'
-    | 'transport'
+    | "account"
+    | "cacheTime"
+    | "ccipRead"
+    | "chain"
+    | "key"
+    | "name"
+    | "pollingInterval"
+    | "rpcSchema"
+    | "transport"
   >
->
+>;
 
 export type WalletClient<
   transport extends Transport = Transport,
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
-  rpcSchema extends RpcSchema | undefined = undefined,
+  rpcSchema extends RpcSchema | undefined = undefined
 > = Prettify<
   Client<
     transport,
@@ -53,9 +53,9 @@ export type WalletClient<
       : WalletRpcSchema,
     WalletActions<chain, account>
   >
->
+>;
 
-export type CreateWalletClientErrorType = CreateClientErrorType | ErrorType
+export type CreateWalletClientErrorType = CreateClientErrorType | ErrorType;
 
 /**
  * Creates a Wallet Client with a given [Transport](https://viem.sh/docs/clients/intro) configured for a [Chain](https://viem.sh/docs/clients/chains).
@@ -97,21 +97,21 @@ export function createWalletClient<
   transport extends Transport,
   chain extends Chain | undefined = undefined,
   accountOrAddress extends Account | Address | undefined = undefined,
-  rpcSchema extends RpcSchema | undefined = undefined,
+  rpcSchema extends RpcSchema | undefined = undefined
 >(
-  parameters: WalletClientConfig<transport, chain, accountOrAddress, rpcSchema>,
-): WalletClient<transport, chain, ParseAccount<accountOrAddress>, rpcSchema>
+  parameters: WalletClientConfig<transport, chain, accountOrAddress, rpcSchema>
+): WalletClient<transport, chain, ParseAccount<accountOrAddress>, rpcSchema>;
 
 export function createWalletClient(
-  parameters: WalletClientConfig,
+  parameters: WalletClientConfig
 ): WalletClient {
-  const { key = 'wallet', name = 'Wallet Client', transport } = parameters
+  const { key = "wallet", name = "Wallet Client", transport } = parameters;
   const client = createClient({
     ...parameters,
     key,
     name,
     transport,
-    type: 'walletClient',
-  })
-  return client.extend(walletActions)
+    type: "walletClient",
+  });
+  return client.extend(walletActions);
 }

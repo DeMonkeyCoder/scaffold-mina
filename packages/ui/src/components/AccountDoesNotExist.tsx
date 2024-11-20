@@ -1,14 +1,14 @@
-import { useMinaProvider } from "@/lib/ZkappContext";
+import { useAccount } from "@/lib/connect/react/hooks/useAccount";
 
 export default function AccountDoesNotExist() {
-  const { account } = useMinaProvider();
+  const { address } = useAccount();
   return (
     <div>
       <span className="pr-2">Account does not exist</span>
       <br />
       Visit{" "}
       <a
-        href={"https://faucet.minaprotocol.com/?address=" + account?.toBase58()}
+        href={"https://faucet.minaprotocol.com/?address=" + address}
         className="underline text-blue-600"
         target="_blank"
         rel="noreferrer"

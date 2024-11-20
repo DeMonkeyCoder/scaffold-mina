@@ -1,39 +1,39 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
-import type { ExactPartial } from '../../types/utils'
-import { isAddressEqual } from '../address/isAddressEqual'
-import type { SiweMessage } from './types'
+import type { ExactPartial } from "../../types/utils";
+import { isAddressEqual } from "../address/isAddressEqual";
+import type { SiweMessage } from "./types";
 
 export type ValidateSiweMessageParameters = {
   /**
    * Ethereum address to check against.
    */
-  address?: Address | undefined
+  address?: Address | undefined;
   /**
    * [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) authority to check against.
    */
-  domain?: string | undefined
+  domain?: string | undefined;
   /**
    * EIP-4361 message fields.
    */
-  message: ExactPartial<SiweMessage>
+  message: ExactPartial<SiweMessage>;
   /**
    * Random string to check against.
    */
-  nonce?: string | undefined
+  nonce?: string | undefined;
   /**
    * [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986#section-3.1) URI scheme to check against.
    */
-  scheme?: string | undefined
+  scheme?: string | undefined;
   /**
    * Current time to check optional `expirationTime` and `notBefore` fields.
    *
    * @default new Date()
    */
-  time?: Date | undefined
-}
+  time?: Date | undefined;
+};
 
-export type ValidateSiweMessageReturnType = boolean
+export type ValidateSiweMessageReturnType = boolean;
 
 /**
  * @description Validates EIP-4361 message.
@@ -41,7 +41,7 @@ export type ValidateSiweMessageReturnType = boolean
  * @see https://eips.ethereum.org/EIPS/eip-4361
  */
 export function validateSiweMessage(
-  parameters: ValidateSiweMessageParameters,
+  parameters: ValidateSiweMessageParameters
 ): ValidateSiweMessageReturnType {
   const {
     address,
@@ -50,21 +50,21 @@ export function validateSiweMessage(
     nonce,
     scheme,
     time = new Date(),
-  } = parameters
+  } = parameters;
 
-  if (domain && message.domain !== domain) return false
-  if (nonce && message.nonce !== nonce) return false
-  if (scheme && message.scheme !== scheme) return false
+  if (domain && message.domain !== domain) return false;
+  if (nonce && message.nonce !== nonce) return false;
+  if (scheme && message.scheme !== scheme) return false;
 
-  if (message.expirationTime && time >= message.expirationTime) return false
-  if (message.notBefore && time < message.notBefore) return false
+  if (message.expirationTime && time >= message.expirationTime) return false;
+  if (message.notBefore && time < message.notBefore) return false;
 
   try {
-    if (!message.address) return false
-    if (address && !isAddressEqual(message.address, address)) return false
+    if (!message.address) return false;
+    if (address && !isAddressEqual(message.address, address)) return false;
   } catch {
-    return false
+    return false;
   }
 
-  return true
+  return true;
 }

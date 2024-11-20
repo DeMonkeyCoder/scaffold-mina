@@ -1,24 +1,24 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
 import type {
   TestClient,
   TestClientMode,
-} from '../../clients/createTestClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account } from '../../types/account'
-import type { Chain } from '../../types/chain'
-import type { RequestErrorType } from '../../utils/buildRequest'
-import { numberToHex } from '../../utils/encoding/toHex'
+} from "../../clients/createTestClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account } from "../../types/account";
+import type { Chain } from "../../types/chain";
+import type { RequestErrorType } from "../../utils/buildRequest";
+import { numberToHex } from "../../utils/encoding/toHex";
 
 export type SetBalanceParameters = {
   /** The account address. */
-  address: Address
+  address: Address;
   /** Amount (in wei) to set */
-  value: bigint
-}
+  value: bigint;
+};
 
-export type SetBalanceErrorType = RequestErrorType | ErrorType
+export type SetBalanceErrorType = RequestErrorType | ErrorType;
 
 /**
  * Modifies the balance of an account.
@@ -45,19 +45,19 @@ export type SetBalanceErrorType = RequestErrorType | ErrorType
  */
 export async function setBalance<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(
   client: TestClient<TestClientMode, Transport, chain, account, false>,
-  { address, value }: SetBalanceParameters,
+  { address, value }: SetBalanceParameters
 ) {
-  if (client.mode === 'ganache')
+  if (client.mode === "ganache")
     await client.request({
-      method: 'evm_setAccountBalance',
+      method: "evm_setAccountBalance",
       params: [address, numberToHex(value)],
-    })
+    });
   else
     await client.request({
       method: `${client.mode}_setBalance`,
       params: [address, numberToHex(value)],
-    })
+    });
 }

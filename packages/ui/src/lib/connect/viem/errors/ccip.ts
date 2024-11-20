@@ -1,14 +1,15 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
-import type { Hex } from '../types/misc'
-import { stringify } from '../utils/stringify'
+import type { Hex } from "../types/misc";
+import { stringify } from "../utils/stringify";
 
-import { BaseError } from './base'
-import { getUrl } from './utils'
+import { BaseError } from "./base";
+import { getUrl } from "./utils";
 
 export type OffchainLookupErrorType = OffchainLookupError & {
-  name: 'OffchainLookupError'
-}
+  name: "OffchainLookupError";
+};
+
 export class OffchainLookupError extends BaseError {
   constructor({
     callbackSelector,
@@ -18,24 +19,24 @@ export class OffchainLookupError extends BaseError {
     sender,
     urls,
   }: {
-    callbackSelector: Hex
-    cause: BaseError
-    data: Hex
-    extraData: Hex
-    sender: Address
-    urls: readonly string[]
+    callbackSelector: Hex;
+    cause: BaseError;
+    data: Hex;
+    extraData: Hex;
+    sender: Address;
+    urls: readonly string[];
   }) {
     super(
       cause.shortMessage ||
-        'An error occurred while fetching for an offchain result.',
+        "An error occurred while fetching for an offchain result.",
       {
         cause,
         metaMessages: [
           ...(cause.metaMessages || []),
-          cause.metaMessages?.length ? '' : [],
-          'Offchain Gateway Call:',
+          cause.metaMessages?.length ? "" : [],
+          "Offchain Gateway Call:",
           urls && [
-            '  Gateway URL(s):',
+            "  Gateway URL(s):",
             ...urls.map((url) => `    ${getUrl(url)}`),
           ],
           `  Sender: ${sender}`,
@@ -43,47 +44,49 @@ export class OffchainLookupError extends BaseError {
           `  Callback selector: ${callbackSelector}`,
           `  Extra data: ${extraData}`,
         ].flat(),
-        name: 'OffchainLookupError',
-      },
-    )
+        name: "OffchainLookupError",
+      }
+    );
   }
 }
 
 export type OffchainLookupResponseMalformedErrorType =
   OffchainLookupResponseMalformedError & {
-    name: 'OffchainLookupResponseMalformedError'
-  }
+    name: "OffchainLookupResponseMalformedError";
+  };
+
 export class OffchainLookupResponseMalformedError extends BaseError {
   constructor({ result, url }: { result: any; url: string }) {
     super(
-      'Offchain gateway response is malformed. Response data must be a hex value.',
+      "Offchain gateway response is malformed. Response data must be a hex value.",
       {
         metaMessages: [
           `Gateway URL: ${getUrl(url)}`,
           `Response: ${stringify(result)}`,
         ],
-        name: 'OffchainLookupResponseMalformedError',
-      },
-    )
+        name: "OffchainLookupResponseMalformedError",
+      }
+    );
   }
 }
 
 /** @internal */
 export type OffchainLookupSenderMismatchErrorType =
   OffchainLookupSenderMismatchError & {
-    name: 'OffchainLookupSenderMismatchError'
-  }
+    name: "OffchainLookupSenderMismatchError";
+  };
+
 export class OffchainLookupSenderMismatchError extends BaseError {
   constructor({ sender, to }: { sender: Address; to: Address }) {
     super(
-      'Reverted sender address does not match target contract address (`to`).',
+      "Reverted sender address does not match target contract address (`to`).",
       {
         metaMessages: [
           `Contract address: ${to}`,
           `OffchainLookup sender address: ${sender}`,
         ],
-        name: 'OffchainLookupSenderMismatchError',
-      },
-    )
+        name: "OffchainLookupSenderMismatchError",
+      }
+    );
   }
 }

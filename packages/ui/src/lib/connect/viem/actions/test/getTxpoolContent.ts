@@ -1,24 +1,24 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
 import type {
   TestClient,
   TestClientMode,
-} from '../../clients/createTestClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account } from '../../types/account'
-import type { Chain } from '../../types/chain'
-import type { RpcTransaction } from '../../types/rpc'
-import type { RequestErrorType } from '../../utils/buildRequest'
+} from "../../clients/createTestClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account } from "../../types/account";
+import type { Chain } from "../../types/chain";
+import type { RpcTransaction } from "../../types/rpc";
+import type { RequestErrorType } from "../../utils/buildRequest";
 
 export type GetTxpoolContentReturnType = {
   /** Pending transactions in the pool */
-  pending: Record<Address, Record<string, RpcTransaction>>
+  pending: Record<Address, Record<string, RpcTransaction>>;
   /** Queued transactions in the pool */
-  queued: Record<Address, Record<string, RpcTransaction>>
-}
+  queued: Record<Address, Record<string, RpcTransaction>>;
+};
 
-export type GetTxpoolContentErrorType = RequestErrorType | ErrorType
+export type GetTxpoolContentErrorType = RequestErrorType | ErrorType;
 
 /**
  * Returns the details of all transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only.
@@ -42,11 +42,11 @@ export type GetTxpoolContentErrorType = RequestErrorType | ErrorType
  */
 export async function getTxpoolContent<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(
-  client: TestClient<TestClientMode, Transport, chain, account, false>,
+  client: TestClient<TestClientMode, Transport, chain, account, false>
 ): Promise<GetTxpoolContentReturnType> {
   return await client.request({
-    method: 'txpool_content',
-  })
+    method: "txpool_content",
+  });
 }

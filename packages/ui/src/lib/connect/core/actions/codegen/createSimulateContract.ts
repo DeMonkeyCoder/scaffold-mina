@@ -18,21 +18,21 @@ import type { UnionCompute, UnionStrictOmit } from "../../types/utils";
 import { getAccount } from "../getAccount";
 import { getChainId } from "../getChainId";
 import {
-  type SimulateContractReturnType,
   simulateContract,
+  type SimulateContractReturnType,
 } from "../simulateContract";
 
 type stateMutability = "nonpayable" | "payable";
 
 export type CreateSimulateContractParameters<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined = undefined,
+  address extends Address | Record<string, Address> | undefined = undefined,
   functionName extends
     | ContractFunctionName<abi, stateMutability>
     | undefined = undefined
 > = {
   abi: abi | Abi | readonly unknown[];
-  address?: address | Address | Record<number, Address> | undefined;
+  address?: address | Address | Record<string, Address> | undefined;
   functionName?:
     | functionName
     | ContractFunctionName<abi, stateMutability>
@@ -41,7 +41,7 @@ export type CreateSimulateContractParameters<
 
 export type CreateSimulateContractReturnType<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined,
+  address extends Address | Record<string, Address> | undefined,
   functionName extends ContractFunctionName<abi, stateMutability> | undefined
 > = <
   config extends Config,
@@ -73,7 +73,7 @@ export type CreateSimulateContractReturnType<
     > &
       ChainIdParameter<config, chainId> &
       ConnectorParameter & {
-        chainId?: address extends Record<number, Address>
+        chainId?: address extends Record<string, Address>
           ?
               | keyof address
               | (chainId extends keyof address ? chainId : never)
@@ -87,7 +87,7 @@ export function createSimulateContract<
   const abi extends Abi | readonly unknown[],
   const address extends
     | Address
-    | Record<number, Address>
+    | Record<string, Address>
     | undefined = undefined,
   functionName extends
     | ContractFunctionName<abi, stateMutability>
@@ -106,7 +106,7 @@ export function createSimulateContract<
       return simulateContract(config, {
         ...(parameters as any),
         ...(c.functionName ? { functionName: c.functionName } : {}),
-        address: c.address?.[chainId],
+        address: (c.address as Record<string, Address> | undefined)?.[chainId],
         abi: c.abi,
       });
     };

@@ -1,56 +1,52 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 import {
   type EstimateContractGasErrorType,
   type EstimateContractGasParameters,
   estimateContractGas,
-} from '../../actions/public/estimateContractGas'
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account, GetAccountParameter } from '../../types/account'
-import type {
-  Chain,
-  DeriveChain,
-  GetChainParameter,
-} from '../../types/chain'
-import type { UnionEvaluate, UnionOmit } from '../../types/utils'
-import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest'
-import { l2ToL1MessagePasserAbi } from '../abis'
-import { contracts } from '../contracts'
-import type { WithdrawalRequest } from '../types/withdrawal'
+} from "../../actions/public/estimateContractGas";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account, GetAccountParameter } from "../../types/account";
+import type { Chain, DeriveChain, GetChainParameter } from "../../types/chain";
+import type { UnionEvaluate, UnionOmit } from "../../types/utils";
+import type { FormattedTransactionRequest } from "../../utils/formatters/transactionRequest";
+import { l2ToL1MessagePasserAbi } from "../abis";
+import { contracts } from "../contracts";
+import type { WithdrawalRequest } from "../types/withdrawal";
 
 export type EstimateInitiateWithdrawalGasParameters<
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
   chainOverride extends Chain | undefined = Chain | undefined,
-  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>,
+  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>
 > = UnionEvaluate<
   UnionOmit<
     FormattedTransactionRequest<_derivedChain>,
-    | 'accessList'
-    | 'data'
-    | 'from'
-    | 'gas'
-    | 'gasPrice'
-    | 'to'
-    | 'type'
-    | 'value'
+    | "accessList"
+    | "data"
+    | "from"
+    | "gas"
+    | "gasPrice"
+    | "to"
+    | "type"
+    | "value"
   >
 > &
   GetAccountParameter<account, Account | Address> &
   GetChainParameter<chain, chainOverride> & {
     /** Gas limit for transaction execution on the L2. */
-    gas?: bigint | undefined
+    gas?: bigint | undefined;
     /**
      * Withdrawal request.
      * Supplied to the L2ToL1MessagePasser `initiateWithdrawal` method.
      */
-    request: WithdrawalRequest
-  }
-export type EstimateInitiateWithdrawalGasReturnType = bigint
+    request: WithdrawalRequest;
+  };
+export type EstimateInitiateWithdrawalGasReturnType = bigint;
 export type EstimateInitiateWithdrawalGasErrorType =
   | EstimateContractGasErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Estimates gas required to initiate a [withdrawal](https://community.optimism.io/docs/protocol/withdrawal-flow/#withdrawal-initiating-transaction) on an L2 to the L1.
@@ -83,14 +79,14 @@ export type EstimateInitiateWithdrawalGasErrorType =
 export async function estimateInitiateWithdrawalGas<
   chain extends Chain | undefined,
   account extends Account | undefined,
-  chainOverride extends Chain | undefined = undefined,
+  chainOverride extends Chain | undefined = undefined
 >(
   client: Client<Transport, chain, account>,
   parameters: EstimateInitiateWithdrawalGasParameters<
     chain,
     account,
     chainOverride
-  >,
+  >
 ) {
   const {
     account,
@@ -99,14 +95,14 @@ export async function estimateInitiateWithdrawalGas<
     maxFeePerGas,
     maxPriorityFeePerGas,
     nonce,
-    request: { data = '0x', gas: l1Gas, to, value },
-  } = parameters
+    request: { data = "0x", gas: l1Gas, to, value },
+  } = parameters;
 
   const params = {
     account,
     abi: l2ToL1MessagePasserAbi,
     address: contracts.l2ToL1MessagePasser.address,
-    functionName: 'initiateWithdrawal',
+    functionName: "initiateWithdrawal",
     args: [to, l1Gas, data],
     gas,
     maxFeePerGas,
@@ -119,7 +115,7 @@ export async function estimateInitiateWithdrawalGas<
     chain,
   } satisfies EstimateContractGasParameters<
     typeof l2ToL1MessagePasserAbi,
-    'initiateWithdrawal'
-  >
-  return estimateContractGas(client, params as any)
+    "initiateWithdrawal"
+  >;
+  return estimateContractGas(client, params as any);
 }

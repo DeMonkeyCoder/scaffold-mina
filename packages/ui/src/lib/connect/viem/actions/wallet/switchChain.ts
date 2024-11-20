@@ -48,7 +48,7 @@ export async function switchChain<
       method: "wallet_switchEthereumChain",
       params: [
         {
-          chainId: numberToHex(id),
+          chainId: stringToHex(id),
         },
       ],
     },

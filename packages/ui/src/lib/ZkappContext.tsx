@@ -1,17 +1,14 @@
 import React, {
   createContext,
   ReactNode,
-  useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
 import ZkappWorkerClient from "./zkappWorkerClient";
 import { useMinaInjectedProvider } from "@/lib/useMinaInjectedProvider";
-import { useAccount } from "@/lib/connect/react/hooks/useAccount";
 import { PublicKey } from "o1js";
-import { useConnect } from "@/lib/connect/react/hooks/useConnect";
-import { useConnectors } from "@/lib/connect/react/hooks/useConnectors";
+import { useAccount } from "@/lib/connect/react/hooks/useAccount";
 
 type MinaAccountData = {
   accountExists: boolean | null;
@@ -26,21 +23,9 @@ const ZkappContext = createContext<ZkappContextType | null>(null);
 export const ZkappProvider = ({ children }: { children: ReactNode }) => {
   const [zkappWorkerClient, setZkappWorkerClient] =
     useState<ZkappWorkerClient | null>(null);
+  const { address } = useAccount();
 
-  const { address: account, isConnected } = useAccount();
-  const { connect: wagmiConnect } = useConnect();
-  const connectors = useConnectors();
-  const connect = useCallback(() => {
-    try {
-      wagmiConnect({
-        connector: connectors[0],
-      });
-    } catch (e) {
-      console.log("errrr");
-      console.log(e);
-    }
-  }, [connectors, wagmiConnect]);
-  const { networkID, hasWallet, switchNetwork, disconnect, sendTransaction } =
+  const { networkID, hasWallet, switchNetwork, sendTransaction } =
     useMinaInjectedProvider();
 
   useEffect(() => {
@@ -57,14 +42,14 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
   const [accountExists, setAccountExists] = useState<boolean | null>(null);
   useEffect(() => {
     (async () => {
-      if (account && zkappWorkerClient) {
+      if (address && zkappWorkerClient) {
         const res = await zkappWorkerClient.fetchAccount({
-          publicKey: PublicKey.fromBase58(account),
+          publicKey: PublicKey.fromBase58(address),
         });
         setAccountExists(res.error == null);
       }
     })();
-  }, [account, zkappWorkerClient, setAccountExists]);
+  }, [address, zkappWorkerClient, setAccountExists]);
 
   return (
     <ZkappContext.Provider
@@ -74,11 +59,7 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
         networkID,
         hasWallet,
         switchNetwork,
-        isConnected,
-        connect,
-        disconnect,
         sendTransaction,
-        account,
       }}
     >
       {children}

@@ -1,34 +1,31 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
 import type {
   ByteArray,
   Hex,
   SignableMessage,
   Signature,
-} from '../../types/misc'
+} from "../../types/misc";
 
-import type { ErrorType } from '../../errors/utils'
-import { type HashMessageErrorType, hashMessage } from './hashMessage'
-import {
-  type RecoverAddressErrorType,
-  recoverAddress,
-} from './recoverAddress'
+import type { ErrorType } from "../../errors/utils";
+import { type HashMessageErrorType, hashMessage } from "./hashMessage";
+import { type RecoverAddressErrorType, recoverAddress } from "./recoverAddress";
 
 export type RecoverMessageAddressParameters = {
-  message: SignableMessage
-  signature: Hex | ByteArray | Signature
-}
+  message: SignableMessage;
+  signature: Hex | ByteArray | Signature;
+};
 
-export type RecoverMessageAddressReturnType = Address
+export type RecoverMessageAddressReturnType = Address;
 
 export type RecoverMessageAddressErrorType =
   | HashMessageErrorType
   | RecoverAddressErrorType
-  | ErrorType
+  | ErrorType;
 
 export async function recoverMessageAddress({
   message,
   signature,
 }: RecoverMessageAddressParameters): Promise<RecoverMessageAddressReturnType> {
-  return recoverAddress({ hash: hashMessage(message), signature })
+  return recoverAddress({ hash: hashMessage(message), signature });
 }

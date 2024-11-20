@@ -1,47 +1,47 @@
-import { parseAccount } from '../../../accounts/utils/parseAccount'
-import type { Client } from '../../../clients/createClient'
-import type { Transport } from '../../../clients/transports/createTransport'
-import { AccountNotFoundError } from '../../../errors/account'
-import type { BaseError } from '../../../errors/base'
-import { ChainNotFoundError } from '../../../errors/chain'
-import type { ErrorType } from '../../../errors/utils'
-import type { Account, GetAccountParameter } from '../../../types/account'
-import type { Chain, GetChainParameter } from '../../../types/chain'
+import { parseAccount } from "../../../accounts/utils/parseAccount";
+import type { Client } from "../../../clients/createClient";
+import type { Transport } from "../../../clients/transports/createTransport";
+import { AccountNotFoundError } from "../../../errors/account";
+import type { BaseError } from "../../../errors/base";
+import { ChainNotFoundError } from "../../../errors/chain";
+import type { ErrorType } from "../../../errors/utils";
+import type { Account, GetAccountParameter } from "../../../types/account";
+import type { Chain, GetChainParameter } from "../../../types/chain";
 import type {
   WalletCapabilities,
   WalletSendCallsParameters,
-} from '../../../types/eip1193'
-import type { Hex } from '../../../types/misc'
-import type { OneOf } from '../../../types/utils'
-import type { RequestErrorType } from '../../../utils/buildRequest'
-import { numberToHex } from '../../../utils/encoding/toHex'
-import { getTransactionError } from '../../../utils/errors/getTransactionError'
+} from "../../../types/eip1193";
+import type { Hex } from "../../../types/misc";
+import type { OneOf } from "../../../types/utils";
+import type { RequestErrorType } from "../../../utils/buildRequest";
+import { numberToHex } from "../../../utils/encoding/toHex";
+import { getTransactionError } from "../../../utils/errors/getTransactionError";
 
 export type SendCallsParameters<
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
-  chainOverride extends Chain | undefined = Chain | undefined,
+  chainOverride extends Chain | undefined = Chain | undefined
 > = {
   calls: OneOf<
     | {
-        to: Hex
-        data?: Hex | undefined
-        value?: bigint | undefined
+        to: Hex;
+        data?: Hex | undefined;
+        value?: bigint | undefined;
       }
     | {
-        data: Hex
+        data: Hex;
       }
-  >[]
+  >[];
   capabilities?:
-    | WalletSendCallsParameters<WalletCapabilities>[number]['capabilities']
-    | undefined
-  version?: WalletSendCallsParameters[number]['version'] | undefined
+    | WalletSendCallsParameters<WalletCapabilities>[number]["capabilities"]
+    | undefined;
+  version?: WalletSendCallsParameters[number]["version"] | undefined;
 } & GetAccountParameter<account> &
-  GetChainParameter<chain, chainOverride>
+  GetChainParameter<chain, chainOverride>;
 
-export type SendCallsReturnType = string
+export type SendCallsReturnType = string;
 
-export type SendCallsErrorType = RequestErrorType | ErrorType
+export type SendCallsErrorType = RequestErrorType | ErrorType;
 
 /**
  * Requests the connected wallet to send a batch of calls.
@@ -78,31 +78,31 @@ export type SendCallsErrorType = RequestErrorType | ErrorType
 export async function sendCalls<
   chain extends Chain | undefined,
   account extends Account | undefined = undefined,
-  chainOverride extends Chain | undefined = undefined,
+  chainOverride extends Chain | undefined = undefined
 >(
   client: Client<Transport, chain, account>,
-  parameters: SendCallsParameters<chain, account, chainOverride>,
+  parameters: SendCallsParameters<chain, account, chainOverride>
 ): Promise<SendCallsReturnType> {
   const {
     account: account_ = client.account,
     calls,
     capabilities,
     chain = client.chain,
-    version = '1.0',
-  } = parameters
+    version = "1.0",
+  } = parameters;
 
   if (!account_)
     throw new AccountNotFoundError({
-      docsPath: '/experimental/eip5792/sendCalls',
-    })
-  const account = parseAccount(account_)
+      docsPath: "/experimental/eip5792/sendCalls",
+    });
+  const account = parseAccount(account_);
 
-  if (!chain) throw new ChainNotFoundError()
+  if (!chain) throw new ChainNotFoundError();
 
   try {
     return await client.request(
       {
-        method: 'wallet_sendCalls',
+        method: "wallet_sendCalls",
         params: [
           {
             calls: calls.map((call) => ({
@@ -110,19 +110,19 @@ export async function sendCalls<
               value: call.value ? numberToHex(call.value) : undefined,
             })) as any,
             capabilities,
-            chainId: numberToHex(chain!.id),
+            chainId: stringToHex(chain!.id),
             from: account.address,
             version,
           },
         ],
       },
-      { retryCount: 0 },
-    )
+      { retryCount: 0 }
+    );
   } catch (err) {
     throw getTransactionError(err as BaseError, {
       ...parameters,
       account,
       chain: parameters.chain!,
-    })
+    });
   }
 }

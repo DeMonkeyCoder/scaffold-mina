@@ -69,7 +69,7 @@ export function watchContractEvent<
     parameters;
 
   let unwatch: WatchContractEventReturnType | undefined;
-  const listener = (chainId: number | undefined) => {
+  const listener = (chainId: string | undefined) => {
     if (unwatch) unwatch();
 
     const client = config.getClient({ chainId });

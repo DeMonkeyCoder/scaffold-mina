@@ -1,21 +1,21 @@
-import { secp256k1 } from '@noble/curves/secp256k1'
-import type { Address } from 'abitype'
+import { secp256k1 } from "@noble/curves/secp256k1";
+import type { Address } from "@/lib/connect/viem";
 
-import type { ErrorType } from '../../errors/utils'
-import type { Hex } from '../../types/misc'
+import type { ErrorType } from "../../errors/utils";
+import type { Hex } from "../../types/misc";
 import {
   type BytesToHexErrorType,
   bytesToHex,
-} from '../../utils/encoding/toHex'
+} from "../../utils/encoding/toHex";
 import {
   type PublicKeyToAddressErrorType,
   publicKeyToAddress,
-} from './publicKeyToAddress'
+} from "./publicKeyToAddress";
 
 export type PrivateKeyToAddressErrorType =
   | BytesToHexErrorType
   | PublicKeyToAddressErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * @description Converts an ECDSA private key to an address.
@@ -26,7 +26,7 @@ export type PrivateKeyToAddressErrorType =
  */
 export function privateKeyToAddress(privateKey: Hex): Address {
   const publicKey = bytesToHex(
-    secp256k1.getPublicKey(privateKey.slice(2), false),
-  )
-  return publicKeyToAddress(publicKey)
+    secp256k1.getPublicKey(privateKey.slice(2), false)
+  );
+  return publicKeyToAddress(publicKey);
 }

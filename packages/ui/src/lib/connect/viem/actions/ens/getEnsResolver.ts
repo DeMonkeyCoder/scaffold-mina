@@ -1,41 +1,41 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Chain } from '../../types/chain'
-import type { Prettify } from '../../types/utils'
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Chain } from "../../types/chain";
+import type { Prettify } from "../../types/utils";
 import {
   type GetChainContractAddressErrorType,
   getChainContractAddress,
-} from '../../utils/chain/getChainContractAddress'
-import { type ToHexErrorType, toHex } from '../../utils/encoding/toHex'
+} from "../../utils/chain/getChainContractAddress";
+import { type ToHexErrorType, toHex } from "../../utils/encoding/toHex";
 import {
   type PacketToBytesErrorType,
   packetToBytes,
-} from '../../utils/ens/packetToBytes'
-import { getAction } from '../../utils/getAction'
+} from "../../utils/ens/packetToBytes";
+import { getAction } from "../../utils/getAction";
 import {
   type ReadContractParameters,
   readContract,
-} from '../public/readContract'
+} from "../public/readContract";
 
 export type GetEnsResolverParameters = Prettify<
-  Pick<ReadContractParameters, 'blockNumber' | 'blockTag'> & {
+  Pick<ReadContractParameters, "blockNumber" | "blockTag"> & {
     /** Name to get the address for. */
-    name: string
+    name: string;
     /** Address of ENS Universal Resolver Contract. */
-    universalResolverAddress?: Address | undefined
+    universalResolverAddress?: Address | undefined;
   }
->
+>;
 
-export type GetEnsResolverReturnType = Address
+export type GetEnsResolverReturnType = Address;
 
 export type GetEnsResolverErrorType =
   | GetChainContractAddressErrorType
   | ToHexErrorType
   | PacketToBytesErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Gets resolver for ENS name.
@@ -72,41 +72,41 @@ export async function getEnsResolver<chain extends Chain | undefined>(
     blockTag,
     name,
     universalResolverAddress: universalResolverAddress_,
-  }: GetEnsResolverParameters,
+  }: GetEnsResolverParameters
 ) {
-  let universalResolverAddress = universalResolverAddress_
+  let universalResolverAddress = universalResolverAddress_;
   if (!universalResolverAddress) {
     if (!client.chain)
       throw new Error(
-        'client chain not configured. universalResolverAddress is required.',
-      )
+        "client chain not configured. universalResolverAddress is required."
+      );
 
     universalResolverAddress = getChainContractAddress({
       blockNumber,
       chain: client.chain,
-      contract: 'ensUniversalResolver',
-    })
+      contract: "ensUniversalResolver",
+    });
   }
 
   const [resolverAddress] = await getAction(
     client,
     readContract,
-    'readContract',
+    "readContract"
   )({
     address: universalResolverAddress,
     abi: [
       {
-        inputs: [{ type: 'bytes' }],
-        name: 'findResolver',
-        outputs: [{ type: 'address' }, { type: 'bytes32' }],
-        stateMutability: 'view',
-        type: 'function',
+        inputs: [{ type: "bytes" }],
+        name: "findResolver",
+        outputs: [{ type: "address" }, { type: "bytes32" }],
+        stateMutability: "view",
+        type: "function",
       },
     ],
-    functionName: 'findResolver',
+    functionName: "findResolver",
     args: [toHex(packetToBytes(name))],
     blockNumber,
     blockTag,
-  })
-  return resolverAddress
+  });
+  return resolverAddress;
 }

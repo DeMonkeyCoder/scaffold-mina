@@ -1,97 +1,97 @@
-import type { Address } from 'abitype'
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { Account } from '../../types/account'
-import type { Chain } from '../../types/chain'
+import type { Address } from "@/lib/connect/viem";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { Account } from "../../types/account";
+import type { Chain } from "../../types/chain";
 import {
   type BuildInitiateWithdrawalParameters,
   type BuildInitiateWithdrawalReturnType,
   buildInitiateWithdrawal,
-} from '../actions/buildInitiateWithdrawal'
+} from "../actions/buildInitiateWithdrawal";
 import {
   type EstimateDepositTransactionGasParameters,
   type EstimateDepositTransactionGasReturnType,
   estimateDepositTransactionGas,
-} from '../actions/estimateDepositTransactionGas'
+} from "../actions/estimateDepositTransactionGas";
 import {
   type EstimateFinalizeWithdrawalGasParameters,
   type EstimateFinalizeWithdrawalGasReturnType,
   estimateFinalizeWithdrawalGas,
-} from '../actions/estimateFinalizeWithdrawalGas'
+} from "../actions/estimateFinalizeWithdrawalGas";
 import {
   type EstimateProveWithdrawalGasParameters,
   type EstimateProveWithdrawalGasReturnType,
   estimateProveWithdrawalGas,
-} from '../actions/estimateProveWithdrawalGas'
+} from "../actions/estimateProveWithdrawalGas";
 import {
   type GetGameParameters,
   type GetGameReturnType,
   getGame,
-} from '../actions/getGame'
+} from "../actions/getGame";
 import {
   type GetGamesParameters,
   type GetGamesReturnType,
   getGames,
-} from '../actions/getGames'
+} from "../actions/getGames";
 import {
   type GetL2OutputParameters,
   type GetL2OutputReturnType,
   getL2Output,
-} from '../actions/getL2Output'
+} from "../actions/getL2Output";
 import {
   type GetPortalVersionParameters,
   type GetPortalVersionReturnType,
   getPortalVersion,
-} from '../actions/getPortalVersion'
+} from "../actions/getPortalVersion";
 import {
   type GetTimeToFinalizeParameters,
   type GetTimeToFinalizeReturnType,
   getTimeToFinalize,
-} from '../actions/getTimeToFinalize'
+} from "../actions/getTimeToFinalize";
 import {
   type GetTimeToNextGameParameters,
   type GetTimeToNextGameReturnType,
   getTimeToNextGame,
-} from '../actions/getTimeToNextGame'
+} from "../actions/getTimeToNextGame";
 import {
   type GetTimeToNextL2OutputParameters,
   type GetTimeToNextL2OutputReturnType,
   getTimeToNextL2Output,
-} from '../actions/getTimeToNextL2Output'
+} from "../actions/getTimeToNextL2Output";
 import {
   type GetTimeToProveParameters,
   type GetTimeToProveReturnType,
   getTimeToProve,
-} from '../actions/getTimeToProve'
+} from "../actions/getTimeToProve";
 import {
   type GetWithdrawalStatusParameters,
   type GetWithdrawalStatusReturnType,
   getWithdrawalStatus,
-} from '../actions/getWithdrawalStatus'
+} from "../actions/getWithdrawalStatus";
 import {
   type WaitForNextGameParameters,
   type WaitForNextGameReturnType,
   waitForNextGame,
-} from '../actions/waitForNextGame'
+} from "../actions/waitForNextGame";
 import {
   type WaitForNextL2OutputParameters,
   type WaitForNextL2OutputReturnType,
   waitForNextL2Output,
-} from '../actions/waitForNextL2Output'
+} from "../actions/waitForNextL2Output";
 import {
   type WaitToFinalizeParameters,
   type WaitToFinalizeReturnType,
   waitToFinalize,
-} from '../actions/waitToFinalize'
+} from "../actions/waitToFinalize";
 import {
   type WaitToProveParameters,
   type WaitToProveReturnType,
   waitToProve,
-} from '../actions/waitToProve'
+} from "../actions/waitToProve";
 
 export type PublicActionsL1<
   chain extends Chain | undefined = Chain | undefined,
-  account extends Account | undefined = Account | undefined,
+  account extends Account | undefined = Account | undefined
 > = {
   /**
    * Prepares parameters for a [deposit transaction](https://github.com/ethereum-optimism/optimism/blob/develop/specs/deposits.md) to be initiated on an L1.
@@ -120,15 +120,15 @@ export type PublicActionsL1<
    */
   buildInitiateWithdrawal: <
     chainOverride extends Chain | undefined = undefined,
-    accountOverride extends Account | Address | undefined = undefined,
+    accountOverride extends Account | Address | undefined = undefined
   >(
     parameters: BuildInitiateWithdrawalParameters<
       chain,
       account,
       chainOverride,
       accountOverride
-    >,
-  ) => Promise<BuildInitiateWithdrawalReturnType<account, accountOverride>>
+    >
+  ) => Promise<BuildInitiateWithdrawalReturnType<account, accountOverride>>;
   /**
    * Estimates gas required to initiate a [deposit transaction](https://github.com/ethereum-optimism/optimism/blob/develop/specs/deposits.md) on an L1, which executes a transaction on L2.
    *
@@ -159,14 +159,14 @@ export type PublicActionsL1<
    * })
    */
   estimateDepositTransactionGas: <
-    chainOverride extends Chain | undefined = undefined,
+    chainOverride extends Chain | undefined = undefined
   >(
     parameters: EstimateDepositTransactionGasParameters<
       chain,
       account,
       chainOverride
-    >,
-  ) => Promise<EstimateDepositTransactionGasReturnType>
+    >
+  ) => Promise<EstimateDepositTransactionGasReturnType>;
   /**
    * Estimates gas required to prove a withdrawal that occurred on an L2.
    *
@@ -196,14 +196,14 @@ export type PublicActionsL1<
    * })
    */
   estimateProveWithdrawalGas: <
-    chainOverride extends Chain | undefined = undefined,
+    chainOverride extends Chain | undefined = undefined
   >(
     parameters: EstimateProveWithdrawalGasParameters<
       chain,
       account,
       chainOverride
-    >,
-  ) => Promise<EstimateProveWithdrawalGasReturnType>
+    >
+  ) => Promise<EstimateProveWithdrawalGasReturnType>;
   /**
    * Estimates gas required to finalize a withdrawal that occurred on an L2.
    *
@@ -230,14 +230,14 @@ export type PublicActionsL1<
    * })
    */
   estimateFinalizeWithdrawalGas: <
-    chainOverride extends Chain | undefined = undefined,
+    chainOverride extends Chain | undefined = undefined
   >(
     parameters: EstimateFinalizeWithdrawalGasParameters<
       chain,
       account,
       chainOverride
-    >,
-  ) => Promise<EstimateFinalizeWithdrawalGasReturnType>
+    >
+  ) => Promise<EstimateFinalizeWithdrawalGasReturnType>;
   /**
    * Retrieves a valid dispute game on an L2 that occurred after a provided L2 block number.
    *
@@ -262,8 +262,8 @@ export type PublicActionsL1<
    * })
    */
   getGame: <chainOverride extends Chain | undefined = undefined>(
-    parameters: GetGameParameters<chain, chainOverride>,
-  ) => Promise<GetGameReturnType>
+    parameters: GetGameParameters<chain, chainOverride>
+  ) => Promise<GetGameReturnType>;
   /**
    * Retrieves dispute games for an L2.
    *
@@ -287,8 +287,8 @@ export type PublicActionsL1<
    * })
    */
   getGames: <chainOverride extends Chain | undefined = undefined>(
-    parameters: GetGamesParameters<chain, chainOverride>,
-  ) => Promise<GetGamesReturnType>
+    parameters: GetGamesParameters<chain, chainOverride>
+  ) => Promise<GetGamesReturnType>;
   /**
    * Retrieves the first L2 output proposal that occurred after a provided block number. Used for the [Withdrawal](/op-stack/guides/withdrawals) flow.
    *
@@ -314,8 +314,8 @@ export type PublicActionsL1<
    * })
    */
   getL2Output: <chainOverride extends Chain | undefined = undefined>(
-    parameters: GetL2OutputParameters<chain, chainOverride>,
-  ) => Promise<GetL2OutputReturnType>
+    parameters: GetL2OutputParameters<chain, chainOverride>
+  ) => Promise<GetL2OutputReturnType>;
   /**
    * Retrieves the current version of the Portal contract.
    *
@@ -343,8 +343,8 @@ export type PublicActionsL1<
    * console.log('Fault proofs are not enabled on this version of optimism')
    */
   getPortalVersion: <chainOverride extends Chain | undefined = undefined>(
-    parameters: GetPortalVersionParameters<chain, chainOverride>,
-  ) => Promise<GetPortalVersionReturnType>
+    parameters: GetPortalVersionParameters<chain, chainOverride>
+  ) => Promise<GetPortalVersionReturnType>;
   /**
    * Returns the time until the withdrawal transaction can be finalized. Used for the [Withdrawal](/op-stack/guides/withdrawals) flow.
    *
@@ -381,8 +381,8 @@ export type PublicActionsL1<
    * })
    */
   getTimeToFinalize: <chainOverride extends Chain | undefined = undefined>(
-    parameters: GetTimeToFinalizeParameters<chain, chainOverride>,
-  ) => Promise<GetTimeToFinalizeReturnType>
+    parameters: GetTimeToFinalizeParameters<chain, chainOverride>
+  ) => Promise<GetTimeToFinalizeReturnType>;
   /**
    * Returns the time until the next L2 dispute game (after the provided block number) is submitted.
    * Used for the [Withdrawal](/op-stack/guides/withdrawals) flow.
@@ -409,8 +409,8 @@ export type PublicActionsL1<
    * })
    */
   getTimeToNextGame: <chainOverride extends Chain | undefined = undefined>(
-    parameters: GetTimeToNextGameParameters<chain, chainOverride>,
-  ) => Promise<GetTimeToNextGameReturnType>
+    parameters: GetTimeToNextGameParameters<chain, chainOverride>
+  ) => Promise<GetTimeToNextGameReturnType>;
   /**
    * Returns the time until the next L2 output (after a provided block number) is submitted. Used for the [Withdrawal](/op-stack/guides/withdrawals) flow.
    *
@@ -441,8 +441,8 @@ export type PublicActionsL1<
    * })
    */
   getTimeToNextL2Output: <chainOverride extends Chain | undefined = undefined>(
-    parameters: GetTimeToNextL2OutputParameters<chain, chainOverride>,
-  ) => Promise<GetTimeToNextL2OutputReturnType>
+    parameters: GetTimeToNextL2OutputParameters<chain, chainOverride>
+  ) => Promise<GetTimeToNextL2OutputReturnType>;
   /**
    * Returns the time until the withdrawal transaction can be finalized. Used for the [Withdrawal](/op-stack/guides/withdrawals) flow.
    *
@@ -479,8 +479,8 @@ export type PublicActionsL1<
    * })
    */
   getTimeToProve: <chainOverride extends Chain | undefined = undefined>(
-    parameters: GetTimeToProveParameters<chain, chainOverride>,
-  ) => Promise<GetTimeToProveReturnType>
+    parameters: GetTimeToProveParameters<chain, chainOverride>
+  ) => Promise<GetTimeToProveReturnType>;
   /**
    * Returns the current status of a withdrawal. Used for the [Withdrawal](/op-stack/guides/withdrawals) flow.
    *
@@ -512,8 +512,8 @@ export type PublicActionsL1<
    * })
    */
   getWithdrawalStatus: <chainOverride extends Chain | undefined = undefined>(
-    parameters: GetWithdrawalStatusParameters<chain, chainOverride>,
-  ) => Promise<GetWithdrawalStatusReturnType>
+    parameters: GetWithdrawalStatusParameters<chain, chainOverride>
+  ) => Promise<GetWithdrawalStatusReturnType>;
   /**
    * Waits for the next L2 output (after the provided block number) to be submitted.
    *
@@ -538,8 +538,8 @@ export type PublicActionsL1<
    * })
    */
   waitForNextGame: <chainOverride extends Chain | undefined = undefined>(
-    parameters: WaitForNextGameParameters<chain, chainOverride>,
-  ) => Promise<WaitForNextGameReturnType>
+    parameters: WaitForNextGameParameters<chain, chainOverride>
+  ) => Promise<WaitForNextGameReturnType>;
   /**
    * Waits for the next L2 output (after the provided block number) to be submitted.
    *
@@ -570,8 +570,8 @@ export type PublicActionsL1<
    * })
    */
   waitForNextL2Output: <chainOverride extends Chain | undefined = undefined>(
-    parameters: WaitForNextL2OutputParameters<chain, chainOverride>,
-  ) => Promise<WaitForNextL2OutputReturnType>
+    parameters: WaitForNextL2OutputParameters<chain, chainOverride>
+  ) => Promise<WaitForNextL2OutputReturnType>;
   /**
    * Waits until the withdrawal transaction can be finalized. Used for the [Withdrawal](/op-stack/guides/withdrawals) flow.
    *
@@ -607,8 +607,8 @@ export type PublicActionsL1<
    * })
    */
   waitToFinalize: <chainOverride extends Chain | undefined = undefined>(
-    parameters: WaitToFinalizeParameters<chain, chainOverride>,
-  ) => Promise<WaitToFinalizeReturnType>
+    parameters: WaitToFinalizeParameters<chain, chainOverride>
+  ) => Promise<WaitToFinalizeReturnType>;
   /**
    * Waits until the L2 withdrawal transaction is provable. Used for the [Withdrawal](/op-stack/guides/withdrawals) flow.
    *
@@ -640,9 +640,9 @@ export type PublicActionsL1<
    * })
    */
   waitToProve: <chainOverride extends Chain | undefined = undefined>(
-    parameters: WaitToProveParameters<chain, chainOverride>,
-  ) => Promise<WaitToProveReturnType>
-}
+    parameters: WaitToProveParameters<chain, chainOverride>
+  ) => Promise<WaitToProveReturnType>;
+};
 
 /**
  * A suite of Public Actions for suited for development with Layer 2 (OP Stack) chains.
@@ -663,9 +663,9 @@ export function publicActionsL1() {
   return <
     transport extends Transport,
     chain extends Chain | undefined = Chain | undefined,
-    account extends Account | undefined = Account | undefined,
+    account extends Account | undefined = Account | undefined
   >(
-    client: Client<transport, chain, account>,
+    client: Client<transport, chain, account>
   ): PublicActionsL1<chain, account> => {
     return {
       buildInitiateWithdrawal: (args) => buildInitiateWithdrawal(client, args),
@@ -688,6 +688,6 @@ export function publicActionsL1() {
       waitForNextL2Output: (args) => waitForNextL2Output(client, args),
       waitToFinalize: (args) => waitToFinalize(client, args),
       waitToProve: (args) => waitToProve(client, args),
-    }
-  }
+    };
+  };
 }

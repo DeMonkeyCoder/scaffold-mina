@@ -1,31 +1,31 @@
-import type { Address } from 'abitype'
-import type { Hash } from '../../../types/misc'
-import { encodeAbiParameters } from '../../../utils/abi/encodeAbiParameters'
-import { concat } from '../../../utils/data/concat'
-import { pad } from '../../../utils/data/pad'
-import { numberToHex } from '../../../utils/encoding/toHex'
-import { keccak256 } from '../../../utils/hash/keccak256'
-import type { EntryPointVersion } from '../../types/entryPointVersion'
-import type { UserOperation } from '../../types/userOperation'
+import type { Address } from "@/lib/connect/viem";
+import type { Hash } from "../../../types/misc";
+import { encodeAbiParameters } from "../../../utils/abi/encodeAbiParameters";
+import { concat } from "../../../utils/data/concat";
+import { pad } from "../../../utils/data/pad";
+import { numberToHex } from "../../../utils/encoding/toHex";
+import { keccak256 } from "../../../utils/hash/keccak256";
+import type { EntryPointVersion } from "../../types/entryPointVersion";
+import type { UserOperation } from "../../types/userOperation";
 
 export type GetUserOperationHashParameters<
-  entryPointVersion extends EntryPointVersion = EntryPointVersion,
+  entryPointVersion extends EntryPointVersion = EntryPointVersion
 > = {
-  chainId: number
-  entryPointAddress: Address
-  entryPointVersion: entryPointVersion | EntryPointVersion
-  userOperation: UserOperation<entryPointVersion>
-}
+  chainId: string;
+  entryPointAddress: Address;
+  entryPointVersion: entryPointVersion | EntryPointVersion;
+  userOperation: UserOperation<entryPointVersion>;
+};
 
-export type GetUserOperationHashReturnType = Hash
+export type GetUserOperationHashReturnType = Hash;
 
 export function getUserOperationHash<
-  entryPointVersion extends EntryPointVersion,
+  entryPointVersion extends EntryPointVersion
 >(
-  parameters: GetUserOperationHashParameters<entryPointVersion>,
+  parameters: GetUserOperationHashParameters<entryPointVersion>
 ): GetUserOperationHashReturnType {
-  const { chainId, entryPointAddress, entryPointVersion } = parameters
-  const userOperation = parameters.userOperation as UserOperation
+  const { chainId, entryPointAddress, entryPointVersion } = parameters;
+  const userOperation = parameters.userOperation as UserOperation;
   const {
     callData,
     callGasLimit,
@@ -37,53 +37,53 @@ export function getUserOperationHash<
     preVerificationGas,
     sender,
     verificationGasLimit,
-  } = userOperation
+  } = userOperation;
 
   const packedUserOp = (() => {
-    if (entryPointVersion === '0.6') {
+    if (entryPointVersion === "0.6") {
       return encodeAbiParameters(
         [
-          { type: 'address' },
-          { type: 'uint256' },
-          { type: 'bytes32' },
-          { type: 'bytes32' },
-          { type: 'uint256' },
-          { type: 'uint256' },
-          { type: 'uint256' },
-          { type: 'uint256' },
-          { type: 'uint256' },
-          { type: 'bytes32' },
+          { type: "address" },
+          { type: "uint256" },
+          { type: "bytes32" },
+          { type: "bytes32" },
+          { type: "uint256" },
+          { type: "uint256" },
+          { type: "uint256" },
+          { type: "uint256" },
+          { type: "uint256" },
+          { type: "bytes32" },
         ],
         [
           sender,
           nonce,
-          keccak256(initCode ?? '0x'),
-          keccak256(callData ?? '0x'),
+          keccak256(initCode ?? "0x"),
+          keccak256(callData ?? "0x"),
           callGasLimit,
           verificationGasLimit,
           preVerificationGas,
           maxFeePerGas,
           maxPriorityFeePerGas,
-          keccak256(paymasterAndData ?? '0x'),
-        ],
-      )
+          keccak256(paymasterAndData ?? "0x"),
+        ]
+      );
     }
 
-    if (entryPointVersion === '0.7') {
+    if (entryPointVersion === "0.7") {
       const accountGasLimits = concat([
         pad(numberToHex(userOperation.verificationGasLimit), { size: 16 }),
         pad(numberToHex(userOperation.callGasLimit), { size: 16 }),
-      ])
-      const callData_hashed = keccak256(callData)
+      ]);
+      const callData_hashed = keccak256(callData);
       const gasFees = concat([
         pad(numberToHex(userOperation.maxPriorityFeePerGas), { size: 16 }),
         pad(numberToHex(userOperation.maxFeePerGas), { size: 16 }),
-      ])
+      ]);
       const initCode_hashed = keccak256(
         userOperation.factory && userOperation.factoryData
           ? concat([userOperation.factory, userOperation.factoryData])
-          : '0x',
-      )
+          : "0x"
+      );
       const paymasterAndData_hashed = keccak256(
         userOperation.paymaster
           ? concat([
@@ -92,26 +92,26 @@ export function getUserOperationHash<
                 numberToHex(userOperation.paymasterVerificationGasLimit || 0),
                 {
                   size: 16,
-                },
+                }
               ),
               pad(numberToHex(userOperation.paymasterPostOpGasLimit || 0), {
                 size: 16,
               }),
-              userOperation.paymasterData || '0x',
+              userOperation.paymasterData || "0x",
             ])
-          : '0x',
-      )
+          : "0x"
+      );
 
       return encodeAbiParameters(
         [
-          { type: 'address' },
-          { type: 'uint256' },
-          { type: 'bytes32' },
-          { type: 'bytes32' },
-          { type: 'bytes32' },
-          { type: 'uint256' },
-          { type: 'bytes32' },
-          { type: 'bytes32' },
+          { type: "address" },
+          { type: "uint256" },
+          { type: "bytes32" },
+          { type: "bytes32" },
+          { type: "bytes32" },
+          { type: "uint256" },
+          { type: "bytes32" },
+          { type: "bytes32" },
         ],
         [
           sender,
@@ -122,17 +122,17 @@ export function getUserOperationHash<
           preVerificationGas,
           gasFees,
           paymasterAndData_hashed,
-        ],
-      )
+        ]
+      );
     }
 
-    throw new Error(`entryPointVersion "${entryPointVersion}" not supported.`)
-  })()
+    throw new Error(`entryPointVersion "${entryPointVersion}" not supported.`);
+  })();
 
   return keccak256(
     encodeAbiParameters(
-      [{ type: 'bytes32' }, { type: 'address' }, { type: 'uint256' }],
-      [keccak256(packedUserOp), entryPointAddress, BigInt(chainId)],
-    ),
-  )
+      [{ type: "bytes32" }, { type: "address" }, { type: "uint256" }],
+      [keccak256(packedUserOp), entryPointAddress, BigInt(chainId)]
+    )
+  );
 }

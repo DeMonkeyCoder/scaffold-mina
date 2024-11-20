@@ -31,8 +31,8 @@ import { useAccount } from "../useAccount";
 import { useChainId } from "../useChainId";
 import { useConfig } from "../useConfig";
 import {
-  type UseWriteContractParameters,
   useWriteContract,
+  type UseWriteContractParameters,
   type UseWriteContractReturnType as wagmi_UseWriteContractReturnType,
 } from "../useWriteContract";
 
@@ -40,13 +40,13 @@ type stateMutability = "nonpayable" | "payable";
 
 export type CreateUseWriteContractParameters<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined = undefined,
+  address extends Address | Record<string, Address> | undefined = undefined,
   functionName extends
     | ContractFunctionName<abi, stateMutability>
     | undefined = undefined
 > = {
   abi: abi | Abi | readonly unknown[];
-  address?: address | Address | Record<number, Address> | undefined;
+  address?: address | Address | Record<string, Address> | undefined;
   functionName?:
     | functionName
     | ContractFunctionName<abi, stateMutability>
@@ -55,7 +55,7 @@ export type CreateUseWriteContractParameters<
 
 export type CreateUseWriteContractReturnType<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined,
+  address extends Address | Record<string, Address> | undefined,
   functionName extends ContractFunctionName<abi, stateMutability> | undefined
 > = <config extends Config = ResolvedRegister["config"], context = unknown>(
   parameters?: UseWriteContractParameters<config, context>
@@ -145,7 +145,7 @@ export function createUseWriteContract<
   const abi extends Abi | readonly unknown[],
   const address extends
     | Address
-    | Record<number, Address>
+    | Record<string, Address>
     | undefined = undefined,
   functionName extends
     | ContractFunctionName<abi, stateMutability>
@@ -164,7 +164,7 @@ export function createUseWriteContract<
         ...(result as any),
         writeContract: useCallback(
           (...args: Args) => {
-            let chainId: number | undefined;
+            let chainId: string | undefined;
             if (args[0].chainId) chainId = args[0].chainId;
             else if (args[0].account && args[0].account === account.address)
               chainId = account.chainId;
@@ -191,7 +191,7 @@ export function createUseWriteContract<
         ),
         writeContractAsync: useCallback(
           (...args: Args) => {
-            let chainId: number | undefined;
+            let chainId: string | undefined;
             if (args[0].chainId) chainId = args[0].chainId;
             else if (args[0].account && args[0].account === account.address)
               chainId = account.chainId;
@@ -259,7 +259,7 @@ type Variables<
   args extends ContractFunctionArgs<abi, stateMutability, name>,
   config extends Config,
   chainId extends config["chains"][number]["id"],
-  address extends Address | Record<number, Address> | undefined,
+  address extends Address | Record<string, Address> | undefined,
   ///
   allFunctionNames = ContractFunctionName<abi, stateMutability>,
   chains extends readonly Chain[] = SelectChains<config, chainId>,
@@ -282,7 +282,7 @@ type Variables<
       omittedProperties | "chain"
     >;
   }[number] &
-    (address extends Record<number, Address>
+    (address extends Record<string, Address>
       ? {
           chainId?:
             | keyof address

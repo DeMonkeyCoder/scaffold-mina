@@ -1,4 +1,4 @@
-import type { Address } from "abitype";
+import type { Address } from "@/lib/connect/viem";
 
 import type { EstimateFeesPerGasReturnType } from "../actions/public/estimateFeesPerGas";
 import type { PrepareTransactionRequestParameters } from "../actions/wallet/prepareTransactionRequest";

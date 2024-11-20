@@ -14,29 +14,22 @@ import type {
   ChainIdParameter,
   ConnectorParameter,
 } from "../../types/properties";
-import type {
-  Compute,
-  UnionCompute,
-  UnionStrictOmit,
-} from "../../types/utils";
+import type { Compute, UnionCompute, UnionStrictOmit } from "../../types/utils";
 import { getAccount } from "../getAccount";
 import { getChainId } from "../getChainId";
-import {
-  type WriteContractReturnType,
-  writeContract,
-} from "../writeContract";
+import { writeContract, type WriteContractReturnType } from "../writeContract";
 
 type stateMutability = "nonpayable" | "payable";
 
 export type CreateWriteContractParameters<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined = undefined,
+  address extends Address | Record<string, Address> | undefined = undefined,
   functionName extends
     | ContractFunctionName<abi, stateMutability>
     | undefined = undefined
 > = {
   abi: abi | Abi | readonly unknown[];
-  address?: address | Address | Record<number, Address> | undefined;
+  address?: address | Address | Record<string, Address> | undefined;
   functionName?:
     | functionName
     | ContractFunctionName<abi, stateMutability>
@@ -45,7 +38,7 @@ export type CreateWriteContractParameters<
 
 export type CreateWriteContractReturnType<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined,
+  address extends Address | Record<string, Address> | undefined,
   functionName extends ContractFunctionName<abi, stateMutability> | undefined
 > = <
   config extends Config,
@@ -78,7 +71,7 @@ export type CreateWriteContractReturnType<
         omittedProperties | "chain"
       >;
     }[number] &
-      (address extends Record<number, Address>
+      (address extends Record<string, Address>
         ? {
             chainId?:
               | keyof address
@@ -94,7 +87,7 @@ export function createWriteContract<
   const abi extends Abi | readonly unknown[],
   const address extends
     | Address
-    | Record<number, Address>
+    | Record<string, Address>
     | undefined = undefined,
   functionName extends
     | ContractFunctionName<abi, stateMutability>
@@ -107,7 +100,7 @@ export function createWriteContract<
       const configChainId = getChainId(config);
       const account = getAccount(config);
 
-      let chainId: number | undefined;
+      let chainId: string | undefined;
       if (parameters.chainId) chainId = parameters.chainId;
       else if (
         (parameters as unknown as { account: Address | Account | undefined })
@@ -126,7 +119,9 @@ export function createWriteContract<
       return writeContract(config, {
         ...(parameters as any),
         ...(c.functionName ? { functionName: c.functionName } : {}),
-        address: chainId ? c.address?.[chainId] : undefined,
+        address: chainId
+          ? (c.address as Record<string, Address> | undefined)?.[chainId]
+          : undefined,
         abi: c.abi,
       });
     };

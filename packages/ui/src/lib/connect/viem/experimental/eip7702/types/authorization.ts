@@ -1,23 +1,23 @@
-import type { Address } from 'abitype'
-import type { Hex, Signature } from '../../../types/misc'
-import type { ExactPartial } from '../../../types/utils'
+import type { Address } from "@/lib/connect/viem";
+import type { Hex, Signature } from "../../../types/misc";
+import type { ExactPartial } from "../../../types/utils";
 
 export type Authorization<uint32 = number, signed extends boolean = false> = {
   /** Address of the contract to set as code for the Authority. */
-  contractAddress: Address
+  contractAddress: Address;
   /** Chain ID to authorize. */
-  chainId: uint32
+  chainId: uint32;
   /** Nonce of the Authority to authorize. */
-  nonce: uint32
-} & (signed extends true ? Signature : ExactPartial<Signature>)
+  nonce: uint32;
+} & (signed extends true ? Signature : ExactPartial<Signature>);
 export type AuthorizationList<
   uint32 = number,
-  signed extends boolean = false,
-> = readonly Authorization<uint32, signed>[]
+  signed extends boolean = false
+> = readonly Authorization<uint32, signed>[];
 
-export type SignedAuthorization<uint32 = number> = Authorization<uint32, true>
+export type SignedAuthorization<uint32 = number> = Authorization<uint32, true>;
 export type SignedAuthorizationList<uint32 = number> =
-  readonly SignedAuthorization<uint32>[]
+  readonly SignedAuthorization<uint32>[];
 
 export type SerializedAuthorization = readonly [
   chainId: Hex,
@@ -25,6 +25,6 @@ export type SerializedAuthorization = readonly [
   nonce: Hex,
   yParity: Hex,
   r: Hex,
-  s: Hex,
-]
-export type SerializedAuthorizationList = readonly SerializedAuthorization[]
+  s: Hex
+];
+export type SerializedAuthorizationList = readonly SerializedAuthorization[];

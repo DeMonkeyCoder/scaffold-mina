@@ -17,7 +17,7 @@ export type ConnectorEventMap = {
     accounts?: readonly Address[] | undefined;
     chainId?: number | undefined;
   };
-  connect: { accounts: readonly Address[]; chainId: number };
+  connect: { accounts: readonly Address[]; chainId: string };
   disconnect: never;
   error: { error: Error };
   message: { type: string; data?: unknown | undefined };
@@ -43,11 +43,11 @@ export type CreateConnectorFn<
     setup?(): Promise<void>;
     connect(
       parameters?:
-        | { chainId?: number | undefined; isReconnecting?: boolean | undefined }
+        | { chainId?: string | undefined; isReconnecting?: boolean | undefined }
         | undefined
     ): Promise<{
       accounts: readonly Address[];
-      chainId: number;
+      chainId: string;
     }>;
     disconnect(): Promise<void>;
     getAccounts(): Promise<readonly Address[]>;
@@ -64,7 +64,7 @@ export type CreateConnectorFn<
         addEthereumChainParameter?:
           | ExactPartial<StrictOmit<AddEthereumChainParameter, "chainId">>
           | undefined;
-        chainId: number;
+        chainId: string;
       }>
     ): Promise<Chain>;
 

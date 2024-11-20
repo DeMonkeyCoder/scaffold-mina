@@ -1,37 +1,37 @@
-import type { Address, TypedDataDomain } from 'abitype'
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
+import type { Address, TypedDataDomain } from "abitype";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
 import {
   Eip712DomainNotFoundError,
   type Eip712DomainNotFoundErrorType,
-} from '../../errors/eip712'
-import type { ErrorType } from '../../errors/utils'
-import type { Hex } from '../../types/misc'
-import type { RequiredBy } from '../../types/utils'
-import { getAction } from '../../utils/getAction'
+} from "../../errors/eip712";
+import type { ErrorType } from "../../errors/utils";
+import type { Hex } from "../../types/misc";
+import type { RequiredBy } from "../../types/utils";
+import { getAction } from "../../utils/getAction";
 import {
   type ReadContractErrorType,
   type ReadContractParameters,
   readContract,
-} from './readContract'
+} from "./readContract";
 
 export type GetEip712DomainParameters = {
-  address: Address
-} & Pick<ReadContractParameters, 'factory' | 'factoryData'>
+  address: Address;
+} & Pick<ReadContractParameters, "factory" | "factoryData">;
 
 export type GetEip712DomainReturnType = {
   domain: RequiredBy<
     TypedDataDomain,
-    'chainId' | 'name' | 'verifyingContract' | 'version'
-  >
-  fields: Hex
-  extensions: readonly bigint[]
-}
+    "chainId" | "name" | "verifyingContract" | "version"
+  >;
+  fields: Hex;
+  extensions: readonly bigint[];
+};
 
 export type GetEip712DomainErrorType =
   | Eip712DomainNotFoundErrorType
   | ReadContractErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Reads the EIP-712 domain from a contract, based on the ERC-5267 specification.
@@ -67,9 +67,9 @@ export type GetEip712DomainErrorType =
  */
 export async function getEip712Domain(
   client: Client<Transport>,
-  parameters: GetEip712DomainParameters,
+  parameters: GetEip712DomainParameters
 ): Promise<GetEip712DomainReturnType> {
-  const { address, factory, factoryData } = parameters
+  const { address, factory, factoryData } = parameters;
 
   try {
     const [
@@ -83,52 +83,52 @@ export async function getEip712Domain(
     ] = await getAction(
       client,
       readContract,
-      'readContract',
+      "readContract"
     )({
       abi,
       address,
-      functionName: 'eip712Domain',
+      functionName: "eip712Domain",
       factory,
       factoryData,
-    })
+    });
 
     return {
       domain: {
         name,
         version,
-        chainId: Number(chainId),
+        chainId: string(chainId),
         verifyingContract,
         salt,
       },
       extensions,
       fields,
-    }
+    };
   } catch (e) {
-    const error = e as ReadContractErrorType
+    const error = e as ReadContractErrorType;
     if (
-      error.name === 'ContractFunctionExecutionError' &&
-      error.cause.name === 'ContractFunctionZeroDataError'
+      error.name === "ContractFunctionExecutionError" &&
+      error.cause.name === "ContractFunctionZeroDataError"
     ) {
-      throw new Eip712DomainNotFoundError({ address })
+      throw new Eip712DomainNotFoundError({ address });
     }
-    throw error
+    throw error;
   }
 }
 
 const abi = [
   {
     inputs: [],
-    name: 'eip712Domain',
+    name: "eip712Domain",
     outputs: [
-      { name: 'fields', type: 'bytes1' },
-      { name: 'name', type: 'string' },
-      { name: 'version', type: 'string' },
-      { name: 'chainId', type: 'uint256' },
-      { name: 'verifyingContract', type: 'address' },
-      { name: 'salt', type: 'bytes32' },
-      { name: 'extensions', type: 'uint256[]' },
+      { name: "fields", type: "bytes1" },
+      { name: "name", type: "string" },
+      { name: "version", type: "string" },
+      { name: "chainId", type: "uint256" },
+      { name: "verifyingContract", type: "address" },
+      { name: "salt", type: "bytes32" },
+      { name: "extensions", type: "uint256[]" },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
-] as const
+] as const;

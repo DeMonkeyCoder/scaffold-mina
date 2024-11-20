@@ -1,114 +1,114 @@
-import type { Address } from 'abitype'
-import { BaseError } from '../../../errors/base'
+import type { Address } from "@/lib/connect/viem";
+import { BaseError } from "../../../errors/base";
 import {
   ContractFunctionExecutionError,
   ContractFunctionRevertedError,
   ContractFunctionZeroDataError,
-} from '../../../errors/contract'
-import type { ErrorType } from '../../../errors/utils'
-import type { ContractFunctionParameters } from '../../../types/contract'
-import type { Hex } from '../../../types/misc'
-import type { OneOf } from '../../../types/utils'
-import { decodeErrorResult } from '../../../utils/abi/decodeErrorResult'
-import type { GetContractErrorReturnType } from '../../../utils/errors/getContractError'
-import { ExecutionRevertedError } from '../../errors/bundler'
+} from "../../../errors/contract";
+import type { ErrorType } from "../../../errors/utils";
+import type { ContractFunctionParameters } from "../../../types/contract";
+import type { Hex } from "../../../types/misc";
+import type { OneOf } from "../../../types/utils";
+import { decodeErrorResult } from "../../../utils/abi/decodeErrorResult";
+import type { GetContractErrorReturnType } from "../../../utils/errors/getContractError";
+import { ExecutionRevertedError } from "../../errors/bundler";
 import {
   UserOperationExecutionError,
   type UserOperationExecutionErrorType,
-} from '../../errors/userOperation'
+} from "../../errors/userOperation";
 import type {
   UserOperation,
   UserOperationCall,
-} from '../../types/userOperation'
+} from "../../types/userOperation";
 import {
   type GetBundlerErrorParameters,
   getBundlerError,
-} from './getBundlerError'
+} from "./getBundlerError";
 
 type Call = OneOf<
   | UserOperationCall
   | (ContractFunctionParameters & {
-      to: Address
+      to: Address;
     })
->
+>;
 
-type GetNodeErrorReturnType = ErrorType
+type GetNodeErrorReturnType = ErrorType;
 
 export type GetUserOperationErrorParameters = UserOperation & {
-  calls?: readonly unknown[] | undefined
-  docsPath?: string | undefined
-}
+  calls?: readonly unknown[] | undefined;
+  docsPath?: string | undefined;
+};
 
 export type GetUserOperationErrorReturnType<cause = ErrorType> = Omit<
   UserOperationExecutionErrorType,
-  'cause'
-> & { cause: cause | GetNodeErrorReturnType }
+  "cause"
+> & { cause: cause | GetNodeErrorReturnType };
 
-export type GetUserOperationErrorErrorType = ErrorType
+export type GetUserOperationErrorErrorType = ErrorType;
 
 export function getUserOperationError<err extends ErrorType<string>>(
   err: err,
-  { calls, docsPath, ...args }: GetUserOperationErrorParameters,
+  { calls, docsPath, ...args }: GetUserOperationErrorParameters
 ): GetUserOperationErrorReturnType<err> {
   const cause = (() => {
     const cause = getBundlerError(
       err as {} as BaseError,
-      args as GetBundlerErrorParameters,
-    )
+      args as GetBundlerErrorParameters
+    );
     if (cause instanceof ExecutionRevertedError) {
-      const revertData = getRevertData(cause)
+      const revertData = getRevertData(cause);
       const contractCalls = calls?.filter(
-        (call: any) => call.abi || call.data,
-      ) as readonly Call[]
+        (call: any) => call.abi || call.data
+      ) as readonly Call[];
       if (revertData && contractCalls.length > 0)
-        return getContractError({ calls: contractCalls, revertData })
+        return getContractError({ calls: contractCalls, revertData });
     }
-    return cause
-  })()
+    return cause;
+  })();
   return new UserOperationExecutionError(cause, {
     docsPath,
     ...args,
-  }) as GetUserOperationErrorReturnType<err>
+  }) as GetUserOperationErrorReturnType<err>;
 }
 
 /////////////////////////////////////////////////////////////////////////////////
 
 function getRevertData(error: BaseError) {
-  let revertData: Hex | undefined
+  let revertData: Hex | undefined;
   error.walk((e) => {
-    const error = e as any
+    const error = e as any;
     if (
-      typeof error.data === 'string' ||
-      typeof error.data?.revertData === 'string' ||
-      (!(error instanceof BaseError) && typeof error.message === 'string')
+      typeof error.data === "string" ||
+      typeof error.data?.revertData === "string" ||
+      (!(error instanceof BaseError) && typeof error.message === "string")
     ) {
       const match = (
         error.data?.revertData ||
         error.data ||
         error.message
-      ).match?.(/(0x[A-Za-z0-9]*)/)
+      ).match?.(/(0x[A-Za-z0-9]*)/);
       if (match) {
-        revertData = match[1]
-        return true
+        revertData = match[1];
+        return true;
       }
     }
-    return false
-  })
-  return revertData
+    return false;
+  });
+  return revertData;
 }
 
 function getContractError(parameters: {
-  calls: readonly Call[]
-  revertData: Hex
+  calls: readonly Call[];
+  revertData: Hex;
 }) {
-  const { calls, revertData } = parameters
+  const { calls, revertData } = parameters;
 
   const { abi, functionName, args, to } = (() => {
     const contractCalls = calls?.filter((call) =>
-      Boolean(call.abi),
-    ) as readonly (ContractFunctionParameters & { to: Address })[]
+      Boolean(call.abi)
+    ) as readonly (ContractFunctionParameters & { to: Address })[];
 
-    if (contractCalls.length === 1) return contractCalls[0]
+    if (contractCalls.length === 1) return contractCalls[0];
 
     const compatContractCalls = contractCalls.filter((call) => {
       try {
@@ -116,38 +116,38 @@ function getContractError(parameters: {
           decodeErrorResult({
             abi: call.abi,
             data: revertData,
-          }),
-        )
+          })
+        );
       } catch {
-        return false
+        return false;
       }
-    })
-    if (compatContractCalls.length === 1) return compatContractCalls[0]
+    });
+    if (compatContractCalls.length === 1) return compatContractCalls[0];
 
     return {
       abi: [],
       functionName: contractCalls.reduce(
-        (acc, call) => `${acc ? `${acc} | ` : ''}${call.functionName}`,
-        '',
+        (acc, call) => `${acc ? `${acc} | ` : ""}${call.functionName}`,
+        ""
       ),
       args: undefined,
       to: undefined,
-    }
-  })()
+    };
+  })();
 
   const cause = (() => {
-    if (revertData === '0x')
-      return new ContractFunctionZeroDataError({ functionName })
+    if (revertData === "0x")
+      return new ContractFunctionZeroDataError({ functionName });
     return new ContractFunctionRevertedError({
       abi,
       data: revertData,
       functionName,
-    })
-  })()
+    });
+  })();
   return new ContractFunctionExecutionError(cause as BaseError, {
     abi,
     args,
     contractAddress: to,
     functionName,
-  }) as GetContractErrorReturnType
+  }) as GetContractErrorReturnType;
 }

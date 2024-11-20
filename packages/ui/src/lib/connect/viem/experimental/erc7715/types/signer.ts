@@ -1,35 +1,35 @@
-import type { Address } from 'abitype'
-import type { OneOf } from '../../../types/utils'
+import type { Address } from "@/lib/connect/viem";
+import type { OneOf } from "../../../types/utils";
 
 /** @internal */
 export type AccountSigner = {
-  type: 'account'
+  type: "account";
   data: {
-    id: Address
-  }
-}
+    id: Address;
+  };
+};
 
 /** @internal */
 export type KeySigner = {
-  type: 'key'
+  type: "key";
   data: {
-    id: string
-  }
-}
+    id: string;
+  };
+};
 
 /** @internal */
 export type MultiKeySigner = {
-  type: 'keys'
+  type: "keys";
   data: {
-    ids: string[]
-  }
-}
+    ids: string[];
+  };
+};
 
 /** @internal */
 export type WalletSigner = {
-  type: 'wallet'
-}
+  type: "wallet";
+};
 
 export type Signer = OneOf<
   AccountSigner | KeySigner | MultiKeySigner | WalletSigner
->
+>;

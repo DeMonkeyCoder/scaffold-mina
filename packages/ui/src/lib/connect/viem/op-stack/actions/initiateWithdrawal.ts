@@ -1,46 +1,42 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 import {
   type WriteContractErrorType,
   type WriteContractParameters,
   writeContract,
-} from '../../actions/wallet/writeContract'
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account, GetAccountParameter } from '../../types/account'
-import type {
-  Chain,
-  DeriveChain,
-  GetChainParameter,
-} from '../../types/chain'
-import type { Hash } from '../../types/misc'
-import type { UnionEvaluate, UnionOmit } from '../../types/utils'
-import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest'
-import { l2ToL1MessagePasserAbi } from '../abis'
-import { contracts } from '../contracts'
-import type { WithdrawalRequest } from '../types/withdrawal'
+} from "../../actions/wallet/writeContract";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account, GetAccountParameter } from "../../types/account";
+import type { Chain, DeriveChain, GetChainParameter } from "../../types/chain";
+import type { Hash } from "../../types/misc";
+import type { UnionEvaluate, UnionOmit } from "../../types/utils";
+import type { FormattedTransactionRequest } from "../../utils/formatters/transactionRequest";
+import { l2ToL1MessagePasserAbi } from "../abis";
+import { contracts } from "../contracts";
+import type { WithdrawalRequest } from "../types/withdrawal";
 import {
   type EstimateInitiateWithdrawalGasErrorType,
   type EstimateInitiateWithdrawalGasParameters,
   estimateInitiateWithdrawalGas,
-} from './estimateInitiateWithdrawalGas'
+} from "./estimateInitiateWithdrawalGas";
 
 export type InitiateWithdrawalParameters<
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
   chainOverride extends Chain | undefined = Chain | undefined,
-  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>,
+  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>
 > = UnionEvaluate<
   UnionOmit<
     FormattedTransactionRequest<_derivedChain>,
-    | 'accessList'
-    | 'data'
-    | 'from'
-    | 'gas'
-    | 'gasPrice'
-    | 'to'
-    | 'type'
-    | 'value'
+    | "accessList"
+    | "data"
+    | "from"
+    | "gas"
+    | "gasPrice"
+    | "to"
+    | "type"
+    | "value"
   >
 > &
   GetAccountParameter<account, Account | Address> &
@@ -49,15 +45,15 @@ export type InitiateWithdrawalParameters<
      * Gas limit for transaction execution on the L2.
      * `null` to skip gas estimation & defer calculation to signer.
      */
-    gas?: bigint | null
+    gas?: bigint | null;
     /** Withdrawal request. Supplied to the L2ToL1MessagePasser `initiateWithdrawal` method. */
-    request: WithdrawalRequest
-  }
-export type InitiateWithdrawalReturnType = Hash
+    request: WithdrawalRequest;
+  };
+export type InitiateWithdrawalReturnType = Hash;
 export type InitiateWithdrawalErrorType =
   | EstimateInitiateWithdrawalGasErrorType
   | WriteContractErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Initiates a [withdrawal](https://community.optimism.io/docs/protocol/withdrawal-flow/#withdrawal-initiating-transaction) on an L2 to the L1.
@@ -114,10 +110,10 @@ export type InitiateWithdrawalErrorType =
 export async function initiateWithdrawal<
   chain extends Chain | undefined,
   account extends Account | undefined,
-  chainOverride extends Chain | undefined = undefined,
+  chainOverride extends Chain | undefined = undefined
 >(
   client: Client<Transport, chain, account>,
-  parameters: InitiateWithdrawalParameters<chain, account, chainOverride>,
+  parameters: InitiateWithdrawalParameters<chain, account, chainOverride>
 ) {
   const {
     account,
@@ -126,28 +122,28 @@ export async function initiateWithdrawal<
     maxFeePerGas,
     maxPriorityFeePerGas,
     nonce,
-    request: { data = '0x', gas: l1Gas, to, value },
-  } = parameters
+    request: { data = "0x", gas: l1Gas, to, value },
+  } = parameters;
 
   const gas_ =
-    typeof gas !== 'number' && gas !== null
+    typeof gas !== "number" && gas !== null
       ? await estimateInitiateWithdrawalGas(
           client,
-          parameters as EstimateInitiateWithdrawalGasParameters,
+          parameters as EstimateInitiateWithdrawalGasParameters
         )
-      : undefined
+      : undefined;
 
   return writeContract(client, {
     account: account!,
     abi: l2ToL1MessagePasserAbi,
     address: contracts.l2ToL1MessagePasser.address,
     chain,
-    functionName: 'initiateWithdrawal',
+    functionName: "initiateWithdrawal",
     args: [to, l1Gas, data],
     gas: gas_,
     maxFeePerGas,
     maxPriorityFeePerGas,
     nonce,
     value,
-  } satisfies WriteContractParameters as any)
+  } satisfies WriteContractParameters as any);
 }

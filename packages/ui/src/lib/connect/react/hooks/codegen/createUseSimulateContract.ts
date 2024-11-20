@@ -20,29 +20,26 @@ import type {
   ContractFunctionName,
 } from "@/lib/connect/viem";
 
-import type {
-  ConfigParameter,
-  QueryParameter,
-} from "../../types/properties";
+import type { ConfigParameter, QueryParameter } from "../../types/properties";
 import { useAccount } from "../useAccount";
 import { useChainId } from "../useChainId";
 import { useConfig } from "../useConfig";
 import {
-  type UseSimulateContractReturnType,
   useSimulateContract,
+  type UseSimulateContractReturnType,
 } from "../useSimulateContract";
 
 type stateMutability = "nonpayable" | "payable";
 
 export type CreateUseSimulateContractParameters<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined = undefined,
+  address extends Address | Record<string, Address> | undefined = undefined,
   functionName extends
     | ContractFunctionName<abi, stateMutability>
     | undefined = undefined
 > = {
   abi: abi | Abi | readonly unknown[];
-  address?: address | Address | Record<number, Address> | undefined;
+  address?: address | Address | Record<string, Address> | undefined;
   functionName?:
     | functionName
     | ContractFunctionName<abi, stateMutability>
@@ -51,7 +48,7 @@ export type CreateUseSimulateContractParameters<
 
 export type CreateUseSimulateContractReturnType<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined,
+  address extends Address | Record<string, Address> | undefined,
   functionName extends ContractFunctionName<abi, stateMutability> | undefined
 > = <
   name extends functionName extends ContractFunctionName<abi, stateMutability>
@@ -66,7 +63,7 @@ export type CreateUseSimulateContractReturnType<
     abi?: undefined;
     address?: address extends undefined ? Address : undefined;
     functionName?: functionName extends undefined ? name : undefined;
-    chainId?: address extends Record<number, Address>
+    chainId?: address extends Record<string, Address>
       ?
           | keyof address
           | (chainId extends keyof address ? chainId : never)
@@ -97,7 +94,7 @@ export function createUseSimulateContract<
   const abi extends Abi | readonly unknown[],
   const address extends
     | Address
-    | Record<number, Address>
+    | Record<string, Address>
     | undefined = undefined,
   functionName extends
     | ContractFunctionName<abi, stateMutability>

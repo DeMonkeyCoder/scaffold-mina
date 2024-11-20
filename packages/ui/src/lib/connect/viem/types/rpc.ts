@@ -1,4 +1,4 @@
-import type { Address } from "abitype";
+import type { Address } from "@/lib/connect/viem";
 
 import type { RpcAuthorizationList } from "../experimental/eip7702/types/rpc";
 import type {

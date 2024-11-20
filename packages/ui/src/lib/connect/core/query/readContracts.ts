@@ -81,7 +81,7 @@ export function readContractsQueryKey<
 ) {
   const contracts = [];
   for (const contract of (options.contracts ??
-    []) as (ContractFunctionParameters & { chainId: number })[]) {
+    []) as (ContractFunctionParameters & { chainId: string })[]) {
     const { abi: _, ...rest } = contract;
     contracts.push({ ...rest, chainId: rest.chainId ?? options.chainId });
   }

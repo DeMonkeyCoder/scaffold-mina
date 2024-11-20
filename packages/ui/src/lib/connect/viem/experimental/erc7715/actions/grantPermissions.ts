@@ -1,49 +1,49 @@
-import type { Address } from 'abitype'
-import type { Client } from '../../../clients/createClient'
-import type { Transport } from '../../../clients/transports/createTransport'
-import type { Account } from '../../../types/account'
-import type { WalletGrantPermissionsReturnType } from '../../../types/eip1193'
-import type { Hex } from '../../../types/misc'
-import type { OneOf } from '../../../types/utils'
-import { numberToHex, parseAccount } from '../../../utils/index'
-import type { Permission } from '../types/permission'
-import type { Signer } from '../types/signer'
+import type { Address } from "@/lib/connect/viem";
+import type { Client } from "../../../clients/createClient";
+import type { Transport } from "../../../clients/transports/createTransport";
+import type { Account } from "../../../types/account";
+import type { WalletGrantPermissionsReturnType } from "../../../types/eip1193";
+import type { Hex } from "../../../types/misc";
+import type { OneOf } from "../../../types/utils";
+import { numberToHex, parseAccount } from "../../../utils/index";
+import type { Permission } from "../types/permission";
+import type { Signer } from "../types/signer";
 
 export type GrantPermissionsParameters = {
   /** Timestamp (in seconds) that specifies the time by which this session MUST expire. */
-  expiry: number
+  expiry: number;
   /** Set of permissions to grant to the user. */
-  permissions: readonly Permission[]
+  permissions: readonly Permission[];
 } & OneOf<
   | {
       /** Signer to assign the permissions to. */
-      signer?: Signer | undefined
+      signer?: Signer | undefined;
     }
   | {
       /** Account to assign the permissions to. */
-      account?: Address | Account | undefined
+      account?: Address | Account | undefined;
     }
->
+>;
 
 export type GrantPermissionsReturnType = {
   /** Timestamp (in seconds) that specifies the time by which this session MUST expire. */
-  expiry: number
+  expiry: number;
   /** ERC-4337 Factory to deploy smart contract account. */
-  factory?: Hex | undefined
+  factory?: Hex | undefined;
   /** Calldata to use when calling the ERC-4337 Factory. */
-  factoryData?: string | undefined
+  factoryData?: string | undefined;
   /** Set of granted permissions. */
-  grantedPermissions: readonly Permission[]
+  grantedPermissions: readonly Permission[];
   /** Permissions identifier. */
-  permissionsContext: string
+  permissionsContext: string;
   /** Signer attached to the permissions. */
   signerData?:
     | {
-        userOpBuilder?: Hex | undefined
-        submitToAddress?: Hex | undefined
+        userOpBuilder?: Hex | undefined;
+        submitToAddress?: Hex | undefined;
       }
-    | undefined
-}
+    | undefined;
+};
 
 /**
  * Request permissions from a wallet to perform actions on behalf of a user.
@@ -83,49 +83,49 @@ export type GrantPermissionsReturnType = {
  */
 export async function grantPermissions(
   client: Client<Transport>,
-  parameters: GrantPermissionsParameters,
+  parameters: GrantPermissionsParameters
 ): Promise<GrantPermissionsReturnType> {
-  const { account, expiry, permissions, signer } = parameters
+  const { account, expiry, permissions, signer } = parameters;
   const result = await client.request(
     {
-      method: 'wallet_grantPermissions',
+      method: "wallet_grantPermissions",
       params: [
         formatParameters({ account, expiry, permissions, signer } as any),
       ],
     },
-    { retryCount: 0 },
-  )
-  return formatRequest(result) as GrantPermissionsReturnType
+    { retryCount: 0 }
+  );
+  return formatRequest(result) as GrantPermissionsReturnType;
 }
 
 function formatParameters(parameters: GrantPermissionsParameters) {
-  const { expiry, permissions, signer: signer_ } = parameters
+  const { expiry, permissions, signer: signer_ } = parameters;
 
   const account = parameters.account
     ? parseAccount(parameters.account)
-    : undefined
+    : undefined;
 
   const signer = (() => {
-    if (!account && !signer_) return undefined
+    if (!account && !signer_) return undefined;
 
     // JSON-RPC Account as signer.
-    if (account?.type === 'json-rpc')
+    if (account?.type === "json-rpc")
       return {
-        type: 'wallet',
-      }
+        type: "wallet",
+      };
 
     // Local Account as signer.
-    if (account?.type === 'local')
+    if (account?.type === "local")
       return {
-        type: 'account',
+        type: "account",
         data: {
           id: account.address,
         },
-      }
+      };
 
     // ERC-7715 Signer as signer.
-    return signer_
-  })()
+    return signer_;
+  })();
 
   return {
     expiry,
@@ -133,31 +133,31 @@ function formatParameters(parameters: GrantPermissionsParameters) {
       ...permission,
       policies: permission.policies.map((policy) => {
         const data = (() => {
-          if (policy.type === 'token-allowance')
+          if (policy.type === "token-allowance")
             return {
               allowance: numberToHex(policy.data.allowance),
-            }
-          if (policy.type === 'gas-limit')
+            };
+          if (policy.type === "gas-limit")
             return {
               limit: numberToHex(policy.data.limit),
-            }
-          return policy.data
-        })()
+            };
+          return policy.data;
+        })();
 
         return {
           data,
           type:
-            typeof policy.type === 'string' ? policy.type : policy.type.custom,
-        }
+            typeof policy.type === "string" ? policy.type : policy.type.custom,
+        };
       }),
       required: permission.required ?? false,
       type:
-        typeof permission.type === 'string'
+        typeof permission.type === "string"
           ? permission.type
           : permission.type.custom,
     })),
     ...(signer ? { signer } : {}),
-  }
+  };
 }
 
 function formatRequest(result: WalletGrantPermissionsReturnType) {
@@ -169,24 +169,24 @@ function formatRequest(result: WalletGrantPermissionsReturnType) {
       ...permission,
       policies: permission.policies.map((policy) => {
         const data = (() => {
-          if (policy.type === 'token-allowance')
+          if (policy.type === "token-allowance")
             return {
               allowance: BigInt((policy.data as any).allowance),
-            }
-          if (policy.type === 'gas-limit')
+            };
+          if (policy.type === "gas-limit")
             return {
               limit: BigInt((policy.data as any).limit),
-            }
-          return policy.data
-        })()
+            };
+          return policy.data;
+        })();
 
         return {
           data,
           type: policy.type,
-        }
+        };
       }),
     })),
     permissionsContext: result.permissionsContext,
     ...(result.signerData ? { signerData: result.signerData } : {}),
-  }
+  };
 }

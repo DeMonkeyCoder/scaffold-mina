@@ -65,7 +65,7 @@ export function watchBlocks<
     parameters as WatchBlocksParameters;
 
   let unwatch: WatchBlocksReturnType | undefined;
-  const listener = (chainId: number | undefined) => {
+  const listener = (chainId: string | undefined) => {
     if (unwatch) unwatch();
 
     const client = config.getClient({ chainId });

@@ -1,4 +1,4 @@
-import type { Address } from "abitype";
+import type { Address } from "@/lib/connect/viem";
 import type { ErrorType } from "../../errors/utils";
 import { LruMap } from "../lru";
 import { checksumAddress } from "./getAddress";

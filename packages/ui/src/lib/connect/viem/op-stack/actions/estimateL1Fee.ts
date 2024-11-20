@@ -1,50 +1,50 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
 import {
   type ReadContractErrorType,
   readContract,
-} from '../../actions/public/readContract'
+} from "../../actions/public/readContract";
 import {
   type PrepareTransactionRequestErrorType,
   type PrepareTransactionRequestParameters,
   prepareTransactionRequest,
-} from '../../actions/wallet/prepareTransactionRequest'
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account, GetAccountParameter } from '../../types/account'
-import type { Chain, GetChainParameter } from '../../types/chain'
+} from "../../actions/wallet/prepareTransactionRequest";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account, GetAccountParameter } from "../../types/account";
+import type { Chain, GetChainParameter } from "../../types/chain";
 import type {
   TransactionRequestEIP1559,
   TransactionSerializable,
-} from '../../types/transaction'
-import type { RequestErrorType } from '../../utils/buildRequest'
-import { getChainContractAddress } from '../../utils/chain/getChainContractAddress'
-import type { HexToNumberErrorType } from '../../utils/encoding/fromHex'
+} from "../../types/transaction";
+import type { RequestErrorType } from "../../utils/buildRequest";
+import { getChainContractAddress } from "../../utils/chain/getChainContractAddress";
+import type { HexToNumberErrorType } from "../../utils/encoding/fromHex";
 import {
   type AssertRequestErrorType,
   type AssertRequestParameters,
   assertRequest,
-} from '../../utils/transaction/assertRequest'
+} from "../../utils/transaction/assertRequest";
 import {
   type SerializeTransactionErrorType,
   serializeTransaction,
-} from '../../utils/transaction/serializeTransaction'
-import { gasPriceOracleAbi } from '../abis'
-import { contracts } from '../contracts'
+} from "../../utils/transaction/serializeTransaction";
+import { gasPriceOracleAbi } from "../abis";
+import { contracts } from "../contracts";
 
 export type EstimateL1FeeParameters<
   TChain extends Chain | undefined = Chain | undefined,
   TAccount extends Account | undefined = Account | undefined,
-  TChainOverride extends Chain | undefined = undefined,
-> = Omit<TransactionRequestEIP1559, 'from'> &
+  TChainOverride extends Chain | undefined = undefined
+> = Omit<TransactionRequestEIP1559, "from"> &
   GetAccountParameter<TAccount> &
   GetChainParameter<TChain, TChainOverride> & {
     /** Gas price oracle address. */
-    gasPriceOracleAddress?: Address | undefined
-  }
+    gasPriceOracleAddress?: Address | undefined;
+  };
 
-export type EstimateL1FeeReturnType = bigint
+export type EstimateL1FeeReturnType = bigint;
 
 export type EstimateL1FeeErrorType =
   | RequestErrorType
@@ -53,7 +53,7 @@ export type EstimateL1FeeErrorType =
   | SerializeTransactionErrorType
   | HexToNumberErrorType
   | ReadContractErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Estimates the L1 data fee required to execute an L2 transaction.
@@ -80,43 +80,43 @@ export type EstimateL1FeeErrorType =
 export async function estimateL1Fee<
   TChain extends Chain | undefined,
   TAccount extends Account | undefined,
-  TChainOverride extends Chain | undefined = undefined,
+  TChainOverride extends Chain | undefined = undefined
 >(
   client: Client<Transport, TChain, TAccount>,
-  args: EstimateL1FeeParameters<TChain, TAccount, TChainOverride>,
+  args: EstimateL1FeeParameters<TChain, TAccount, TChainOverride>
 ): Promise<EstimateL1FeeReturnType> {
   const {
     chain = client.chain,
     gasPriceOracleAddress: gasPriceOracleAddress_,
-  } = args
+  } = args;
 
   const gasPriceOracleAddress = (() => {
-    if (gasPriceOracleAddress_) return gasPriceOracleAddress_
+    if (gasPriceOracleAddress_) return gasPriceOracleAddress_;
     if (chain)
       return getChainContractAddress({
         chain,
-        contract: 'gasPriceOracle',
-      })
-    return contracts.gasPriceOracle.address
-  })()
+        contract: "gasPriceOracle",
+      });
+    return contracts.gasPriceOracle.address;
+  })();
 
   // Populate transaction with required fields to accurately estimate gas.
   const request = await prepareTransactionRequest(
     client,
-    args as PrepareTransactionRequestParameters,
-  )
+    args as PrepareTransactionRequestParameters
+  );
 
-  assertRequest(request as AssertRequestParameters)
+  assertRequest(request as AssertRequestParameters);
 
   const transaction = serializeTransaction({
     ...request,
-    type: 'eip1559',
-  } as TransactionSerializable)
+    type: "eip1559",
+  } as TransactionSerializable);
 
   return readContract(client, {
     abi: gasPriceOracleAbi,
     address: gasPriceOracleAddress,
-    functionName: 'getL1Fee',
+    functionName: "getL1Fee",
     args: [transaction as any],
-  })
+  });
 }

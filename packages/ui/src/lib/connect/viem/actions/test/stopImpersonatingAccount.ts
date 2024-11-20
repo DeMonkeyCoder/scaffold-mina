@@ -1,21 +1,21 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
 import type {
   TestClient,
   TestClientMode,
-} from '../../clients/createTestClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account } from '../../types/account'
-import type { Chain } from '../../types/chain'
-import type { RequestErrorType } from '../../utils/buildRequest'
+} from "../../clients/createTestClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account } from "../../types/account";
+import type { Chain } from "../../types/chain";
+import type { RequestErrorType } from "../../utils/buildRequest";
 
 export type StopImpersonatingAccountParameters = {
   /** The account to impersonate. */
-  address: Address
-}
+  address: Address;
+};
 
-export type StopImpersonatingAccountErrorType = RequestErrorType | ErrorType
+export type StopImpersonatingAccountErrorType = RequestErrorType | ErrorType;
 
 /**
  * Stop impersonating an account after having previously used [`impersonateAccount`](https://viem.sh/docs/actions/test/impersonateAccount).
@@ -41,13 +41,13 @@ export type StopImpersonatingAccountErrorType = RequestErrorType | ErrorType
  */
 export async function stopImpersonatingAccount<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(
   client: TestClient<TestClientMode, Transport, chain, account, false>,
-  { address }: StopImpersonatingAccountParameters,
+  { address }: StopImpersonatingAccountParameters
 ) {
   await client.request({
     method: `${client.mode}_stopImpersonatingAccount`,
     params: [address],
-  })
+  });
 }

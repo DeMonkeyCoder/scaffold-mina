@@ -1,4 +1,4 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
 /**
  * @description EIP-4361 message fields
@@ -9,53 +9,53 @@ export type SiweMessage = {
   /**
    * The Ethereum address performing the signing.
    */
-  address: Address
+  address: Address;
   /**
    * The [EIP-155](https://eips.ethereum.org/EIPS/eip-155) Chain ID to which the session is bound,
    */
-  chainId: number
+  chainId: string;
   /**
    * [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) authority that is requesting the signing.
    */
-  domain: string
+  domain: string;
   /**
    * Time when the signed authentication message is no longer valid.
    */
-  expirationTime?: Date | undefined
+  expirationTime?: Date | undefined;
   /**
    * Time when the message was generated, typically the current time.
    */
-  issuedAt?: Date | undefined
+  issuedAt?: Date | undefined;
   /**
    * A random string typically chosen by the relying party and used to prevent replay attacks.
    */
-  nonce: string
+  nonce: string;
   /**
    * Time when the signed authentication message will become valid.
    */
-  notBefore?: Date | undefined
+  notBefore?: Date | undefined;
   /**
    * A system-specific identifier that may be used to uniquely refer to the sign-in request.
    */
-  requestId?: string | undefined
+  requestId?: string | undefined;
   /**
    * A list of information or references to information the user wishes to have resolved as part of authentication by the relying party.
    */
-  resources?: string[] | undefined
+  resources?: string[] | undefined;
   /**
    * [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986#section-3.1) URI scheme of the origin of the request.
    */
-  scheme?: string | undefined
+  scheme?: string | undefined;
   /**
    * A human-readable ASCII assertion that the user will sign.
    */
-  statement?: string | undefined
+  statement?: string | undefined;
   /**
    * [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) URI referring to the resource that is the subject of the signing (as in the subject of a claim).
    */
-  uri: string
+  uri: string;
   /**
    * The current version of the SIWE Message.
    */
-  version: '1'
-}
+  version: "1";
+};

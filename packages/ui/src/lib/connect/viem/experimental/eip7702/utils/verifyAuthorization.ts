@@ -1,33 +1,33 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
-import type { ErrorType } from '../../../errors/utils'
+import type { ErrorType } from "../../../errors/utils";
 import {
   type GetAddressErrorType,
   getAddress,
-} from '../../../utils/address/getAddress'
+} from "../../../utils/address/getAddress";
 import {
   type IsAddressEqualErrorType,
   isAddressEqual,
-} from '../../../utils/address/isAddressEqual'
+} from "../../../utils/address/isAddressEqual";
 import {
   type RecoverAuthorizationAddressErrorType,
   type RecoverAuthorizationAddressParameters,
   recoverAuthorizationAddress,
-} from './recoverAuthorizationAddress'
+} from "./recoverAuthorizationAddress";
 
 export type VerifyAuthorizationParameters =
   RecoverAuthorizationAddressParameters & {
     /** The address that signed the Authorization object. */
-    address: Address
-  }
+    address: Address;
+  };
 
-export type VerifyAuthorizationReturnType = boolean
+export type VerifyAuthorizationReturnType = boolean;
 
 export type VerifyAuthorizationErrorType =
   | IsAddressEqualErrorType
   | GetAddressErrorType
   | RecoverAuthorizationAddressErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Verify that an Authorization object was signed by the provided address.
@@ -47,6 +47,6 @@ export async function verifyAuthorization({
     await recoverAuthorizationAddress({
       authorization,
       signature,
-    }),
-  )
+    })
+  );
 }

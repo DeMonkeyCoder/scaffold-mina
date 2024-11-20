@@ -1,24 +1,24 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
 import type {
   TestClient,
   TestClientMode,
-} from '../../clients/createTestClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account } from '../../types/account'
-import type { Chain } from '../../types/chain'
-import type { Hex } from '../../types/misc'
-import type { RequestErrorType } from '../../utils/buildRequest'
+} from "../../clients/createTestClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account } from "../../types/account";
+import type { Chain } from "../../types/chain";
+import type { Hex } from "../../types/misc";
+import type { RequestErrorType } from "../../utils/buildRequest";
 
 export type SetCodeParameters = {
   /** The account address. */
-  address: Address
+  address: Address;
   /** The bytecode to set */
-  bytecode: Hex
-}
+  bytecode: Hex;
+};
 
-export type SetCodeErrorType = RequestErrorType | ErrorType
+export type SetCodeErrorType = RequestErrorType | ErrorType;
 
 /**
  * Modifies the bytecode stored at an account's address.
@@ -45,13 +45,13 @@ export type SetCodeErrorType = RequestErrorType | ErrorType
  */
 export async function setCode<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(
   client: TestClient<TestClientMode, Transport, chain, account, false>,
-  { address, bytecode }: SetCodeParameters,
+  { address, bytecode }: SetCodeParameters
 ) {
   await client.request({
     method: `${client.mode}_setCode`,
     params: [address, bytecode],
-  })
+  });
 }

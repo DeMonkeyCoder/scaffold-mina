@@ -1,29 +1,25 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../accounts/utils/parseAccount'
+} from "../../accounts/utils/parseAccount";
 import {
   type PrepareTransactionRequestErrorType,
   type PrepareTransactionRequestParameters,
   prepareTransactionRequest,
-} from '../../actions/wallet/prepareTransactionRequest'
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
+} from "../../actions/wallet/prepareTransactionRequest";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
 import type {
   Account,
   DeriveAccount,
   GetAccountParameter,
-} from '../../types/account'
-import type {
-  Chain,
-  DeriveChain,
-  GetChainParameter,
-} from '../../types/chain'
-import type { Hex } from '../../types/misc'
-import type { Prettify, UnionOmit } from '../../types/utils'
-import type { DepositTransactionParameters } from './depositTransaction'
+} from "../../types/account";
+import type { Chain, DeriveChain, GetChainParameter } from "../../types/chain";
+import type { Hex } from "../../types/misc";
+import type { Prettify, UnionOmit } from "../../types/utils";
+import type { DepositTransactionParameters } from "./depositTransaction";
 
 export type BuildDepositTransactionParameters<
   chain extends Chain | undefined = Chain | undefined,
@@ -33,50 +29,50 @@ export type BuildDepositTransactionParameters<
     | Account
     | Address
     | undefined,
-  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>,
+  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>
 > = GetAccountParameter<account, accountOverride, false> &
   GetChainParameter<chain, chainOverride> & {
     /** Gas limit for transaction execution on the L2. */
-    gas?: bigint | undefined
+    gas?: bigint | undefined;
     /** Value in wei to mint (deposit) on the L2. Debited from the caller's L1 balance. */
-    mint?: bigint | undefined
+    mint?: bigint | undefined;
     /** Value in wei sent with this transaction on the L2. Debited from the caller's L2 balance. */
-    value?: bigint | undefined
+    value?: bigint | undefined;
   } & (
     | {
         /** Encoded contract method & arguments. */
-        data?: Hex | undefined
+        data?: Hex | undefined;
         /** Whether or not this is a contract deployment transaction. */
-        isCreation?: false | undefined
+        isCreation?: false | undefined;
         /** L2 Transaction recipient. */
-        to?: Address | undefined
+        to?: Address | undefined;
       }
     | {
         /** Contract deployment bytecode. Required for contract deployment transactions. */
-        data: Hex
+        data: Hex;
         /** Whether or not this is a contract deployment transaction. */
-        isCreation: true
+        isCreation: true;
         /** L2 Transaction recipient. Cannot exist for contract deployment transactions. */
-        to?: undefined
+        to?: undefined;
       }
-  )
+  );
 
 export type BuildDepositTransactionReturnType<
   account extends Account | undefined = Account | undefined,
   accountOverride extends Account | Address | undefined =
     | Account
     | Address
-    | undefined,
+    | undefined
 > = Prettify<
-  UnionOmit<DepositTransactionParameters<Chain, account, Chain>, 'account'> & {
-    account: DeriveAccount<account, accountOverride>
+  UnionOmit<DepositTransactionParameters<Chain, account, Chain>, "account"> & {
+    account: DeriveAccount<account, accountOverride>;
   }
->
+>;
 
 export type BuildDepositTransactionErrorType =
   | ParseAccountErrorType
   | PrepareTransactionRequestErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Prepares parameters for a [deposit transaction](https://github.com/ethereum-optimism/optimism/blob/develop/specs/deposits.md) to be initiated on an L1.
@@ -108,7 +104,7 @@ export async function buildDepositTransaction<
   chain extends Chain | undefined,
   account extends Account | undefined,
   chainOverride extends Chain | undefined = undefined,
-  accountOverride extends Account | Address | undefined = undefined,
+  accountOverride extends Account | Address | undefined = undefined
 >(
   client: Client<Transport, chain, account>,
   args: BuildDepositTransactionParameters<
@@ -116,7 +112,7 @@ export async function buildDepositTransaction<
     account,
     chainOverride,
     accountOverride
-  >,
+  >
 ): Promise<BuildDepositTransactionReturnType<account, accountOverride>> {
   const {
     account: account_,
@@ -127,19 +123,19 @@ export async function buildDepositTransaction<
     mint,
     to,
     value,
-  } = args
+  } = args;
 
-  const account = account_ ? parseAccount(account_) : undefined
+  const account = account_ ? parseAccount(account_) : undefined;
 
   const request = await prepareTransactionRequest(client, {
     account: mint ? undefined : account,
     chain,
     gas,
     data,
-    parameters: ['gas'],
+    parameters: ["gas"],
     to,
     value,
-  } as PrepareTransactionRequestParameters)
+  } as PrepareTransactionRequestParameters);
 
   return {
     account,
@@ -152,5 +148,5 @@ export async function buildDepositTransaction<
       value: request.value,
     },
     targetChain: chain,
-  } as unknown as BuildDepositTransactionReturnType<account, accountOverride>
+  } as unknown as BuildDepositTransactionReturnType<account, accountOverride>;
 }

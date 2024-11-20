@@ -1,12 +1,12 @@
-import type { Address } from 'abitype'
-import type { FeeValuesEIP1559 } from '../../types/fee'
-import type { Hash, Hex } from '../../types/misc'
+import type { Address } from "@/lib/connect/viem";
+import type { FeeValuesEIP1559 } from "../../types/fee";
+import type { Hash, Hex } from "../../types/misc";
 import type {
   Index,
   Quantity,
   RpcTransactionReceipt,
   RpcTransactionRequest as RpcTransactionRequest_,
-} from '../../types/rpc'
+} from "../../types/rpc";
 import type {
   TransactionBase,
   TransactionEIP1559 as TransactionEIP1559_,
@@ -20,27 +20,27 @@ import type {
   TransactionSerialized,
   TransactionType,
   Transaction as Transaction_,
-} from '../../types/transaction'
-import type { ExactPartial, OneOf, UnionOmit } from '../../types/utils'
-import type { ZksyncEip712Meta } from './eip712'
-import type { ZksyncFee, ZksyncFeeValues } from './fee'
+} from "../../types/transaction";
+import type { ExactPartial, OneOf, UnionOmit } from "../../types/utils";
+import type { ZksyncEip712Meta } from "./eip712";
+import type { ZksyncFee, ZksyncFeeValues } from "./fee";
 import type {
   ZksyncL2ToL1Log,
   ZksyncLog,
   ZksyncRpcL2ToL1Log,
   ZksyncRpcLog,
-} from './log'
+} from "./log";
 
-type EIP712Type = '0x71'
-type PriorityType = '0xff'
+type EIP712Type = "0x71";
+type PriorityType = "0xff";
 
 // Transaction
 // https://era.zksync.io/docs/api/js/types#transactionresponse
 
 type TransactionOverrides = {
-  l1BatchNumber: bigint | null
-  l1BatchTxIndex: bigint | null
-}
+  l1BatchNumber: bigint | null;
+  l1BatchTxIndex: bigint | null;
+};
 
 type TransactionPriority<pending extends boolean = boolean> = TransactionBase<
   bigint,
@@ -49,61 +49,61 @@ type TransactionPriority<pending extends boolean = boolean> = TransactionBase<
 > &
   TransactionOverrides &
   FeeValuesEIP1559 & {
-    type: 'priority'
-  }
+    type: "priority";
+  };
 
 export type ZksyncTransactionEIP712<pending extends boolean = boolean> =
   TransactionBase<bigint, number, pending> &
     TransactionOverrides &
     FeeValuesEIP1559 & {
-      type: 'eip712' | 'priority'
-    }
+      type: "eip712" | "priority";
+    };
 
 type Transaction<pending extends boolean = boolean> = Transaction_<
   bigint,
   number,
   pending
 > &
-  TransactionOverrides
+  TransactionOverrides;
 
 export type ZksyncTransaction<pending extends boolean = boolean> =
   | Transaction<pending>
   | TransactionPriority<pending>
-  | ZksyncTransactionEIP712<pending>
+  | ZksyncTransactionEIP712<pending>;
 
 // Transaction (RPC)
 
 type RpcTransactionOverrides = {
-  l1BatchNumber: Hex | null
-  l1BatchTxIndex: Hex | null
-}
+  l1BatchNumber: Hex | null;
+  l1BatchTxIndex: Hex | null;
+};
 
 type RpcTransactionLegacy<pending extends boolean = boolean> =
-  TransactionLegacy_<Hex, Hex, pending, '0x0'> & RpcTransactionOverrides
+  TransactionLegacy_<Hex, Hex, pending, "0x0"> & RpcTransactionOverrides;
 
 type RpcTransactionEIP2930<pending extends boolean = boolean> =
-  TransactionEIP2930_<Hex, Hex, pending, '0x1'> & RpcTransactionOverrides
+  TransactionEIP2930_<Hex, Hex, pending, "0x1"> & RpcTransactionOverrides;
 
 type RpcTransactionEIP1559<pending extends boolean = boolean> =
-  TransactionEIP1559_<Hex, Hex, pending, '0x2'> & RpcTransactionOverrides
+  TransactionEIP1559_<Hex, Hex, pending, "0x2"> & RpcTransactionOverrides;
 
 export type ZksyncRpcTransactionPriority<pending extends boolean = boolean> =
   TransactionBase<Quantity, Index, pending> &
     ZksyncFeeValues<Quantity> &
     RpcTransactionOverrides & {
-      accessList?: undefined
-      chainId: Hex
-      type: PriorityType
-    }
+      accessList?: undefined;
+      chainId: Hex;
+      type: PriorityType;
+    };
 
 export type ZksyncRpcTransactionEIP712<pending extends boolean = boolean> =
   TransactionBase<Quantity, Index, pending> &
     ZksyncFeeValues<Quantity> &
     RpcTransactionOverrides & {
-      accessList?: undefined
-      chainId: Hex
-      type: EIP712Type
-    }
+      accessList?: undefined;
+      chainId: Hex;
+      type: EIP712Type;
+    };
 
 export type ZksyncRpcTransaction<pending extends boolean = boolean> = UnionOmit<
   | RpcTransactionLegacy<pending>
@@ -111,212 +111,214 @@ export type ZksyncRpcTransaction<pending extends boolean = boolean> = UnionOmit<
   | RpcTransactionEIP1559<pending>
   | ZksyncRpcTransactionPriority<pending>
   | ZksyncRpcTransactionEIP712<pending>,
-  'typeHex'
->
+  "typeHex"
+>;
 
 // Transaction Request
 // https://era.zksync.io/docs/reference/concepts/transactions
 
 export type TransactionRequest<
   quantity = bigint,
-  index = number,
+  index = number
 > = TransactionRequest_<quantity, index> & {
-  gasPerPubdata?: undefined
-  customSignature?: undefined
-  paymaster?: undefined
-  paymasterInput?: undefined
-  factoryDeps?: undefined
-}
+  gasPerPubdata?: undefined;
+  customSignature?: undefined;
+  paymaster?: undefined;
+  paymasterInput?: undefined;
+  factoryDeps?: undefined;
+};
 
 export type ZksyncTransactionRequestEIP712<
   quantity = bigint,
-  index = number,
-> = Omit<TransactionRequestBase<quantity, index>, 'type'> &
+  index = number
+> = Omit<TransactionRequestBase<quantity, index>, "type"> &
   ExactPartial<FeeValuesEIP1559> & {
-    gasPerPubdata?: bigint | undefined
-    customSignature?: Hex | undefined
-    factoryDeps?: Hex[] | undefined
-    type?: 'eip712' | 'priority' | undefined
+    gasPerPubdata?: bigint | undefined;
+    customSignature?: Hex | undefined;
+    factoryDeps?: Hex[] | undefined;
+    type?: "eip712" | "priority" | undefined;
   } & (
     | { paymaster: Address; paymasterInput: Hex }
     | { paymaster?: undefined; paymasterInput?: undefined }
-  )
+  );
 
 export type ZksyncTransactionRequest<quantity = bigint, index = number> =
   | TransactionRequest<quantity, index>
-  | ZksyncTransactionRequestEIP712<quantity, index>
+  | ZksyncTransactionRequestEIP712<quantity, index>;
 
-type RpcTransactionRequest = RpcTransactionRequest_ & { eip712Meta?: undefined }
+type RpcTransactionRequest = RpcTransactionRequest_ & {
+  eip712Meta?: undefined;
+};
 
 export type ZksyncRpcTransactionRequestEIP712 = TransactionRequestBase<
   Quantity,
   Index
 > &
   ExactPartial<FeeValuesEIP1559<Quantity>> & {
-    eip712Meta: ZksyncEip712Meta
-    type: EIP712Type | PriorityType
-  }
+    eip712Meta: ZksyncEip712Meta;
+    type: EIP712Type | PriorityType;
+  };
 
 export type ZksyncRpcTransactionRequest =
   | RpcTransactionRequest
-  | ZksyncRpcTransactionRequestEIP712
+  | ZksyncRpcTransactionRequestEIP712;
 
-export type ZksyncTransactionType = TransactionType | 'eip712' | 'priority'
+export type ZksyncTransactionType = TransactionType | "eip712" | "priority";
 
 // Transaction Receipt
 // https://era.zksync.io/docs/api/js/types#transactionreceipt
 
 export type ZksyncRpcTransactionReceiptOverrides = {
-  l1BatchNumber: Hex | null
-  l1BatchTxIndex: Hex | null
-  logs: ZksyncRpcLog[]
-  l2ToL1Logs: ZksyncRpcL2ToL1Log[]
-  root: Hex
-}
+  l1BatchNumber: Hex | null;
+  l1BatchTxIndex: Hex | null;
+  logs: ZksyncRpcLog[];
+  l2ToL1Logs: ZksyncRpcL2ToL1Log[];
+  root: Hex;
+};
 
-export type ZksyncRpcTransactionReceipt = Omit<RpcTransactionReceipt, 'logs'> &
-  ZksyncRpcTransactionReceiptOverrides
+export type ZksyncRpcTransactionReceipt = Omit<RpcTransactionReceipt, "logs"> &
+  ZksyncRpcTransactionReceiptOverrides;
 
 export type ZksyncTransactionReceiptOverrides = {
-  l1BatchNumber: bigint | null
-  l1BatchTxIndex: bigint | null
-  logs: ZksyncLog[]
-  l2ToL1Logs: ZksyncL2ToL1Log[]
-}
+  l1BatchNumber: bigint | null;
+  l1BatchTxIndex: bigint | null;
+  logs: ZksyncLog[];
+  l2ToL1Logs: ZksyncL2ToL1Log[];
+};
 
 export type ZksyncTransactionReceipt<
-  status = 'success' | 'reverted',
-  type = ZksyncTransactionType,
-> = Omit<TransactionReceipt<bigint, number, status, type>, 'logs'> &
-  ZksyncTransactionReceiptOverrides
+  status = "success" | "reverted",
+  type = ZksyncTransactionType
+> = Omit<TransactionReceipt<bigint, number, status, type>, "logs"> &
+  ZksyncTransactionReceiptOverrides;
 
 // Serializers
 
 export type ZksyncTransactionSerializable = OneOf<
   TransactionSerializable | ZksyncTransactionSerializableEIP712
->
+>;
 
 export type ZksyncTransactionSerialized<
-  type extends TransactionType = 'eip712',
-> = type extends 'eip712'
+  type extends TransactionType = "eip712"
+> = type extends "eip712"
   ? ZksyncTransactionSerializedEIP712
-  : TransactionSerialized<type>
+  : TransactionSerialized<type>;
 
-export type ZksyncTransactionSerializedEIP712 = `0x71${string}`
+export type ZksyncTransactionSerializedEIP712 = `0x71${string}`;
 
 export type ZksyncTransactionSerializableEIP712<
   quantity = bigint,
-  index = number,
-> = Omit<TransactionSerializableEIP1559<quantity, index>, 'type'> & {
-  from: Hex
-  gasPerPubdata?: bigint | undefined
-  paymaster?: Address | undefined
-  factoryDeps?: Hex[] | undefined
-  paymasterInput?: Hex | undefined
-  customSignature?: Hex | undefined
-  type?: 'eip712' | undefined
-}
+  index = number
+> = Omit<TransactionSerializableEIP1559<quantity, index>, "type"> & {
+  from: Hex;
+  gasPerPubdata?: bigint | undefined;
+  paymaster?: Address | undefined;
+  factoryDeps?: Hex[] | undefined;
+  paymasterInput?: Hex | undefined;
+  customSignature?: Hex | undefined;
+  type?: "eip712" | undefined;
+};
 
 // EIP712 Signer
 
 export type ZksyncEIP712TransactionSignable = {
-  txType: bigint
-  from: bigint
-  to: bigint
-  gasLimit: bigint
-  gasPerPubdataByteLimit: bigint
-  maxFeePerGas: bigint
-  maxPriorityFeePerGas: bigint
-  paymaster: bigint
-  nonce: bigint
-  value: bigint
-  data: Hex
-  factoryDeps: Hex[]
-  paymasterInput: Hex
-}
+  txType: bigint;
+  from: bigint;
+  to: bigint;
+  gasLimit: bigint;
+  gasPerPubdataByteLimit: bigint;
+  maxFeePerGas: bigint;
+  maxPriorityFeePerGas: bigint;
+  paymaster: bigint;
+  nonce: bigint;
+  value: bigint;
+  data: Hex;
+  factoryDeps: Hex[];
+  paymasterInput: Hex;
+};
 
 export type TransactionRequestEIP712<
   quantity = bigint,
   index = number,
-  transactionType = 'eip712',
+  transactionType = "eip712"
 > = TransactionRequestBase<quantity, index> &
   ExactPartial<FeeValuesEIP1559<quantity>> & {
-    accessList?: undefined
-    gasPerPubdata?: bigint | undefined
-    factoryDeps?: Hex[] | undefined
-    paymaster?: Address | undefined
-    paymasterInput?: Hex | undefined
-    customSignature?: Hex | undefined
-    type?: transactionType | undefined
-  }
+    accessList?: undefined;
+    gasPerPubdata?: bigint | undefined;
+    factoryDeps?: Hex[] | undefined;
+    paymaster?: Address | undefined;
+    paymasterInput?: Hex | undefined;
+    customSignature?: Hex | undefined;
+    type?: transactionType | undefined;
+  };
 
 type CommonDataRawBlockTransaction = {
-  sender: Address
-  maxFeePerGas: Hex
-  gasLimit: Hex
-  gasPerPubdataLimit: Hex
-  ethHash: Hash
-  ethBlock: number
-  canonicalTxHash: Hash
-  toMint: Hex
-  refundRecipient: Address
-}
+  sender: Address;
+  maxFeePerGas: Hex;
+  gasLimit: Hex;
+  gasPerPubdataLimit: Hex;
+  ethHash: Hash;
+  ethBlock: number;
+  canonicalTxHash: Hash;
+  toMint: Hex;
+  refundRecipient: Address;
+};
 
 export type ZksyncRawBlockTransactions = {
   commonData: {
     L1?:
       | ({
-          serialId: number
-          deadlineBlock: number
-          layer2TipFee: Hex
-          fullFee: Hex
-          opProcessingType: string
-          priorityQueueType: string
+          serialId: number;
+          deadlineBlock: number;
+          layer2TipFee: Hex;
+          fullFee: Hex;
+          opProcessingType: string;
+          priorityQueueType: string;
         } & CommonDataRawBlockTransaction)
-      | undefined
+      | undefined;
     L2?:
       | {
-          nonce: number
-          fee: ZksyncFee<Hex>
-          initiatorAddress: Address
-          signature: Uint8Array
-          transactionType: string
+          nonce: number;
+          fee: ZksyncFee<Hex>;
+          initiatorAddress: Address;
+          signature: Uint8Array;
+          transactionType: string;
           input?:
             | {
-                hash: Hash
-                data: Uint8Array
+                hash: Hash;
+                data: Uint8Array;
               }
-            | undefined
+            | undefined;
           paymasterParams: {
-            paymaster: Address
-            paymasterInput: Uint8Array
-          }
+            paymaster: Address;
+            paymasterInput: Uint8Array;
+          };
         }
-      | undefined
+      | undefined;
     ProtocolUpgrade?:
       | ({
-          upgradeId: string
+          upgradeId: string;
         } & CommonDataRawBlockTransaction)
-      | undefined
-  }
+      | undefined;
+  };
   execute: {
-    calldata: Hash
-    contractAddress: Address
-    factoryDeps?: Hash
-    value: bigint
-  }
-  receivedTimestampMs: number
-  rawBytes?: string | undefined
-}[]
+    calldata: Hash;
+    contractAddress: Address;
+    factoryDeps?: Hash;
+    value: bigint;
+  };
+  receivedTimestampMs: number;
+  rawBytes?: string | undefined;
+}[];
 
 export type ZksyncTransactionDetails = {
-  isL1Originated: boolean
-  status: string
-  fee: bigint
-  gasPerPubdata: bigint
-  initiatorAddress: Address
-  receivedAt: Date
-  ethCommitTxHash?: Hash | undefined
-  ethProveTxHash?: Hash | undefined
-  ethExecuteTxHash?: Hash | undefined
-}
+  isL1Originated: boolean;
+  status: string;
+  fee: bigint;
+  gasPerPubdata: bigint;
+  initiatorAddress: Address;
+  receivedAt: Date;
+  ethCommitTxHash?: Hash | undefined;
+  ethProveTxHash?: Hash | undefined;
+  ethExecuteTxHash?: Hash | undefined;
+};

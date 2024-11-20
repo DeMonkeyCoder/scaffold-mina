@@ -1,27 +1,27 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
-import type { ErrorType } from '../../../errors/utils'
-import type { ByteArray, Hex, Signature } from '../../../types/misc'
-import type { OneOf } from '../../../types/utils'
+import type { ErrorType } from "../../../errors/utils";
+import type { ByteArray, Hex, Signature } from "../../../types/misc";
+import type { OneOf } from "../../../types/utils";
 import {
   type RecoverAddressErrorType,
   recoverAddress,
-} from '../../../utils/signature/recoverAddress'
+} from "../../../utils/signature/recoverAddress";
 import type {
   Authorization,
   SignedAuthorization,
-} from '../types/authorization'
+} from "../types/authorization";
 import {
   type HashAuthorizationErrorType,
   hashAuthorization,
-} from './hashAuthorization'
+} from "./hashAuthorization";
 
 export type RecoverAuthorizationAddressParameters<
   authorization extends OneOf<Authorization | SignedAuthorization> = OneOf<
     Authorization | SignedAuthorization
   >,
   //
-  _signature = Hex | ByteArray | OneOf<Signature | SignedAuthorization>,
+  _signature = Hex | ByteArray | OneOf<Signature | SignedAuthorization>
 > = {
   /**
    * The Authorization object.
@@ -29,33 +29,33 @@ export type RecoverAuthorizationAddressParameters<
    * - If an unsigned `authorization` is provided, the `signature` property is required.
    * - If a signed `authorization` is provided, the `signature` property does not need to be provided.
    */
-  authorization: authorization | OneOf<Authorization | SignedAuthorization>
+  authorization: authorization | OneOf<Authorization | SignedAuthorization>;
 } & (authorization extends SignedAuthorization
   ? {
       /** Signature of the Authorization. Not required if the `authorization` is signed. */
-      signature?: _signature | undefined
+      signature?: _signature | undefined;
     }
   : {
       /** Signature of the Authorization. Not required if the `authorization` is signed. */
-      signature: _signature
-    })
+      signature: _signature;
+    });
 
-export type RecoverAuthorizationAddressReturnType = Address
+export type RecoverAuthorizationAddressReturnType = Address;
 
 export type RecoverAuthorizationAddressErrorType =
   | HashAuthorizationErrorType
   | RecoverAddressErrorType
-  | ErrorType
+  | ErrorType;
 
 export async function recoverAuthorizationAddress<
-  const authorization extends OneOf<Authorization | SignedAuthorization>,
+  const authorization extends OneOf<Authorization | SignedAuthorization>
 >(
-  parameters: RecoverAuthorizationAddressParameters<authorization>,
+  parameters: RecoverAuthorizationAddressParameters<authorization>
 ): Promise<RecoverAuthorizationAddressReturnType> {
-  const { authorization, signature } = parameters
+  const { authorization, signature } = parameters;
 
   return recoverAddress({
     hash: hashAuthorization(authorization as Authorization),
     signature: (signature ?? authorization) as Signature,
-  })
+  });
 }

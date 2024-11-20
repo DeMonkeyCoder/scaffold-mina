@@ -10,10 +10,7 @@ import type {
 } from "@/lib/connect/core/exports/internal";
 import type { Abi, Address, ContractEventName } from "@/lib/connect/viem";
 
-import type {
-  ConfigParameter,
-  EnabledParameter,
-} from "../../types/properties";
+import type { ConfigParameter, EnabledParameter } from "../../types/properties";
 import { useAccount } from "../useAccount";
 import { useChainId } from "../useChainId";
 import { useConfig } from "../useConfig";
@@ -21,23 +18,23 @@ import { useWatchContractEvent } from "../useWatchContractEvent";
 
 export type CreateUseWatchContractEventParameters<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined = undefined,
+  address extends Address | Record<string, Address> | undefined = undefined,
   eventName extends ContractEventName<abi> | undefined = undefined
 > = {
   abi: abi | Abi | readonly unknown[];
-  address?: address | Address | Record<number, Address> | undefined;
+  address?: address | Address | Record<string, Address> | undefined;
   eventName?: eventName | ContractEventName<abi> | undefined;
 };
 
 export type CreateUseWatchContractEventReturnType<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined,
+  address extends Address | Record<string, Address> | undefined,
   eventName extends ContractEventName<abi> | undefined,
   ///
   omittedProperties extends "abi" | "address" | "chainId" | "eventName" =
     | "abi"
     | (address extends undefined ? never : "address")
-    | (address extends Record<number, Address> ? "chainId" : never)
+    | (address extends Record<string, Address> ? "chainId" : never)
     | (eventName extends undefined ? never : "eventName")
 > = <
   name extends eventName extends ContractEventName<abi>
@@ -57,7 +54,7 @@ export type CreateUseWatchContractEventReturnType<
       ConfigParameter<config> &
       EnabledParameter
   > &
-    (address extends Record<number, Address>
+    (address extends Record<string, Address>
       ? { chainId?: keyof address | undefined }
       : unknown)
 ) => void;
@@ -66,7 +63,7 @@ export function createUseWatchContractEvent<
   const abi extends Abi | readonly unknown[],
   const address extends
     | Address
-    | Record<number, Address>
+    | Record<string, Address>
     | undefined = undefined,
   eventName extends ContractEventName<abi> | undefined = undefined
 >(

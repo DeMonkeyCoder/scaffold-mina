@@ -22,29 +22,26 @@ import type {
   ContractFunctionName,
 } from "@/lib/connect/viem";
 
-import type {
-  ConfigParameter,
-  QueryParameter,
-} from "../../types/properties";
+import type { ConfigParameter, QueryParameter } from "../../types/properties";
 import { useAccount } from "../useAccount";
 import { useChainId } from "../useChainId";
 import { useConfig } from "../useConfig";
 import {
-  type UseReadContractReturnType,
   useReadContract,
+  type UseReadContractReturnType,
 } from "../useReadContract";
 
 type stateMutability = "pure" | "view";
 
 export type CreateUseReadContractParameters<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined = undefined,
+  address extends Address | Record<string, Address> | undefined = undefined,
   functionName extends
     | ContractFunctionName<abi, stateMutability>
     | undefined = undefined
 > = {
   abi: abi | Abi | readonly unknown[];
-  address?: address | Address | Record<number, Address> | undefined;
+  address?: address | Address | Record<string, Address> | undefined;
   functionName?:
     | functionName
     | ContractFunctionName<abi, stateMutability>
@@ -53,13 +50,13 @@ export type CreateUseReadContractParameters<
 
 export type CreateUseReadContractReturnType<
   abi extends Abi | readonly unknown[],
-  address extends Address | Record<number, Address> | undefined,
+  address extends Address | Record<string, Address> | undefined,
   functionName extends ContractFunctionName<abi, stateMutability> | undefined,
   ///
   omittedProperties extends "abi" | "address" | "chainId" | "functionName" =
     | "abi"
     | (address extends undefined ? never : "address")
-    | (address extends Record<number, Address> ? "chainId" : never)
+    | (address extends Record<string, Address> ? "chainId" : never)
     | (functionName extends undefined ? never : "functionName")
 > = <
   name extends functionName extends ContractFunctionName<abi, stateMutability>
@@ -85,7 +82,7 @@ export type CreateUseReadContractReturnType<
         ReadContractQueryKey<abi, name, args, config>
       >
   > &
-    (address extends Record<number, Address>
+    (address extends Record<string, Address>
       ? { chainId?: keyof address | undefined }
       : unknown)
 ) => UseReadContractReturnType<abi, name, args, selectData>;
@@ -94,7 +91,7 @@ export function createUseReadContract<
   const abi extends Abi | readonly unknown[],
   const address extends
     | Address
-    | Record<number, Address>
+    | Record<string, Address>
     | undefined = undefined,
   functionName extends
     | ContractFunctionName<abi, stateMutability>

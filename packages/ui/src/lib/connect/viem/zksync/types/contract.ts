@@ -1,14 +1,14 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 
 export type BridgeContractAddresses = {
-  erc20L1: Address
-  sharedL1: Address
-  sharedL2: Address
-}
+  erc20L1: Address;
+  sharedL1: Address;
+  sharedL2: Address;
+};
 
 export type ContractDeploymentType =
-  | 'create'
-  | 'create2'
-  | 'createAccount'
-  | 'create2Account'
-  | undefined
+  | "create"
+  | "create2"
+  | "createAccount"
+  | "create2Account"
+  | undefined;

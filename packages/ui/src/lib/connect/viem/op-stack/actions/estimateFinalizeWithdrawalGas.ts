@@ -1,53 +1,49 @@
-import type { Address } from 'abitype'
+import type { Address } from "@/lib/connect/viem";
 import {
   type EstimateContractGasErrorType,
   type EstimateContractGasParameters,
   estimateContractGas,
-} from '../../actions/public/estimateContractGas'
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { ErrorType } from '../../errors/utils'
-import type { Account, GetAccountParameter } from '../../types/account'
-import type {
-  Chain,
-  DeriveChain,
-  GetChainParameter,
-} from '../../types/chain'
-import type { UnionEvaluate, UnionOmit } from '../../types/utils'
-import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest'
-import { portalAbi } from '../abis'
-import type { GetContractAddressParameter } from '../types/contract'
-import type { Withdrawal } from '../types/withdrawal'
+} from "../../actions/public/estimateContractGas";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { Account, GetAccountParameter } from "../../types/account";
+import type { Chain, DeriveChain, GetChainParameter } from "../../types/chain";
+import type { UnionEvaluate, UnionOmit } from "../../types/utils";
+import type { FormattedTransactionRequest } from "../../utils/formatters/transactionRequest";
+import { portalAbi } from "../abis";
+import type { GetContractAddressParameter } from "../types/contract";
+import type { Withdrawal } from "../types/withdrawal";
 
 export type EstimateFinalizeWithdrawalGasParameters<
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
   chainOverride extends Chain | undefined = Chain | undefined,
-  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>,
+  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>
 > = UnionEvaluate<
   UnionOmit<
     FormattedTransactionRequest<_derivedChain>,
-    | 'accessList'
-    | 'data'
-    | 'from'
-    | 'gas'
-    | 'gasPrice'
-    | 'to'
-    | 'type'
-    | 'value'
+    | "accessList"
+    | "data"
+    | "from"
+    | "gas"
+    | "gasPrice"
+    | "to"
+    | "type"
+    | "value"
   >
 > &
   GetAccountParameter<account, Account | Address> &
   GetChainParameter<chain, chainOverride> &
-  GetContractAddressParameter<_derivedChain, 'portal'> & {
+  GetContractAddressParameter<_derivedChain, "portal"> & {
     /** Gas limit for transaction execution on the L2. */
-    gas?: bigint | undefined
-    withdrawal: Withdrawal
-  }
-export type EstimateFinalizeWithdrawalGasReturnType = bigint
+    gas?: bigint | undefined;
+    withdrawal: Withdrawal;
+  };
+export type EstimateFinalizeWithdrawalGasReturnType = bigint;
 export type EstimateFinalizeWithdrawalGasErrorType =
   | EstimateContractGasErrorType
-  | ErrorType
+  | ErrorType;
 
 /**
  * Estimates gas required to finalize a withdrawal that occurred on an L2.
@@ -77,14 +73,14 @@ export type EstimateFinalizeWithdrawalGasErrorType =
 export async function estimateFinalizeWithdrawalGas<
   chain extends Chain | undefined,
   account extends Account | undefined,
-  chainOverride extends Chain | undefined = undefined,
+  chainOverride extends Chain | undefined = undefined
 >(
   client: Client<Transport, chain, account>,
   parameters: EstimateFinalizeWithdrawalGasParameters<
     chain,
     account,
     chainOverride
-  >,
+  >
 ) {
   const {
     account,
@@ -95,19 +91,19 @@ export async function estimateFinalizeWithdrawalGas<
     nonce,
     targetChain,
     withdrawal,
-  } = parameters
+  } = parameters;
 
   const portalAddress = (() => {
-    if (parameters.portalAddress) return parameters.portalAddress
-    if (chain) return targetChain!.contracts.portal[chain.id].address
-    return Object.values(targetChain!.contracts.portal)[0].address
-  })()
+    if (parameters.portalAddress) return parameters.portalAddress;
+    if (chain) return targetChain!.contracts.portal[chain.id].address;
+    return Object.values(targetChain!.contracts.portal)[0].address;
+  })();
 
   const params = {
     account,
     abi: portalAbi,
     address: portalAddress,
-    functionName: 'finalizeWithdrawalTransaction',
+    functionName: "finalizeWithdrawalTransaction",
     args: [withdrawal],
     gas,
     maxFeePerGas,
@@ -119,7 +115,7 @@ export async function estimateFinalizeWithdrawalGas<
     chain,
   } satisfies EstimateContractGasParameters<
     typeof portalAbi,
-    'finalizeWithdrawalTransaction'
-  >
-  return estimateContractGas(client, params as any)
+    "finalizeWithdrawalTransaction"
+  >;
+  return estimateContractGas(client, params as any);
 }
