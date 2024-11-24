@@ -18,13 +18,6 @@ export {
 } from "../actions/connect";
 
 export {
-  type DeployContractErrorType,
-  type DeployContractParameters,
-  type DeployContractReturnType,
-  deployContract,
-} from "../actions/deployContract";
-
-export {
   type DisconnectErrorType,
   type DisconnectParameters,
   type DisconnectReturnType,

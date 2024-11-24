@@ -1,6 +1,5 @@
 import type { Address } from "@/lib/connect/viem";
 
-import type { SmartAccount } from "../account-abstraction/accounts/types";
 import type { Authorization } from "../experimental/eip7702/types/authorization";
 import type { HDKey } from "../types/account";
 import type { Hash, Hex, SignableMessage } from "../types/misc";
@@ -15,7 +14,7 @@ import type { SerializeTransactionFn } from "../utils/transaction/serializeTrans
 import type { SignAuthorizationReturnType } from "./utils/signAuthorization";
 
 export type Account<address extends Address = Address> = OneOf<
-  JsonRpcAccount<address> | LocalAccount<string, address> | SmartAccount
+  JsonRpcAccount<address> | LocalAccount<string, address>
 >;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
