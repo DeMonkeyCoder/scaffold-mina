@@ -179,7 +179,7 @@ export async function getMetadataAvatarUri({
   uri: string;
 }): Promise<string> {
   try {
-    const res = await fetch(uri).then((res) => reson());
+    const res = await fetch(uri).then((res) => res.json());
     const image = await parseAvatarUri({
       gatewayUrls,
       uri: getJsonImage(res),

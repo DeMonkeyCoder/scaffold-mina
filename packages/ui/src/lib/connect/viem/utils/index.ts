@@ -60,13 +60,6 @@ export {
 export { getWebSocketRpcClient } from "./rpc/webSocket";
 export { type StringifyErrorType, stringify } from "./stringify";
 export {
-  type DomainSeparatorErrorType,
-  type SerializeTypedDataErrorType,
-  type ValidateTypedDataErrorType,
-  serializeTypedData,
-  validateTypedData,
-} from "./typedData";
-export {
   type DecodeAbiParametersErrorType,
   type DecodeAbiParametersReturnType,
   decodeAbiParameters,

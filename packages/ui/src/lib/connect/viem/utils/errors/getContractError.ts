@@ -1,4 +1,4 @@
-import type { Abi } from "abitype";
+import type { Abi, Address as EthAddress } from "abitype";
 import type { Address } from "@/lib/connect/viem";
 
 import { AbiDecodingZeroDataError } from "../../errors/abi";
@@ -73,9 +73,9 @@ export function getContractError<err extends ErrorType<string>>(
   return new ContractFunctionExecutionError(cause as BaseError, {
     abi,
     args,
-    contractAddress: address,
+    contractAddress: address as EthAddress,
     docsPath,
     functionName,
-    sender,
+    sender: sender as EthAddress,
   }) as GetContractErrorReturnType;
 }

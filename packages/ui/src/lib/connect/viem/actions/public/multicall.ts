@@ -1,5 +1,6 @@
-import type { AbiStateMutability, Address, Narrow } from "abitype";
+import type { AbiStateMutability, Narrow } from "abitype";
 import { type Address as EthAddress } from "abitype";
+import { type Address } from "@/lib/connect/viem";
 
 import type { Client } from "../../clients/createClient";
 import type { Transport } from "../../clients/transports/createTransport";

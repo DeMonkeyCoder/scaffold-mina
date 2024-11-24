@@ -1284,12 +1284,6 @@ export {
   verifyMessage,
 } from "./utils/signature/verifyMessage";
 export {
-  type VerifyTypedDataErrorType,
-  type VerifyTypedDataParameters,
-  type VerifyTypedDataReturnType,
-  verifyTypedData,
-} from "./utils/signature/verifyTypedData";
-export {
   type ParseErc6492SignatureErrorType,
   type ParseErc6492SignatureParameters,
   type ParseErc6492SignatureReturnType,

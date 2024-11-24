@@ -1,60 +1,57 @@
-import type { Abi, Address } from 'abitype'
+import type { Abi, Address } from "abitype";
 
-import { type CallParameters, call } from '../actions/public/call'
-import type { Transport } from '../clients/transports/createTransport'
-import type { BaseError } from '../errors/base'
+import { call, type CallParameters } from "../actions/public/call";
+import type { Transport } from "../clients/transports/createTransport";
+import type { BaseError } from "../errors/base";
 import {
   OffchainLookupError,
   type OffchainLookupErrorType as OffchainLookupErrorType_,
   OffchainLookupResponseMalformedError,
   type OffchainLookupResponseMalformedErrorType,
   OffchainLookupSenderMismatchError,
-} from '../errors/ccip'
-import {
-  HttpRequestError,
-  type HttpRequestErrorType,
-} from '../errors/request'
-import type { Chain } from '../types/chain'
-import type { Hex } from '../types/misc'
+} from "../errors/ccip";
+import { HttpRequestError, type HttpRequestErrorType } from "../errors/request";
+import type { Chain } from "../types/chain";
+import type { Hex } from "../types/misc";
 
-import type { Client } from '../clients/createClient'
-import type { ErrorType } from '../errors/utils'
-import { decodeErrorResult } from './abi/decodeErrorResult'
-import { encodeAbiParameters } from './abi/encodeAbiParameters'
-import { isAddressEqual } from './address/isAddressEqual'
-import { concat } from './data/concat'
-import { isHex } from './data/isHex'
-import { stringify } from './stringify'
+import type { Client } from "../clients/createClient";
+import type { ErrorType } from "../errors/utils";
+import { decodeErrorResult } from "./abi/decodeErrorResult";
+import { encodeAbiParameters } from "./abi/encodeAbiParameters";
+import { isAddressEqual } from "./address/isAddressEqual";
+import { concat } from "./data/concat";
+import { isHex } from "./data/isHex";
+import { stringify } from "./stringify";
 
-export const offchainLookupSignature = '0x556f1830'
+export const offchainLookupSignature = "0x556f1830";
 export const offchainLookupAbiItem = {
-  name: 'OffchainLookup',
-  type: 'error',
+  name: "OffchainLookup",
+  type: "error",
   inputs: [
     {
-      name: 'sender',
-      type: 'address',
+      name: "sender",
+      type: "address",
     },
     {
-      name: 'urls',
-      type: 'string[]',
+      name: "urls",
+      type: "string[]",
     },
     {
-      name: 'callData',
-      type: 'bytes',
+      name: "callData",
+      type: "bytes",
     },
     {
-      name: 'callbackFunction',
-      type: 'bytes4',
+      name: "callbackFunction",
+      type: "bytes4",
     },
     {
-      name: 'extraData',
-      type: 'bytes',
+      name: "extraData",
+      type: "bytes",
     },
   ],
-} as const satisfies Abi[number]
+} as const satisfies Abi[number];
 
-export type OffchainLookupErrorType = OffchainLookupErrorType_ | ErrorType
+export type OffchainLookupErrorType = OffchainLookupErrorType_ | ErrorType;
 
 export async function offchainLookup<chain extends Chain | undefined>(
   client: Client<Transport, chain>,
@@ -63,28 +60,28 @@ export async function offchainLookup<chain extends Chain | undefined>(
     blockTag,
     data,
     to,
-  }: Pick<CallParameters, 'blockNumber' | 'blockTag'> & {
-    data: Hex
-    to: Address
-  },
+  }: Pick<CallParameters, "blockNumber" | "blockTag"> & {
+    data: Hex;
+    to: Address;
+  }
 ): Promise<Hex> {
   const { args } = decodeErrorResult({
     data,
     abi: [offchainLookupAbiItem],
-  })
-  const [sender, urls, callData, callbackSelector, extraData] = args
+  });
+  const [sender, urls, callData, callbackSelector, extraData] = args;
 
-  const { ccipRead } = client
+  const { ccipRead } = client;
   const ccipRequest_ =
-    ccipRead && typeof ccipRead?.request === 'function'
+    ccipRead && typeof ccipRead?.request === "function"
       ? ccipRead.request
-      : ccipRequest
+      : ccipRequest;
 
   try {
     if (!isAddressEqual(to, sender))
-      throw new OffchainLookupSenderMismatchError({ sender, to })
+      throw new OffchainLookupSenderMismatchError({ sender, to });
 
-    const result = await ccipRequest_({ data: callData, sender, urls })
+    const result = await ccipRequest_({ data: callData, sender, urls });
 
     const { data: data_ } = await call(client, {
       blockNumber,
@@ -92,14 +89,14 @@ export async function offchainLookup<chain extends Chain | undefined>(
       data: concat([
         callbackSelector,
         encodeAbiParameters(
-          [{ type: 'bytes' }, { type: 'bytes' }],
-          [result, extraData],
+          [{ type: "bytes" }, { type: "bytes" }],
+          [result, extraData]
         ),
       ]),
       to,
-    } as CallParameters)
+    } as CallParameters);
 
-    return data_!
+    return data_!;
   } catch (err) {
     throw new OffchainLookupError({
       callbackSelector,
@@ -108,51 +105,51 @@ export async function offchainLookup<chain extends Chain | undefined>(
       extraData,
       sender,
       urls,
-    })
+    });
   }
 }
 
 export type CcipRequestParameters = {
-  data: Hex
-  sender: Address
-  urls: readonly string[]
-}
+  data: Hex;
+  sender: Address;
+  urls: readonly string[];
+};
 
-export type CcipRequestReturnType = Hex
+export type CcipRequestReturnType = Hex;
 
 export type CcipRequestErrorType =
   | HttpRequestErrorType
   | OffchainLookupResponseMalformedErrorType
-  | ErrorType
+  | ErrorType;
 
 export async function ccipRequest({
   data,
   sender,
   urls,
 }: CcipRequestParameters): Promise<CcipRequestReturnType> {
-  let error = new Error('An unknown error occurred.')
+  let error = new Error("An unknown error occurred.");
 
   for (let i = 0; i < urls.length; i++) {
-    const url = urls[i]
-    const method = url.includes('{data}') ? 'GET' : 'POST'
-    const body = method === 'POST' ? { data, sender } : undefined
+    const url = urls[i];
+    const method = url.includes("{data}") ? "GET" : "POST";
+    const body = method === "POST" ? { data, sender } : undefined;
 
     try {
       const response = await fetch(
-        url.replace('{sender}', sender).replace('{data}', data),
+        url.replace("{sender}", sender).replace("{data}", data),
         {
           body: JSON.stringify(body),
           method,
-        },
-      )
+        }
+      );
 
-      let result: any
+      let result: any;
       if (
-        response.headers.get('Content-Type')?.startsWith('application/json')
+        response.headers.get("Content-Type")?.startsWith("application/json")
       ) {
-        result = (await responseon()).data
+        result = (await response.json()).data;
       } else {
-        result = (await response.text()) as any
+        result = (await response.text()) as any;
       }
 
       if (!response.ok) {
@@ -164,27 +161,27 @@ export async function ccipRequest({
           headers: response.headers,
           status: response.status,
           url,
-        })
-        continue
+        });
+        continue;
       }
 
       if (!isHex(result)) {
         error = new OffchainLookupResponseMalformedError({
           result,
           url,
-        })
-        continue
+        });
+        continue;
       }
 
-      return result
+      return result;
     } catch (err) {
       error = new HttpRequestError({
         body,
         details: (err as Error).message,
         url,
-      })
+      });
     }
   }
 
-  throw error
+  throw error;
 }
