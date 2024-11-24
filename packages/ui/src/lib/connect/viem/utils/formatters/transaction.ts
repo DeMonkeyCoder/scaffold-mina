@@ -2,8 +2,8 @@ import type { ErrorType } from "../../errors/utils";
 import type { SignedAuthorizationList } from "../../experimental/eip7702/types/authorization";
 import type { RpcAuthorizationList } from "../../experimental/eip7702/types/rpc";
 import type { BlockTag } from "../../types/block";
-import type { Chain } from "../../types/chain";
 import type {
+  Chain,
   ExtractChainFormatterExclude,
   ExtractChainFormatterReturnType,
 } from "../../types/chain";
@@ -12,7 +12,7 @@ import type { RpcTransaction } from "../../types/rpc";
 import type { Transaction, TransactionType } from "../../types/transaction";
 import type { ExactPartial, UnionLooseOmit } from "../../types/utils";
 import { hexToNumber } from "../encoding/fromHex";
-import { type DefineFormatterErrorType, defineFormatter } from "./formatter";
+import { defineFormatter, type DefineFormatterErrorType } from "./formatter";
 
 type TransactionPendingDependencies =
   | "blockHash"
@@ -133,7 +133,7 @@ function formatAuthorizationList(
         contractAddress: (authorization as any).address,
         r: authorization.r,
         s: authorization.s,
-        chainId: string(authorization.chainId),
+        chainId: authorization.chainId,
         nonce: Number(authorization.nonce),
         ...(typeof authorization.yParity !== "undefined"
           ? { yParity: Number(authorization.yParity) }

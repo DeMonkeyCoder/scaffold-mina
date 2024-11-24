@@ -10,9 +10,9 @@ import type { Hex } from "../../types/misc";
 import type { RequiredBy } from "../../types/utils";
 import { getAction } from "../../utils/getAction";
 import {
+  readContract,
   type ReadContractErrorType,
   type ReadContractParameters,
-  readContract,
 } from "./readContract";
 
 export type GetEip712DomainParameters = {
@@ -96,7 +96,7 @@ export async function getEip712Domain(
       domain: {
         name,
         version,
-        chainId: string(chainId),
+        chainId,
         verifyingContract,
         salt,
       },

@@ -108,7 +108,7 @@ export function mock(parameters: MockParameters) {
 
       await provider.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: stringToHex(chainId) }],
+        params: [{ chainId }],
       });
       return chain;
     },

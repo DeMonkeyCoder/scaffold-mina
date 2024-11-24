@@ -3,7 +3,6 @@ import {
   type Address,
   type EIP1193Provider,
   getAddress,
-  numberToHex,
   type ProviderConnectInfo,
   type ProviderRpcError,
   ResourceUnavailableRpcError,
@@ -202,11 +201,9 @@ export function injected(parameters: InjectedParameters = {}) {
       }
       try {
         if (!accounts?.length && !isReconnecting) {
-          const requestedAccounts = (
-            await provider.request({
-              method: "mina_requestAccounts",
-            })
-          ).result;
+          const requestedAccounts = await provider.request({
+            method: "mina_requestAccounts",
+          });
           accounts = requestedAccounts.map((x) => getAddress(x));
         }
 
@@ -313,8 +310,7 @@ export function injected(parameters: InjectedParameters = {}) {
     async getChainId() {
       const provider = await this.getProvider();
       if (!provider) throw new ProviderNotFoundError();
-      const hexChainId = await provider.request({ method: "mina_networkId" });
-      return Number(hexChainId);
+      return provider.request({ method: "mina_networkId" });
     },
     async getProvider() {
       if (typeof window === "undefined") return undefined;
@@ -419,7 +415,7 @@ export function injected(parameters: InjectedParameters = {}) {
           provider
             .request({
               method: "wallet_switchEthereumChain",
-              params: [{ chainId: stringToHex(chainId) }],
+              params: [{ chainId }],
             })
             // During `'wallet_switchEthereumChain'`, MetaMask makes a `'net_version'` RPC call to the target chain.
             // If this request fails, MetaMask does not emit the `'chainChanged'` event, but will still switch the chain.
@@ -468,7 +464,7 @@ export function injected(parameters: InjectedParameters = {}) {
 
             const addEthereumChain = {
               blockExplorerUrls,
-              chainId: stringToHex(chainId),
+              chainId,
               chainName: addEthereumChainParameter?.chainName ?? chain.name,
               iconUrls: addEthereumChainParameter?.iconUrls,
               nativeCurrency:

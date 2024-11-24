@@ -6,7 +6,7 @@ export type Authorization<uint32 = number, signed extends boolean = false> = {
   /** Address of the contract to set as code for the Authority. */
   contractAddress: Address;
   /** Chain ID to authorize. */
-  chainId: uint32;
+  chainId: string;
   /** Nonce of the Authority to authorize. */
   nonce: uint32;
 } & (signed extends true ? Signature : ExactPartial<Signature>);

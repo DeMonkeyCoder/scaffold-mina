@@ -7,7 +7,7 @@ import type { RpcTransactionRequest } from "../../types/rpc";
 import type { TransactionRequest } from "../../types/transaction";
 import type { ExactPartial } from "../../types/utils";
 import { bytesToHex, numberToHex } from "../encoding/toHex";
-import { type DefineFormatterErrorType, defineFormatter } from "./formatter";
+import { defineFormatter, type DefineFormatterErrorType } from "./formatter";
 
 export type FormattedTransactionRequest<
   chain extends Chain | undefined = Chain | undefined
@@ -90,7 +90,7 @@ function formatAuthorizationList(
         address: authorization.contractAddress,
         r: authorization.r,
         s: authorization.s,
-        chainId: stringToHex(authorization.chainId),
+        chainId: authorization.chainId,
         nonce: numberToHex(authorization.nonce),
         ...(typeof authorization.yParity !== "undefined"
           ? { yParity: numberToHex(authorization.yParity) }

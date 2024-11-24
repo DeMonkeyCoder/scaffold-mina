@@ -1,7 +1,7 @@
-import type { Address } from "@/lib/connect/viem";
+import type {Address} from "@/lib/connect/viem";
 
-import type { ExactPartial, Prettify } from "../../types/utils";
-import type { SiweMessage } from "./types";
+import type {ExactPartial, Prettify} from "../../types/utils";
+import type {SiweMessage} from "./types";
 
 /**
  * @description Parses EIP-4361 formatted message into message fields object.
@@ -35,7 +35,7 @@ export function parseSiweMessage(
   return {
     ...prefix,
     ...suffix,
-    ...(chainId ? { chainId: string(chainId) } : {}),
+    ...(chainId ? { chainId } : {}),
     ...(expirationTime ? { expirationTime: new Date(expirationTime) } : {}),
     ...(issuedAt ? { issuedAt: new Date(issuedAt) } : {}),
     ...(notBefore ? { notBefore: new Date(notBefore) } : {}),
