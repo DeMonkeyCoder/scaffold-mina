@@ -9,7 +9,7 @@ import type { Chain } from "../../types/chain";
 
 export type AssertCurrentChainParameters = {
   chain?: Chain | undefined;
-  currentchainId: string;
+  currentChainId: string;
 };
 
 export type AssertCurrentChainErrorType =

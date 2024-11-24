@@ -268,7 +268,7 @@ export async function prepareTransactionRequest<
 
   let chainId: string | undefined;
 
-  async function getChainId(): Promise<number> {
+  async function getChainId(): Promise<string> {
     if (chainId) return chainId;
     if (chain) return chain.id;
     if (typeof args.chainId !== "undefined") return args.chainId;

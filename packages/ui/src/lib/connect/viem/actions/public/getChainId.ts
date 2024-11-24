@@ -4,12 +4,9 @@ import type { Transport } from "../../clients/transports/createTransport";
 import type { ErrorType } from "../../errors/utils";
 import type { Chain } from "../../types/chain";
 import type { RequestErrorType } from "../../utils/buildRequest";
-import {
-  hexToNumber,
-  type HexToNumberErrorType,
-} from "../../utils/encoding/fromHex";
+import { type HexToNumberErrorType } from "../../utils/encoding/fromHex";
 
-export type GetChainIdReturnType = number;
+export type GetChainIdReturnType = string;
 
 export type GetChainIdErrorType =
   | HexToNumberErrorType
@@ -41,11 +38,10 @@ export async function getChainId<
   chain extends Chain | undefined,
   account extends Account | undefined
 >(client: Client<Transport, chain, account>): Promise<GetChainIdReturnType> {
-  const chainIdHex = await client.request(
+  return client.request(
     {
       method: "mina_networkId",
     },
     { dedupe: true }
   );
-  return hexToNumber(chainIdHex);
 }

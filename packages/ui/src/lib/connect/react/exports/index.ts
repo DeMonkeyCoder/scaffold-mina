@@ -216,12 +216,6 @@ export {
 } from "../hooks/useSignMessage";
 
 export {
-  type UseSignTypedDataParameters,
-  type UseSignTypedDataReturnType,
-  useSignTypedData,
-} from "../hooks/useSignTypedData";
-
-export {
   type UseSimulateContractParameters,
   type UseSimulateContractReturnType,
   useSimulateContract,

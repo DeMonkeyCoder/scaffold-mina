@@ -224,13 +224,6 @@ export {
 } from "../actions/signMessage";
 
 export {
-  type SignTypedDataErrorType,
-  type SignTypedDataParameters,
-  type SignTypedDataReturnType,
-  signTypedData,
-} from "../actions/signTypedData";
-
-export {
   type SimulateContractErrorType,
   type SimulateContractParameters,
   type SimulateContractReturnType,
@@ -258,12 +251,6 @@ export {
   type VerifyMessageReturnType,
   verifyMessage,
 } from "../actions/verifyMessage";
-
-export {
-  type VerifyTypedDataParameters,
-  type VerifyTypedDataReturnType,
-  verifyTypedData,
-} from "../actions/verifyTypedData";
 
 export {
   type WatchAccountParameters,

@@ -1,7 +1,7 @@
 import type { Account } from "../../accounts/types";
 import {
-  type ParseAccountErrorType,
   parseAccount,
+  type ParseAccountErrorType,
 } from "../../accounts/utils/parseAccount";
 import type { SignTransactionErrorType } from "../../accounts/utils/signTransaction";
 import type { Client } from "../../clients/createClient";
@@ -15,24 +15,23 @@ import {
 import { BaseError } from "../../errors/base";
 import type { ErrorType } from "../../errors/utils";
 import {
-  type RecoverAuthorizationAddressErrorType,
   recoverAuthorizationAddress,
+  type RecoverAuthorizationAddressErrorType,
 } from "../../experimental/eip7702/utils/recoverAuthorizationAddress";
 import type { GetAccountParameter } from "../../types/account";
-import type { Chain, DeriveChain } from "../../types/chain";
-import type { GetChainParameter } from "../../types/chain";
+import type { Chain, DeriveChain, GetChainParameter } from "../../types/chain";
 import type { GetTransactionRequestKzgParameter } from "../../types/kzg";
 import type { Hash } from "../../types/misc";
 import type { TransactionRequest } from "../../types/transaction";
 import type { UnionOmit } from "../../types/utils";
 import type { RequestErrorType } from "../../utils/buildRequest";
 import {
-  type AssertCurrentChainErrorType,
   assertCurrentChain,
+  type AssertCurrentChainErrorType,
 } from "../../utils/chain/assertCurrentChain";
 import {
-  type GetTransactionErrorReturnType,
   getTransactionError,
+  type GetTransactionErrorReturnType,
 } from "../../utils/errors/getTransactionError";
 import { extract } from "../../utils/formatters/extract";
 import {
@@ -41,19 +40,19 @@ import {
 } from "../../utils/formatters/transactionRequest";
 import { getAction } from "../../utils/getAction";
 import {
+  assertRequest,
   type AssertRequestErrorType,
   type AssertRequestParameters,
-  assertRequest,
 } from "../../utils/transaction/assertRequest";
-import { type GetChainIdErrorType, getChainId } from "../public/getChainId";
+import { getChainId, type GetChainIdErrorType } from "../public/getChainId";
 import {
-  type PrepareTransactionRequestErrorType,
   defaultParameters,
   prepareTransactionRequest,
+  type PrepareTransactionRequestErrorType,
 } from "./prepareTransactionRequest";
 import {
-  type SendRawTransactionErrorType,
   sendRawTransaction,
+  type SendRawTransactionErrorType,
 } from "./sendRawTransaction";
 
 export type SendTransactionRequest<
@@ -272,15 +271,6 @@ export async function sendTransaction<
         serializedTransaction,
       });
     }
-
-    if (account.type === "smart")
-      throw new AccountTypeNotSupportedError({
-        metaMessages: [
-          "Consider using the `sendUserOperation` Action instead.",
-        ],
-        docsPath: "/docs/actions/bundler/sendUserOperation",
-        type: "smart",
-      });
 
     throw new AccountTypeNotSupportedError({
       docsPath: "/docs/actions/wallet/sendTransaction",

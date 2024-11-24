@@ -161,11 +161,6 @@ import {
   type VerifyMessageReturnType,
 } from "../../actions/public/verifyMessage";
 import {
-  verifyTypedData,
-  type VerifyTypedDataParameters,
-  type VerifyTypedDataReturnType,
-} from "../../actions/public/verifyTypedData";
-import {
   waitForTransactionReceipt,
   type WaitForTransactionReceiptParameters,
   type WaitForTransactionReceiptReturnType,
@@ -1340,17 +1335,6 @@ export type PublicActions<
     args: VerifySiweMessageParameters
   ) => Promise<VerifySiweMessageReturnType>;
   /**
-   * Verify that typed data was signed by the provided address.
-   *
-   * - Docs {@link https://viem.sh/docs/actions/public/verifyTypedData}
-   *
-   * @param parameters - {@link VerifyTypedDataParameters}
-   * @returns Whether or not the signature is valid. {@link VerifyTypedDataReturnType}
-   */
-  verifyTypedData: (
-    args: VerifyTypedDataParameters
-  ) => Promise<VerifyTypedDataReturnType>;
-  /**
    * Destroys a Filter that was created from one of the following Actions:
    *
    * - [`createBlockFilter`](https://viem.sh/docs/actions/public/createBlockFilter)
@@ -1632,7 +1616,6 @@ export function publicActions<
     simulateContract: (args) => simulateContract(client, args),
     verifyMessage: (args) => verifyMessage(client, args),
     verifySiweMessage: (args) => verifySiweMessage(client, args),
-    verifyTypedData: (args) => verifyTypedData(client, args),
     uninstallFilter: (args) => uninstallFilter(client, args),
     waitForTransactionReceipt: (args) =>
       waitForTransactionReceipt(client, args),

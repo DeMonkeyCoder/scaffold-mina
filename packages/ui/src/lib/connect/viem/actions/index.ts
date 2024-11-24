@@ -409,12 +409,6 @@ export {
   signMessage,
 } from "./wallet/signMessage";
 export {
-  type SignTypedDataErrorType,
-  type SignTypedDataParameters,
-  type SignTypedDataReturnType,
-  signTypedData,
-} from "./wallet/signTypedData";
-export {
   type SimulateContractErrorType,
   type SimulateContractParameters,
   type SimulateContractReturnType,
@@ -448,12 +442,6 @@ export {
   type VerifyMessageReturnType,
   verifyMessage,
 } from "./public/verifyMessage";
-export {
-  type VerifyTypedDataErrorType,
-  type VerifyTypedDataParameters,
-  type VerifyTypedDataReturnType,
-  verifyTypedData,
-} from "./public/verifyTypedData";
 export {
   type WatchAssetErrorType,
   type WatchAssetParameters,

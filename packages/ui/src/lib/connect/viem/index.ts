@@ -410,11 +410,6 @@ export type {
   VerifyHashReturnType as VerifyHashActionReturnType,
 } from "./actions/public/verifyHash";
 export type {
-  VerifyTypedDataErrorType as VerifyTypedDataActionErrorType,
-  VerifyTypedDataParameters as VerifyTypedDataActionParameters,
-  VerifyTypedDataReturnType as VerifyTypedDataActionReturnType,
-} from "./actions/public/verifyTypedData";
-export type {
   VerifyMessageErrorType as VerifyMessageActionErrorType,
   VerifyMessageParameters as VerifyMessageActionParameters,
   VerifyMessageReturnType as VerifyMessageActionReturnType,

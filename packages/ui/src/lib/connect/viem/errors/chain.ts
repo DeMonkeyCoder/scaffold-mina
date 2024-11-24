@@ -48,7 +48,7 @@ export class ChainMismatchError extends BaseError {
     currentChainId,
   }: {
     chain: Chain;
-    currentchainId: string;
+    currentChainId: string;
   }) {
     super(
       `The current chain of the wallet (id: ${currentChainId}) does not match the target chain for the transaction (id: ${chain.id} – ${chain.name}).`,

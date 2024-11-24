@@ -242,14 +242,6 @@ export {
 } from "../query/signMessage";
 
 export {
-  type SignTypedDataData,
-  type SignTypedDataVariables,
-  type SignTypedDataMutate,
-  type SignTypedDataMutateAsync,
-  signTypedDataMutationOptions,
-} from "../query/signTypedData";
-
-export {
   type SwitchAccountData,
   type SwitchAccountVariables,
   type SwitchAccountMutate,
@@ -282,15 +274,6 @@ export {
   verifyMessageQueryKey,
   verifyMessageQueryOptions,
 } from "../query/verifyMessage";
-
-export {
-  type VerifyTypedDataData,
-  type VerifyTypedDataOptions,
-  type VerifyTypedDataQueryFnData,
-  type VerifyTypedDataQueryKey,
-  verifyTypedDataQueryKey,
-  verifyTypedDataQueryOptions,
-} from "../query/verifyTypedData";
 
 export {
   type WaitForTransactionReceiptData,
