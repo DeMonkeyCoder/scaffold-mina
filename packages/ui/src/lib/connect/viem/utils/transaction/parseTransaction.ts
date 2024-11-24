@@ -176,7 +176,7 @@ function parseTransactionEIP7702(
     });
 
   const transaction = {
-    chainId: hexToNumber(chainId as Hex),
+    chainId,
     type: "eip7702",
   } as TransactionSerializableEIP7702;
   if (isHex(to) && to !== "0x") transaction.to = to;
@@ -275,7 +275,7 @@ function parseTransactionEIP4844(
 
   const transaction = {
     blobVersionedHashes: blobVersionedHashes as Hex[],
-    chainId: hexToNumber(chainId as Hex),
+    chainId,
     type: "eip4844",
   } as TransactionSerializableEIP4844;
   if (isHex(to) && to !== "0x") transaction.to = to;
@@ -366,7 +366,7 @@ function parseTransactionEIP1559(
     });
 
   const transaction: TransactionSerializableEIP1559 = {
-    chainId: hexToNumber(chainId as Hex),
+    chainId: chainId as string,
     type: "eip1559",
   };
   if (isHex(to) && to !== "0x") transaction.to = to;
@@ -437,7 +437,7 @@ function parseTransactionEIP2930(
     });
 
   const transaction: TransactionSerializableEIP2930 = {
-    chainId: hexToNumber(chainId as Hex),
+    chainId: chainId as string,
     type: "eip2930",
   };
   if (isHex(to) && to !== "0x") transaction.to = to;
@@ -521,15 +521,16 @@ function parseTransactionLegacy(
       : 0n;
 
   if (s === "0x" && r === "0x") {
-    if (chainIdOrV > 0) transaction.chainId = Number(chainIdOrV);
+    // if (chainIdOrV > 0) transaction.chainId = Number(chainIdOrV);
     return transaction;
   }
 
   const v = chainIdOrV;
 
-  const chainId: string | undefined = Number((v - 35n) / 2n);
-  if (chainId > 0) transaction.chainId = chainId;
-  else if (v !== 27n && v !== 28n) throw new InvalidLegacyVError({ v });
+  // const chainId: string | undefined = Number((v - 35n) / 2n);
+  // if (chainId > 0) transaction.chainId = chainId;
+  // else if (v !== 27n && v !== 28n) throw new InvalidLegacyVError({ v });
+  if (v !== 27n && v !== 28n) throw new InvalidLegacyVError({ v });
 
   transaction.v = v;
   transaction.s = s as Hex;
@@ -580,7 +581,7 @@ function parseAuthorizationList(
       serializedAuthorizationList[i];
 
     authorizationList.push({
-      chainId: hexToNumber(chainId),
+      chainId,
       contractAddress,
       nonce: hexToNumber(nonce),
       ...parseEIP155Signature([yParity, r, s]),

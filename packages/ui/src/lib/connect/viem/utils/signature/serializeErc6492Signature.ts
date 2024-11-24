@@ -1,4 +1,5 @@
 import type { Address } from "@/lib/connect/viem";
+import type { Address as EthAddress } from "abitype";
 import { erc6492MagicBytes } from "../../constants/bytes";
 import type { ErrorType } from "../../errors/utils";
 import type { ByteArray, Hex } from "../../types/misc";
@@ -41,7 +42,7 @@ export function serializeErc6492Signature<to extends To = "hex">(
   const signature_ = concatHex([
     encodeAbiParameters(
       [{ type: "address" }, { type: "bytes" }, { type: "bytes" }],
-      [address, data, signature]
+      [address as EthAddress, data, signature]
     ),
     erc6492MagicBytes,
   ]);

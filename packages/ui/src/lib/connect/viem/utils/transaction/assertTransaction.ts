@@ -1,9 +1,9 @@
-import { versionedHashVersionKzg } from '../../constants/kzg'
+import { versionedHashVersionKzg } from "../../constants/kzg";
 import {
   InvalidAddressError,
   type InvalidAddressErrorType,
-} from '../../errors/address'
-import { BaseError, type BaseErrorType } from '../../errors/base'
+} from "../../errors/address";
+import { BaseError, type BaseErrorType } from "../../errors/base";
 import {
   EmptyBlobError,
   type EmptyBlobErrorType,
@@ -11,49 +11,46 @@ import {
   type InvalidVersionedHashSizeErrorType,
   InvalidVersionedHashVersionError,
   type InvalidVersionedHashVersionErrorType,
-} from '../../errors/blob'
-import {
-  InvalidChainIdError,
-  type InvalidChainIdErrorType,
-} from '../../errors/chain'
+} from "../../errors/blob";
+import { type InvalidChainIdErrorType } from "../../errors/chain";
 import {
   FeeCapTooHighError,
   type FeeCapTooHighErrorType,
   TipAboveFeeCapError,
   type TipAboveFeeCapErrorType,
-} from '../../errors/node'
-import type { ErrorType } from '../../errors/utils'
+} from "../../errors/node";
+import type { ErrorType } from "../../errors/utils";
 import type {
   TransactionSerializableEIP1559,
   TransactionSerializableEIP2930,
   TransactionSerializableEIP4844,
   TransactionSerializableEIP7702,
   TransactionSerializableLegacy,
-} from '../../types/transaction'
-import { type IsAddressErrorType, isAddress } from '../address/isAddress'
-import { size } from '../data/size'
-import { slice } from '../data/slice'
-import { hexToNumber } from '../encoding/fromHex'
+} from "../../types/transaction";
+import { isAddress, type IsAddressErrorType } from "../address/isAddress";
+import { size } from "../data/size";
+import { slice } from "../data/slice";
+import { hexToNumber } from "../encoding/fromHex";
 
 export type AssertTransactionEIP7702ErrorType =
   | AssertTransactionEIP1559ErrorType
   | InvalidAddressErrorType
   | InvalidChainIdErrorType
-  | ErrorType
+  | ErrorType;
 
 export function assertTransactionEIP7702(
-  transaction: TransactionSerializableEIP7702,
+  transaction: TransactionSerializableEIP7702
 ) {
-  const { authorizationList } = transaction
+  const { authorizationList } = transaction;
   if (authorizationList) {
     for (const authorization of authorizationList) {
-      const { contractAddress, chainId } = authorization
+      const { contractAddress, chainId } = authorization;
       if (!isAddress(contractAddress))
-        throw new InvalidAddressError({ address: contractAddress })
-      if (chainId <= 0) throw new InvalidChainIdError({ chainId })
+        throw new InvalidAddressError({ address: contractAddress });
+      // if (chainId <= 0) throw new InvalidChainIdError({ chainId });
     }
   }
-  assertTransactionEIP1559(transaction as {} as TransactionSerializableEIP1559)
+  assertTransactionEIP1559(transaction as {} as TransactionSerializableEIP1559);
 }
 
 export type AssertTransactionEIP4844ErrorType =
@@ -61,27 +58,27 @@ export type AssertTransactionEIP4844ErrorType =
   | EmptyBlobErrorType
   | InvalidVersionedHashSizeErrorType
   | InvalidVersionedHashVersionErrorType
-  | ErrorType
+  | ErrorType;
 
 export function assertTransactionEIP4844(
-  transaction: TransactionSerializableEIP4844,
+  transaction: TransactionSerializableEIP4844
 ) {
-  const { blobVersionedHashes } = transaction
+  const { blobVersionedHashes } = transaction;
   if (blobVersionedHashes) {
-    if (blobVersionedHashes.length === 0) throw new EmptyBlobError()
+    if (blobVersionedHashes.length === 0) throw new EmptyBlobError();
     for (const hash of blobVersionedHashes) {
-      const size_ = size(hash)
-      const version = hexToNumber(slice(hash, 0, 1))
+      const size_ = size(hash);
+      const version = hexToNumber(slice(hash, 0, 1));
       if (size_ !== 32)
-        throw new InvalidVersionedHashSizeError({ hash, size: size_ })
+        throw new InvalidVersionedHashSizeError({ hash, size: size_ });
       if (version !== versionedHashVersionKzg)
         throw new InvalidVersionedHashVersionError({
           hash,
           version,
-        })
+        });
     }
   }
-  assertTransactionEIP1559(transaction as {} as TransactionSerializableEIP1559)
+  assertTransactionEIP1559(transaction as {} as TransactionSerializableEIP1559);
 }
 
 export type AssertTransactionEIP1559ErrorType =
@@ -91,22 +88,22 @@ export type AssertTransactionEIP1559ErrorType =
   | InvalidChainIdErrorType
   | FeeCapTooHighErrorType
   | TipAboveFeeCapErrorType
-  | ErrorType
+  | ErrorType;
 
 export function assertTransactionEIP1559(
-  transaction: TransactionSerializableEIP1559,
+  transaction: TransactionSerializableEIP1559
 ) {
-  const { chainId, maxPriorityFeePerGas, maxFeePerGas, to } = transaction
-  if (chainId <= 0) throw new InvalidChainIdError({ chainId })
-  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to })
+  const { chainId, maxPriorityFeePerGas, maxFeePerGas, to } = transaction;
+  // if (chainId <= 0) throw new InvalidChainIdError({ chainId })
+  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to });
   if (maxFeePerGas && maxFeePerGas > 2n ** 256n - 1n)
-    throw new FeeCapTooHighError({ maxFeePerGas })
+    throw new FeeCapTooHighError({ maxFeePerGas });
   if (
     maxPriorityFeePerGas &&
     maxFeePerGas &&
     maxPriorityFeePerGas > maxFeePerGas
   )
-    throw new TipAboveFeeCapError({ maxFeePerGas, maxPriorityFeePerGas })
+    throw new TipAboveFeeCapError({ maxFeePerGas, maxPriorityFeePerGas });
 }
 
 export type AssertTransactionEIP2930ErrorType =
@@ -115,21 +112,21 @@ export type AssertTransactionEIP2930ErrorType =
   | InvalidAddressErrorType
   | InvalidChainIdErrorType
   | FeeCapTooHighErrorType
-  | ErrorType
+  | ErrorType;
 
 export function assertTransactionEIP2930(
-  transaction: TransactionSerializableEIP2930,
+  transaction: TransactionSerializableEIP2930
 ) {
   const { chainId, maxPriorityFeePerGas, gasPrice, maxFeePerGas, to } =
-    transaction
-  if (chainId <= 0) throw new InvalidChainIdError({ chainId })
-  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to })
+    transaction;
+  // if (chainId <= 0) throw new InvalidChainIdError({ chainId })
+  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to });
   if (maxPriorityFeePerGas || maxFeePerGas)
     throw new BaseError(
-      '`maxFeePerGas`/`maxPriorityFeePerGas` is not a valid EIP-2930 Transaction attribute.',
-    )
+      "`maxFeePerGas`/`maxPriorityFeePerGas` is not a valid EIP-2930 Transaction attribute."
+    );
   if (gasPrice && gasPrice > 2n ** 256n - 1n)
-    throw new FeeCapTooHighError({ maxFeePerGas: gasPrice })
+    throw new FeeCapTooHighError({ maxFeePerGas: gasPrice });
 }
 
 export type AssertTransactionLegacyErrorType =
@@ -138,20 +135,20 @@ export type AssertTransactionLegacyErrorType =
   | InvalidAddressErrorType
   | InvalidChainIdErrorType
   | FeeCapTooHighErrorType
-  | ErrorType
+  | ErrorType;
 
 export function assertTransactionLegacy(
-  transaction: TransactionSerializableLegacy,
+  transaction: TransactionSerializableLegacy
 ) {
   const { chainId, maxPriorityFeePerGas, gasPrice, maxFeePerGas, to } =
-    transaction
-  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to })
-  if (typeof chainId !== 'undefined' && chainId <= 0)
-    throw new InvalidChainIdError({ chainId })
+    transaction;
+  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to });
+  // if (typeof chainId !== 'undefined' && chainId <= 0)
+  //   throw new InvalidChainIdError({ chainId })
   if (maxPriorityFeePerGas || maxFeePerGas)
     throw new BaseError(
-      '`maxFeePerGas`/`maxPriorityFeePerGas` is not a valid Legacy Transaction attribute.',
-    )
+      "`maxFeePerGas`/`maxPriorityFeePerGas` is not a valid Legacy Transaction attribute."
+    );
   if (gasPrice && gasPrice > 2n ** 256n - 1n)
-    throw new FeeCapTooHighError({ maxFeePerGas: gasPrice })
+    throw new FeeCapTooHighError({ maxFeePerGas: gasPrice });
 }
