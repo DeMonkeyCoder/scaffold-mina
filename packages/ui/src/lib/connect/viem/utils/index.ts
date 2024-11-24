@@ -407,12 +407,6 @@ export {
   recoverPublicKey,
 } from "./signature/recoverPublicKey";
 export {
-  type RecoverTypedDataAddressErrorType,
-  type RecoverTypedDataAddressParameters,
-  type RecoverTypedDataAddressReturnType,
-  recoverTypedDataAddress,
-} from "./signature/recoverTypedDataAddress";
-export {
   type VerifyHashErrorType,
   type VerifyHashParameters,
   type VerifyHashReturnType,

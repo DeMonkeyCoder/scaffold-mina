@@ -1235,12 +1235,6 @@ export {
   recoverTransactionAddress,
 } from "./utils/signature/recoverTransactionAddress";
 export {
-  type RecoverTypedDataAddressErrorType,
-  type RecoverTypedDataAddressParameters,
-  type RecoverTypedDataAddressReturnType,
-  recoverTypedDataAddress,
-} from "./utils/signature/recoverTypedDataAddress";
-export {
   type SignatureToCompactSignatureErrorType,
   signatureToCompactSignature,
 } from "./utils/signature/signatureToCompactSignature";
