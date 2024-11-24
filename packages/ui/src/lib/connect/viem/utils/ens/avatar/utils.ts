@@ -1,8 +1,8 @@
 import type { Address } from "@/lib/connect/viem";
 
 import {
-  type ReadContractErrorType,
   readContract,
+  type ReadContractErrorType,
 } from "../../../actions/public/readContract";
 import type { Client } from "../../../clients/createClient";
 import type { Transport } from "../../../clients/transports/createTransport";
@@ -254,7 +254,7 @@ export function parseNftUri(uri_: string): ParsedNft {
     });
 
   return {
-    chainId: string.parseInt(chainID),
+    chainId: chainID,
     namespace: erc_namespace.toLowerCase(),
     contractAddress: contractAddress as Address,
     tokenID,

@@ -59,7 +59,7 @@ export async function readContracts<
           allowFailure,
           blockNumber,
           blockTag,
-          chainId: string.parseInt(chainId),
+          chainId,
           contracts: contracts.map(({ contract }) => contract),
         })
       );
