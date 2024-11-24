@@ -475,7 +475,7 @@ export type PaymasterRpcSchema = [
           >
       >,
       entrypoint: Address,
-      chainId: Hex,
+      chainId: string,
       context: unknown
     ];
     ReturnType: OneOf<
@@ -526,7 +526,7 @@ export type PaymasterRpcSchema = [
             | "verificationGasLimit"
           >,
       entrypoint: Address,
-      chainId: Hex,
+      chainId: string,
       context: unknown
     ];
     ReturnType: OneOf<

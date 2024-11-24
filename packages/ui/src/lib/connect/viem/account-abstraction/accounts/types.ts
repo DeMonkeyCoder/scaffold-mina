@@ -1,9 +1,8 @@
-import type { Abi, Address, TypedData } from "abitype";
+import type { Abi, Address } from "abitype";
 import type { SignReturnType as WebAuthnSignReturnType } from "webauthn-p256";
 
 import type { Client } from "../../clients/createClient";
 import type { Hash, Hex, SignableMessage } from "../../types/misc";
-import type { TypedDataDefinition } from "../../types/typedData";
 import type { Assign, ExactPartial, UnionPartialBy } from "../../types/utils";
 import type { EntryPointVersion } from "../types/entryPointVersion";
 import type {
@@ -125,25 +124,6 @@ export type SmartAccountImplementation<
    */
   signMessage: (parameters: { message: SignableMessage }) => Promise<Hex>;
   /**
-   * Signs [EIP-712 Typed Data](https://eips.ethereum.org/EIPS/eip-712).
-   *
-   * @example
-   * ```ts
-   * const signature = await account.signTypedData({
-   *   domain,
-   *   types,
-   *   primaryType: 'Mail',
-   *   message,
-   * })
-   * ```
-   */
-  signTypedData: <
-    const typedData extends TypedData | Record<string, unknown>,
-    primaryType extends keyof typedData | "EIP712Domain" = keyof typedData
-  >(
-    parameters: TypedDataDefinition<typedData, primaryType>
-  ) => Promise<Hex>;
-  /**
    * Signs the User Operation.
    *
    * @example
@@ -199,11 +179,5 @@ export type WebAuthnAccount = {
   }: {
     message: SignableMessage;
   }) => Promise<WebAuthnSignReturnType>;
-  signTypedData: <
-    const typedData extends TypedDataDefinition | Record<string, unknown>,
-    primaryType extends keyof typedData | "EIP712Domain" = keyof typedData
-  >(
-    typedDataDefinition: TypedDataDefinition<typedData, primaryType>
-  ) => Promise<WebAuthnSignReturnType>;
   type: "webAuthn";
 };

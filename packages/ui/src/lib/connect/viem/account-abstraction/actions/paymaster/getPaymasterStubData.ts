@@ -5,11 +5,10 @@ import type { ErrorType } from "../../../errors/utils";
 import type { Hex } from "../../../types/misc";
 import type { OneOf, PartialBy, Prettify } from "../../../types/utils";
 import { hexToBigInt } from "../../../utils/encoding/fromHex";
-import { numberToHex } from "../../../utils/encoding/toHex";
 import type { UserOperation } from "../../types/userOperation";
 import {
-  type FormatUserOperationRequestErrorType,
   formatUserOperationRequest,
+  type FormatUserOperationRequestErrorType,
 } from "../../utils/formatters/userOperationRequest";
 
 export type GetPaymasterStubDataParameters = OneOf<
@@ -122,7 +121,7 @@ export async function getPaymasterStubData(
           preVerificationGas: request.preVerificationGas ?? "0x0",
         },
         entryPointAddress,
-        numberToHex(chainId),
+        chainId,
         context,
       ],
     });
