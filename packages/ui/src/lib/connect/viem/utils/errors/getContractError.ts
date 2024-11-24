@@ -1,7 +1,8 @@
-import type { Abi, Address } from 'abitype'
+import type { Abi } from "abitype";
+import type { Address } from "@/lib/connect/viem";
 
-import { AbiDecodingZeroDataError } from '../../errors/abi'
-import { BaseError } from '../../errors/base'
+import { AbiDecodingZeroDataError } from "../../errors/abi";
+import { BaseError } from "../../errors/base";
 import {
   ContractFunctionExecutionError,
   type ContractFunctionExecutionErrorType,
@@ -10,21 +11,21 @@ import {
   ContractFunctionZeroDataError,
   type ContractFunctionZeroDataErrorType,
   RawContractError,
-} from '../../errors/contract'
-import { InternalRpcError } from '../../errors/rpc'
-import type { ErrorType } from '../../errors/utils'
+} from "../../errors/contract";
+import { InternalRpcError } from "../../errors/rpc";
+import type { ErrorType } from "../../errors/utils";
 
-const EXECUTION_REVERTED_ERROR_CODE = 3
+const EXECUTION_REVERTED_ERROR_CODE = 3;
 
 export type GetContractErrorReturnType<cause = ErrorType> = Omit<
   ContractFunctionExecutionErrorType,
-  'cause'
+  "cause"
 > & {
   cause:
     | cause
     | ContractFunctionZeroDataErrorType
-    | ContractFunctionRevertedErrorType
-}
+    | ContractFunctionRevertedErrorType;
+};
 
 export function getContractError<err extends ErrorType<string>>(
   err: err,
@@ -36,38 +37,38 @@ export function getContractError<err extends ErrorType<string>>(
     functionName,
     sender,
   }: {
-    abi: Abi
-    args: any
-    address?: Address | undefined
-    docsPath?: string | undefined
-    functionName: string
-    sender?: Address | undefined
-  },
+    abi: Abi;
+    args: any;
+    address?: Address | undefined;
+    docsPath?: string | undefined;
+    functionName: string;
+    sender?: Address | undefined;
+  }
 ): GetContractErrorReturnType {
   const { code, data, message, shortMessage } = (
     err instanceof RawContractError
       ? err
       : err instanceof BaseError
-        ? err.walk((err) => 'data' in (err as Error)) || err.walk()
-        : {}
-  ) as RawContractError
+      ? err.walk((err) => "data" in (err as Error)) || err.walk()
+      : {}
+  ) as RawContractError;
 
   const cause = (() => {
     if (err instanceof AbiDecodingZeroDataError)
-      return new ContractFunctionZeroDataError({ functionName })
+      return new ContractFunctionZeroDataError({ functionName });
     if (
       [EXECUTION_REVERTED_ERROR_CODE, InternalRpcError.code].includes(code) &&
       (data || message || shortMessage)
     ) {
       return new ContractFunctionRevertedError({
         abi,
-        data: typeof data === 'object' ? data.data : data,
+        data: typeof data === "object" ? data.data : data,
         functionName,
         message: shortMessage ?? message,
-      })
+      });
     }
-    return err
-  })()
+    return err;
+  })();
 
   return new ContractFunctionExecutionError(cause as BaseError, {
     abi,
@@ -76,5 +77,5 @@ export function getContractError<err extends ErrorType<string>>(
     docsPath,
     functionName,
     sender,
-  }) as GetContractErrorReturnType
+  }) as GetContractErrorReturnType;
 }

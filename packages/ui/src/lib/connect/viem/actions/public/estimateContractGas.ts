@@ -1,69 +1,70 @@
-import type { Abi } from 'abitype'
+import type { Abi } from "abitype";
+import { type Address as EthAddress } from "abitype";
 
-import type { Account } from '../../accounts/types'
+import type { Account } from "../../accounts/types";
 import {
-  type ParseAccountErrorType,
   parseAccount,
-} from '../../accounts/utils/parseAccount'
-import type { Client } from '../../clients/createClient'
-import type { Transport } from '../../clients/transports/createTransport'
-import type { BaseError } from '../../errors/base'
-import type { Chain } from '../../types/chain'
+  type ParseAccountErrorType,
+} from "../../accounts/utils/parseAccount";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { BaseError } from "../../errors/base";
+import type { Chain } from "../../types/chain";
 import type {
   ContractFunctionArgs,
   ContractFunctionName,
   ContractFunctionParameters,
   GetValue,
-} from '../../types/contract'
-import type { UnionOmit } from '../../types/utils'
+} from "../../types/contract";
+import type { UnionOmit } from "../../types/utils";
 import {
+  encodeFunctionData,
   type EncodeFunctionDataErrorType,
   type EncodeFunctionDataParameters,
-  encodeFunctionData,
-} from '../../utils/abi/encodeFunctionData'
+} from "../../utils/abi/encodeFunctionData";
 import {
-  type GetContractErrorReturnType,
   getContractError,
-} from '../../utils/errors/getContractError'
-import { getAction } from '../../utils/getAction'
+  type GetContractErrorReturnType,
+} from "../../utils/errors/getContractError";
+import { getAction } from "../../utils/getAction";
 import {
+  estimateGas,
   type EstimateGasErrorType,
   type EstimateGasParameters,
-  estimateGas,
-} from './estimateGas'
+} from "./estimateGas";
 
 export type EstimateContractGasParameters<
   abi extends Abi | readonly unknown[] = Abi,
   functionName extends ContractFunctionName<
     abi,
-    'nonpayable' | 'payable'
-  > = ContractFunctionName<abi, 'nonpayable' | 'payable'>,
+    "nonpayable" | "payable"
+  > = ContractFunctionName<abi, "nonpayable" | "payable">,
   args extends ContractFunctionArgs<
     abi,
-    'nonpayable' | 'payable',
+    "nonpayable" | "payable",
     functionName
-  > = ContractFunctionArgs<abi, 'nonpayable' | 'payable', functionName>,
-  chain extends Chain | undefined = Chain | undefined,
+  > = ContractFunctionArgs<abi, "nonpayable" | "payable", functionName>,
+  chain extends Chain | undefined = Chain | undefined
 > = ContractFunctionParameters<
   abi,
-  'nonpayable' | 'payable',
+  "nonpayable" | "payable",
   functionName,
   args
 > &
-  UnionOmit<EstimateGasParameters<chain>, 'data' | 'to' | 'value'> &
+  UnionOmit<EstimateGasParameters<chain>, "data" | "to" | "value"> &
   GetValue<
     abi,
     functionName,
     EstimateGasParameters<chain> extends EstimateGasParameters
-      ? EstimateGasParameters<chain>['value']
-      : EstimateGasParameters['value']
-  >
+      ? EstimateGasParameters<chain>["value"]
+      : EstimateGasParameters["value"]
+  >;
 
-export type EstimateContractGasReturnType = bigint
+export type EstimateContractGasReturnType = bigint;
 
 export type EstimateContractGasErrorType = GetContractErrorReturnType<
   EncodeFunctionDataErrorType | EstimateGasErrorType | ParseAccountErrorType
->
+>;
 
 /**
  * Estimates the gas required to successfully execute a contract write function call.
@@ -94,41 +95,41 @@ export type EstimateContractGasErrorType = GetContractErrorReturnType<
  */
 export async function estimateContractGas<
   const abi extends Abi | readonly unknown[],
-  functionName extends ContractFunctionName<abi, 'nonpayable' | 'payable'>,
-  args extends ContractFunctionArgs<abi, 'pure' | 'view', functionName>,
+  functionName extends ContractFunctionName<abi, "nonpayable" | "payable">,
+  args extends ContractFunctionArgs<abi, "pure" | "view", functionName>,
   chain extends Chain | undefined,
-  account extends Account | undefined = undefined,
+  account extends Account | undefined = undefined
 >(
   client: Client<Transport, chain, account>,
-  parameters: EstimateContractGasParameters<abi, functionName, args, chain>,
+  parameters: EstimateContractGasParameters<abi, functionName, args, chain>
 ): Promise<EstimateContractGasReturnType> {
   const { abi, address, args, functionName, ...request } =
-    parameters as EstimateContractGasParameters
+    parameters as EstimateContractGasParameters;
   const data = encodeFunctionData({
     abi,
     args,
     functionName,
-  } as EncodeFunctionDataParameters)
+  } as EncodeFunctionDataParameters);
   try {
     const gas = await getAction(
       client,
       estimateGas,
-      'estimateGas',
+      "estimateGas"
     )({
       data,
       to: address,
       ...request,
-    } as unknown as EstimateGasParameters)
-    return gas
+    } as unknown as EstimateGasParameters);
+    return gas;
   } catch (error) {
-    const account = request.account ? parseAccount(request.account) : undefined
+    const account = request.account ? parseAccount(request.account) : undefined;
     throw getContractError(error as BaseError, {
       abi,
       address,
       args,
-      docsPath: '/docs/contract/estimateContractGas',
+      docsPath: "/docs/contract/estimateContractGas",
       functionName,
-      sender: account?.address,
-    })
+      sender: account?.address as EthAddress | undefined,
+    });
   }
 }

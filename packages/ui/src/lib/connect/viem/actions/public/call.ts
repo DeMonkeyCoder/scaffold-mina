@@ -1,4 +1,4 @@
-import { parseAbi } from "abitype";
+import { type Address as EthAddress, parseAbi } from "abitype";
 import { type Address } from "@/lib/connect/viem";
 
 import type { Account } from "../../accounts/types";
@@ -274,11 +274,15 @@ export async function call<chain extends Chain | undefined>(
       data?.slice(0, 10) === offchainLookupSignature &&
       to
     )
-      return { data: await offchainLookup(client, { data, to }) };
+      return {
+        data: await offchainLookup(client, { data, to: to as EthAddress }),
+      };
 
     // Check for counterfactual deployment error.
     if (deploylessCall && data?.slice(0, 10) === "0x101bb98d")
-      throw new CounterfactualDeploymentFailedError({ factory });
+      throw new CounterfactualDeploymentFailedError({
+        factory: factory as EthAddress,
+      });
 
     throw getCallError(err as ErrorType, {
       ...args,
@@ -367,7 +371,7 @@ async function scheduleMulticall<chain extends Chain | undefined>(
       const calls = requests.map((request) => ({
         allowFailure: true,
         callData: request.data,
-        target: request.to,
+        target: request.to as EthAddress,
       }));
 
       const calldata = encodeFunctionData({
@@ -430,7 +434,7 @@ function toDeploylessCallViaFactoryData(parameters: {
   return encodeDeployData({
     abi: parseAbi(["constructor(address, bytes, address, bytes)"]),
     bytecode: deploylessCallViaFactoryBytecode,
-    args: [to, data, factory, factoryData],
+    args: [to as EthAddress, data, factory as EthAddress, factoryData],
   });
 }
 

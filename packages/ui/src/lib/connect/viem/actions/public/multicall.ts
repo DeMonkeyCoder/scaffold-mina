@@ -1,4 +1,5 @@
 import type { AbiStateMutability, Address, Narrow } from "abitype";
+import { type Address as EthAddress } from "abitype";
 
 import type { Client } from "../../clients/createClient";
 import type { Transport } from "../../clients/transports/createTransport";
@@ -14,26 +15,26 @@ import type {
   MulticallResults,
 } from "../../types/multicall";
 import {
-  type DecodeFunctionResultErrorType,
   decodeFunctionResult,
+  type DecodeFunctionResultErrorType,
 } from "../../utils/abi/decodeFunctionResult";
 import {
-  type EncodeFunctionDataErrorType,
   encodeFunctionData,
+  type EncodeFunctionDataErrorType,
 } from "../../utils/abi/encodeFunctionData";
 import {
-  type GetChainContractAddressErrorType,
   getChainContractAddress,
+  type GetChainContractAddressErrorType,
 } from "../../utils/chain/getChainContractAddress";
 import {
-  type GetContractErrorReturnType,
   getContractError,
+  type GetContractErrorReturnType,
 } from "../../utils/errors/getContractError";
 
 import type { ErrorType } from "../../errors/utils";
 import { getAction } from "../../utils/getAction";
 import type { CallParameters } from "./call";
-import { type ReadContractErrorType, readContract } from "./readContract";
+import { readContract, type ReadContractErrorType } from "./readContract";
 
 export type MulticallParameters<
   contracts extends readonly unknown[] = readonly ContractFunctionParameters[],
@@ -146,7 +147,7 @@ export async function multicall<
       blockNumber,
       chain: client.chain,
       contract: "multicall3",
-    });
+    }) as EthAddress;
   }
 
   type Aggregate3Calls = {
