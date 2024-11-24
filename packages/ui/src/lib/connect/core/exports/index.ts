@@ -52,10 +52,7 @@ export {
   estimateMaxPriorityFeePerGas,
 } from "../actions/estimateMaxPriorityFeePerGas";
 
-export {
-  type GetAccountReturnType,
-  getAccount,
-} from "../actions/getAccount";
+export { type GetAccountReturnType, getAccount } from "../actions/getAccount";
 
 export {
   type GetBalanceParameters,
@@ -96,10 +93,7 @@ export {
   getBytecode,
 } from "../actions/getBytecode";
 
-export {
-  type GetChainIdReturnType,
-  getChainId,
-} from "../actions/getChainId";
+export { type GetChainIdReturnType, getChainId } from "../actions/getChainId";
 
 export { type GetChainsReturnType, getChains } from "../actions/getChains";
 
@@ -202,15 +196,6 @@ export {
   type GetStorageAtReturnType,
   getStorageAt,
 } from "../actions/getStorageAt";
-
-export {
-  type GetTokenErrorType,
-  type GetTokenParameters,
-  type GetTokenReturnType,
-  getToken,
-  /** @deprecated use `getToken` instead */
-  getToken as fetchToken,
-} from "../actions/getToken";
 
 export {
   type GetTransactionErrorType,
