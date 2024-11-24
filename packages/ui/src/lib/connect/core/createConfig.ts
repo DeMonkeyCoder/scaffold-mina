@@ -139,7 +139,7 @@ export function createConfig<
     });
   }
 
-  const clients = new Map<number, Client<Transport, chains[number]>>();
+  const clients = new Map<string, Client<Transport, chains[number]>>();
 
   function getClient<chainId extends chains[number]["id"]>(
     config: { chainId?: chainId | chains[number]["id"] | undefined } = {}
@@ -241,7 +241,7 @@ export function createConfig<
                 persistedState &&
                 typeof persistedState === "object" &&
                 "chainId" in persistedState &&
-                typeof persistedState.chainId === "number" &&
+                typeof persistedState.chainId === "string" &&
                 chains.getState().some((x) => x.id === persistedState.chainId)
                   ? persistedState.chainId
                   : initialState.chainId;

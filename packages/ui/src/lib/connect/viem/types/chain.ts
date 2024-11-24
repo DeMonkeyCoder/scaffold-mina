@@ -43,7 +43,7 @@ export type Chain<
         }
       >
     | undefined;
-  /** ID in number form */
+  /** ID in string form */
   id: string;
   /** Human-readable name */
   name: string;

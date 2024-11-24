@@ -4,10 +4,7 @@ import type { Transport } from "../../clients/transports/createTransport";
 import type { ErrorType } from "../../errors/utils";
 import type { Chain } from "../../types/chain";
 import type { RequestErrorType } from "../../utils/buildRequest";
-import {
-  type NumberToHexErrorType,
-  numberToHex,
-} from "../../utils/encoding/toHex";
+import { type NumberToHexErrorType } from "../../utils/encoding/toHex";
 
 export type AddChainParameters = {
   /** The chain to add to the wallet. */
@@ -48,7 +45,7 @@ export async function addChain<
       method: "wallet_addEthereumChain",
       params: [
         {
-          chainId: stringToHex(id),
+          chainId: id,
           chainName: name,
           nativeCurrency,
           rpcUrls: rpcUrls.default.http,

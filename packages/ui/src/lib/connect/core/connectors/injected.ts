@@ -512,15 +512,14 @@ export function injected(parameters: InjectedParameters = {}) {
           accounts: accounts.map((x) => getAddress(x)),
         });
     },
-    onChainChanged(chain) {
-      const chainId = Number(chain);
+    onChainChanged(chainId) {
       config.emitter.emit("change", { chainId });
     },
     async onConnect(connectInfo) {
       const accounts = await this.getAccounts();
       if (accounts.length === 0) return;
 
-      const chainId = Number(connectInfo.chainId);
+      const chainId = connectInfo.chainId;
       config.emitter.emit("connect", { accounts, chainId });
 
       // Manage EIP-1193 event listeners

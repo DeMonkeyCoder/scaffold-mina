@@ -1,7 +1,7 @@
 import type { Account } from "../../accounts/types";
 import {
-  type ParseAccountErrorType,
   parseAccount,
+  type ParseAccountErrorType,
 } from "../../accounts/utils/parseAccount";
 import type { SignTransactionErrorType as SignTransactionErrorType_account } from "../../accounts/utils/signTransaction";
 import type { Client } from "../../clients/createClient";
@@ -20,10 +20,9 @@ import type {
 import type { UnionOmit } from "../../types/utils";
 import type { RequestErrorType } from "../../utils/buildRequest";
 import {
-  type AssertCurrentChainErrorType,
   assertCurrentChain,
+  type AssertCurrentChainErrorType,
 } from "../../utils/chain/assertCurrentChain";
-import { numberToHex } from "../../utils/encoding/toHex";
 import type { NumberToHexErrorType } from "../../utils/encoding/toHex";
 import {
   type FormattedTransactionRequest,
@@ -31,10 +30,10 @@ import {
 } from "../../utils/formatters/transactionRequest";
 import { getAction } from "../../utils/getAction";
 import {
-  type AssertRequestErrorType,
   assertRequest,
+  type AssertRequestErrorType,
 } from "../../utils/transaction/assertRequest";
-import { type GetChainIdErrorType, getChainId } from "../public/getChainId";
+import { getChainId, type GetChainIdErrorType } from "../public/getChainId";
 
 type SignTransactionRequest<
   chain extends Chain | undefined = Chain | undefined,
@@ -166,7 +165,7 @@ export async function signTransaction<
       params: [
         {
           ...format(transaction as unknown as TransactionRequest),
-          chainId: stringToHex(chainId),
+          chainId,
           from: account.address,
         } as unknown as RpcTransactionRequest,
       ],

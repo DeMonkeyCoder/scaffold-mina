@@ -1062,7 +1062,6 @@ export type {
   FeeValuesType,
 } from "./types/fee";
 export type { Filter, FilterType } from "./types/filter";
-export type { TypedDataDefinition } from "./types/typedData";
 export type { GetTransportConfig, GetPollOptions } from "./types/transport";
 export type { Log } from "./types/log";
 export type {

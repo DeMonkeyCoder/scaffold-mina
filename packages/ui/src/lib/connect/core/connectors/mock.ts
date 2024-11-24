@@ -2,11 +2,9 @@ import {
   type Address,
   custom,
   type EIP1193RequestFn,
-  fromHex,
   getAddress,
   type Hex,
   keccak256,
-  numberToHex,
   RpcRequestError,
   stringToHex,
   SwitchChainError,
@@ -47,7 +45,7 @@ export function mock(parameters: MockParameters) {
     Transport<"custom", unknown, EIP1193RequestFn<WalletRpcSchema>>
   >;
   let connected = false;
-  let connectedchainId: string;
+  let connectedChainId: string;
 
   return createConnector<Provider>((config) => ({
     id: "mock",
@@ -92,8 +90,7 @@ export function mock(parameters: MockParameters) {
     },
     async getChainId() {
       const provider = await this.getProvider();
-      const hexChainId = await provider.request({ method: "mina_networkId" });
-      return fromHex(hexChainId, "number");
+      return provider.request({ method: "mina_networkId" });
     },
     async isAuthorized() {
       if (!features.reconnect) return false;
@@ -119,8 +116,7 @@ export function mock(parameters: MockParameters) {
           accounts: accounts.map((x) => getAddress(x)),
         });
     },
-    onChainChanged(chain) {
-      const chainId = Number(chain);
+    onChainChanged(chainId) {
       config.emitter.emit("change", { chainId });
     },
     async onDisconnect(_error) {
@@ -134,7 +130,7 @@ export function mock(parameters: MockParameters) {
 
       const request: EIP1193RequestFn = async ({ method, params }) => {
         // eth methods
-        if (method === "mina_networkId") return numberToHex(connectedChainId);
+        if (method === "mina_networkId") return connectedChainId;
         if (method === "mina_requestAccounts") return parameters.accounts;
         if (method === "mina_signTypedData_v4")
           if (features.signTypedDataError) {
@@ -154,8 +150,8 @@ export function mock(parameters: MockParameters) {
               );
             throw features.switchChainError;
           }
-          type Params = [{ chainId: Hex }];
-          connectedChainId = fromHex((params as Params)[0].chainId, "number");
+          type Params = [{ chainId: string }];
+          connectedChainId = (params as Params)[0].chainId;
           this.onChainChanged(connectedChainId.toString());
           return;
         }
