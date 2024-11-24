@@ -122,12 +122,6 @@ export {
   getContractEvents,
 } from "./public/getContractEvents";
 export {
-  type GetEip712DomainErrorType,
-  type GetEip712DomainParameters,
-  type GetEip712DomainReturnType,
-  getEip712Domain,
-} from "./public/getEip712Domain";
-export {
   type GetFeeHistoryErrorType,
   type GetFeeHistoryParameters,
   type GetFeeHistoryReturnType,
