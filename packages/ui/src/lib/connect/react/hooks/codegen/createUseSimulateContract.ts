@@ -114,7 +114,9 @@ export function createUseSimulateContract<
       return useSimulateContract({
         ...(parameters as any),
         ...(props.functionName ? { functionName: props.functionName } : {}),
-        address: props.address?.[chainId],
+        address: (props.address as Record<string, Address> | undefined)?.[
+          chainId
+        ],
         abi: props.abi,
       });
     };

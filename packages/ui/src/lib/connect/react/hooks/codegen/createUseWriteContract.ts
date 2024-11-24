@@ -173,7 +173,11 @@ export function createUseWriteContract<
 
             const variables = {
               ...(args[0] as any),
-              address: chainId ? props.address?.[chainId] : undefined,
+              address: chainId
+                ? (props.address as Record<string, Address> | undefined)?.[
+                    chainId
+                  ]
+                : undefined,
               ...(props.functionName
                 ? { functionName: props.functionName }
                 : {}),
@@ -200,7 +204,11 @@ export function createUseWriteContract<
 
             const variables = {
               ...(args[0] as any),
-              address: chainId ? props.address?.[chainId] : undefined,
+              address: chainId
+                ? (props.address as Record<string, Address> | undefined)?.[
+                    chainId
+                  ]
+                : undefined,
               ...(props.functionName
                 ? { functionName: props.functionName }
                 : {}),

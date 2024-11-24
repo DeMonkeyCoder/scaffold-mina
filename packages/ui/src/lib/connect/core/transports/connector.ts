@@ -4,7 +4,6 @@ import {
   type EIP1193Parameters,
   type EIP1193Provider,
   type EIP1193RequestFn,
-  hexToNumber,
   ProviderDisconnectedError,
   type TransportConfig,
   type WalletRpcSchema,
@@ -57,12 +56,10 @@ export function unstable_connector(
 
       // We are applying a retry & timeout strategy here as some injected wallets (e.g. MetaMask) fail to
       // immediately resolve a JSON-RPC request on page load.
-      const chainId = hexToNumber(
-        await withRetry(() =>
-          withTimeout(() => provider.request({ method: "mina_networkId" }), {
-            timeout: 100,
-          })
-        )
+      const chainId = await withRetry(() =>
+        withTimeout(() => provider.request({ method: "mina_networkId" }), {
+          timeout: 100,
+        })
       );
       if (chain && chainId !== chain.id)
         throw new ChainDisconnectedError(

@@ -282,13 +282,6 @@ export {
 } from "../hooks/useSwitchChain";
 
 export {
-  type UseTokenParameters,
-  type UseTokenReturnType,
-  /** @deprecated Use `useReadContracts` instead */
-  useToken,
-} from "../hooks/useToken";
-
-export {
   type UseTransactionParameters,
   type UseTransactionReturnType,
   useTransaction,
@@ -317,12 +310,6 @@ export {
   type UseVerifyMessageReturnType,
   useVerifyMessage,
 } from "../hooks/useVerifyMessage";
-
-export {
-  type UseVerifyTypedDataParameters,
-  type UseVerifyTypedDataReturnType,
-  useVerifyTypedData,
-} from "../hooks/useVerifyTypedData";
 
 export {
   type UseWalletClientParameters,

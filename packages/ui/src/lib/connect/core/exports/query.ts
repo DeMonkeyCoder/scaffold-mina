@@ -10,7 +10,7 @@ export {
   type CallQueryKey,
   callQueryKey,
   callQueryOptions,
-} from '../query/call'
+} from "../query/call";
 
 export {
   type ConnectData,
@@ -18,7 +18,7 @@ export {
   type ConnectMutate,
   type ConnectMutateAsync,
   connectMutationOptions,
-} from '../query/connect'
+} from "../query/connect";
 
 export {
   type DeployContractData,
@@ -26,7 +26,7 @@ export {
   type DeployContractMutate,
   type DeployContractMutateAsync,
   deployContractMutationOptions,
-} from '../query/deployContract'
+} from "../query/deployContract";
 
 export {
   type DisconnectData,
@@ -34,7 +34,7 @@ export {
   type DisconnectMutate,
   type DisconnectMutateAsync,
   disconnectMutationOptions,
-} from '../query/disconnect'
+} from "../query/disconnect";
 
 export {
   type EstimateFeesPerGasData,
@@ -43,7 +43,7 @@ export {
   type EstimateFeesPerGasQueryKey,
   estimateFeesPerGasQueryKey,
   estimateFeesPerGasQueryOptions,
-} from '../query/estimateFeesPerGas'
+} from "../query/estimateFeesPerGas";
 
 export {
   type EstimateGasData,
@@ -52,7 +52,7 @@ export {
   type EstimateGasQueryKey,
   estimateGasQueryKey,
   estimateGasQueryOptions,
-} from '../query/estimateGas'
+} from "../query/estimateGas";
 
 export {
   type EstimateMaxPriorityFeePerGasData,
@@ -61,16 +61,7 @@ export {
   type EstimateMaxPriorityFeePerGasQueryKey,
   estimateMaxPriorityFeePerGasQueryKey,
   estimateMaxPriorityFeePerGasQueryOptions,
-} from '../query/estimateMaxPriorityFeePerGas'
-
-export {
-  type GetBalanceData,
-  type GetBalanceOptions,
-  type GetBalanceQueryFnData,
-  type GetBalanceQueryKey,
-  getBalanceQueryKey,
-  getBalanceQueryOptions,
-} from '../query/getBalance'
+} from "../query/estimateMaxPriorityFeePerGas";
 
 export {
   type GetBlockData,
@@ -79,7 +70,7 @@ export {
   type GetBlockQueryKey,
   getBlockQueryKey,
   getBlockQueryOptions,
-} from '../query/getBlock'
+} from "../query/getBlock";
 
 export {
   type GetBlockNumberData,
@@ -88,7 +79,7 @@ export {
   type GetBlockNumberQueryKey,
   getBlockNumberQueryKey,
   getBlockNumberQueryOptions,
-} from '../query/getBlockNumber'
+} from "../query/getBlockNumber";
 
 export {
   type GetBlockTransactionCountData,
@@ -97,7 +88,7 @@ export {
   type GetBlockTransactionCountQueryKey,
   getBlockTransactionCountQueryKey,
   getBlockTransactionCountQueryOptions,
-} from '../query/getBlockTransactionCount'
+} from "../query/getBlockTransactionCount";
 
 export {
   type GetBytecodeData,
@@ -106,7 +97,7 @@ export {
   type GetBytecodeQueryKey,
   getBytecodeQueryKey,
   getBytecodeQueryOptions,
-} from '../query/getBytecode'
+} from "../query/getBytecode";
 
 export {
   type GetConnectorClientData,
@@ -115,7 +106,7 @@ export {
   type GetConnectorClientQueryKey,
   getConnectorClientQueryKey,
   getConnectorClientQueryOptions,
-} from '../query/getConnectorClient'
+} from "../query/getConnectorClient";
 
 export {
   type GetEnsAddressData,
@@ -124,7 +115,7 @@ export {
   type GetEnsAddressQueryKey,
   getEnsAddressQueryKey,
   getEnsAddressQueryOptions,
-} from '../query/getEnsAddress'
+} from "../query/getEnsAddress";
 
 export {
   type GetEnsAvatarData,
@@ -133,7 +124,7 @@ export {
   type GetEnsAvatarQueryKey,
   getEnsAvatarQueryKey,
   getEnsAvatarQueryOptions,
-} from '../query/getEnsAvatar'
+} from "../query/getEnsAvatar";
 
 export {
   type GetEnsNameData,
@@ -142,7 +133,7 @@ export {
   type GetEnsNameQueryKey,
   getEnsNameQueryKey,
   getEnsNameQueryOptions,
-} from '../query/getEnsName'
+} from "../query/getEnsName";
 
 export {
   type GetEnsResolverData,
@@ -151,7 +142,7 @@ export {
   type GetEnsResolverQueryKey,
   getEnsResolverQueryKey,
   getEnsResolverQueryOptions,
-} from '../query/getEnsResolver'
+} from "../query/getEnsResolver";
 
 export {
   type GetEnsTextData,
@@ -160,7 +151,7 @@ export {
   type GetEnsTextQueryKey,
   getEnsTextQueryKey,
   getEnsTextQueryOptions,
-} from '../query/getEnsText'
+} from "../query/getEnsText";
 
 export {
   type GetFeeHistoryData,
@@ -169,7 +160,7 @@ export {
   type GetFeeHistoryQueryKey,
   getFeeHistoryQueryKey,
   getFeeHistoryQueryOptions,
-} from '../query/getFeeHistory'
+} from "../query/getFeeHistory";
 
 export {
   type GetGasPriceData,
@@ -178,7 +169,7 @@ export {
   type GetGasPriceQueryKey,
   getGasPriceQueryKey,
   getGasPriceQueryOptions,
-} from '../query/getGasPrice'
+} from "../query/getGasPrice";
 
 export {
   type GetProofData,
@@ -187,7 +178,7 @@ export {
   type GetProofQueryKey,
   getProofQueryKey,
   getProofQueryOptions,
-} from '../query/getProof'
+} from "../query/getProof";
 
 export {
   type GetStorageAtData,
@@ -196,16 +187,7 @@ export {
   type GetStorageAtQueryKey,
   getStorageAtQueryKey,
   getStorageAtQueryOptions,
-} from '../query/getStorageAt'
-
-export {
-  type GetTokenData,
-  type GetTokenOptions,
-  type GetTokenQueryFnData,
-  type GetTokenQueryKey,
-  getTokenQueryKey,
-  getTokenQueryOptions,
-} from '../query/getToken'
+} from "../query/getStorageAt";
 
 export {
   type GetTransactionData,
@@ -214,7 +196,7 @@ export {
   type GetTransactionQueryKey,
   getTransactionQueryKey,
   getTransactionQueryOptions,
-} from '../query/getTransaction'
+} from "../query/getTransaction";
 
 export {
   type GetTransactionConfirmationsData,
@@ -223,7 +205,7 @@ export {
   type GetTransactionConfirmationsQueryKey,
   getTransactionConfirmationsQueryKey,
   getTransactionConfirmationsQueryOptions,
-} from '../query/getTransactionConfirmations'
+} from "../query/getTransactionConfirmations";
 
 export {
   type GetTransactionCountData,
@@ -232,7 +214,7 @@ export {
   type GetTransactionCountQueryKey,
   getTransactionCountQueryKey,
   getTransactionCountQueryOptions,
-} from '../query/getTransactionCount'
+} from "../query/getTransactionCount";
 
 export {
   type GetTransactionReceiptData,
@@ -241,7 +223,7 @@ export {
   type GetTransactionReceiptQueryKey,
   getTransactionReceiptQueryKey,
   getTransactionReceiptQueryOptions,
-} from '../query/getTransactionReceipt'
+} from "../query/getTransactionReceipt";
 
 export {
   type GetWalletClientData,
@@ -250,7 +232,7 @@ export {
   type GetWalletClientQueryKey,
   getWalletClientQueryKey,
   getWalletClientQueryOptions,
-} from '../query/getWalletClient'
+} from "../query/getWalletClient";
 
 export {
   type InfiniteReadContractsData,
@@ -259,7 +241,7 @@ export {
   type InfiniteReadContractsQueryKey,
   infiniteReadContractsQueryKey,
   infiniteReadContractsQueryOptions,
-} from '../query/infiniteReadContracts'
+} from "../query/infiniteReadContracts";
 
 export {
   type PrepareTransactionRequestData,
@@ -268,7 +250,7 @@ export {
   type PrepareTransactionRequestQueryKey,
   prepareTransactionRequestQueryKey,
   prepareTransactionRequestQueryOptions,
-} from '../query/prepareTransactionRequest'
+} from "../query/prepareTransactionRequest";
 
 export {
   type ReadContractData,
@@ -277,7 +259,7 @@ export {
   type ReadContractQueryKey,
   readContractQueryKey,
   readContractQueryOptions,
-} from '../query/readContract'
+} from "../query/readContract";
 
 export {
   type ReadContractsData,
@@ -286,7 +268,7 @@ export {
   type ReadContractsQueryKey,
   readContractsQueryKey,
   readContractsQueryOptions,
-} from '../query/readContracts'
+} from "../query/readContracts";
 
 export {
   type ReconnectData,
@@ -294,7 +276,7 @@ export {
   type ReconnectMutate,
   type ReconnectMutateAsync,
   reconnectMutationOptions,
-} from '../query/reconnect'
+} from "../query/reconnect";
 
 export {
   type SendTransactionData,
@@ -302,7 +284,7 @@ export {
   type SendTransactionMutate,
   type SendTransactionMutateAsync,
   sendTransactionMutationOptions,
-} from '../query/sendTransaction'
+} from "../query/sendTransaction";
 
 export {
   type SignMessageData,
@@ -310,7 +292,7 @@ export {
   type SignMessageMutate,
   type SignMessageMutateAsync,
   signMessageMutationOptions,
-} from '../query/signMessage'
+} from "../query/signMessage";
 
 export {
   type SignTypedDataData,
@@ -318,7 +300,7 @@ export {
   type SignTypedDataMutate,
   type SignTypedDataMutateAsync,
   signTypedDataMutationOptions,
-} from '../query/signTypedData'
+} from "../query/signTypedData";
 
 export {
   type SwitchAccountData,
@@ -326,7 +308,7 @@ export {
   type SwitchAccountMutate,
   type SwitchAccountMutateAsync,
   switchAccountMutationOptions,
-} from '../query/switchAccount'
+} from "../query/switchAccount";
 
 export {
   type SimulateContractData,
@@ -335,7 +317,7 @@ export {
   type SimulateContractQueryKey,
   simulateContractQueryKey,
   simulateContractQueryOptions,
-} from '../query/simulateContract'
+} from "../query/simulateContract";
 
 export {
   type SwitchChainData,
@@ -343,7 +325,7 @@ export {
   type SwitchChainMutate,
   type SwitchChainMutateAsync,
   switchChainMutationOptions,
-} from '../query/switchChain'
+} from "../query/switchChain";
 
 export {
   type VerifyMessageData,
@@ -352,7 +334,7 @@ export {
   type VerifyMessageQueryKey,
   verifyMessageQueryKey,
   verifyMessageQueryOptions,
-} from '../query/verifyMessage'
+} from "../query/verifyMessage";
 
 export {
   type VerifyTypedDataData,
@@ -361,7 +343,7 @@ export {
   type VerifyTypedDataQueryKey,
   verifyTypedDataQueryKey,
   verifyTypedDataQueryOptions,
-} from '../query/verifyTypedData'
+} from "../query/verifyTypedData";
 
 export {
   type WaitForTransactionReceiptData,
@@ -370,7 +352,7 @@ export {
   type WaitForTransactionReceiptQueryKey,
   waitForTransactionReceiptQueryKey,
   waitForTransactionReceiptQueryOptions,
-} from '../query/waitForTransactionReceipt'
+} from "../query/waitForTransactionReceipt";
 
 export {
   type WatchAssetData,
@@ -378,7 +360,7 @@ export {
   type WatchAssetMutate,
   type WatchAssetMutateAsync,
   watchAssetMutationOptions,
-} from '../query/watchAsset'
+} from "../query/watchAsset";
 
 export {
   type WriteContractData,
@@ -386,6 +368,6 @@ export {
   type WriteContractMutate,
   type WriteContractMutateAsync,
   writeContractMutationOptions,
-} from '../query/writeContract'
+} from "../query/writeContract";
 
-export { hashFn, structuralSharing } from '../query/utils'
+export { hashFn, structuralSharing } from "../query/utils";

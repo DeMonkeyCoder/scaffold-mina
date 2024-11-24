@@ -81,7 +81,9 @@ export function createUseWatchContractEvent<
       return useWatchContractEvent({
         ...(parameters as any),
         ...(props.eventName ? { eventName: props.eventName } : {}),
-        address: props.address?.[chainId],
+        address: (props.address as Record<string, Address> | undefined)?.[
+          chainId
+        ],
         abi: props.abi,
       });
     };

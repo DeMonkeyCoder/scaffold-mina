@@ -1,4 +1,3 @@
-import type { TypedData } from "abitype";
 import type { Address } from "@/lib/connect/viem";
 
 import type { SmartAccount } from "../account-abstraction/accounts/types";
@@ -9,7 +8,6 @@ import type {
   TransactionSerializable,
   TransactionSerialized,
 } from "../types/transaction";
-import type { TypedDataDefinition } from "../types/typedData";
 import type { IsNarrowable, OneOf, Prettify } from "../types/utils";
 import type { NonceManager } from "../utils/nonceManager";
 import type { GetTransactionType } from "../utils/transaction/getTransactionType";
@@ -52,12 +50,6 @@ export type CustomSource = {
       ? TransactionSerialized<GetTransactionType<transaction>>
       : Hex
   >;
-  signTypedData: <
-    const typedData extends TypedData | Record<string, unknown>,
-    primaryType extends keyof typedData | "EIP712Domain" = keyof typedData
-  >(
-    parameters: TypedDataDefinition<typedData, primaryType>
-  ) => Promise<Hex>;
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
