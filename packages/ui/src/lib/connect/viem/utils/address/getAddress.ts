@@ -29,7 +29,7 @@ export function checksumAddress(
    *
    * See more: https://github.com/ethereum/EIPs/issues/1121
    */
-  chainId?: number | undefined
+  chainId?: string | undefined
 ): Address {
   if (checksumAddressCache.has(`${address_}.${chainId}`))
     return checksumAddressCache.get(`${address_}.${chainId}`)!;
@@ -73,7 +73,7 @@ export function getAddress(
    *
    * See more: https://github.com/ethereum/EIPs/issues/1121
    */
-  chainId?: number
+  chainId?: string
 ): Address {
   if (!isAddress(address, { strict: false }))
     throw new InvalidAddressError({ address });

@@ -1,25 +1,25 @@
 import type { Address } from "@/lib/connect/viem";
 import type { Account } from "../../accounts/types";
 import {
-  type ParseAccountErrorType,
   parseAccount,
+  type ParseAccountErrorType,
 } from "../../accounts/utils/parseAccount";
 import {
   type EstimateFeesPerGasErrorType,
   internal_estimateFeesPerGas,
 } from "../../actions/public/estimateFeesPerGas";
 import {
+  estimateGas,
   type EstimateGasErrorType,
   type EstimateGasParameters,
-  estimateGas,
 } from "../../actions/public/estimateGas";
 import {
-  type GetBlockErrorType,
   getBlock as getBlock_,
+  type GetBlockErrorType,
 } from "../../actions/public/getBlock";
 import {
-  type GetTransactionCountErrorType,
   getTransactionCount,
+  type GetTransactionCountErrorType,
 } from "../../actions/public/getTransactionCount";
 import type { Client } from "../../clients/createClient";
 import type { Transport } from "../../clients/transports/createTransport";
@@ -30,8 +30,7 @@ import {
 } from "../../errors/fee";
 import type { DeriveAccount, GetAccountParameter } from "../../types/account";
 import type { Block } from "../../types/block";
-import type { Chain, DeriveChain } from "../../types/chain";
-import type { GetChainParameter } from "../../types/chain";
+import type { Chain, DeriveChain, GetChainParameter } from "../../types/chain";
 import type { GetTransactionRequestKzgParameter } from "../../types/kzg";
 import type {
   TransactionRequest,
@@ -56,9 +55,9 @@ import { toBlobSidecars } from "../../utils/blob/toBlobSidecars";
 import type { FormattedTransactionRequest } from "../../utils/formatters/transactionRequest";
 import { getAction } from "../../utils/getAction";
 import {
+  assertRequest,
   type AssertRequestErrorType,
   type AssertRequestParameters,
-  assertRequest,
 } from "../../utils/transaction/assertRequest";
 import {
   type GetTransactionType,
@@ -114,7 +113,7 @@ export type PrepareTransactionRequestParameters<
 > = request &
   GetAccountParameter<account, accountOverride, false> &
   GetChainParameter<chain, chainOverride> &
-  GetTransactionRequestKzgParameter<request> & { chainId?: number | undefined };
+  GetTransactionRequestKzgParameter<request> & { chainId?: string | undefined };
 
 export type PrepareTransactionRequestReturnType<
   chain extends Chain | undefined = Chain | undefined,
@@ -158,7 +157,7 @@ export type PrepareTransactionRequestReturnType<
       IsNever<_transactionRequest> extends true
         ? unknown
         : ExactPartial<_transactionRequest>
-    > & { chainId?: number | undefined },
+    > & { chainId?: string | undefined },
     ParameterTypeToParameters<
       request["parameters"] extends readonly PrepareTransactionRequestParameterType[]
         ? request["parameters"][number]

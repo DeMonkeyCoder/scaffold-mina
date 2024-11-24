@@ -7,8 +7,8 @@ import { ContractFunctionExecutionError } from "@/lib/connect/viem";
 
 import type { Config } from "../createConfig";
 import type { ChainIdParameter } from "../types/properties";
-import { type MulticallErrorType, multicall } from "./multicall";
-import { type ReadContractErrorType, readContract } from "./readContract";
+import { multicall, type MulticallErrorType } from "./multicall";
+import { readContract, type ReadContractErrorType } from "./readContract";
 
 export type ReadContractsParameters<
   contracts extends readonly unknown[] = readonly ContractFunctionParameters[],
@@ -37,7 +37,7 @@ export async function readContracts<
 ): Promise<ReadContractsReturnType<contracts, allowFailure>> {
   const { allowFailure = true, blockNumber, blockTag, ...rest } = parameters;
   const contracts = parameters.contracts as (ContractFunctionParameters & {
-    chainId?: number | undefined;
+    chainId?: string | undefined;
   })[];
 
   try {

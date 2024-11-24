@@ -1,7 +1,7 @@
 import {
   type Client,
-  type PublicClient,
   publicActions,
+  type PublicClient,
 } from "@/lib/connect/viem";
 
 import type { Config } from "../createConfig";
@@ -43,7 +43,7 @@ export type GetPublicClientReturnType<
 
 export function getPublicClient<
   config extends Config,
-  chainId extends config["chains"][number]["id"] | number | undefined
+  chainId extends config["chains"][number]["id"] | string | undefined
 >(
   config: config,
   parameters: GetPublicClientParameters<config, chainId> = {}

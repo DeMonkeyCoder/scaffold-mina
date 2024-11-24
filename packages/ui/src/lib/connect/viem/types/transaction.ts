@@ -331,7 +331,7 @@ export type TransactionSerializableLegacy<
   index = number
 > = TransactionSerializableBase<quantity, index> &
   ExactPartial<FeeValuesLegacy<quantity>> & {
-    chainId?: number | undefined;
+    chainId?: string | undefined;
     type?: "legacy" | undefined;
   };
 
@@ -407,7 +407,7 @@ export type TransactionSerializableGeneric<
   authorizationList?: AuthorizationList<index, boolean> | undefined;
   blobs?: readonly Hex[] | readonly ByteArray[] | undefined;
   blobVersionedHashes?: readonly Hex[] | undefined;
-  chainId?: number | undefined;
+  chainId?: string | undefined;
   gasPrice?: quantity | undefined;
   maxFeePerBlobGas?: quantity | undefined;
   maxFeePerGas?: quantity | undefined;

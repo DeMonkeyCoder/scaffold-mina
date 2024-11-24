@@ -8,7 +8,7 @@ export type GetClientParameters<
   config extends Config = Config,
   chainId extends
     | config["chains"][number]["id"]
-    | number
+    | string
     | undefined = config["chains"][number]["id"]
 > = ChainIdParameter<config, chainId>;
 
@@ -39,7 +39,7 @@ export type GetClientReturnType<
 
 export function getClient<
   config extends Config,
-  chainId extends config["chains"][number]["id"] | number | undefined
+  chainId extends config["chains"][number]["id"] | string | undefined
 >(
   config: config,
   parameters: GetClientParameters<config, chainId> = {}

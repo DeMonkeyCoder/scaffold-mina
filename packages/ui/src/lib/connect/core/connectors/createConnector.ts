@@ -15,7 +15,7 @@ import type { Compute, ExactPartial, StrictOmit } from "../types/utils";
 export type ConnectorEventMap = {
   change: {
     accounts?: readonly Address[] | undefined;
-    chainId?: number | undefined;
+    chainId?: string | undefined;
   };
   connect: { accounts: readonly Address[]; chainId: string };
   disconnect: never;
@@ -51,12 +51,12 @@ export type CreateConnectorFn<
     }>;
     disconnect(): Promise<void>;
     getAccounts(): Promise<readonly Address[]>;
-    getChainId(): Promise<number>;
+    getChainId(): Promise<string>;
     getProvider(
-      parameters?: { chainId?: number | undefined } | undefined
+      parameters?: { chainId?: string | undefined } | undefined
     ): Promise<provider>;
     getClient?(
-      parameters?: { chainId?: number | undefined } | undefined
+      parameters?: { chainId?: string | undefined } | undefined
     ): Promise<Client>;
     isAuthorized(): Promise<boolean>;
     switchChain?(

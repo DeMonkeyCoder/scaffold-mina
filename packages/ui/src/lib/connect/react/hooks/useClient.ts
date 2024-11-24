@@ -2,10 +2,10 @@
 
 import {
   type Config,
+  getClient,
   type GetClientParameters,
   type GetClientReturnType,
   type ResolvedRegister,
-  getClient,
   watchClient,
 } from "@/lib/connect/core/exports";
 import type { Compute } from "@/lib/connect/core/exports/internal";
@@ -16,14 +16,14 @@ import { useConfig } from "./useConfig";
 
 export type UseClientParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] | number | undefined =
+  chainId extends config["chains"][number]["id"] | string | undefined =
     | config["chains"][number]["id"]
     | undefined
 > = Compute<GetClientParameters<config, chainId> & ConfigParameter<config>>;
 
 export type UseClientReturnType<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] | number | undefined =
+  chainId extends config["chains"][number]["id"] | string | undefined =
     | config["chains"][number]["id"]
     | undefined
 > = GetClientReturnType<config, chainId>;
@@ -31,7 +31,7 @@ export type UseClientReturnType<
 /** https://wagmi.sh/react/api/hooks/useClient */
 export function useClient<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] | number | undefined =
+  chainId extends config["chains"][number]["id"] | string | undefined =
     | config["chains"][number]["id"]
     | undefined
 >(

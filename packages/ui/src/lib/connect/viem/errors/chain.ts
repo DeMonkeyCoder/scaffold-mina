@@ -99,7 +99,7 @@ export type InvalidChainIdErrorType = InvalidChainIdError & {
 };
 
 export class InvalidChainIdError extends BaseError {
-  constructor({ chainId }: { chainId?: number | undefined }) {
+  constructor({ chainId }: { chainId?: string | undefined }) {
     super(
       typeof chainId === "number"
         ? `Chain ID "${chainId}" is invalid.`

@@ -2,10 +2,10 @@
 
 import {
   type Config,
+  getPublicClient,
   type GetPublicClientParameters,
   type GetPublicClientReturnType,
   type ResolvedRegister,
-  getPublicClient,
   watchPublicClient,
 } from "@/lib/connect/core/exports";
 import type { Compute } from "@/lib/connect/core/exports/internal";
@@ -16,7 +16,7 @@ import { useConfig } from "./useConfig";
 
 export type UsePublicClientParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] | number | undefined =
+  chainId extends config["chains"][number]["id"] | string | undefined =
     | config["chains"][number]["id"]
     | undefined
 > = Compute<
@@ -25,7 +25,7 @@ export type UsePublicClientParameters<
 
 export type UsePublicClientReturnType<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] | number | undefined =
+  chainId extends config["chains"][number]["id"] | string | undefined =
     | config["chains"][number]["id"]
     | undefined
 > = GetPublicClientReturnType<config, chainId>;
@@ -33,7 +33,7 @@ export type UsePublicClientReturnType<
 /** https://wagmi.sh/react/api/hooks/usePublicClient */
 export function usePublicClient<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] | number | undefined =
+  chainId extends config["chains"][number]["id"] | string | undefined =
     | config["chains"][number]["id"]
     | undefined
 >(

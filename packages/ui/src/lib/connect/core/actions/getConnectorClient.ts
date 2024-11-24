@@ -5,6 +5,7 @@ import {
   type Client,
   createClient,
   custom,
+  type Transport,
 } from "@/lib/connect/viem";
 import { getAddress, parseAccount } from "@/lib/connect/viem/utils";
 
@@ -18,10 +19,7 @@ import {
   ConnectorNotConnectedError,
   type ConnectorNotConnectedErrorType,
 } from "../errors/config";
-import type {
-  ChainIdParameter,
-  ConnectorParameter,
-} from "../types/properties";
+import type { ChainIdParameter, ConnectorParameter } from "../types/properties";
 import type { Compute } from "../types/utils";
 
 export type GetConnectorClientParameters<
@@ -118,6 +116,7 @@ export async function getConnectorClient<
     account,
     chain,
     name: "Connector Client",
-    transport: (opts) => custom(provider)({ ...opts, retryCount: 0 }),
+    transport: ((opts) =>
+      custom(provider)({ ...opts, retryCount: 0 })) as Transport,
   }) as Return;
 }

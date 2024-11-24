@@ -108,7 +108,7 @@ export function createUseSimulateContract<
       const configChainId = useChainId({ config });
       const account = useAccount({ config });
       const chainId =
-        (parameters as { chainId?: number })?.chainId ??
+        (parameters as { chainId?: string })?.chainId ??
         account.chainId ??
         configChainId;
       return useSimulateContract({

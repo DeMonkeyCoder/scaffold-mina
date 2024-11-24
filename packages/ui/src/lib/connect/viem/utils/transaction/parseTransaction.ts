@@ -33,37 +33,37 @@ import type {
   TransactionType,
 } from "../../types/transaction";
 import type { IsNarrowable, Mutable } from "../../types/utils";
-import { type IsAddressErrorType, isAddress } from "../address/isAddress";
+import { isAddress, type IsAddressErrorType } from "../address/isAddress";
 import { toBlobSidecars } from "../blob/toBlobSidecars";
-import { type IsHexErrorType, isHex } from "../data/isHex";
-import { type PadHexErrorType, padHex } from "../data/pad";
+import { isHex, type IsHexErrorType } from "../data/isHex";
+import { padHex, type PadHexErrorType } from "../data/pad";
 import { trim } from "../data/trim";
 import {
-  type HexToBigIntErrorType,
-  type HexToNumberErrorType,
   hexToBigInt,
+  type HexToBigIntErrorType,
   hexToNumber,
+  type HexToNumberErrorType,
 } from "../encoding/fromHex";
-import { type FromRlpErrorType, fromRlp } from "../encoding/fromRlp";
+import { fromRlp, type FromRlpErrorType } from "../encoding/fromRlp";
 import type { RecursiveArray } from "../encoding/toRlp";
 import { isHash } from "../hash/isHash";
 
 import {
-  type AssertTransactionEIP1559ErrorType,
-  type AssertTransactionEIP2930ErrorType,
-  type AssertTransactionEIP4844ErrorType,
-  type AssertTransactionEIP7702ErrorType,
-  type AssertTransactionLegacyErrorType,
   assertTransactionEIP1559,
+  type AssertTransactionEIP1559ErrorType,
   assertTransactionEIP2930,
+  type AssertTransactionEIP2930ErrorType,
   assertTransactionEIP4844,
+  type AssertTransactionEIP4844ErrorType,
   assertTransactionEIP7702,
+  type AssertTransactionEIP7702ErrorType,
   assertTransactionLegacy,
+  type AssertTransactionLegacyErrorType,
 } from "./assertTransaction";
 import {
   type GetSerializedTransactionType,
-  type GetSerializedTransactionTypeErrorType,
   getSerializedTransactionType,
+  type GetSerializedTransactionTypeErrorType,
 } from "./getSerializedTransactionType";
 
 export type ParseTransactionReturnType<
@@ -473,7 +473,7 @@ type ParseTransactionLegacyErrorType =
 function parseTransactionLegacy(
   serializedTransaction: Hex
 ): Omit<TransactionRequestLegacy, "from"> &
-  ({ chainId?: number | undefined } | ({ chainId: string } & Signature)) {
+  ({ chainId?: string | undefined } | ({ chainId: string } & Signature)) {
   const transactionArray = fromRlp(serializedTransaction, "hex");
 
   const [nonce, gasPrice, gas, to, value, data, chainIdOrV_, r, s] =

@@ -1,41 +1,41 @@
-import type { Abi, Address, TypedData } from 'abitype'
-import type { SignReturnType as WebAuthnSignReturnType } from 'webauthn-p256'
+import type { Abi, Address, TypedData } from "abitype";
+import type { SignReturnType as WebAuthnSignReturnType } from "webauthn-p256";
 
-import type { Client } from '../../clients/createClient'
-import type { Hash, Hex, SignableMessage } from '../../types/misc'
-import type { TypedDataDefinition } from '../../types/typedData'
-import type { Assign, ExactPartial, UnionPartialBy } from '../../types/utils'
-import type { EntryPointVersion } from '../types/entryPointVersion'
+import type { Client } from "../../clients/createClient";
+import type { Hash, Hex, SignableMessage } from "../../types/misc";
+import type { TypedDataDefinition } from "../../types/typedData";
+import type { Assign, ExactPartial, UnionPartialBy } from "../../types/utils";
+import type { EntryPointVersion } from "../types/entryPointVersion";
 import type {
   EstimateUserOperationGasReturnType,
   UserOperation,
   UserOperationRequest,
-} from '../types/userOperation'
+} from "../types/userOperation";
 
 type Call = {
-  to: Hex
-  data?: Hex | undefined
-  value?: bigint | undefined
-}
+  to: Hex;
+  data?: Hex | undefined;
+  value?: bigint | undefined;
+};
 
 export type SmartAccountImplementation<
   entryPointAbi extends Abi | readonly unknown[] = Abi,
   entryPointVersion extends EntryPointVersion = EntryPointVersion,
-  extend extends object = object,
+  extend extends object = object
 > = {
   /** Client used to retrieve Smart Account data, and perform signing (if owner is a JSON-RPC Account). */
-  client: Client
+  client: Client;
   /** Compatible EntryPoint of the Smart Account. */
   entryPoint: {
     /** Compatible EntryPoint ABI. */
-    abi: entryPointAbi
+    abi: entryPointAbi;
     /** Compatible EntryPoint address. */
-    address: Address
+    address: Address;
     /** Compatible EntryPoint version. */
-    version: entryPointVersion
-  }
+    version: entryPointVersion;
+  };
   /** Extend the Smart Account with custom properties. */
-  extend?: extend | undefined
+  extend?: extend | undefined;
   /**
    * Retrieves the Smart Account's address.
    *
@@ -45,7 +45,7 @@ export type SmartAccountImplementation<
    * // '0x...'
    * ```
    */
-  getAddress: () => Promise<Address>
+  getAddress: () => Promise<Address>;
   /**
    * Encodes the calls into calldata for executing a User Operation.
    *
@@ -58,7 +58,7 @@ export type SmartAccountImplementation<
    * // '0x...'
    * ```
    */
-  encodeCalls: (calls: readonly Call[]) => Promise<Hex>
+  encodeCalls: (calls: readonly Call[]) => Promise<Hex>;
   /**
    * Retrieves the calldata for factory call to deploy a Smart Account.
    * If the Smart Account has already been deployed, this will return undefined values.
@@ -76,9 +76,9 @@ export type SmartAccountImplementation<
    * ```
    */
   getFactoryArgs: () => Promise<{
-    factory?: Address | undefined
-    factoryData?: Hex | undefined
-  }>
+    factory?: Address | undefined;
+    factoryData?: Hex | undefined;
+  }>;
   /**
    * Retrieves the nonce of the Account.
    *
@@ -89,8 +89,8 @@ export type SmartAccountImplementation<
    * ```
    */
   getNonce: (
-    parameters?: { key?: bigint | undefined } | undefined,
-  ) => Promise<bigint>
+    parameters?: { key?: bigint | undefined } | undefined
+  ) => Promise<bigint>;
   /**
    * Retrieves the User Operation "stub" signature for gas estimation.
    *
@@ -99,7 +99,7 @@ export type SmartAccountImplementation<
    * // '0x...'
    * ```
    */
-  getStubSignature: () => Promise<Hex>
+  getStubSignature: () => Promise<Hex>;
   /**
    * Signs a hash via the Smart Account's owner.
    *
@@ -111,7 +111,7 @@ export type SmartAccountImplementation<
    * // '0x...'
    * ```
    */
-  sign?: ((parameters: { hash: Hash }) => Promise<Hex>) | undefined
+  sign?: ((parameters: { hash: Hash }) => Promise<Hex>) | undefined;
   /**
    * Signs a [EIP-191 Personal Sign message](https://eips.ethereum.org/EIPS/eip-191).
    *
@@ -123,7 +123,7 @@ export type SmartAccountImplementation<
    * // '0x...'
    * ```
    */
-  signMessage: (parameters: { message: SignableMessage }) => Promise<Hex>
+  signMessage: (parameters: { message: SignableMessage }) => Promise<Hex>;
   /**
    * Signs [EIP-712 Typed Data](https://eips.ethereum.org/EIPS/eip-712).
    *
@@ -139,10 +139,10 @@ export type SmartAccountImplementation<
    */
   signTypedData: <
     const typedData extends TypedData | Record<string, unknown>,
-    primaryType extends keyof typedData | 'EIP712Domain' = keyof typedData,
+    primaryType extends keyof typedData | "EIP712Domain" = keyof typedData
   >(
-    parameters: TypedDataDefinition<typedData, primaryType>,
-  ) => Promise<Hex>
+    parameters: TypedDataDefinition<typedData, primaryType>
+  ) => Promise<Hex>;
   /**
    * Signs the User Operation.
    *
@@ -155,54 +155,55 @@ export type SmartAccountImplementation<
    * ```
    */
   signUserOperation: (
-    parameters: UnionPartialBy<UserOperation, 'sender'> & {
-      chainId?: number | undefined
-    },
-  ) => Promise<Hex>
+    parameters: UnionPartialBy<UserOperation, "sender"> & {
+      chainId?: string | undefined;
+    }
+  ) => Promise<Hex>;
   /** User Operation configuration properties. */
   userOperation?:
     | {
         /** Prepares gas properties for the User Operation request. */
         estimateGas?:
           | ((
-              userOperation: UserOperationRequest,
+              userOperation: UserOperationRequest
             ) => Promise<
               ExactPartial<EstimateUserOperationGasReturnType> | undefined
             >)
-          | undefined
+          | undefined;
       }
-    | undefined
-}
+    | undefined;
+};
 
 export type SmartAccount<
-  implementation extends
-    SmartAccountImplementation = SmartAccountImplementation,
+  implementation extends SmartAccountImplementation = SmartAccountImplementation
 > = Assign<
-  implementation['extend'],
+  implementation["extend"],
   Assign<
     implementation,
     {
       /** Address of the Smart Account. */
-      address: Address
+      address: Address;
       /** Whether or not the Smart Account has been deployed. */
-      isDeployed: () => Promise<boolean>
+      isDeployed: () => Promise<boolean>;
       /** Type of account. */
-      type: 'smart'
+      type: "smart";
     }
   >
->
+>;
 
 export type WebAuthnAccount = {
-  publicKey: Hex
-  sign: ({ hash }: { hash: Hash }) => Promise<WebAuthnSignReturnType>
+  publicKey: Hex;
+  sign: ({ hash }: { hash: Hash }) => Promise<WebAuthnSignReturnType>;
   signMessage: ({
     message,
-  }: { message: SignableMessage }) => Promise<WebAuthnSignReturnType>
+  }: {
+    message: SignableMessage;
+  }) => Promise<WebAuthnSignReturnType>;
   signTypedData: <
     const typedData extends TypedDataDefinition | Record<string, unknown>,
-    primaryType extends keyof typedData | 'EIP712Domain' = keyof typedData,
+    primaryType extends keyof typedData | "EIP712Domain" = keyof typedData
   >(
-    typedDataDefinition: TypedDataDefinition<typedData, primaryType>,
-  ) => Promise<WebAuthnSignReturnType>
-  type: 'webAuthn'
-}
+    typedDataDefinition: TypedDataDefinition<typedData, primaryType>
+  ) => Promise<WebAuthnSignReturnType>;
+  type: "webAuthn";
+};

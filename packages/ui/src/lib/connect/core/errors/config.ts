@@ -82,8 +82,8 @@ export class ConnectorChainMismatchError extends BaseError {
     connectionChainId,
     connectorChainId,
   }: {
-    connectionchainId: string;
-    connectorchainId: string;
+    connectionChainId: string;
+    connectorChainId: string;
   }) {
     super(
       `The current chain of the connector (id: ${connectorChainId}) does not match the connection's chain (id: ${connectionChainId}).`,

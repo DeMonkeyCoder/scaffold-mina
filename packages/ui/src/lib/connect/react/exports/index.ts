@@ -40,12 +40,6 @@ export {
 } from "../hooks/useAccountEffect";
 
 export {
-  type UseBalanceParameters,
-  type UseBalanceReturnType,
-  useBalance,
-} from "../hooks/useBalance";
-
-export {
   type UseBlockParameters,
   type UseBlockReturnType,
   useBlock,

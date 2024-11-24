@@ -65,7 +65,7 @@ export function createWatchContractEvent<
       const configChainId = getChainId(config);
       const account = getAccount(config);
       const chainId =
-        (parameters as { chainId?: number })?.chainId ??
+        (parameters as { chainId?: string })?.chainId ??
         account.chainId ??
         configChainId;
       return watchContractEvent(config, {
