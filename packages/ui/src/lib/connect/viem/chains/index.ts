@@ -53,8 +53,6 @@ export { btrTestnet } from "./definitions/btrTestnet";
 export { bxn } from "./definitions/bxn";
 export { bxnTestnet } from "./definitions/bxnTestnet";
 export { canto } from "./definitions/canto";
-export { celo } from "./definitions/celo";
-export { celoAlfajores } from "./definitions/celoAlfajores";
 export { chiliz } from "./definitions/chiliz";
 export { classic } from "./definitions/classic";
 export { confluxESpace } from "./definitions/confluxESpace";
@@ -348,34 +346,6 @@ export type {
   Prettify,
   UnionLooseOmit,
 } from "../types/utils";
-export type {
-  SerializeTransactionCIP64ReturnType,
-  assertTransactionCIP42 as assertTransactionCIP42Celo,
-  assertTransactionCIP64 as assertTransactionCIP64Celo,
-  serializeTransaction as serializeTransactionCelo,
-  serializers as serializersCelo,
-} from "../celo/serializers";
-export type {
-  CeloBlock,
-  CeloRpcBlock,
-  CeloRpcTransaction,
-  CeloRpcTransactionRequest,
-  CeloTransaction,
-  CeloTransactionRequest,
-  CeloTransactionType,
-  CeloTransactionSerializable,
-  CeloTransactionSerialized,
-  RpcTransactionCIP42,
-  RpcTransactionCIP64,
-  RpcTransactionRequestCIP64,
-  TransactionCIP42,
-  TransactionCIP64,
-  TransactionRequestCIP64,
-  TransactionSerializableCIP42,
-  TransactionSerializableCIP64,
-  TransactionSerializedCIP42,
-  TransactionSerializedCIP64,
-} from "../celo/types";
 export type {
   OpStackBlock,
   OpStackBlockOverrides,
