@@ -154,7 +154,7 @@ export async function multicall<
   type Aggregate3Calls = {
     allowFailure: boolean;
     callData: Hex;
-    target: Address;
+    target: EthAddress;
   }[];
 
   const chunkedCalls: Aggregate3Calls[] = [[]];
@@ -185,7 +185,7 @@ export async function multicall<
         {
           allowFailure: true,
           callData,
-          target: address,
+          target: address as EthAddress,
         },
       ];
     } catch (err) {
@@ -202,7 +202,7 @@ export async function multicall<
         {
           allowFailure: true,
           callData: "0x" as Hex,
-          target: address,
+          target: address as EthAddress,
         },
       ];
     }

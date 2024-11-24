@@ -2,8 +2,8 @@ import { SocketClosedError, TimeoutError } from "../../errors/request";
 import type { ErrorType } from "../../errors/utils";
 import type { RpcRequest, RpcResponse } from "../../types/rpc";
 import {
-  type CreateBatchSchedulerErrorType,
   createBatchScheduler,
+  type CreateBatchSchedulerErrorType,
 } from "../promise/createBatchScheduler";
 import { withTimeout } from "../promise/withTimeout";
 import { idCache } from "./id";
@@ -128,7 +128,7 @@ export async function getSocketRpcClient<socket extends {}>(
 
       let error: Error | Event | undefined;
       let socket: Socket<{}>;
-      let keepAliveTimer: Timer | undefined;
+      let keepAliveTimer: NodeJS.Timeout | undefined;
 
       // Set up socket implementation.
       async function setup() {
