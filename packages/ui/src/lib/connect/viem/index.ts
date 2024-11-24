@@ -377,11 +377,6 @@ export type {
   SignMessageReturnType,
 } from "./actions/wallet/signMessage";
 export type {
-  SignTypedDataErrorType,
-  SignTypedDataParameters,
-  SignTypedDataReturnType,
-} from "./actions/wallet/signTypedData";
-export type {
   SimulateContractErrorType,
   SimulateContractParameters,
   SimulateContractReturnType,

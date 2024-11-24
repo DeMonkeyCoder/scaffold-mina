@@ -193,7 +193,7 @@ export type WalletPermission = {
 
 export type WalletSendCallsParameters<
   capabilities extends WalletCapabilities = WalletCapabilities,
-  chainId extends Hex | number = Hex,
+  chainId extends string = string,
   quantity extends Quantity | bigint = Quantity
 > = [
   {

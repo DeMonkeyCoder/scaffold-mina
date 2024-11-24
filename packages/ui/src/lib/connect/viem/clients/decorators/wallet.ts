@@ -1,4 +1,4 @@
-import type { Abi, Address, TypedData } from "abitype";
+import type { Abi, Address } from "abitype";
 
 import type { Account } from "../../accounts/types";
 import {
@@ -58,11 +58,6 @@ import {
   type SignTransactionParameters,
   type SignTransactionReturnType,
 } from "../../actions/wallet/signTransaction";
-import {
-  signTypedData,
-  type SignTypedDataParameters,
-  type SignTypedDataReturnType,
-} from "../../actions/wallet/signTypedData";
 import {
   switchChain,
   type SwitchChainParameters,
@@ -473,108 +468,6 @@ export type WalletActions<
     args: SignTransactionParameters<chain, account, chainOverride>
   ) => Promise<SignTransactionReturnType>;
   /**
-   * Signs typed data and calculates an Ethereum-specific signature in [EIP-191 format](https://eips.ethereum.org/EIPS/eip-191): `keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))`.
-   *
-   * - Docs: https://viem.sh/docs/actions/wallet/signTypedData
-   * - JSON-RPC Methods:
-   *   - JSON-RPC Accounts: [`mina_signTypedData_v4`](https://docs.metamask.io/guide/signing-data#signtypeddata-v4)
-   *   - Local Accounts: Signs locally. No JSON-RPC request.
-   *
-   * @param client - Client to use
-   * @param args - {@link SignTypedDataParameters}
-   * @returns The signed data. {@link SignTypedDataReturnType}
-   *
-   * @example
-   * import { createWalletClient, custom } from 'viem'
-   * import { mainnet } from 'viem/chains'
-   *
-   * const client = createWalletClient({
-   *   chain: mainnet,
-   *   transport: custom(window.ethereum),
-   * })
-   * const signature = await client.signTypedData({
-   *   account: '0xA0Cf798816D4b9b9866b5330EEa46a18382f251e',
-   *   domain: {
-   *     name: 'Ether Mail',
-   *     version: '1',
-   *     chainId: 1,
-   *     verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
-   *   },
-   *   types: {
-   *     Person: [
-   *       { name: 'name', type: 'string' },
-   *       { name: 'wallet', type: 'address' },
-   *     ],
-   *     Mail: [
-   *       { name: 'from', type: 'Person' },
-   *       { name: 'to', type: 'Person' },
-   *       { name: 'contents', type: 'string' },
-   *     ],
-   *   },
-   *   primaryType: 'Mail',
-   *   message: {
-   *     from: {
-   *       name: 'Cow',
-   *       wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
-   *     },
-   *     to: {
-   *       name: 'Bob',
-   *       wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
-   *     },
-   *     contents: 'Hello, Bob!',
-   *   },
-   * })
-   *
-   * @example
-   * // Account Hoisting
-   * import { createWalletClient, http } from 'viem'
-   * import { privateKeyToAccount } from 'viem/accounts'
-   * import { mainnet } from 'viem/chains'
-   *
-   * const client = createWalletClient({
-   *   account: privateKeyToAccount('0x…'),
-   *   chain: mainnet,
-   *   transport: http(),
-   * })
-   * const signature = await client.signTypedData({
-   *   domain: {
-   *     name: 'Ether Mail',
-   *     version: '1',
-   *     chainId: 1,
-   *     verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
-   *   },
-   *   types: {
-   *     Person: [
-   *       { name: 'name', type: 'string' },
-   *       { name: 'wallet', type: 'address' },
-   *     ],
-   *     Mail: [
-   *       { name: 'from', type: 'Person' },
-   *       { name: 'to', type: 'Person' },
-   *       { name: 'contents', type: 'string' },
-   *     ],
-   *   },
-   *   primaryType: 'Mail',
-   *   message: {
-   *     from: {
-   *       name: 'Cow',
-   *       wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
-   *     },
-   *     to: {
-   *       name: 'Bob',
-   *       wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
-   *     },
-   *     contents: 'Hello, Bob!',
-   *   },
-   * })
-   */
-  signTypedData: <
-    const typedData extends TypedData | { [key: string]: unknown },
-    primaryType extends string
-  >(
-    args: SignTypedDataParameters<typedData, primaryType, account>
-  ) => Promise<SignTypedDataReturnType>;
-  /**
    * Switch the target chain in a wallet.
    *
    * - Docs: https://viem.sh/docs/actions/wallet/switchChain
@@ -707,7 +600,6 @@ export function walletActions<
     sendTransaction: (args) => sendTransaction(client, args),
     signMessage: (args) => signMessage(client, args),
     signTransaction: (args) => signTransaction(client, args),
-    signTypedData: (args) => signTypedData(client, args),
     switchChain: (args) => switchChain(client, args),
     watchAsset: (args) => watchAsset(client, args),
     writeContract: (args) => writeContract(client, args as any),

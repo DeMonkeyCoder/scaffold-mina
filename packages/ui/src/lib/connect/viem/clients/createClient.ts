@@ -2,8 +2,8 @@ import type { Address } from "@/lib/connect/viem";
 
 import type { JsonRpcAccount } from "../accounts/types";
 import {
-  type ParseAccountErrorType,
   parseAccount,
+  type ParseAccountErrorType,
 } from "../accounts/utils/parseAccount";
 import type { ErrorType } from "../errors/utils";
 import type { Account } from "../types/account";
@@ -102,7 +102,6 @@ type ExtendableProtectedActions<
   | "getBlockNumber"
   | "getChainId"
   | "getContractEvents"
-  | "getEnsText"
   | "getFilterChanges"
   | "getGasPrice"
   | "getLogs"

@@ -396,12 +396,6 @@ export { type Keccak256ErrorType, keccak256 } from "./hash/keccak256";
 export { type Sha256ErrorType, sha256 } from "./hash/sha256";
 export { type Ripemd160ErrorType, ripemd160 } from "./hash/ripemd160";
 export {
-  type HashDomainErrorType,
-  type HashTypedDataParameters,
-  type HashTypedDataReturnType,
-  hashTypedData,
-} from "./signature/hashTypedData";
-export {
   type RecoverAddressErrorType,
   type RecoverAddressParameters,
   type RecoverAddressReturnType,
