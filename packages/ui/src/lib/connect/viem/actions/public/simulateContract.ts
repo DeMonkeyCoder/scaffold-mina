@@ -1,4 +1,9 @@
-import type { Abi, AbiFunction, AbiStateMutability } from "abitype";
+import type {
+  Abi,
+  AbiFunction,
+  AbiStateMutability,
+  Address as EthAddress,
+} from "abitype";
 import type { Address } from "@/lib/connect/viem";
 import {
   parseAccount,
@@ -308,7 +313,7 @@ export async function simulateContract<
       args,
       docsPath: "/docs/contract/simulateContract",
       functionName,
-      sender: account?.address,
+      sender: account?.address as EthAddress | undefined,
     });
   }
 }

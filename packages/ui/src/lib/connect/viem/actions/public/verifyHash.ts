@@ -1,3 +1,4 @@
+import type { Address as EthAddress } from "abitype";
 import type { Address } from "@/lib/connect/viem";
 
 import type { Client } from "../../clients/createClient";
@@ -10,23 +11,23 @@ import type { Chain } from "../../types/chain";
 import type { ByteArray, Hex, Signature } from "../../types/misc";
 import type { OneOf } from "../../types/utils";
 import {
-  type EncodeDeployDataErrorType,
   encodeDeployData,
+  type EncodeDeployDataErrorType,
 } from "../../utils/abi/encodeDeployData";
 import { getAddress } from "../../utils/address/getAddress";
 import { isAddressEqual } from "../../utils/address/isAddressEqual";
 import {
-  type IsBytesEqualErrorType,
   isBytesEqual,
+  type IsBytesEqualErrorType,
 } from "../../utils/data/isBytesEqual";
-import { type IsHexErrorType, isHex } from "../../utils/data/isHex";
-import { type ToHexErrorType, bytesToHex } from "../../utils/encoding/toHex";
+import { isHex, type IsHexErrorType } from "../../utils/data/isHex";
+import { bytesToHex, type ToHexErrorType } from "../../utils/encoding/toHex";
 import { getAction } from "../../utils/getAction";
 import { isErc6492Signature } from "../../utils/signature/isErc6492Signature";
 import { recoverAddress } from "../../utils/signature/recoverAddress";
 import { serializeErc6492Signature } from "../../utils/signature/serializeErc6492Signature";
 import { serializeSignature } from "../../utils/signature/serializeSignature";
-import { type CallErrorType, type CallParameters, call } from "./call";
+import { call, type CallErrorType, type CallParameters } from "./call";
 
 export type VerifyHashParameters = Pick<
   CallParameters,
@@ -96,7 +97,7 @@ export async function verifyHash<chain extends Chain | undefined>(
     )({
       data: encodeDeployData({
         abi: universalSignatureValidatorAbi,
-        args: [address, hash, wrappedSignature],
+        args: [address as EthAddress, hash, wrappedSignature],
         bytecode: universalSignatureValidatorByteCode,
       }),
       ...rest,
