@@ -124,36 +124,6 @@ export {
 } from "../hooks/useDisconnect";
 
 export {
-  type UseEnsAddressParameters,
-  type UseEnsAddressReturnType,
-  useEnsAddress,
-} from "../hooks/useEnsAddress";
-
-export {
-  type UseEnsAvatarParameters,
-  type UseEnsAvatarReturnType,
-  useEnsAvatar,
-} from "../hooks/useEnsAvatar";
-
-export {
-  type UseEnsNameParameters,
-  type UseEnsNameReturnType,
-  useEnsName,
-} from "../hooks/useEnsName";
-
-export {
-  type UseEnsResolverParameters,
-  type UseEnsResolverReturnType,
-  useEnsResolver,
-} from "../hooks/useEnsResolver";
-
-export {
-  type UseEnsTextParameters,
-  type UseEnsTextReturnType,
-  useEnsText,
-} from "../hooks/useEnsText";
-
-export {
   type UseEstimateFeesPerGasParameters,
   type UseEstimateFeesPerGasReturnType,
   useEstimateFeesPerGas,

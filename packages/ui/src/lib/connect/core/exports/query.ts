@@ -101,51 +101,6 @@ export {
 } from "../query/getConnectorClient";
 
 export {
-  type GetEnsAddressData,
-  type GetEnsAddressOptions,
-  type GetEnsAddressQueryFnData,
-  type GetEnsAddressQueryKey,
-  getEnsAddressQueryKey,
-  getEnsAddressQueryOptions,
-} from "../query/getEnsAddress";
-
-export {
-  type GetEnsAvatarData,
-  type GetEnsAvatarOptions,
-  type GetEnsAvatarQueryFnData,
-  type GetEnsAvatarQueryKey,
-  getEnsAvatarQueryKey,
-  getEnsAvatarQueryOptions,
-} from "../query/getEnsAvatar";
-
-export {
-  type GetEnsNameData,
-  type GetEnsNameOptions,
-  type GetEnsNameQueryFnData,
-  type GetEnsNameQueryKey,
-  getEnsNameQueryKey,
-  getEnsNameQueryOptions,
-} from "../query/getEnsName";
-
-export {
-  type GetEnsResolverData,
-  type GetEnsResolverOptions,
-  type GetEnsResolverQueryFnData,
-  type GetEnsResolverQueryKey,
-  getEnsResolverQueryKey,
-  getEnsResolverQueryOptions,
-} from "../query/getEnsResolver";
-
-export {
-  type GetEnsTextData,
-  type GetEnsTextOptions,
-  type GetEnsTextQueryFnData,
-  type GetEnsTextQueryKey,
-  getEnsTextQueryKey,
-  getEnsTextQueryOptions,
-} from "../query/getEnsText";
-
-export {
   type GetFeeHistoryData,
   type GetFeeHistoryOptions,
   type GetFeeHistoryQueryFnData,

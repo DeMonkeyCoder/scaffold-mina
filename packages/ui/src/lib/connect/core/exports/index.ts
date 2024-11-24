@@ -105,49 +105,6 @@ export {
 } from "../actions/getConnectorClient";
 
 export {
-  type GetEnsAddressErrorType,
-  type GetEnsAddressParameters,
-  type GetEnsAddressReturnType,
-  getEnsAddress,
-  /** @deprecated use `getEnsAddress` instead */
-  getEnsAddress as fetchEnsAddress,
-} from "../actions/getEnsAddress";
-
-export {
-  type GetEnsAvatarErrorType,
-  type GetEnsAvatarParameters,
-  type GetEnsAvatarReturnType,
-  getEnsAvatar,
-  /** @deprecated use `getEnsAvatar` instead */
-  getEnsAvatar as fetchEnsAvatar,
-} from "../actions/getEnsAvatar";
-
-export {
-  type GetEnsNameErrorType,
-  type GetEnsNameParameters,
-  type GetEnsNameReturnType,
-  getEnsName,
-  /** @deprecated */
-  getEnsName as fetchEnsName,
-} from "../actions/getEnsName";
-
-export {
-  type GetEnsResolverErrorType,
-  type GetEnsResolverParameters,
-  type GetEnsResolverReturnType,
-  getEnsResolver,
-  /** @deprecated use `getEnsResolver` instead */
-  getEnsResolver as fetchEnsResolver,
-} from "../actions/getEnsResolver";
-
-export {
-  type GetEnsTextErrorType,
-  type GetEnsTextParameters,
-  type GetEnsTextReturnType,
-  getEnsText,
-} from "../actions/getEnsText";
-
-export {
   type GetFeeHistoryErrorType,
   type GetFeeHistoryParameters,
   type GetFeeHistoryReturnType,

@@ -155,31 +155,6 @@ export type {
   GetChainIdReturnType,
 } from "./actions/public/getChainId";
 export type {
-  GetEnsAddressErrorType,
-  GetEnsAddressParameters,
-  GetEnsAddressReturnType,
-} from "./actions/ens/getEnsAddress";
-export type {
-  GetEnsAvatarErrorType,
-  GetEnsAvatarParameters,
-  GetEnsAvatarReturnType,
-} from "./actions/ens/getEnsAvatar";
-export type {
-  GetEnsNameErrorType,
-  GetEnsNameParameters,
-  GetEnsNameReturnType,
-} from "./actions/ens/getEnsName";
-export type {
-  GetEnsResolverErrorType,
-  GetEnsResolverParameters,
-  GetEnsResolverReturnType,
-} from "./actions/ens/getEnsResolver";
-export type {
-  GetEnsTextErrorType,
-  GetEnsTextParameters,
-  GetEnsTextReturnType,
-} from "./actions/ens/getEnsText";
-export type {
   GetFeeHistoryErrorType,
   GetFeeHistoryParameters,
   GetFeeHistoryReturnType,

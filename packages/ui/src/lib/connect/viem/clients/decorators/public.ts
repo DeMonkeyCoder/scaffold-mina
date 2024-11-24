@@ -1,31 +1,6 @@
 import type { Abi, AbiEvent, Address } from "abitype";
 
 import {
-  getEnsAddress,
-  type GetEnsAddressParameters,
-  type GetEnsAddressReturnType,
-} from "../../actions/ens/getEnsAddress";
-import {
-  getEnsAvatar,
-  type GetEnsAvatarParameters,
-  type GetEnsAvatarReturnType,
-} from "../../actions/ens/getEnsAvatar";
-import {
-  getEnsName,
-  type GetEnsNameParameters,
-  type GetEnsNameReturnType,
-} from "../../actions/ens/getEnsName";
-import {
-  getEnsResolver,
-  type GetEnsResolverParameters,
-  type GetEnsResolverReturnType,
-} from "../../actions/ens/getEnsResolver";
-import {
-  getEnsText,
-  type GetEnsTextParameters,
-  type GetEnsTextReturnType,
-} from "../../actions/ens/getEnsText";
-import {
   call,
   type CallParameters,
   type CallReturnType,
@@ -106,11 +81,6 @@ import {
   type GetContractEventsParameters,
   type GetContractEventsReturnType,
 } from "../../actions/public/getContractEvents";
-import {
-  getEip712Domain,
-  type GetEip712DomainParameters,
-  type GetEip712DomainReturnType,
-} from "../../actions/public/getEip712Domain";
 import {
   getFeeHistory,
   type GetFeeHistoryParameters,
@@ -710,212 +680,6 @@ export type PublicActions<
   ) => Promise<
     GetContractEventsReturnType<abi, eventName, strict, fromBlock, toBlock>
   >;
-  /**
-   * Reads the EIP-712 domain from a contract, based on the ERC-5267 specification.
-   *
-   * @param client - A {@link Client} instance.
-   * @param parameters - The parameters of the action. {@link GetEip712DomainParameters}
-   * @returns The EIP-712 domain, fields, and extensions. {@link GetEip712DomainReturnType}
-   *
-   * @example
-   * ```ts
-   * import { createPublicClient, http } from 'viem'
-   * import { mainnet } from 'viem/chains'
-   *
-   * const client = createPublicClient({
-   *   chain: mainnet,
-   *   transport: http(),
-   * })
-   *
-   * const domain = await client.getEip712Domain({
-   *   address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-   * })
-   * // {
-   * //   domain: {
-   * //     name: 'ExampleContract',
-   * //     version: '1',
-   * //     chainId: 1,
-   * //     verifyingContract: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-   * //   },
-   * //   fields: '0x0f',
-   * //   extensions: [],
-   * // }
-   * ```
-   */
-  getEip712Domain: (
-    args: GetEip712DomainParameters
-  ) => Promise<GetEip712DomainReturnType>;
-  /**
-   * Gets address for ENS name.
-   *
-   * - Docs: https://viem.sh/docs/ens/actions/getEnsAddress
-   * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/ens
-   *
-   * @remarks
-   * Calls `resolve(bytes, bytes)` on ENS Universal Resolver Contract.
-   *
-   * Since ENS names prohibit certain forbidden characters (e.g. underscore) and have other validation rules, you likely want to [normalize ENS names](https://docs.ens.domains/contract-api-reference/name-processing#normalising-names) with [UTS-46 normalization](https://unicode.org/reports/tr46) before passing them to `getEnsAddress`. You can use the built-in [`normalize`](https://viem.sh/docs/ens/utilities/normalize) function for this.
-   *
-   * @param args - {@link GetEnsAddressParameters}
-   * @returns Address for ENS name or `null` if not found. {@link GetEnsAddressReturnType}
-   *
-   * @example
-   * import { createPublicClient, http } from 'viem'
-   * import { mainnet } from 'viem/chains'
-   * import { normalize } from 'viem/ens'
-   *
-   * const client = createPublicClient({
-   *   chain: mainnet,
-   *   transport: http(),
-   * })
-   * const ensAddress = await client.getEnsAddress({
-   *   name: normalize('wevm.eth'),
-   * })
-   * // '0xd2135CfB216b74109775236E36d4b433F1DF507B'
-   */
-  getEnsAddress: (
-    args: GetEnsAddressParameters
-  ) => Promise<GetEnsAddressReturnType>;
-  /**
-   * Gets the avatar of an ENS name.
-   *
-   * - Docs: https://viem.sh/docs/ens/actions/getEnsAvatar
-   * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/ens
-   *
-   * @remarks
-   * Calls [`getEnsText`](https://viem.sh/docs/ens/actions/getEnsText) with `key` set to `'avatar'`.
-   *
-   * Since ENS names prohibit certain forbidden characters (e.g. underscore) and have other validation rules, you likely want to [normalize ENS names](https://docs.ens.domains/contract-api-reference/name-processing#normalising-names) with [UTS-46 normalization](https://unicode.org/reports/tr46) before passing them to `getEnsAddress`. You can use the built-in [`normalize`](https://viem.sh/docs/ens/utilities/normalize) function for this.
-   *
-   * @param args - {@link GetEnsAvatarParameters}
-   * @returns Avatar URI or `null` if not found. {@link GetEnsAvatarReturnType}
-   *
-   * @example
-   * import { createPublicClient, http } from 'viem'
-   * import { mainnet } from 'viem/chains'
-   * import { normalize } from 'viem/ens'
-   *
-   * const client = createPublicClient({
-   *   chain: mainnet,
-   *   transport: http(),
-   * })
-   * const ensAvatar = await client.getEnsAvatar({
-   *   name: normalize('wevm.eth'),
-   * })
-   * // 'https://ipfs.io/ipfs/Qma8mnp6xV3J2cRNf3mTth5C8nV11CAnceVinc3y8jSbio'
-   */
-  getEnsAvatar: (
-    args: GetEnsAvatarParameters
-  ) => Promise<GetEnsAvatarReturnType>;
-  /**
-   * Gets primary name for specified address.
-   *
-   * - Docs: https://viem.sh/docs/ens/actions/getEnsName
-   * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/ens
-   *
-   * @remarks
-   * Calls `reverse(bytes)` on ENS Universal Resolver Contract to "reverse resolve" the address to the primary ENS name.
-   *
-   * @param args - {@link GetEnsNameParameters}
-   * @returns Name or `null` if not found. {@link GetEnsNameReturnType}
-   *
-   * @example
-   * import { createPublicClient, http } from 'viem'
-   * import { mainnet } from 'viem/chains'
-   *
-   * const client = createPublicClient({
-   *   chain: mainnet,
-   *   transport: http(),
-   * })
-   * const ensName = await client.getEnsName({
-   *   address: '0xd2135CfB216b74109775236E36d4b433F1DF507B',
-   * })
-   * // 'wevm.eth'
-   */
-  getEnsName: (args: GetEnsNameParameters) => Promise<GetEnsNameReturnType>;
-  /**
-   * Gets resolver for ENS name.
-   *
-   * - Docs: https://viem.sh/docs/ens/actions/getEnsResolver
-   * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/ens
-   *
-   * @remarks
-   * Calls `findResolver(bytes)` on ENS Universal Resolver Contract to retrieve the resolver of an ENS name.
-   *
-   * Since ENS names prohibit certain forbidden characters (e.g. underscore) and have other validation rules, you likely want to [normalize ENS names](https://docs.ens.domains/contract-api-reference/name-processing#normalising-names) with [UTS-46 normalization](https://unicode.org/reports/tr46) before passing them to `getEnsAddress`. You can use the built-in [`normalize`](https://viem.sh/docs/ens/utilities/normalize) function for this.
-   *
-   * @param args - {@link GetEnsResolverParameters}
-   * @returns Address for ENS resolver. {@link GetEnsResolverReturnType}
-   *
-   * @example
-   * import { createPublicClient, http } from 'viem'
-   * import { mainnet } from 'viem/chains'
-   * import { normalize } from 'viem/ens'
-   *
-   * const client = createPublicClient({
-   *   chain: mainnet,
-   *   transport: http(),
-   * })
-   * const resolverAddress = await client.getEnsResolver({
-   *   name: normalize('wevm.eth'),
-   * })
-   * // '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41'
-   */
-  getEnsResolver: (
-    args: GetEnsResolverParameters
-  ) => Promise<GetEnsResolverReturnType>;
-  /**
-   * Gets a text record for specified ENS name.
-   *
-   * - Docs: https://viem.sh/docs/ens/actions/getEnsResolver
-   * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/ens
-   *
-   * @remarks
-   * Calls `resolve(bytes, bytes)` on ENS Universal Resolver Contract.
-   *
-   * Since ENS names prohibit certain forbidden characters (e.g. underscore) and have other validation rules, you likely want to [normalize ENS names](https://docs.ens.domains/contract-api-reference/name-processing#normalising-names) with [UTS-46 normalization](https://unicode.org/reports/tr46) before passing them to `getEnsAddress`. You can use the built-in [`normalize`](https://viem.sh/docs/ens/utilities/normalize) function for this.
-   *
-   * @param args - {@link GetEnsTextParameters}
-   * @returns Address for ENS resolver. {@link GetEnsTextReturnType}
-   *
-   * @example
-   * import { createPublicClient, http } from 'viem'
-   * import { mainnet } from 'viem/chains'
-   * import { normalize } from 'viem/ens'
-   *
-   * const client = createPublicClient({
-   *   chain: mainnet,
-   *   transport: http(),
-   * })
-   * const twitterRecord = await client.getEnsText({
-   *   name: normalize('wevm.eth'),
-   *   key: 'com.twitter',
-   * })
-   * // 'wevm_dev'
-   */
-  getEnsText: (args: GetEnsTextParameters) => Promise<GetEnsTextReturnType>;
-  /**
-   * Returns a collection of historical gas information.
-   *
-   * - Docs: https://viem.sh/docs/actions/public/getFeeHistory
-   * - JSON-RPC Methods: [`mina_feeHistory`](https://docs.alchemy.com/reference/eth-feehistory)
-   *
-   * @param args - {@link GetFeeHistoryParameters}
-   * @returns The gas estimate (in wei). {@link GetFeeHistoryReturnType}
-   *
-   * @example
-   * import { createPublicClient, http } from 'viem'
-   * import { mainnet } from 'viem/chains'
-   *
-   * const client = createPublicClient({
-   *   chain: mainnet,
-   *   transport: http(),
-   * })
-   * const feeHistory = await client.getFeeHistory({
-   *   blockCount: 4,
-   *   rewardPercentiles: [25, 75],
-   * })
-   */
   getFeeHistory: (
     args: GetFeeHistoryParameters
   ) => Promise<GetFeeHistoryReturnType>;
@@ -1845,12 +1609,6 @@ export function publicActions<
     getChainId: () => getChainId(client),
     getCode: (args) => getCode(client, args),
     getContractEvents: (args) => getContractEvents(client, args),
-    getEip712Domain: (args) => getEip712Domain(client, args),
-    getEnsAddress: (args) => getEnsAddress(client, args),
-    getEnsAvatar: (args) => getEnsAvatar(client, args),
-    getEnsName: (args) => getEnsName(client, args),
-    getEnsResolver: (args) => getEnsResolver(client, args),
-    getEnsText: (args) => getEnsText(client, args),
     getFeeHistory: (args) => getFeeHistory(client, args),
     estimateFeesPerGas: (args) => estimateFeesPerGas(client, args),
     getFilterChanges: (args) => getFilterChanges(client, args),
