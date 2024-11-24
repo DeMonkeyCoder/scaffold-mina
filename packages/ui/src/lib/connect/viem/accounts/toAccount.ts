@@ -6,7 +6,7 @@ import {
   InvalidAddressError,
   type InvalidAddressErrorType,
 } from "../errors/address";
-import { type IsAddressErrorType, isAddress } from "../utils/address/isAddress";
+import { isAddress, type IsAddressErrorType } from "../utils/address/isAddress";
 
 import type { ErrorType } from "../errors/utils";
 import type {
@@ -51,7 +51,6 @@ export function toAccount<accountSource extends AccountSource>(
     experimental_signAuthorization: source.experimental_signAuthorization,
     signMessage: source.signMessage,
     signTransaction: source.signTransaction,
-    signTypedData: source.signTypedData,
     source: "custom",
     type: "local",
   } as GetAccountReturnType<accountSource>;

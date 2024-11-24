@@ -118,12 +118,6 @@ export {
 } from "../hooks/useConnectorClient";
 
 export {
-  type UseDeployContractParameters,
-  type UseDeployContractReturnType,
-  useDeployContract,
-} from "../hooks/useDeployContract";
-
-export {
   type UseDisconnectParameters,
   type UseDisconnectReturnType,
   useDisconnect,

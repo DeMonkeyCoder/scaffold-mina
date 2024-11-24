@@ -21,14 +21,6 @@ export {
 } from "../query/connect";
 
 export {
-  type DeployContractData,
-  type DeployContractVariables,
-  type DeployContractMutate,
-  type DeployContractMutateAsync,
-  deployContractMutationOptions,
-} from "../query/deployContract";
-
-export {
   type DisconnectData,
   type DisconnectVariables,
   type DisconnectMutate,

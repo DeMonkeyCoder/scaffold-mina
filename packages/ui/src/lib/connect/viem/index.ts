@@ -48,11 +48,6 @@ export {
   type GetContractEventsReturnType,
 } from "./actions/public/getContractEvents";
 export {
-  type GetEip712DomainErrorType,
-  type GetEip712DomainParameters,
-  type GetEip712DomainReturnType,
-} from "./actions/public/getEip712Domain";
-export {
   type AddChainErrorType,
   type AddChainParameters,
 } from "./actions/wallet/addChain";
@@ -1023,8 +1018,6 @@ export type {
 } from "./types/misc";
 export type {
   AddEthereumChainParameter,
-  BundlerRpcSchema,
-  DebugBundlerRpcSchema,
   EIP1193EventMap,
   EIP1193Events,
   EIP1193Parameters,
@@ -1232,14 +1225,6 @@ export {
   type GetTransactionTypeErrorType,
   getTransactionType,
 } from "./utils/transaction/getTransactionType";
-export {
-  type HashDomainErrorType,
-  type HashTypedDataErrorType,
-  type HashTypedDataParameters,
-  type HashTypedDataReturnType,
-  hashDomain,
-  hashTypedData,
-} from "./utils/signature/hashTypedData";
 export {
   type CompactSignatureToSignatureErrorType,
   compactSignatureToSignature,
@@ -1679,28 +1664,11 @@ export {
   trim,
 } from "./utils/data/trim";
 export {
-  type DomainSeparatorErrorType,
-  type GetTypesForEIP712DomainErrorType,
-  type SerializeTypedDataErrorType,
-  type ValidateTypedDataErrorType,
-  serializeTypedData,
-  validateTypedData,
-  domainSeparator,
-  getTypesForEIP712Domain,
-} from "./utils/typedData";
-export {
   type CreateNonceManagerParameters,
   type NonceManager,
   type NonceManagerSource,
   createNonceManager,
   nonceManager,
 } from "./utils/nonceManager";
-export type {
-  RpcEstimateUserOperationGasReturnType,
-  RpcGetUserOperationByHashReturnType,
-  RpcUserOperation,
-  RpcUserOperationReceipt,
-  RpcUserOperationRequest,
-} from "./account-abstraction/types/rpc";
 
 export type Address = string;

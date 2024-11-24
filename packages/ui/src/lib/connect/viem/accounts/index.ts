@@ -1,41 +1,41 @@
-export type { Address } from 'abitype'
+export type { Address } from "abitype";
 
 // biome-ignore lint/performance/noBarrelFile: entrypoint module
-export { HDKey } from '@scure/bip32'
-export { wordlist as czech } from '@scure/bip39/wordlists/czech'
-export { wordlist as english } from '@scure/bip39/wordlists/english'
-export { wordlist as french } from '@scure/bip39/wordlists/french'
-export { wordlist as italian } from '@scure/bip39/wordlists/italian'
-export { wordlist as japanese } from '@scure/bip39/wordlists/japanese'
-export { wordlist as korean } from '@scure/bip39/wordlists/korean'
-export { wordlist as simplifiedChinese } from '@scure/bip39/wordlists/simplified-chinese'
-export { wordlist as spanish } from '@scure/bip39/wordlists/spanish'
-export { wordlist as traditionalChinese } from '@scure/bip39/wordlists/traditional-chinese'
+export { HDKey } from "@scure/bip32";
+export { wordlist as czech } from "@scure/bip39/wordlists/czech";
+export { wordlist as english } from "@scure/bip39/wordlists/english";
+export { wordlist as french } from "@scure/bip39/wordlists/french";
+export { wordlist as italian } from "@scure/bip39/wordlists/italian";
+export { wordlist as japanese } from "@scure/bip39/wordlists/japanese";
+export { wordlist as korean } from "@scure/bip39/wordlists/korean";
+export { wordlist as simplifiedChinese } from "@scure/bip39/wordlists/simplified-chinese";
+export { wordlist as spanish } from "@scure/bip39/wordlists/spanish";
+export { wordlist as traditionalChinese } from "@scure/bip39/wordlists/traditional-chinese";
 
 export {
   type GenerateMnemonicErrorType,
   generateMnemonic,
-} from './generateMnemonic'
+} from "./generateMnemonic";
 export {
   type GeneratePrivateKeyErrorType,
   generatePrivateKey,
-} from './generatePrivateKey'
+} from "./generatePrivateKey";
 export {
   type HDKeyToAccountOptions,
   type HDKeyToAccountErrorType,
   hdKeyToAccount,
-} from './hdKeyToAccount'
+} from "./hdKeyToAccount";
 export {
   type MnemonicToAccountOptions,
   type MnemonicToAccountErrorType,
   mnemonicToAccount,
-} from './mnemonicToAccount'
+} from "./mnemonicToAccount";
 export {
   type PrivateKeyToAccountOptions,
   type PrivateKeyToAccountErrorType,
   privateKeyToAccount,
-} from './privateKeyToAccount'
-export { type ToAccountErrorType, toAccount } from './toAccount'
+} from "./privateKeyToAccount";
+export { type ToAccountErrorType, toAccount } from "./toAccount";
 
 export type {
   Account,
@@ -46,13 +46,13 @@ export type {
   LocalAccount,
   HDAccount,
   PrivateKeyAccount,
-} from './types'
+} from "./types";
 export {
   type SignErrorType,
   type SignParameters,
   type SignReturnType,
   sign,
-} from './utils/sign'
+} from "./utils/sign";
 export {
   /** @deprecated Use `SignatureToHexErrorType` instead. */
   type SerializeSignatureErrorType as SignatureToHexErrorType,
@@ -60,47 +60,38 @@ export {
   serializeSignature as signatureToHex,
   type SerializeSignatureErrorType,
   serializeSignature,
-} from '../utils/signature/serializeSignature'
+} from "../utils/signature/serializeSignature";
 export {
   type SignAuthorizationErrorType,
   type SignAuthorizationParameters,
   type SignAuthorizationReturnType,
   experimental_signAuthorization,
-} from './utils/signAuthorization'
+} from "./utils/signAuthorization";
 export {
   type SignMessageErrorType,
   type SignMessageParameters,
   type SignMessageReturnType,
   signMessage,
-} from './utils/signMessage'
+} from "./utils/signMessage";
 export {
   type SignTransactionErrorType,
   type SignTransactionParameters,
   type SignTransactionReturnType,
   signTransaction,
-} from './utils/signTransaction'
-export {
-  type SignTypedDataErrorType,
-  type SignTypedDataParameters,
-  type SignTypedDataReturnType,
-  signTypedData,
-} from './utils/signTypedData'
-export {
-  type ParseAccountErrorType,
-  parseAccount,
-} from './utils/parseAccount'
+} from "./utils/signTransaction";
+export { type ParseAccountErrorType, parseAccount } from "./utils/parseAccount";
 export {
   type PublicKeyToAddressErrorType,
   publicKeyToAddress,
-} from './utils/publicKeyToAddress'
+} from "./utils/publicKeyToAddress";
 export {
   type PrivateKeyToAddressErrorType,
   privateKeyToAddress,
-} from './utils/privateKeyToAddress'
+} from "./utils/privateKeyToAddress";
 export {
   type CreateNonceManagerParameters,
   type NonceManager,
   type NonceManagerSource,
   createNonceManager,
   nonceManager,
-} from '../utils/nonceManager'
+} from "../utils/nonceManager";
