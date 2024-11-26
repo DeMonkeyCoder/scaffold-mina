@@ -6,8 +6,8 @@ import type { Transport } from "../../clients/transports/createTransport";
 import type { ErrorType } from "../../errors/utils";
 import type { Chain } from "../../types/chain";
 import {
-  type ChecksumAddressErrorType,
   checksumAddress,
+  type ChecksumAddressErrorType,
 } from "../../utils/address/getAddress";
 import type { RequestErrorType } from "../../utils/buildRequest";
 

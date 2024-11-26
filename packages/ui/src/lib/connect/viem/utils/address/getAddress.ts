@@ -1,6 +1,4 @@
 import type { Address } from "@/lib/connect/viem";
-
-import { InvalidAddressError } from "../../errors/address";
 import type { ErrorType } from "../../errors/utils";
 import {
   stringToBytes,
@@ -8,7 +6,7 @@ import {
 } from "../encoding/toBytes";
 import { keccak256, type Keccak256ErrorType } from "../hash/keccak256";
 import { LruMap } from "../lru";
-import { isAddress, type IsAddressErrorType } from "./isAddress";
+import { type IsAddressErrorType } from "./isAddress";
 
 const checksumAddressCache = /*#__PURE__*/ new LruMap<Address>(8192);
 
@@ -75,7 +73,8 @@ export function getAddress(
    */
   chainId?: string
 ): Address {
-  if (!isAddress(address, { strict: false }))
-    throw new InvalidAddressError({ address });
-  return checksumAddress(address, chainId);
+  // if (!isAddress(address, { strict: false }))
+  //   throw new InvalidAddressError({ address });
+  // return checksumAddress(address, chainId);
+  return address;
 }

@@ -93,6 +93,7 @@ const targetMap = {
 injected.type = "injected" as const;
 
 export function injected(parameters: InjectedParameters = {}) {
+  console.log({ parameters });
   const { shimDisconnect = true, unstable_shimAsyncInject } = parameters;
 
   function getTarget(): Compute<Target & { id: string }> {
@@ -102,7 +103,20 @@ export function injected(parameters: InjectedParameters = {}) {
       if (result) return result;
     }
 
-    if (typeof target === "object") return target;
+    if (typeof target === "object") {
+      if (target.id === "co.pallad" && typeof target.provider === "object") {
+        return {
+          ...target,
+          provider: {
+            ...target.provider,
+            request: async (...args) =>
+              // @ts-ignore
+              (await target.provider.request(...args)).result,
+          },
+        };
+      }
+      return target;
+    }
 
     if (typeof target === "string")
       return {
@@ -597,6 +611,8 @@ type TargetMap = { [_ in TargetId]?: Target | undefined };
 
 /** @deprecated */
 type WalletProviderFlags =
+  | "isAuro"
+  | "isPallad"
   | "isApexWallet"
   | "isAvalanche"
   | "isBackpack"
