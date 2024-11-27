@@ -1,6 +1,7 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import GradientBG from "../components/GradientBG.js";
 import LoadingScreen from "@/components/LoadingScreen";
+import ConnectWallet from "@/components/ConnectWallet";
 import {
   QuestContractProvider,
   useGetQuestContractState,
@@ -21,7 +22,7 @@ enum TransactionState {
 
 function HomeBody() {
   const { loading, prepareTransaction } = useQuestContract();
-  const { isConnected } = useAccount();
+  const { address, isConnected } = useAccount();
 
   const { accountExists, sendTransaction, networkID } = useMinaProvider();
 
@@ -54,6 +55,10 @@ function HomeBody() {
     setTxState(TransactionState.INITIAL);
   }, [prepareTransaction, questSolution, txState]);
 
+  useEffect(() => {
+    setTransactionLink("")
+  }, [address])
+
   return (
     <GradientBG>
       <div className="main">
@@ -61,24 +66,29 @@ function HomeBody() {
           <LoadingScreen />
         ) : (
           <div className="center">
+
             {transactionLink && (
-              <div className="start text-2xl font-bold pb-10 underline">
+              <div className="mb-1">
+                <button className="card flex items-center justify-center">
+                <Image width={16} height={16} src="/assets/view.svg" alt="" />
                 <a href={transactionLink} target="_blank" rel="noreferrer">
-                  View transaction
+                  View Transaction
                 </a>
+              </button>
               </div>
             )}
             {isConnected ? (
               isSupportedNetwork(networkID) ? (
                 accountExists ? (
                   <>
-                    <div className="riddle-box">
+
+                    <div className="riddle-box bg-purple-50">
                       <div className="justify-center items-center">
                         <div className="text-center text-2xl mb-2 flex items-center justify-center p-0">
                           Solve the riddle{" "}
                           <img
-                            className="px-2"
-                            src="/assets/face-smile-2.svg"
+                            className="px-2 w-11"
+                            src="/assets/thinkingface.svg"
                             alt=""
                           />
                         </div>
@@ -98,7 +108,7 @@ function HomeBody() {
                       <div>
                         <input
                           type="text"
-                          className="p-2 my-4 rounded-l border-2 border-gray-400 w-56"
+                          className="p-2 my-4 rounded-l border-2 border-gray-400 w-56 h-11"
                           placeholder="Solution"
                           value={questSolution}
                           onChange={(e) => setQuestSolution(e.target.value)}
@@ -107,16 +117,18 @@ function HomeBody() {
                     </div>
                     <div className="flex items-center justify-center">
                       <button
-                        className="card flex items-center justify-center"
+                        className="card flex items-center justify-center whitespace-nowrap"
                         onClick={onSendTransaction}
                         disabled={txState !== TransactionState.INITIAL}
                       >
+                        {txState !== TransactionState.PREPARING && (
                         <Image
                           width={16}
                           height={16}
                           src="/assets/upload-circle-01-stroke-rounded.svg"
                           alt=""
                         />
+                       )}
                         {txState === TransactionState.AWAITING_USER_APPROVAL
                           ? "Awaiting Approval..."
                           : txState === TransactionState.PREPARING
@@ -131,11 +143,26 @@ function HomeBody() {
                 )
               ) : (
                 <div>
-                  Wrong network. Please change your wallet network to Devnet
+                Please change your wallet network to Devnet
+                <div className="flex items-center justify-center">
+                <ConnectWallet />
+                </div>
                 </div>
               )
             ) : (
-              <div>Please connect your wallet first.</div>
+              <div className="welcome">
+
+                <div>Welcome to</div>
+                <div className="flex items-center justify-center text-2xl font-semibold mr-6">
+                <img
+                            className="px-2 w-12"
+                            src="/assets/minalogo.png"
+                            alt=""
+                 />
+                Scaffold-<div className="bg-gradient-to-r from-purple-600 to-orange-500 text-transparent bg-clip-text">MINA</div>
+                </div>
+                <ConnectWallet />
+              </div>
             )}
           </div>
         )}
