@@ -93,7 +93,6 @@ const targetMap = {
 injected.type = "injected" as const;
 
 export function injected(parameters: InjectedParameters = {}) {
-  console.log({ parameters });
   const { shimDisconnect = true, unstable_shimAsyncInject } = parameters;
 
   function getTarget(): Compute<Target & { id: string }> {

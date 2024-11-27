@@ -2,7 +2,7 @@ import { formatPublicKey } from "@/utils";
 import Image from "next/image";
 import { useMinaProvider } from "@/lib/ZkappContext";
 import { useCallback, useState } from "react";
-import { NETWORK_ID } from "@/constants/network";
+import { isSupportedNetwork, NETWORK_ID } from "@/constants/network";
 import { PublicKey } from "o1js";
 import { useConnect } from "@/lib/connect/react/hooks/useConnect";
 import { useConnectors } from "@/lib/connect/react/hooks/useConnectors";
@@ -49,7 +49,7 @@ export default function ConnectWallet() {
       onClick={() => {
         if (!isConnected) {
           connect();
-        } else if (networkID !== NETWORK_ID) {
+        } else if (!isSupportedNetwork(networkID)) {
           switchNetwork(NETWORK_ID);
         } else {
           disconnect();
@@ -58,7 +58,7 @@ export default function ConnectWallet() {
     >
       <Image width={16} height={16} src="/assets/wallet-2.svg" alt="" />
       {isConnected
-        ? networkID === NETWORK_ID
+        ? isSupportedNetwork(networkID)
           ? isHovered
             ? "Disconnect"
             : address

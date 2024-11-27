@@ -3,18 +3,19 @@ import type { AppProps } from "next/app";
 import { ZkappProvider } from "@/lib/ZkappContext";
 import Navbar from "@/components/Navbar";
 import { createConfig } from "@/lib/connect/core/createConfig";
-import { mainnet } from "@/lib/connect/viem/chains";
+import { devnet, mainnet } from "@/lib/connect/viem/chains";
 import { http } from "@/lib/connect/viem";
 import { WagmiProvider } from "@/lib/connect/react/context";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const config = createConfig({
-  chains: [mainnet],
+  chains: [mainnet, devnet],
   connectors: [],
   pollingInterval: 100,
   storage: null,
   transports: {
     [mainnet.id]: http(),
+    [devnet.id]: http(),
   },
 });
 

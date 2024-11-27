@@ -56,6 +56,15 @@ export {
 } from "../query/estimateMaxPriorityFeePerGas";
 
 export {
+  type GetBalanceData,
+  type GetBalanceOptions,
+  type GetBalanceQueryFnData,
+  type GetBalanceQueryKey,
+  getBalanceQueryKey,
+  getBalanceQueryOptions,
+} from "../query/getBalance";
+
+export {
   type GetBlockData,
   type GetBlockOptions,
   type GetBlockQueryFnData,

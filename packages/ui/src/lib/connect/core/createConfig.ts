@@ -98,14 +98,6 @@ export function createConfig<
         : []),
     ].map(setup)
   );
-  console.log(
-    [
-      ...(rest.connectors ?? []),
-      ...(!ssr
-        ? mipd?.getProviders().map(providerDetailToConnector) ?? []
-        : []),
-    ].map(setup)
-  );
 
   function setup(connectorFn: CreateConnectorFn): Connector {
     // Set up emitter with uid and add to connector so they are "linked" together.

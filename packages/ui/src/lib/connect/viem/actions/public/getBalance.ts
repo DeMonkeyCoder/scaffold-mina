@@ -6,10 +6,7 @@ import type { ErrorType } from "../../errors/utils";
 import type { BlockTag } from "../../types/block";
 import type { Chain } from "../../types/chain";
 import type { RequestErrorType } from "../../utils/buildRequest";
-import {
-  type NumberToHexErrorType,
-  numberToHex,
-} from "../../utils/encoding/toHex";
+import { type NumberToHexErrorType } from "../../utils/encoding/toHex";
 
 export type GetBalanceParameters = {
   /** The address of the account. */
@@ -71,13 +68,15 @@ export type GetBalanceErrorType =
  */
 export async function getBalance<chain extends Chain | undefined>(
   client: Client<Transport, chain>,
-  { address, blockNumber, blockTag = "latest" }: GetBalanceParameters
+  // { address, blockNumber, blockTag = "latest" }: GetBalanceParameters
+  { address }: GetBalanceParameters
 ): Promise<GetBalanceReturnType> {
-  const blockNumberHex = blockNumber ? numberToHex(blockNumber) : undefined;
+  // const blockNumberHex = blockNumber ? numberToHex(blockNumber) : undefined;
 
   const balance = await client.request({
     method: "mina_getBalance",
-    params: [address, blockNumberHex || blockTag],
+    // params: [address, blockNumberHex || blockTag],
+    params: [address],
   });
   return BigInt(balance);
 }

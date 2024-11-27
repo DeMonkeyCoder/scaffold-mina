@@ -11,8 +11,9 @@
   },
   "dependencies": {
     "@adraffy/ens-normalize": "1.10.0",
-    "@mina-js/connect": "https://pkg.pr.new/palladians/mina-js/@mina-js/connect@758fc6f",
-    "@mina-js/providers": "https://pkg.pr.new/palladians/mina-js/@mina-js/providers@758fc6f",
+    "@mina-js/connect": "https://pkg.pr.new/palladians/mina-js/@mina-js/connect@d652e7a",
+    "@mina-js/providers": "https://pkg.pr.new/palladians/mina-js/@mina-js/providers@d652e7a",
+    "@mina-js/utils": "https://pkg.pr.new/palladians/mina-js/@mina-js/utils@d652e7a",
     "@noble/curves": "1.4.0",
     "@noble/hashes": "1.4.0",
     "@scure/bip32": "1.4.0",

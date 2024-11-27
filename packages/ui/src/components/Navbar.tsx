@@ -1,9 +1,14 @@
-import ConnectWallet from "./ConnectWallet";
 import Image from "next/image";
 import { useAccount } from "@/lib/connect/react/hooks/useAccount";
+import { useBalance } from "@/lib/connect/react/hooks/useBalance";
+import ConnectWallet from "./ConnectWallet";
+import { formatMina } from "@mina-js/utils";
 
 export default function Navbar() {
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
+  const { data: balance } = useBalance({
+    address,
+  });
 
   if (!isConnected) return <div></div>;
 
@@ -64,6 +69,7 @@ export default function Navbar() {
           </div>
 
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            {balance ? formatMina(balance.value) : "..."} MINA
             {isConnected && <ConnectWallet />}
           </div>
         </div>

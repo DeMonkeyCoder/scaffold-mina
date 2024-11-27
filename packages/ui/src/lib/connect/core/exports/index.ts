@@ -48,6 +48,15 @@ export {
 export { type GetAccountReturnType, getAccount } from "../actions/getAccount";
 
 export {
+  type GetBalanceParameters,
+  type GetBalanceReturnType,
+  type GetBalanceErrorType,
+  getBalance,
+  /** @deprecated use `getBalance` instead */
+  getBalance as fetchBalance,
+} from "../actions/getBalance";
+
+export {
   type GetBlockErrorType,
   type GetBlockParameters,
   type GetBlockReturnType,

@@ -1,0 +1,64 @@
+import { type Address, formatUnits } from "@/lib/connect/viem";
+import {
+  getBalance as viem_getBalance,
+  type GetBalanceErrorType as viem_GetBalanceErrorType,
+  type GetBalanceParameters as viem_GetBalanceParameters,
+} from "@/lib/connect/viem/actions";
+
+import type { Config } from "../createConfig";
+import type { ChainIdParameter } from "../types/properties";
+import type { Unit } from "../types/unit";
+import type { Compute } from "../types/utils";
+import { getAction } from "../utils/getAction";
+import { getUnit } from "../utils/getUnit";
+
+export type GetBalanceParameters<config extends Config = Config> = Compute<
+  ChainIdParameter<config> &
+    viem_GetBalanceParameters & {
+      /** @deprecated */
+      token?: Address | undefined;
+      /** @deprecated */
+      unit?: Unit | undefined;
+    }
+>;
+
+export type GetBalanceReturnType = {
+  decimals: number;
+  /** @deprecated */
+  formatted: string;
+  symbol: string;
+  value: bigint;
+};
+
+export type GetBalanceErrorType = viem_GetBalanceErrorType;
+
+/** https://wagmi.sh/core/api/actions/getBalance */
+export async function getBalance<config extends Config>(
+  config: config,
+  parameters: GetBalanceParameters<config>
+): Promise<GetBalanceReturnType> {
+  const {
+    address,
+    blockNumber,
+    blockTag,
+    chainId,
+    token: tokenAddress,
+    unit = "ether",
+  } = parameters;
+
+  if (tokenAddress) {
+    throw new Error("not supported yet");
+  }
+  const client = config.getClient({ chainId });
+  const action = getAction(client, viem_getBalance, "getBalance");
+  const value = await action(
+    blockNumber ? { address, blockNumber } : { address, blockTag }
+  );
+  const chain = config.chains.find((x) => x.id === chainId) ?? client.chain!;
+  return {
+    decimals: chain.nativeCurrency.decimals,
+    formatted: formatUnits(value, getUnit(unit)),
+    symbol: chain.nativeCurrency.symbol,
+    value,
+  };
+}

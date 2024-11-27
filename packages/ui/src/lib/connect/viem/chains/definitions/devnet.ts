@@ -6,7 +6,7 @@ export const devnet = /*#__PURE__*/ defineChain({
   nativeCurrency: { name: "MINA", symbol: "MINA", decimals: 9 },
   rpcUrls: {
     default: {
-      http: ["https://cloudflare-eth.com"],
+      http: ["https://devnet.klesia.palladians.xyz/api"],
     },
   },
   blockExplorers: {

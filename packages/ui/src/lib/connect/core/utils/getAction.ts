@@ -1,12 +1,4 @@
-import type {
-  Account,
-  Chain,
-  Client,
-  PublicActions,
-  RpcSchema,
-  Transport,
-  WalletActions,
-} from "@/lib/connect/viem";
+import type {Account, Chain, Client, PublicActions, RpcSchema, Transport, WalletActions,} from "@/lib/connect/viem";
 
 /**
  * Retrieves and returns an action from the client (if exists), and falls
