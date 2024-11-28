@@ -151,9 +151,9 @@ export type {
   GetCodeReturnType,
 } from "./actions/public/getCode";
 export type {
-  GetChainIdErrorType,
-  GetChainIdReturnType,
-} from "./actions/public/getChainId";
+  GetNetworkIdErrorType,
+  GetNetworkIdReturnType,
+} from "./actions/public/getNetworkId";
 export type {
   GetFeeHistoryErrorType,
   GetFeeHistoryParameters,
@@ -743,8 +743,8 @@ export {
   type ChainNotFoundErrorType,
   ClientChainNotConfiguredError,
   type ClientChainNotConfiguredErrorType,
-  InvalidChainIdError,
-  type InvalidChainIdErrorType,
+  InvalidNetworkIdError,
+  type InvalidNetworkIdErrorType,
 } from "./errors/chain";
 export {
   InvalidBytesBooleanError,

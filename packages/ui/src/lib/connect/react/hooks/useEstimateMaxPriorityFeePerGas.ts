@@ -16,7 +16,7 @@ import {
 
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { type UseQueryReturnType, useQuery } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseEstimateMaxPriorityFeePerGasParameters<
@@ -47,11 +47,11 @@ export function useEstimateMaxPriorityFeePerGas<
   const { query = {} } = parameters;
 
   const config = useConfig(parameters);
-  const chainId = useChainId({ config });
+  const networkId = useNetworkId({ config });
 
   const options = estimateMaxPriorityFeePerGasQueryOptions(config, {
     ...parameters,
-    chainId: parameters.chainId ?? chainId,
+    networkId: parameters.networkId ?? networkId,
   });
 
   return useQuery({ ...query, ...options });

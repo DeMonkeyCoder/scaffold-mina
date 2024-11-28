@@ -13,7 +13,7 @@ import { useMinaProvider } from "@/lib/ZkappContext";
 import { isSupportedNetwork } from "@/constants/network";
 import AccountDoesNotExist from "@/components/AccountDoesNotExist";
 import { useAccount } from "@/lib/connect/react/hooks/useAccount";
-import { useChainId } from "@/lib/connect/react/hooks/useChainId";
+import { useNetworkId } from "@/lib/connect/react/hooks/useNetworkId";
 
 enum TransactionState {
   INITIAL,
@@ -26,7 +26,7 @@ function HomeBody() {
   const { address, isConnected } = useAccount();
 
   const { accountExists } = useMinaProvider();
-  const networkId = useChainId();
+  const networkId = useNetworkId();
 
   const { data: currentNum } = useGetQuestContractState({
     stateVariable: "counter",

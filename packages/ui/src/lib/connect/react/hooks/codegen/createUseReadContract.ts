@@ -24,7 +24,7 @@ import type {
 
 import type { ConfigParameter, QueryParameter } from "../../types/properties";
 import { useAccount } from "../useAccount";
-import { useChainId } from "../useChainId";
+import { useNetworkId } from "../useNetworkId";
 import { useConfig } from "../useConfig";
 import {
   useReadContract,
@@ -53,10 +53,10 @@ export type CreateUseReadContractReturnType<
   address extends Address | Record<string, Address> | undefined,
   functionName extends ContractFunctionName<abi, stateMutability> | undefined,
   ///
-  omittedProperties extends "abi" | "address" | "chainId" | "functionName" =
+  omittedProperties extends "abi" | "address" | "networkId" | "functionName" =
     | "abi"
     | (address extends undefined ? never : "address")
-    | (address extends Record<string, Address> ? "chainId" : never)
+    | (address extends Record<string, Address> ? "networkId" : never)
     | (functionName extends undefined ? never : "functionName")
 > = <
   name extends functionName extends ContractFunctionName<abi, stateMutability>
@@ -83,7 +83,7 @@ export type CreateUseReadContractReturnType<
       >
   > &
     (address extends Record<string, Address>
-      ? { chainId?: keyof address | undefined }
+      ? { networkId?: keyof address | undefined }
       : unknown)
 ) => UseReadContractReturnType<abi, name, args, selectData>;
 
@@ -102,17 +102,17 @@ export function createUseReadContract<
   if (props.address !== undefined && typeof props.address === "object")
     return (parameters) => {
       const config = useConfig(parameters);
-      const configChainId = useChainId({ config });
+      const configNetworkId = useNetworkId({ config });
       const account = useAccount({ config });
-      const chainId =
-        (parameters as { chainId?: string })?.chainId ??
-        account.chainId ??
-        configChainId;
+      const networkId =
+        (parameters as { networkId?: string })?.networkId ??
+        account.networkId ??
+        configNetworkId;
       return useReadContract({
         ...(parameters as any),
         ...(props.functionName ? { functionName: props.functionName } : {}),
         address: (props.address as Record<string, Address> | undefined)?.[
-          chainId
+          networkId
         ],
         abi: props.abi,
       });

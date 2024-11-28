@@ -44,7 +44,10 @@ import {
   type AssertRequestErrorType,
   type AssertRequestParameters,
 } from "../../utils/transaction/assertRequest";
-import { getChainId, type GetChainIdErrorType } from "../public/getChainId";
+import {
+  getNetworkId,
+  type GetNetworkIdErrorType,
+} from "../public/getNetworkId";
 import {
   defaultParameters,
   prepareTransactionRequest,
@@ -85,7 +88,7 @@ export type SendTransactionErrorType =
       | AccountTypeNotSupportedErrorType
       | AssertCurrentChainErrorType
       | AssertRequestErrorType
-      | GetChainIdErrorType
+      | GetNetworkIdErrorType
       | PrepareTransactionRequestErrorType
       | SendRawTransactionErrorType
       | RecoverAuthorizationAddressErrorType
@@ -174,11 +177,11 @@ export async function sendTransaction<
   try {
     assertRequest(parameters as AssertRequestParameters);
 
-    let chainId: string | undefined;
+    let networkId: string | undefined;
     if (chain !== null) {
-      chainId = await getAction(client, getChainId, "getChainId")({});
+      networkId = await getAction(client, getNetworkId, "getNetworkId")({});
       assertCurrentChain({
-        currentChainId: chainId,
+        currentNetworkId: networkId,
         chain,
       });
     }
@@ -212,7 +215,7 @@ export async function sendTransaction<
         accessList,
         authorizationList,
         blobs,
-        chainId,
+        networkId,
         data,
         from: account.address,
         gas,
@@ -245,7 +248,7 @@ export async function sendTransaction<
         authorizationList,
         blobs,
         chain,
-        chainId,
+        networkId,
         data,
         gas,
         gasPrice,

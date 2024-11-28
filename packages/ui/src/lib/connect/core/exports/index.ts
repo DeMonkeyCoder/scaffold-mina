@@ -86,7 +86,10 @@ export {
   getBytecode,
 } from "../actions/getBytecode";
 
-export { type GetChainIdReturnType, getChainId } from "../actions/getChainId";
+export {
+  type GetNetworkIdReturnType,
+  getNetworkId,
+} from "../actions/getNetworkId";
 
 export { type GetChainsReturnType, getChains } from "../actions/getChains";
 
@@ -288,10 +291,10 @@ export {
 } from "../actions/watchBlockNumber";
 
 export {
-  type WatchChainIdParameters,
-  type WatchChainIdReturnType,
-  watchChainId,
-} from "../actions/watchChainId";
+  type WatchNetworkIdParameters,
+  type WatchNetworkIdReturnType,
+  watchNetworkId,
+} from "../actions/watchNetworkId";
 
 export {
   type WatchClientParameters,
@@ -457,7 +460,7 @@ export { deserialize } from "../utils/deserialize";
 
 export { extractRpcUrls } from "../utils/extractRpcUrls";
 
-export { normalizeChainId } from "../utils/normalizeChainId";
+export { normalizeNetworkId } from "../utils/normalizeNetworkId";
 
 export { serialize } from "../utils/serialize";
 

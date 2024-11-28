@@ -110,7 +110,7 @@ export async function sendCalls<
               value: call.value ? numberToHex(call.value) : undefined,
             })) as any,
             capabilities,
-            chainId: chain!.id,
+            networkId: chain!.id,
             from: account.address,
             version,
           },

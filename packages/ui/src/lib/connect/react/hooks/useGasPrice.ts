@@ -16,21 +16,21 @@ import {
 
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { type UseQueryReturnType, useQuery } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseGasPriceParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   selectData = GetGasPriceData
 > = Compute<
-  GetGasPriceOptions<config, chainId> &
+  GetGasPriceOptions<config, networkId> &
     ConfigParameter<config> &
     QueryParameter<
       GetGasPriceQueryFnData,
       GetGasPriceErrorType,
       selectData,
-      GetGasPriceQueryKey<config, chainId>
+      GetGasPriceQueryKey<config, networkId>
     >
 >;
 
@@ -40,20 +40,20 @@ export type UseGasPriceReturnType<selectData = GetGasPriceData> =
 /** https://wagmi.sh/react/api/hooks/useGasPrice */
 export function useGasPrice<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   selectData = GetGasPriceData
 >(
-  parameters: UseGasPriceParameters<config, chainId, selectData> = {}
+  parameters: UseGasPriceParameters<config, networkId, selectData> = {}
 ): UseGasPriceReturnType<selectData> {
   const { query = {} } = parameters;
 
   const config = useConfig(parameters);
-  const configChainId = useChainId({ config });
-  const chainId = parameters.chainId ?? configChainId;
+  const configNetworkId = useNetworkId({ config });
+  const networkId = parameters.networkId ?? configNetworkId;
 
   const options = getGasPriceQueryOptions(config, {
     ...parameters,
-    chainId,
+    networkId,
   });
 
   return useQuery({ ...query, ...options });

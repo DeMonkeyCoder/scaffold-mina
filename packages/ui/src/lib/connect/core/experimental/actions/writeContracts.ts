@@ -18,7 +18,7 @@ import type { Config } from "../../createConfig";
 import type { BaseErrorType, ErrorType } from "../../errors/base";
 import type { SelectChains } from "../../types/chain";
 import type {
-  ChainIdParameter,
+  NetworkIdParameter,
   ConnectorParameter,
 } from "../../types/properties";
 import type { Compute } from "../../types/utils";
@@ -26,9 +26,9 @@ import type { Compute } from "../../types/utils";
 export type WriteContractsParameters<
   contracts extends readonly unknown[] = readonly ContractFunctionParameters[],
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = {
   [key in keyof chains]: Compute<
     Omit<
@@ -40,7 +40,7 @@ export type WriteContractsParameters<
       >,
       "chain"
     > &
-      ChainIdParameter<config, chainId> &
+      NetworkIdParameter<config, networkId> &
       ConnectorParameter
   >;
 }[number];
@@ -60,22 +60,22 @@ export type WriteContractsErrorType =
 export async function writeContracts<
   const contracts extends readonly unknown[],
   config extends Config,
-  chainId extends config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"]
 >(
   config: config,
-  parameters: WriteContractsParameters<contracts, config, chainId>
+  parameters: WriteContractsParameters<contracts, config, networkId>
 ): Promise<WriteContractsReturnType> {
-  const { account, chainId, connector, ...rest } = parameters;
+  const { account, networkId, connector, ...rest } = parameters;
 
   const client = await getConnectorClient(config, {
     account,
-    chainId,
+    networkId,
     connector,
   });
 
   return viem_writeContracts(client, {
     ...(rest as any),
     ...(account ? { account } : {}),
-    chain: chainId ? { id: chainId } : undefined,
+    chain: networkId ? { id: networkId } : undefined,
   });
 }

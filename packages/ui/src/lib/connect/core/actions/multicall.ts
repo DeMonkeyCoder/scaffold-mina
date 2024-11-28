@@ -7,7 +7,7 @@ import type {
 import { multicall as viem_multicall } from "@/lib/connect/viem/actions";
 
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import { getAction } from "../utils/getAction";
 
 export type MulticallParameters<
@@ -15,7 +15,7 @@ export type MulticallParameters<
   allowFailure extends boolean = true,
   config extends Config = Config
 > = viem_MulticallParameters<contracts, allowFailure> &
-  ChainIdParameter<config>;
+  NetworkIdParameter<config>;
 
 export type MulticallReturnType<
   contracts extends readonly unknown[] = readonly ContractFunctionParameters[],
@@ -32,8 +32,8 @@ export async function multicall<
   config: config,
   parameters: MulticallParameters<contracts, allowFailure, config>
 ): Promise<MulticallReturnType<contracts, allowFailure>> {
-  const { allowFailure = true, chainId, contracts, ...rest } = parameters;
-  const client = config.getClient({ chainId });
+  const { allowFailure = true, networkId, contracts, ...rest } = parameters;
+  const client = config.getClient({ networkId });
   const action = getAction(client, viem_multicall, "multicall");
   return action({
     allowFailure,

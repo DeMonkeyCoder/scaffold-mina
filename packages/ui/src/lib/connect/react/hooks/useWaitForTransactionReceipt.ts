@@ -16,50 +16,50 @@ import {
 
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { type UseQueryReturnType, useQuery } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseWaitForTransactionReceiptParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = WaitForTransactionReceiptData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = WaitForTransactionReceiptData<config, networkId>
 > = Compute<
-  WaitForTransactionReceiptOptions<config, chainId> &
+  WaitForTransactionReceiptOptions<config, networkId> &
     ConfigParameter<config> &
     QueryParameter<
-      WaitForTransactionReceiptQueryFnData<config, chainId>,
+      WaitForTransactionReceiptQueryFnData<config, networkId>,
       WaitForTransactionReceiptErrorType,
       selectData,
-      WaitForTransactionReceiptQueryKey<config, chainId>
+      WaitForTransactionReceiptQueryKey<config, networkId>
     >
 >;
 
 export type UseWaitForTransactionReceiptReturnType<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = WaitForTransactionReceiptData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = WaitForTransactionReceiptData<config, networkId>
 > = UseQueryReturnType<selectData, WaitForTransactionReceiptErrorType>;
 
 /** https://wagmi.sh/react/api/hooks/useWaitForTransactionReceipt */
 export function useWaitForTransactionReceipt<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = WaitForTransactionReceiptData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = WaitForTransactionReceiptData<config, networkId>
 >(
   parameters: UseWaitForTransactionReceiptParameters<
     config,
-    chainId,
+    networkId,
     selectData
   > = {}
-): UseWaitForTransactionReceiptReturnType<config, chainId, selectData> {
+): UseWaitForTransactionReceiptReturnType<config, networkId, selectData> {
   const { hash, query = {} } = parameters;
 
   const config = useConfig(parameters);
-  const chainId = useChainId({ config });
+  const networkId = useNetworkId({ config });
 
   const options = waitForTransactionReceiptQueryOptions(config, {
     ...parameters,
-    chainId: parameters.chainId ?? chainId,
+    networkId: parameters.networkId ?? networkId,
   });
   const enabled = Boolean(hash && (query.enabled ?? true));
 
@@ -67,5 +67,5 @@ export function useWaitForTransactionReceipt<
     ...(query as any),
     ...options,
     enabled,
-  }) as UseWaitForTransactionReceiptReturnType<config, chainId, selectData>;
+  }) as UseWaitForTransactionReceiptReturnType<config, networkId, selectData>;
 }

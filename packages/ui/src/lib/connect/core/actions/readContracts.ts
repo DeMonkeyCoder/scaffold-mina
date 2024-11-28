@@ -6,7 +6,7 @@ import type {
 import { ContractFunctionExecutionError } from "@/lib/connect/viem";
 
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import { multicall, type MulticallErrorType } from "./multicall";
 import { readContract, type ReadContractErrorType } from "./readContract";
 
@@ -17,7 +17,7 @@ export type ReadContractsParameters<
 > = viem_MulticallParameters<
   contracts,
   allowFailure,
-  { properties: ChainIdParameter<config> }
+  { properties: NetworkIdParameter<config> }
 >;
 
 export type ReadContractsReturnType<
@@ -37,29 +37,30 @@ export async function readContracts<
 ): Promise<ReadContractsReturnType<contracts, allowFailure>> {
   const { allowFailure = true, blockNumber, blockTag, ...rest } = parameters;
   const contracts = parameters.contracts as (ContractFunctionParameters & {
-    chainId?: string | undefined;
+    networkId?: string | undefined;
   })[];
 
   try {
-    const contractsByChainId: {
-      [chainId: string]: {
+    const contractsByNetworkId: {
+      [networkId: string]: {
         contract: ContractFunctionParameters;
         index: number;
       }[];
     } = {};
     for (const [index, contract] of contracts.entries()) {
-      const chainId = contract.chainId ?? config.state.chainId;
-      if (!contractsByChainId[chainId]) contractsByChainId[chainId] = [];
-      contractsByChainId[chainId]?.push({ contract, index });
+      const networkId = contract.networkId ?? config.state.networkId;
+      if (!contractsByNetworkId[networkId])
+        contractsByNetworkId[networkId] = [];
+      contractsByNetworkId[networkId]?.push({ contract, index });
     }
     const promises = () =>
-      Object.entries(contractsByChainId).map(([chainId, contracts]) =>
+      Object.entries(contractsByNetworkId).map(([networkId, contracts]) =>
         multicall(config, {
           ...rest,
           allowFailure,
           blockNumber,
           blockTag,
-          chainId,
+          networkId,
           contracts: contracts.map(({ contract }) => contract),
         })
       );
@@ -67,7 +68,7 @@ export async function readContracts<
     const multicallResults = (await Promise.all(promises())).flat();
     // Reorder the contract results back to the order they were
     // provided in.
-    const resultIndexes = Object.values(contractsByChainId).flatMap(
+    const resultIndexes = Object.values(contractsByNetworkId).flatMap(
       (contracts) => contracts.map(({ index }) => index)
     );
     return multicallResults.reduce((results, result, index) => {

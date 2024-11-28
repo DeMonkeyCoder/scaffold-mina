@@ -1,7 +1,7 @@
-import type {Address} from "@/lib/connect/viem";
+import type { Address } from "@/lib/connect/viem";
 
-import type {ExactPartial, Prettify} from "../../types/utils";
-import type {SiweMessage} from "./types";
+import type { ExactPartial, Prettify } from "../../types/utils";
+import type { SiweMessage } from "./types";
 
 /**
  * @description Parses EIP-4361 formatted message into message fields object.
@@ -20,22 +20,28 @@ export function parseSiweMessage(
     scheme?: string;
     statement?: string;
   };
-  const { chainId, expirationTime, issuedAt, notBefore, requestId, ...suffix } =
-    (message.match(suffixRegex)?.groups ?? {}) as {
-      chainId: string;
-      expirationTime?: string;
-      issuedAt?: string;
-      nonce: string;
-      notBefore?: string;
-      requestId?: string;
-      uri: string;
-      version: "1";
-    };
+  const {
+    networkId,
+    expirationTime,
+    issuedAt,
+    notBefore,
+    requestId,
+    ...suffix
+  } = (message.match(suffixRegex)?.groups ?? {}) as {
+    networkId: string;
+    expirationTime?: string;
+    issuedAt?: string;
+    nonce: string;
+    notBefore?: string;
+    requestId?: string;
+    uri: string;
+    version: "1";
+  };
   const resources = message.split("Resources:")[1]?.split("\n- ").slice(1);
   return {
     ...prefix,
     ...suffix,
-    ...(chainId ? { chainId } : {}),
+    ...(networkId ? { networkId } : {}),
     ...(expirationTime ? { expirationTime: new Date(expirationTime) } : {}),
     ...(issuedAt ? { issuedAt: new Date(issuedAt) } : {}),
     ...(notBefore ? { notBefore: new Date(notBefore) } : {}),
@@ -52,4 +58,4 @@ const prefixRegex =
 
 // https://regexr.com/80gf9
 const suffixRegex =
-  /(?:URI: (?<uri>.+))\n(?:Version: (?<version>.+))\n(?:Chain ID: (?<chainId>\d+))\n(?:Nonce: (?<nonce>[a-zA-Z0-9]+))\n(?:Issued At: (?<issuedAt>.+))(?:\nExpiration Time: (?<expirationTime>.+))?(?:\nNot Before: (?<notBefore>.+))?(?:\nRequest ID: (?<requestId>.+))?/;
+  /(?:URI: (?<uri>.+))\n(?:Version: (?<version>.+))\n(?:Chain ID: (?<networkId>\d+))\n(?:Nonce: (?<nonce>[a-zA-Z0-9]+))\n(?:Issued At: (?<issuedAt>.+))(?:\nExpiration Time: (?<expirationTime>.+))?(?:\nNot Before: (?<notBefore>.+))?(?:\nRequest ID: (?<requestId>.+))?/;

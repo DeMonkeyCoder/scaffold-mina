@@ -6,15 +6,16 @@ import {
 } from "@/lib/connect/viem/actions";
 
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { UnionCompute } from "../types/utils";
 import { getAction } from "../utils/getAction";
 
 export type GetBlockTransactionCountParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = UnionCompute<
-  viem_GetBlockTransactionCountParameters & ChainIdParameter<config, chainId>
+  viem_GetBlockTransactionCountParameters &
+    NetworkIdParameter<config, networkId>
 >;
 
 export type GetBlockTransactionCountReturnType =
@@ -26,13 +27,13 @@ export type GetBlockTransactionCountErrorType =
 /** https://wagmi.sh/core/api/actions/getBlockTransactionCount */
 export function getBlockTransactionCount<
   config extends Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 >(
   config: config,
-  parameters: GetBlockTransactionCountParameters<config, chainId> = {}
+  parameters: GetBlockTransactionCountParameters<config, networkId> = {}
 ): Promise<GetBlockTransactionCountReturnType> {
-  const { chainId, ...rest } = parameters;
-  const client = config.getClient({ chainId });
+  const { networkId, ...rest } = parameters;
+  const client = config.getClient({ networkId });
   const action = getAction(
     client,
     viem_getBlockTransactionCount,

@@ -12,7 +12,7 @@ import type { Abi, Address, ContractEventName } from "@/lib/connect/viem";
 
 import type { ConfigParameter, EnabledParameter } from "../../types/properties";
 import { useAccount } from "../useAccount";
-import { useChainId } from "../useChainId";
+import { useNetworkId } from "../useNetworkId";
 import { useConfig } from "../useConfig";
 import { useWatchContractEvent } from "../useWatchContractEvent";
 
@@ -31,10 +31,10 @@ export type CreateUseWatchContractEventReturnType<
   address extends Address | Record<string, Address> | undefined,
   eventName extends ContractEventName<abi> | undefined,
   ///
-  omittedProperties extends "abi" | "address" | "chainId" | "eventName" =
+  omittedProperties extends "abi" | "address" | "networkId" | "eventName" =
     | "abi"
     | (address extends undefined ? never : "address")
-    | (address extends Record<string, Address> ? "chainId" : never)
+    | (address extends Record<string, Address> ? "networkId" : never)
     | (eventName extends undefined ? never : "eventName")
 > = <
   name extends eventName extends ContractEventName<abi>
@@ -42,12 +42,12 @@ export type CreateUseWatchContractEventReturnType<
     : ContractEventName<abi>,
   strict extends boolean | undefined = undefined,
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 >(
   parameters?: UnionCompute<
     UnionExactPartial<
       UnionStrictOmit<
-        WatchContractEventParameters<abi, name, strict, config, chainId>,
+        WatchContractEventParameters<abi, name, strict, config, networkId>,
         omittedProperties
       >
     > &
@@ -55,7 +55,7 @@ export type CreateUseWatchContractEventReturnType<
       EnabledParameter
   > &
     (address extends Record<string, Address>
-      ? { chainId?: keyof address | undefined }
+      ? { networkId?: keyof address | undefined }
       : unknown)
 ) => void;
 
@@ -72,17 +72,17 @@ export function createUseWatchContractEvent<
   if (props.address !== undefined && typeof props.address === "object")
     return (parameters) => {
       const config = useConfig(parameters);
-      const configChainId = useChainId({ config });
+      const configNetworkId = useNetworkId({ config });
       const account = useAccount({ config });
-      const chainId =
-        (parameters as { chainId?: string })?.chainId ??
-        account.chainId ??
-        configChainId;
+      const networkId =
+        (parameters as { networkId?: string })?.networkId ??
+        account.networkId ??
+        configNetworkId;
       return useWatchContractEvent({
         ...(parameters as any),
         ...(props.eventName ? { eventName: props.eventName } : {}),
         address: (props.address as Record<string, Address> | undefined)?.[
-          chainId
+          networkId
         ],
         abi: props.abi,
       });

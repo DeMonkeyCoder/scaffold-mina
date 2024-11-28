@@ -22,7 +22,7 @@ import type {
 
 import type { ConfigParameter, QueryParameter } from "../../types/properties";
 import { useAccount } from "../useAccount";
-import { useChainId } from "../useChainId";
+import { useNetworkId } from "../useNetworkId";
 import { useConfig } from "../useConfig";
 import {
   useSimulateContract,
@@ -56,37 +56,37 @@ export type CreateUseSimulateContractReturnType<
     : ContractFunctionName<abi, stateMutability>,
   args extends ContractFunctionArgs<abi, stateMutability, name>,
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] | undefined = undefined,
-  selectData = SimulateContractData<abi, name, args, config, chainId>
+  networkId extends config["chains"][number]["id"] | undefined = undefined,
+  selectData = SimulateContractData<abi, name, args, config, networkId>
 >(
   parameters?: {
     abi?: undefined;
     address?: address extends undefined ? Address : undefined;
     functionName?: functionName extends undefined ? name : undefined;
-    chainId?: address extends Record<string, Address>
+    networkId?: address extends Record<string, Address>
       ?
           | keyof address
-          | (chainId extends keyof address ? chainId : never)
+          | (networkId extends keyof address ? networkId : never)
           | undefined
-      : chainId | number | undefined;
+      : networkId | number | undefined;
   } & UnionExactPartial<
     // TODO: Take `abi` and `address` from above and omit from below (currently breaks inference)
-    SimulateContractParameters<abi, name, args, config, chainId>
+    SimulateContractParameters<abi, name, args, config, networkId>
   > &
     ScopeKeyParameter &
     ConfigParameter<config> &
     QueryParameter<
-      SimulateContractQueryFnData<abi, name, args, config, chainId>,
+      SimulateContractQueryFnData<abi, name, args, config, networkId>,
       SimulateContractErrorType,
       selectData,
-      SimulateContractQueryKey<abi, name, args, config, chainId>
+      SimulateContractQueryKey<abi, name, args, config, networkId>
     >
 ) => UseSimulateContractReturnType<
   abi,
   name,
   args,
   config,
-  chainId,
+  networkId,
   selectData
 >;
 
@@ -105,17 +105,17 @@ export function createUseSimulateContract<
   if (props.address !== undefined && typeof props.address === "object")
     return (parameters) => {
       const config = useConfig(parameters);
-      const configChainId = useChainId({ config });
+      const configNetworkId = useNetworkId({ config });
       const account = useAccount({ config });
-      const chainId =
-        (parameters as { chainId?: string })?.chainId ??
-        account.chainId ??
-        configChainId;
+      const networkId =
+        (parameters as { networkId?: string })?.networkId ??
+        account.networkId ??
+        configNetworkId;
       return useSimulateContract({
         ...(parameters as any),
         ...(props.functionName ? { functionName: props.functionName } : {}),
         address: (props.address as Record<string, Address> | undefined)?.[
-          chainId
+          networkId
         ],
         abi: props.abi,
       });

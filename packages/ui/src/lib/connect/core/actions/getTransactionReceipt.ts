@@ -8,27 +8,27 @@ import {
 
 import type { Config } from "../createConfig";
 import type { SelectChains } from "../types/chain";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { Compute, IsNarrowable } from "../types/utils";
 import { getAction } from "../utils/getAction";
 
 export type GetTransactionReceiptParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = Compute<
-  viem_GetTransactionReceiptParameters & ChainIdParameter<config, chainId>
+  viem_GetTransactionReceiptParameters & NetworkIdParameter<config, networkId>
 >;
 
 export type GetTransactionReceiptReturnType<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = Compute<
   {
     [key in keyof chains]: viem_GetTransactionReceiptReturnType<
       IsNarrowable<chains[key], Chain> extends true ? chains[key] : undefined
-    > & { chainId: chains[key]["id"] };
+    > & { networkId: chains[key]["id"] };
   }[number]
 >;
 
@@ -38,19 +38,19 @@ export type GetTransactionReceiptErrorType =
 /** https://wagmi.sh/core/api/actions/getTransactionReceipt */
 export async function getTransactionReceipt<
   config extends Config,
-  chainId extends config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"]
 >(
   config: config,
   parameters: GetTransactionReceiptParameters<config>
-): Promise<GetTransactionReceiptReturnType<config, chainId>> {
-  const { chainId, ...rest } = parameters;
-  const client = config.getClient({ chainId });
+): Promise<GetTransactionReceiptReturnType<config, networkId>> {
+  const { networkId, ...rest } = parameters;
+  const client = config.getClient({ networkId });
   const action = getAction(
     client,
     viem_getTransactionReceipt,
     "getTransactionReceipt"
   );
   return action(rest) as unknown as Promise<
-    GetTransactionReceiptReturnType<config, chainId>
+    GetTransactionReceiptReturnType<config, networkId>
   >;
 }

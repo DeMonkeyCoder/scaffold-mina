@@ -2,9 +2,9 @@ import type { Abi, Address } from "abitype";
 
 import type { Account } from "../../accounts/types";
 import {
-  getChainId,
-  type GetChainIdReturnType,
-} from "../../actions/public/getChainId";
+  getNetworkId,
+  type GetNetworkIdReturnType,
+} from "../../actions/public/getNetworkId";
 import {
   addChain,
   type AddChainParameters,
@@ -155,10 +155,10 @@ export type WalletActions<
   /**
    * Returns the chain ID associated with the current network.
    *
-   * - Docs: https://viem.sh/docs/actions/public/getChainId
+   * - Docs: https://viem.sh/docs/actions/public/getNetworkId
    * - JSON-RPC Methods: [`mina_networkId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_networkId)
    *
-   * @returns The current chain ID. {@link GetChainIdReturnType}
+   * @returns The current chain ID. {@link GetNetworkIdReturnType}
    *
    * @example
    * import { createWalletClient, http } from 'viem'
@@ -168,10 +168,10 @@ export type WalletActions<
    *   chain: mainnet,
    *   transport: custom(window.ethereum),
    * })
-   * const chainId = await client.getChainId()
+   * const networkId = await client.getNetworkId()
    * // 1
    */
-  getChainId: () => Promise<GetChainIdReturnType>;
+  getNetworkId: () => Promise<GetNetworkIdReturnType>;
   /**
    * Gets the wallets current permissions.
    *
@@ -590,7 +590,7 @@ export function walletActions<
     addChain: (args) => addChain(client, args),
     deployContract: (args) => deployContract(client, args),
     getAddresses: () => getAddresses(client),
-    getChainId: () => getChainId(client),
+    getNetworkId: () => getNetworkId(client),
     getPermissions: () => getPermissions(client),
     prepareTransactionRequest: (args) =>
       prepareTransactionRequest(client as any, args as any) as any,

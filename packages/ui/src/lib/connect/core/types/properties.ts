@@ -1,23 +1,23 @@
-import type { Config, Connector } from '../createConfig'
+import type { Config, Connector } from "../createConfig";
 
-export type ChainIdParameter<
+export type NetworkIdParameter<
   config extends Config,
-  chainId extends
-    | config['chains'][number]['id']
-    | undefined = config['chains'][number]['id'],
+  networkId extends
+    | config["chains"][number]["id"]
+    | undefined = config["chains"][number]["id"]
 > = {
-  chainId?:
-    | (chainId extends config['chains'][number]['id'] ? chainId : undefined)
-    | config['chains'][number]['id']
-    | undefined
-}
+  networkId?:
+    | (networkId extends config["chains"][number]["id"] ? networkId : undefined)
+    | config["chains"][number]["id"]
+    | undefined;
+};
 
 export type ConnectorParameter = {
-  connector?: Connector | undefined
-}
+  connector?: Connector | undefined;
+};
 
-export type ScopeKeyParameter = { scopeKey?: string | undefined }
+export type ScopeKeyParameter = { scopeKey?: string | undefined };
 
 export type SyncConnectedChainParameter = {
-  syncConnectedChain?: boolean | undefined
-}
+  syncConnectedChain?: boolean | undefined;
+};

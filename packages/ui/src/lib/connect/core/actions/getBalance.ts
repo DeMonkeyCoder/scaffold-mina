@@ -6,14 +6,14 @@ import {
 } from "@/lib/connect/viem/actions";
 
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { Unit } from "../types/unit";
 import type { Compute } from "../types/utils";
 import { getAction } from "../utils/getAction";
 import { getUnit } from "../utils/getUnit";
 
 export type GetBalanceParameters<config extends Config = Config> = Compute<
-  ChainIdParameter<config> &
+  NetworkIdParameter<config> &
     viem_GetBalanceParameters & {
       /** @deprecated */
       token?: Address | undefined;
@@ -41,7 +41,7 @@ export async function getBalance<config extends Config>(
     address,
     blockNumber,
     blockTag,
-    chainId,
+    networkId,
     token: tokenAddress,
     unit = "ether",
   } = parameters;
@@ -49,12 +49,12 @@ export async function getBalance<config extends Config>(
   if (tokenAddress) {
     throw new Error("not supported yet");
   }
-  const client = config.getClient({ chainId });
+  const client = config.getClient({ networkId });
   const action = getAction(client, viem_getBalance, "getBalance");
   const value = await action(
     blockNumber ? { address, blockNumber } : { address, blockTag }
   );
-  const chain = config.chains.find((x) => x.id === chainId) ?? client.chain!;
+  const chain = config.chains.find((x) => x.id === networkId) ?? client.chain!;
   return {
     decimals: chain.nativeCurrency.decimals,
     formatted: formatUnits(value, getUnit(unit)),

@@ -90,7 +90,7 @@ function formatAuthorizationList(
         address: authorization.contractAddress,
         r: authorization.r,
         s: authorization.s,
-        chainId: authorization.chainId,
+        networkId: authorization.networkId,
         nonce: numberToHex(authorization.nonce),
         ...(typeof authorization.yParity !== "undefined"
           ? { yParity: numberToHex(authorization.yParity) }

@@ -22,7 +22,7 @@ import type { BlockTag } from "@/lib/connect/viem";
 
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { type UseQueryReturnType, useQuery } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 import {
   type UseWatchBlocksParameters,
@@ -33,16 +33,16 @@ export type UseBlockParameters<
   includeTransactions extends boolean = false,
   blockTag extends BlockTag = "latest",
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetBlockData<includeTransactions, blockTag, config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetBlockData<includeTransactions, blockTag, config, networkId>
 > = Compute<
-  GetBlockOptions<includeTransactions, blockTag, config, chainId> &
+  GetBlockOptions<includeTransactions, blockTag, config, networkId> &
     ConfigParameter<config> &
     QueryParameter<
-      GetBlockQueryFnData<includeTransactions, blockTag, config, chainId>,
+      GetBlockQueryFnData<includeTransactions, blockTag, config, networkId>,
       GetBlockErrorType,
       selectData,
-      GetBlockQueryKey<includeTransactions, blockTag, config, chainId>
+      GetBlockQueryKey<includeTransactions, blockTag, config, networkId>
     > & {
       watch?:
         | boolean
@@ -52,9 +52,9 @@ export type UseBlockParameters<
                 includeTransactions,
                 blockTag,
                 config,
-                chainId
+                networkId
               >,
-              "chainId" | "config" | "onBlock" | "onError"
+              "networkId" | "config" | "onBlock" | "onError"
             >
           >
         | undefined;
@@ -65,8 +65,8 @@ export type UseBlockReturnType<
   includeTransactions extends boolean = false,
   blockTag extends BlockTag = "latest",
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetBlockData<includeTransactions, blockTag, config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetBlockData<includeTransactions, blockTag, config, networkId>
 > = UseQueryReturnType<selectData, GetBlockErrorType>;
 
 /** https://wagmi.sh/react/hooks/useBlock */
@@ -74,40 +74,40 @@ export function useBlock<
   includeTransactions extends boolean = false,
   blockTag extends BlockTag = "latest",
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetBlockData<includeTransactions, blockTag, config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetBlockData<includeTransactions, blockTag, config, networkId>
 >(
   parameters: UseBlockParameters<
     includeTransactions,
     blockTag,
     config,
-    chainId,
+    networkId,
     selectData
   > = {}
 ): UseBlockReturnType<
   includeTransactions,
   blockTag,
   config,
-  chainId,
+  networkId,
   selectData
 > {
   const { query = {}, watch } = parameters;
 
   const config = useConfig(parameters);
   const queryClient = useQueryClient();
-  const configChainId = useChainId({ config });
-  const chainId = parameters.chainId ?? configChainId;
+  const configNetworkId = useNetworkId({ config });
+  const networkId = parameters.networkId ?? configNetworkId;
 
   const options = getBlockQueryOptions(config, {
     ...parameters,
-    chainId,
+    networkId,
   });
   const enabled = Boolean(query.enabled ?? true);
 
   useWatchBlocks({
     ...({
       config: parameters.config,
-      chainId: parameters.chainId!,
+      networkId: parameters.networkId!,
       ...(typeof watch === "object" ? watch : {}),
     } as UseWatchBlocksParameters),
     enabled: Boolean(
@@ -126,7 +126,7 @@ export function useBlock<
     includeTransactions,
     blockTag,
     config,
-    chainId,
+    networkId,
     selectData
   >;
 }

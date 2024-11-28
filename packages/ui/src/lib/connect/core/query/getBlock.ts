@@ -16,22 +16,27 @@ export type GetBlockOptions<
   includeTransactions extends boolean,
   blockTag extends BlockTag,
   config extends Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = Compute<
   ExactPartial<
-    GetBlockParameters<includeTransactions, blockTag, config, chainId>
+    GetBlockParameters<includeTransactions, blockTag, config, networkId>
   > &
     ScopeKeyParameter
 >;
 
 export function getBlockQueryOptions<
   config extends Config,
-  chainId extends config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"],
   includeTransactions extends boolean,
   blockTag extends BlockTag
 >(
   config: config,
-  options: GetBlockOptions<includeTransactions, blockTag, config, chainId> = {}
+  options: GetBlockOptions<
+    includeTransactions,
+    blockTag,
+    config,
+    networkId
+  > = {}
 ) {
   return {
     async queryFn({ queryKey }) {
@@ -41,10 +46,10 @@ export function getBlockQueryOptions<
     },
     queryKey: getBlockQueryKey(options),
   } as const satisfies QueryOptions<
-    GetBlockQueryFnData<includeTransactions, blockTag, config, chainId>,
+    GetBlockQueryFnData<includeTransactions, blockTag, config, networkId>,
     GetBlockErrorType,
-    GetBlockData<includeTransactions, blockTag, config, chainId>,
-    GetBlockQueryKey<includeTransactions, blockTag, config, chainId>
+    GetBlockData<includeTransactions, blockTag, config, networkId>,
+    GetBlockQueryKey<includeTransactions, blockTag, config, networkId>
   >;
 }
 
@@ -52,23 +57,28 @@ export type GetBlockQueryFnData<
   includeTransactions extends boolean,
   blockTag extends BlockTag,
   config extends Config,
-  chainId extends config["chains"][number]["id"]
-> = GetBlockReturnType<includeTransactions, blockTag, config, chainId>;
+  networkId extends config["chains"][number]["id"]
+> = GetBlockReturnType<includeTransactions, blockTag, config, networkId>;
 
 export type GetBlockData<
   includeTransactions extends boolean,
   blockTag extends BlockTag,
   config extends Config,
-  chainId extends config["chains"][number]["id"]
-> = GetBlockQueryFnData<includeTransactions, blockTag, config, chainId>;
+  networkId extends config["chains"][number]["id"]
+> = GetBlockQueryFnData<includeTransactions, blockTag, config, networkId>;
 
 export function getBlockQueryKey<
   config extends Config,
-  chainId extends config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"],
   includeTransactions extends boolean = false,
   blockTag extends BlockTag = "latest"
 >(
-  options: GetBlockOptions<includeTransactions, blockTag, config, chainId> = {}
+  options: GetBlockOptions<
+    includeTransactions,
+    blockTag,
+    config,
+    networkId
+  > = {}
 ) {
   return ["block", filterQueryOptions(options)] as const;
 }
@@ -77,7 +87,7 @@ export type GetBlockQueryKey<
   includeTransactions extends boolean,
   blockTag extends BlockTag,
   config extends Config,
-  chainId extends config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"]
 > = ReturnType<
-  typeof getBlockQueryKey<config, chainId, includeTransactions, blockTag>
+  typeof getBlockQueryKey<config, networkId, includeTransactions, blockTag>
 >;

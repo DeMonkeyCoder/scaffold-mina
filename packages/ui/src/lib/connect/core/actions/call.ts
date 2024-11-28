@@ -6,11 +6,11 @@ import type {
 import { call as viem_call } from "@/lib/connect/viem/actions";
 
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import { getAction } from "../utils/getAction";
 
 export type CallParameters<config extends Config = Config> =
-  viem_CallParameters & ChainIdParameter<config>;
+  viem_CallParameters & NetworkIdParameter<config>;
 
 export type CallReturnType = viem_CallReturnType;
 
@@ -20,8 +20,8 @@ export async function call<config extends Config>(
   config: config,
   parameters: CallParameters<config>
 ): Promise<CallReturnType> {
-  const { chainId, ...rest } = parameters;
-  const client = config.getClient({ chainId });
+  const { networkId, ...rest } = parameters;
+  const client = config.getClient({ networkId });
   const action = getAction(client, viem_call, "call");
   return action(rest);
 }

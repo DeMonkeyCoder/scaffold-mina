@@ -6,12 +6,12 @@ import {
 } from "@/lib/connect/viem/actions";
 
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { Compute } from "../types/utils";
 import { getAction } from "../utils/getAction";
 
 export type GetTransactionCountParameters<config extends Config = Config> =
-  Compute<ChainIdParameter<config> & viem_GetTransactionCountParameters>;
+  Compute<NetworkIdParameter<config> & viem_GetTransactionCountParameters>;
 
 export type GetTransactionCountReturnType = viem_GetTransactionCountReturnType;
 
@@ -22,9 +22,9 @@ export async function getTransactionCount<config extends Config>(
   config: config,
   parameters: GetTransactionCountParameters<config>
 ): Promise<GetTransactionCountReturnType> {
-  const { address, blockNumber, blockTag, chainId } = parameters;
+  const { address, blockNumber, blockTag, networkId } = parameters;
 
-  const client = config.getClient({ chainId });
+  const client = config.getClient({ networkId });
   const action = getAction(
     client,
     viem_getTransactionCount,

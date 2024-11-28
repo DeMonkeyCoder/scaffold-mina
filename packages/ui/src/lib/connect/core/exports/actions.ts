@@ -77,7 +77,10 @@ export {
   getBytecode,
 } from "../actions/getBytecode";
 
-export { type GetChainIdReturnType, getChainId } from "../actions/getChainId";
+export {
+  type GetNetworkIdReturnType,
+  getNetworkId,
+} from "../actions/getNetworkId";
 
 export { type GetChainsReturnType, getChains } from "../actions/getChains";
 
@@ -277,10 +280,10 @@ export {
 } from "../actions/watchBlockNumber";
 
 export {
-  type WatchChainIdParameters,
-  type WatchChainIdReturnType,
-  watchChainId,
-} from "../actions/watchChainId";
+  type WatchNetworkIdParameters,
+  type WatchNetworkIdReturnType,
+  watchNetworkId,
+} from "../actions/watchNetworkId";
 
 export {
   type WatchClientParameters,

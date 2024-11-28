@@ -26,24 +26,24 @@ import {
   useQuery,
 } from "../utils/query";
 import { useAccount } from "./useAccount";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseWalletClientParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetWalletClientData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetWalletClientData<config, networkId>
 > = Compute<
-  GetWalletClientOptions<config, chainId> &
+  GetWalletClientOptions<config, networkId> &
     ConfigParameter<config> & {
       query?:
         | Compute<
             Omit<
               UseQueryParameters<
-                GetWalletClientQueryFnData<config, chainId>,
+                GetWalletClientQueryFnData<config, networkId>,
                 GetWalletClientErrorType,
                 selectData,
-                GetWalletClientQueryKey<config, chainId>
+                GetWalletClientQueryKey<config, networkId>
               >,
               "gcTime" | "staleTime"
             >
@@ -54,33 +54,33 @@ export type UseWalletClientParameters<
 
 export type UseWalletClientReturnType<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetWalletClientData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetWalletClientData<config, networkId>
 > = UseQueryReturnType<selectData, GetWalletClientErrorType>;
 
 /** https://wagmi.sh/react/api/hooks/useWalletClient */
 export function useWalletClient<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetWalletClientData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetWalletClientData<config, networkId>
 >(
-  parameters: UseWalletClientParameters<config, chainId, selectData> = {}
-): UseWalletClientReturnType<config, chainId, selectData> {
+  parameters: UseWalletClientParameters<config, networkId, selectData> = {}
+): UseWalletClientReturnType<config, networkId, selectData> {
   const { query = {}, ...rest } = parameters;
 
   const config = useConfig(rest);
   const queryClient = useQueryClient();
   const { address, connector, status } = useAccount({ config });
-  const chainId = useChainId({ config });
+  const networkId = useNetworkId({ config });
 
-  const { queryKey, ...options } = getWalletClientQueryOptions<config, chainId>(
+  const { queryKey, ...options } = getWalletClientQueryOptions<
     config,
-    {
-      ...parameters,
-      chainId: parameters.chainId ?? chainId,
-      connector: parameters.connector ?? connector,
-    }
-  );
+    networkId
+  >(config, {
+    ...parameters,
+    networkId: parameters.networkId ?? networkId,
+    connector: parameters.connector ?? connector,
+  });
   const enabled = Boolean(status !== "disconnected" && (query.enabled ?? true));
 
   const addressRef = useRef(address);
@@ -104,5 +104,5 @@ export function useWalletClient<
     queryKey,
     enabled,
     staleTime: Number.POSITIVE_INFINITY,
-  } as any) as UseWalletClientReturnType<config, chainId, selectData>;
+  } as any) as UseWalletClientReturnType<config, networkId, selectData>;
 }

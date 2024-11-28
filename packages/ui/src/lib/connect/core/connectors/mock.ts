@@ -45,16 +45,16 @@ export function mock(parameters: MockParameters) {
     Transport<"custom", unknown, EIP1193RequestFn<WalletRpcSchema>>
   >;
   let connected = false;
-  let connectedChainId: string;
+  let connectedNetworkId: string;
 
   return createConnector<Provider>((config) => ({
     id: "mock",
     name: "Mock Connector",
     type: mock.type,
     async setup() {
-      connectedChainId = config.chains[0].id;
+      connectedNetworkId = config.chains[0].id;
     },
-    async connect({ chainId } = {}) {
+    async connect({ networkId } = {}) {
       if (features.connectError) {
         if (typeof features.connectError === "boolean")
           throw new UserRejectedRequestError(new Error("Failed to connect."));
@@ -66,17 +66,17 @@ export function mock(parameters: MockParameters) {
         method: "mina_requestAccounts",
       });
 
-      let currentChainId = await this.getChainId();
-      if (chainId && currentChainId !== chainId) {
-        const chain = await this.switchChain!({ chainId });
-        currentChainId = chain.id;
+      let currentNetworkId = await this.getNetworkId();
+      if (networkId && currentNetworkId !== networkId) {
+        const chain = await this.switchChain!({ networkId });
+        currentNetworkId = chain.id;
       }
 
       connected = true;
 
       return {
         accounts: accounts.map((x) => getAddress(x)),
-        chainId: currentChainId,
+        networkId: currentNetworkId,
       };
     },
     async disconnect() {
@@ -88,7 +88,7 @@ export function mock(parameters: MockParameters) {
       const accounts = await provider.request({ method: "mina_accounts" });
       return accounts.map((x) => getAddress(x));
     },
-    async getChainId() {
+    async getNetworkId() {
       const provider = await this.getProvider();
       return provider.request({ method: "mina_networkId" });
     },
@@ -98,14 +98,14 @@ export function mock(parameters: MockParameters) {
       const accounts = await this.getAccounts();
       return !!accounts.length;
     },
-    async switchChain({ chainId }) {
+    async switchChain({ networkId }) {
       const provider = await this.getProvider();
-      const chain = config.chains.find((x) => x.id === chainId);
+      const chain = config.chains.find((x) => x.id === networkId);
       if (!chain) throw new SwitchChainError(new ChainNotConfiguredError());
 
       await provider.request({
         method: "mina_switchChain",
-        params: [chainId],
+        params: [networkId],
       });
       return chain;
     },
@@ -116,21 +116,21 @@ export function mock(parameters: MockParameters) {
           accounts: accounts.map((x) => getAddress(x)),
         });
     },
-    onChainChanged(chainId) {
-      config.emitter.emit("change", { chainId });
+    onChainChanged(networkId) {
+      config.emitter.emit("change", { networkId });
     },
     async onDisconnect(_error) {
       config.emitter.emit("disconnect");
       connected = false;
     },
-    async getProvider({ chainId } = {}) {
+    async getProvider({ networkId } = {}) {
       const chain =
-        config.chains.find((x) => x.id === chainId) ?? config.chains[0];
+        config.chains.find((x) => x.id === networkId) ?? config.chains[0];
       const url = chain.rpcUrls.default.http[0]!;
 
       const request: EIP1193RequestFn = async ({ method, params }) => {
         // eth methods
-        if (method === "mina_networkId") return connectedChainId;
+        if (method === "mina_networkId") return connectedNetworkId;
         if (method === "mina_requestAccounts") return parameters.accounts;
         if (method === "mina_signTypedData_v4")
           if (features.signTypedDataError) {
@@ -150,9 +150,9 @@ export function mock(parameters: MockParameters) {
               );
             throw features.switchChainError;
           }
-          type Params = [{ chainId: string }];
-          connectedChainId = (params as Params)[0].chainId;
-          this.onChainChanged(connectedChainId.toString());
+          type Params = [{ networkId: string }];
+          connectedNetworkId = (params as Params)[0].networkId;
+          this.onChainChanged(connectedNetworkId.toString());
           return;
         }
 

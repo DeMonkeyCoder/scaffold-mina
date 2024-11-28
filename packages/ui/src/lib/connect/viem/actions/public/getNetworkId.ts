@@ -6,9 +6,9 @@ import type { Chain } from "../../types/chain";
 import type { RequestErrorType } from "../../utils/buildRequest";
 import { type HexToNumberErrorType } from "../../utils/encoding/fromHex";
 
-export type GetChainIdReturnType = string;
+export type GetNetworkIdReturnType = string;
 
-export type GetChainIdErrorType =
+export type GetNetworkIdErrorType =
   | HexToNumberErrorType
   | RequestErrorType
   | ErrorType;
@@ -16,28 +16,28 @@ export type GetChainIdErrorType =
 /**
  * Returns the chain ID associated with the current network.
  *
- * - Docs: https://viem.sh/docs/actions/public/getChainId
+ * - Docs: https://viem.sh/docs/actions/public/getNetworkId
  * - JSON-RPC Methods: [`mina_networkId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_networkId)
  *
  * @param client - Client to use
- * @returns The current chain ID. {@link GetChainIdReturnType}
+ * @returns The current chain ID. {@link GetNetworkIdReturnType}
  *
  * @example
  * import { createPublicClient, http } from 'viem'
  * import { mainnet } from 'viem/chains'
- * import { getChainId } from 'viem/public'
+ * import { getNetworkId } from 'viem/public'
  *
  * const client = createPublicClient({
  *   chain: mainnet,
  *   transport: http(),
  * })
- * const chainId = await getChainId(client)
+ * const networkId = await getNetworkId(client)
  * // 1
  */
-export async function getChainId<
+export async function getNetworkId<
   chain extends Chain | undefined,
   account extends Account | undefined
->(client: Client<Transport, chain, account>): Promise<GetChainIdReturnType> {
+>(client: Client<Transport, chain, account>): Promise<GetNetworkIdReturnType> {
   return client.request(
     {
       method: "mina_networkId",

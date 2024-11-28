@@ -16,21 +16,21 @@ import {
 
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { type UseQueryReturnType, useQuery } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseFeeHistoryParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   selectData = GetFeeHistoryData
 > = Compute<
-  GetFeeHistoryOptions<config, chainId> &
+  GetFeeHistoryOptions<config, networkId> &
     ConfigParameter<config> &
     QueryParameter<
       GetFeeHistoryQueryFnData,
       GetFeeHistoryErrorType,
       selectData,
-      GetFeeHistoryQueryKey<config, chainId>
+      GetFeeHistoryQueryKey<config, networkId>
     >
 >;
 
@@ -40,19 +40,19 @@ export type UseFeeHistoryReturnType<selectData = GetFeeHistoryData> =
 /** https://wagmi.sh/react/api/hooks/useFeeHistory */
 export function useFeeHistory<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   selectData = GetFeeHistoryData
 >(
-  parameters: UseFeeHistoryParameters<config, chainId, selectData> = {}
+  parameters: UseFeeHistoryParameters<config, networkId, selectData> = {}
 ): UseFeeHistoryReturnType<selectData> {
   const { blockCount, rewardPercentiles, query = {} } = parameters;
 
   const config = useConfig(parameters);
-  const chainId = useChainId({ config });
+  const networkId = useNetworkId({ config });
 
   const options = getFeeHistoryQueryOptions(config, {
     ...parameters,
-    chainId: parameters.chainId ?? chainId,
+    networkId: parameters.networkId ?? networkId,
   });
   const enabled = Boolean(
     blockCount && rewardPercentiles && (query.enabled ?? true)

@@ -15,9 +15,9 @@ import type { Compute, ExactPartial, StrictOmit } from "../types/utils";
 export type ConnectorEventMap = {
   change: {
     accounts?: readonly Address[] | undefined;
-    chainId?: string | undefined;
+    networkId?: string | undefined;
   };
-  connect: { accounts: readonly Address[]; chainId: string };
+  connect: { accounts: readonly Address[]; networkId: string };
   disconnect: never;
   error: { error: Error };
   message: { type: string; data?: unknown | undefined };
@@ -43,33 +43,36 @@ export type CreateConnectorFn<
     setup?(): Promise<void>;
     connect(
       parameters?:
-        | { chainId?: string | undefined; isReconnecting?: boolean | undefined }
+        | {
+            networkId?: string | undefined;
+            isReconnecting?: boolean | undefined;
+          }
         | undefined
     ): Promise<{
       accounts: readonly Address[];
-      chainId: string;
+      networkId: string;
     }>;
     disconnect(): Promise<void>;
     getAccounts(): Promise<readonly Address[]>;
-    getChainId(): Promise<string>;
+    getNetworkId(): Promise<string>;
     getProvider(
-      parameters?: { chainId?: string | undefined } | undefined
+      parameters?: { networkId?: string | undefined } | undefined
     ): Promise<provider>;
     getClient?(
-      parameters?: { chainId?: string | undefined } | undefined
+      parameters?: { networkId?: string | undefined } | undefined
     ): Promise<Client>;
     isAuthorized(): Promise<boolean>;
     switchChain?(
       parameters: Compute<{
         addEthereumChainParameter?:
-          | ExactPartial<StrictOmit<AddEthereumChainParameter, "chainId">>
+          | ExactPartial<StrictOmit<AddEthereumChainParameter, "networkId">>
           | undefined;
-        chainId: string;
+        networkId: string;
       }>
     ): Promise<Chain>;
 
     onAccountsChanged(accounts: string[]): void;
-    onChainChanged(chainId: string): void;
+    onChainChanged(networkId: string): void;
     onConnect?(connectInfo: ProviderConnectInfo): void;
     onDisconnect(error?: Error | undefined): void;
     onMessage?(message: ProviderMessage): void;

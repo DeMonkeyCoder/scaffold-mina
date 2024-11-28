@@ -3,7 +3,7 @@ import { useAccount } from "@/lib/connect/react/hooks/useAccount";
 import { useBalance } from "@/lib/connect/react/hooks/useBalance";
 import ConnectWallet from "./ConnectWallet";
 import { formatMina } from "@mina-js/utils";
-import { useChainId } from "@/lib/connect/react/hooks/useChainId";
+import { useNetworkId } from "@/lib/connect/react/hooks/useNetworkId";
 import { useChains } from "@/lib/connect/react/hooks/useChains";
 
 export default function Navbar() {
@@ -11,7 +11,7 @@ export default function Navbar() {
   const { data: balance } = useBalance({
     address,
   });
-  const networkId = useChainId();
+  const networkId = useNetworkId();
   const chains = useChains();
 
   if (!isConnected) return <div></div>;

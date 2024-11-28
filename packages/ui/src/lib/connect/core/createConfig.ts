@@ -133,34 +133,34 @@ export function createConfig<
 
   const clients = new Map<string, Client<Transport, chains[number]>>();
 
-  function getClient<chainId extends chains[number]["id"]>(
-    config: { chainId?: chainId | chains[number]["id"] | undefined } = {}
-  ): Client<Transport, Extract<chains[number], { id: chainId }>> {
-    const chainId = config.chainId ?? store.getState().chainId;
-    const chain = chains.getState().find((x) => x.id === chainId);
+  function getClient<networkId extends chains[number]["id"]>(
+    config: { networkId?: networkId | chains[number]["id"] | undefined } = {}
+  ): Client<Transport, Extract<chains[number], { id: networkId }>> {
+    const networkId = config.networkId ?? store.getState().networkId;
+    const chain = chains.getState().find((x) => x.id === networkId);
 
-    // chainId specified and not configured
-    if (config.chainId && !chain) throw new ChainNotConfiguredError();
+    // networkId specified and not configured
+    if (config.networkId && !chain) throw new ChainNotConfiguredError();
 
     // If the target chain is not configured, use the client of the current chain.
-    type Return = Client<Transport, Extract<chains[number], { id: chainId }>>;
+    type Return = Client<Transport, Extract<chains[number], { id: networkId }>>;
     {
-      const client = clients.get(store.getState().chainId);
+      const client = clients.get(store.getState().networkId);
       if (client && !chain) return client as Return;
       if (!chain) throw new ChainNotConfiguredError();
     }
 
     // If a memoized client exists for a chain id, use that.
     {
-      const client = clients.get(chainId);
+      const client = clients.get(networkId);
       if (client) return client as Return;
     }
 
     let client: Client<Transport, chains[number]>;
     if (rest.client) client = rest.client({ chain });
     else {
-      const chainId = chain.id as chains[number]["id"];
-      const chainIds = chains.getState().map((x) => x.id);
+      const networkId = chain.id as chains[number]["id"];
+      const networkIds = chains.getState().map((x) => x.id);
       // Grab all properties off `rest` and resolve for use in `createClient`
       const properties: Partial<viem_ClientConfig> = {};
       const entries = Object.entries(rest) as [keyof typeof rest, any][];
@@ -175,12 +175,12 @@ export function createConfig<
           continue;
 
         if (typeof value === "object") {
-          // check if value is chainId-specific since some values can be objects
+          // check if value is networkId-specific since some values can be objects
           // e.g. { batch: { multicall: { batchSize: 1024 } } }
-          if (chainId in value) properties[key] = value[chainId];
+          if (networkId in value) properties[key] = value[networkId];
           else {
-            // check if value is chainId-specific, but does not have value for current chainId
-            const hasChainSpecificValue = chainIds.some((x) => x in value);
+            // check if value is networkId-specific, but does not have value for current networkId
+            const hasChainSpecificValue = networkIds.some((x) => x in value);
             if (hasChainSpecificValue) continue;
             properties[key] = value;
           }
@@ -192,11 +192,11 @@ export function createConfig<
         chain,
         batch: properties.batch ?? { multicall: true },
         transport: (parameters) =>
-          rest.transports[chainId]({ ...parameters, connectors }),
+          rest.transports[networkId]({ ...parameters, connectors }),
       });
     }
 
-    clients.set(chainId, client);
+    clients.set(networkId, client);
     return client as Return;
   }
 
@@ -206,7 +206,7 @@ export function createConfig<
 
   function getInitialState(): State {
     return {
-      chainId: chains.getState()[0].id,
+      networkId: chains.getState()[0].id,
       connections: new Map<string, Connection>(),
       current: null,
       status: "disconnected",
@@ -229,15 +229,15 @@ export function createConfig<
               if (version === currentVersion) return persistedState as State;
 
               const initialState = getInitialState();
-              const chainId =
+              const networkId =
                 persistedState &&
                 typeof persistedState === "object" &&
-                "chainId" in persistedState &&
-                typeof persistedState.chainId === "string" &&
-                chains.getState().some((x) => x.id === persistedState.chainId)
-                  ? persistedState.chainId
-                  : initialState.chainId;
-              return { ...initialState, chainId };
+                "networkId" in persistedState &&
+                typeof persistedState.networkId === "string" &&
+                chains.getState().some((x) => x.id === persistedState.networkId)
+                  ? persistedState.networkId
+                  : initialState.networkId;
+              return { ...initialState, networkId };
             },
             name: "store",
             partialize(state) {
@@ -253,7 +253,7 @@ export function createConfig<
                     }
                   ),
                 } as unknown as PartializedState["connections"],
-                chainId: state.chainId,
+                networkId: state.networkId,
                 current: state.current,
               } satisfies PartializedState;
             },
@@ -286,17 +286,17 @@ export function createConfig<
   if (syncConnectedChain)
     store.subscribe(
       ({ connections, current }) =>
-        current ? connections.get(current)?.chainId : undefined,
-      (chainId) => {
+        current ? connections.get(current)?.networkId : undefined,
+      (networkId) => {
         // If chain is not configured, then don't switch over to it.
         const isChainConfigured = chains
           .getState()
-          .some((x) => x.id === chainId);
+          .some((x) => x.id === networkId);
         if (!isChainConfigured) return;
 
         return store.setState((x) => ({
           ...x,
-          chainId: chainId ?? x.chainId,
+          networkId: networkId ?? x.networkId,
         }));
       }
     );
@@ -333,7 +333,7 @@ export function createConfig<
           accounts:
             (data.accounts as readonly [Address, ...Address[]]) ??
             connection.accounts,
-          chainId: data.chainId ?? connection.chainId,
+          networkId: data.networkId ?? connection.networkId,
           connector: connection.connector,
         }),
       };
@@ -363,7 +363,7 @@ export function createConfig<
         ...x,
         connections: new Map(x.connections).set(data.uid, {
           accounts: data.accounts as readonly [Address, ...Address[]],
-          chainId: data.chainId,
+          networkId: data.networkId,
           connector: connector,
         }),
         current: data.uid,
@@ -511,9 +511,9 @@ export type Config<
       | undefined
   ): () => void;
 
-  getClient<chainId extends chains[number]["id"]>(parameters?: {
-    chainId?: chainId | chains[number]["id"] | undefined;
-  }): Client<transports[chainId], Extract<chains[number], { id: chainId }>>;
+  getClient<networkId extends chains[number]["id"]>(parameters?: {
+    networkId?: networkId | chains[number]["id"] | undefined;
+  }): Client<transports[networkId], Extract<chains[number], { id: networkId }>>;
 
   /**
    * Not part of versioned API, proceed with caution.
@@ -570,19 +570,19 @@ type Internal<
 export type State<
   chains extends readonly [Chain, ...Chain[]] = readonly [Chain, ...Chain[]]
 > = {
-  chainId: chains[number]["id"];
+  networkId: chains[number]["id"];
   connections: Map<string, Connection>;
   current: string | null;
   status: "connected" | "connecting" | "disconnected" | "reconnecting";
 };
 
 export type PartializedState = Compute<
-  ExactPartial<Pick<State, "chainId" | "connections" | "current" | "status">>
+  ExactPartial<Pick<State, "networkId" | "connections" | "current" | "status">>
 >;
 
 export type Connection = {
   accounts: readonly [Address, ...Address[]];
-  chainId: string;
+  networkId: string;
   connector: Connector;
 };
 

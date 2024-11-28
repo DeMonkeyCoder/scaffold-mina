@@ -5,7 +5,7 @@ import type {
   WriteContractErrorType,
 } from "@/lib/connect/core/exports";
 import type {
-  ChainIdParameter,
+  NetworkIdParameter,
   Compute,
   ConnectorParameter,
   SelectChains,
@@ -28,7 +28,7 @@ import type {
 import type { WriteContractParameters as viem_WriteContractParameters } from "@/lib/connect/viem/actions";
 
 import { useAccount } from "../useAccount";
-import { useChainId } from "../useChainId";
+import { useNetworkId } from "../useNetworkId";
 import { useConfig } from "../useConfig";
 import {
   useWriteContract,
@@ -73,7 +73,7 @@ export type CreateUseWriteContractReturnType<
         ? functionName
         : ContractFunctionName<abi, stateMutability>,
       args extends ContractFunctionArgs<abi2, stateMutability, name>,
-      chainId extends config["chains"][number]["id"]
+      networkId extends config["chains"][number]["id"]
     >(
       variables: Variables<
         abi2,
@@ -81,7 +81,7 @@ export type CreateUseWriteContractReturnType<
         name,
         args,
         config,
-        chainId,
+        networkId,
         address
       >,
       options?:
@@ -93,7 +93,7 @@ export type CreateUseWriteContractReturnType<
               name,
               args,
               config,
-              chainId,
+              networkId,
               // use `functionName` to make sure it's not union of all possible function names
               name
             >,
@@ -110,7 +110,7 @@ export type CreateUseWriteContractReturnType<
         ? functionName
         : ContractFunctionName<abi, stateMutability>,
       args extends ContractFunctionArgs<abi2, stateMutability, name>,
-      chainId extends config["chains"][number]["id"]
+      networkId extends config["chains"][number]["id"]
     >(
       variables: Variables<
         abi2,
@@ -118,7 +118,7 @@ export type CreateUseWriteContractReturnType<
         name,
         args,
         config,
-        chainId,
+        networkId,
         address
       >,
       options?:
@@ -130,7 +130,7 @@ export type CreateUseWriteContractReturnType<
               name,
               args,
               config,
-              chainId,
+              networkId,
               // use `functionName` to make sure it's not union of all possible function names
               name
             >,
@@ -157,25 +157,26 @@ export function createUseWriteContract<
     return (parameters) => {
       const config = useConfig(parameters);
       const result = useWriteContract(parameters);
-      const configChainId = useChainId({ config });
+      const configNetworkId = useNetworkId({ config });
       const account = useAccount({ config });
       type Args = Parameters<wagmi_UseWriteContractReturnType["writeContract"]>;
       return {
         ...(result as any),
         writeContract: useCallback(
           (...args: Args) => {
-            let chainId: string | undefined;
-            if (args[0].chainId) chainId = args[0].chainId;
+            let networkId: string | undefined;
+            if (args[0].networkId) networkId = args[0].networkId;
             else if (args[0].account && args[0].account === account.address)
-              chainId = account.chainId;
-            else if (args[0].account === undefined) chainId = account.chainId;
-            else chainId = configChainId;
+              networkId = account.networkId;
+            else if (args[0].account === undefined)
+              networkId = account.networkId;
+            else networkId = configNetworkId;
 
             const variables = {
               ...(args[0] as any),
-              address: chainId
+              address: networkId
                 ? (props.address as Record<string, Address> | undefined)?.[
-                    chainId
+                    networkId
                   ]
                 : undefined,
               ...(props.functionName
@@ -187,26 +188,27 @@ export function createUseWriteContract<
           },
           [
             account.address,
-            account.chainId,
+            account.networkId,
             props,
-            configChainId,
+            configNetworkId,
             result.writeContract,
           ]
         ),
         writeContractAsync: useCallback(
           (...args: Args) => {
-            let chainId: string | undefined;
-            if (args[0].chainId) chainId = args[0].chainId;
+            let networkId: string | undefined;
+            if (args[0].networkId) networkId = args[0].networkId;
             else if (args[0].account && args[0].account === account.address)
-              chainId = account.chainId;
-            else if (args[0].account === undefined) chainId = account.chainId;
-            else chainId = configChainId;
+              networkId = account.networkId;
+            else if (args[0].account === undefined)
+              networkId = account.networkId;
+            else networkId = configNetworkId;
 
             const variables = {
               ...(args[0] as any),
-              address: chainId
+              address: networkId
                 ? (props.address as Record<string, Address> | undefined)?.[
-                    chainId
+                    networkId
                   ]
                 : undefined,
               ...(props.functionName
@@ -218,9 +220,9 @@ export function createUseWriteContract<
           },
           [
             account.address,
-            account.chainId,
+            account.networkId,
             props,
-            configChainId,
+            configNetworkId,
             result.writeContractAsync,
           ]
         ),
@@ -266,11 +268,11 @@ type Variables<
   name extends ContractFunctionName<abi, stateMutability>,
   args extends ContractFunctionArgs<abi, stateMutability, name>,
   config extends Config,
-  chainId extends config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"],
   address extends Address | Record<string, Address> | undefined,
   ///
   allFunctionNames = ContractFunctionName<abi, stateMutability>,
-  chains extends readonly Chain[] = SelectChains<config, chainId>,
+  chains extends readonly Chain[] = SelectChains<config, networkId>,
   omittedProperties extends "abi" | "address" | "functionName" =
     | "abi"
     | (address extends undefined ? never : "address")
@@ -292,11 +294,11 @@ type Variables<
   }[number] &
     (address extends Record<string, Address>
       ? {
-          chainId?:
+          networkId?:
             | keyof address
-            | (chainId extends keyof address ? chainId : never)
+            | (networkId extends keyof address ? networkId : never)
             | undefined;
         }
-      : Compute<ChainIdParameter<config, chainId>>) &
+      : Compute<NetworkIdParameter<config, networkId>>) &
     ConnectorParameter & { __mode?: "prepared" }
 >;

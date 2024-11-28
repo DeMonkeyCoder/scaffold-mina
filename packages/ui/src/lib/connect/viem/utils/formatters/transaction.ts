@@ -53,7 +53,9 @@ export function formatTransaction(transaction: ExactPartial<RpcTransaction>) {
     blockNumber: transaction.blockNumber
       ? BigInt(transaction.blockNumber)
       : null,
-    chainId: transaction.chainId ? hexToNumber(transaction.chainId) : undefined,
+    networkId: transaction.networkId
+      ? hexToNumber(transaction.networkId)
+      : undefined,
     gas: transaction.gas ? BigInt(transaction.gas) : undefined,
     gasPrice: transaction.gasPrice ? BigInt(transaction.gasPrice) : undefined,
     maxFeePerBlobGas: transaction.maxFeePerBlobGas
@@ -133,7 +135,7 @@ function formatAuthorizationList(
         contractAddress: (authorization as any).address,
         r: authorization.r,
         s: authorization.s,
-        chainId: authorization.chainId,
+        networkId: authorization.networkId,
         nonce: Number(authorization.nonce),
         ...(typeof authorization.yParity !== "undefined"
           ? { yParity: Number(authorization.yParity) }

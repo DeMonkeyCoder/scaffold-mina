@@ -46,7 +46,7 @@ export type WriteContractVariables<
     functionName
   >,
   config extends Config,
-  chainId extends config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"],
   ///
   allFunctionNames = ContractFunctionName<abi, "nonpayable" | "payable">
 > = WriteContractParameters<
@@ -54,7 +54,7 @@ export type WriteContractVariables<
   functionName,
   args,
   config,
-  chainId,
+  networkId,
   allFunctionNames
 >;
 
@@ -66,9 +66,9 @@ export type WriteContractMutate<config extends Config, context = unknown> = <
     "nonpayable" | "payable",
     functionName
   >,
-  chainId extends config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"]
 >(
-  variables: WriteContractVariables<abi, functionName, args, config, chainId>,
+  variables: WriteContractVariables<abi, functionName, args, config, networkId>,
   options?:
     | MutateOptions<
         WriteContractData,
@@ -78,7 +78,7 @@ export type WriteContractMutate<config extends Config, context = unknown> = <
           functionName,
           args,
           config,
-          chainId,
+          networkId,
           // use `functionName` to make sure it's not union of all possible function names
           functionName
         >,
@@ -98,9 +98,9 @@ export type WriteContractMutateAsync<
     "nonpayable" | "payable",
     functionName
   >,
-  chainId extends config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"]
 >(
-  variables: WriteContractVariables<abi, functionName, args, config, chainId>,
+  variables: WriteContractVariables<abi, functionName, args, config, networkId>,
   options?:
     | MutateOptions<
         WriteContractData,
@@ -110,7 +110,7 @@ export type WriteContractMutateAsync<
           functionName,
           args,
           config,
-          chainId,
+          networkId,
           // use `functionName` to make sure it's not union of all possible function names
           functionName
         >,

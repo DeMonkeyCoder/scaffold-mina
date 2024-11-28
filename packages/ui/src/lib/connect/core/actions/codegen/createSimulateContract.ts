@@ -11,12 +11,12 @@ import type {
 import type { Config } from "../../createConfig";
 import type { SelectChains } from "../../types/chain";
 import type {
-  ChainIdParameter,
+  NetworkIdParameter,
   ConnectorParameter,
 } from "../../types/properties";
 import type { UnionCompute, UnionStrictOmit } from "../../types/utils";
 import { getAccount } from "../getAccount";
-import { getChainId } from "../getChainId";
+import { getNetworkId } from "../getNetworkId";
 import {
   simulateContract,
   type SimulateContractReturnType,
@@ -49,9 +49,9 @@ export type CreateSimulateContractReturnType<
     ? functionName
     : ContractFunctionName<abi, stateMutability>,
   args extends ContractFunctionArgs<abi, stateMutability, name>,
-  chainId extends config["chains"][number]["id"] | undefined = undefined,
+  networkId extends config["chains"][number]["id"] | undefined = undefined,
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 >(
   config: config,
   parameters: {
@@ -71,17 +71,17 @@ export type CreateSimulateContractReturnType<
         | (functionName extends undefined ? never : "functionName")
       >
     > &
-      ChainIdParameter<config, chainId> &
+      NetworkIdParameter<config, networkId> &
       ConnectorParameter & {
-        chainId?: address extends Record<string, Address>
+        networkId?: address extends Record<string, Address>
           ?
               | keyof address
-              | (chainId extends keyof address ? chainId : never)
+              | (networkId extends keyof address ? networkId : never)
               | undefined
-          : chainId | number | undefined;
+          : networkId | number | undefined;
       };
   }[number]
-) => Promise<SimulateContractReturnType<abi, name, args, config, chainId>>;
+) => Promise<SimulateContractReturnType<abi, name, args, config, networkId>>;
 
 export function createSimulateContract<
   const abi extends Abi | readonly unknown[],
@@ -97,16 +97,18 @@ export function createSimulateContract<
 ): CreateSimulateContractReturnType<abi, address, functionName> {
   if (c.address !== undefined && typeof c.address === "object")
     return (config, parameters) => {
-      const configChainId = getChainId(config);
+      const configNetworkId = getNetworkId(config);
       const account = getAccount(config);
-      const chainId =
-        (parameters as { chainId?: string })?.chainId ??
-        account.chainId ??
-        configChainId;
+      const networkId =
+        (parameters as { networkId?: string })?.networkId ??
+        account.networkId ??
+        configNetworkId;
       return simulateContract(config, {
         ...(parameters as any),
         ...(c.functionName ? { functionName: c.functionName } : {}),
-        address: (c.address as Record<string, Address> | undefined)?.[chainId],
+        address: (c.address as Record<string, Address> | undefined)?.[
+          networkId
+        ],
         abi: c.abi,
       });
     };

@@ -8,7 +8,7 @@ import type {
 import type { Config } from "../../createConfig";
 import type { UnionCompute, UnionStrictOmit } from "../../types/utils";
 import { getAccount } from "../getAccount";
-import { getChainId } from "../getChainId";
+import { getNetworkId } from "../getNetworkId";
 import {
   readContract,
   type ReadContractParameters,
@@ -37,10 +37,10 @@ export type CreateReadContractReturnType<
   address extends Address | Record<string, Address> | undefined,
   functionName extends ContractFunctionName<abi, stateMutability> | undefined,
   ///
-  omittedProperties extends "abi" | "address" | "chainId" | "functionName" =
+  omittedProperties extends "abi" | "address" | "networkId" | "functionName" =
     | "abi"
     | (address extends undefined ? never : "address")
-    | (address extends Record<string, Address> ? "chainId" : never)
+    | (address extends Record<string, Address> ? "networkId" : never)
     | (functionName extends undefined ? never : "functionName")
 > = <
   config extends Config,
@@ -57,7 +57,7 @@ export type CreateReadContractReturnType<
     >
   > &
     (address extends Record<string, Address>
-      ? { chainId?: keyof address | undefined }
+      ? { networkId?: keyof address | undefined }
       : unknown)
 ) => Promise<ReadContractReturnType<abi, name, args>>;
 
@@ -75,16 +75,18 @@ export function createReadContract<
 ): CreateReadContractReturnType<abi, address, functionName> {
   if (c.address !== undefined && typeof c.address === "object")
     return (config, parameters) => {
-      const configChainId = getChainId(config);
+      const configNetworkId = getNetworkId(config);
       const account = getAccount(config);
-      const chainId =
-        (parameters as { chainId?: string })?.chainId ??
-        account.chainId ??
-        configChainId;
+      const networkId =
+        (parameters as { networkId?: string })?.networkId ??
+        account.networkId ??
+        configNetworkId;
       return readContract(config, {
         ...(parameters as any),
         ...(c.functionName ? { functionName: c.functionName } : {}),
-        address: (c.address as Record<string, Address> | undefined)?.[chainId],
+        address: (c.address as Record<string, Address> | undefined)?.[
+          networkId
+        ],
         abi: c.abi,
       });
     };

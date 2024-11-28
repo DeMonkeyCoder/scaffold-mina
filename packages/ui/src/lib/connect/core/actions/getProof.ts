@@ -6,12 +6,12 @@ import {
 } from "@/lib/connect/viem/actions";
 
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { Compute } from "../types/utils";
 import { getAction } from "../utils/getAction";
 
 export type GetProofParameters<config extends Config = Config> = Compute<
-  viem_GetProofParameters & ChainIdParameter<config>
+  viem_GetProofParameters & NetworkIdParameter<config>
 >;
 
 export type GetProofReturnType = viem_GetProofReturnType;
@@ -23,8 +23,8 @@ export async function getProof<config extends Config>(
   config: config,
   parameters: GetProofParameters<config>
 ): Promise<GetProofReturnType> {
-  const { chainId, ...rest } = parameters;
-  const client = config.getClient({ chainId });
+  const { networkId, ...rest } = parameters;
+  const client = config.getClient({ networkId });
   const action = getAction(client, viem_getProof, "getProof");
   return action(rest);
 }

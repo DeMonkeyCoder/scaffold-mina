@@ -14,7 +14,7 @@ import { useEffect } from "react";
 
 import type { Abi, ContractEventName } from "@/lib/connect/viem";
 import type { ConfigParameter, EnabledParameter } from "../types/properties";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseWatchContractEventParameters<
@@ -22,10 +22,10 @@ export type UseWatchContractEventParameters<
   eventName extends ContractEventName<abi> = ContractEventName<abi>,
   strict extends boolean | undefined = undefined,
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = UnionCompute<
   UnionExactPartial<
-    WatchContractEventParameters<abi, eventName, strict, config, chainId>
+    WatchContractEventParameters<abi, eventName, strict, config, networkId>
   > &
     ConfigParameter<config> &
     EnabledParameter
@@ -39,21 +39,21 @@ export function useWatchContractEvent<
   eventName extends ContractEventName<abi>,
   strict extends boolean | undefined = undefined,
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 >(
   parameters: UseWatchContractEventParameters<
     abi,
     eventName,
     strict,
     config,
-    chainId
+    networkId
   > = {} as any
 ): UseWatchContractEventReturnType {
   const { enabled = true, onLogs, config: _, ...rest } = parameters;
 
   const config = useConfig(parameters);
-  const configChainId = useChainId({ config });
-  const chainId = parameters.chainId ?? configChainId;
+  const configNetworkId = useNetworkId({ config });
+  const networkId = parameters.networkId ?? configNetworkId;
 
   // TODO(react@19): cleanup
   // biome-ignore lint/correctness/useExhaustiveDependencies: `rest` changes every render so only including properties in dependency array
@@ -62,11 +62,11 @@ export function useWatchContractEvent<
     if (!onLogs) return;
     return watchContractEvent(config, {
       ...(rest as any),
-      chainId,
+      networkId,
       onLogs,
     });
   }, [
-    chainId,
+    networkId,
     config,
     enabled,
     onLogs,

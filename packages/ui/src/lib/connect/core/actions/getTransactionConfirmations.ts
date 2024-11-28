@@ -8,21 +8,21 @@ import {
 
 import type { Config } from "../createConfig";
 import type { SelectChains } from "../types/chain";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import { getAction } from "../utils/getAction";
 
 export type GetTransactionConfirmationsParameters<
   config extends Config = Config,
-  chainId extends
+  networkId extends
     | config["chains"][number]["id"]
     | undefined = config["chains"][number]["id"],
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = {
   [key in keyof chains]: viem_GetTransactionConfirmationsParameters<
     chains[key]
   > &
-    ChainIdParameter<config, chainId>;
+    NetworkIdParameter<config, networkId>;
 }[number];
 
 export type GetTransactionConfirmationsReturnType =
@@ -34,15 +34,15 @@ export type GetTransactionConfirmationsErrorType =
 /** https://wagmi.sh/core/api/actions/getTransactionConfirmations */
 export function getTransactionConfirmations<
   config extends Config,
-  chainId extends
+  networkId extends
     | config["chains"][number]["id"]
     | undefined = config["chains"][number]["id"]
 >(
   config: config,
-  parameters: GetTransactionConfirmationsParameters<config, chainId>
+  parameters: GetTransactionConfirmationsParameters<config, networkId>
 ): Promise<GetTransactionConfirmationsReturnType> {
-  const { chainId, ...rest } = parameters;
-  const client = config.getClient({ chainId });
+  const { networkId, ...rest } = parameters;
+  const client = config.getClient({ networkId });
   const action = getAction(
     client,
     viem_getTransactionConfirmations,

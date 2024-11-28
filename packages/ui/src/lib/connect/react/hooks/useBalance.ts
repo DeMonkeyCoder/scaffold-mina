@@ -16,7 +16,7 @@ import {
 
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { useQuery, type UseQueryReturnType } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseBalanceParameters<
@@ -46,11 +46,11 @@ export function useBalance<
   const { address, query = {} } = parameters;
 
   const config = useConfig(parameters);
-  const chainId = useChainId({ config });
+  const networkId = useNetworkId({ config });
 
   const options = getBalanceQueryOptions(config, {
     ...parameters,
-    chainId: parameters.chainId ?? chainId,
+    networkId: parameters.networkId ?? networkId,
   });
   const enabled = Boolean(address && (query.enabled ?? true));
 

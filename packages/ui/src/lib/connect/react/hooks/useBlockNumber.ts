@@ -21,7 +21,7 @@ import {
 
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { type UseQueryReturnType, useQuery } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 import {
   type UseWatchBlockNumberParameters,
@@ -30,23 +30,23 @@ import {
 
 export type UseBlockNumberParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   selectData = GetBlockNumberData
 > = Compute<
-  GetBlockNumberOptions<config, chainId> &
+  GetBlockNumberOptions<config, networkId> &
     ConfigParameter<config> &
     QueryParameter<
       GetBlockNumberQueryFnData,
       GetBlockNumberErrorType,
       selectData,
-      GetBlockNumberQueryKey<config, chainId>
+      GetBlockNumberQueryKey<config, networkId>
     > & {
       watch?:
         | boolean
         | UnionCompute<
             UnionStrictOmit<
-              UseWatchBlockNumberParameters<config, chainId>,
-              "chainId" | "config" | "onBlockNumber" | "onError"
+              UseWatchBlockNumberParameters<config, networkId>,
+              "networkId" | "config" | "onBlockNumber" | "onError"
             >
           >
         | undefined;
@@ -59,27 +59,27 @@ export type UseBlockNumberReturnType<selectData = GetBlockNumberData> =
 /** https://wagmi.sh/react/api/hooks/useBlockNumber */
 export function useBlockNumber<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   selectData = GetBlockNumberData
 >(
-  parameters: UseBlockNumberParameters<config, chainId, selectData> = {}
+  parameters: UseBlockNumberParameters<config, networkId, selectData> = {}
 ): UseBlockNumberReturnType<selectData> {
   const { query = {}, watch } = parameters;
 
   const config = useConfig(parameters);
   const queryClient = useQueryClient();
-  const configChainId = useChainId({ config });
-  const chainId = parameters.chainId ?? configChainId;
+  const configNetworkId = useNetworkId({ config });
+  const networkId = parameters.networkId ?? configNetworkId;
 
   const options = getBlockNumberQueryOptions(config, {
     ...parameters,
-    chainId,
+    networkId,
   });
 
   useWatchBlockNumber({
     ...({
       config: parameters.config,
-      chainId: parameters.chainId,
+      networkId: parameters.networkId,
       ...(typeof watch === "object" ? watch : {}),
     } as UseWatchBlockNumberParameters),
     enabled: Boolean(

@@ -11,18 +11,18 @@ import {
   ConnectorAlreadyConnectedError,
   type ConnectorAlreadyConnectedErrorType,
 } from "../errors/config";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { Compute } from "../types/utils";
 
 export type ConnectParameters<config extends Config = Config> = Compute<
-  ChainIdParameter<config> & {
+  NetworkIdParameter<config> & {
     connector: Connector | CreateConnectorFn;
   }
 >;
 
 export type ConnectReturnType<config extends Config = Config> = {
   accounts: readonly [Address, ...Address[]];
-  chainId:
+  networkId:
     | config["chains"][number]["id"]
     | (number extends config["chains"][number]["id"] ? number : number & {});
 };
@@ -55,7 +55,7 @@ export async function connect<config extends Config>(
     config.setState((x) => ({ ...x, status: "connecting" }));
     connector.emitter.emit("message", { type: "connecting" });
 
-    const data = await connector.connect({ chainId: parameters.chainId });
+    const data = await connector.connect({ networkId: parameters.networkId });
     const accounts = data.accounts as readonly [Address, ...Address[]];
 
     connector.emitter.off("connect", config._internal.events.connect);
@@ -67,14 +67,14 @@ export async function connect<config extends Config>(
       ...x,
       connections: new Map(x.connections).set(connector.uid, {
         accounts,
-        chainId: data.chainId,
+        networkId: data.networkId,
         connector: connector,
       }),
       current: connector.uid,
       status: "connected",
     }));
 
-    return { accounts, chainId: data.chainId };
+    return { accounts, networkId: data.networkId };
   } catch (error) {
     config.setState((x) => ({
       ...x,

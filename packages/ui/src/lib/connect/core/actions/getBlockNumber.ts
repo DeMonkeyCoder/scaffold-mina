@@ -6,14 +6,16 @@ import {
 } from "@/lib/connect/viem/actions";
 
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { Compute } from "../types/utils";
 import { getAction } from "../utils/getAction";
 
 export type GetBlockNumberParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
-> = Compute<viem_GetBlockNumberParameters & ChainIdParameter<config, chainId>>;
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+> = Compute<
+  viem_GetBlockNumberParameters & NetworkIdParameter<config, networkId>
+>;
 
 export type GetBlockNumberReturnType = viem_GetBlockNumberReturnType;
 
@@ -22,13 +24,13 @@ export type GetBlockNumberErrorType = viem_GetBlockNumberErrorType;
 /** https://wagmi.sh/core/api/actions/getBlockNumber */
 export function getBlockNumber<
   config extends Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 >(
   config: config,
-  parameters: GetBlockNumberParameters<config, chainId> = {}
+  parameters: GetBlockNumberParameters<config, networkId> = {}
 ): Promise<GetBlockNumberReturnType> {
-  const { chainId, ...rest } = parameters;
-  const client = config.getClient({ chainId });
+  const { networkId, ...rest } = parameters;
+  const client = config.getClient({ networkId });
   const action = getAction(client, viem_getBlockNumber, "getBlockNumber");
   return action(rest);
 }

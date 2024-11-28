@@ -17,7 +17,7 @@ import type { Config } from "../createConfig";
 import type { BaseErrorType, ErrorType } from "../errors/base";
 import type { SelectChains } from "../types/chain";
 import type {
-  ChainIdParameter,
+  NetworkIdParameter,
   ConnectorParameter,
 } from "../types/properties";
 import type { Compute, UnionCompute } from "../types/utils";
@@ -44,10 +44,10 @@ export type WriteContractParameters<
     functionName
   > = ContractFunctionArgs<abi, "nonpayable" | "payable", functionName>,
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   ///
   allFunctionNames = ContractFunctionName<abi, "nonpayable" | "payable">,
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = UnionCompute<
   {
     // TODO: Should use `UnionStrictOmit<..., 'chain'>` on `viem_WriteContractParameters` result instead
@@ -62,7 +62,7 @@ export type WriteContractParameters<
       allFunctionNames
     >;
   }[number] &
-    Compute<ChainIdParameter<config, chainId>> &
+    Compute<NetworkIdParameter<config, networkId>> &
     ConnectorParameter & { __mode?: "prepared" }
 >;
 
@@ -89,18 +89,28 @@ export async function writeContract<
     "nonpayable" | "payable",
     functionName
   >,
-  chainId extends config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"]
 >(
   config: config,
-  parameters: WriteContractParameters<abi, functionName, args, config, chainId>
+  parameters: WriteContractParameters<
+    abi,
+    functionName,
+    args,
+    config,
+    networkId
+  >
 ): Promise<WriteContractReturnType> {
-  const { account, chainId, connector, __mode, ...rest } = parameters;
+  const { account, networkId, connector, __mode, ...rest } = parameters;
 
   let client: Client;
   if (typeof account === "object" && account.type === "local")
-    client = config.getClient({ chainId });
+    client = config.getClient({ networkId });
   else
-    client = await getConnectorClient(config, { account, chainId, connector });
+    client = await getConnectorClient(config, {
+      account,
+      networkId,
+      connector,
+    });
 
   const { connector: activeConnector } = getAccount(config);
 
@@ -111,7 +121,7 @@ export async function writeContract<
     const { request: simulateRequest } = await simulateContract(config, {
       ...rest,
       account,
-      chainId,
+      networkId,
     } as any);
     request = simulateRequest;
   }
@@ -120,7 +130,7 @@ export async function writeContract<
   const hash = await action({
     ...request,
     ...(account ? { account } : {}),
-    chain: chainId ? { id: chainId } : null,
+    chain: networkId ? { id: networkId } : null,
   });
 
   return hash;

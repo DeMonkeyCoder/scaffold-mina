@@ -179,7 +179,7 @@ export function injected(parameters: InjectedParameters = {}) {
         }
       }
     },
-    async connect({ chainId, isReconnecting } = {}) {
+    async connect({ networkId, isReconnecting } = {}) {
       const provider = await this.getProvider();
       if (!provider) throw new ProviderNotFoundError();
 
@@ -240,13 +240,15 @@ export function injected(parameters: InjectedParameters = {}) {
         }
 
         // Switch to chain if provided
-        let currentChainId = await this.getChainId();
-        if (chainId && currentChainId !== chainId) {
-          const chain = await this.switchChain!({ chainId }).catch((error) => {
-            if (error.code === UserRejectedRequestError.code) throw error;
-            return { id: currentChainId };
-          });
-          currentChainId = chain?.id ?? currentChainId;
+        let currentNetworkId = await this.getNetworkId();
+        if (networkId && currentNetworkId !== networkId) {
+          const chain = await this.switchChain!({ networkId }).catch(
+            (error) => {
+              if (error.code === UserRejectedRequestError.code) throw error;
+              return { id: currentNetworkId };
+            }
+          );
+          currentNetworkId = chain?.id ?? currentNetworkId;
         }
 
         // Remove disconnected shim if it exists
@@ -257,7 +259,7 @@ export function injected(parameters: InjectedParameters = {}) {
         if (!parameters.target)
           await config.storage?.setItem("injected.connected", true);
 
-        return { accounts, chainId: currentChainId };
+        return { accounts, networkId: currentNetworkId };
       } catch (err) {
         const error = err as RpcError;
         if (error.code === UserRejectedRequestError.code)
@@ -320,7 +322,7 @@ export function injected(parameters: InjectedParameters = {}) {
       const accounts = await provider.request({ method: "mina_accounts" });
       return accounts.map((x) => getAddress(x));
     },
-    async getChainId() {
+    async getNetworkId() {
       const provider = await this.getProvider();
       if (!provider) throw new ProviderNotFoundError();
       return provider.request({ method: "mina_networkId" });
@@ -416,11 +418,11 @@ export function injected(parameters: InjectedParameters = {}) {
         return false;
       }
     },
-    async switchChain({ addEthereumChainParameter, chainId }) {
+    async switchChain({ addEthereumChainParameter, networkId }) {
       const provider = await this.getProvider();
       if (!provider) throw new ProviderNotFoundError();
 
-      const chain = config.chains.find((x) => x.id === chainId);
+      const chain = config.chains.find((x) => x.id === networkId);
       if (!chain) throw new SwitchChainError(new ChainNotConfiguredError());
 
       try {
@@ -428,7 +430,7 @@ export function injected(parameters: InjectedParameters = {}) {
           provider
             .request({
               method: "mina_switchChain",
-              params: [chainId],
+              params: [networkId],
             })
             // During `'mina_switchChain'`, MetaMask makes a `'net_version'` RPC call to the target chain.
             // If this request fails, MetaMask does not emit the `'chainChanged'` event, but will still switch the chain.
@@ -436,13 +438,13 @@ export function injected(parameters: InjectedParameters = {}) {
             // this callback or an externally emitted `'chainChanged'` event.
             // https://github.com/MetaMask/metamask-extension/issues/24247
             .then(async () => {
-              const currentChainId = await this.getChainId();
-              if (currentChainId === chainId)
-                config.emitter.emit("change", { chainId });
+              const currentNetworkId = await this.getNetworkId();
+              if (currentNetworkId === networkId)
+                config.emitter.emit("change", { networkId });
             }),
           new Promise<void>((resolve) =>
-            config.emitter.once("change", ({ chainId: currentChainId }) => {
-              if (currentChainId === chainId) resolve();
+            config.emitter.once("change", ({ networkId: currentNetworkId }) => {
+              if (currentNetworkId === networkId) resolve();
             })
           ),
         ]);
@@ -477,7 +479,7 @@ export function injected(parameters: InjectedParameters = {}) {
 
             const addEthereumChain = {
               blockExplorerUrls,
-              chainId,
+              networkId,
               chainName: addEthereumChainParameter?.chainName ?? chain.name,
               iconUrls: addEthereumChainParameter?.iconUrls,
               nativeCurrency:
@@ -491,8 +493,8 @@ export function injected(parameters: InjectedParameters = {}) {
               params: [addEthereumChain],
             });
 
-            const currentChainId = await this.getChainId();
-            if (currentChainId !== chainId)
+            const currentNetworkId = await this.getNetworkId();
+            if (currentNetworkId !== networkId)
               throw new UserRejectedRequestError(
                 new Error("User rejected switch after adding network.")
               );
@@ -513,8 +515,8 @@ export function injected(parameters: InjectedParameters = {}) {
       if (accounts.length === 0) this.onDisconnect();
       // Connect if emitter is listening for connect event (e.g. is disconnected and connects through wallet interface)
       else if (config.emitter.listenerCount("connect")) {
-        const chainId = (await this.getChainId()).toString();
-        this.onConnect({ chainId });
+        const networkId = (await this.getNetworkId()).toString();
+        this.onConnect({ networkId });
         // Remove disconnected shim if it exists
         if (shimDisconnect)
           await config.storage?.removeItem(`${this.id}.disconnected`);
@@ -525,15 +527,15 @@ export function injected(parameters: InjectedParameters = {}) {
           accounts: accounts.map((x) => getAddress(x)),
         });
     },
-    onChainChanged(chainId) {
-      config.emitter.emit("change", { chainId });
+    onChainChanged(networkId) {
+      config.emitter.emit("change", { networkId });
     },
     async onConnect(connectInfo) {
       const accounts = await this.getAccounts();
       if (accounts.length === 0) return;
 
-      const chainId = connectInfo.chainId;
-      config.emitter.emit("connect", { accounts, chainId });
+      const networkId = connectInfo.networkId;
+      config.emitter.emit("connect", { accounts, networkId });
 
       // Manage EIP-1193 event listeners
       const provider = await this.getProvider();

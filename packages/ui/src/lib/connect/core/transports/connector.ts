@@ -47,7 +47,7 @@ export function unstable_connector(
         );
 
       const provider = (await connector.getProvider({
-        chainId: chain?.id,
+        networkId: chain?.id,
       })) as EIP1193Provider | undefined;
       if (!provider)
         throw new ProviderDisconnectedError(
@@ -56,15 +56,15 @@ export function unstable_connector(
 
       // We are applying a retry & timeout strategy here as some injected wallets (e.g. MetaMask) fail to
       // immediately resolve a JSON-RPC request on page load.
-      const chainId = await withRetry(() =>
+      const networkId = await withRetry(() =>
         withTimeout(() => provider.request({ method: "mina_networkId" }), {
           timeout: 100,
         })
       );
-      if (chain && chainId !== chain.id)
+      if (chain && networkId !== chain.id)
         throw new ChainDisconnectedError(
           new Error(
-            `The current chain of the connector (id: ${chainId}) does not match the target chain for the request (id: ${chain.id} – ${chain.name}).`
+            `The current chain of the connector (id: ${networkId}) does not match the target chain for the request (id: ${chain.id} – ${chain.name}).`
           )
         );
 

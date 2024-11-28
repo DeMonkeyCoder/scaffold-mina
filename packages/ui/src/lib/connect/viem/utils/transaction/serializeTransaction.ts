@@ -153,7 +153,7 @@ function serializeTransactionEIP7702(
 ): TransactionSerializedEIP7702 {
   const {
     authorizationList,
-    chainId,
+    networkId,
     gas,
     nonce,
     to,
@@ -173,7 +173,7 @@ function serializeTransactionEIP7702(
   return concatHex([
     "0x04",
     toRlp([
-      // toHex(chainId),
+      // toHex(networkId),
       nonce ? toHex(nonce) : "0x",
       // maxPriorityFeePerGas ? toHex(maxPriorityFeePerGas) : '0x',
       // maxFeePerGas ? toHex(maxFeePerGas) : '0x',
@@ -206,7 +206,7 @@ function serializeTransactionEIP4844(
   signature?: Signature | undefined
 ): TransactionSerializedEIP4844 {
   const {
-    chainId,
+    networkId,
     gas,
     nonce,
     to,
@@ -252,7 +252,7 @@ function serializeTransactionEIP4844(
   const serializedAccessList = serializeAccessList(accessList);
 
   const serializedTransaction = [
-    // toHex(chainId),
+    // toHex(networkId),
     nonce ? toHex(nonce) : "0x",
     // maxPriorityFeePerGas ? toHex(maxPriorityFeePerGas) : '0x',
     // maxFeePerGas ? toHex(maxFeePerGas) : '0x',
@@ -301,7 +301,7 @@ function serializeTransactionEIP1559(
   signature?: Signature | undefined
 ): TransactionSerializedEIP1559 {
   const {
-    chainId,
+    networkId,
     gas,
     nonce,
     to,
@@ -317,7 +317,7 @@ function serializeTransactionEIP1559(
   const serializedAccessList = serializeAccessList(accessList);
 
   const serializedTransaction = [
-    // toHex(chainId),
+    // toHex(networkId),
     nonce ? toHex(nonce) : "0x",
     // maxPriorityFeePerGas ? toHex(maxPriorityFeePerGas) : '0x',
     // maxFeePerGas ? toHex(maxFeePerGas) : '0x',
@@ -348,7 +348,7 @@ function serializeTransactionEIP2930(
   transaction: TransactionSerializableEIP2930,
   signature?: Signature | undefined
 ): TransactionSerializedEIP2930 {
-  const { chainId, gas, data, nonce, to, value, accessList, gasPrice } =
+  const { networkId, gas, data, nonce, to, value, accessList, gasPrice } =
     transaction;
 
   assertTransactionEIP2930(transaction);
@@ -356,7 +356,7 @@ function serializeTransactionEIP2930(
   const serializedAccessList = serializeAccessList(accessList);
 
   const serializedTransaction = [
-    // toHex(chainId),
+    // toHex(networkId),
     nonce ? toHex(nonce) : "0x",
     // gasPrice ? toHex(gasPrice) : '0x',
     // gas ? toHex(gas) : '0x',
@@ -384,7 +384,7 @@ function serializeTransactionLegacy(
   transaction: TransactionSerializableLegacy,
   signature?: SignatureLegacy | undefined
 ): TransactionSerializedLegacy {
-  const { chainId = 0, gas, data, nonce, to, value, gasPrice } = transaction;
+  const { networkId = 0, gas, data, nonce, to, value, gasPrice } = transaction;
 
   assertTransactionLegacy(transaction);
 
@@ -399,18 +399,18 @@ function serializeTransactionLegacy(
 
   if (signature) {
     const v = (() => {
-      // EIP-155 (inferred chainId)
+      // EIP-155 (inferred networkId)
       if (signature.v >= 35n) {
-        const inferredChainId = (signature.v - 35n) / 2n;
-        if (inferredChainId > 0) return signature.v;
+        const inferredNetworkId = (signature.v - 35n) / 2n;
+        if (inferredNetworkId > 0) return signature.v;
         return 27n + (signature.v === 35n ? 0n : 1n);
       }
 
-      // // EIP-155 (explicit chainId)
-      // if (chainId > 0)
-      //   return BigInt(chainId * 2) + BigInt(35n + signature.v - 27n)
+      // // EIP-155 (explicit networkId)
+      // if (networkId > 0)
+      //   return BigInt(networkId * 2) + BigInt(35n + signature.v - 27n)
 
-      // Pre-EIP-155 (no chainId)
+      // Pre-EIP-155 (no networkId)
       const v = 27n + (signature.v === 27n ? 0n : 1n);
       if (signature.v !== v) throw new InvalidLegacyVError({ v: signature.v });
       return v;
@@ -428,7 +428,7 @@ function serializeTransactionLegacy(
   } else {
     serializedTransaction = [
       ...serializedTransaction,
-      toHex(chainId),
+      toHex(networkId),
       "0x",
       "0x",
     ];

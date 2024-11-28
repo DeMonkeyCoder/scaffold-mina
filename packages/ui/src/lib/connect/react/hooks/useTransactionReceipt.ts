@@ -15,46 +15,50 @@ import {
 import type { GetTransactionReceiptQueryFnData } from "@/lib/connect/core/exports/query";
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { type UseQueryReturnType, useQuery } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseTransactionReceiptParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetTransactionReceiptData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetTransactionReceiptData<config, networkId>
 > = Compute<
-  GetTransactionReceiptOptions<config, chainId> &
+  GetTransactionReceiptOptions<config, networkId> &
     ConfigParameter<config> &
     QueryParameter<
-      GetTransactionReceiptQueryFnData<config, chainId>,
+      GetTransactionReceiptQueryFnData<config, networkId>,
       GetTransactionReceiptErrorType,
       selectData,
-      GetTransactionReceiptQueryKey<config, chainId>
+      GetTransactionReceiptQueryKey<config, networkId>
     >
 >;
 
 export type UseTransactionReceiptReturnType<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetTransactionReceiptData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetTransactionReceiptData<config, networkId>
 > = UseQueryReturnType<selectData, GetTransactionReceiptErrorType>;
 
 /** https://wagmi.sh/react/api/hooks/useTransactionReceipt */
 export function useTransactionReceipt<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetTransactionReceiptData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetTransactionReceiptData<config, networkId>
 >(
-  parameters: UseTransactionReceiptParameters<config, chainId, selectData> = {}
-): UseTransactionReceiptReturnType<config, chainId, selectData> {
+  parameters: UseTransactionReceiptParameters<
+    config,
+    networkId,
+    selectData
+  > = {}
+): UseTransactionReceiptReturnType<config, networkId, selectData> {
   const { hash, query = {} } = parameters;
 
   const config = useConfig(parameters);
-  const chainId = useChainId({ config });
+  const networkId = useNetworkId({ config });
 
   const options = getTransactionReceiptQueryOptions(config, {
     ...parameters,
-    chainId: parameters.chainId ?? chainId,
+    networkId: parameters.networkId ?? networkId,
   });
   const enabled = Boolean(hash && (query.enabled ?? true));
 
@@ -62,5 +66,5 @@ export function useTransactionReceipt<
     ...(query as any),
     ...options,
     enabled,
-  }) as UseTransactionReceiptReturnType<config, chainId, selectData>;
+  }) as UseTransactionReceiptReturnType<config, networkId, selectData>;
 }

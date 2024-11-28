@@ -1,35 +1,36 @@
-import type { Account } from '../../../accounts/types'
+import type { Account } from "../../../accounts/types";
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from '../../../accounts/utils/parseAccount'
+} from "../../../accounts/utils/parseAccount";
 import type {
   SignAuthorizationErrorType as SignAuthorizationErrorType_account,
   SignAuthorizationReturnType as SignAuthorizationReturnType_account,
-} from '../../../accounts/utils/signAuthorization'
-import { getChainId } from '../../../actions/public/getChainId'
-import { getTransactionCount } from '../../../actions/public/getTransactionCount'
-import type { Client } from '../../../clients/createClient'
-import type { Transport } from '../../../clients/transports/createTransport'
+} from "../../../accounts/utils/signAuthorization";
+import { getNetworkId } from "../../../actions/public/getNetworkId";
+import { getTransactionCount } from "../../../actions/public/getTransactionCount";
+import type { Client } from "../../../clients/createClient";
+import type { Transport } from "../../../clients/transports/createTransport";
 import {
   AccountNotFoundError,
   type AccountNotFoundErrorType,
   AccountTypeNotSupportedError,
   type AccountTypeNotSupportedErrorType,
-} from '../../../errors/account'
-import type { ErrorType } from '../../../errors/utils'
-import type { GetAccountParameter } from '../../../types/account'
-import type { Chain } from '../../../types/chain'
-import type { PartialBy } from '../../../types/utils'
-import type { RequestErrorType } from '../../../utils/buildRequest'
-import { getAction } from '../../../utils/getAction'
-import type { Authorization } from '../types/authorization'
+} from "../../../errors/account";
+import type { ErrorType } from "../../../errors/utils";
+import type { GetAccountParameter } from "../../../types/account";
+import type { Chain } from "../../../types/chain";
+import type { PartialBy } from "../../../types/utils";
+import type { RequestErrorType } from "../../../utils/buildRequest";
+import { getAction } from "../../../utils/getAction";
+import type { Authorization } from "../types/authorization";
 
 export type SignAuthorizationParameters<
-  account extends Account | undefined = Account | undefined,
-> = GetAccountParameter<account> & PartialBy<Authorization, 'chainId' | 'nonce'>
+  account extends Account | undefined = Account | undefined
+> = GetAccountParameter<account> &
+  PartialBy<Authorization, "networkId" | "nonce">;
 
-export type SignAuthorizationReturnType = SignAuthorizationReturnType_account
+export type SignAuthorizationReturnType = SignAuthorizationReturnType_account;
 
 export type SignAuthorizationErrorType =
   | ParseAccountErrorType
@@ -37,7 +38,7 @@ export type SignAuthorizationErrorType =
   | AccountNotFoundErrorType
   | AccountTypeNotSupportedErrorType
   | SignAuthorizationErrorType_account
-  | ErrorType
+  | ErrorType;
 
 /**
  * Signs an [EIP-7702 Authorization](https://eips.ethereum.org/EIPS/eip-7702) object.
@@ -83,54 +84,54 @@ export type SignAuthorizationErrorType =
  */
 export async function signAuthorization<
   chain extends Chain | undefined,
-  account extends Account | undefined,
+  account extends Account | undefined
 >(
   client: Client<Transport, chain, account>,
-  parameters: SignAuthorizationParameters<account>,
+  parameters: SignAuthorizationParameters<account>
 ): Promise<SignAuthorizationReturnType> {
   const {
     account: account_ = client.account,
     contractAddress,
-    chainId,
+    networkId,
     nonce,
-  } = parameters
+  } = parameters;
 
   if (!account_)
     throw new AccountNotFoundError({
-      docsPath: '/experimental/eip7702/signAuthorization',
-    })
-  const account = parseAccount(account_)
+      docsPath: "/experimental/eip7702/signAuthorization",
+    });
+  const account = parseAccount(account_);
 
   if (!account.experimental_signAuthorization)
     throw new AccountTypeNotSupportedError({
-      docsPath: '/experimental/eip7702/signAuthorization',
+      docsPath: "/experimental/eip7702/signAuthorization",
       metaMessages: [
-        'The `signAuthorization` Action does not support JSON-RPC Accounts.',
+        "The `signAuthorization` Action does not support JSON-RPC Accounts.",
       ],
       type: account.type,
-    })
+    });
 
   const authorization = {
     contractAddress,
-    chainId,
+    networkId,
     nonce,
-  } as Authorization
+  } as Authorization;
 
-  if (typeof authorization.chainId === 'undefined')
-    authorization.chainId =
+  if (typeof authorization.networkId === "undefined")
+    authorization.networkId =
       client.chain?.id ??
-      (await getAction(client, getChainId, 'getChainId')({}))
+      (await getAction(client, getNetworkId, "getNetworkId")({}));
 
-  if (typeof authorization.nonce === 'undefined') {
+  if (typeof authorization.nonce === "undefined") {
     authorization.nonce = await getAction(
       client,
       getTransactionCount,
-      'getTransactionCount',
+      "getTransactionCount"
     )({
       address: account.address,
-      blockTag: 'pending',
-    })
+      blockTag: "pending",
+    });
   }
 
-  return account.experimental_signAuthorization(authorization)
+  return account.experimental_signAuthorization(authorization);
 }

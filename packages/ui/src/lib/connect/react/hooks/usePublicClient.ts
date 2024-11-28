@@ -16,29 +16,29 @@ import { useConfig } from "./useConfig";
 
 export type UsePublicClientParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] | string | undefined =
+  networkId extends config["chains"][number]["id"] | string | undefined =
     | config["chains"][number]["id"]
     | undefined
 > = Compute<
-  GetPublicClientParameters<config, chainId> & ConfigParameter<config>
+  GetPublicClientParameters<config, networkId> & ConfigParameter<config>
 >;
 
 export type UsePublicClientReturnType<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] | string | undefined =
+  networkId extends config["chains"][number]["id"] | string | undefined =
     | config["chains"][number]["id"]
     | undefined
-> = GetPublicClientReturnType<config, chainId>;
+> = GetPublicClientReturnType<config, networkId>;
 
 /** https://wagmi.sh/react/api/hooks/usePublicClient */
 export function usePublicClient<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] | string | undefined =
+  networkId extends config["chains"][number]["id"] | string | undefined =
     | config["chains"][number]["id"]
     | undefined
 >(
-  parameters: UsePublicClientParameters<config, chainId> = {}
-): UsePublicClientReturnType<config, chainId> {
+  parameters: UsePublicClientParameters<config, networkId> = {}
+): UsePublicClientReturnType<config, networkId> {
   const config = useConfig(parameters);
 
   return useSyncExternalStoreWithSelector(

@@ -1,32 +1,34 @@
-import type { QueryOptions } from '@tanstack/query-core'
+import type { QueryOptions } from "@tanstack/query-core";
 
 import {
   type GetTransactionConfirmationsErrorType,
   type GetTransactionConfirmationsParameters,
   type GetTransactionConfirmationsReturnType,
   getTransactionConfirmations,
-} from '../actions/getTransactionConfirmations'
-import type { Config } from '../createConfig'
-import type { ScopeKeyParameter } from '../types/properties'
-import type { UnionExactPartial } from '../types/utils'
-import { filterQueryOptions } from './utils'
+} from "../actions/getTransactionConfirmations";
+import type { Config } from "../createConfig";
+import type { ScopeKeyParameter } from "../types/properties";
+import type { UnionExactPartial } from "../types/utils";
+import { filterQueryOptions } from "./utils";
 
 export type GetTransactionConfirmationsOptions<
   config extends Config,
-  chainId extends
-    | config['chains'][number]['id']
-    | undefined = config['chains'][number]['id'],
-> = UnionExactPartial<GetTransactionConfirmationsParameters<config, chainId>> &
-  ScopeKeyParameter
+  networkId extends
+    | config["chains"][number]["id"]
+    | undefined = config["chains"][number]["id"]
+> = UnionExactPartial<
+  GetTransactionConfirmationsParameters<config, networkId>
+> &
+  ScopeKeyParameter;
 
 export function getTransactionConfirmationsQueryOptions<
   config extends Config,
-  chainId extends
-    | config['chains'][number]['id']
-    | undefined = config['chains'][number]['id'],
+  networkId extends
+    | config["chains"][number]["id"]
+    | undefined = config["chains"][number]["id"]
 >(
   config: config,
-  options: GetTransactionConfirmationsOptions<config, chainId> = {} as any,
+  options: GetTransactionConfirmationsOptions<config, networkId> = {} as any
 ) {
   return {
     async queryFn({ queryKey }) {
@@ -35,44 +37,44 @@ export function getTransactionConfirmationsQueryOptions<
         transactionReceipt,
         scopeKey: _,
         ...parameters
-      } = queryKey[1]
+      } = queryKey[1];
       if (!hash && !transactionReceipt)
-        throw new Error('hash or transactionReceipt is required')
+        throw new Error("hash or transactionReceipt is required");
 
       const confirmations = await getTransactionConfirmations(config, {
         hash,
         transactionReceipt,
         ...(parameters as any),
-      })
-      return confirmations ?? null
+      });
+      return confirmations ?? null;
     },
     queryKey: getTransactionConfirmationsQueryKey(options),
   } as const satisfies QueryOptions<
     GetTransactionConfirmationsQueryFnData,
     GetTransactionConfirmationsErrorType,
     GetTransactionConfirmationsData,
-    GetTransactionConfirmationsQueryKey<config, chainId>
-  >
+    GetTransactionConfirmationsQueryKey<config, networkId>
+  >;
 }
 
 export type GetTransactionConfirmationsQueryFnData =
-  GetTransactionConfirmationsReturnType
+  GetTransactionConfirmationsReturnType;
 
 export type GetTransactionConfirmationsData =
-  GetTransactionConfirmationsQueryFnData
+  GetTransactionConfirmationsQueryFnData;
 
 export function getTransactionConfirmationsQueryKey<
   config extends Config,
-  chainId extends
-    | config['chains'][number]['id']
-    | undefined = config['chains'][number]['id'],
->(options: GetTransactionConfirmationsOptions<config, chainId> = {} as any) {
-  return ['transactionConfirmations', filterQueryOptions(options)] as const
+  networkId extends
+    | config["chains"][number]["id"]
+    | undefined = config["chains"][number]["id"]
+>(options: GetTransactionConfirmationsOptions<config, networkId> = {} as any) {
+  return ["transactionConfirmations", filterQueryOptions(options)] as const;
 }
 
 export type GetTransactionConfirmationsQueryKey<
   config extends Config,
-  chainId extends
-    | config['chains'][number]['id']
-    | undefined = config['chains'][number]['id'],
-> = ReturnType<typeof getTransactionConfirmationsQueryKey<config, chainId>>
+  networkId extends
+    | config["chains"][number]["id"]
+    | undefined = config["chains"][number]["id"]
+> = ReturnType<typeof getTransactionConfirmationsQueryKey<config, networkId>>;

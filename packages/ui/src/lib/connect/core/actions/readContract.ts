@@ -11,7 +11,7 @@ import {
 } from "@/lib/connect/viem/actions";
 
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import { getAction } from "../utils/getAction";
 
 export type ReadContractParameters<
@@ -27,7 +27,7 @@ export type ReadContractParameters<
   > = ContractFunctionArgs<abi, "pure" | "view", functionName>,
   config extends Config = Config
 > = viem_ReadContractParameters<abi, functionName, args> &
-  ChainIdParameter<config>;
+  NetworkIdParameter<config>;
 
 export type ReadContractReturnType<
   abi extends Abi | readonly unknown[] = Abi,
@@ -54,8 +54,8 @@ export function readContract<
   config: config,
   parameters: ReadContractParameters<abi, functionName, args, config>
 ): Promise<ReadContractReturnType<abi, functionName, args>> {
-  const { chainId, ...rest } = parameters;
-  const client = config.getClient({ chainId });
+  const { networkId, ...rest } = parameters;
+  const client = config.getClient({ networkId });
   const action = getAction(client, viem_readContract, "readContract");
   return action(rest as any);
 }

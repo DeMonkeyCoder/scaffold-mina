@@ -13,7 +13,7 @@ import {
 } from "@/lib/connect/viem/actions";
 
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { Unit } from "../types/unit";
 import type { Compute } from "../types/utils";
 import type { UnionCompute, UnionLooseOmit } from "../types/utils";
@@ -28,7 +28,7 @@ export type EstimateFeesPerGasParameters<
     viem_EstimateFeesPerGasParameters<Chain, Chain, type>,
     "chain"
   > &
-    ChainIdParameter<config> & {
+    NetworkIdParameter<config> & {
       /** @deprecated */
       formatUnits?: Unit | undefined;
     }
@@ -55,9 +55,9 @@ export async function estimateFeesPerGas<
   config: config,
   parameters: EstimateFeesPerGasParameters<type, config> = {}
 ): Promise<EstimateFeesPerGasReturnType<type>> {
-  const { chainId, formatUnits: units = "gwei", ...rest } = parameters;
+  const { networkId, formatUnits: units = "gwei", ...rest } = parameters;
 
-  const client = config.getClient({ chainId });
+  const client = config.getClient({ networkId });
   const action = getAction(
     client,
     viem_estimateFeesPerGas,

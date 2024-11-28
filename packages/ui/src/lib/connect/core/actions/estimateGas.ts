@@ -10,7 +10,7 @@ import type { Config } from "../createConfig";
 import type { BaseErrorType, ErrorType } from "../errors/base";
 import type { SelectChains } from "../types/chain";
 import type {
-  ChainIdParameter,
+  NetworkIdParameter,
   ConnectorParameter,
 } from "../types/properties";
 import type { UnionCompute, UnionLooseOmit } from "../types/utils";
@@ -22,15 +22,15 @@ import {
 
 export type EstimateGasParameters<
   config extends Config = Config,
-  chainId extends
+  networkId extends
     | config["chains"][number]["id"]
     | undefined = config["chains"][number]["id"],
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = {
   [key in keyof chains]: UnionCompute<
     UnionLooseOmit<viem_EstimateGasParameters<chains[key]>, "chain"> &
-      ChainIdParameter<config, chainId> &
+      NetworkIdParameter<config, networkId> &
       ConnectorParameter
   >;
 }[number];
@@ -49,25 +49,25 @@ export type EstimateGasErrorType =
 /** https://wagmi.sh/core/api/actions/estimateGas */
 export async function estimateGas<
   config extends Config,
-  chainId extends config["chains"][number]["id"] | undefined = undefined
+  networkId extends config["chains"][number]["id"] | undefined = undefined
 >(
   config: config,
-  parameters: EstimateGasParameters<config, chainId>
+  parameters: EstimateGasParameters<config, networkId>
 ): Promise<EstimateGasReturnType> {
-  const { chainId, connector, ...rest } = parameters;
+  const { networkId, connector, ...rest } = parameters;
 
   let account: Address | Account;
   if (parameters.account) account = parameters.account;
   else {
     const connectorClient = await getConnectorClient(config, {
       account: parameters.account,
-      chainId,
+      networkId,
       connector,
     });
     account = connectorClient.account;
   }
 
-  const client = config.getClient({ chainId });
+  const client = config.getClient({ networkId });
   const action = getAction(client, viem_estimateGas, "estimateGas");
   return action({ ...(rest as viem_EstimateGasParameters), account });
 }

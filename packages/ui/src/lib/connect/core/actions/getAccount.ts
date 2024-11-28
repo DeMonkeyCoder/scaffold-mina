@@ -11,7 +11,7 @@ export type GetAccountReturnType<
       address: Address;
       addresses: readonly [Address, ...Address[]];
       chain: chain | undefined;
-      chainId: string;
+      networkId: string;
       connector: Connector;
       isConnected: true;
       isConnecting: false;
@@ -23,7 +23,7 @@ export type GetAccountReturnType<
       address: Address | undefined;
       addresses: readonly Address[] | undefined;
       chain: chain | undefined;
-      chainId: string | undefined;
+      networkId: string | undefined;
       connector: Connector | undefined;
       isConnected: boolean;
       isConnecting: false;
@@ -35,7 +35,7 @@ export type GetAccountReturnType<
       address: Address | undefined;
       addresses: readonly Address[] | undefined;
       chain: chain | undefined;
-      chainId: string | undefined;
+      networkId: string | undefined;
       connector: Connector | undefined;
       isConnected: false;
       isReconnecting: false;
@@ -47,7 +47,7 @@ export type GetAccountReturnType<
       address: undefined;
       addresses: undefined;
       chain: undefined;
-      chainId: undefined;
+      networkId: undefined;
       connector: undefined;
       isConnected: false;
       isReconnecting: false;
@@ -65,7 +65,7 @@ export function getAccount<config extends Config>(
   const addresses = connection?.accounts;
   const address = addresses?.[0];
   const chain = config.chains.find(
-    (chain) => chain.id === connection?.chainId
+    (chain) => chain.id === connection?.networkId
   ) as GetAccountReturnType<config>["chain"];
   const status = config.state.status;
 
@@ -75,7 +75,7 @@ export function getAccount<config extends Config>(
         address: address!,
         addresses: addresses!,
         chain,
-        chainId: connection?.chainId!,
+        networkId: connection?.networkId!,
         connector: connection?.connector!,
         isConnected: true,
         isConnecting: false,
@@ -88,7 +88,7 @@ export function getAccount<config extends Config>(
         address,
         addresses,
         chain,
-        chainId: connection?.chainId,
+        networkId: connection?.networkId,
         connector: connection?.connector,
         isConnected: !!address,
         isConnecting: false,
@@ -101,7 +101,7 @@ export function getAccount<config extends Config>(
         address,
         addresses,
         chain,
-        chainId: connection?.chainId,
+        networkId: connection?.networkId,
         connector: connection?.connector,
         isConnected: false,
         isConnecting: true,
@@ -114,7 +114,7 @@ export function getAccount<config extends Config>(
         address: undefined,
         addresses: undefined,
         chain: undefined,
-        chainId: undefined,
+        networkId: undefined,
         connector: undefined,
         isConnected: false,
         isConnecting: false,

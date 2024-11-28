@@ -7,7 +7,7 @@ import {
 } from "../actions/readContracts";
 import type { Config } from "../createConfig";
 import type {
-  ChainIdParameter,
+  NetworkIdParameter,
   ScopeKeyParameter,
 } from "../types/properties";
 import type { StrictOmit } from "../types/utils";
@@ -43,7 +43,7 @@ export function infiniteReadContractsQueryOptions<
     pageParam,
     config
   > &
-    ChainIdParameter<config> &
+    NetworkIdParameter<config> &
     RequiredPageParamsParameters<contracts, allowFailure, pageParam>
 ) {
   return {
@@ -105,7 +105,7 @@ export function infiniteReadContractsQueryKey<
     pageParam,
     config
   > &
-    ChainIdParameter<config> &
+    NetworkIdParameter<config> &
     RequiredPageParamsParameters<contracts, allowFailure, pageParam>
 ) {
   const { contracts: _, query: _q, ...parameters } = options;

@@ -26,7 +26,7 @@ import {
   type UseInfiniteQueryReturnType,
   useInfiniteQuery,
 } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseInfiniteContractReadsParameters<
@@ -71,11 +71,11 @@ export function useInfiniteReadContracts<
   const { contracts = [], query } = parameters;
 
   const config = useConfig(parameters);
-  const chainId = useChainId({ config });
+  const networkId = useNetworkId({ config });
 
   const options = infiniteReadContractsQueryOptions(config, {
     ...parameters,
-    chainId,
+    networkId,
     contracts: contracts as UseInfiniteContractReadsParameters["contracts"],
     query: query as UseInfiniteQueryParameters,
   });

@@ -13,7 +13,7 @@ import type {
 import type { Config } from "../createConfig";
 import type { SelectChains } from "../types/chain";
 import type {
-  ChainIdParameter,
+  NetworkIdParameter,
   SyncConnectedChainParameter,
 } from "../types/properties";
 import type { IsNarrowable, UnionCompute } from "../types/utils";
@@ -23,9 +23,9 @@ export type WatchBlocksParameters<
   includeTransactions extends boolean = false,
   blockTag extends BlockTag = "latest",
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = {
   [key in keyof chains]: UnionCompute<
     viem_WatchBlocksParameters<
@@ -38,7 +38,7 @@ export type WatchBlocksParameters<
       includeTransactions,
       blockTag
     > &
-      ChainIdParameter<config, chainId> &
+      NetworkIdParameter<config, networkId> &
       SyncConnectedChainParameter
   >;
 }[number];
@@ -49,7 +49,7 @@ export type WatchBlocksReturnType = viem_WatchBlocksReturnType;
 /** https://wagmi.sh/core/actions/watchBlocks */
 export function watchBlocks<
   config extends Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   includeTransactions extends boolean = false,
   blockTag extends BlockTag = "latest"
 >(
@@ -58,31 +58,31 @@ export function watchBlocks<
     includeTransactions,
     blockTag,
     config,
-    chainId
+    networkId
   >
 ): WatchBlocksReturnType {
   const { syncConnectedChain = config._internal.syncConnectedChain, ...rest } =
     parameters as WatchBlocksParameters;
 
   let unwatch: WatchBlocksReturnType | undefined;
-  const listener = (chainId: string | undefined) => {
+  const listener = (networkId: string | undefined) => {
     if (unwatch) unwatch();
 
-    const client = config.getClient({ chainId });
+    const client = config.getClient({ networkId });
     const action = getAction(client, viem_watchBlocks, "watchBlocks");
     unwatch = action(rest as viem_WatchBlocksParameters);
     return unwatch;
   };
 
   // set up listener for block number changes
-  const unlisten = listener(parameters.chainId);
+  const unlisten = listener(parameters.networkId);
 
   // set up subscriber for connected chain changes
   let unsubscribe: (() => void) | undefined;
-  if (syncConnectedChain && !parameters.chainId)
+  if (syncConnectedChain && !parameters.networkId)
     unsubscribe = config.subscribe(
-      ({ chainId }) => chainId,
-      async (chainId) => listener(chainId)
+      ({ networkId }) => networkId,
+      async (networkId) => listener(networkId)
     );
 
   return () => {

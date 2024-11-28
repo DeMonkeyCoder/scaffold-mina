@@ -20,22 +20,22 @@ import type { Compute, ExactPartial } from "../types/utils";
 
 export type SwitchChainParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = Compute<
   ConnectorParameter & {
-    chainId: chainId | config["chains"][number]["id"];
+    networkId: networkId | config["chains"][number]["id"];
     addEthereumChainParameter?:
-      | Compute<ExactPartial<Omit<AddEthereumChainParameter, "chainId">>>
+      | Compute<ExactPartial<Omit<AddEthereumChainParameter, "networkId">>>
       | undefined;
   }
 >;
 
 export type SwitchChainReturnType<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = Extract<
   config["chains"][number],
-  { id: Config extends config ? number : chainId }
+  { id: Config extends config ? number : networkId }
 >;
 
 export type SwitchChainErrorType =
@@ -53,12 +53,12 @@ export type SwitchChainErrorType =
 /** https://wagmi.sh/core/api/actions/switchChain */
 export async function switchChain<
   config extends Config,
-  chainId extends config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"]
 >(
   config: config,
-  parameters: SwitchChainParameters<config, chainId>
-): Promise<SwitchChainReturnType<config, chainId>> {
-  const { addEthereumChainParameter, chainId } = parameters;
+  parameters: SwitchChainParameters<config, networkId>
+): Promise<SwitchChainReturnType<config, networkId>> {
+  const { addEthereumChainParameter, networkId } = parameters;
 
   const connection = config.state.connections.get(
     parameters.connector?.uid ?? config.state.current!
@@ -69,13 +69,13 @@ export async function switchChain<
       throw new SwitchChainNotSupportedError({ connector });
     const chain = await connector.switchChain({
       addEthereumChainParameter,
-      chainId,
+      networkId,
     });
-    return chain as SwitchChainReturnType<config, chainId>;
+    return chain as SwitchChainReturnType<config, networkId>;
   }
 
-  const chain = config.chains.find((x) => x.id === chainId);
+  const chain = config.chains.find((x) => x.id === networkId);
   if (!chain) throw new ChainNotConfiguredError();
-  config.setState((x) => ({ ...x, chainId }));
-  return chain as SwitchChainReturnType<config, chainId>;
+  config.setState((x) => ({ ...x, networkId }));
+  return chain as SwitchChainReturnType<config, networkId>;
 }

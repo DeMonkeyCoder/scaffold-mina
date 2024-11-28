@@ -11,7 +11,7 @@ export type CreateNonceManagerParameters = {
 
 type FunctionParameters = {
   address: Address;
-  chainId: string;
+  networkId: string;
 };
 
 export type NonceManager = {
@@ -20,11 +20,11 @@ export type NonceManager = {
     parameters: FunctionParameters & { client: Client }
   ) => Promise<number>;
   /** Increment a nonce. */
-  increment: (chainId: FunctionParameters) => void;
+  increment: (networkId: FunctionParameters) => void;
   /** Get a nonce. */
-  get: (chainId: FunctionParameters & { client: Client }) => Promise<number>;
+  get: (networkId: FunctionParameters & { client: Client }) => Promise<number>;
   /** Reset a nonce. */
-  reset: (chainId: FunctionParameters) => void;
+  reset: (networkId: FunctionParameters) => void;
 };
 
 /**
@@ -48,42 +48,42 @@ export function createNonceManager(
   const nonceMap = new LruMap<number>(8192);
   const promiseMap = new Map<string, Promise<number>>();
 
-  const getKey = ({ address, chainId }: FunctionParameters) =>
-    `${address}.${chainId}`;
+  const getKey = ({ address, networkId }: FunctionParameters) =>
+    `${address}.${networkId}`;
 
   return {
-    async consume({ address, chainId, client }) {
-      const key = getKey({ address, chainId });
-      const promise = this.get({ address, chainId, client });
+    async consume({ address, networkId, client }) {
+      const key = getKey({ address, networkId });
+      const promise = this.get({ address, networkId, client });
 
-      this.increment({ address, chainId });
+      this.increment({ address, networkId });
       const nonce = await promise;
 
-      await source.set({ address, chainId }, nonce);
+      await source.set({ address, networkId }, nonce);
       nonceMap.set(key, nonce);
 
       return nonce;
     },
-    async increment({ address, chainId }) {
-      const key = getKey({ address, chainId });
+    async increment({ address, networkId }) {
+      const key = getKey({ address, networkId });
       const delta = deltaMap.get(key) ?? 0;
       deltaMap.set(key, delta + 1);
     },
-    async get({ address, chainId, client }) {
-      const key = getKey({ address, chainId });
+    async get({ address, networkId, client }) {
+      const key = getKey({ address, networkId });
 
       let promise = promiseMap.get(key);
       if (!promise) {
         promise = (async () => {
           try {
-            const nonce = await source.get({ address, chainId, client });
+            const nonce = await source.get({ address, networkId, client });
             const previousNonce = nonceMap.get(key) ?? 0;
             if (previousNonce > 0 && nonce <= previousNonce)
               return previousNonce + 1;
             nonceMap.delete(key);
             return nonce;
           } finally {
-            this.reset({ address, chainId });
+            this.reset({ address, networkId });
           }
         })();
         promiseMap.set(key, promise);
@@ -92,8 +92,8 @@ export function createNonceManager(
       const delta = deltaMap.get(key) ?? 0;
       return delta + (await promise);
     },
-    reset({ address, chainId }) {
-      const key = getKey({ address, chainId });
+    reset({ address, networkId }) {
+      const key = getKey({ address, networkId });
       deltaMap.delete(key);
       promiseMap.delete(key);
     },

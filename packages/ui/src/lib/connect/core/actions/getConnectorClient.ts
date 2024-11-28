@@ -19,14 +19,17 @@ import {
   ConnectorNotConnectedError,
   type ConnectorNotConnectedErrorType,
 } from "../errors/config";
-import type { ChainIdParameter, ConnectorParameter } from "../types/properties";
+import type {
+  NetworkIdParameter,
+  ConnectorParameter,
+} from "../types/properties";
 import type { Compute } from "../types/utils";
 
 export type GetConnectorClientParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = Compute<
-  ChainIdParameter<config, chainId> &
+  NetworkIdParameter<config, networkId> &
     ConnectorParameter & {
       account?: Address | Account | undefined;
     }
@@ -34,11 +37,11 @@ export type GetConnectorClientParameters<
 
 export type GetConnectorClientReturnType<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = Compute<
   Client<
-    config["_internal"]["transports"][chainId],
-    Extract<config["chains"][number], { id: chainId }>,
+    config["_internal"]["transports"][networkId],
+    Extract<config["chains"][number], { id: networkId }>,
     Account
   >
 >;
@@ -54,49 +57,49 @@ export type GetConnectorClientErrorType =
 /** https://wagmi.sh/core/api/actions/getConnectorClient */
 export async function getConnectorClient<
   config extends Config,
-  chainId extends config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"]
 >(
   config: config,
-  parameters: GetConnectorClientParameters<config, chainId> = {}
-): Promise<GetConnectorClientReturnType<config, chainId>> {
+  parameters: GetConnectorClientParameters<config, networkId> = {}
+): Promise<GetConnectorClientReturnType<config, networkId>> {
   // Get connection
   let connection: Connection | undefined;
   if (parameters.connector) {
     const { connector } = parameters;
-    const [accounts, chainId] = await Promise.all([
+    const [accounts, networkId] = await Promise.all([
       connector.getAccounts(),
-      connector.getChainId(),
+      connector.getNetworkId(),
     ]);
     connection = {
       accounts: accounts as readonly [Address, ...Address[]],
-      chainId,
+      networkId,
       connector,
     };
   } else connection = config.state.connections.get(config.state.current!);
   if (!connection) throw new ConnectorNotConnectedError();
 
-  const chainId = parameters.chainId ?? connection.chainId;
+  const networkId = parameters.networkId ?? connection.networkId;
 
-  // Check connector using same chainId as connection
-  const connectorChainId = await connection.connector.getChainId();
-  if (connectorChainId !== connection.chainId)
+  // Check connector using same networkId as connection
+  const connectorNetworkId = await connection.connector.getNetworkId();
+  if (connectorNetworkId !== connection.networkId)
     throw new ConnectorChainMismatchError({
-      connectionChainId: connection.chainId,
-      connectorChainId,
+      connectionNetworkId: connection.networkId,
+      connectorNetworkId,
     });
 
   // If connector has custom `getClient` implementation
-  type Return = GetConnectorClientReturnType<config, chainId>;
+  type Return = GetConnectorClientReturnType<config, networkId>;
   const connector = connection.connector;
   if (connector.getClient)
-    return connector.getClient({ chainId }) as unknown as Return;
+    return connector.getClient({ networkId }) as unknown as Return;
 
   // Default using `custom` transport
   const account = parseAccount(parameters.account ?? connection.accounts[0]!);
   account.address = getAddress(account.address); // TODO: Checksum address as part of `parseAccount`?
 
-  const chain = config.chains.find((chain) => chain.id === chainId);
-  const provider = (await connection.connector.getProvider({ chainId })) as {
+  const chain = config.chains.find((chain) => chain.id === networkId);
+  const provider = (await connection.connector.getProvider({ networkId })) as {
     request(...args: any): Promise<any>;
   };
 

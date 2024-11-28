@@ -6,12 +6,12 @@ import {
 } from "@/lib/connect/viem/actions";
 
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { Compute } from "../types/utils";
 import { getAction } from "../utils/getAction";
 
 export type GetStorageAtParameters<config extends Config = Config> = Compute<
-  viem_GetStorageAtParameters & ChainIdParameter<config>
+  viem_GetStorageAtParameters & NetworkIdParameter<config>
 >;
 
 export type GetStorageAtReturnType = viem_GetStorageAtReturnType;
@@ -23,8 +23,8 @@ export async function getStorageAt<config extends Config>(
   config: config,
   parameters: GetStorageAtParameters<config>
 ): Promise<GetStorageAtReturnType> {
-  const { chainId, ...rest } = parameters;
-  const client = config.getClient({ chainId });
+  const { networkId, ...rest } = parameters;
+  const client = config.getClient({ networkId });
   const action = getAction(client, viem_getStorageAt, "getStorageAt");
   return action(rest);
 }

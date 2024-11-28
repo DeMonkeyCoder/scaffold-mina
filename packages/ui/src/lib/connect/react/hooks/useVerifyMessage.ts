@@ -15,7 +15,7 @@ import {
 import type { VerifyMessageQueryFnData } from "@/lib/connect/core/exports/query";
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { type UseQueryReturnType, useQuery } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseVerifyMessageParameters<
@@ -45,11 +45,11 @@ export function useVerifyMessage<
   const { address, message, signature, query = {} } = parameters;
 
   const config = useConfig(parameters);
-  const chainId = useChainId({ config });
+  const networkId = useNetworkId({ config });
 
   const options = verifyMessageQueryOptions(config, {
     ...parameters,
-    chainId: parameters.chainId ?? chainId,
+    networkId: parameters.networkId ?? networkId,
   });
   const enabled = Boolean(
     address && message && signature && (query.enabled ?? true)

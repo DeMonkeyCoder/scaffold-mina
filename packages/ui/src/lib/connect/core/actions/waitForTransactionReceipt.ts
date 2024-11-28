@@ -11,27 +11,28 @@ import {
 
 import type { Config } from "../createConfig";
 import type { SelectChains } from "../types/chain";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { Compute, IsNarrowable } from "../types/utils";
 import { getAction } from "../utils/getAction";
 
 export type WaitForTransactionReceiptParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = Compute<
-  viem_WaitForTransactionReceiptParameters & ChainIdParameter<config, chainId>
+  viem_WaitForTransactionReceiptParameters &
+    NetworkIdParameter<config, networkId>
 >;
 
 export type WaitForTransactionReceiptReturnType<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = Compute<
   {
     [key in keyof chains]: viem_WaitForTransactionReceiptReturnType<
       IsNarrowable<chains[key], Chain> extends true ? chains[key] : undefined
-    > & { chainId: chains[key]["id"] };
+    > & { networkId: chains[key]["id"] };
   }[number]
 >;
 
@@ -40,14 +41,14 @@ export type WaitForTransactionReceiptErrorType =
 
 export async function waitForTransactionReceipt<
   config extends Config,
-  chainId extends config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"]
 >(
   config: config,
-  parameters: WaitForTransactionReceiptParameters<config, chainId>
-): Promise<WaitForTransactionReceiptReturnType<config, chainId>> {
-  const { chainId, timeout = 0, ...rest } = parameters;
+  parameters: WaitForTransactionReceiptParameters<config, networkId>
+): Promise<WaitForTransactionReceiptReturnType<config, networkId>> {
+  const { networkId, timeout = 0, ...rest } = parameters;
 
-  const client = config.getClient({ chainId });
+  const client = config.getClient({ networkId });
   const action = getAction(
     client,
     viem_waitForTransactionReceipt,
@@ -78,6 +79,6 @@ export async function waitForTransactionReceipt<
 
   return {
     ...receipt,
-    chainId: client.chain.id,
-  } as WaitForTransactionReceiptReturnType<config, chainId>;
+    networkId: client.chain.id,
+  } as WaitForTransactionReceiptReturnType<config, networkId>;
 }

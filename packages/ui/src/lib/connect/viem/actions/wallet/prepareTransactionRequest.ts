@@ -63,11 +63,11 @@ import {
   type GetTransactionType,
   getTransactionType,
 } from "../../utils/transaction/getTransactionType";
-import { getChainId as getChainId_ } from "../public/getChainId";
+import { getNetworkId as getNetworkId_ } from "../public/getNetworkId";
 
 export const defaultParameters = [
   "blobVersionedHashes",
-  "chainId",
+  "networkId",
   "fees",
   "gas",
   "nonce",
@@ -76,7 +76,7 @@ export const defaultParameters = [
 
 export type PrepareTransactionRequestParameterType =
   | "blobVersionedHashes"
-  | "chainId"
+  | "networkId"
   | "fees"
   | "gas"
   | "nonce"
@@ -113,7 +113,9 @@ export type PrepareTransactionRequestParameters<
 > = request &
   GetAccountParameter<account, accountOverride, false> &
   GetChainParameter<chain, chainOverride> &
-  GetTransactionRequestKzgParameter<request> & { chainId?: string | undefined };
+  GetTransactionRequestKzgParameter<request> & {
+    networkId?: string | undefined;
+  };
 
 export type PrepareTransactionRequestReturnType<
   chain extends Chain | undefined = Chain | undefined,
@@ -157,7 +159,7 @@ export type PrepareTransactionRequestReturnType<
       IsNever<_transactionRequest> extends true
         ? unknown
         : ExactPartial<_transactionRequest>
-    > & { chainId?: string | undefined },
+    > & { networkId?: string | undefined },
     ParameterTypeToParameters<
       request["parameters"] extends readonly PrepareTransactionRequestParameterType[]
         ? request["parameters"][number]
@@ -266,15 +268,19 @@ export async function prepareTransactionRequest<
     return block;
   }
 
-  let chainId: string | undefined;
+  let networkId: string | undefined;
 
-  async function getChainId(): Promise<string> {
-    if (chainId) return chainId;
+  async function getNetworkId(): Promise<string> {
+    if (networkId) return networkId;
     if (chain) return chain.id;
-    if (typeof args.chainId !== "undefined") return args.chainId;
-    const chainId_ = await getAction(client, getChainId_, "getChainId")({});
-    chainId = chainId_;
-    return chainId;
+    if (typeof args.networkId !== "undefined") return args.networkId;
+    const networkId_ = await getAction(
+      client,
+      getNetworkId_,
+      "getNetworkId"
+    )({});
+    networkId = networkId_;
+    return networkId;
   }
 
   if (
@@ -304,14 +310,15 @@ export async function prepareTransactionRequest<
     }
   }
 
-  if (parameters.includes("chainId")) request.chainId = await getChainId();
+  if (parameters.includes("networkId"))
+    request.networkId = await getNetworkId();
 
   if (parameters.includes("nonce") && typeof nonce === "undefined" && account) {
     if (account.nonceManager) {
-      const chainId = await getChainId();
+      const networkId = await getNetworkId();
       request.nonce = await account.nonceManager.consume({
         address: account.address,
-        chainId,
+        networkId,
         client,
       });
     } else {

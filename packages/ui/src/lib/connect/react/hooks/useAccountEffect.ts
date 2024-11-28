@@ -16,7 +16,7 @@ export type UseAccountEffectParameters = Compute<
       data: Compute<
         Pick<
           Extract<GetAccountReturnType, { status: "connected" }>,
-          "address" | "addresses" | "chain" | "chainId" | "connector"
+          "address" | "addresses" | "chain" | "networkId" | "connector"
         > & {
           isReconnected: boolean;
         }
@@ -41,7 +41,7 @@ export function useAccountEffect(parameters: UseAccountEffectParameters = {}) {
               prevData.address === undefined)) &&
           data.status === "connected"
         ) {
-          const { address, addresses, chain, chainId, connector } = data;
+          const { address, addresses, chain, networkId, connector } = data;
           const isReconnected =
             prevData.status === "reconnecting" ||
             // if `previousAccount.status` is `undefined`, the connector connected immediately.
@@ -50,7 +50,7 @@ export function useAccountEffect(parameters: UseAccountEffectParameters = {}) {
             address,
             addresses,
             chain,
-            chainId,
+            networkId,
             connector,
             isReconnected,
           });

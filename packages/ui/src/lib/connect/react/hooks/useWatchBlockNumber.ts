@@ -13,14 +13,14 @@ import type {
 import { useEffect } from "react";
 
 import type { ConfigParameter, EnabledParameter } from "../types/properties";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseWatchBlockNumberParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = UnionCompute<
-  UnionExactPartial<WatchBlockNumberParameters<config, chainId>> &
+  UnionExactPartial<WatchBlockNumberParameters<config, networkId>> &
     ConfigParameter<config> &
     EnabledParameter
 >;
@@ -30,15 +30,15 @@ export type UseWatchBlockNumberReturnType = void;
 /** https://wagmi.sh/react/api/hooks/useWatchBlockNumber */
 export function useWatchBlockNumber<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 >(
-  parameters: UseWatchBlockNumberParameters<config, chainId> = {} as any
+  parameters: UseWatchBlockNumberParameters<config, networkId> = {} as any
 ): UseWatchBlockNumberReturnType {
   const { enabled = true, onBlockNumber, config: _, ...rest } = parameters;
 
   const config = useConfig(parameters);
-  const configChainId = useChainId({ config });
-  const chainId = parameters.chainId ?? configChainId;
+  const configNetworkId = useNetworkId({ config });
+  const networkId = parameters.networkId ?? configNetworkId;
 
   // TODO(react@19): cleanup
   // biome-ignore lint/correctness/useExhaustiveDependencies: `rest` changes every render so only including properties in dependency array
@@ -47,11 +47,11 @@ export function useWatchBlockNumber<
     if (!onBlockNumber) return;
     return watchBlockNumber(config, {
       ...(rest as any),
-      chainId,
+      networkId,
       onBlockNumber,
     });
   }, [
-    chainId,
+    networkId,
     config,
     enabled,
     onBlockNumber,

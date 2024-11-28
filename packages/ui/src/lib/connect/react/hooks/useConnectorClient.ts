@@ -23,24 +23,24 @@ import {
   useQuery,
 } from "../utils/query";
 import { useAccount } from "./useAccount";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseConnectorClientParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetConnectorClientData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetConnectorClientData<config, networkId>
 > = Compute<
-  GetConnectorClientOptions<config, chainId> &
+  GetConnectorClientOptions<config, networkId> &
     ConfigParameter<config> & {
       query?:
         | Compute<
             Omit<
               UseQueryParameters<
-                GetConnectorClientQueryFnData<config, chainId>,
+                GetConnectorClientQueryFnData<config, networkId>,
                 GetConnectorClientErrorType,
                 selectData,
-                GetConnectorClientQueryKey<config, chainId>
+                GetConnectorClientQueryKey<config, networkId>
               >,
               "gcTime" | "staleTime"
             >
@@ -51,31 +51,31 @@ export type UseConnectorClientParameters<
 
 export type UseConnectorClientReturnType<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetConnectorClientData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetConnectorClientData<config, networkId>
 > = UseQueryReturnType<selectData, GetConnectorClientErrorType>;
 
 /** https://wagmi.sh/react/api/hooks/useConnectorClient */
 export function useConnectorClient<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetConnectorClientData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetConnectorClientData<config, networkId>
 >(
-  parameters: UseConnectorClientParameters<config, chainId, selectData> = {}
-): UseConnectorClientReturnType<config, chainId, selectData> {
+  parameters: UseConnectorClientParameters<config, networkId, selectData> = {}
+): UseConnectorClientReturnType<config, networkId, selectData> {
   const { query = {}, ...rest } = parameters;
 
   const config = useConfig(rest);
   const queryClient = useQueryClient();
   const { address, connector, status } = useAccount({ config });
-  const chainId = useChainId({ config });
+  const networkId = useNetworkId({ config });
 
   const { queryKey, ...options } = getConnectorClientQueryOptions<
     config,
-    chainId
+    networkId
   >(config, {
     ...parameters,
-    chainId: parameters.chainId ?? chainId,
+    networkId: parameters.networkId ?? networkId,
     connector: parameters.connector ?? connector,
   });
   const enabled = Boolean(

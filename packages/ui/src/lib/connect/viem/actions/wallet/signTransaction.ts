@@ -33,7 +33,10 @@ import {
   assertRequest,
   type AssertRequestErrorType,
 } from "../../utils/transaction/assertRequest";
-import { getChainId, type GetChainIdErrorType } from "../public/getChainId";
+import {
+  getNetworkId,
+  type GetNetworkIdErrorType,
+} from "../public/getNetworkId";
 
 type SignTransactionRequest<
   chain extends Chain | undefined = Chain | undefined,
@@ -60,7 +63,7 @@ export type SignTransactionReturnType = TransactionSerialized;
 export type SignTransactionErrorType =
   | ParseAccountErrorType
   | AssertRequestErrorType
-  | GetChainIdErrorType
+  | GetNetworkIdErrorType
   | AssertCurrentChainErrorType
   | SignTransactionErrorType_account
   | NumberToHexErrorType
@@ -139,10 +142,10 @@ export async function signTransaction<
     ...parameters,
   });
 
-  const chainId = await getAction(client, getChainId, "getChainId")({});
+  const networkId = await getAction(client, getNetworkId, "getNetworkId")({});
   if (chain !== null)
     assertCurrentChain({
-      currentChainId: chainId,
+      currentNetworkId: networkId,
       chain,
     });
 
@@ -154,7 +157,7 @@ export async function signTransaction<
     return account.signTransaction(
       {
         ...transaction,
-        chainId,
+        networkId,
       } as TransactionSerializable,
       { serializer: client.chain?.serializers?.transaction }
     ) as Promise<SignTransactionReturnType>;
@@ -165,7 +168,7 @@ export async function signTransaction<
       params: [
         {
           ...format(transaction as unknown as TransactionRequest),
-          chainId,
+          networkId,
           from: account.address,
         } as unknown as RpcTransactionRequest,
       ],

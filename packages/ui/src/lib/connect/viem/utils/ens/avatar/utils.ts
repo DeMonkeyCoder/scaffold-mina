@@ -217,7 +217,7 @@ export async function parseAvatarUri({
 }
 
 type ParsedNft = {
-  chainId: string;
+  networkId: string;
   namespace: string;
   contractAddress: Address;
   tokenID: string;
@@ -254,7 +254,7 @@ export function parseNftUri(uri_: string): ParsedNft {
     });
 
   return {
-    chainId: chainID,
+    networkId: chainID,
     namespace: erc_namespace.toLowerCase(),
     contractAddress: contractAddress as Address,
     tokenID,

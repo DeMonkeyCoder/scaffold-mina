@@ -7,17 +7,17 @@ import {
 } from "@/lib/connect/viem/actions";
 
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { Compute, UnionLooseOmit } from "../types/utils";
 import { getAction } from "../utils/getAction";
 
 export type EstimateMaxPriorityFeePerGasParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = Compute<
   UnionLooseOmit<
     viem_EstimateMaxPriorityFeePerGasParameters<Chain, Chain> &
-      ChainIdParameter<config, chainId>,
+      NetworkIdParameter<config, networkId>,
     "chain"
   >
 >;
@@ -31,13 +31,13 @@ export type EstimateMaxPriorityFeePerGasErrorType =
 /** https://wagmi.sh/core/api/actions/estimateMaxPriorityFeePerGas */
 export async function estimateMaxPriorityFeePerGas<
   config extends Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 >(
   config: config,
-  parameters: EstimateMaxPriorityFeePerGasParameters<config, chainId> = {}
+  parameters: EstimateMaxPriorityFeePerGasParameters<config, networkId> = {}
 ): Promise<EstimateMaxPriorityFeePerGasReturnType> {
-  const { chainId } = parameters;
-  const client = config.getClient({ chainId });
+  const { networkId } = parameters;
+  const client = config.getClient({ networkId });
   const action = getAction(
     client,
     viem_estimateMaxPriorityFeePerGas,

@@ -97,10 +97,10 @@ export {
   getBlockTransactionCount,
 } from "./public/getBlockTransactionCount";
 export {
-  type GetChainIdErrorType,
-  type GetChainIdReturnType,
-  getChainId,
-} from "./public/getChainId";
+  type GetNetworkIdErrorType,
+  type GetNetworkIdReturnType,
+  getNetworkId,
+} from "./public/getNetworkId";
 export {
   /** @deprecated Use `GetCodeErrorType` instead */
   type GetCodeErrorType as GetBytecodeErrorType,

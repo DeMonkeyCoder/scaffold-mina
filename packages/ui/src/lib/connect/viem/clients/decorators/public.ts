@@ -68,9 +68,9 @@ import {
   type GetBlockTransactionCountReturnType,
 } from "../../actions/public/getBlockTransactionCount";
 import {
-  getChainId,
-  type GetChainIdReturnType,
-} from "../../actions/public/getChainId";
+  getNetworkId,
+  type GetNetworkIdReturnType,
+} from "../../actions/public/getNetworkId";
 import {
   getCode,
   type GetCodeParameters,
@@ -594,10 +594,10 @@ export type PublicActions<
   /**
    * Returns the chain ID associated with the current network.
    *
-   * - Docs: https://viem.sh/docs/actions/public/getChainId
+   * - Docs: https://viem.sh/docs/actions/public/getNetworkId
    * - JSON-RPC Methods: [`mina_networkId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_networkId)
    *
-   * @returns The current chain ID. {@link GetChainIdReturnType}
+   * @returns The current chain ID. {@link GetNetworkIdReturnType}
    *
    * @example
    * import { createPublicClient, http } from 'viem'
@@ -607,10 +607,10 @@ export type PublicActions<
    *   chain: mainnet,
    *   transport: http(),
    * })
-   * const chainId = await client.getChainId()
+   * const networkId = await client.getNetworkId()
    * // 1
    */
-  getChainId: () => Promise<GetChainIdReturnType>;
+  getNetworkId: () => Promise<GetNetworkIdReturnType>;
   /**
    * Retrieves the bytecode at an address.
    *
@@ -1590,7 +1590,7 @@ export function publicActions<
     getBlockNumber: (args) => getBlockNumber(client, args),
     getBlockTransactionCount: (args) => getBlockTransactionCount(client, args),
     getBytecode: (args) => getCode(client, args),
-    getChainId: () => getChainId(client),
+    getNetworkId: () => getNetworkId(client),
     getCode: (args) => getCode(client, args),
     getContractEvents: (args) => getContractEvents(client, args),
     getFeeHistory: (args) => getFeeHistory(client, args),

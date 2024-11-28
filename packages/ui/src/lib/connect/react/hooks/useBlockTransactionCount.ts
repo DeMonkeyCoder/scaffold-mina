@@ -16,21 +16,21 @@ import {
 
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { type UseQueryReturnType, useQuery } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseBlockTransactionCountParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   selectData = GetBlockTransactionCountData
 > = UnionCompute<
-  GetBlockTransactionCountOptions<config, chainId> &
+  GetBlockTransactionCountOptions<config, networkId> &
     ConfigParameter<config> &
     QueryParameter<
       GetBlockTransactionCountQueryFnData,
       GetBlockTransactionCountErrorType,
       selectData,
-      GetBlockTransactionCountQueryKey<config, chainId>
+      GetBlockTransactionCountQueryKey<config, networkId>
     >
 >;
 
@@ -41,24 +41,24 @@ export type UseBlockTransactionCountReturnType<
 /** https://wagmi.sh/react/api/hooks/useBlockTransactionCount */
 export function useBlockTransactionCount<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   selectData = GetBlockTransactionCountData
 >(
   parameters: UseBlockTransactionCountParameters<
     config,
-    chainId,
+    networkId,
     selectData
   > = {}
 ): UseBlockTransactionCountReturnType<selectData> {
   const { query = {} } = parameters;
 
   const config = useConfig(parameters);
-  const configChainId = useChainId({ config });
-  const chainId = parameters.chainId ?? configChainId;
+  const configNetworkId = useNetworkId({ config });
+  const networkId = parameters.networkId ?? configNetworkId;
 
   const options = getBlockTransactionCountQueryOptions(config, {
     ...parameters,
-    chainId,
+    networkId,
   });
 
   return useQuery({ ...query, ...options });

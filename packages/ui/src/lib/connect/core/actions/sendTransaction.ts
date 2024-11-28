@@ -16,7 +16,7 @@ import type { Config } from "../createConfig";
 import type { BaseErrorType, ErrorType } from "../errors/base";
 import type { SelectChains } from "../types/chain";
 import type {
-  ChainIdParameter,
+  NetworkIdParameter,
   ConnectorParameter,
 } from "../types/properties";
 import type { Compute } from "../types/utils";
@@ -29,16 +29,16 @@ import {
 
 export type SendTransactionParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = {
   [key in keyof chains]: Compute<
     Omit<
       viem_SendTransactionParameters<chains[key], Account, chains[key]>,
       "chain" | "gas"
     > &
-      ChainIdParameter<config, chainId> &
+      NetworkIdParameter<config, networkId> &
       ConnectorParameter
   >;
 }[number] & {
@@ -60,18 +60,22 @@ export type SendTransactionErrorType =
 /** https://wagmi.sh/core/api/actions/sendTransaction */
 export async function sendTransaction<
   config extends Config,
-  chainId extends config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"]
 >(
   config: config,
-  parameters: SendTransactionParameters<config, chainId>
+  parameters: SendTransactionParameters<config, networkId>
 ): Promise<SendTransactionReturnType> {
-  const { account, chainId, connector, gas: gas_, ...rest } = parameters;
+  const { account, networkId, connector, gas: gas_, ...rest } = parameters;
 
   let client: Client;
   if (typeof account === "object" && account.type === "local")
-    client = config.getClient({ chainId });
+    client = config.getClient({ networkId });
   else
-    client = await getConnectorClient(config, { account, chainId, connector });
+    client = await getConnectorClient(config, {
+      account,
+      networkId,
+      connector,
+    });
 
   const { connector: activeConnector } = getAccount(config);
 
@@ -91,7 +95,7 @@ export async function sendTransaction<
       return action({
         ...(rest as any),
         account,
-        chain: chainId ? { id: chainId } : null,
+        chain: networkId ? { id: networkId } : null,
       });
     }
 
@@ -104,7 +108,7 @@ export async function sendTransaction<
     ...(rest as any),
     ...(account ? { account } : {}),
     gas,
-    chain: chainId ? { id: chainId } : null,
+    chain: networkId ? { id: networkId } : null,
   });
 
   return hash;

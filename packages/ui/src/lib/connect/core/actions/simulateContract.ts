@@ -17,7 +17,7 @@ import type { Config } from "../createConfig";
 import type { BaseErrorType, ErrorType } from "../errors/base";
 import type { SelectChains } from "../types/chain";
 import type {
-  ChainIdParameter,
+  NetworkIdParameter,
   ConnectorParameter,
 } from "../types/properties";
 import type {
@@ -44,11 +44,11 @@ export type SimulateContractParameters<
     functionName
   > = ContractFunctionArgs<abi, "nonpayable" | "payable", functionName>,
   config extends Config = Config,
-  chainId extends
+  networkId extends
     | config["chains"][number]["id"]
     | undefined = config["chains"][number]["id"],
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = {
   [key in keyof chains]: UnionCompute<
     UnionStrictOmit<
@@ -63,7 +63,7 @@ export type SimulateContractParameters<
       "chain"
     >
   > &
-    ChainIdParameter<config, chainId> &
+    NetworkIdParameter<config, networkId> &
     ConnectorParameter;
 }[number];
 
@@ -79,11 +79,11 @@ export type SimulateContractReturnType<
     functionName
   > = ContractFunctionArgs<abi, "nonpayable" | "payable", functionName>,
   config extends Config = Config,
-  chainId extends
+  networkId extends
     | config["chains"][number]["id"]
     | undefined = config["chains"][number]["id"],
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = {
   [key in keyof chains]: viem_SimulateContractReturnType<
     abi,
@@ -93,11 +93,11 @@ export type SimulateContractReturnType<
     Account,
     chains[key]
   > & {
-    chainId: chains[key]["id"];
+    networkId: chains[key]["id"];
     request: Compute<
       PartialBy<
-        { __mode: "prepared"; chainId: chainId; chain: chains[key] },
-        chainId extends config["chains"][number]["id"] ? never : "chainId"
+        { __mode: "prepared"; networkId: networkId; chain: chains[key] },
+        networkId extends config["chains"][number]["id"] ? never : "networkId"
       >
     >;
   };
@@ -122,7 +122,7 @@ export async function simulateContract<
     "nonpayable" | "payable",
     functionName
   >,
-  chainId extends config["chains"][number]["id"] | undefined = undefined
+  networkId extends config["chains"][number]["id"] | undefined = undefined
 >(
   config: config,
   parameters: SimulateContractParameters<
@@ -130,37 +130,37 @@ export async function simulateContract<
     functionName,
     args,
     config,
-    chainId
+    networkId
   >
 ): Promise<
-  SimulateContractReturnType<abi, functionName, args, config, chainId>
+  SimulateContractReturnType<abi, functionName, args, config, networkId>
 > {
-  const { abi, chainId, connector, ...rest } =
+  const { abi, networkId, connector, ...rest } =
     parameters as SimulateContractParameters;
 
   let account: Address | Account;
   if (parameters.account) account = parameters.account;
   else {
     const connectorClient = await getConnectorClient(config, {
-      chainId,
+      networkId,
       connector,
     });
     account = connectorClient.account;
   }
 
-  const client = config.getClient({ chainId });
+  const client = config.getClient({ networkId });
   const action = getAction(client, viem_simulateContract, "simulateContract");
   const { result, request } = await action({ ...rest, abi, account });
 
   return {
-    chainId: client.chain.id,
+    networkId: client.chain.id,
     result,
-    request: { __mode: "prepared", ...request, chainId },
+    request: { __mode: "prepared", ...request, networkId },
   } as unknown as SimulateContractReturnType<
     abi,
     functionName,
     args,
     config,
-    chainId
+    networkId
   >;
 }

@@ -45,16 +45,16 @@ export type ChainMismatchErrorType = ChainMismatchError & {
 export class ChainMismatchError extends BaseError {
   constructor({
     chain,
-    currentChainId,
+    currentNetworkId,
   }: {
     chain: Chain;
-    currentChainId: string;
+    currentNetworkId: string;
   }) {
     super(
-      `The current chain of the wallet (id: ${currentChainId}) does not match the target chain for the transaction (id: ${chain.id} – ${chain.name}).`,
+      `The current chain of the wallet (id: ${currentNetworkId}) does not match the target chain for the transaction (id: ${chain.id} – ${chain.name}).`,
       {
         metaMessages: [
-          `Current Chain ID:  ${currentChainId}`,
+          `Current Chain ID:  ${currentNetworkId}`,
           `Expected Chain ID: ${chain.id} – ${chain.name}`,
         ],
         name: "ChainMismatchError",
@@ -94,17 +94,17 @@ export class ClientChainNotConfiguredError extends BaseError {
   }
 }
 
-export type InvalidChainIdErrorType = InvalidChainIdError & {
-  name: "InvalidChainIdError";
+export type InvalidNetworkIdErrorType = InvalidNetworkIdError & {
+  name: "InvalidNetworkIdError";
 };
 
-export class InvalidChainIdError extends BaseError {
-  constructor({ chainId }: { chainId?: string | undefined }) {
+export class InvalidNetworkIdError extends BaseError {
+  constructor({ networkId }: { networkId?: string | undefined }) {
     super(
-      typeof chainId === "number"
-        ? `Chain ID "${chainId}" is invalid.`
+      typeof networkId === "number"
+        ? `Chain ID "${networkId}" is invalid.`
         : "Chain ID is invalid.",
-      { name: "InvalidChainIdError" }
+      { name: "InvalidNetworkIdError" }
     );
   }
 }

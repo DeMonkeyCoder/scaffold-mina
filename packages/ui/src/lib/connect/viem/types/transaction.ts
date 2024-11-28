@@ -125,7 +125,7 @@ export type TransactionLegacy<
   authorizationList?: undefined;
   blobVersionedHashes?: undefined;
   /** Chain ID that this transaction is valid on. */
-  chainId?: index | undefined;
+  networkId?: index | undefined;
   yParity?: undefined;
   type: type;
 } & FeeValuesLegacy<quantity>;
@@ -141,7 +141,7 @@ export type TransactionEIP2930<
   authorizationList?: undefined;
   blobVersionedHashes?: undefined;
   /** Chain ID that this transaction is valid on. */
-  chainId: index;
+  networkId: index;
   type: type;
 } & FeeValuesLegacy<quantity>;
 
@@ -156,7 +156,7 @@ export type TransactionEIP1559<
   authorizationList?: undefined;
   blobVersionedHashes?: undefined;
   /** Chain ID that this transaction is valid on. */
-  chainId: index;
+  networkId: index;
   type: type;
 } & FeeValuesEIP1559<quantity>;
 
@@ -172,7 +172,7 @@ export type TransactionEIP4844<
   /** List of versioned blob hashes associated with the transaction's blobs. */
   blobVersionedHashes: readonly Hex[];
   /** Chain ID that this transaction is valid on. */
-  chainId: index;
+  networkId: index;
   type: type;
 } & FeeValuesEIP4844<quantity>;
 
@@ -188,7 +188,7 @@ export type TransactionEIP7702<
   authorizationList: SignedAuthorizationList;
   blobVersionedHashes?: undefined;
   /** Chain ID that this transaction is valid on. */
-  chainId: index;
+  networkId: index;
   type: type;
 } & FeeValuesEIP1559<quantity>;
 
@@ -331,7 +331,7 @@ export type TransactionSerializableLegacy<
   index = number
 > = TransactionSerializableBase<quantity, index> &
   ExactPartial<FeeValuesLegacy<quantity>> & {
-    chainId?: string | undefined;
+    networkId?: string | undefined;
     type?: "legacy" | undefined;
   };
 
@@ -341,7 +341,7 @@ export type TransactionSerializableEIP2930<
 > = TransactionSerializableBase<quantity, index> &
   ExactPartial<FeeValuesLegacy<quantity>> & {
     accessList?: AccessList | undefined;
-    chainId: string;
+    networkId: string;
     type?: "eip2930" | undefined;
     yParity?: number | undefined;
   };
@@ -352,7 +352,7 @@ export type TransactionSerializableEIP1559<
 > = TransactionSerializableBase<quantity, index> &
   ExactPartial<FeeValuesEIP1559<quantity>> & {
     accessList?: AccessList | undefined;
-    chainId: string;
+    networkId: string;
     type?: "eip1559" | undefined;
     yParity?: number | undefined;
   };
@@ -363,7 +363,7 @@ export type TransactionSerializableEIP4844<
 > = TransactionSerializableBase<quantity, index> &
   ExactPartial<FeeValuesEIP4844<quantity>> & {
     accessList?: AccessList | undefined;
-    chainId: string;
+    networkId: string;
     sidecars?: readonly BlobSidecar<Hex>[] | false | undefined;
     type?: "eip4844" | undefined;
     yParity?: number | undefined;
@@ -386,7 +386,7 @@ export type TransactionSerializableEIP7702<
   ExactPartial<FeeValuesEIP1559<quantity>> & {
     accessList?: AccessList | undefined;
     authorizationList: SignedAuthorizationList;
-    chainId: string;
+    networkId: string;
     type?: "eip7702" | undefined;
     yParity?: number | undefined;
   };
@@ -407,7 +407,7 @@ export type TransactionSerializableGeneric<
   authorizationList?: AuthorizationList<index, boolean> | undefined;
   blobs?: readonly Hex[] | readonly ByteArray[] | undefined;
   blobVersionedHashes?: readonly Hex[] | undefined;
-  chainId?: string | undefined;
+  networkId?: string | undefined;
   gasPrice?: quantity | undefined;
   maxFeePerBlobGas?: quantity | undefined;
   maxFeePerGas?: quantity | undefined;

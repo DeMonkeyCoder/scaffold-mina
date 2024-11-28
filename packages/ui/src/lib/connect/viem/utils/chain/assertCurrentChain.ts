@@ -9,7 +9,7 @@ import type { Chain } from "../../types/chain";
 
 export type AssertCurrentChainParameters = {
   chain?: Chain | undefined;
-  currentChainId: string;
+  currentNetworkId: string;
 };
 
 export type AssertCurrentChainErrorType =
@@ -19,9 +19,9 @@ export type AssertCurrentChainErrorType =
 
 export function assertCurrentChain({
   chain,
-  currentChainId,
+  currentNetworkId,
 }: AssertCurrentChainParameters): void {
   if (!chain) throw new ChainNotFoundError();
-  if (currentChainId !== chain.id)
-    throw new ChainMismatchError({ chain, currentChainId });
+  if (currentNetworkId !== chain.id)
+    throw new ChainMismatchError({ chain, currentNetworkId });
 }

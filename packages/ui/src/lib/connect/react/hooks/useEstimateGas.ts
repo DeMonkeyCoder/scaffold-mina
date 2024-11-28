@@ -15,21 +15,21 @@ import {
 
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { type UseQueryReturnType, useQuery } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 import { useConnectorClient } from "./useConnectorClient";
 
 export type UseEstimateGasParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] | undefined = undefined,
+  networkId extends config["chains"][number]["id"] | undefined = undefined,
   selectData = EstimateGasData
-> = EstimateGasOptions<config, chainId> &
+> = EstimateGasOptions<config, networkId> &
   ConfigParameter<config> &
   QueryParameter<
     EstimateGasQueryFnData,
     EstimateGasErrorType,
     selectData,
-    EstimateGasQueryKey<config, chainId>
+    EstimateGasQueryKey<config, networkId>
   >;
 
 export type UseEstimateGasReturnType<selectData = EstimateGasData> =
@@ -38,10 +38,10 @@ export type UseEstimateGasReturnType<selectData = EstimateGasData> =
 /** https://wagmi.sh/react/api/hooks/useEstimateGas */
 export function useEstimateGas<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] | undefined = undefined,
+  networkId extends config["chains"][number]["id"] | undefined = undefined,
   selectData = EstimateGasData
 >(
-  parameters?: UseEstimateGasParameters<config, chainId, selectData>
+  parameters?: UseEstimateGasParameters<config, networkId, selectData>
 ): UseEstimateGasReturnType<selectData>;
 
 export function useEstimateGas(
@@ -55,12 +55,12 @@ export function useEstimateGas(
     query: { enabled: parameters.account === undefined },
   });
   const account = parameters.account ?? connectorClient?.account;
-  const chainId = useChainId({ config });
+  const networkId = useNetworkId({ config });
 
   const options = estimateGasQueryOptions(config, {
     ...parameters,
     account,
-    chainId: parameters.chainId ?? chainId,
+    networkId: parameters.networkId ?? networkId,
     connector,
   });
   const enabled = Boolean((account || connector) && (query.enabled ?? true));

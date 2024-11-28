@@ -5,14 +5,14 @@ import {
 } from "@/lib/connect/viem/actions";
 
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { Compute } from "../types/utils";
 import { getAction } from "../utils/getAction";
 
 export type GetGasPriceParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
-> = Compute<ChainIdParameter<config, chainId>>;
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+> = Compute<NetworkIdParameter<config, networkId>>;
 
 export type GetGasPriceReturnType = viem_GetGasPriceReturnType;
 
@@ -21,13 +21,13 @@ export type GetGasPriceErrorType = viem_GetGasPriceErrorType;
 /** https://wagmi.sh/core/api/actions/getGasPrice */
 export function getGasPrice<
   config extends Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 >(
   config: config,
-  parameters: GetGasPriceParameters<config, chainId> = {}
+  parameters: GetGasPriceParameters<config, networkId> = {}
 ): Promise<GetGasPriceReturnType> {
-  const { chainId } = parameters;
-  const client = config.getClient({ chainId });
+  const { networkId } = parameters;
+  const client = config.getClient({ networkId });
   const action = getAction(client, viem_getGasPrice, "getGasPrice");
   return action({});
 }

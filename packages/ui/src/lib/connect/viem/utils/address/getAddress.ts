@@ -20,25 +20,25 @@ export function checksumAddress(
   /**
    * Warning: EIP-1191 checksum addresses are generally not backwards compatible with the
    * wider Ethereum ecosystem, meaning it will break when validated against an application/tool
-   * that relies on EIP-55 checksum encoding (checksum without chainId).
+   * that relies on EIP-55 checksum encoding (checksum without networkId).
    *
    * It is highly recommended to not use this feature unless you
    * know what you are doing.
    *
    * See more: https://github.com/ethereum/EIPs/issues/1121
    */
-  chainId?: string | undefined
+  networkId?: string | undefined
 ): Address {
-  if (checksumAddressCache.has(`${address_}.${chainId}`))
-    return checksumAddressCache.get(`${address_}.${chainId}`)!;
+  if (checksumAddressCache.has(`${address_}.${networkId}`))
+    return checksumAddressCache.get(`${address_}.${networkId}`)!;
 
-  const hexAddress = chainId
-    ? `${chainId}${address_.toLowerCase()}`
+  const hexAddress = networkId
+    ? `${networkId}${address_.toLowerCase()}`
     : address_.substring(2).toLowerCase();
   const hash = keccak256(stringToBytes(hexAddress), "bytes");
 
   const address = (
-    chainId ? hexAddress.substring(`${chainId}0x`.length) : hexAddress
+    networkId ? hexAddress.substring(`${networkId}0x`.length) : hexAddress
   ).split("");
   for (let i = 0; i < 40; i += 2) {
     if (hash[i >> 1] >> 4 >= 8 && address[i]) {
@@ -50,7 +50,7 @@ export function checksumAddress(
   }
 
   const result = `0x${address.join("")}` as const;
-  checksumAddressCache.set(`${address_}.${chainId}`, result);
+  checksumAddressCache.set(`${address_}.${networkId}`, result);
   return address_;
 }
 
@@ -64,17 +64,17 @@ export function getAddress(
   /**
    * Warning: EIP-1191 checksum addresses are generally not backwards compatible with the
    * wider Ethereum ecosystem, meaning it will break when validated against an application/tool
-   * that relies on EIP-55 checksum encoding (checksum without chainId).
+   * that relies on EIP-55 checksum encoding (checksum without networkId).
    *
    * It is highly recommended to not use this feature unless you
    * know what you are doing.
    *
    * See more: https://github.com/ethereum/EIPs/issues/1121
    */
-  chainId?: string
+  networkId?: string
 ): Address {
   // if (!isAddress(address, { strict: false }))
   //   throw new InvalidAddressError({ address });
-  // return checksumAddress(address, chainId);
+  // return checksumAddress(address, networkId);
   return address;
 }

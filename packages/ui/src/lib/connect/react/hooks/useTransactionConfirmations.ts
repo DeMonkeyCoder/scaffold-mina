@@ -15,20 +15,20 @@ import {
 
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { type UseQueryReturnType, useQuery } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseTransactionConfirmationsParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] | undefined = undefined,
+  networkId extends config["chains"][number]["id"] | undefined = undefined,
   selectData = GetTransactionConfirmationsData
-> = GetTransactionConfirmationsOptions<config, chainId> &
+> = GetTransactionConfirmationsOptions<config, networkId> &
   ConfigParameter<config> &
   QueryParameter<
     GetTransactionConfirmationsQueryFnData,
     GetTransactionConfirmationsErrorType,
     selectData,
-    GetTransactionConfirmationsQueryKey<config, chainId>
+    GetTransactionConfirmationsQueryKey<config, networkId>
   >;
 
 export type UseTransactionConfirmationsReturnType<
@@ -38,23 +38,23 @@ export type UseTransactionConfirmationsReturnType<
 /** https://wagmi.sh/react/api/hooks/useTransactionConfirmations */
 export function useTransactionConfirmations<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] | undefined = undefined,
+  networkId extends config["chains"][number]["id"] | undefined = undefined,
   selectData = GetTransactionConfirmationsData
 >(
   parameters: UseTransactionConfirmationsParameters<
     config,
-    chainId,
+    networkId,
     selectData
   > = {} as any
 ): UseTransactionConfirmationsReturnType<selectData> {
   const { hash, transactionReceipt, query = {} } = parameters;
 
   const config = useConfig(parameters);
-  const chainId = useChainId({ config });
+  const networkId = useNetworkId({ config });
 
   const options = getTransactionConfirmationsQueryOptions(config, {
     ...parameters,
-    chainId: parameters.chainId ?? chainId,
+    networkId: parameters.networkId ?? networkId,
   });
   const enabled = Boolean(
     !(hash && transactionReceipt) &&

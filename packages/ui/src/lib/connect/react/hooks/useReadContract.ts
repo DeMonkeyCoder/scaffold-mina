@@ -22,7 +22,7 @@ import type {
 
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { type UseQueryReturnType, useQuery } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseReadContractParameters<
@@ -82,11 +82,11 @@ export function useReadContract<
   const { abi, address, functionName, query = {} } = parameters;
 
   const config = useConfig(parameters);
-  const chainId = useChainId({ config });
+  const networkId = useNetworkId({ config });
 
   const options = readContractQueryOptions<config, abi, functionName, args>(
     config,
-    { ...(parameters as any), chainId: parameters.chainId ?? chainId }
+    { ...(parameters as any), networkId: parameters.networkId ?? networkId }
   );
   const enabled = Boolean(
     address && abi && functionName && (query.enabled ?? true)

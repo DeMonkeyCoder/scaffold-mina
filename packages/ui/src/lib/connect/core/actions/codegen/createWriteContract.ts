@@ -11,12 +11,12 @@ import type {
 import type { Config } from "../../createConfig";
 import type { SelectChains } from "../../types/chain";
 import type {
-  ChainIdParameter,
+  NetworkIdParameter,
   ConnectorParameter,
 } from "../../types/properties";
 import type { Compute, UnionCompute, UnionStrictOmit } from "../../types/utils";
 import { getAccount } from "../getAccount";
-import { getChainId } from "../getChainId";
+import { getNetworkId } from "../getNetworkId";
 import { writeContract, type WriteContractReturnType } from "../writeContract";
 
 type stateMutability = "nonpayable" | "payable";
@@ -46,10 +46,10 @@ export type CreateWriteContractReturnType<
     ? functionName
     : ContractFunctionName<abi, stateMutability>,
   args extends ContractFunctionArgs<abi, stateMutability, name>,
-  chainId extends config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"],
   ///
   allFunctionNames = ContractFunctionName<abi, "nonpayable" | "payable">,
-  chains extends readonly Chain[] = SelectChains<config, chainId>,
+  chains extends readonly Chain[] = SelectChains<config, networkId>,
   omittedProperties extends "abi" | "address" | "functionName" =
     | "abi"
     | (address extends undefined ? never : "address")
@@ -73,12 +73,12 @@ export type CreateWriteContractReturnType<
     }[number] &
       (address extends Record<string, Address>
         ? {
-            chainId?:
+            networkId?:
               | keyof address
-              | (chainId extends keyof address ? chainId : never)
+              | (networkId extends keyof address ? networkId : never)
               | undefined;
           }
-        : Compute<ChainIdParameter<config, chainId>>) &
+        : Compute<NetworkIdParameter<config, networkId>>) &
       ConnectorParameter & { __mode?: "prepared" }
   >
 ) => Promise<WriteContractReturnType>;
@@ -97,30 +97,30 @@ export function createWriteContract<
 ): CreateWriteContractReturnType<abi, address, functionName> {
   if (c.address !== undefined && typeof c.address === "object")
     return (config, parameters) => {
-      const configChainId = getChainId(config);
+      const configNetworkId = getNetworkId(config);
       const account = getAccount(config);
 
-      let chainId: string | undefined;
-      if (parameters.chainId) chainId = parameters.chainId;
+      let networkId: string | undefined;
+      if (parameters.networkId) networkId = parameters.networkId;
       else if (
         (parameters as unknown as { account: Address | Account | undefined })
           .account &&
         (parameters as unknown as { account: Address | Account | undefined })
           .account === account.address
       )
-        chainId = account.chainId;
+        networkId = account.networkId;
       else if (
         (parameters as unknown as { account: Address | Account | undefined })
           .account === undefined
       )
-        chainId = account.chainId;
-      else chainId = configChainId;
+        networkId = account.networkId;
+      else networkId = configNetworkId;
 
       return writeContract(config, {
         ...(parameters as any),
         ...(c.functionName ? { functionName: c.functionName } : {}),
-        address: chainId
-          ? (c.address as Record<string, Address> | undefined)?.[chainId]
+        address: networkId
+          ? (c.address as Record<string, Address> | undefined)?.[networkId]
           : undefined,
         abi: c.abi,
       });

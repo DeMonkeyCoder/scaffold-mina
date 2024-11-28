@@ -10,7 +10,7 @@ import {
   readContracts,
 } from "../actions/readContracts";
 import type { Config } from "../createConfig";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { ScopeKeyParameter } from "../types/properties";
 import type { ExactPartial } from "../types/utils";
 import { filterQueryOptions } from "./utils";
@@ -23,7 +23,7 @@ export type ReadContractsOptions<
   viem_MulticallParameters<
     contracts,
     allowFailure,
-    { optional: true; properties: ChainIdParameter<config> }
+    { optional: true; properties: NetworkIdParameter<config> }
   >
 > &
   ScopeKeyParameter;
@@ -35,7 +35,7 @@ export function readContractsQueryOptions<
 >(
   config: config,
   options: ReadContractsOptions<contracts, allowFailure, config> &
-    ChainIdParameter<config> = {}
+    NetworkIdParameter<config> = {}
 ) {
   return {
     async queryFn({ queryKey }) {
@@ -77,13 +77,13 @@ export function readContractsQueryKey<
   allowFailure extends boolean
 >(
   options: ReadContractsOptions<contracts, allowFailure, config> &
-    ChainIdParameter<config> = {}
+    NetworkIdParameter<config> = {}
 ) {
   const contracts = [];
   for (const contract of (options.contracts ??
-    []) as (ContractFunctionParameters & { chainId: string })[]) {
+    []) as (ContractFunctionParameters & { networkId: string })[]) {
     const { abi: _, ...rest } = contract;
-    contracts.push({ ...rest, chainId: rest.chainId ?? options.chainId });
+    contracts.push({ ...rest, networkId: rest.networkId ?? options.networkId });
   }
   return [
     "readContracts",

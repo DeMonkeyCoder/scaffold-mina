@@ -13,7 +13,7 @@ export type SwitchAccountParameters = {
 
 export type SwitchAccountReturnType<config extends Config = Config> = {
   accounts: readonly [Address, ...Address[]];
-  chainId:
+  networkId:
     | config["chains"][number]["id"]
     | (number extends config["chains"][number]["id"] ? number : number & {});
 };
@@ -40,6 +40,6 @@ export async function switchAccount<config extends Config>(
   }));
   return {
     accounts: connection.accounts,
-    chainId: connection.chainId,
+    networkId: connection.networkId,
   };
 }

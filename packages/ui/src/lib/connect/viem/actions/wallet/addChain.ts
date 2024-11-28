@@ -45,7 +45,7 @@ export async function addChain<
       method: "wallet_addEthereumChain",
       params: [
         {
-          chainId: id,
+          networkId: id,
           chainName: name,
           nativeCurrency,
           rpcUrls: rpcUrls.default.http,

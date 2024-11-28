@@ -100,7 +100,7 @@ type ExtendableProtectedActions<
   | "estimateGas"
   | "getBlock"
   | "getBlockNumber"
-  | "getChainId"
+  | "getNetworkId"
   | "getContractEvents"
   | "getFilterChanges"
   | "getGasPrice"

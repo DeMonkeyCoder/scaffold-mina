@@ -70,10 +70,10 @@ export {
 } from "../hooks/useCall";
 
 export {
-  type UseChainIdParameters,
-  type UseChainIdReturnType,
-  useChainId,
-} from "../hooks/useChainId";
+  type UseNetworkIdParameters,
+  type UseNetworkIdReturnType,
+  useNetworkId,
+} from "../hooks/useNetworkId";
 
 export {
   type UseChainsParameters,
@@ -373,7 +373,7 @@ export {
   cookieToInitialState,
   deepEqual,
   deserialize,
-  normalizeChainId,
+  normalizeNetworkId,
   parseCookie,
   serialize,
 } from "@/lib/connect/core/exports";

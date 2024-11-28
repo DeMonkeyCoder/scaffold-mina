@@ -13,7 +13,7 @@ export type SiweMessage = {
   /**
    * The [EIP-155](https://eips.ethereum.org/EIPS/eip-155) Chain ID to which the session is bound,
    */
-  chainId: string;
+  networkId: string;
   /**
    * [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) authority that is requesting the signing.
    */

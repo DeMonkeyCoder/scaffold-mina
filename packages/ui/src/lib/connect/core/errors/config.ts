@@ -79,18 +79,18 @@ export class ConnectorChainMismatchError extends BaseError {
   override name = "ConnectorChainMismatchError";
 
   constructor({
-    connectionChainId,
-    connectorChainId,
+    connectionNetworkId,
+    connectorNetworkId,
   }: {
-    connectionChainId: string;
-    connectorChainId: string;
+    connectionNetworkId: string;
+    connectorNetworkId: string;
   }) {
     super(
-      `The current chain of the connector (id: ${connectorChainId}) does not match the connection's chain (id: ${connectionChainId}).`,
+      `The current chain of the connector (id: ${connectorNetworkId}) does not match the connection's chain (id: ${connectionNetworkId}).`,
       {
         metaMessages: [
-          `Current Chain ID:  ${connectorChainId}`,
-          `Expected Chain ID: ${connectionChainId}`,
+          `Current Chain ID:  ${connectorNetworkId}`,
+          `Expected Chain ID: ${connectionNetworkId}`,
         ],
       }
     );

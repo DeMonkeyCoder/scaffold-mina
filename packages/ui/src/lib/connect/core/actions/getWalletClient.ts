@@ -15,16 +15,16 @@ import {
 
 export type GetWalletClientParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
-> = GetConnectorClientParameters<Config, chainId>;
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+> = GetConnectorClientParameters<Config, networkId>;
 
 export type GetWalletClientReturnType<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = Compute<
   WalletClient<
-    config["_internal"]["transports"][chainId],
-    Extract<config["chains"][number], { id: chainId }>,
+    config["_internal"]["transports"][networkId],
+    Extract<config["chains"][number], { id: networkId }>,
     Account
   >
 >;
@@ -38,17 +38,17 @@ export type GetWalletClientErrorType =
 
 export async function getWalletClient<
   config extends Config,
-  chainId extends config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"]
 >(
   config: config,
-  parameters: GetWalletClientParameters<config, chainId> = {}
-): Promise<GetWalletClientReturnType<config, chainId>> {
+  parameters: GetWalletClientParameters<config, networkId> = {}
+): Promise<GetWalletClientReturnType<config, networkId>> {
   const client = await getConnectorClient(config, parameters);
   client.extend(walletActions);
 
   // @ts-ignore
   return client.extend(walletActions) as unknown as GetWalletClientReturnType<
     config,
-    chainId
+    networkId
   >;
 }

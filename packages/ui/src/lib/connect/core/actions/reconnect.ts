@@ -89,7 +89,7 @@ export async function reconnect(
     config.setState((x) => {
       const connections = new Map(connected ? x.connections : new Map()).set(
         connector.uid,
-        { accounts: data.accounts, chainId: data.chainId, connector }
+        { accounts: data.accounts, networkId: data.networkId, connector }
       );
       return {
         ...x,
@@ -99,7 +99,7 @@ export async function reconnect(
     });
     connections.push({
       accounts: data.accounts as readonly [Address, ...Address[]],
-      chainId: data.chainId,
+      networkId: data.networkId,
       connector,
     });
     providers.push(provider);

@@ -14,20 +14,20 @@ import type { Config } from "../../createConfig";
 import type { BaseErrorType, ErrorType } from "../../errors/base";
 import type { SelectChains } from "../../types/chain";
 import type {
-  ChainIdParameter,
+  NetworkIdParameter,
   ConnectorParameter,
 } from "../../types/properties";
 import type { Compute } from "../../types/utils";
 
 export type SendCallsParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = {
   [key in keyof chains]: Compute<
     Omit<viem_SendCallsParameters<chains[key], Account, chains[key]>, "chain"> &
-      ChainIdParameter<config, chainId> &
+      NetworkIdParameter<config, networkId> &
       ConnectorParameter
   >;
 }[number];
@@ -46,16 +46,16 @@ export type SendCallsErrorType =
 /** https://wagmi.sh/core/api/actions/sendCalls */
 export async function sendCalls<
   config extends Config,
-  chainId extends config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"]
 >(
   config: config,
-  parameters: SendCallsParameters<config, chainId>
+  parameters: SendCallsParameters<config, networkId>
 ): Promise<SendCallsReturnType> {
-  const { account, chainId, connector, calls, ...rest } = parameters;
+  const { account, networkId, connector, calls, ...rest } = parameters;
 
   const client = await getConnectorClient(config, {
     account,
-    chainId,
+    networkId,
     connector,
   });
 
@@ -63,6 +63,6 @@ export async function sendCalls<
     ...(rest as any),
     ...(account ? { account } : {}),
     calls,
-    chain: chainId ? { id: chainId } : undefined,
+    chain: networkId ? { id: networkId } : undefined,
   });
 }

@@ -16,46 +16,46 @@ import {
 
 import type { ConfigParameter, QueryParameter } from "../types/properties";
 import { type UseQueryReturnType, useQuery } from "../utils/query";
-import { useChainId } from "./useChainId";
+import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
 export type UseTransactionParameters<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetTransactionData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetTransactionData<config, networkId>
 > = Compute<
-  GetTransactionOptions<config, chainId> &
+  GetTransactionOptions<config, networkId> &
     ConfigParameter<config> &
     QueryParameter<
-      GetTransactionQueryFnData<config, chainId>,
+      GetTransactionQueryFnData<config, networkId>,
       GetTransactionErrorType,
       selectData,
-      GetTransactionQueryKey<config, chainId>
+      GetTransactionQueryKey<config, networkId>
     >
 >;
 
 export type UseTransactionReturnType<
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetTransactionData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetTransactionData<config, networkId>
 > = UseQueryReturnType<selectData, GetTransactionErrorType>;
 
 /** https://wagmi.sh/react/api/hooks/useTransaction */
 export function useTransaction<
   config extends Config = ResolvedRegister["config"],
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetTransactionData<config, chainId>
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  selectData = GetTransactionData<config, networkId>
 >(
-  parameters: UseTransactionParameters<config, chainId, selectData> = {}
-): UseTransactionReturnType<config, chainId, selectData> {
+  parameters: UseTransactionParameters<config, networkId, selectData> = {}
+): UseTransactionReturnType<config, networkId, selectData> {
   const { blockHash, blockNumber, blockTag, hash, query = {} } = parameters;
 
   const config = useConfig(parameters);
-  const chainId = useChainId({ config });
+  const networkId = useNetworkId({ config });
 
   const options = getTransactionQueryOptions(config, {
     ...parameters,
-    chainId: parameters.chainId ?? chainId,
+    networkId: parameters.networkId ?? networkId,
   });
   const enabled = Boolean(
     !(blockHash && blockNumber && blockTag && hash) && (query.enabled ?? true)
@@ -65,5 +65,5 @@ export function useTransaction<
     ...(query as any),
     ...options,
     enabled,
-  }) as UseTransactionReturnType<config, chainId, selectData>;
+  }) as UseTransactionReturnType<config, networkId, selectData>;
 }

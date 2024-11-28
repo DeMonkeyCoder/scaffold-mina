@@ -11,7 +11,7 @@ import { prepareTransactionRequest as viem_prepareTransactionRequest } from "@/l
 
 import type { Config } from "../createConfig";
 import type { SelectChains } from "../types/chain";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type {
   Compute,
   IsNarrowable,
@@ -23,18 +23,18 @@ import { getAccount } from "./getAccount";
 
 export type PrepareTransactionRequestParameters<
   config extends Config = Config,
-  chainId extends
+  networkId extends
     | config["chains"][number]["id"]
     | undefined = config["chains"][number]["id"],
   request extends viem_PrepareTransactionRequestRequest<
-    SelectChains<config, chainId>[0],
-    SelectChains<config, chainId>[0]
+    SelectChains<config, networkId>[0],
+    SelectChains<config, networkId>[0]
   > = viem_PrepareTransactionRequestRequest<
-    SelectChains<config, chainId>[0],
-    SelectChains<config, chainId>[0]
+    SelectChains<config, networkId>[0],
+    SelectChains<config, networkId>[0]
   >,
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = {
   [key in keyof chains]: UnionCompute<
     UnionStrictOmit<
@@ -52,7 +52,7 @@ export type PrepareTransactionRequestParameters<
       >,
       "chain"
     > &
-      ChainIdParameter<config, chainId> & {
+      NetworkIdParameter<config, networkId> & {
         to: Address;
       }
   >;
@@ -60,18 +60,18 @@ export type PrepareTransactionRequestParameters<
 
 export type PrepareTransactionRequestReturnType<
   config extends Config = Config,
-  chainId extends
+  networkId extends
     | config["chains"][number]["id"]
     | undefined = config["chains"][number]["id"],
   request extends viem_PrepareTransactionRequestRequest<
-    SelectChains<config, chainId>[0],
-    SelectChains<config, chainId>[0]
+    SelectChains<config, networkId>[0],
+    SelectChains<config, networkId>[0]
   > = viem_PrepareTransactionRequestRequest<
-    SelectChains<config, chainId>[0],
-    SelectChains<config, chainId>[0]
+    SelectChains<config, networkId>[0],
+    SelectChains<config, networkId>[0]
   >,
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = {
   [key in keyof chains]: Compute<
     viem_PrepareTransactionRequestReturnType<
@@ -87,7 +87,7 @@ export type PrepareTransactionRequestReturnType<
         : never
     >
   > & {
-    chainId: chains[key]["id"];
+    networkId: chains[key]["id"];
   };
 }[number];
 
@@ -97,19 +97,19 @@ export type PrepareTransactionRequestErrorType =
 /** https://wagmi.sh/core/api/actions/prepareTransactionRequest */
 export async function prepareTransactionRequest<
   config extends Config,
-  chainId extends config["chains"][number]["id"] | undefined,
+  networkId extends config["chains"][number]["id"] | undefined,
   const request extends viem_PrepareTransactionRequestRequest<
-    SelectChains<config, chainId>["0"],
-    SelectChains<config, chainId>["0"]
+    SelectChains<config, networkId>["0"],
+    SelectChains<config, networkId>["0"]
   >
 >(
   config: config,
-  parameters: PrepareTransactionRequestParameters<config, chainId, request>
-): Promise<PrepareTransactionRequestReturnType<config, chainId, request>> {
-  const { account: account_, chainId, ...rest } = parameters;
+  parameters: PrepareTransactionRequestParameters<config, networkId, request>
+): Promise<PrepareTransactionRequestReturnType<config, networkId, request>> {
+  const { account: account_, networkId, ...rest } = parameters;
 
   const account = account_ ?? getAccount(config).address;
-  const client = config.getClient({ chainId });
+  const client = config.getClient({ networkId });
 
   const action = getAction(
     client,
@@ -120,6 +120,6 @@ export async function prepareTransactionRequest<
     ...rest,
     ...(account ? { account } : {}),
   } as unknown as viem_PrepareTransactionRequestParameters) as unknown as Promise<
-    PrepareTransactionRequestReturnType<config, chainId, request>
+    PrepareTransactionRequestReturnType<config, networkId, request>
   >;
 }

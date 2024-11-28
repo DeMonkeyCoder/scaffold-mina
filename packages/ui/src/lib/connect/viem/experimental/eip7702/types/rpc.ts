@@ -5,7 +5,7 @@ export type RpcAuthorization = {
   /** Address of the contract to set as code for the Authority. */
   address: Address;
   /** Chain ID to authorize. */
-  chainId: string;
+  networkId: string;
   /** Nonce of the Authority to authorize. */
   nonce: Hex;
 } & Signature;

@@ -41,12 +41,12 @@ export type HashAuthorizationErrorType =
 export function hashAuthorization<to extends To = "hex">(
   parameters: HashAuthorizationParameters<to>
 ): HashAuthorizationReturnType<to> {
-  const { chainId, contractAddress, nonce, to } = parameters;
+  const { networkId, contractAddress, nonce, to } = parameters;
   const hash = keccak256(
     concatHex([
       "0x05",
       toRlp([
-        // numberToHex(chainId),
+        // numberToHex(networkId),
         // contractAddress,
         [nonce ? numberToHex(nonce) : "0x"],
       ]),

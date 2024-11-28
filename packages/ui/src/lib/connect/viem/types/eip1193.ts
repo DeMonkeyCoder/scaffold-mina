@@ -51,7 +51,7 @@ export class ProviderRpcError extends Error {
 // Provider Events
 
 export type ProviderConnectInfo = {
-  chainId: string;
+  networkId: string;
 };
 
 export type ProviderMessage = {
@@ -61,7 +61,7 @@ export type ProviderMessage = {
 
 export type EIP1193EventMap = {
   accountsChanged(accounts: Address[]): void;
-  chainChanged(chainId: string): void;
+  chainChanged(networkId: string): void;
   connect(connectInfo: ProviderConnectInfo): void;
   disconnect(error: ProviderRpcError): void;
   message(message: ProviderMessage): void;
@@ -83,7 +83,7 @@ export type EIP1193Events = {
 
 export type AddEthereumChainParameter = {
   /** A 0x-prefixed hexadecimal string */
-  chainId: string;
+  networkId: string;
   /** The chain name. */
   chainName: string;
   /** Native currency for the chain. */
@@ -116,7 +116,7 @@ export type WalletCapabilitiesRecord<
   capabilities extends WalletCapabilities = WalletCapabilities,
   id extends string | number = Hex
 > = {
-  [chainId in id]: capabilities;
+  [networkId in id]: capabilities;
 };
 
 export type WalletCallReceipt<quantity = Hex, status = Hex> = {
@@ -193,7 +193,7 @@ export type WalletPermission = {
 
 export type WalletSendCallsParameters<
   capabilities extends WalletCapabilities = WalletCapabilities,
-  chainId extends string = string,
+  networkId extends string = string,
   quantity extends Quantity | bigint = Quantity
 > = [
   {
@@ -208,7 +208,7 @@ export type WalletSendCallsParameters<
         }
     >[];
     capabilities?: capabilities | undefined;
-    chainId: chainId;
+    networkId: networkId;
     from: Address;
     version: string;
   }
@@ -1366,7 +1366,7 @@ export type WalletRpcSchema = [
    * @description Add an Ethereum chain to the wallet.
    * @link https://eips.ethereum.org/EIPS/eip-3085
    * @example
-   * provider.request({ method: 'wallet_addEthereumChain', params: [{ chainId: 1, rpcUrl: 'https://mainnet.infura.io/v3/...' }] })
+   * provider.request({ method: 'wallet_addEthereumChain', params: [{ networkId: 1, rpcUrl: 'https://mainnet.infura.io/v3/...' }] })
    * // => { ... }
    */
   {
@@ -1474,12 +1474,12 @@ export type WalletRpcSchema = [
    * @description Switch the wallet to the given Ethereum chain.
    * @link https://eips.ethereum.org/EIPS/eip-3326
    * @example
-   * provider.request({ method: 'mina_switchChain', params: [{ chainId: '0xf00' }] })
+   * provider.request({ method: 'mina_switchChain', params: [{ networkId: '0xf00' }] })
    * // => { ... }
    */
   {
     Method: "mina_switchChain";
-    Parameters: [chainId: string];
+    Parameters: [networkId: string];
     ReturnType: null;
   },
   /**

@@ -135,7 +135,7 @@ function parseTransactionEIP7702(
   const transactionArray = toTransactionArray(serializedTransaction);
 
   const [
-    chainId,
+    networkId,
     nonce,
     maxPriorityFeePerGas,
     maxFeePerGas,
@@ -153,7 +153,7 @@ function parseTransactionEIP7702(
   if (transactionArray.length !== 10 && transactionArray.length !== 13)
     throw new InvalidSerializedTransactionError({
       attributes: {
-        chainId,
+        networkId,
         nonce,
         maxPriorityFeePerGas,
         maxFeePerGas,
@@ -176,7 +176,7 @@ function parseTransactionEIP7702(
     });
 
   const transaction = {
-    chainId,
+    networkId,
     type: "eip7702",
   } as TransactionSerializableEIP7702;
   if (isHex(to) && to !== "0x") transaction.to = to;
@@ -232,7 +232,7 @@ function parseTransactionEIP4844(
     : [];
 
   const [
-    chainId,
+    networkId,
     nonce,
     maxPriorityFeePerGas,
     maxFeePerGas,
@@ -252,7 +252,7 @@ function parseTransactionEIP4844(
   if (!(transactionArray.length === 11 || transactionArray.length === 14))
     throw new InvalidSerializedTransactionError({
       attributes: {
-        chainId,
+        networkId,
         nonce,
         maxPriorityFeePerGas,
         maxFeePerGas,
@@ -275,7 +275,7 @@ function parseTransactionEIP4844(
 
   const transaction = {
     blobVersionedHashes: blobVersionedHashes as Hex[],
-    chainId,
+    networkId,
     type: "eip4844",
   } as TransactionSerializableEIP4844;
   if (isHex(to) && to !== "0x") transaction.to = to;
@@ -327,7 +327,7 @@ function parseTransactionEIP1559(
   const transactionArray = toTransactionArray(serializedTransaction);
 
   const [
-    chainId,
+    networkId,
     nonce,
     maxPriorityFeePerGas,
     maxFeePerGas,
@@ -344,7 +344,7 @@ function parseTransactionEIP1559(
   if (!(transactionArray.length === 9 || transactionArray.length === 12))
     throw new InvalidSerializedTransactionError({
       attributes: {
-        chainId,
+        networkId,
         nonce,
         maxPriorityFeePerGas,
         maxFeePerGas,
@@ -366,7 +366,7 @@ function parseTransactionEIP1559(
     });
 
   const transaction: TransactionSerializableEIP1559 = {
-    chainId: chainId as string,
+    networkId: networkId as string,
     type: "eip1559",
   };
   if (isHex(to) && to !== "0x") transaction.to = to;
@@ -407,16 +407,27 @@ type ParseTransactionEIP2930ErrorType =
 function parseTransactionEIP2930(
   serializedTransaction: TransactionSerializedEIP2930
 ): Omit<TransactionRequestEIP2930, "from"> &
-  ({ chainId: string } | ({ chainId: string } & Signature)) {
+  ({ networkId: string } | ({ networkId: string } & Signature)) {
   const transactionArray = toTransactionArray(serializedTransaction);
 
-  const [chainId, nonce, gasPrice, gas, to, value, data, accessList, v, r, s] =
-    transactionArray;
+  const [
+    networkId,
+    nonce,
+    gasPrice,
+    gas,
+    to,
+    value,
+    data,
+    accessList,
+    v,
+    r,
+    s,
+  ] = transactionArray;
 
   if (!(transactionArray.length === 8 || transactionArray.length === 11))
     throw new InvalidSerializedTransactionError({
       attributes: {
-        chainId,
+        networkId,
         nonce,
         gasPrice,
         gas,
@@ -437,7 +448,7 @@ function parseTransactionEIP2930(
     });
 
   const transaction: TransactionSerializableEIP2930 = {
-    chainId: chainId as string,
+    networkId: networkId as string,
     type: "eip2930",
   };
   if (isHex(to) && to !== "0x") transaction.to = to;
@@ -473,10 +484,10 @@ type ParseTransactionLegacyErrorType =
 function parseTransactionLegacy(
   serializedTransaction: Hex
 ): Omit<TransactionRequestLegacy, "from"> &
-  ({ chainId?: string | undefined } | ({ chainId: string } & Signature)) {
+  ({ networkId?: string | undefined } | ({ networkId: string } & Signature)) {
   const transactionArray = fromRlp(serializedTransaction, "hex");
 
-  const [nonce, gasPrice, gas, to, value, data, chainIdOrV_, r, s] =
+  const [nonce, gasPrice, gas, to, value, data, networkIdOrV_, r, s] =
     transactionArray;
 
   if (!(transactionArray.length === 6 || transactionArray.length === 9))
@@ -490,7 +501,7 @@ function parseTransactionLegacy(
         data,
         ...(transactionArray.length > 6
           ? {
-              v: chainIdOrV_,
+              v: networkIdOrV_,
               r,
               s,
             }
@@ -515,20 +526,20 @@ function parseTransactionLegacy(
 
   if (transactionArray.length === 6) return transaction;
 
-  const chainIdOrV =
-    isHex(chainIdOrV_) && chainIdOrV_ !== "0x"
-      ? hexToBigInt(chainIdOrV_ as Hex)
+  const networkIdOrV =
+    isHex(networkIdOrV_) && networkIdOrV_ !== "0x"
+      ? hexToBigInt(networkIdOrV_ as Hex)
       : 0n;
 
   if (s === "0x" && r === "0x") {
-    // if (chainIdOrV > 0) transaction.chainId = Number(chainIdOrV);
+    // if (networkIdOrV > 0) transaction.networkId = Number(networkIdOrV);
     return transaction;
   }
 
-  const v = chainIdOrV;
+  const v = networkIdOrV;
 
-  // const chainId: string | undefined = Number((v - 35n) / 2n);
-  // if (chainId > 0) transaction.chainId = chainId;
+  // const networkId: string | undefined = Number((v - 35n) / 2n);
+  // if (networkId > 0) transaction.networkId = networkId;
   // else if (v !== 27n && v !== 28n) throw new InvalidLegacyVError({ v });
   if (v !== 27n && v !== 28n) throw new InvalidLegacyVError({ v });
 
@@ -577,11 +588,11 @@ function parseAuthorizationList(
 ): SignedAuthorizationList {
   const authorizationList: Mutable<SignedAuthorizationList> = [];
   for (let i = 0; i < serializedAuthorizationList.length; i++) {
-    const [chainId, contractAddress, nonce, yParity, r, s] =
+    const [networkId, contractAddress, nonce, yParity, r, s] =
       serializedAuthorizationList[i];
 
     authorizationList.push({
-      chainId,
+      networkId,
       contractAddress,
       nonce: hexToNumber(nonce),
       ...parseEIP155Signature([yParity, r, s]),

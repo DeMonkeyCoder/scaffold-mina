@@ -7,13 +7,13 @@ import { useConnect } from "@/lib/connect/react/hooks/useConnect";
 import { useConnectors } from "@/lib/connect/react/hooks/useConnectors";
 import { useDisconnect } from "@/lib/connect/react/hooks/useDisconnect";
 import { useAccount } from "@/lib/connect/react/hooks/useAccount";
-import { useChainId } from "@/lib/connect/react/hooks/useChainId";
+import { useNetworkId } from "@/lib/connect/react/hooks/useNetworkId";
 import { useSwitchChain } from "@/lib/connect/react/hooks/useSwitchChain";
 
 export default function ConnectWallet() {
   const { address, isConnected } = useAccount();
 
-  const networkId = useChainId();
+  const networkId = useNetworkId();
 
   const { connect: wagmiConnect } = useConnect();
   const connectors = useConnectors();
@@ -54,7 +54,7 @@ export default function ConnectWallet() {
         if (!isConnected) {
           connect();
         } else if (!isSupportedNetwork(networkId)) {
-          switchChain({ chainId: NETWORK_ID });
+          switchChain({ networkId: NETWORK_ID });
         } else {
           disconnect();
         }

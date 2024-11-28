@@ -6,7 +6,7 @@ export type Authorization<uint32 = number, signed extends boolean = false> = {
   /** Address of the contract to set as code for the Authority. */
   contractAddress: Address;
   /** Chain ID to authorize. */
-  chainId: string;
+  networkId: string;
   /** Nonce of the Authority to authorize. */
   nonce: uint32;
 } & (signed extends true ? Signature : ExactPartial<Signature>);
@@ -20,7 +20,7 @@ export type SignedAuthorizationList<uint32 = number> =
   readonly SignedAuthorization<uint32>[];
 
 export type SerializedAuthorization = readonly [
-  chainId: Hex,
+  networkId: Hex,
   address: Hex,
   nonce: Hex,
   yParity: Hex,

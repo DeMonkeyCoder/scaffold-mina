@@ -8,7 +8,7 @@ import {
 
 import type { Config } from "../createConfig";
 import type { SelectChains } from "../types/chain";
-import type { ChainIdParameter } from "../types/properties";
+import type { NetworkIdParameter } from "../types/properties";
 import type { Compute, IsNarrowable } from "../types/utils";
 import { getAction } from "../utils/getAction";
 
@@ -16,26 +16,26 @@ export type GetBlockParameters<
   includeTransactions extends boolean = false,
   blockTag extends BlockTag = "latest",
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = Compute<
   viem_GetBlockParameters<includeTransactions, blockTag> &
-    ChainIdParameter<config, chainId>
+    NetworkIdParameter<config, networkId>
 >;
 
 export type GetBlockReturnType<
   includeTransactions extends boolean = false,
   blockTag extends BlockTag = "latest",
   config extends Config = Config,
-  chainId extends config["chains"][number]["id"] = config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   ///
-  chains extends readonly Chain[] = SelectChains<config, chainId>
+  chains extends readonly Chain[] = SelectChains<config, networkId>
 > = Compute<
   {
     [key in keyof chains]: viem_GetBlockReturnType<
       IsNarrowable<chains[key], Chain> extends true ? chains[key] : undefined,
       includeTransactions,
       blockTag
-    > & { chainId: chains[key]["id"] };
+    > & { networkId: chains[key]["id"] };
   }[number]
 >;
 
@@ -44,7 +44,7 @@ export type GetBlockErrorType = viem_GetBlockErrorType;
 /** https://wagmi.sh/core/actions/getBlock */
 export async function getBlock<
   config extends Config,
-  chainId extends config["chains"][number]["id"],
+  networkId extends config["chains"][number]["id"],
   includeTransactions extends boolean = false,
   blockTag extends BlockTag = "latest"
 >(
@@ -53,11 +53,13 @@ export async function getBlock<
     includeTransactions,
     blockTag,
     config,
-    chainId
+    networkId
   > = {}
-): Promise<GetBlockReturnType<includeTransactions, blockTag, config, chainId>> {
-  const { chainId, ...rest } = parameters;
-  const client = config.getClient({ chainId });
+): Promise<
+  GetBlockReturnType<includeTransactions, blockTag, config, networkId>
+> {
+  const { networkId, ...rest } = parameters;
+  const client = config.getClient({ networkId });
   const action = getAction(client, viem_getBlock, "getBlock");
   const block = await action(rest);
   return {
@@ -65,8 +67,8 @@ export async function getBlock<
       includeTransactions,
       blockTag,
       config,
-      chainId
+      networkId
     >),
-    chainId: client.chain.id,
+    networkId: client.chain.id,
   };
 }

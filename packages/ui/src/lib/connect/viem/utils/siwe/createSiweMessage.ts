@@ -22,7 +22,7 @@ export type CreateSiweMessageErrorType =
  * @example
  * const message = createMessage({
  *   address: '0xA0Cf798816D4b9b9866b5330EEa46a18382f251e',
- *   chainId: 1,
+ *   networkId: 1,
  *   domain: 'example.com',
  *   nonce: 'foobarbaz',
  *   uri: 'https://example.com/path',
@@ -35,7 +35,7 @@ export function createSiweMessage(
   parameters: CreateSiweMessageParameters
 ): CreateSiweMessageReturnType {
   const {
-    chainId,
+    networkId,
     domain,
     expirationTime,
     issuedAt = new Date(),
@@ -51,14 +51,14 @@ export function createSiweMessage(
   // Validate fields
   {
     // // Required fields
-    // if (chainId !== Math.floor(chainId))
+    // if (networkId !== Math.floor(networkId))
     //   throw new SiweInvalidMessageFieldError({
-    //     field: 'chainId',
+    //     field: 'networkId',
     //     metaMessages: [
     //       '- Chain ID must be a EIP-155 chain ID.',
     //       '- See https://eips.ethereum.org/EIPS/eip-155',
     //       '',
-    //       `Provided value: ${chainId}`,
+    //       `Provided value: ${networkId}`,
     //     ],
     //   })
     if (
@@ -142,7 +142,7 @@ export function createSiweMessage(
   })();
   const prefix = `${origin} wants you to sign in with your Ethereum account:\n${address}\n\n${statement}`;
 
-  let suffix = `URI: ${uri}\nVersion: ${version}\nChain ID: ${chainId}\nNonce: ${nonce}\nIssued At: ${issuedAt.toISOString()}`;
+  let suffix = `URI: ${uri}\nVersion: ${version}\nChain ID: ${networkId}\nNonce: ${nonce}\nIssued At: ${issuedAt.toISOString()}`;
 
   if (expirationTime)
     suffix += `\nExpiration Time: ${expirationTime.toISOString()}`;
