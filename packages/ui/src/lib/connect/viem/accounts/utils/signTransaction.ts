@@ -4,17 +4,14 @@ import type {
   TransactionSerializable,
   TransactionSerialized,
 } from "../../types/transaction";
-import {
-  type Keccak256ErrorType,
-  keccak256,
-} from "../../utils/hash/keccak256";
+import { keccak256, type Keccak256ErrorType } from "../../utils/hash/keccak256";
 import type { GetTransactionType } from "../../utils/transaction/getTransactionType";
 import {
-  type SerializeTransactionFn,
   serializeTransaction,
+  type SerializeTransactionFn,
 } from "../../utils/transaction/serializeTransaction";
 
-import { type SignErrorType, sign } from "./sign";
+import { sign, type SignErrorType } from "./sign";
 
 export type SignTransactionParameters<
   serializer extends SerializeTransactionFn<TransactionSerializable> = SerializeTransactionFn<TransactionSerializable>,
@@ -48,7 +45,7 @@ export async function signTransaction<
   } = parameters;
 
   const signableTransaction = (() => {
-    // For EIP-4844 Transactions, we want to sign the transaction payload body (tx_payload_body) without the sidecars (ie. without the networkID wrapper).
+    // For EIP-4844 Transactions, we want to sign the transaction payload body (tx_payload_body) without the sidecars (ie. without the network wrapper).
     // See: https://github.com/ethereum/EIPs/blob/e00f4daa66bd56e2dbd5f1d36d09fd613811a48b/EIPS/eip-4844.md#networking
     if (transaction.type === "eip4844")
       return {

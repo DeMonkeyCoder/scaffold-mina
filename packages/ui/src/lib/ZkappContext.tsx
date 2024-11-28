@@ -6,13 +6,12 @@ import React, {
   useState,
 } from "react";
 import ZkappWorkerClient from "./zkappWorkerClient";
-import { useMinaInjectedProvider } from "@/lib/useMinaInjectedProvider";
 import { PublicKey } from "o1js";
 import { useAccount } from "@/lib/connect/react/hooks/useAccount";
 
 type MinaAccountData = {
   accountExists: boolean | null;
-} & ReturnType<typeof useMinaInjectedProvider>;
+};
 
 type ZkappContextType = {
   zkappWorkerClient: ZkappWorkerClient | null;
@@ -24,9 +23,6 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
   const [zkappWorkerClient, setZkappWorkerClient] =
     useState<ZkappWorkerClient | null>(null);
   const { address } = useAccount();
-
-  const { networkID, hasWallet, switchNetwork, sendTransaction } =
-    useMinaInjectedProvider();
 
   useEffect(() => {
     (async () => {
@@ -56,10 +52,6 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
       value={{
         zkappWorkerClient,
         accountExists,
-        networkID,
-        hasWallet,
-        switchNetwork,
-        sendTransaction,
       }}
     >
       {children}

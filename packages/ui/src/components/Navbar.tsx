@@ -3,12 +3,16 @@ import { useAccount } from "@/lib/connect/react/hooks/useAccount";
 import { useBalance } from "@/lib/connect/react/hooks/useBalance";
 import ConnectWallet from "./ConnectWallet";
 import { formatMina } from "@mina-js/utils";
+import { useChainId } from "@/lib/connect/react/hooks/useChainId";
+import { useChains } from "@/lib/connect/react/hooks/useChains";
 
 export default function Navbar() {
   const { isConnected, address } = useAccount();
   const { data: balance } = useBalance({
     address,
   });
+  const networkId = useChainId();
+  const chains = useChains();
 
   if (!isConnected) return <div></div>;
 
@@ -69,8 +73,13 @@ export default function Navbar() {
           </div>
 
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {balance ? formatMina(balance.value) : "..."} MINA
-            {isConnected && <ConnectWallet />}
+            {networkId && chains.find((c) => c.id === networkId)?.name}{" "}
+            {isConnected && (
+              <>
+                {balance ? formatMina(balance.value) : "..."} MINA
+                <ConnectWallet />
+              </>
+            )}
           </div>
         </div>
       </div>

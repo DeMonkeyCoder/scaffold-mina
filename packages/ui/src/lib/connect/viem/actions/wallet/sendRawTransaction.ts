@@ -16,7 +16,7 @@ export type SendRawTransactionReturnType = Hash;
 export type SendRawTransactionErrorType = RequestErrorType | ErrorType;
 
 /**
- * Sends a **signed** transaction to the networkID
+ * Sends a **signed** transaction to the network
  *
  * - Docs: https://viem.sh/docs/actions/wallet/sendRawTransaction
  * - JSON-RPC Method: [`mina_sendRawTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)

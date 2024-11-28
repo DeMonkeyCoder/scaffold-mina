@@ -42,12 +42,8 @@ export async function switchChain<
 >(client: Client<Transport, chain, account>, { id }: SwitchChainParameters) {
   await client.request(
     {
-      method: "wallet_switchEthereumChain",
-      params: [
-        {
-          chainId: id,
-        },
-      ],
+      method: "mina_switchChain",
+      params: [id],
     },
     { retryCount: 0 }
   );

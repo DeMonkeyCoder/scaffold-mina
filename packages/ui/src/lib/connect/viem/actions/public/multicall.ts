@@ -230,7 +230,7 @@ export async function multicall<
   for (let i = 0; i < aggregate3Results.length; i++) {
     const result = aggregate3Results[i];
 
-    // If an error occurred in a `readContract` invocation (ie. networkID error),
+    // If an error occurred in a `readContract` invocation (ie. network error),
     // then append the failure reason to each contract result.
     if (result.status === "rejected") {
       if (!allowFailure) throw result.reason;

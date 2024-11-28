@@ -3,8 +3,7 @@ import type { Abi } from "abitype";
 import type { Account } from "../../accounts/types";
 import type { Client } from "../../clients/createClient";
 import type { Transport } from "../../clients/transports/createTransport";
-import type { Chain } from "../../types/chain";
-import type { GetChainParameter } from "../../types/chain";
+import type { Chain, GetChainParameter } from "../../types/chain";
 import type { ContractConstructorArgs } from "../../types/contract";
 import type { Hex } from "../../types/misc";
 import type { UnionEvaluate, UnionOmit } from "../../types/utils";
@@ -12,10 +11,10 @@ import { encodeDeployData } from "../../utils/abi/encodeDeployData";
 
 import type { ErrorType } from "../../errors/utils";
 import {
+  sendTransaction,
   type SendTransactionErrorType,
   type SendTransactionParameters,
   type SendTransactionReturnType,
-  sendTransaction,
 } from "./sendTransaction";
 
 export type DeployContractParameters<
@@ -44,7 +43,7 @@ export type DeployContractReturnType = SendTransactionReturnType;
 export type DeployContractErrorType = SendTransactionErrorType | ErrorType;
 
 /**
- * Deploys a contract to the networkID, given bytecode and constructor arguments.
+ * Deploys a contract to the network, given bytecode and constructor arguments.
  *
  * - Docs: https://viem.sh/docs/contract/deployContract
  * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/contracts/deploying-contracts

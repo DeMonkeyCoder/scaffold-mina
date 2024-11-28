@@ -227,7 +227,7 @@ export type PublicActions<
   account extends Account | undefined = Account | undefined
 > = {
   /**
-   * Executes a new message call immediately without submitting a transaction to the networkID.
+   * Executes a new message call immediately without submitting a transaction to the network.
    *
    * - Docs: https://viem.sh/docs/actions/public/call
    * - JSON-RPC Methods: [`mina_call`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_call)
@@ -432,7 +432,7 @@ export type PublicActions<
     args: EstimateContractGasParameters<abi, functionName, args, chain>
   ) => Promise<EstimateContractGasReturnType>;
   /**
-   * Estimates the gas necessary to complete a transaction without submitting it to the networkID.
+   * Estimates the gas necessary to complete a transaction without submitting it to the network.
    *
    * - Docs: https://viem.sh/docs/actions/public/estimateGas
    * - JSON-RPC Methods: [`mina_estimateGas`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_estimategas)
@@ -592,7 +592,7 @@ export type PublicActions<
   /** @deprecated Use `getCode` instead. */
   getBytecode: (args: GetCodeParameters) => Promise<GetCodeReturnType>;
   /**
-   * Returns the chain ID associated with the current networkID.
+   * Returns the chain ID associated with the current network.
    *
    * - Docs: https://viem.sh/docs/actions/public/getChainId
    * - JSON-RPC Methods: [`mina_networkId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_networkId)
@@ -1222,7 +1222,7 @@ export type PublicActions<
     args: ReadContractParameters<abi, functionName, args>
   ) => Promise<ReadContractReturnType<abi, functionName, args>>;
   /**
-   * Sends a **signed** transaction to the networkID
+   * Sends a **signed** transaction to the network
    *
    * - Docs: https://viem.sh/docs/actions/wallet/sendRawTransaction
    * - JSON-RPC Method: [`mina_sendRawTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)

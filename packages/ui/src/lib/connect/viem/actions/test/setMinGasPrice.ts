@@ -17,7 +17,7 @@ export type SetMinGasPriceParameters = {
 export type SetMinGasPriceErrorType = RequestErrorType | ErrorType;
 
 /**
- * Change the minimum gas price accepted by the networkID (in wei).
+ * Change the minimum gas price accepted by the network (in wei).
  *
  * - Docs: https://viem.sh/docs/actions/test/setMinGasPrice
  *

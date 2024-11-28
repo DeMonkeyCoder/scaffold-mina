@@ -104,8 +104,8 @@ export function mock(parameters: MockParameters) {
       if (!chain) throw new SwitchChainError(new ChainNotConfiguredError());
 
       await provider.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId }],
+        method: "mina_switchChain",
+        params: [chainId],
       });
       return chain;
     },
@@ -142,7 +142,7 @@ export function mock(parameters: MockParameters) {
           }
 
         // wallet methods
-        if (method === "wallet_switchEthereumChain") {
+        if (method === "mina_switchChain") {
           if (features.switchChainError) {
             if (typeof features.switchChainError === "boolean")
               throw new UserRejectedRequestError(

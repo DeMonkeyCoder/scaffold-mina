@@ -1,15 +1,15 @@
 import type { Address } from "@/lib/connect/viem";
 import type { Account } from "../../accounts/types";
 import {
-  type ParseAccountErrorType,
   parseAccount,
+  type ParseAccountErrorType,
 } from "../../accounts/utils/parseAccount";
 import type { Client } from "../../clients/createClient";
 import type { Transport } from "../../clients/transports/createTransport";
 import { BaseError } from "../../errors/base";
 import {
-  type RecoverAuthorizationAddressErrorType,
   recoverAuthorizationAddress,
+  type RecoverAuthorizationAddressErrorType,
 } from "../../experimental/eip7702/utils/recoverAuthorizationAddress";
 import type { BlockTag } from "../../types/block";
 import type { Chain } from "../../types/chain";
@@ -18,12 +18,12 @@ import type { TransactionRequest } from "../../types/transaction";
 import type { UnionOmit } from "../../types/utils";
 import type { RequestErrorType } from "../../utils/buildRequest";
 import {
-  type NumberToHexErrorType,
   numberToHex,
+  type NumberToHexErrorType,
 } from "../../utils/encoding/toHex";
 import {
-  type GetEstimateGasErrorReturnType,
   getEstimateGasError,
+  type GetEstimateGasErrorReturnType,
 } from "../../utils/errors/getEstimateGasError";
 import { extract } from "../../utils/formatters/extract";
 import {
@@ -32,13 +32,13 @@ import {
 } from "../../utils/formatters/transactionRequest";
 import { serializeStateOverride } from "../../utils/stateOverride";
 import {
+  assertRequest,
   type AssertRequestErrorType,
   type AssertRequestParameters,
-  assertRequest,
 } from "../../utils/transaction/assertRequest";
 import {
-  type PrepareTransactionRequestParameters,
   prepareTransactionRequest,
+  type PrepareTransactionRequestParameters,
 } from "../wallet/prepareTransactionRequest";
 import { getBalance } from "./getBalance";
 
@@ -76,7 +76,7 @@ export type EstimateGasErrorType = GetEstimateGasErrorReturnType<
 >;
 
 /**
- * Estimates the gas necessary to complete a transaction without submitting it to the networkID.
+ * Estimates the gas necessary to complete a transaction without submitting it to the network.
  *
  * - Docs: https://viem.sh/docs/actions/public/estimateGas
  * - JSON-RPC Methods: [`mina_estimateGas`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_estimategas)

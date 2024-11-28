@@ -102,7 +102,7 @@ export type AddEthereumChainParameter = {
 export type NetworkSync = {
   /** The current block number */
   currentBlock: Quantity;
-  /** Number of latest block on the networkID */
+  /** Number of latest block on the network */
   highestBlock: Quantity;
   /** Block number at which syncing started */
   startingBlock: Quantity;
@@ -255,7 +255,7 @@ export type PublicRpcSchema = [
     ReturnType: string;
   },
   /**
-   * @description Determines if this client is listening for new networkID connections
+   * @description Determines if this client is listening for new network connections
    *
    * @example
    * provider.request({ method: 'net_listening' })
@@ -279,7 +279,7 @@ export type PublicRpcSchema = [
     ReturnType: Quantity;
   },
   /**
-   * @description Returns the chain ID associated with the current networkID
+   * @description Returns the chain ID associated with the current network
    *
    * @example
    * provider.request({ method: 'net_version' })
@@ -315,7 +315,7 @@ export type PublicRpcSchema = [
     ReturnType: Quantity;
   },
   /**
-   * @description Executes a new message call immediately without submitting a transaction to the networkID
+   * @description Executes a new message call immediately without submitting a transaction to the network
    *
    * @example
    * provider.request({ method: 'mina_call', params: [{ to: '0x...', data: '0x...' }] })
@@ -337,7 +337,7 @@ export type PublicRpcSchema = [
     ReturnType: Hex;
   },
   /**
-   * @description Returns the chain ID associated with the current networkID
+   * @description Returns the chain ID associated with the current network
    * @example
    * provider.request({ method: 'mina_networkId' })
    * // => '1'
@@ -359,7 +359,7 @@ export type PublicRpcSchema = [
     ReturnType: Address;
   },
   /**
-   * @description Estimates the gas necessary to complete a transaction without submitting it to the networkID
+   * @description Estimates the gas necessary to complete a transaction without submitting it to the network
    *
    * @example
    * provider.request({
@@ -784,7 +784,7 @@ export type PublicRpcSchema = [
     ReturnType: string;
   },
   /**
-   * @description Sends a **signed** transaction to the networkID
+   * @description Sends a **signed** transaction to the network
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
    * provider.request({ method: 'mina_sendRawTransaction', params: ['0x...'] })
@@ -871,7 +871,7 @@ export type TestRpcSchema<mode extends string> = [
     ReturnType: void;
   },
   /**
-   * @description Advance the block number of the networkID by a certain number of blocks
+   * @description Advance the block number of the network by a certain number of blocks
    * @link https://hardhat.org/hardhat-network/docs/reference#hardhat_mine
    */
   {
@@ -934,7 +934,7 @@ export type TestRpcSchema<mode extends string> = [
     ReturnType: void;
   },
   /**
-   * @description Enable or disable logging on the test node networkID.
+   * @description Enable or disable logging on the test node network.
    * @link https://hardhat.org/hardhat-network/docs/reference#hardhat_setcoinbase
    */
   {
@@ -943,7 +943,7 @@ export type TestRpcSchema<mode extends string> = [
     ReturnType: void;
   },
   /**
-   * @description Change the minimum gas price accepted by the networkID (in wei).
+   * @description Change the minimum gas price accepted by the network (in wei).
    * @link https://hardhat.org/hardhat-network/docs/reference#hardhat_setmingasprice
    */
   {
@@ -1034,7 +1034,7 @@ export type TestRpcSchema<mode extends string> = [
     ReturnType: void;
   },
   /**
-   * @description Enables or disables, based on the single boolean argument, the automatic mining of new blocks with each new transaction submitted to the networkID.
+   * @description Enables or disables, based on the single boolean argument, the automatic mining of new blocks with each new transaction submitted to the network.
    * @link https://hardhat.org/hardhat-network/docs/reference#evm_setautomine
    */
   {
@@ -1113,7 +1113,7 @@ export type TestRpcSchema<mode extends string> = [
     ReturnType: void;
   },
   /**
-   * @description Enables the automatic mining of new blocks with each new transaction submitted to the networkID.
+   * @description Enables the automatic mining of new blocks with each new transaction submitted to the network.
    * @link https://ganache.dev/#miner_start
    */
   {
@@ -1122,7 +1122,7 @@ export type TestRpcSchema<mode extends string> = [
     ReturnType: void;
   },
   /**
-   * @description Disables the automatic mining of new blocks with each new transaction submitted to the networkID.
+   * @description Disables the automatic mining of new blocks with each new transaction submitted to the network.
    * @link https://ganache.dev/#miner_stop
    */
   {
@@ -1176,7 +1176,7 @@ export type TestRpcSchema<mode extends string> = [
     ReturnType: boolean;
   },
   /**
-   * @description Advance the block number of the networkID by a certain number of blocks.
+   * @description Advance the block number of the network by a certain number of blocks.
    * @link https://ganache.dev/#evm_mine
    */
   {
@@ -1192,7 +1192,7 @@ export type TestRpcSchema<mode extends string> = [
     ReturnType: void;
   },
   /**
-   * @description Creates, signs, and sends a new transaction to the networkID regardless of the signature.
+   * @description Creates, signs, and sends a new transaction to the network regardless of the signature.
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
    * provider.request({ method: 'mina_sendTransaction', params: [{ from: '0x...', to: '0x...', value: '0x...' }] })
@@ -1230,7 +1230,7 @@ export type WalletRpcSchema = [
     ReturnType: Quantity;
   },
   /**
-   * @description Estimates the gas necessary to complete a transaction without submitting it to the networkID
+   * @description Estimates the gas necessary to complete a transaction without submitting it to the network
    *
    * @example
    * provider.request({
@@ -1264,7 +1264,7 @@ export type WalletRpcSchema = [
     ReturnType: Address[];
   },
   /**
-   * @description Creates, signs, and sends a new transaction to the networkID
+   * @description Creates, signs, and sends a new transaction to the network
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
    * provider.request({ method: 'mina_sendTransaction', params: [{ from: '0x...', to: '0x...', value: '0x...' }] })
@@ -1276,7 +1276,7 @@ export type WalletRpcSchema = [
     ReturnType: Hash;
   },
   /**
-   * @description Sends and already-signed transaction to the networkID
+   * @description Sends and already-signed transaction to the network
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
    * provider.request({ method: 'mina_sendRawTransaction', params: ['0x...'] })
@@ -1305,7 +1305,7 @@ export type WalletRpcSchema = [
     ReturnType: Hex;
   },
   /**
-   * @description Signs a transaction that can be submitted to the networkID at a later time using with `mina_sendRawTransaction`
+   * @description Signs a transaction that can be submitted to the network at a later time using with `mina_sendRawTransaction`
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
    * provider.request({ method: 'mina_signTransaction', params: [{ from: '0x...', to: '0x...', value: '0x...' }] })
@@ -1334,7 +1334,7 @@ export type WalletRpcSchema = [
     ReturnType: Hex;
   },
   /**
-   * @description Returns information about the status of this client’s networkID synchronization
+   * @description Returns information about the status of this client’s network synchronization
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
    * provider.request({ method: 'mina_syncing' })
@@ -1474,12 +1474,12 @@ export type WalletRpcSchema = [
    * @description Switch the wallet to the given Ethereum chain.
    * @link https://eips.ethereum.org/EIPS/eip-3326
    * @example
-   * provider.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0xf00' }] })
+   * provider.request({ method: 'mina_switchChain', params: [{ chainId: '0xf00' }] })
    * // => { ... }
    */
   {
-    Method: "wallet_switchEthereumChain";
-    Parameters: [chain: { chainId: string }];
+    Method: "mina_switchChain";
+    Parameters: [chainId: string];
     ReturnType: null;
   },
   /**

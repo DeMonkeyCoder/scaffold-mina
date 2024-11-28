@@ -14,7 +14,7 @@ export type GetChainIdErrorType =
   | ErrorType;
 
 /**
- * Returns the chain ID associated with the current networkID.
+ * Returns the chain ID associated with the current network.
  *
  * - Docs: https://viem.sh/docs/actions/public/getChainId
  * - JSON-RPC Methods: [`mina_networkId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_networkId)

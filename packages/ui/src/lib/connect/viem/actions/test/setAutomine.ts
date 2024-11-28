@@ -11,7 +11,7 @@ import type { RequestErrorType } from "../../utils/buildRequest";
 export type SetAutomineErrorType = RequestErrorType | ErrorType;
 
 /**
- * Enables or disables the automatic mining of new blocks with each new transaction submitted to the networkID.
+ * Enables or disables the automatic mining of new blocks with each new transaction submitted to the network.
  *
  * - Docs: https://viem.sh/docs/actions/test/setAutomine
  *

@@ -3,29 +3,29 @@ import type { Transport } from "../../../clients/transports/createTransport";
 import type { Account } from "../../../types/account";
 import type { Chain } from "../../../types/chain";
 import {
+  getCallsStatus,
   type GetCallsStatusParameters,
   type GetCallsStatusReturnType,
-  getCallsStatus,
 } from "../actions/getCallsStatus";
 import {
+  getCapabilities,
   type GetCapabilitiesParameters,
   type GetCapabilitiesReturnType,
-  getCapabilities,
 } from "../actions/getCapabilities";
 import {
+  sendCalls,
   type SendCallsParameters,
   type SendCallsReturnType,
-  sendCalls,
 } from "../actions/sendCalls";
 import {
+  showCallsStatus,
   type ShowCallsStatusParameters,
   type ShowCallsStatusReturnType,
-  showCallsStatus,
 } from "../actions/showCallsStatus";
 import {
+  writeContracts,
   type WriteContractsParameters,
   type WriteContractsReturnType,
-  writeContracts,
 } from "../actions/writeContracts";
 
 export type Eip5792Actions<
@@ -146,7 +146,7 @@ export type Eip5792Actions<
     parameters: ShowCallsStatusParameters
   ) => Promise<ShowCallsStatusReturnType>;
   /**
-   * Requests for the wallet to sign and broadcast a batch of write contract calls (transactions) to the networkID.
+   * Requests for the wallet to sign and broadcast a batch of write contract calls (transactions) to the network.
    *
    * - Docs: https://viem.sh/experimental/eip5792/writeContracts
    *

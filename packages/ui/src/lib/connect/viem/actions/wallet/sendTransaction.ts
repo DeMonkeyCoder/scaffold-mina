@@ -95,7 +95,7 @@ export type SendTransactionErrorType =
   | ErrorType;
 
 /**
- * Creates, signs, and sends a new transaction to the networkID.
+ * Creates, signs, and sends a new transaction to the network.
  *
  * - Docs: https://viem.sh/docs/actions/wallet/sendTransaction
  * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/transactions/sending-transactions

@@ -125,7 +125,7 @@ export type CallErrorType = GetCallErrorReturnType<
 >;
 
 /**
- * Executes a new message call immediately without submitting a transaction to the networkID.
+ * Executes a new message call immediately without submitting a transaction to the network.
  *
  * - Docs: https://viem.sh/docs/actions/public/call
  * - JSON-RPC Methods: [`mina_call`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_call)

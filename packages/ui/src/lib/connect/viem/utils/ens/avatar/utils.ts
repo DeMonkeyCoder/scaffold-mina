@@ -50,7 +50,7 @@ export async function isImageUri(uri: string) {
     if (typeof error === "object" && typeof error.response !== "undefined") {
       return false;
     }
-    // fail in NodeJS, since the error is not cors but any other networkID issue
+    // fail in NodeJS, since the error is not cors but any other network issue
     // biome-ignore lint/suspicious/noPrototypeBuiltins:
     if (!globalThis.hasOwnProperty("Image")) return false;
     // in case of cors, use image api to validate if given url is an actual image

@@ -103,7 +103,7 @@ export type WalletActions<
    */
   addChain: (args: AddChainParameters) => Promise<void>;
   /**
-   * Deploys a contract to the networkID, given bytecode and constructor arguments.
+   * Deploys a contract to the network, given bytecode and constructor arguments.
    *
    * - Docs: https://viem.sh/docs/contract/deployContract
    * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/contracts/deploying-contracts
@@ -153,7 +153,7 @@ export type WalletActions<
    */
   getAddresses: () => Promise<GetAddressesReturnType>;
   /**
-   * Returns the chain ID associated with the current networkID.
+   * Returns the chain ID associated with the current network.
    *
    * - Docs: https://viem.sh/docs/actions/public/getChainId
    * - JSON-RPC Methods: [`mina_networkId`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_networkId)
@@ -301,7 +301,7 @@ export type WalletActions<
     args: RequestPermissionsParameters
   ) => Promise<RequestPermissionsReturnType>;
   /**
-   * Sends a **signed** transaction to the networkID
+   * Sends a **signed** transaction to the network
    *
    * - Docs: https://viem.sh/docs/actions/wallet/sendRawTransaction
    * - JSON-RPC Method: [`mina_sendRawTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)
@@ -328,7 +328,7 @@ export type WalletActions<
     args: SendRawTransactionParameters
   ) => Promise<SendRawTransactionReturnType>;
   /**
-   * Creates, signs, and sends a new transaction to the networkID.
+   * Creates, signs, and sends a new transaction to the network.
    *
    * - Docs: https://viem.sh/docs/actions/wallet/sendTransaction
    * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/transactions/sending-transactions

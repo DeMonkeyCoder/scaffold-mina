@@ -11,7 +11,7 @@ import type { RequestErrorType } from "../../utils/buildRequest";
 export type SetLoggingEnabledErrorType = RequestErrorType | ErrorType;
 
 /**
- * Enable or disable logging on the test node networkID.
+ * Enable or disable logging on the test node network.
  *
  * - Docs: https://viem.sh/docs/actions/test/setLoggingEnabled
  *

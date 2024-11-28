@@ -14,15 +14,15 @@ import type {
 } from "../../../types/contract";
 import type { MulticallContracts } from "../../../types/multicall";
 import {
-  type EncodeFunctionDataErrorType,
   encodeFunctionData,
+  type EncodeFunctionDataErrorType,
 } from "../../../utils/abi/encodeFunctionData";
 import { getAction } from "../../../utils/getAction";
 import {
+  sendCalls,
   type SendCallsErrorType,
   type SendCallsParameters,
   type SendCallsReturnType,
-  sendCalls,
 } from "./sendCalls";
 
 export type WriteContractsParameters<
@@ -49,7 +49,7 @@ export type WriteContractsErrorType =
   | ErrorType;
 
 /**
- * Requests for the wallet to sign and broadcast a batch of write contract calls (transactions) to the networkID.
+ * Requests for the wallet to sign and broadcast a batch of write contract calls (transactions) to the network.
  *
  * - Docs: https://viem.sh/experimental/eip5792/writeContracts
  *

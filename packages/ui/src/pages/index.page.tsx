@@ -13,6 +13,7 @@ import { useMinaProvider } from "@/lib/ZkappContext";
 import { isSupportedNetwork } from "@/constants/network";
 import AccountDoesNotExist from "@/components/AccountDoesNotExist";
 import { useAccount } from "@/lib/connect/react/hooks/useAccount";
+import { useChainId } from "@/lib/connect/react/hooks/useChainId";
 
 enum TransactionState {
   INITIAL,
@@ -24,7 +25,8 @@ function HomeBody() {
   const { loading, prepareTransaction } = useQuestContract();
   const { address, isConnected } = useAccount();
 
-  const { accountExists, sendTransaction, networkID } = useMinaProvider();
+  const { accountExists } = useMinaProvider();
+  const networkId = useChainId();
 
   const { data: currentNum } = useGetQuestContractState({
     stateVariable: "counter",
@@ -56,8 +58,8 @@ function HomeBody() {
   }, [prepareTransaction, questSolution, txState]);
 
   useEffect(() => {
-    setTransactionLink("")
-  }, [address])
+    setTransactionLink("");
+  }, [address]);
 
   return (
     <GradientBG>
@@ -66,22 +68,20 @@ function HomeBody() {
           <LoadingScreen />
         ) : (
           <div className="center">
-
             {transactionLink && (
               <div className="mb-1">
                 <button className="card flex items-center justify-center">
-                <Image width={16} height={16} src="/assets/view.svg" alt="" />
-                <a href={transactionLink} target="_blank" rel="noreferrer">
-                  View Transaction
-                </a>
-              </button>
+                  <Image width={16} height={16} src="/assets/view.svg" alt="" />
+                  <a href={transactionLink} target="_blank" rel="noreferrer">
+                    View Transaction
+                  </a>
+                </button>
               </div>
             )}
             {isConnected ? (
-              isSupportedNetwork(networkID) ? (
+              isSupportedNetwork(networkId) ? (
                 accountExists ? (
                   <>
-
                     <div className="riddle-box bg-purple-50">
                       <div className="justify-center items-center">
                         <div className="text-center text-2xl mb-2 flex items-center justify-center p-0">
@@ -122,13 +122,13 @@ function HomeBody() {
                         disabled={txState !== TransactionState.INITIAL}
                       >
                         {txState !== TransactionState.PREPARING && (
-                        <Image
-                          width={16}
-                          height={16}
-                          src="/assets/upload-circle-01-stroke-rounded.svg"
-                          alt=""
-                        />
-                       )}
+                          <Image
+                            width={16}
+                            height={16}
+                            src="/assets/upload-circle-01-stroke-rounded.svg"
+                            alt=""
+                          />
+                        )}
                         {txState === TransactionState.AWAITING_USER_APPROVAL
                           ? "Awaiting Approval..."
                           : txState === TransactionState.PREPARING
@@ -143,23 +143,25 @@ function HomeBody() {
                 )
               ) : (
                 <div>
-                Please change your wallet network to Devnet
-                <div className="flex items-center justify-center">
-                <ConnectWallet />
-                </div>
+                  Please change your wallet network to Devnet
+                  <div className="flex items-center justify-center">
+                    <ConnectWallet />
+                  </div>
                 </div>
               )
             ) : (
               <div className="welcome">
-
                 <div>Welcome to</div>
                 <div className="flex items-center justify-center text-2xl font-semibold mr-6">
-                <img
-                            className="px-2 w-12"
-                            src="/assets/minalogo.png"
-                            alt=""
-                 />
-                Scaffold-<div className="bg-gradient-to-r from-purple-600 to-orange-500 text-transparent bg-clip-text">MINA</div>
+                  <img
+                    className="px-2 w-12"
+                    src="/assets/minalogo.png"
+                    alt=""
+                  />
+                  Scaffold-
+                  <div className="bg-gradient-to-r from-purple-600 to-orange-500 text-transparent bg-clip-text">
+                    MINA
+                  </div>
                 </div>
                 <ConnectWallet />
               </div>

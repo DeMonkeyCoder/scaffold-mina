@@ -427,10 +427,10 @@ export function injected(parameters: InjectedParameters = {}) {
         await Promise.all([
           provider
             .request({
-              method: "wallet_switchEthereumChain",
-              params: [{ chainId }],
+              method: "mina_switchChain",
+              params: [chainId],
             })
-            // During `'wallet_switchEthereumChain'`, MetaMask makes a `'net_version'` RPC call to the target chain.
+            // During `'mina_switchChain'`, MetaMask makes a `'net_version'` RPC call to the target chain.
             // If this request fails, MetaMask does not emit the `'chainChanged'` event, but will still switch the chain.
             // To counter this behavior, we request and emit the current chain ID to confirm the chain switch either via
             // this callback or an externally emitted `'chainChanged'` event.
@@ -494,7 +494,7 @@ export function injected(parameters: InjectedParameters = {}) {
             const currentChainId = await this.getChainId();
             if (currentChainId !== chainId)
               throw new UserRejectedRequestError(
-                new Error("User rejected switch after adding networkID.")
+                new Error("User rejected switch after adding network.")
               );
 
             return chain;

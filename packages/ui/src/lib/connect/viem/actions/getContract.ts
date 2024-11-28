@@ -33,39 +33,39 @@ import type {
 import type { ErrorType } from "../errors/utils";
 import { getAction } from "../utils/getAction";
 import {
+  createContractEventFilter,
   type CreateContractEventFilterParameters,
   type CreateContractEventFilterReturnType,
-  createContractEventFilter,
 } from "./public/createContractEventFilter";
 import {
+  estimateContractGas,
   type EstimateContractGasParameters,
   type EstimateContractGasReturnType,
-  estimateContractGas,
 } from "./public/estimateContractGas";
 import {
+  getContractEvents,
   type GetContractEventsParameters,
   type GetContractEventsReturnType,
-  getContractEvents,
 } from "./public/getContractEvents";
 import {
+  readContract,
   type ReadContractParameters,
   type ReadContractReturnType,
-  readContract,
 } from "./public/readContract";
 import {
+  simulateContract,
   type SimulateContractParameters,
   type SimulateContractReturnType,
-  simulateContract,
 } from "./public/simulateContract";
 import {
+  watchContractEvent,
   type WatchContractEventParameters,
   type WatchContractEventReturnType,
-  watchContractEvent,
 } from "./public/watchContractEvent";
 import {
+  writeContract,
   type WriteContractParameters,
   type WriteContractReturnType,
-  writeContract,
 } from "./wallet/writeContract";
 
 type KeyedClient<
@@ -196,7 +196,7 @@ export type GetContractReturnType<
             ? unknown
             : {
                 /**
-                 * Estimates the gas necessary to complete a transaction without submitting it to the networkID.
+                 * Estimates the gas necessary to complete a transaction without submitting it to the network.
                  *
                  * @example
                  * import { createPublicClient, getContract, http, parseAbi } from 'viem'
@@ -363,7 +363,7 @@ export type GetContractReturnType<
           ? unknown
           : {
               /**
-               * Estimates the gas necessary to complete a transaction without submitting it to the networkID.
+               * Estimates the gas necessary to complete a transaction without submitting it to the network.
                *
                * @example
                * import { createWalletClient, getContract, http, parseAbi } from 'viem'
