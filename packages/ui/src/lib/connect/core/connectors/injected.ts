@@ -101,7 +101,6 @@ export function injected(parameters: InjectedParameters = {}) {
       const result = target();
       if (result) return result;
     }
-
     if (typeof target === "object") {
       if (target.id === "co.pallad" && typeof target.provider === "object") {
         return {
@@ -325,6 +324,13 @@ export function injected(parameters: InjectedParameters = {}) {
     async getNetworkId() {
       const provider = await this.getProvider();
       if (!provider) throw new ProviderNotFoundError();
+      // TODO: Remove this hotfix once the method mismatch between wallets is resolved
+      if (getTarget().id === "com.aurowallet") {
+        const response: string =
+          // @ts-ignore
+          (await provider.request({ method: "mina_requestNetwork" })).networkID;
+        return response === "mina:testnet" ? "mina:devnet" : response;
+      }
       return provider.request({ method: "mina_networkId" });
     },
     async getProvider() {
@@ -427,11 +433,21 @@ export function injected(parameters: InjectedParameters = {}) {
 
       try {
         await Promise.all([
-          provider
-            .request({
-              method: "mina_switchChain",
-              params: [networkId],
-            })
+          // TODO: Remove this hotfix once the method mismatch between wallets is resolved
+          (getTarget().id === "com.aurowallet"
+            ? provider.request({
+                method: "mina_switchChain",
+                params: {
+                  // @ts-ignore
+                  networkID:
+                    networkId === "mina:devnet" ? "mina:testnet" : networkId,
+                },
+              })
+            : provider.request({
+                method: "mina_switchChain",
+                params: [networkId],
+              })
+          )
             // During `'mina_switchChain'`, MetaMask makes a `'net_version'` RPC call to the target chain.
             // If this request fails, MetaMask does not emit the `'chainChanged'` event, but will still switch the chain.
             // To counter this behavior, we request and emit the current chain ID to confirm the chain switch either via

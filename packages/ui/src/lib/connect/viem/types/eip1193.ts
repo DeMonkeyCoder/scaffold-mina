@@ -345,7 +345,7 @@ export type PublicRpcSchema = [
   {
     Method: "mina_networkId";
     Parameters?: undefined;
-    ReturnType: Quantity;
+    ReturnType: string;
   },
   /**
    * @description Returns the client coinbase address.
@@ -1227,7 +1227,7 @@ export type WalletRpcSchema = [
   {
     Method: "mina_networkId";
     Parameters?: undefined;
-    ReturnType: Quantity;
+    ReturnType: string;
   },
   /**
    * @description Estimates the gas necessary to complete a transaction without submitting it to the network

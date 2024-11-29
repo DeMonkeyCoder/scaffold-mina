@@ -38,10 +38,13 @@ export async function getNetworkId<
   chain extends Chain | undefined,
   account extends Account | undefined
 >(client: Client<Transport, chain, account>): Promise<GetNetworkIdReturnType> {
-  return client.request(
+  const response = await client.request(
     {
       method: "mina_networkId",
     },
     { dedupe: true }
   );
+  // TODO: Remove this hotfix once the networkId mismatch issue in Devnet is resolved
+  if (response === "mina:testnet") return "mina:devnet";
+  return response;
 }
