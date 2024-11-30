@@ -306,13 +306,13 @@ export type PublicRpcSchema = [
    * @description Returns the number of the most recent block seen by this client
    *
    * @example
-   * provider.request({ method: 'mina_blockNumber' })
+   * provider.request({ method: 'mina_blockHash' })
    * // => '0x1b4'
    */
   {
-    Method: "mina_blockNumber";
+    Method: "mina_blockHash";
     Parameters?: undefined;
-    ReturnType: Quantity;
+    ReturnType: string;
   },
   /**
    * @description Executes a new message call immediately without submitting a transaction to the network

@@ -546,7 +546,7 @@ export type PublicActions<
    *
    * - Docs: https://viem.sh/docs/actions/public/getBlockNumber
    * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/fetching-blocks
-   * - JSON-RPC Methods: [`mina_blockNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber)
+   * - JSON-RPC Methods: [`mina_blockHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber)
    *
    * @param args - {@link GetBlockNumberParameters}
    * @returns The number of the block. {@link GetBlockNumberReturnType}
@@ -1406,7 +1406,7 @@ export type PublicActions<
    * - Docs: https://viem.sh/docs/actions/public/watchBlockNumber
    * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/watching-blocks
    * - JSON-RPC Methods:
-   *   - When `poll: true`, calls [`mina_blockNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber) on a polling interval.
+   *   - When `poll: true`, calls [`mina_blockHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber) on a polling interval.
    *   - When `poll: false` & WebSocket Transport, uses a WebSocket subscription via [`mina_subscribe`](https://docs.alchemy.com/reference/eth-subscribe-polygon) and the `"newHeads"` event.
    *
    * @param args - {@link WatchBlockNumberParameters}

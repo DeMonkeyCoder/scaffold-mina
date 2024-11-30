@@ -4,8 +4,8 @@ import type { ErrorType } from "../../errors/utils";
 import type { Chain } from "../../types/chain";
 import type { RequestErrorType } from "../../utils/buildRequest";
 import {
-  type GetCacheErrorType,
   getCache,
+  type GetCacheErrorType,
   withCache,
 } from "../../utils/promise/withCache";
 
@@ -33,7 +33,7 @@ export function getBlockNumberCache(id: string) {
  *
  * - Docs: https://viem.sh/docs/actions/public/getBlockNumber
  * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/fetching-blocks
- * - JSON-RPC Methods: [`mina_blockNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber)
+ * - JSON-RPC Methods: [`mina_blockHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber)
  *
  * @param client - Client to use
  * @param parameters - {@link GetBlockNumberParameters}
@@ -58,7 +58,7 @@ export async function getBlockNumber<chain extends Chain | undefined>(
   const blockNumberHex = await withCache(
     () =>
       client.request({
-        method: "mina_blockNumber",
+        method: "mina_blockHash",
       }),
     { cacheKey: cacheKey(client.uid), cacheTime }
   );

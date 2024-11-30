@@ -6,12 +6,12 @@ import type { HasTransportType } from "../../types/transport";
 import { hexToBigInt } from "../../utils/encoding/fromHex";
 import { getAction } from "../../utils/getAction";
 import { observe } from "../../utils/observe";
-import { type PollErrorType, poll } from "../../utils/poll";
+import { poll, type PollErrorType } from "../../utils/poll";
 import { stringify } from "../../utils/stringify";
 
 import {
-  type GetBlockNumberReturnType,
   getBlockNumber,
+  type GetBlockNumberReturnType,
 } from "./getBlockNumber";
 
 export type OnBlockNumberParameter = GetBlockNumberReturnType;
@@ -58,7 +58,7 @@ export type WatchBlockNumberErrorType = PollErrorType | ErrorType;
  * - Docs: https://viem.sh/docs/actions/public/watchBlockNumber
  * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/watching-blocks
  * - JSON-RPC Methods:
- *   - When `poll: true`, calls [`mina_blockNumber`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber) on a polling interval.
+ *   - When `poll: true`, calls [`mina_blockHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber) on a polling interval.
  *   - When `poll: false` & WebSocket Transport, uses a WebSocket subscription via [`mina_subscribe`](https://docs.alchemy.com/reference/eth-subscribe-polygon) and the `"newHeads"` event.
  *
  * @param client - Client to use
