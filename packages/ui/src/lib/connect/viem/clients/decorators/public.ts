@@ -176,16 +176,6 @@ import {
   type WatchBlocksReturnType,
 } from "../../actions/public/watchBlocks";
 import {
-  watchContractEvent,
-  type WatchContractEventParameters,
-  type WatchContractEventReturnType,
-} from "../../actions/public/watchContractEvent";
-import {
-  watchEvent,
-  type WatchEventParameters,
-  type WatchEventReturnType,
-} from "../../actions/public/watchEvent";
-import {
   watchPendingTransactions,
   type WatchPendingTransactionsParameters,
   type WatchPendingTransactionsReturnType,
@@ -1456,83 +1446,6 @@ export type PublicActions<
     args: WatchBlocksParameters<transport, chain, includeTransactions, blockTag>
   ) => WatchBlocksReturnType;
   /**
-   * Watches and returns emitted contract event logs.
-   *
-   * - Docs: https://viem.sh/docs/contract/watchContractEvent
-   *
-   * @remarks
-   * This Action will batch up all the event logs found within the [`pollingInterval`](https://viem.sh/docs/contract/watchContractEvent#pollinginterval-optional), and invoke them via [`onLogs`](https://viem.sh/docs/contract/watchContractEvent#onLogs).
-   *
-   * `watchContractEvent` will attempt to create an [Event Filter](https://viem.sh/docs/contract/createContractEventFilter) and listen to changes to the Filter per polling interval, however, if the RPC Provider does not support Filters (e.g. `mina_newFilter`), then `watchContractEvent` will fall back to using [`getLogs`](https://viem.sh/docs/actions/public/getLogs) instead.
-   *
-   * @param args - {@link WatchContractEventParameters}
-   * @returns A function that can be invoked to stop watching for new event logs. {@link WatchContractEventReturnType}
-   *
-   * @example
-   * import { createPublicClient, http, parseAbi } from 'viem'
-   * import { mainnet } from 'viem/chains'
-   *
-   * const client = createPublicClient({
-   *   chain: mainnet,
-   *   transport: http(),
-   * })
-   * const unwatch = client.watchContractEvent({
-   *   address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
-   *   abi: parseAbi(['event Transfer(address indexed from, address indexed to, uint256 value)']),
-   *   eventName: 'Transfer',
-   *   args: { from: '0xc961145a54C96E3aE9bAA048c4F4D6b04C13916b' },
-   *   onLogs: (logs) => console.log(logs),
-   * })
-   */
-  watchContractEvent: <
-    const abi extends Abi | readonly unknown[],
-    eventName extends ContractEventName<abi>,
-    strict extends boolean | undefined = undefined
-  >(
-    args: WatchContractEventParameters<abi, eventName, strict, transport>
-  ) => WatchContractEventReturnType;
-  /**
-   * Watches and returns emitted [Event Logs](https://viem.sh/docs/glossary/terms#event-log).
-   *
-   * - Docs: https://viem.sh/docs/actions/public/watchEvent
-   * - JSON-RPC Methods:
-   *   - **RPC Provider supports `mina_newFilter`:**
-   *     - Calls [`mina_newFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_newfilter) to create a filter (called on initialize).
-   *     - On a polling interval, it will call [`mina_getFilterChanges`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getfilterchanges).
-   *   - **RPC Provider does not support `mina_newFilter`:**
-   *     - Calls [`mina_getLogs`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_getlogs) for each block between the polling interval.
-   *
-   * @remarks
-   * This Action will batch up all the Event Logs found within the [`pollingInterval`](https://viem.sh/docs/actions/public/watchEvent#pollinginterval-optional), and invoke them via [`onLogs`](https://viem.sh/docs/actions/public/watchEvent#onLogs).
-   *
-   * `watchEvent` will attempt to create an [Event Filter](https://viem.sh/docs/actions/public/createEventFilter) and listen to changes to the Filter per polling interval, however, if the RPC Provider does not support Filters (e.g. `mina_newFilter`), then `watchEvent` will fall back to using [`getLogs`](https://viem.sh/docs/actions/public/getLogs) instead.
-   *
-   * @param args - {@link WatchEventParameters}
-   * @returns A function that can be invoked to stop watching for new Event Logs. {@link WatchEventReturnType}
-   *
-   * @example
-   * import { createPublicClient, http } from 'viem'
-   * import { mainnet } from 'viem/chains'
-   *
-   * const client = createPublicClient({
-   *   chain: mainnet,
-   *   transport: http(),
-   * })
-   * const unwatch = client.watchEvent({
-   *   onLogs: (logs) => console.log(logs),
-   * })
-   */
-  watchEvent: <
-    const abiEvent extends AbiEvent | undefined = undefined,
-    const abiEvents extends
-      | readonly AbiEvent[]
-      | readonly unknown[]
-      | undefined = abiEvent extends AbiEvent ? [abiEvent] : undefined,
-    strict extends boolean | undefined = undefined
-  >(
-    args: WatchEventParameters<abiEvent, abiEvents, strict, transport>
-  ) => WatchEventReturnType;
-  /**
    * Watches and returns pending transaction hashes.
    *
    * - Docs: https://viem.sh/docs/actions/public/watchPendingTransactions
@@ -1619,8 +1532,6 @@ export function publicActions<
       waitForTransactionReceipt(client, args),
     watchBlocks: (args) => watchBlocks(client, args),
     watchBlockHash: (args) => watchBlockHash(client, args),
-    watchContractEvent: (args) => watchContractEvent(client, args),
-    watchEvent: (args) => watchEvent(client, args),
     watchPendingTransactions: (args) => watchPendingTransactions(client, args),
   };
 }

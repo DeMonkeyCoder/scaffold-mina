@@ -3,22 +3,16 @@ export {
   type CreateSimulateContractParameters,
   type CreateSimulateContractReturnType,
   createSimulateContract,
-} from '../actions/codegen/createSimulateContract'
+} from "../actions/codegen/createSimulateContract";
 
 export {
   type CreateReadContractParameters,
   type CreateReadContractReturnType,
   createReadContract,
-} from '../actions/codegen/createReadContract'
-
-export {
-  type CreateWatchContractEventParameters,
-  type CreateWatchContractEventReturnType,
-  createWatchContractEvent,
-} from '../actions/codegen/createWatchContractEvent'
+} from "../actions/codegen/createReadContract";
 
 export {
   type CreateWriteContractParameters,
   type CreateWriteContractReturnType,
   createWriteContract,
-} from '../actions/codegen/createWriteContract'
+} from "../actions/codegen/createWriteContract";

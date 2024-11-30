@@ -304,12 +304,6 @@ export {
 } from "../actions/watchConnectors";
 
 export {
-  type WatchContractEventParameters,
-  type WatchContractEventReturnType,
-  watchContractEvent,
-} from "../actions/watchContractEvent";
-
-export {
   type WatchPendingTransactionsParameters,
   type WatchPendingTransactionsReturnType,
   watchPendingTransactions,

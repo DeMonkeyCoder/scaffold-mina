@@ -247,13 +247,6 @@ export type {
   WatchBlockHashReturnType,
 } from "./actions/public/watchBlockHash";
 export type {
-  WatchEventOnLogsFn,
-  WatchEventOnLogsParameter,
-  WatchEventErrorType,
-  WatchEventParameters,
-  WatchEventReturnType,
-} from "./actions/public/watchEvent";
-export type {
   OnTransactionsFn,
   OnTransactionsParameter,
   WatchPendingTransactionsErrorType,
@@ -409,13 +402,6 @@ export type {
   VerifyMessageParameters as VerifyMessageActionParameters,
   VerifyMessageReturnType as VerifyMessageActionReturnType,
 } from "./actions/public/verifyMessage";
-export type {
-  WatchContractEventOnLogsFn,
-  WatchContractEventOnLogsParameter,
-  WatchContractEventErrorType,
-  WatchContractEventParameters,
-  WatchContractEventReturnType,
-} from "./actions/public/watchContractEvent";
 export type {
   WriteContractErrorType,
   WriteContractParameters,

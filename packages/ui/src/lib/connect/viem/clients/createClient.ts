@@ -114,7 +114,6 @@ type ExtendableProtectedActions<
   | "simulateContract"
   | "uninstallFilter"
   | "watchBlockHash"
-  | "watchContractEvent"
 > &
   Pick<WalletActions<chain, account>, "sendTransaction" | "writeContract">;
 

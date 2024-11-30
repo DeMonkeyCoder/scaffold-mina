@@ -300,12 +300,6 @@ export {
 } from "../hooks/useWatchBlockHash";
 
 export {
-  type UseWatchContractEventParameters,
-  type UseWatchContractEventReturnType,
-  useWatchContractEvent,
-} from "../hooks/useWatchContractEvent";
-
-export {
   type UseWatchPendingTransactionsParameters,
   type UseWatchPendingTransactionsReturnType,
   useWatchPendingTransactions,

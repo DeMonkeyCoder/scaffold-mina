@@ -23,12 +23,6 @@ export {
 } from "../hooks/codegen/createUseReadContract";
 
 export {
-  type CreateUseWatchContractEventParameters,
-  type CreateUseWatchContractEventReturnType,
-  createUseWatchContractEvent,
-} from "../hooks/codegen/createUseWatchContractEvent";
-
-export {
   type CreateUseWriteContractParameters,
   type CreateUseWriteContractReturnType,
   createUseWriteContract,

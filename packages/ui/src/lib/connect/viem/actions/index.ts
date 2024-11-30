@@ -220,13 +220,6 @@ export {
   watchBlockHash,
 } from "./public/watchBlockHash";
 export {
-  type WatchEventOnLogsFn,
-  type WatchEventOnLogsParameter,
-  type WatchEventParameters,
-  type WatchEventReturnType,
-  watchEvent,
-} from "./public/watchEvent";
-export {
   type OnTransactionsFn,
   type OnTransactionsParameter,
   type WatchPendingTransactionsErrorType,
@@ -448,12 +441,6 @@ export {
   type WatchAssetReturnType,
   watchAsset,
 } from "./wallet/watchAsset";
-export {
-  type WatchContractEventErrorType,
-  type WatchContractEventParameters,
-  type WatchContractEventReturnType,
-  watchContractEvent,
-} from "./public/watchContractEvent";
 export {
   type WriteContractErrorType,
   type WriteContractParameters,
