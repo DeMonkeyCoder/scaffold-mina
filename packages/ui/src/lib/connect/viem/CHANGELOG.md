@@ -3356,7 +3356,7 @@
 
 - [#958](https://github.com/wevm/viem/pull/958) [
   `f7976fd0`](https://github.com/wevm/viem/commit/f7976fd0486079247a76ff3d3cecfbc2f6f2dae9)
-  Thanks [@jxom](https://github.com/jxom)! - Added `cacheTime` as a parameter to `getBlockNumber` & `createClient`.
+  Thanks [@jxom](https://github.com/jxom)! - Added `cacheTime` as a parameter to `getBlockHash` & `createClient`.
 
 - [`28a82125`](https://github.com/wevm/viem/commit/28a82125f2678ed6ceb3bfaab065bfb9ffc8a367)
   Thanks [@jxom](https://github.com/jxom)! - Exported number constants (ie. `maxInt128`, `maxUint256`, etc).
@@ -5116,15 +5116,15 @@
   ```diff
   import { createPublicClient, http } from 'viem'
   import { mainnet } from 'viem/chains'
-  -import { getBlockNumber } from 'viem/public'
+  -import { getBlockHash } from 'viem/public'
 
   const client = createPublicClient({
     chain: mainnet,
     transport: http(),
   })
 
-  - const blockNumber = await getBlockNumber(client)
-  + const blockNumber = await client.getBlockNumber()
+  - const blockNumber = await getBlockHash(client)
+  + const blockNumber = await client.getBlockHash()
   ```
 
 ## 0.0.1-alpha.26

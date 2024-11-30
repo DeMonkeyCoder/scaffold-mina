@@ -74,13 +74,13 @@ export {
 } from "../query/getBlock";
 
 export {
-  type GetBlockNumberData,
-  type GetBlockNumberOptions,
-  type GetBlockNumberQueryFnData,
-  type GetBlockNumberQueryKey,
-  getBlockNumberQueryKey,
-  getBlockNumberQueryOptions,
-} from "../query/getBlockNumber";
+  type GetBlockHashData,
+  type GetBlockHashOptions,
+  type GetBlockHashQueryFnData,
+  type GetBlockHashQueryKey,
+  getBlockHashQueryKey,
+  getBlockHashQueryOptions,
+} from "../query/getBlockHash";
 
 export {
   type GetBlockTransactionCountData,

@@ -6,8 +6,8 @@ import type { Hash } from "../../types/misc";
 import type { FormattedTransactionReceipt } from "../../utils/formatters/transactionReceipt";
 import { getAction } from "../../utils/getAction";
 
-import { type GetBlockNumberErrorType, getBlockNumber } from "./getBlockNumber";
-import { type GetTransactionErrorType, getTransaction } from "./getTransaction";
+import { getBlockHash, type GetBlockHashErrorType } from "./getBlockHash";
+import { getTransaction, type GetTransactionErrorType } from "./getTransaction";
 
 export type GetTransactionConfirmationsParameters<
   chain extends Chain | undefined = Chain
@@ -26,7 +26,7 @@ export type GetTransactionConfirmationsParameters<
 export type GetTransactionConfirmationsReturnType = bigint;
 
 export type GetTransactionConfirmationsErrorType =
-  | GetBlockNumberErrorType
+  | GetBlockHashErrorType
   | GetTransactionErrorType
   | ErrorType;
 
@@ -61,7 +61,7 @@ export async function getTransactionConfirmations<
   { hash, transactionReceipt }: GetTransactionConfirmationsParameters<chain>
 ): Promise<GetTransactionConfirmationsReturnType> {
   const [blockNumber, transaction] = await Promise.all([
-    getAction(client, getBlockNumber, "getBlockNumber")({}),
+    getAction(client, getBlockHash, "getBlockHash")({}),
     hash
       ? getAction(client, getTransaction, "getTransaction")({ hash })
       : undefined,

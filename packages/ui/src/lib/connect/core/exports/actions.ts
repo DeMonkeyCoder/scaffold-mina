@@ -55,13 +55,13 @@ export {
 } from "../actions/getBlock";
 
 export {
-  type GetBlockNumberErrorType,
-  type GetBlockNumberParameters,
-  type GetBlockNumberReturnType,
-  getBlockNumber,
-  /** @deprecated use `getBlockNumber` instead */
-  getBlockNumber as fetchBlockNumber,
-} from "../actions/getBlockNumber";
+  type GetBlockHashErrorType,
+  type GetBlockHashParameters,
+  type GetBlockHashReturnType,
+  getBlockHash,
+  /** @deprecated use `getBlockHash` instead */
+  getBlockHash as fetchBlockNumber,
+} from "../actions/getBlockHash";
 
 export {
   type GetBlockTransactionCountErrorType,

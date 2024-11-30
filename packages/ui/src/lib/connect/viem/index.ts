@@ -125,10 +125,10 @@ export type {
   GetBlobBaseFeeReturnType,
 } from "./actions/public/getBlobBaseFee";
 export type {
-  GetBlockNumberErrorType,
-  GetBlockNumberParameters,
-  GetBlockNumberReturnType,
-} from "./actions/public/getBlockNumber";
+  GetBlockHashErrorType,
+  GetBlockHashParameters,
+  GetBlockHashReturnType,
+} from "./actions/public/getBlockHash";
 export type {
   GetBlockErrorType,
   GetBlockParameters,

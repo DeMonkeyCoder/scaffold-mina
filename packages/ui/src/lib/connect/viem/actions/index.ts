@@ -85,11 +85,11 @@ export {
   getBlock,
 } from "./public/getBlock";
 export {
-  type GetBlockNumberErrorType,
-  type GetBlockNumberParameters,
-  type GetBlockNumberReturnType,
-  getBlockNumber,
-} from "./public/getBlockNumber";
+  type GetBlockHashErrorType,
+  type GetBlockHashParameters,
+  type GetBlockHashReturnType,
+  getBlockHash,
+} from "./public/getBlockHash";
 export {
   type GetBlockTransactionCountErrorType,
   type GetBlockTransactionCountParameters,

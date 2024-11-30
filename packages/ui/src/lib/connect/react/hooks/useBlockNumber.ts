@@ -3,7 +3,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import type {
   Config,
-  GetBlockNumberErrorType,
+  GetBlockHashErrorType,
   ResolvedRegister,
 } from "@/lib/connect/core/exports";
 import type {
@@ -12,34 +12,34 @@ import type {
   UnionStrictOmit,
 } from "@/lib/connect/core/exports/internal";
 import {
-  type GetBlockNumberData,
-  type GetBlockNumberOptions,
-  type GetBlockNumberQueryFnData,
-  type GetBlockNumberQueryKey,
-  getBlockNumberQueryOptions,
+  type GetBlockHashData,
+  type GetBlockHashOptions,
+  type GetBlockHashQueryFnData,
+  type GetBlockHashQueryKey,
+  getBlockHashQueryOptions,
 } from "@/lib/connect/core/exports/query";
 
 import type { ConfigParameter, QueryParameter } from "../types/properties";
-import { type UseQueryReturnType, useQuery } from "../utils/query";
+import { useQuery, type UseQueryReturnType } from "../utils/query";
 import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 import {
-  type UseWatchBlockNumberParameters,
   useWatchBlockNumber,
+  type UseWatchBlockNumberParameters,
 } from "./useWatchBlockNumber";
 
 export type UseBlockNumberParameters<
   config extends Config = Config,
   networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetBlockNumberData
+  selectData = GetBlockHashData
 > = Compute<
-  GetBlockNumberOptions<config, networkId> &
+  GetBlockHashOptions<config, networkId> &
     ConfigParameter<config> &
     QueryParameter<
-      GetBlockNumberQueryFnData,
-      GetBlockNumberErrorType,
+      GetBlockHashQueryFnData,
+      GetBlockHashErrorType,
       selectData,
-      GetBlockNumberQueryKey<config, networkId>
+      GetBlockHashQueryKey<config, networkId>
     > & {
       watch?:
         | boolean
@@ -53,14 +53,14 @@ export type UseBlockNumberParameters<
     }
 >;
 
-export type UseBlockNumberReturnType<selectData = GetBlockNumberData> =
-  UseQueryReturnType<selectData, GetBlockNumberErrorType>;
+export type UseBlockNumberReturnType<selectData = GetBlockHashData> =
+  UseQueryReturnType<selectData, GetBlockHashErrorType>;
 
 /** https://wagmi.sh/react/api/hooks/useBlockNumber */
 export function useBlockNumber<
   config extends Config = ResolvedRegister["config"],
   networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
-  selectData = GetBlockNumberData
+  selectData = GetBlockHashData
 >(
   parameters: UseBlockNumberParameters<config, networkId, selectData> = {}
 ): UseBlockNumberReturnType<selectData> {
@@ -71,7 +71,7 @@ export function useBlockNumber<
   const configNetworkId = useNetworkId({ config });
   const networkId = parameters.networkId ?? configNetworkId;
 
-  const options = getBlockNumberQueryOptions(config, {
+  const options = getBlockHashQueryOptions(config, {
     ...parameters,
     networkId,
   });

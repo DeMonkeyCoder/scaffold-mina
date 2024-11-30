@@ -12,12 +12,12 @@ import type { Log } from "../../types/log";
 import type { LogTopic } from "../../types/misc";
 import type { GetPollOptions } from "../../types/transport";
 import {
-  type EncodeEventTopicsParameters,
   encodeEventTopics,
+  type EncodeEventTopicsParameters,
 } from "../../utils/abi/encodeEventTopics";
-import { type ObserveErrorType, observe } from "../../utils/observe";
+import { observe, type ObserveErrorType } from "../../utils/observe";
 import { poll } from "../../utils/poll";
-import { type StringifyErrorType, stringify } from "../../utils/stringify";
+import { stringify, type StringifyErrorType } from "../../utils/stringify";
 
 import {
   DecodeLogDataMismatch,
@@ -30,12 +30,12 @@ import { decodeEventLog } from "../../utils/abi/decodeEventLog";
 import { formatLog } from "../../utils/formatters/log";
 import { getAction } from "../../utils/getAction";
 import {
-  type CreateEventFilterParameters,
   createEventFilter,
+  type CreateEventFilterParameters,
 } from "./createEventFilter";
-import { getBlockNumber } from "./getBlockNumber";
+import { getBlockHash } from "./getBlockHash";
 import { getFilterChanges } from "./getFilterChanges";
-import { type GetLogsParameters, getLogs } from "./getLogs";
+import { getLogs, type GetLogsParameters } from "./getLogs";
 import { uninstallFilter } from "./uninstallFilter";
 
 export type WatchEventOnLogsParameter<
@@ -245,8 +245,8 @@ export function watchEvent<
               // Fetch the block number to use for `getLogs`.
               const blockNumber = await getAction(
                 client,
-                getBlockNumber,
-                "getBlockNumber"
+                getBlockHash,
+                "getBlockHash"
               )({});
 
               // If the block number has changed, we will need to fetch the logs.

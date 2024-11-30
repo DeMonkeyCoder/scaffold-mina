@@ -9,58 +9,57 @@ import {
   withCache,
 } from "../../utils/promise/withCache";
 
-export type GetBlockNumberParameters = {
+export type GetBlockHashParameters = {
   /** Time (in ms) that cached block number will remain in memory. */
   cacheTime?: number | undefined;
 };
 
-export type GetBlockNumberReturnType = bigint;
+export type GetBlockHashReturnType = bigint;
 
-export type GetBlockNumberErrorType = RequestErrorType | ErrorType;
+export type GetBlockHashErrorType = RequestErrorType | ErrorType;
 
 const cacheKey = (id: string) => `blockNumber.${id}`;
 
 /** @internal */
-export type GetBlockNumberCacheErrorType = GetCacheErrorType | ErrorType;
+export type GetBlockHashCacheErrorType = GetCacheErrorType | ErrorType;
 
 /** @internal */
-export function getBlockNumberCache(id: string) {
+export function getBlockHashCache(id: string) {
   return getCache(cacheKey(id));
 }
 
 /**
  * Returns the number of the most recent block seen.
  *
- * - Docs: https://viem.sh/docs/actions/public/getBlockNumber
+ * - Docs: https://viem.sh/docs/actions/public/getBlockHash
  * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/fetching-blocks
  * - JSON-RPC Methods: [`mina_blockHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber)
  *
  * @param client - Client to use
- * @param parameters - {@link GetBlockNumberParameters}
- * @returns The number of the block. {@link GetBlockNumberReturnType}
+ * @param parameters - {@link GetBlockHashParameters}
+ * @returns The number of the block. {@link GetBlockHashReturnType}
  *
  * @example
  * import { createPublicClient, http } from 'viem'
  * import { mainnet } from 'viem/chains'
- * import { getBlockNumber } from 'viem/public'
+ * import { getBlockHash } from 'viem/public'
  *
  * const client = createPublicClient({
  *   chain: mainnet,
  *   transport: http(),
  * })
- * const blockNumber = await getBlockNumber(client)
+ * const blockNumber = await getBlockHash(client)
  * // 69420n
  */
-export async function getBlockNumber<chain extends Chain | undefined>(
+export async function getBlockHash<chain extends Chain | undefined>(
   client: Client<Transport, chain>,
-  { cacheTime = client.cacheTime }: GetBlockNumberParameters = {}
-): Promise<GetBlockNumberReturnType> {
-  const blockNumberHex = await withCache(
+  { cacheTime = client.cacheTime }: GetBlockHashParameters = {}
+): Promise<GetBlockHashReturnType> {
+  return withCache(
     () =>
       client.request({
         method: "mina_blockHash",
       }),
     { cacheKey: cacheKey(client.uid), cacheTime }
   );
-  return BigInt(blockNumberHex);
 }

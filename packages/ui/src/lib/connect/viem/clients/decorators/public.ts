@@ -58,10 +58,10 @@ import {
   type GetBlockReturnType,
 } from "../../actions/public/getBlock";
 import {
-  getBlockNumber,
-  type GetBlockNumberParameters,
-  type GetBlockNumberReturnType,
-} from "../../actions/public/getBlockNumber";
+  getBlockHash,
+  type GetBlockHashParameters,
+  type GetBlockHashReturnType,
+} from "../../actions/public/getBlockHash";
 import {
   getBlockTransactionCount,
   type GetBlockTransactionCountParameters,
@@ -544,12 +544,12 @@ export type PublicActions<
   /**
    * Returns the number of the most recent block seen.
    *
-   * - Docs: https://viem.sh/docs/actions/public/getBlockNumber
+   * - Docs: https://viem.sh/docs/actions/public/getBlockHash
    * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/fetching-blocks
    * - JSON-RPC Methods: [`mina_blockHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber)
    *
-   * @param args - {@link GetBlockNumberParameters}
-   * @returns The number of the block. {@link GetBlockNumberReturnType}
+   * @param args - {@link GetBlockHashParameters}
+   * @returns The number of the block. {@link GetBlockHashReturnType}
    *
    * @example
    * import { createPublicClient, http } from 'viem'
@@ -559,12 +559,12 @@ export type PublicActions<
    *   chain: mainnet,
    *   transport: http(),
    * })
-   * const blockNumber = await client.getBlockNumber()
+   * const blockNumber = await client.getBlockHash()
    * // 69420n
    */
-  getBlockNumber: (
-    args?: GetBlockNumberParameters | undefined
-  ) => Promise<GetBlockNumberReturnType>;
+  getBlockHash: (
+    args?: GetBlockHashParameters | undefined
+  ) => Promise<GetBlockHashReturnType>;
   /**
    * Returns the number of Transactions at a block number, hash, or tag.
    *
@@ -1587,7 +1587,7 @@ export function publicActions<
     getBalance: (args) => getBalance(client, args),
     getBlobBaseFee: () => getBlobBaseFee(client),
     getBlock: (args) => getBlock(client, args),
-    getBlockNumber: (args) => getBlockNumber(client, args),
+    getBlockHash: (args) => getBlockHash(client, args),
     getBlockTransactionCount: (args) => getBlockTransactionCount(client, args),
     getBytecode: (args) => getCode(client, args),
     getNetworkId: () => getNetworkId(client),

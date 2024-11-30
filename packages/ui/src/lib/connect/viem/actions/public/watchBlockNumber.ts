@@ -9,12 +9,9 @@ import { observe } from "../../utils/observe";
 import { poll, type PollErrorType } from "../../utils/poll";
 import { stringify } from "../../utils/stringify";
 
-import {
-  getBlockNumber,
-  type GetBlockNumberReturnType,
-} from "./getBlockNumber";
+import { getBlockHash, type GetBlockHashReturnType } from "./getBlockHash";
 
-export type OnBlockNumberParameter = GetBlockNumberReturnType;
+export type OnBlockNumberParameter = GetBlockHashReturnType;
 export type OnBlockNumberFn = (
   blockNumber: OnBlockNumberParameter,
   prevBlockNumber: OnBlockNumberParameter | undefined
@@ -102,7 +99,7 @@ export function watchBlockNumber<
     return true;
   })();
 
-  let prevBlockNumber: GetBlockNumberReturnType | undefined;
+  let prevBlockNumber: GetBlockHashReturnType | undefined;
 
   const pollBlockNumber = () => {
     const observerId = stringify([
@@ -119,8 +116,8 @@ export function watchBlockNumber<
           try {
             const blockNumber = await getAction(
               client,
-              getBlockNumber,
-              "getBlockNumber"
+              getBlockHash,
+              "getBlockHash"
             )({ cacheTime: 0 });
 
             if (prevBlockNumber) {

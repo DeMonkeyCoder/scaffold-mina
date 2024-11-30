@@ -21,19 +21,19 @@ import type { LogTopic } from "../../types/misc";
 import type { GetPollOptions } from "../../types/transport";
 import { decodeEventLog } from "../../utils/abi/decodeEventLog";
 import {
-  type EncodeEventTopicsParameters,
   encodeEventTopics,
+  type EncodeEventTopicsParameters,
 } from "../../utils/abi/encodeEventTopics";
 import { formatLog } from "../../utils/formatters/log";
 import { getAction } from "../../utils/getAction";
-import { type ObserveErrorType, observe } from "../../utils/observe";
+import { observe, type ObserveErrorType } from "../../utils/observe";
 import { poll } from "../../utils/poll";
-import { type StringifyErrorType, stringify } from "../../utils/stringify";
+import { stringify, type StringifyErrorType } from "../../utils/stringify";
 import { createContractEventFilter } from "./createContractEventFilter";
-import { getBlockNumber } from "./getBlockNumber";
+import { getBlockHash } from "./getBlockHash";
 import {
-  type GetContractEventsParameters,
   getContractEvents,
+  type GetContractEventsParameters,
 } from "./getContractEvents";
 import { getFilterChanges } from "./getFilterChanges";
 import { uninstallFilter } from "./uninstallFilter";
@@ -222,8 +222,8 @@ export function watchContractEvent<
               // Fetch the block number to use for `getLogs`.
               const blockNumber = await getAction(
                 client,
-                getBlockNumber,
-                "getBlockNumber"
+                getBlockHash,
+                "getBlockHash"
               )({});
 
               // If the block number has changed, we will need to fetch the logs.

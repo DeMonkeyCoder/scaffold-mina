@@ -99,7 +99,7 @@ type ExtendableProtectedActions<
   | "estimateContractGas"
   | "estimateGas"
   | "getBlock"
-  | "getBlockNumber"
+  | "getBlockHash"
   | "getNetworkId"
   | "getContractEvents"
   | "getFilterChanges"
