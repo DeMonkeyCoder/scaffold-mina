@@ -22,7 +22,8 @@ enum TransactionState {
 }
 
 function HomeBody() {
-  const { loading, prepareTransaction } = useQuestContract();
+  const { prepareTransaction } = useQuestContract();
+  const { zkappWorkerClient } = useMinaProvider();
   const { address, isConnected } = useAccount();
 
   const { accountExists } = useMinaProvider();
@@ -64,7 +65,7 @@ function HomeBody() {
   return (
     <GradientBG>
       <div className="main">
-        {loading ? (
+        {!zkappWorkerClient ? (
           <LoadingScreen />
         ) : (
           <div className="center">

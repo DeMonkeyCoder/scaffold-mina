@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import ZkappWorkerClient from "./zkappWorkerClient";
-import { PublicKey } from "o1js";
+import { Mina, PublicKey } from "o1js";
 import { useAccount } from "@/lib/connect/react/hooks/useAccount";
 
 type MinaAccountData = {
@@ -14,6 +14,7 @@ type MinaAccountData = {
 };
 
 type ZkappContextType = {
+  initialized: boolean;
   zkappWorkerClient: ZkappWorkerClient | null;
 } & MinaAccountData;
 
@@ -23,6 +24,14 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
   const [zkappWorkerClient, setZkappWorkerClient] =
     useState<ZkappWorkerClient | null>(null);
   const { address } = useAccount();
+
+  const [initialized, setInitialized] = useState(false);
+  useEffect(() => {
+    Mina.setActiveInstance(
+      Mina.Network("https://api.minascan.io/node/devnet/v1/graphql")
+    );
+    setInitialized(true);
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -50,6 +59,7 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
   return (
     <ZkappContext.Provider
       value={{
+        initialized,
         zkappWorkerClient,
         accountExists,
       }}

@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { Field, PublicKey } from "o1js";
+import { fetchAccount, Field, PublicKey } from "o1js";
 import { useMinaProvider } from "@/lib/ZkappContext";
 import { timeout } from "@/utils";
 import { ContractContextType, Methods, StateVariables } from "@/lib/types";
@@ -23,46 +23,16 @@ export const QuestContractProvider = ({
   children: ReactNode;
   zkappPublicKey: PublicKey;
 }) => {
-  const [loading, setLoading] = useState<boolean>(true);
   const { zkappWorkerClient } = useMinaProvider();
-
-  useEffect(() => {
-    (async () => {
-      if (zkappWorkerClient) {
-        await zkappWorkerClient.loadAndCompileContract({
-          contractName: "Quest",
-        });
-        console.log("zkApp compiled");
-        await zkappWorkerClient.initZkappInstance({
-          contractName: "Quest",
-          publicKey: zkappPublicKey,
-        });
-        setLoading(false);
-      }
-    })();
-  }, [zkappWorkerClient, zkappPublicKey]);
-
-  const fetchAccount = useCallback(async () => {
-    if (!zkappWorkerClient) {
-      throw Error("zkappWorkerClient not initialized");
-    }
-    await zkappWorkerClient.fetchAccount({
-      publicKey: zkappPublicKey,
-    });
-  }, [zkappPublicKey, zkappWorkerClient]);
 
   const getState = useCallback(
     async ({ stateVariable }: { stateVariable: StateVariables<Quest> }) => {
-      if (!zkappWorkerClient) {
-        throw Error("zkappWorkerClient not initialized");
-      }
-      await fetchAccount();
-      return zkappWorkerClient.getState({
-        contractName: "Quest",
-        stateVariable,
+      await fetchAccount({
+        publicKey: zkappPublicKey,
       });
+      return new Quest(zkappPublicKey)[stateVariable].get();
     },
-    [fetchAccount, zkappWorkerClient]
+    [zkappPublicKey]
   );
   const prepareTransaction = async ({
     method,
@@ -74,7 +44,12 @@ export const QuestContractProvider = ({
     if (!zkappWorkerClient) {
       throw Error("zkappWorkerClient not initialized");
     }
-    await fetchAccount();
+    await zkappWorkerClient.loadAndCompileContract({
+      contractName: "Quest",
+    });
+    await fetchAccount({
+      publicKey: zkappPublicKey,
+    });
     return zkappWorkerClient.prepareTransaction({
       contractName: "Quest",
       method,
@@ -87,7 +62,6 @@ export const QuestContractProvider = ({
       value={{
         prepareTransaction,
         getState,
-        loading,
       }}
     >
       {children}
@@ -113,7 +87,9 @@ export function useGetQuestContractState({
   stateVariable: StateVariables<Quest>;
 }) {
   const [data, setData] = useState<Field | null>(null);
-  const { loading, getState } = useQuestContract();
+  const { getState } = useQuestContract();
+  const { initialized } = useMinaProvider();
+
   useEffect(() => {
     let continuePolling = watch;
 
@@ -128,13 +104,13 @@ export function useGetQuestContractState({
       }
     }
 
-    if (!loading) {
+    if (initialized) {
       getData();
     }
     return () => {
       continuePolling = false;
     };
-  }, [getState, loading, stateVariable, watch]);
+  }, [getState, initialized, stateVariable, watch]);
   return {
     data,
   };

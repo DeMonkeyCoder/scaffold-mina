@@ -17,7 +17,6 @@ type StateVariables<T extends SmartContract> = {
 }[keyof T];
 
 interface ContractContextType<T extends SmartContract> {
-  loading: boolean;
   getState: (args: { stateVariable: StateVariables<T> }) => Promise<Field>;
   prepareTransaction: (args: {
     method: Methods<T>;
