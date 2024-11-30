@@ -73,7 +73,7 @@ export type BlockIdentifier<quantity = bigint> = {
 } & (
   | {
       /** The block in the canonical chain with this number */
-      blockNumber: BlockNumber<quantity>;
+      blockNumber: BlockHash;
     }
   | {
       /** The block uniquely identified by this hash. The `blockNumber` and `blockHash` properties are mutually exclusive; exactly one of them must be set. */
@@ -81,7 +81,7 @@ export type BlockIdentifier<quantity = bigint> = {
     }
 );
 
-export type BlockNumber<quantity = bigint> = quantity;
+export type BlockHash = string;
 
 export type BlockTag = "latest" | "earliest" | "pending" | "safe" | "finalized";
 

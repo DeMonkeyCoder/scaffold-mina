@@ -9,8 +9,8 @@ import type { RpcTransaction } from "../../types/rpc";
 import type { Prettify } from "../../types/utils";
 import type { RequestErrorType } from "../../utils/buildRequest";
 import {
-  type NumberToHexErrorType,
   numberToHex,
+  type NumberToHexErrorType,
 } from "../../utils/encoding/toHex";
 import {
   type FormattedTransaction,
@@ -126,7 +126,7 @@ export async function getTransaction<
   } else if (blockNumberHex || blockTag) {
     transaction = await client.request(
       {
-        method: "mina_getTransactionByBlockNumberAndIndex",
+        method: "mina_getTransactionByBlockHashAndIndex",
         params: [blockNumberHex || blockTag, numberToHex(index)],
       },
       { dedupe: Boolean(blockNumberHex) }

@@ -1,7 +1,7 @@
 import {
-  type WatchBlockNumberParameters as viem_WatchBlockNumberParameters,
-  type WatchBlockNumberReturnType as viem_WatchBlockNumberReturnType,
-  watchBlockNumber as viem_watchBlockNumber,
+  watchBlockHash as viem_watchBlockHash,
+  type WatchBlockHashParameters as viem_WatchBlockHashParameters,
+  type WatchBlockHashReturnType as viem_WatchBlockHashReturnType,
 } from "@/lib/connect/viem/actions";
 
 import type { Chain, Transport, WebSocketTransport } from "@/lib/connect/viem";
@@ -14,14 +14,14 @@ import type {
 import type { UnionCompute } from "../types/utils";
 import { getAction } from "../utils/getAction";
 
-export type WatchBlockNumberParameters<
+export type WatchBlockHashParameters<
   config extends Config = Config,
   networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   ///
   chains extends readonly Chain[] = SelectChains<config, networkId>
 > = {
   [key in keyof chains]: UnionCompute<
-    viem_WatchBlockNumberParameters<
+    viem_WatchBlockHashParameters<
       config["_internal"]["transports"][chains[key]["id"]] extends infer transport extends Transport
         ? Transport extends transport
           ? WebSocketTransport
@@ -33,27 +33,27 @@ export type WatchBlockNumberParameters<
   >;
 }[number];
 
-export type WatchBlockNumberReturnType = viem_WatchBlockNumberReturnType;
+export type WatchBlockHashReturnType = viem_WatchBlockHashReturnType;
 
 // TODO: wrap in @/lib/connect/viem's `observe` to avoid duplicate invocations.
-/** https://wagmi.sh/core/api/actions/watchBlockNumber */
-export function watchBlockNumber<
+/** https://wagmi.sh/core/api/actions/watchBlockHash */
+export function watchBlockHash<
   config extends Config,
   networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 >(
   config: config,
-  parameters: WatchBlockNumberParameters<config, networkId>
-): WatchBlockNumberReturnType {
+  parameters: WatchBlockHashParameters<config, networkId>
+): WatchBlockHashReturnType {
   const { syncConnectedChain = config._internal.syncConnectedChain, ...rest } =
-    parameters as WatchBlockNumberParameters;
+    parameters as WatchBlockHashParameters;
 
-  let unwatch: WatchBlockNumberReturnType | undefined;
+  let unwatch: WatchBlockHashReturnType | undefined;
   const listener = (networkId: string | undefined) => {
     if (unwatch) unwatch();
 
     const client = config.getClient({ networkId });
-    const action = getAction(client, viem_watchBlockNumber, "watchBlockNumber");
-    unwatch = action(rest as viem_WatchBlockNumberParameters);
+    const action = getAction(client, viem_watchBlockHash, "watchBlockHash");
+    unwatch = action(rest as viem_WatchBlockHashParameters);
     return unwatch;
   };
 

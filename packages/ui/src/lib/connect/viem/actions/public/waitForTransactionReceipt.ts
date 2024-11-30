@@ -11,28 +11,25 @@ import type { Chain } from "../../types/chain";
 import type { Hash } from "../../types/misc";
 import type { Transaction } from "../../types/transaction";
 import { getAction } from "../../utils/getAction";
-import { type ObserveErrorType, observe } from "../../utils/observe";
+import { observe, type ObserveErrorType } from "../../utils/observe";
 import {
-  type WithRetryParameters,
   withRetry,
+  type WithRetryParameters,
 } from "../../utils/promise/withRetry";
 import { stringify } from "../../utils/stringify";
 
-import { type GetBlockErrorType, getBlock } from "./getBlock";
+import { getBlock, type GetBlockErrorType } from "./getBlock";
 import {
+  getTransaction,
   type GetTransactionErrorType,
   type GetTransactionReturnType,
-  getTransaction,
 } from "./getTransaction";
 import {
+  getTransactionReceipt,
   type GetTransactionReceiptErrorType,
   type GetTransactionReceiptReturnType,
-  getTransactionReceipt,
 } from "./getTransactionReceipt";
-import {
-  type WatchBlockNumberErrorType,
-  watchBlockNumber,
-} from "./watchBlockNumber";
+import { watchBlockHash, type WatchBlockHashErrorType } from "./watchBlockHash";
 
 export type ReplacementReason = "cancelled" | "replaced" | "repriced";
 export type ReplacementReturnType<
@@ -84,7 +81,7 @@ export type WaitForTransactionReceiptErrorType =
   | GetBlockErrorType
   | GetTransactionErrorType
   | GetTransactionReceiptErrorType
-  | WatchBlockNumberErrorType
+  | WatchBlockHashErrorType
   | ErrorType;
 
 /**
@@ -160,14 +157,14 @@ export async function waitForTransactionReceipt<
       (emit) => {
         const _unwatch = getAction(
           client,
-          watchBlockNumber,
-          "watchBlockNumber"
+          watchBlockHash,
+          "watchBlockHash"
         )({
           emitMissed: true,
           emitOnBegin: true,
           poll: true,
           pollingInterval,
-          async onBlockNumber(blockNumber_) {
+          async onBlockHash(blockNumber_) {
             const done = (fn: () => void) => {
               _unwatch();
               fn();

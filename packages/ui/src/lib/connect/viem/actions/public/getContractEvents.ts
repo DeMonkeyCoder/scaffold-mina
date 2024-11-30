@@ -3,7 +3,7 @@ import type { Abi, Address } from "abitype";
 import type { Client } from "../../clients/createClient";
 import type { Transport } from "../../clients/transports/createTransport";
 import type { ErrorType } from "../../errors/utils";
-import type { BlockNumber, BlockTag } from "../../types/block";
+import type { BlockHash, BlockTag } from "../../types/block";
 import type { Chain } from "../../types/chain";
 import type {
   ContractEventArgs,
@@ -12,15 +12,15 @@ import type {
 import type { Log } from "../../types/log";
 import type { Hash } from "../../types/misc";
 import {
+  getAbiItem,
   type GetAbiItemErrorType,
   type GetAbiItemParameters,
-  getAbiItem,
 } from "../../utils/abi/getAbiItem";
 import { getAction } from "../../utils/getAction";
 import {
+  getLogs,
   type GetLogsErrorType,
   type GetLogsParameters,
-  getLogs,
 } from "./getLogs";
 
 export type GetContractEventsParameters<
@@ -29,8 +29,8 @@ export type GetContractEventsParameters<
     | ContractEventName<abi>
     | undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined
 > = {
   /** The address of the contract. */
   address?: Address | Address[] | undefined;
@@ -54,9 +54,9 @@ export type GetContractEventsParameters<
 } & (
   | {
       /** Block number or tag after which to include logs */
-      fromBlock?: fromBlock | BlockNumber | BlockTag | undefined;
+      fromBlock?: fromBlock | BlockHash | BlockTag | undefined;
       /** Block number or tag before which to include logs */
-      toBlock?: toBlock | BlockNumber | BlockTag | undefined;
+      toBlock?: toBlock | BlockHash | BlockTag | undefined;
       blockHash?: undefined;
     }
   | {
@@ -73,8 +73,8 @@ export type GetContractEventsReturnType<
     | ContractEventName<abi>
     | undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined,
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined,
   ///
   isPending extends boolean =
     | (fromBlock extends "pending" ? true : false)
@@ -117,8 +117,8 @@ export async function getContractEvents<
   const abi extends Abi | readonly unknown[],
   eventName extends ContractEventName<abi> | undefined = undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined
 >(
   client: Client<Transport, chain>,
   parameters: GetContractEventsParameters<

@@ -3,7 +3,7 @@ import type { AbiEvent, Address } from "abitype";
 import type { Client } from "../../clients/createClient";
 import type { Transport } from "../../clients/transports/createTransport";
 import type { ErrorType } from "../../errors/utils";
-import type { BlockNumber, BlockTag } from "../../types/block";
+import type { BlockHash, BlockTag } from "../../types/block";
 import type { Chain } from "../../types/chain";
 import type {
   MaybeAbiEventName,
@@ -13,14 +13,14 @@ import type { Filter } from "../../types/filter";
 import type { Hex, LogTopic } from "../../types/misc";
 import type { Prettify } from "../../types/utils";
 import {
+  encodeEventTopics,
   type EncodeEventTopicsErrorType,
   type EncodeEventTopicsParameters,
-  encodeEventTopics,
 } from "../../utils/abi/encodeEventTopics";
 import type { RequestErrorType } from "../../utils/buildRequest";
 import {
-  type NumberToHexErrorType,
   numberToHex,
+  type NumberToHexErrorType,
 } from "../../utils/encoding/toHex";
 import { createFilterRequestScope } from "../../utils/filters/createFilterRequestScope";
 
@@ -31,8 +31,8 @@ export type CreateEventFilterParameters<
     | readonly unknown[]
     | undefined = abiEvent extends AbiEvent ? [abiEvent] : undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined,
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined,
   //
   _eventName extends string | undefined = MaybeAbiEventName<abiEvent>,
   _args extends
@@ -40,8 +40,8 @@ export type CreateEventFilterParameters<
     | undefined = undefined
 > = {
   address?: Address | Address[] | undefined;
-  fromBlock?: fromBlock | BlockNumber | BlockTag | undefined;
-  toBlock?: toBlock | BlockNumber | BlockTag | undefined;
+  fromBlock?: fromBlock | BlockHash | BlockTag | undefined;
+  toBlock?: toBlock | BlockHash | BlockTag | undefined;
 } & (MaybeExtractEventArgsFromAbi<
   abiEvents,
   _eventName
@@ -99,8 +99,8 @@ export type CreateEventFilterReturnType<
     | readonly unknown[]
     | undefined = abiEvent extends AbiEvent ? [abiEvent] : undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined,
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined,
   _eventName extends string | undefined = MaybeAbiEventName<abiEvent>,
   _args extends
     | MaybeExtractEventArgsFromAbi<abiEvents, _eventName>
@@ -146,8 +146,8 @@ export async function createEventFilter<
     | readonly unknown[]
     | undefined = abiEvent extends AbiEvent ? [abiEvent] : undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber<bigint> | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber<bigint> | BlockTag | undefined = undefined,
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined,
   _eventName extends string | undefined = MaybeAbiEventName<abiEvent>,
   _args extends
     | MaybeExtractEventArgsFromAbi<abiEvents, _eventName>

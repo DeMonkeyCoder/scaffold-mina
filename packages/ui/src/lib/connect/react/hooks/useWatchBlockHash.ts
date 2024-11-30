@@ -3,8 +3,8 @@
 import {
   type Config,
   type ResolvedRegister,
-  type WatchBlockNumberParameters,
-  watchBlockNumber,
+  watchBlockHash,
+  type WatchBlockHashParameters,
 } from "@/lib/connect/core/exports";
 import type {
   UnionCompute,
@@ -16,25 +16,25 @@ import type { ConfigParameter, EnabledParameter } from "../types/properties";
 import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 
-export type UseWatchBlockNumberParameters<
+export type UseWatchBlockHashParameters<
   config extends Config = Config,
   networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 > = UnionCompute<
-  UnionExactPartial<WatchBlockNumberParameters<config, networkId>> &
+  UnionExactPartial<WatchBlockHashParameters<config, networkId>> &
     ConfigParameter<config> &
     EnabledParameter
 >;
 
-export type UseWatchBlockNumberReturnType = void;
+export type UseWatchBlockHashReturnType = void;
 
-/** https://wagmi.sh/react/api/hooks/useWatchBlockNumber */
-export function useWatchBlockNumber<
+/** https://wagmi.sh/react/api/hooks/useWatchBlockHash */
+export function useWatchBlockHash<
   config extends Config = ResolvedRegister["config"],
   networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
 >(
-  parameters: UseWatchBlockNumberParameters<config, networkId> = {} as any
-): UseWatchBlockNumberReturnType {
-  const { enabled = true, onBlockNumber, config: _, ...rest } = parameters;
+  parameters: UseWatchBlockHashParameters<config, networkId> = {} as any
+): UseWatchBlockHashReturnType {
+  const { enabled = true, onBlockHash, config: _, ...rest } = parameters;
 
   const config = useConfig(parameters);
   const configNetworkId = useNetworkId({ config });
@@ -44,17 +44,17 @@ export function useWatchBlockNumber<
   // biome-ignore lint/correctness/useExhaustiveDependencies: `rest` changes every render so only including properties in dependency array
   useEffect(() => {
     if (!enabled) return;
-    if (!onBlockNumber) return;
-    return watchBlockNumber(config, {
+    if (!onBlockHash) return;
+    return watchBlockHash(config, {
       ...(rest as any),
       networkId,
-      onBlockNumber,
+      onBlockHash,
     });
   }, [
     networkId,
     config,
     enabled,
-    onBlockNumber,
+    onBlockHash,
     ///
     rest.onError,
     rest.emitMissed,

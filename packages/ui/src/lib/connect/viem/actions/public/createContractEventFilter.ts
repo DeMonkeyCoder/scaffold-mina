@@ -3,7 +3,7 @@ import type { Abi, Address } from "abitype";
 import type { Client } from "../../clients/createClient";
 import type { Transport } from "../../clients/transports/createTransport";
 import type { ErrorType } from "../../errors/utils";
-import type { BlockNumber, BlockTag } from "../../types/block";
+import type { BlockHash, BlockTag } from "../../types/block";
 import type { Chain } from "../../types/chain";
 import type {
   ContractEventName,
@@ -12,14 +12,14 @@ import type {
 import type { Filter } from "../../types/filter";
 import type { Hex } from "../../types/misc";
 import {
+  encodeEventTopics,
   type EncodeEventTopicsErrorType,
   type EncodeEventTopicsParameters,
-  encodeEventTopics,
 } from "../../utils/abi/encodeEventTopics";
 import type { RequestErrorType } from "../../utils/buildRequest";
 import {
-  type NumberToHexErrorType,
   numberToHex,
+  type NumberToHexErrorType,
 } from "../../utils/encoding/toHex";
 import { createFilterRequestScope } from "../../utils/filters/createFilterRequestScope";
 
@@ -30,19 +30,19 @@ export type CreateContractEventFilterParameters<
     | MaybeExtractEventArgsFromAbi<abi, eventName>
     | undefined = undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined
 > = {
   address?: Address | Address[] | undefined;
   abi: abi;
   eventName?: eventName | ContractEventName<abi> | undefined;
-  fromBlock?: fromBlock | BlockNumber | BlockTag | undefined;
+  fromBlock?: fromBlock | BlockHash | BlockTag | undefined;
   /**
    * Whether or not the logs must match the indexed/non-indexed arguments in the event ABI item.
    * @default false
    */
   strict?: strict | boolean | undefined;
-  toBlock?: toBlock | BlockNumber | BlockTag | undefined;
+  toBlock?: toBlock | BlockHash | BlockTag | undefined;
 } & (undefined extends eventName
   ? {
       args?: undefined;
@@ -65,8 +65,8 @@ export type CreateContractEventFilterReturnType<
     | MaybeExtractEventArgsFromAbi<abi, eventName>
     | undefined = undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined
 > = Filter<"event", abi, eventName, args, strict, fromBlock, toBlock>;
 
 export type CreateContractEventFilterErrorType =
@@ -103,8 +103,8 @@ export async function createContractEventFilter<
   eventName extends ContractEventName<abi> | undefined,
   args extends MaybeExtractEventArgsFromAbi<abi, eventName> | undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined
 >(
   client: Client<Transport, chain>,
   parameters: CreateContractEventFilterParameters<

@@ -3,8 +3,8 @@ import type { Address } from "@/lib/connect/viem";
 import type { RpcAuthorizationList } from "../experimental/eip7702/types/rpc";
 import type {
   Block,
+  BlockHash,
   BlockIdentifier,
-  BlockNumber,
   BlockTag,
   Uncle,
 } from "./block";
@@ -43,7 +43,7 @@ export type RpcBlock<
   includeTransactions extends boolean = boolean,
   transaction = RpcTransaction<blockTag extends "pending" ? true : false>
 > = Block<Quantity, includeTransactions, blockTag, transaction>;
-export type RpcBlockNumber = BlockNumber<Quantity>;
+export type RpcBlockHash = BlockHash;
 export type RpcBlockIdentifier = BlockIdentifier<Quantity>;
 export type RpcUncle = Uncle<Quantity>;
 export type RpcFeeHistory = FeeHistory<Quantity>;

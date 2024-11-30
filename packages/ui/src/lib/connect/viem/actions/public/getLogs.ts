@@ -3,7 +3,7 @@ import type { AbiEvent, Address } from "abitype";
 import type { Client } from "../../clients/createClient";
 import type { Transport } from "../../clients/transports/createTransport";
 import type { ErrorType } from "../../errors/utils";
-import type { BlockNumber, BlockTag } from "../../types/block";
+import type { BlockHash, BlockTag } from "../../types/block";
 import type { Chain } from "../../types/chain";
 import type {
   MaybeAbiEventName,
@@ -14,17 +14,17 @@ import type { Hash, LogTopic } from "../../types/misc";
 import type { RpcLog } from "../../types/rpc";
 import type { DecodeEventLogErrorType } from "../../utils/abi/decodeEventLog";
 import {
+  encodeEventTopics,
   type EncodeEventTopicsErrorType,
   type EncodeEventTopicsParameters,
-  encodeEventTopics,
 } from "../../utils/abi/encodeEventTopics";
 import { parseEventLogs } from "../../utils/abi/parseEventLogs";
 import type { RequestErrorType } from "../../utils/buildRequest";
 import {
-  type NumberToHexErrorType,
   numberToHex,
+  type NumberToHexErrorType,
 } from "../../utils/encoding/toHex";
-import { type FormatLogErrorType, formatLog } from "../../utils/formatters/log";
+import { formatLog, type FormatLogErrorType } from "../../utils/formatters/log";
 
 export type GetLogsParameters<
   abiEvent extends AbiEvent | undefined = undefined,
@@ -33,8 +33,8 @@ export type GetLogsParameters<
     | readonly unknown[]
     | undefined = abiEvent extends AbiEvent ? [abiEvent] : undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined,
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined,
   //
   _eventName extends string | undefined = MaybeAbiEventName<abiEvent>
 > = {
@@ -71,9 +71,9 @@ export type GetLogsParameters<
   (
     | {
         /** Block number or tag after which to include logs */
-        fromBlock?: fromBlock | BlockNumber | BlockTag | undefined;
+        fromBlock?: fromBlock | BlockHash | BlockTag | undefined;
         /** Block number or tag before which to include logs */
-        toBlock?: toBlock | BlockNumber | BlockTag | undefined;
+        toBlock?: toBlock | BlockHash | BlockTag | undefined;
         blockHash?: undefined;
       }
     | {
@@ -91,8 +91,8 @@ export type GetLogsReturnType<
     | readonly unknown[]
     | undefined = abiEvent extends AbiEvent ? [abiEvent] : undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined,
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined,
   //
   _eventName extends string | undefined = MaybeAbiEventName<abiEvent>,
   _pending extends boolean =
@@ -138,8 +138,8 @@ export async function getLogs<
     | readonly unknown[]
     | undefined = abiEvent extends AbiEvent ? [abiEvent] : undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined
 >(
   client: Client<Transport, chain>,
   {

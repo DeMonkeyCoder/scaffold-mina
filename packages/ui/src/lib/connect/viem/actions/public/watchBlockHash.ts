@@ -11,70 +11,69 @@ import { stringify } from "../../utils/stringify";
 
 import { getBlockHash, type GetBlockHashReturnType } from "./getBlockHash";
 
-export type OnBlockNumberParameter = GetBlockHashReturnType;
-export type OnBlockNumberFn = (
-  blockNumber: OnBlockNumberParameter,
-  prevBlockNumber: OnBlockNumberParameter | undefined
+export type OnBlockHashParameter = GetBlockHashReturnType;
+export type OnBlockHashFn = (
+  blockNumber: OnBlockHashParameter,
+  prevBlockHash: OnBlockHashParameter | undefined
 ) => void;
 
-export type WatchBlockNumberParameters<
-  transport extends Transport = Transport
-> = {
-  /** The callback to call when a new block number is received. */
-  onBlockNumber: OnBlockNumberFn;
-  /** The callback to call when an error occurred when trying to get for a new block. */
-  onError?: ((error: Error) => void) | undefined;
-} & (
-  | (HasTransportType<transport, "webSocket"> extends true
-      ? {
-          emitMissed?: undefined;
-          emitOnBegin?: undefined;
-          /** Whether or not the WebSocket Transport should poll the JSON-RPC, rather than using `mina_subscribe`. */
-          poll?: false | undefined;
-          pollingInterval?: undefined;
-        }
-      : never)
-  | {
-      /** Whether or not to emit the missed block numbers to the callback. */
-      emitMissed?: boolean | undefined;
-      /** Whether or not to emit the latest block number to the callback when the subscription opens. */
-      emitOnBegin?: boolean | undefined;
-      poll?: true | undefined;
-      /** Polling frequency (in ms). Defaults to Client's pollingInterval config. */
-      pollingInterval?: number | undefined;
-    }
-);
+export type WatchBlockHashParameters<transport extends Transport = Transport> =
+  {
+    /** The callback to call when a new block number is received. */
+    onBlockHash: OnBlockHashFn;
+    /** The callback to call when an error occurred when trying to get for a new block. */
+    onError?: ((error: Error) => void) | undefined;
+  } & (
+    | (HasTransportType<transport, "webSocket"> extends true
+        ? {
+            emitMissed?: undefined;
+            emitOnBegin?: undefined;
+            /** Whether or not the WebSocket Transport should poll the JSON-RPC, rather than using `mina_subscribe`. */
+            poll?: false | undefined;
+            pollingInterval?: undefined;
+          }
+        : never)
+    | {
+        /** Whether or not to emit the missed block numbers to the callback. */
+        emitMissed?: boolean | undefined;
+        /** Whether or not to emit the latest block number to the callback when the subscription opens. */
+        emitOnBegin?: boolean | undefined;
+        poll?: true | undefined;
+        /** Polling frequency (in ms). Defaults to Client's pollingInterval config. */
+        pollingInterval?: number | undefined;
+      }
+  );
 
-export type WatchBlockNumberReturnType = () => void;
+export type WatchBlockHashReturnType = () => void;
 
-export type WatchBlockNumberErrorType = PollErrorType | ErrorType;
+export type WatchBlockHashErrorType = PollErrorType | ErrorType;
 
 /**
  * Watches and returns incoming block numbers.
  *
- * - Docs: https://viem.sh/docs/actions/public/watchBlockNumber
+ * - Docs: https://viem.sh/docs/actions/public/watchBlockHash
  * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/watching-blocks
  * - JSON-RPC Methods:
  *   - When `poll: true`, calls [`mina_blockHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber) on a polling interval.
  *   - When `poll: false` & WebSocket Transport, uses a WebSocket subscription via [`mina_subscribe`](https://docs.alchemy.com/reference/eth-subscribe-polygon) and the `"newHeads"` event.
  *
  * @param client - Client to use
- * @param parameters - {@link WatchBlockNumberParameters}
- * @returns A function that can be invoked to stop watching for new block numbers. {@link WatchBlockNumberReturnType}
+ * @param parameters - {@link WatchBlockHashParameters}
+ * @returns A function that can be invoked to stop watching for new block numbers. {@link WatchBlockHashReturnType}
  *
  * @example
- * import { createPublicClient, watchBlockNumber, http } from 'viem'
+ * import { createPublicClient, watchBlockHash, http } from 'viem'
  * import { mainnet } from 'viem/chains'
  *
  * const client = createPublicClient({
  *   chain: mainnet,
  *   transport: http(),
  * })
- * const unwatch = watchBlockNumber(client, {
- *   onBlockNumber: (blockNumber) => console.log(blockNumber),
+ * const unwatch = watchBlockHash(client, {
+ *   onBlockHash: (blockNumber) => console.log(blockNumber),
  * })
  */
-export function watchBlockNumber<
+export function watchBlockHash<
   chain extends Chain | undefined,
   transport extends Transport
 >(
@@ -82,12 +81,12 @@ export function watchBlockNumber<
   {
     emitOnBegin = false,
     emitMissed = false,
-    onBlockNumber,
+    onBlockHash,
     onError,
     poll: poll_,
     pollingInterval = client.pollingInterval,
-  }: WatchBlockNumberParameters<transport>
-): WatchBlockNumberReturnType {
+  }: WatchBlockHashParameters<transport>
+): WatchBlockHashReturnType {
   const enablePolling = (() => {
     if (typeof poll_ !== "undefined") return poll_;
     if (client.transport.type === "webSocket") return false;
@@ -99,18 +98,18 @@ export function watchBlockNumber<
     return true;
   })();
 
-  let prevBlockNumber: GetBlockHashReturnType | undefined;
+  let prevBlockHash: GetBlockHashReturnType | undefined;
 
-  const pollBlockNumber = () => {
+  const pollBlockHash = () => {
     const observerId = stringify([
-      "watchBlockNumber",
+      "watchBlockHash",
       client.uid,
       emitOnBegin,
       emitMissed,
       pollingInterval,
     ]);
 
-    return observe(observerId, { onBlockNumber, onError }, (emit) =>
+    return observe(observerId, { onBlockHash, onError }, (emit) =>
       poll(
         async () => {
           try {
@@ -120,26 +119,26 @@ export function watchBlockNumber<
               "getBlockHash"
             )({ cacheTime: 0 });
 
-            if (prevBlockNumber) {
+            if (prevBlockHash) {
               // If the current block number is the same as the previous,
               // we can skip.
-              if (blockNumber === prevBlockNumber) return;
+              if (blockNumber === prevBlockHash) return;
 
               // If we have missed out on some previous blocks, and the
               // `emitMissed` flag is truthy, let's emit those blocks.
-              if (blockNumber - prevBlockNumber > 1 && emitMissed) {
-                for (let i = prevBlockNumber + 1n; i < blockNumber; i++) {
-                  emit.onBlockNumber(i, prevBlockNumber);
-                  prevBlockNumber = i;
+              if (blockNumber - prevBlockHash > 1 && emitMissed) {
+                for (let i = prevBlockHash + 1n; i < blockNumber; i++) {
+                  emit.onBlockHash(i, prevBlockHash);
+                  prevBlockHash = i;
                 }
               }
             }
 
             // If the next block number is greater than the previous,
             // it is not in the past, and we can emit the new block number.
-            if (!prevBlockNumber || blockNumber > prevBlockNumber) {
-              emit.onBlockNumber(blockNumber, prevBlockNumber);
-              prevBlockNumber = blockNumber;
+            if (!prevBlockHash || blockNumber > prevBlockHash) {
+              emit.onBlockHash(blockNumber, prevBlockHash);
+              prevBlockHash = blockNumber;
             }
           } catch (err) {
             emit.onError?.(err as Error);
@@ -153,15 +152,15 @@ export function watchBlockNumber<
     );
   };
 
-  const subscribeBlockNumber = () => {
+  const subscribeBlockHash = () => {
     const observerId = stringify([
-      "watchBlockNumber",
+      "watchBlockHash",
       client.uid,
       emitOnBegin,
       emitMissed,
     ]);
 
-    return observe(observerId, { onBlockNumber, onError }, (emit) => {
+    return observe(observerId, { onBlockHash, onError }, (emit) => {
       let active = true;
       let unsubscribe = () => (active = false);
       (async () => {
@@ -183,8 +182,8 @@ export function watchBlockNumber<
             onData(data: any) {
               if (!active) return;
               const blockNumber = hexToBigInt(data.result?.number);
-              emit.onBlockNumber(blockNumber, prevBlockNumber);
-              prevBlockNumber = blockNumber;
+              emit.onBlockHash(blockNumber, prevBlockHash);
+              prevBlockHash = blockNumber;
             },
             onError(error: Error) {
               emit.onError?.(error);
@@ -200,5 +199,5 @@ export function watchBlockNumber<
     });
   };
 
-  return enablePolling ? pollBlockNumber() : subscribeBlockNumber();
+  return enablePolling ? pollBlockHash() : subscribeBlockHash();
 }

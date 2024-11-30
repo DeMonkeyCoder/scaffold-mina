@@ -66,8 +66,8 @@ export async function getTransactionConfirmations<
       ? getAction(client, getTransaction, "getTransaction")({ hash })
       : undefined,
   ]);
-  const transactionBlockNumber =
+  const transactionBlockHash =
     transactionReceipt?.blockNumber || transaction?.blockNumber;
-  if (!transactionBlockNumber) return 0n;
-  return blockNumber - transactionBlockNumber! + 1n;
+  if (!transactionBlockHash) return 0n;
+  return blockNumber - transactionBlockHash! + 1n;
 }

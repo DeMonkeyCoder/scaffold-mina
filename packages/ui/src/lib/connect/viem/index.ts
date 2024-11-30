@@ -240,12 +240,12 @@ export type {
   WatchBlocksReturnType,
 } from "./actions/public/watchBlocks";
 export type {
-  OnBlockNumberFn,
-  OnBlockNumberParameter,
-  WatchBlockNumberErrorType,
-  WatchBlockNumberParameters,
-  WatchBlockNumberReturnType,
-} from "./actions/public/watchBlockNumber";
+  OnBlockHashFn,
+  OnBlockHashParameter,
+  WatchBlockHashErrorType,
+  WatchBlockHashParameters,
+  WatchBlockHashReturnType,
+} from "./actions/public/watchBlockHash";
 export type {
   WatchEventOnLogsFn,
   WatchEventOnLogsParameter,
@@ -968,7 +968,7 @@ export type { AssetGateway, AssetGatewayUrls } from "./types/ens";
 export type {
   Block,
   BlockIdentifier,
-  BlockNumber,
+  BlockHash,
   BlockTag,
   Uncle,
 } from "./types/block";
@@ -1033,7 +1033,7 @@ export type {
   Quantity,
   RpcBlock,
   RpcBlockIdentifier,
-  RpcBlockNumber,
+  RpcBlockHash,
   RpcFeeHistory,
   RpcFeeValues,
   RpcLog,

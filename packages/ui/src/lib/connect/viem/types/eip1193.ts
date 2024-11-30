@@ -5,8 +5,8 @@ import type { Hash, Hex, LogTopic } from "./misc";
 import type {
   Quantity,
   RpcBlock as Block,
+  RpcBlockHash as BlockHash,
   RpcBlockIdentifier as BlockIdentifier,
-  RpcBlockNumber as BlockNumber,
   RpcFeeHistory as FeeHistory,
   RpcLog as Log,
   RpcProof as Proof,
@@ -327,11 +327,11 @@ export type PublicRpcSchema = [
       | [transaction: ExactPartial<TransactionRequest>]
       | [
           transaction: ExactPartial<TransactionRequest>,
-          block: BlockNumber | BlockTag | BlockIdentifier
+          block: BlockHash | BlockTag | BlockIdentifier
         ]
       | [
           transaction: ExactPartial<TransactionRequest>,
-          block: BlockNumber | BlockTag | BlockIdentifier,
+          block: BlockHash | BlockTag | BlockIdentifier,
           stateOverrideSet: RpcStateOverride
         ];
     ReturnType: Hex;
@@ -372,10 +372,10 @@ export type PublicRpcSchema = [
     Method: "mina_estimateGas";
     Parameters:
       | [transaction: TransactionRequest]
-      | [transaction: TransactionRequest, block: BlockNumber | BlockTag]
+      | [transaction: TransactionRequest, block: BlockHash | BlockTag]
       | [
           transaction: TransactionRequest,
-          block: BlockNumber | BlockTag,
+          block: BlockHash | BlockTag,
           stateOverride: RpcStateOverride
         ];
     ReturnType: Quantity;
@@ -401,7 +401,7 @@ export type PublicRpcSchema = [
       /** Number of blocks in the requested range. Between 1 and 1024 blocks can be requested in a single query. Less than requested may be returned if not all blocks are available. */
       blockCount: Quantity,
       /** Highest number block of the requested range. */
-      newestBlock: BlockNumber | BlockTag,
+      newestBlock: BlockHash | BlockTag,
       /** A monotonically increasing list of percentile values to sample from each block's effective priority fees per gas in ascending order, weighted by gas used. */
       rewardPercentiles: number[] | undefined
     ];
@@ -430,7 +430,7 @@ export type PublicRpcSchema = [
     Method: "mina_getBalance";
     Parameters: [
       address: Address
-      // block: BlockNumber | BlockTag | BlockIdentifier
+      // block: BlockHash | BlockTag | BlockIdentifier
     ];
     ReturnType: Quantity;
   },
@@ -472,7 +472,7 @@ export type PublicRpcSchema = [
     Method: "mina_getBlockByNumber";
     Parameters: [
       /** block number, or one of "latest", "safe", "finalized", "earliest" or "pending" */
-      block: BlockNumber | BlockTag,
+      block: BlockHash | BlockTag,
       /** true will pull full transaction objects, false will pull transaction hashes */
       includeTransactionObjects: boolean
     ];
@@ -499,7 +499,7 @@ export type PublicRpcSchema = [
    */
   {
     Method: "mina_getBlockTransactionCountByNumber";
-    Parameters: [block: BlockNumber | BlockTag];
+    Parameters: [block: BlockHash | BlockTag];
     ReturnType: Quantity;
   },
   /**
@@ -513,7 +513,7 @@ export type PublicRpcSchema = [
     Method: "mina_getCode";
     Parameters: [
       address: Address,
-      block: BlockNumber | BlockTag | BlockIdentifier
+      block: BlockHash | BlockTag | BlockIdentifier
     ];
     ReturnType: Hex;
   },
@@ -556,8 +556,8 @@ export type PublicRpcSchema = [
         topics?: LogTopic[] | undefined;
       } & (
         | {
-            fromBlock?: BlockNumber | BlockTag | undefined;
-            toBlock?: BlockNumber | BlockTag | undefined;
+            fromBlock?: BlockHash | BlockTag | undefined;
+            toBlock?: BlockHash | BlockTag | undefined;
             blockHash?: undefined;
           }
         | {
@@ -585,7 +585,7 @@ export type PublicRpcSchema = [
       address: Address,
       /** An array of storage-keys that should be proofed and included. */
       storageKeys: Hash[],
-      block: BlockNumber | BlockTag
+      block: BlockHash | BlockTag
     ];
     ReturnType: Proof;
   },
@@ -601,7 +601,7 @@ export type PublicRpcSchema = [
     Parameters: [
       address: Address,
       index: Quantity,
-      block: BlockNumber | BlockTag | BlockIdentifier
+      block: BlockHash | BlockTag | BlockIdentifier
     ];
     ReturnType: Hex;
   },
@@ -621,12 +621,12 @@ export type PublicRpcSchema = [
    * @description Returns information about a transaction specified by block number and transaction index
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'mina_getTransactionByBlockNumberAndIndex', params: ['0x...', '0x...'] })
+   * provider.request({ method: 'mina_getTransactionByBlockHashAndIndex', params: ['0x...', '0x...'] })
    * // => { ... }
    */
   {
-    Method: "mina_getTransactionByBlockNumberAndIndex";
-    Parameters: [block: BlockNumber | BlockTag, index: Quantity];
+    Method: "mina_getTransactionByBlockHashAndIndex";
+    Parameters: [block: BlockHash | BlockTag, index: Quantity];
     ReturnType: Transaction | null;
   },
   /**
@@ -652,7 +652,7 @@ export type PublicRpcSchema = [
     Method: "mina_getTransactionCount";
     Parameters: [
       address: Address,
-      block: BlockNumber | BlockTag | BlockIdentifier
+      block: BlockHash | BlockTag | BlockIdentifier
     ];
     ReturnType: Quantity;
   },
@@ -684,12 +684,12 @@ export type PublicRpcSchema = [
    * @description Returns information about an uncle specified by block number and uncle index position
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'mina_getUncleByBlockNumberAndIndex', params: ['0x...', '0x...'] })
+   * provider.request({ method: 'mina_getUncleByBlockHashAndIndex', params: ['0x...', '0x...'] })
    * // => { ... }
    */
   {
-    Method: "mina_getUncleByBlockNumberAndIndex";
-    Parameters: [block: BlockNumber | BlockTag, index: Quantity];
+    Method: "mina_getUncleByBlockHashAndIndex";
+    Parameters: [block: BlockHash | BlockTag, index: Quantity];
     ReturnType: Uncle | null;
   },
   /**
@@ -708,12 +708,12 @@ export type PublicRpcSchema = [
    * @description Returns the number of uncles in a block specified by block number
    * @link https://eips.ethereum.org/EIPS/eip-1474
    * @example
-   * provider.request({ method: 'mina_getUncleCountByBlockNumber', params: ['0x...'] })
+   * provider.request({ method: 'mina_getUncleCountByBlockHash', params: ['0x...'] })
    * // => '0x1'
    */
   {
-    Method: "mina_getUncleCountByBlockNumber";
-    Parameters: [block: BlockNumber | BlockTag];
+    Method: "mina_getUncleCountByBlockHash";
+    Parameters: [block: BlockHash | BlockTag];
     ReturnType: Quantity;
   },
   /**
@@ -751,8 +751,8 @@ export type PublicRpcSchema = [
     Method: "mina_newFilter";
     Parameters: [
       filter: {
-        fromBlock?: BlockNumber | BlockTag | undefined;
-        toBlock?: BlockNumber | BlockTag | undefined;
+        fromBlock?: BlockHash | BlockTag | undefined;
+        toBlock?: BlockHash | BlockTag | undefined;
         address?: Address | Address[] | undefined;
         topics?: LogTopic[] | undefined;
       }
@@ -1243,10 +1243,10 @@ export type WalletRpcSchema = [
     Method: "mina_estimateGas";
     Parameters:
       | [transaction: TransactionRequest]
-      | [transaction: TransactionRequest, block: BlockNumber | BlockTag]
+      | [transaction: TransactionRequest, block: BlockHash | BlockTag]
       | [
           transaction: TransactionRequest,
-          block: BlockNumber | BlockTag,
+          block: BlockHash | BlockTag,
           stateOverride: RpcStateOverride
         ];
     ReturnType: Quantity;

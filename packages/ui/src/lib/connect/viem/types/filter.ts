@@ -1,6 +1,6 @@
 import type { Abi } from "abitype";
 
-import type { BlockNumber, BlockTag } from "./block";
+import type { BlockHash, BlockTag } from "./block";
 import type { MaybeExtractEventArgsFromAbi } from "./contract";
 import type { EIP1193RequestFn, PublicRpcSchema } from "./eip1193";
 import type { Hex } from "./misc";
@@ -26,8 +26,8 @@ export type Filter<
     | MaybeExtractEventArgsFromAbi<abi, eventName>
     | undefined = MaybeExtractEventArgsFromAbi<abi, eventName>,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined
 > = {
   id: Hex;
   request: EIP1193RequestFn<FilterRpcSchema>;

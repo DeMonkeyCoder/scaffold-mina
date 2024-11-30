@@ -46,10 +46,10 @@ export {
 } from "../hooks/useBlock";
 
 export {
-  type UseBlockNumberParameters,
-  type UseBlockNumberReturnType,
-  useBlockNumber,
-} from "../hooks/useBlockNumber";
+  type UseBlockHashParameters,
+  type UseBlockHashReturnType,
+  useBlockHash,
+} from "../hooks/useBlockHash";
 
 export {
   type UseBlockTransactionCountParameters,
@@ -294,10 +294,10 @@ export {
 } from "../hooks/useWatchBlocks";
 
 export {
-  type UseWatchBlockNumberParameters,
-  type UseWatchBlockNumberReturnType,
-  useWatchBlockNumber,
-} from "../hooks/useWatchBlockNumber";
+  type UseWatchBlockHashParameters,
+  type UseWatchBlockHashReturnType,
+  useWatchBlockHash,
+} from "../hooks/useWatchBlockHash";
 
 export {
   type UseWatchContractEventParameters,

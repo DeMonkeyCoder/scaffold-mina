@@ -12,7 +12,7 @@ import {
 } from "../../errors/abi";
 import { InvalidInputRpcError } from "../../errors/rpc";
 import type { ErrorType } from "../../errors/utils";
-import type { BlockNumber } from "../../types/block";
+import type { BlockHash } from "../../types/block";
 import type {
   ContractEventArgs,
   ContractEventName,
@@ -75,7 +75,7 @@ export type WatchContractEventParameters<
   /** Contract event. */
   eventName?: eventName | ContractEventName<abi> | undefined;
   /** Block to start listening from. */
-  fromBlock?: BlockNumber<bigint> | undefined;
+  fromBlock?: BlockHash | undefined;
   /** The callback to call when an error occurred when trying to get for a new block. */
   onError?: ((error: Error) => void) | undefined;
   /** The callback to call when new event logs are received. */
@@ -181,8 +181,8 @@ export function watchContractEvent<
     ]);
 
     return observe(observerId, { onLogs, onError }, (emit) => {
-      let previousBlockNumber: bigint;
-      if (fromBlock !== undefined) previousBlockNumber = fromBlock - 1n;
+      let previousBlockHash: bigint;
+      if (fromBlock !== undefined) previousBlockHash = fromBlock - 1n;
       let filter: Filter<"event", abi, eventName> | undefined;
       let initialized = false;
 
@@ -229,7 +229,7 @@ export function watchContractEvent<
               // If the block number has changed, we will need to fetch the logs.
               // If the block number doesn't exist, we are yet to reach the first poll interval,
               // so do not emit any logs.
-              if (previousBlockNumber && previousBlockNumber < blockNumber) {
+              if (previousBlockHash && previousBlockHash < blockNumber) {
                 logs = await getAction(
                   client,
                   getContractEvents,
@@ -239,14 +239,14 @@ export function watchContractEvent<
                   address,
                   args,
                   eventName,
-                  fromBlock: previousBlockNumber + 1n,
+                  fromBlock: previousBlockHash + 1n,
                   toBlock: blockNumber,
                   strict,
                 } as {} as GetContractEventsParameters);
               } else {
                 logs = [];
               }
-              previousBlockNumber = blockNumber;
+              previousBlockHash = blockNumber;
             }
 
             if (logs.length === 0) return;

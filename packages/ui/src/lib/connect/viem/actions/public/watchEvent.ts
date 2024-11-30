@@ -25,7 +25,7 @@ import {
 } from "../../errors/abi";
 import { InvalidInputRpcError } from "../../errors/rpc";
 import type { ErrorType } from "../../errors/utils";
-import type { BlockNumber } from "../../types/block";
+import type { BlockHash } from "../../types/block";
 import { decodeEventLog } from "../../utils/abi/decodeEventLog";
 import { formatLog } from "../../utils/formatters/log";
 import { getAction } from "../../utils/getAction";
@@ -74,7 +74,7 @@ export type WatchEventParameters<
   /** The address of the contract. */
   address?: Address | Address[] | undefined;
   /** Block to start listening from. */
-  fromBlock?: BlockNumber<bigint> | undefined;
+  fromBlock?: BlockHash | undefined;
   /** The callback to call when an error occurred when trying to get for a new block. */
   onError?: ((error: Error) => void) | undefined;
   /** The callback to call when new event logs are received. */
@@ -200,8 +200,8 @@ export function watchEvent<
     ]);
 
     return observe(observerId, { onLogs, onError }, (emit) => {
-      let previousBlockNumber: bigint;
-      if (fromBlock !== undefined) previousBlockNumber = fromBlock - 1n;
+      let previousBlockHash: bigint;
+      if (fromBlock !== undefined) previousBlockHash = fromBlock - 1n;
       let filter: Filter<"event", abiEvents, _eventName, any>;
       let initialized = false;
 
@@ -252,7 +252,7 @@ export function watchEvent<
               // If the block number has changed, we will need to fetch the logs.
               // If the block number doesn't exist, we are yet to reach the first poll interval,
               // so do not emit any logs.
-              if (previousBlockNumber && previousBlockNumber !== blockNumber) {
+              if (previousBlockHash && previousBlockHash !== blockNumber) {
                 logs = await getAction(
                   client,
                   getLogs,
@@ -262,13 +262,13 @@ export function watchEvent<
                   args,
                   event: event!,
                   events,
-                  fromBlock: previousBlockNumber + 1n,
+                  fromBlock: previousBlockHash + 1n,
                   toBlock: blockNumber,
                 } as unknown as GetLogsParameters);
               } else {
                 logs = [];
               }
-              previousBlockNumber = blockNumber;
+              previousBlockHash = blockNumber;
             }
 
             if (logs.length === 0) return;

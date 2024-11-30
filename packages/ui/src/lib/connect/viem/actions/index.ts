@@ -212,13 +212,13 @@ export {
   watchBlocks,
 } from "./public/watchBlocks";
 export {
-  type OnBlockNumberFn,
-  type OnBlockNumberParameter,
-  type WatchBlockNumberErrorType,
-  type WatchBlockNumberParameters,
-  type WatchBlockNumberReturnType,
-  watchBlockNumber,
-} from "./public/watchBlockNumber";
+  type OnBlockHashFn,
+  type OnBlockHashParameter,
+  type WatchBlockHashErrorType,
+  type WatchBlockHashParameters,
+  type WatchBlockHashReturnType,
+  watchBlockHash,
+} from "./public/watchBlockHash";
 export {
   type WatchEventOnLogsFn,
   type WatchEventOnLogsParameter,

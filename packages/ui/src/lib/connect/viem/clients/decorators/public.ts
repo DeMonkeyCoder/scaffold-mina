@@ -166,10 +166,10 @@ import {
   type WaitForTransactionReceiptReturnType,
 } from "../../actions/public/waitForTransactionReceipt";
 import {
-  watchBlockNumber,
-  type WatchBlockNumberParameters,
-  type WatchBlockNumberReturnType,
-} from "../../actions/public/watchBlockNumber";
+  watchBlockHash,
+  type WatchBlockHashParameters,
+  type WatchBlockHashReturnType,
+} from "../../actions/public/watchBlockHash";
 import {
   watchBlocks,
   type WatchBlocksParameters,
@@ -207,7 +207,7 @@ import {
   type SendRawTransactionReturnType,
 } from "../../actions/wallet/sendRawTransaction";
 import type { Account } from "../../types/account";
-import type { BlockNumber, BlockTag } from "../../types/block";
+import type { BlockHash, BlockTag } from "../../types/block";
 import type { Chain } from "../../types/chain";
 import type {
   ContractEventName,
@@ -295,8 +295,8 @@ export type PublicActions<
     eventName extends ContractEventName<abi> | undefined,
     args extends MaybeExtractEventArgsFromAbi<abi, eventName> | undefined,
     strict extends boolean | undefined = undefined,
-    fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-    toBlock extends BlockNumber | BlockTag | undefined = undefined
+    fromBlock extends BlockHash | BlockTag | undefined = undefined,
+    toBlock extends BlockHash | BlockTag | undefined = undefined
   >(
     args: CreateContractEventFilterParameters<
       abi,
@@ -344,8 +344,8 @@ export type PublicActions<
       | readonly unknown[]
       | undefined = abiEvent extends AbiEvent ? [abiEvent] : undefined,
     strict extends boolean | undefined = undefined,
-    fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-    toBlock extends BlockNumber | BlockTag | undefined = undefined,
+    fromBlock extends BlockHash | BlockTag | undefined = undefined,
+    toBlock extends BlockHash | BlockTag | undefined = undefined,
     _EventName extends string | undefined = MaybeAbiEventName<abiEvent>,
     _Args extends
       | MaybeExtractEventArgsFromAbi<abiEvents, _EventName>
@@ -662,8 +662,8 @@ export type PublicActions<
     const abi extends Abi | readonly unknown[],
     eventName extends ContractEventName<abi> | undefined = undefined,
     strict extends boolean | undefined = undefined,
-    fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-    toBlock extends BlockNumber | BlockTag | undefined = undefined
+    fromBlock extends BlockHash | BlockTag | undefined = undefined,
+    toBlock extends BlockHash | BlockTag | undefined = undefined
   >(
     args: GetContractEventsParameters<
       abi,
@@ -788,8 +788,8 @@ export type PublicActions<
     const abi extends Abi | readonly unknown[] | undefined,
     eventName extends string | undefined,
     strict extends boolean | undefined = undefined,
-    fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-    toBlock extends BlockNumber | BlockTag | undefined = undefined
+    fromBlock extends BlockHash | BlockTag | undefined = undefined,
+    toBlock extends BlockHash | BlockTag | undefined = undefined
   >(
     args: GetFilterChangesParameters<
       filterType,
@@ -839,8 +839,8 @@ export type PublicActions<
     const abi extends Abi | readonly unknown[] | undefined,
     eventName extends string | undefined,
     strict extends boolean | undefined = undefined,
-    fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-    toBlock extends BlockNumber | BlockTag | undefined = undefined
+    fromBlock extends BlockHash | BlockTag | undefined = undefined,
+    toBlock extends BlockHash | BlockTag | undefined = undefined
   >(
     args: GetFilterLogsParameters<abi, eventName, strict, fromBlock, toBlock>
   ) => Promise<
@@ -892,8 +892,8 @@ export type PublicActions<
       | readonly unknown[]
       | undefined = abiEvent extends AbiEvent ? [abiEvent] : undefined,
     strict extends boolean | undefined = undefined,
-    fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-    toBlock extends BlockNumber | BlockTag | undefined = undefined
+    fromBlock extends BlockHash | BlockTag | undefined = undefined,
+    toBlock extends BlockHash | BlockTag | undefined = undefined
   >(
     args?:
       | GetLogsParameters<abiEvent, abiEvents, strict, fromBlock, toBlock>
@@ -1403,14 +1403,14 @@ export type PublicActions<
   /**
    * Watches and returns incoming block numbers.
    *
-   * - Docs: https://viem.sh/docs/actions/public/watchBlockNumber
+   * - Docs: https://viem.sh/docs/actions/public/watchBlockHash
    * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/blocks/watching-blocks
    * - JSON-RPC Methods:
    *   - When `poll: true`, calls [`mina_blockHash`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_blocknumber) on a polling interval.
    *   - When `poll: false` & WebSocket Transport, uses a WebSocket subscription via [`mina_subscribe`](https://docs.alchemy.com/reference/eth-subscribe-polygon) and the `"newHeads"` event.
    *
-   * @param args - {@link WatchBlockNumberParameters}
-   * @returns A function that can be invoked to stop watching for new block numbers. {@link WatchBlockNumberReturnType}
+   * @param args - {@link WatchBlockHashParameters}
+   * @returns A function that can be invoked to stop watching for new block numbers. {@link WatchBlockHashReturnType}
    *
    * @example
    * import { createPublicClient, http } from 'viem'
@@ -1420,13 +1420,11 @@ export type PublicActions<
    *   chain: mainnet,
    *   transport: http(),
    * })
-   * const unwatch = await client.watchBlockNumber({
-   *   onBlockNumber: (blockNumber) => console.log(blockNumber),
+   * const unwatch = await client.watchBlockHash({
+   *   onBlockHash: (blockNumber) => console.log(blockNumber),
    * })
    */
-  watchBlockNumber: (
-    args: WatchBlockNumberParameters
-  ) => WatchBlockNumberReturnType;
+  watchBlockHash: (args: WatchBlockHashParameters) => WatchBlockHashReturnType;
   /**
    * Watches and returns information for incoming blocks.
    *
@@ -1620,7 +1618,7 @@ export function publicActions<
     waitForTransactionReceipt: (args) =>
       waitForTransactionReceipt(client, args),
     watchBlocks: (args) => watchBlocks(client, args),
-    watchBlockNumber: (args) => watchBlockNumber(client, args),
+    watchBlockHash: (args) => watchBlockHash(client, args),
     watchContractEvent: (args) => watchContractEvent(client, args),
     watchEvent: (args) => watchEvent(client, args),
     watchPendingTransactions: (args) => watchPendingTransactions(client, args),

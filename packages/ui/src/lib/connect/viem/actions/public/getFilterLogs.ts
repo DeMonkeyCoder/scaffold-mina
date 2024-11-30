@@ -4,21 +4,21 @@ import type { Client } from "../../clients/createClient";
 import type { Transport } from "../../clients/transports/createTransport";
 
 import type { ErrorType } from "../../errors/utils";
-import type { BlockNumber, BlockTag } from "../../types/block";
+import type { BlockHash, BlockTag } from "../../types/block";
 import type { Chain } from "../../types/chain";
 import type { Filter } from "../../types/filter";
 import type { Log } from "../../types/log";
 import type { DecodeEventLogErrorType } from "../../utils/abi/decodeEventLog";
 import { parseEventLogs } from "../../utils/abi/parseEventLogs";
 import type { RequestErrorType } from "../../utils/buildRequest";
-import { type FormatLogErrorType, formatLog } from "../../utils/formatters/log";
+import { formatLog, type FormatLogErrorType } from "../../utils/formatters/log";
 
 export type GetFilterLogsParameters<
   abi extends Abi | readonly unknown[] | undefined = undefined,
   eventName extends string | undefined = undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined
 > = {
   filter: Filter<"event", abi, eventName, any, strict, fromBlock, toBlock>;
 };
@@ -26,8 +26,8 @@ export type GetFilterLogsReturnType<
   abi extends Abi | readonly unknown[] | undefined = undefined,
   eventName extends string | undefined = undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined,
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined,
   _AbiEvent extends AbiEvent | undefined = abi extends Abi
     ? eventName extends string
       ? ExtractAbiEvent<abi, eventName>
@@ -76,8 +76,8 @@ export async function getFilterLogs<
   const abi extends Abi | readonly unknown[] | undefined,
   eventName extends string | undefined,
   strict extends boolean | undefined = undefined,
-  fromBlock extends BlockNumber | BlockTag | undefined = undefined,
-  toBlock extends BlockNumber | BlockTag | undefined = undefined
+  fromBlock extends BlockHash | BlockTag | undefined = undefined,
+  toBlock extends BlockHash | BlockTag | undefined = undefined
 >(
   _client: Client<Transport, chain>,
   {

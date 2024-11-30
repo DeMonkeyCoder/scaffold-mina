@@ -24,11 +24,11 @@ import { useQuery, type UseQueryReturnType } from "../utils/query";
 import { useNetworkId } from "./useNetworkId";
 import { useConfig } from "./useConfig";
 import {
-  useWatchBlockNumber,
-  type UseWatchBlockNumberParameters,
-} from "./useWatchBlockNumber";
+  useWatchBlockHash,
+  type UseWatchBlockHashParameters,
+} from "./useWatchBlockHash";
 
-export type UseBlockNumberParameters<
+export type UseBlockHashParameters<
   config extends Config = Config,
   networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   selectData = GetBlockHashData
@@ -45,25 +45,25 @@ export type UseBlockNumberParameters<
         | boolean
         | UnionCompute<
             UnionStrictOmit<
-              UseWatchBlockNumberParameters<config, networkId>,
-              "networkId" | "config" | "onBlockNumber" | "onError"
+              UseWatchBlockHashParameters<config, networkId>,
+              "networkId" | "config" | "onBlockHash" | "onError"
             >
           >
         | undefined;
     }
 >;
 
-export type UseBlockNumberReturnType<selectData = GetBlockHashData> =
+export type UseBlockHashReturnType<selectData = GetBlockHashData> =
   UseQueryReturnType<selectData, GetBlockHashErrorType>;
 
-/** https://wagmi.sh/react/api/hooks/useBlockNumber */
-export function useBlockNumber<
+/** https://wagmi.sh/react/api/hooks/useBlockHash */
+export function useBlockHash<
   config extends Config = ResolvedRegister["config"],
   networkId extends config["chains"][number]["id"] = config["chains"][number]["id"],
   selectData = GetBlockHashData
 >(
-  parameters: UseBlockNumberParameters<config, networkId, selectData> = {}
-): UseBlockNumberReturnType<selectData> {
+  parameters: UseBlockHashParameters<config, networkId, selectData> = {}
+): UseBlockHashReturnType<selectData> {
   const { query = {}, watch } = parameters;
 
   const config = useConfig(parameters);
@@ -76,17 +76,17 @@ export function useBlockNumber<
     networkId,
   });
 
-  useWatchBlockNumber({
+  useWatchBlockHash({
     ...({
       config: parameters.config,
       networkId: parameters.networkId,
       ...(typeof watch === "object" ? watch : {}),
-    } as UseWatchBlockNumberParameters),
+    } as UseWatchBlockHashParameters),
     enabled: Boolean(
       (query.enabled ?? true) &&
         (typeof watch === "object" ? watch.enabled : watch)
     ),
-    onBlockNumber(blockNumber) {
+    onBlockHash(blockNumber) {
       queryClient.setQueryData(options.queryKey, blockNumber);
     },
   });

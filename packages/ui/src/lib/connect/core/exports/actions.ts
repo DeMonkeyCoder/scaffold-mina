@@ -60,7 +60,7 @@ export {
   type GetBlockHashReturnType,
   getBlockHash,
   /** @deprecated use `getBlockHash` instead */
-  getBlockHash as fetchBlockNumber,
+  getBlockHash as fetchBlockHash,
 } from "../actions/getBlockHash";
 
 export {
@@ -274,10 +274,10 @@ export {
 } from "../actions/watchBlocks";
 
 export {
-  type WatchBlockNumberParameters,
-  type WatchBlockNumberReturnType,
-  watchBlockNumber,
-} from "../actions/watchBlockNumber";
+  type WatchBlockHashParameters,
+  type WatchBlockHashReturnType,
+  watchBlockHash,
+} from "../actions/watchBlockHash";
 
 export {
   type WatchNetworkIdParameters,
