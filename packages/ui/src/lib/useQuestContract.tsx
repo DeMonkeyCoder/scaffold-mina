@@ -34,6 +34,8 @@ export const QuestContractProvider = ({
     },
     [zkappPublicKey]
   );
+
+  // TODO: optimize this function by pre-loading the contract or using cloud workers
   const prepareTransaction = async ({
     method,
     args,
@@ -46,6 +48,10 @@ export const QuestContractProvider = ({
     }
     await zkappWorkerClient.loadAndCompileContract({
       contractName: "Quest",
+    });
+    await zkappWorkerClient.initZkappInstance({
+      contractName: "Quest",
+      publicKey: zkappPublicKey,
     });
     await fetchAccount({
       publicKey: zkappPublicKey,
