@@ -11,7 +11,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const config = createConfig({
   chains: [mainnet, devnet],
   connectors: [],
-  pollingInterval: 100,
   storage: null,
   transports: {
     [mainnet.id]: http(),

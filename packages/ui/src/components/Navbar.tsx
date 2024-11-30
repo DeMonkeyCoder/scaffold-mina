@@ -5,12 +5,22 @@ import ConnectWallet from "./ConnectWallet";
 import { formatMina } from "@mina-js/utils";
 import { useNetworkId } from "@/lib/connect/react/hooks/useNetworkId";
 import { useChains } from "@/lib/connect/react/hooks/useChains";
+import { useBlockHash } from "@/lib/connect/react/hooks/useBlockHash";
+import { useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function Navbar() {
   const { isConnected, address } = useAccount();
-  const { data: balance } = useBalance({
+
+  const { data: blockHash } = useBlockHash({ watch: true });
+  const { data: balance, queryKey } = useBalance({
     address,
   });
+  const queryClient = useQueryClient();
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey });
+  }, [blockHash, queryClient, queryKey]);
+
   const networkId = useNetworkId();
   const chains = useChains();
 

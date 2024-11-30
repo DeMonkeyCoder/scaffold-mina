@@ -113,33 +113,16 @@ export function watchBlockHash<
       poll(
         async () => {
           try {
-            const blockNumber = await getAction(
+            const blockHash = await getAction(
               client,
               getBlockHash,
               "getBlockHash"
             )({ cacheTime: 0 });
 
-            if (prevBlockHash) {
-              // If the current block number is the same as the previous,
-              // we can skip.
-              if (blockNumber === prevBlockHash) return;
+            if (blockHash === prevBlockHash) return;
 
-              // If we have missed out on some previous blocks, and the
-              // `emitMissed` flag is truthy, let's emit those blocks.
-              if (blockNumber - prevBlockHash > 1 && emitMissed) {
-                for (let i = prevBlockHash + 1n; i < blockNumber; i++) {
-                  emit.onBlockHash(i, prevBlockHash);
-                  prevBlockHash = i;
-                }
-              }
-            }
-
-            // If the next block number is greater than the previous,
-            // it is not in the past, and we can emit the new block number.
-            if (!prevBlockHash || blockNumber > prevBlockHash) {
-              emit.onBlockHash(blockNumber, prevBlockHash);
-              prevBlockHash = blockNumber;
-            }
+            emit.onBlockHash(blockHash, prevBlockHash);
+            prevBlockHash = blockHash;
           } catch (err) {
             emit.onError?.(err as Error);
           }
