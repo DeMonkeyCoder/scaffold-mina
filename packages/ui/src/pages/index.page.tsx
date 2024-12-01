@@ -4,7 +4,6 @@ import LoadingScreen from "@/components/LoadingScreen";
 import ConnectWallet from "@/components/ConnectWallet";
 import {
   QuestContractProvider,
-  useGetQuestContractState,
   useQuestContract,
 } from "@/lib/useQuestContract";
 import { CircuitString, PublicKey } from "o1js";
@@ -14,6 +13,8 @@ import { isSupportedNetwork } from "@/constants/network";
 import AccountDoesNotExist from "@/components/AccountDoesNotExist";
 import { useAccount } from "@/lib/connect/react/hooks/useAccount";
 import { useNetworkId } from "@/lib/connect/react/hooks/useNetworkId";
+import { useReadZkAppState } from "@/lib/useReadZkAppState";
+import { Quest } from "../../../contracts";
 
 enum TransactionState {
   INITIAL,
@@ -29,7 +30,11 @@ function HomeBody() {
   const { accountExists } = useMinaProvider();
   const networkId = useNetworkId();
 
-  const { data: currentNum } = useGetQuestContractState({
+  const { data: currentNum } = useReadZkAppState({
+    smartContract: Quest,
+    publicKey: PublicKey.fromBase58(
+      "B62qjDnppFhY5tsEmLbCDRniCoJcYqLmHpEeXVfwM4Ej18uJFhTrmBb"
+    ),
     stateVariable: "counter",
     watch: true,
   });

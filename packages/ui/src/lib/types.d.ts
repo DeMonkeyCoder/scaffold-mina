@@ -8,16 +8,12 @@ type Methods<T extends SmartContract> = {
     : never;
 }[keyof T];
 
-type StateVariables<T extends SmartContract> = {
-  [K in keyof T]: K extends keyof SmartContract
-    ? never
-    : T[K] extends State<any>
-    ? K
-    : never;
+type StateVariable<T extends SmartContract> = {
+  [K in keyof T]: T[K] extends State<any> ? K : never;
 }[keyof T];
 
 interface ContractContextType<T extends SmartContract> {
-  getState: (args: { stateVariable: StateVariables<T> }) => Promise<Field>;
+  getState: (args: { stateVariable: StateVariable<T> }) => Promise<Field>;
   prepareTransaction: (args: {
     method: Methods<T>;
     args: Field[];

@@ -7,6 +7,7 @@ import { devnet, mainnet } from "@/lib/connect/viem/chains";
 import { http } from "@/lib/connect/viem";
 import { WagmiProvider } from "@/lib/connect/react/context";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Mina } from "o1js";
 
 const config = createConfig({
   chains: [mainnet, devnet],
@@ -16,6 +17,9 @@ const config = createConfig({
     [mainnet.id]: http(),
     [devnet.id]: http(),
   },
+  minaActiveInstance: Mina.Network(
+    "https://api.minascan.io/node/devnet/v1/graphql"
+  ),
 });
 
 export default function App({ Component, pageProps }: AppProps) {

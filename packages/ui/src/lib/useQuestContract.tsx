@@ -3,13 +3,10 @@ import React, {
   ReactNode,
   useCallback,
   useContext,
-  useEffect,
-  useState,
 } from "react";
 import { fetchAccount, Field, PublicKey } from "o1js";
 import { useMinaProvider } from "@/lib/ZkappContext";
-import { timeout } from "@/utils";
-import { ContractContextType, Methods, StateVariables } from "@/lib/types";
+import { ContractContextType, Methods, StateVariable } from "@/lib/types";
 import { Quest } from "../../../contracts";
 
 const QuestContractContext = createContext<ContractContextType<Quest> | null>(
@@ -26,7 +23,7 @@ export const QuestContractProvider = ({
   const { zkappWorkerClient } = useMinaProvider();
 
   const getState = useCallback(
-    async ({ stateVariable }: { stateVariable: StateVariables<Quest> }) => {
+    async ({ stateVariable }: { stateVariable: StateVariable<Quest> }) => {
       await fetchAccount({
         publicKey: zkappPublicKey,
       });
@@ -84,40 +81,3 @@ export const useQuestContract = (): ContractContextType<Quest> => {
   }
   return context;
 };
-
-export function useGetQuestContractState({
-  watch,
-  stateVariable,
-}: {
-  watch?: boolean;
-  stateVariable: StateVariables<Quest>;
-}) {
-  const [data, setData] = useState<Field | null>(null);
-  const { getState } = useQuestContract();
-  const { initialized } = useMinaProvider();
-
-  useEffect(() => {
-    let continuePolling = watch;
-
-    async function getData() {
-      const newData = await getState({
-        stateVariable,
-      });
-      setData(newData);
-      await timeout(3);
-      if (continuePolling) {
-        getData();
-      }
-    }
-
-    if (initialized) {
-      getData();
-    }
-    return () => {
-      continuePolling = false;
-    };
-  }, [getState, initialized, stateVariable, watch]);
-  return {
-    data,
-  };
-}

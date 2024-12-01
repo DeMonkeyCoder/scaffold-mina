@@ -32,6 +32,8 @@ import type {
 } from "./types/utils";
 import { uid } from "./utils/uid";
 import { version } from "./version";
+import { Mina as MinaInstance } from "o1js/dist/node/lib/mina/mina-instance";
+import { Mina } from "o1js";
 
 export type CreateConfigParameters<
   chains extends readonly [Chain, ...Chain[]] = readonly [Chain, ...Chain[]],
@@ -47,6 +49,7 @@ export type CreateConfigParameters<
     storage?: Storage | null | undefined;
     ssr?: boolean | undefined;
     syncConnectedChain?: boolean | undefined;
+    minaActiveInstance: MinaInstance;
   } & OneOf<
     | ({ transports: transports } & {
         [key in keyof ClientConfig]?:
@@ -78,12 +81,14 @@ export function createConfig<
     }),
     syncConnectedChain = true,
     ssr = false,
+    minaActiveInstance,
     ...rest
   } = parameters;
-
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Set up connectors, clients, etc.
   /////////////////////////////////////////////////////////////////////////////////////////////////
+
+  Mina.setActiveInstance(minaActiveInstance);
 
   const mipd =
     typeof window !== "undefined" && multiInjectedProviderDiscovery

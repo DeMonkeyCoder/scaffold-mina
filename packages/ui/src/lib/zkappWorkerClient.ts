@@ -6,7 +6,7 @@ import {
   ZkappWorkerReponse,
   ZkappWorkerRequest,
 } from "./zkappWorker";
-import { Methods, StateVariables } from "@/lib/types";
+import { Methods, StateVariable } from "@/lib/types";
 
 export default class ZkappWorkerClient {
   // ---------------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ export default class ZkappWorkerClient {
   async getState<T extends SmartContract>(args: {
     //TODO: fix this general string type
     contractName: string;
-    stateVariable: StateVariables<T>;
+    stateVariable: StateVariable<T>;
   }) {
     const result = await this._call("getState", args);
     return Field.fromJSON(JSON.parse(result as string));
