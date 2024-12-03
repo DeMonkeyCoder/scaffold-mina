@@ -4,9 +4,7 @@ import {
   type EIP1193RequestFn,
   getAddress,
   type Hex,
-  keccak256,
   RpcRequestError,
-  stringToHex,
   SwitchChainError,
   type Transport,
   UserRejectedRequestError,
@@ -38,7 +36,7 @@ export type MockParameters = {
 mock.type = "mock" as const;
 
 export function mock(parameters: MockParameters) {
-  const transactionCache = new Map<Hex, Hex[]>();
+  const transactionCache = new Map<string, string[]>();
   const features = parameters.features ?? {};
 
   type Provider = ReturnType<
@@ -206,7 +204,8 @@ export function mock(parameters: MockParameters) {
               });
             hashes.push(result);
           }
-          const id = keccak256(stringToHex(JSON.stringify(calls)));
+          // const id = keccak256(stringToHex(JSON.stringify(calls)));
+          const id = JSON.stringify(calls);
           transactionCache.set(id, hashes);
           return id;
         }

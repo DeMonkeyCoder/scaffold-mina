@@ -60,10 +60,6 @@ export {
   parseAccount,
 } from "../accounts/utils/parseAccount";
 export {
-  type PublicKeyToAddressErrorType,
-  publicKeyToAddress,
-} from "../accounts/utils/publicKeyToAddress";
-export {
   type ChecksumAddressErrorType,
   getAddress,
 } from "./address/getAddress";
@@ -141,10 +137,7 @@ export {
   type DefineFormatterErrorType,
   defineFormatter,
 } from "./formatters/formatter";
-export { type IsHashErrorType, isHash } from "./hash/isHash";
-export { type Keccak256ErrorType, keccak256 } from "./hash/keccak256";
 export { type Sha256ErrorType, sha256 } from "./hash/sha256";
-export { type Ripemd160ErrorType, ripemd160 } from "./hash/ripemd160";
 export {
   type CreateNonceManagerParameters,
   type NonceManager,

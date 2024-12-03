@@ -444,23 +444,12 @@ export {
   type IsAddressEqualErrorType,
   isAddressEqual,
 } from "./utils/address/isAddressEqual";
-export { type IsHashErrorType, isHash } from "./utils/hash/isHash";
 export { type IsHexErrorType, isHex } from "./utils/data/isHex";
-export {
-  type Keccak256Hash,
-  type Keccak256ErrorType,
-  keccak256,
-} from "./utils/hash/keccak256";
 export {
   type Sha256Hash,
   type Sha256ErrorType,
   sha256,
 } from "./utils/hash/sha256";
-export {
-  type Ripemd160Hash,
-  type Ripemd160ErrorType,
-  ripemd160,
-} from "./utils/hash/ripemd160";
 export {
   type PadBytesErrorType,
   type PadErrorType,

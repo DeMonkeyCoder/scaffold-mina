@@ -1,12 +1,11 @@
 import type { Address } from "@/lib/connect/viem";
 import type { ErrorType } from "../../errors/utils";
-import { type Keccak256ErrorType } from "../hash/keccak256";
 import { LruMap } from "../lru";
 import { type IsAddressErrorType } from "./isAddress";
 
 const checksumAddressCache = /*#__PURE__*/ new LruMap<Address>(8192);
 
-export type ChecksumAddressErrorType = Keccak256ErrorType | ErrorType;
+export type ChecksumAddressErrorType = ErrorType;
 
 export function checksumAddress(
   address_: Address,
