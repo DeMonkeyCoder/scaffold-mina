@@ -1,4 +1,4 @@
-import { type Address, formatUnits } from "@/lib/connect/viem";
+import { type Address } from "@/lib/connect/viem";
 import {
   getBalance as viem_getBalance,
   type GetBalanceErrorType as viem_GetBalanceErrorType,
@@ -10,7 +10,6 @@ import type { NetworkIdParameter } from "../types/properties";
 import type { Unit } from "../types/unit";
 import type { Compute } from "../types/utils";
 import { getAction } from "../utils/getAction";
-import { getUnit } from "../utils/getUnit";
 
 export type GetBalanceParameters<config extends Config = Config> = Compute<
   NetworkIdParameter<config> &
@@ -24,8 +23,6 @@ export type GetBalanceParameters<config extends Config = Config> = Compute<
 
 export type GetBalanceReturnType = {
   decimals: number;
-  /** @deprecated */
-  formatted: string;
   symbol: string;
   value: bigint;
 };
@@ -57,7 +54,6 @@ export async function getBalance<config extends Config>(
   const chain = config.chains.find((x) => x.id === networkId) ?? client.chain!;
   return {
     decimals: chain.nativeCurrency.decimals,
-    formatted: formatUnits(value, getUnit(unit)),
     symbol: chain.nativeCurrency.symbol,
     value,
   };

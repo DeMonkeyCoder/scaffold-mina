@@ -187,12 +187,6 @@ export {
   hexToString,
 } from "./encoding/fromHex";
 export { type FromRlpErrorType, fromRlp } from "./encoding/fromRlp";
-export {
-  type GetNodeErrorParameters,
-  type GetNodeErrorReturnType,
-  containsNodeError,
-  getNodeError,
-} from "./errors/getNodeError";
 export { getAction } from "./getAction";
 export {
   type DefineFormatterErrorType,
@@ -239,12 +233,6 @@ export { type IsHashErrorType, isHash } from "./hash/isHash";
 export { type Keccak256ErrorType, keccak256 } from "./hash/keccak256";
 export { type Sha256ErrorType, sha256 } from "./hash/sha256";
 export { type Ripemd160ErrorType, ripemd160 } from "./hash/ripemd160";
-export { type FormatEtherErrorType, formatEther } from "./unit/formatEther";
-export { type FormatGweiErrorType, formatGwei } from "./unit/formatGwei";
-export { type FormatUnitsErrorType, formatUnits } from "./unit/formatUnits";
-export { type ParseUnitsErrorType, parseUnits } from "./unit/parseUnits";
-export { type ParseEtherErrorType, parseEther } from "./unit/parseEther";
-export { type ParseGweiErrorType, parseGwei } from "./unit/parseGwei";
 export {
   type CreateNonceManagerParameters,
   type NonceManager,
