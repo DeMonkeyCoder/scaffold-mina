@@ -72,11 +72,7 @@ type ExtendableProtectedActions<
   account extends Account | undefined = Account | undefined
 > = Pick<
   PublicActions<transport, chain, account>,
-  | "getBlockHash"
-  | "uninstallFilter"
-  | "getNetworkId"
-  | "getTransactionCount"
-  | "watchBlockHash"
+  "getBlockHash" | "getNetworkId" | "getTransactionCount" | "watchBlockHash"
 >;
 
 // TODO: Move `transport` to slot index 2 since `chain` and `account` used more frequently.

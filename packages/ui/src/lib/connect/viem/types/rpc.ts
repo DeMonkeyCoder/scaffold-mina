@@ -7,8 +7,6 @@ import type {
   BlockTag,
   Uncle,
 } from "./block";
-import type { FeeHistory, FeeValues } from "./fee";
-import type { Log } from "./log";
 import type { Hex } from "./misc";
 import type { Proof } from "./proof";
 
@@ -31,9 +29,9 @@ export type RpcBlock<
 export type RpcBlockHash = BlockHash;
 export type RpcBlockIdentifier = BlockIdentifier<Quantity>;
 export type RpcUncle = Uncle<Quantity>;
-export type RpcFeeHistory = FeeHistory<Quantity>;
-export type RpcFeeValues = FeeValues<Quantity>;
-export type RpcLog = Log<Quantity, Index>;
+export type RpcFeeHistory = any;
+export type RpcFeeValues = any;
+export type RpcLog = any;
 export type RpcProof = Proof<Quantity, Index>;
 export type RpcTransactionReceipt = any;
 export type RpcTransactionRequest = any;

@@ -181,11 +181,6 @@ export type {
   SwitchChainParameters,
 } from "./actions/wallet/switchChain";
 export type {
-  UninstallFilterErrorType,
-  UninstallFilterParameters,
-  UninstallFilterReturnType,
-} from "./actions/public/uninstallFilter";
-export type {
   Chain,
   ChainContract,
   ChainFormatter,
@@ -197,7 +192,6 @@ export type {
   ExtractChainFormatterParameters,
   ExtractChainFormatterReturnType,
 } from "./types/chain";
-export type { GetTransactionRequestKzgParameter, Kzg } from "./types/kzg";
 export {
   type Client,
   type ClientConfig,
@@ -371,58 +365,6 @@ export {
 } from "./constants/number";
 export { zeroHash } from "./constants/bytes";
 export { presignMessagePrefix } from "./constants/strings";
-export {
-  AbiConstructorNotFoundError,
-  type AbiConstructorNotFoundErrorType,
-  AbiConstructorParamsNotFoundError,
-  type AbiConstructorParamsNotFoundErrorType,
-  AbiDecodingDataSizeInvalidError,
-  type AbiDecodingDataSizeInvalidErrorType,
-  AbiDecodingDataSizeTooSmallError,
-  type AbiDecodingDataSizeTooSmallErrorType,
-  AbiDecodingZeroDataError,
-  type AbiDecodingZeroDataErrorType,
-  AbiEncodingArrayLengthMismatchError,
-  type AbiEncodingArrayLengthMismatchErrorType,
-  AbiEncodingLengthMismatchError,
-  type AbiEncodingLengthMismatchErrorType,
-  AbiEncodingBytesSizeMismatchError,
-  type AbiEncodingBytesSizeMismatchErrorType,
-  AbiErrorInputsNotFoundError,
-  type AbiErrorInputsNotFoundErrorType,
-  AbiErrorNotFoundError,
-  type AbiErrorNotFoundErrorType,
-  AbiErrorSignatureNotFoundError,
-  type AbiErrorSignatureNotFoundErrorType,
-  AbiEventNotFoundError,
-  type AbiEventNotFoundErrorType,
-  AbiEventSignatureEmptyTopicsError,
-  type AbiEventSignatureEmptyTopicsErrorType,
-  AbiEventSignatureNotFoundError,
-  type AbiEventSignatureNotFoundErrorType,
-  AbiFunctionNotFoundError,
-  type AbiFunctionNotFoundErrorType,
-  AbiFunctionOutputsNotFoundError,
-  type AbiFunctionOutputsNotFoundErrorType,
-  AbiFunctionSignatureNotFoundError,
-  type AbiFunctionSignatureNotFoundErrorType,
-  BytesSizeMismatchError,
-  type BytesSizeMismatchErrorType,
-  DecodeLogDataMismatch,
-  type DecodeLogDataMismatchErrorType,
-  DecodeLogTopicsMismatch,
-  type DecodeLogTopicsMismatchErrorType,
-  InvalidAbiDecodingTypeError,
-  type InvalidAbiDecodingTypeErrorType,
-  InvalidAbiEncodingTypeError,
-  type InvalidAbiEncodingTypeErrorType,
-  InvalidArrayError,
-  type InvalidArrayErrorType,
-  InvalidDefinitionTypeError,
-  type InvalidDefinitionTypeErrorType,
-  UnsupportedPackedAbiType,
-  type UnsupportedPackedAbiTypeErrorType,
-} from "./errors/abi";
 export { BaseError, type BaseErrorType, setErrorConfig } from "./errors/base";
 export {
   BlockNotFoundError,
@@ -568,36 +510,6 @@ export {
   type StateAssignmentConflictErrorType,
 } from "./errors/stateOverride";
 export type {
-  AbiEventParameterToPrimitiveType,
-  AbiEventParametersToPrimitiveTypes,
-  AbiEventTopicToPrimitiveType,
-  AbiItem,
-  AbiItemArgs,
-  AbiItemName,
-  ContractConstructorArgs,
-  ContractEventArgsFromTopics,
-  EventDefinition,
-  ExtractAbiFunctionForArgs,
-  ExtractAbiItem,
-  ExtractAbiItemForArgs,
-  ExtractAbiItemNames,
-  ContractErrorArgs,
-  ContractErrorName,
-  ContractEventArgs,
-  ContractEventName,
-  ContractFunctionParameters,
-  ContractFunctionReturnType,
-  ContractFunctionArgs,
-  ContractFunctionName,
-  GetEventArgs,
-  GetValue,
-  LogTopicType,
-  MaybeAbiEventName,
-  MaybeExtractEventArgsFromAbi,
-  UnionWiden,
-  Widen,
-} from "./types/contract";
-export type {
   Assign,
   Branded,
   Evaluate,
@@ -686,22 +598,7 @@ export type {
 } from "./types/eip1193";
 export { ProviderRpcError as EIP1193ProviderRpcError } from "./types/eip1193";
 export type { BlobSidecar, BlobSidecars } from "./types/eip4844";
-export type {
-  FeeHistory,
-  FeeValues,
-  FeeValuesEIP1559,
-  FeeValuesEIP4844,
-  FeeValuesLegacy,
-  FeeValuesType,
-} from "./types/fee";
-export type { Filter, FilterType } from "./types/filter";
 export type { GetTransportConfig, GetPollOptions } from "./types/transport";
-export type { Log } from "./types/log";
-export type {
-  MulticallContracts,
-  MulticallResponse,
-  MulticallResults,
-} from "./types/multicall";
 export type { ParseAccount, DeriveAccount, HDKey } from "./types/account";
 export type {
   Index,
@@ -724,105 +621,6 @@ export type {
 } from "./types/rpc";
 export type { Withdrawal } from "./types/withdrawal";
 export type { StateMapping, StateOverride } from "./types/stateOverride";
-export { formatLog, type FormatLogErrorType } from "./utils/formatters/log";
-export {
-  type DecodeAbiParametersErrorType,
-  type DecodeAbiParametersReturnType,
-  decodeAbiParameters,
-} from "./utils/abi/decodeAbiParameters";
-export {
-  type DecodeDeployDataErrorType,
-  type DecodeDeployDataParameters,
-  type DecodeDeployDataReturnType,
-  decodeDeployData,
-} from "./utils/abi/decodeDeployData";
-export {
-  type DecodeErrorResultErrorType,
-  type DecodeErrorResultParameters,
-  type DecodeErrorResultReturnType,
-  decodeErrorResult,
-} from "./utils/abi/decodeErrorResult";
-export {
-  type DecodeEventLogErrorType,
-  type DecodeEventLogParameters,
-  type DecodeEventLogReturnType,
-  decodeEventLog,
-} from "./utils/abi/decodeEventLog";
-export {
-  type DecodeFunctionDataErrorType,
-  type DecodeFunctionDataParameters,
-  type DecodeFunctionDataReturnType,
-  decodeFunctionData,
-} from "./utils/abi/decodeFunctionData";
-export {
-  type DecodeFunctionResultErrorType,
-  type DecodeFunctionResultParameters,
-  type DecodeFunctionResultReturnType,
-  decodeFunctionResult,
-} from "./utils/abi/decodeFunctionResult";
-export {
-  type EncodeAbiParametersErrorType,
-  type EncodeAbiParametersReturnType,
-  encodeAbiParameters,
-} from "./utils/abi/encodeAbiParameters";
-export {
-  type EncodeDeployDataErrorType,
-  type EncodeDeployDataParameters,
-  type EncodeDeployDataReturnType,
-  encodeDeployData,
-} from "./utils/abi/encodeDeployData";
-export {
-  type EncodeErrorResultErrorType,
-  type EncodeErrorResultParameters,
-  type EncodeErrorResultReturnType,
-  encodeErrorResult,
-} from "./utils/abi/encodeErrorResult";
-export {
-  type EncodeEventTopicsErrorType,
-  type EncodeEventTopicsParameters,
-  type EncodeEventTopicsReturnType,
-  encodeEventTopics,
-} from "./utils/abi/encodeEventTopics";
-export {
-  type EncodeFunctionDataErrorType,
-  type EncodeFunctionDataParameters,
-  type EncodeFunctionDataReturnType,
-  encodeFunctionData,
-} from "./utils/abi/encodeFunctionData";
-export {
-  type PrepareEncodeFunctionDataErrorType,
-  type PrepareEncodeFunctionDataParameters,
-  type PrepareEncodeFunctionDataReturnType,
-  prepareEncodeFunctionData,
-} from "./utils/abi/prepareEncodeFunctionData";
-export {
-  type EncodeFunctionResultErrorType,
-  type EncodeFunctionResultParameters,
-  type EncodeFunctionResultReturnType,
-  encodeFunctionResult,
-} from "./utils/abi/encodeFunctionResult";
-export {
-  type ParseEventLogsErrorType,
-  type ParseEventLogsParameters,
-  type ParseEventLogsReturnType,
-  parseEventLogs,
-} from "./utils/abi/parseEventLogs";
-export {
-  type GetAbiItemErrorType,
-  type GetAbiItemParameters,
-  type GetAbiItemReturnType,
-  getAbiItem,
-} from "./utils/abi/getAbiItem";
-export {
-  type GetContractAddressOptions,
-  type GetCreate2AddressOptions,
-  type GetCreate2AddressErrorType,
-  type GetCreateAddressOptions,
-  type GetCreateAddressErrorType,
-  getContractAddress,
-  getCreate2Address,
-  getCreateAddress,
-} from "./utils/address/getContractAddress";
 export {
   type BoolToBytesErrorType,
   type BoolToBytesOpts,
@@ -874,66 +672,6 @@ export {
   fromBytes,
 } from "./utils/encoding/fromBytes";
 export {
-  type BlobsToCommitmentsErrorType,
-  type BlobsToCommitmentsParameters,
-  type BlobsToCommitmentsReturnType,
-  blobsToCommitments,
-} from "./utils/blob/blobsToCommitments";
-export {
-  type CommitmentToVersionedHashErrorType,
-  type CommitmentToVersionedHashParameters,
-  type CommitmentToVersionedHashReturnType,
-  commitmentToVersionedHash,
-} from "./utils/blob/commitmentToVersionedHash";
-export {
-  type CommitmentsToVersionedHashesErrorType,
-  type CommitmentsToVersionedHashesParameters,
-  type CommitmentsToVersionedHashesReturnType,
-  commitmentsToVersionedHashes,
-} from "./utils/blob/commitmentsToVersionedHashes";
-export {
-  type SidecarsToVersionedHashesErrorType,
-  type SidecarsToVersionedHashesParameters,
-  type SidecarsToVersionedHashesReturnType,
-  sidecarsToVersionedHashes,
-} from "./utils/blob/sidecarsToVersionedHashes";
-export {
-  type blobsToProofsErrorType,
-  type blobsToProofsParameters,
-  type blobsToProofsReturnType,
-  blobsToProofs,
-} from "./utils/blob/blobsToProofs";
-export {
-  type FromBlobsErrorType,
-  type FromBlobsParameters,
-  type FromBlobsReturnType,
-  fromBlobs,
-} from "./utils/blob/fromBlobs";
-export {
-  type ToBlobSidecarsErrorType,
-  type ToBlobSidecarsParameters,
-  type ToBlobSidecarsReturnType,
-  toBlobSidecars,
-} from "./utils/blob/toBlobSidecars";
-export {
-  type ToBlobsErrorType,
-  type ToBlobsParameters,
-  type ToBlobsReturnType,
-  toBlobs,
-} from "./utils/blob/toBlobs";
-export {
-  type DefineKzgErrorType,
-  type DefineKzgParameters,
-  type DefineKzgReturnType,
-  defineKzg,
-} from "./utils/kzg/defineKzg";
-export {
-  type SetupKzgErrorType,
-  type SetupKzgParameters,
-  type SetupKzgReturnType,
-  setupKzg,
-} from "./utils/kzg/setupKzg";
-export {
   type ConcatBytesErrorType,
   type ConcatErrorType,
   type ConcatHexErrorType,
@@ -958,10 +696,6 @@ export {
   type GetChainContractAddressErrorType,
   getChainContractAddress,
 } from "./utils/chain/getChainContractAddress";
-export {
-  type EncodePackedErrorType,
-  encodePacked,
-} from "./utils/abi/encodePacked";
 export { type WithRetryErrorType, withRetry } from "./utils/promise/withRetry";
 export {
   type WithTimeoutErrorType,

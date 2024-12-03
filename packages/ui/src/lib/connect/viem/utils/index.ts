@@ -50,77 +50,6 @@ export {
 export { getWebSocketRpcClient } from "./rpc/webSocket";
 export { type StringifyErrorType, stringify } from "./stringify";
 export {
-  type DecodeAbiParametersErrorType,
-  type DecodeAbiParametersReturnType,
-  decodeAbiParameters,
-} from "./abi/decodeAbiParameters";
-export {
-  type DecodeErrorResultErrorType,
-  type DecodeErrorResultParameters,
-  type DecodeErrorResultReturnType,
-  decodeErrorResult,
-} from "./abi/decodeErrorResult";
-export {
-  type DecodeEventLogErrorType,
-  type DecodeEventLogParameters,
-  type DecodeEventLogReturnType,
-  decodeEventLog,
-} from "./abi/decodeEventLog";
-export {
-  type DecodeFunctionDataErrorType,
-  type DecodeFunctionDataParameters,
-  type DecodeFunctionDataReturnType,
-  decodeFunctionData,
-} from "./abi/decodeFunctionData";
-export {
-  type DecodeFunctionResultErrorType,
-  type DecodeFunctionResultParameters,
-  type DecodeFunctionResultReturnType,
-  decodeFunctionResult,
-} from "./abi/decodeFunctionResult";
-export {
-  type EncodeAbiParametersErrorType,
-  type EncodeAbiParametersReturnType,
-  encodeAbiParameters,
-} from "./abi/encodeAbiParameters";
-export {
-  type EncodeDeployDataErrorType,
-  type EncodeDeployDataParameters,
-  encodeDeployData,
-} from "./abi/encodeDeployData";
-export {
-  type EncodeErrorResultErrorType,
-  type EncodeErrorResultParameters,
-  encodeErrorResult,
-} from "./abi/encodeErrorResult";
-export {
-  type EncodeArgErrorType,
-  type EncodeEventTopicsParameters,
-  type EncodeEventTopicsReturnType,
-  encodeEventTopics,
-} from "./abi/encodeEventTopics";
-export {
-  type EncodeFunctionDataErrorType,
-  type EncodeFunctionDataParameters,
-  encodeFunctionData,
-} from "./abi/encodeFunctionData";
-export {
-  type EncodeFunctionResultErrorType,
-  type EncodeFunctionResultParameters,
-  encodeFunctionResult,
-} from "./abi/encodeFunctionResult";
-export {
-  type ParseEventLogsErrorType,
-  type ParseEventLogsParameters,
-  type ParseEventLogsReturnType,
-  parseEventLogs,
-} from "./abi/parseEventLogs";
-export {
-  type GetAbiItemErrorType,
-  type GetAbiItemParameters,
-  getAbiItem,
-} from "./abi/getAbiItem";
-export {
   type ParseAbi,
   type ParseAbiItem,
   type ParseAbiParameter,
@@ -130,18 +59,6 @@ export {
   parseAbiParameter,
   parseAbiParameters,
 } from "abitype";
-export { type EncodePackedErrorType, encodePacked } from "./abi/encodePacked";
-export {
-  type FormatAbiItemWithArgsErrorType,
-  formatAbiItemWithArgs,
-} from "./abi/formatAbiItemWithArgs";
-export {
-  type FormatAbiItemErrorType,
-  type FormatAbiParamErrorType,
-  type FormatAbiParamsErrorType,
-  formatAbiItem,
-  formatAbiParams,
-} from "./abi/formatAbiItem";
 export {
   type ParseAccountErrorType,
   parseAccount,
@@ -150,16 +67,6 @@ export {
   type PublicKeyToAddressErrorType,
   publicKeyToAddress,
 } from "../accounts/utils/publicKeyToAddress";
-export {
-  type GetContractAddressOptions,
-  type GetCreate2AddressErrorType,
-  type GetCreate2AddressOptions,
-  type GetCreateAddressErrorType,
-  type GetCreateAddressOptions,
-  getContractAddress,
-  getCreateAddress,
-  getCreate2Address,
-} from "./address/getContractAddress";
 export {
   type ChecksumAddressErrorType,
   getAddress,

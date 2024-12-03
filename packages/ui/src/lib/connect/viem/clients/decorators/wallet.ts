@@ -1,5 +1,3 @@
-import type { Abi, Address } from "abitype";
-
 import type { Account } from "../../accounts/types";
 import {
   getNetworkId,
@@ -31,10 +29,6 @@ import {
   type SwitchChainParameters,
 } from "../../actions/wallet/switchChain";
 import type { Chain } from "../../types/chain";
-import type {
-  ContractFunctionArgs,
-  ContractFunctionName,
-} from "../../types/contract";
 import type { Client } from "../createClient";
 import type { Transport } from "../transports/createTransport";
 

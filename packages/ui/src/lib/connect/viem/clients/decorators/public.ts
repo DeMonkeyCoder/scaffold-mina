@@ -18,11 +18,6 @@ import {
   type GetTransactionCountReturnType,
 } from "../../actions/public/getTransactionCount";
 import {
-  uninstallFilter,
-  type UninstallFilterParameters,
-  type UninstallFilterReturnType,
-} from "../../actions/public/uninstallFilter";
-import {
   watchBlockHash,
   type WatchBlockHashParameters,
   type WatchBlockHashReturnType,
@@ -141,31 +136,6 @@ export type PublicActions<
     args: GetTransactionCountParameters
   ) => Promise<GetTransactionCountReturnType>;
   /**
-   * Destroys a Filter that was created from one of the following Actions:
-   *
-   * - [`createBlockFilter`](https://viem.sh/docs/actions/public/createBlockFilter)
-   * - [`createEventFilter`](https://viem.sh/docs/actions/public/createEventFilter)
-   * - [`createPendingTransactionFilter`](https://viem.sh/docs/actions/public/createPendingTransactionFilter)
-   *
-   * - Docs: https://viem.sh/docs/actions/public/uninstallFilter
-   * - JSON-RPC Methods: [`mina_uninstallFilter`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_uninstallFilter)
-   *
-   * @param args - {@link UninstallFilterParameters}
-   * @returns A boolean indicating if the Filter was successfully uninstalled. {@link UninstallFilterReturnType}
-   *
-   * @example
-   * import { createPublicClient, http } from 'viem'
-   * import { mainnet } from 'viem/chains'
-   * import { createPendingTransactionFilter, uninstallFilter } from 'viem/public'
-   *
-   * const filter = await client.createPendingTransactionFilter()
-   * const uninstalled = await client.uninstallFilter({ filter })
-   * // true
-   */
-  uninstallFilter: (
-    args: UninstallFilterParameters
-  ) => Promise<UninstallFilterReturnType>;
-  /**
    * Watches and returns incoming block numbers.
    *
    * - Docs: https://viem.sh/docs/actions/public/watchBlockHash
@@ -204,7 +174,6 @@ export function publicActions<
     getBlockHash: (args) => getBlockHash(client, args),
     getNetworkId: () => getNetworkId(client),
     getTransactionCount: (args) => getTransactionCount(client, args),
-    uninstallFilter: (args) => uninstallFilter(client, args),
     watchBlockHash: (args) => watchBlockHash(client, args),
   };
 }

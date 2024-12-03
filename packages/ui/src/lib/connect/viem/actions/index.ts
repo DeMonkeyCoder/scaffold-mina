@@ -184,9 +184,3 @@ export {
   type SwitchChainParameters,
   switchChain,
 } from "./wallet/switchChain";
-export {
-  type UninstallFilterErrorType,
-  type UninstallFilterParameters,
-  type UninstallFilterReturnType,
-  uninstallFilter,
-} from "./public/uninstallFilter";
