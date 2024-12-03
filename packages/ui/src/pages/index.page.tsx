@@ -14,7 +14,7 @@ import AccountDoesNotExist from "@/components/AccountDoesNotExist";
 import { useAccount } from "@/lib/connect/react/hooks/useAccount";
 import { useNetworkId } from "@/lib/connect/react/hooks/useNetworkId";
 import { useReadZkAppState } from "@/lib/useReadZkAppState";
-import { Quest } from "../../../contracts";
+import { Quest } from "scaffold-mina-contracts";
 
 enum TransactionState {
   INITIAL,

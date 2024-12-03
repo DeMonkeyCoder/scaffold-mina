@@ -35,7 +35,7 @@ const functions = {
       throw new Error(`${contractName} contract is not defined`);
     if (!state.contracts[contractName].contract) {
       const contract = (
-        await import(`../../../contracts/build/src/${contractName}.js`)
+        await import(`scaffold-mina-contracts/build/src/${contractName}.js`)
       )[contractName];
       if (!contract) {
         throw new Error(

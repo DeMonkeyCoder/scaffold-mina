@@ -7,7 +7,7 @@ import React, {
 import { fetchAccount, Field, PublicKey } from "o1js";
 import { useMinaProvider } from "@/lib/ZkappContext";
 import { ContractContextType, Methods, StateVariable } from "@/lib/types";
-import { Quest } from "../../../contracts";
+import { Quest } from "scaffold-mina-contracts";
 
 const QuestContractContext = createContext<ContractContextType<Quest> | null>(
   null

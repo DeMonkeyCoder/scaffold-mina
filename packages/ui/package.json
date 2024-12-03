@@ -28,6 +28,7 @@
     "react": "^18.2.0",
     "react-dom": "^18",
     "sass": "^1.77.8",
+    "scaffold-mina-contracts": "workspace:*",
     "use-sync-external-store": "^1.2.0",
     "webauthn-p256": "0.0.5",
     "ws": "8.17.1",
