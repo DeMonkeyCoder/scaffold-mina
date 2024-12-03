@@ -37,48 +37,9 @@ export {
 } from "abitype";
 
 export {
-  getContract,
-  type GetContractErrorType,
-  type GetContractParameters,
-  type GetContractReturnType,
-} from "./actions/getContract";
-export {
-  type GetContractEventsErrorType,
-  type GetContractEventsParameters,
-  type GetContractEventsReturnType,
-} from "./actions/public/getContractEvents";
-export {
   type AddChainErrorType,
   type AddChainParameters,
 } from "./actions/wallet/addChain";
-export {
-  type CallErrorType,
-  type CallParameters,
-  type CallReturnType,
-} from "./actions/public/call";
-export type {
-  CreateBlockFilterErrorType,
-  CreateBlockFilterReturnType,
-} from "./actions/public/createBlockFilter";
-export type {
-  CreateContractEventFilterErrorType,
-  CreateContractEventFilterParameters,
-  CreateContractEventFilterReturnType,
-} from "./actions/public/createContractEventFilter";
-export type {
-  CreateEventFilterErrorType,
-  CreateEventFilterParameters,
-  CreateEventFilterReturnType,
-} from "./actions/public/createEventFilter";
-export type {
-  CreatePendingTransactionFilterErrorType,
-  CreatePendingTransactionFilterReturnType,
-} from "./actions/public/createPendingTransactionFilter";
-export type {
-  DeployContractErrorType,
-  DeployContractParameters,
-  DeployContractReturnType,
-} from "./actions/wallet/deployContract";
 export type {
   DropTransactionErrorType,
   DropTransactionParameters,
@@ -92,26 +53,6 @@ export type {
   GetAutomineReturnType,
 } from "./actions/test/getAutomine";
 export type {
-  EstimateContractGasErrorType,
-  EstimateContractGasParameters,
-  EstimateContractGasReturnType,
-} from "./actions/public/estimateContractGas";
-export type {
-  EstimateGasErrorType,
-  EstimateGasParameters,
-  EstimateGasReturnType,
-} from "./actions/public/estimateGas";
-export type {
-  EstimateFeesPerGasErrorType,
-  EstimateFeesPerGasParameters,
-  EstimateFeesPerGasReturnType,
-} from "./actions/public/estimateFeesPerGas";
-export type {
-  EstimateMaxPriorityFeePerGasErrorType,
-  EstimateMaxPriorityFeePerGasParameters,
-  EstimateMaxPriorityFeePerGasReturnType,
-} from "./actions/public/estimateMaxPriorityFeePerGas";
-export type {
   GetAddressesErrorType,
   GetAddressesReturnType,
 } from "./actions/wallet/getAddresses";
@@ -121,97 +62,23 @@ export type {
   GetBalanceReturnType,
 } from "./actions/public/getBalance";
 export type {
-  GetBlobBaseFeeErrorType,
-  GetBlobBaseFeeReturnType,
-} from "./actions/public/getBlobBaseFee";
-export type {
   GetBlockHashErrorType,
   GetBlockHashParameters,
   GetBlockHashReturnType,
 } from "./actions/public/getBlockHash";
 export type {
-  GetBlockErrorType,
-  GetBlockParameters,
-  GetBlockReturnType,
-} from "./actions/public/getBlock";
-export type {
-  GetBlockTransactionCountErrorType,
-  GetBlockTransactionCountParameters,
-  GetBlockTransactionCountReturnType,
-} from "./actions/public/getBlockTransactionCount";
-export type {
-  /** @deprecated Use `GetCodeErrorType` instead */
-  GetCodeErrorType as GetBytecodeErrorType,
-  /** @deprecated Use `GetCodeParameters` instead */
-  GetCodeParameters as GetBytecodeParameters,
-  /** @deprecated Use `GetCodeReturnType` instead  */
-  GetCodeReturnType as GetBytecodeReturnType,
-  GetCodeErrorType,
-  GetCodeParameters,
-  GetCodeReturnType,
-} from "./actions/public/getCode";
-export type {
   GetNetworkIdErrorType,
   GetNetworkIdReturnType,
 } from "./actions/public/getNetworkId";
-export type {
-  GetFeeHistoryErrorType,
-  GetFeeHistoryParameters,
-  GetFeeHistoryReturnType,
-} from "./actions/public/getFeeHistory";
-export type {
-  GetFilterChangesErrorType,
-  GetFilterChangesParameters,
-  GetFilterChangesReturnType,
-} from "./actions/public/getFilterChanges";
-export type {
-  GetFilterLogsErrorType,
-  GetFilterLogsParameters,
-  GetFilterLogsReturnType,
-} from "./actions/public/getFilterLogs";
-export type {
-  GetGasPriceErrorType,
-  GetGasPriceReturnType,
-} from "./actions/public/getGasPrice";
-export type {
-  GetLogsErrorType,
-  GetLogsParameters,
-  GetLogsReturnType,
-} from "./actions/public/getLogs";
-export type {
-  GetPermissionsErrorType,
-  GetPermissionsReturnType,
-} from "./actions/wallet/getPermissions";
-export type {
-  GetProofErrorType,
-  GetProofParameters,
-  GetProofReturnType,
-} from "./actions/public/getProof";
-export type {
-  GetStorageAtErrorType,
-  GetStorageAtParameters,
-  GetStorageAtReturnType,
-} from "./actions/public/getStorageAt";
-export type {
-  GetTransactionConfirmationsErrorType,
-  GetTransactionConfirmationsParameters,
-  GetTransactionConfirmationsReturnType,
-} from "./actions/public/getTransactionConfirmations";
 export type {
   GetTransactionCountErrorType,
   GetTransactionCountParameters,
   GetTransactionCountReturnType,
 } from "./actions/public/getTransactionCount";
 export type {
-  GetTransactionErrorType,
-  GetTransactionParameters,
-  GetTransactionReturnType,
-} from "./actions/public/getTransaction";
-export type {
-  GetTransactionReceiptErrorType,
-  GetTransactionReceiptParameters,
-  GetTransactionReceiptReturnType,
-} from "./actions/public/getTransactionReceipt";
+  GetPermissionsErrorType,
+  GetPermissionsReturnType,
+} from "./actions/wallet/getPermissions";
 export type {
   ImpersonateAccountErrorType,
   ImpersonateAccountParameters,
@@ -226,19 +93,7 @@ export type {
   LoadStateReturnType,
 } from "./actions/test/loadState";
 export type { MineErrorType, MineParameters } from "./actions/test/mine";
-export type {
-  MulticallErrorType,
-  MulticallParameters,
-  MulticallReturnType,
-} from "./actions/public/multicall";
 export type { SnapshotErrorType } from "./actions/test/snapshot";
-export type {
-  OnBlock,
-  OnBlockParameter,
-  WatchBlocksErrorType,
-  WatchBlocksParameters,
-  WatchBlocksReturnType,
-} from "./actions/public/watchBlocks";
 export type {
   OnBlockHashFn,
   OnBlockHashParameter,
@@ -246,25 +101,6 @@ export type {
   WatchBlockHashParameters,
   WatchBlockHashReturnType,
 } from "./actions/public/watchBlockHash";
-export type {
-  OnTransactionsFn,
-  OnTransactionsParameter,
-  WatchPendingTransactionsErrorType,
-  WatchPendingTransactionsParameters,
-  WatchPendingTransactionsReturnType,
-} from "./actions/public/watchPendingTransactions";
-export type {
-  ReadContractErrorType,
-  ReadContractParameters,
-  ReadContractReturnType,
-} from "./actions/public/readContract";
-export type {
-  ReplacementReason,
-  ReplacementReturnType,
-  WaitForTransactionReceiptErrorType,
-  WaitForTransactionReceiptParameters,
-  WaitForTransactionReceiptReturnType,
-} from "./actions/public/waitForTransactionReceipt";
 export type {
   RequestAddressesErrorType,
   RequestAddressesReturnType,
@@ -289,29 +125,6 @@ export type {
 export type { RemoveBlockTimestampIntervalErrorType } from "./actions/test/removeBlockTimestampInterval";
 export type { ResetErrorType, ResetParameters } from "./actions/test/reset";
 export type { RevertErrorType, RevertParameters } from "./actions/test/revert";
-export type {
-  SendRawTransactionErrorType,
-  SendRawTransactionParameters,
-  SendRawTransactionReturnType,
-} from "./actions/wallet/sendRawTransaction";
-export type {
-  SendTransactionErrorType,
-  SendTransactionParameters,
-  SendTransactionRequest,
-  SendTransactionReturnType,
-} from "./actions/wallet/sendTransaction";
-export type {
-  SignTransactionErrorType,
-  SignTransactionParameters,
-  SignTransactionReturnType,
-} from "./actions/wallet/signTransaction";
-export type {
-  PrepareTransactionRequestErrorType,
-  PrepareTransactionRequestParameters,
-  PrepareTransactionRequestParameterType,
-  PrepareTransactionRequestRequest,
-  PrepareTransactionRequestReturnType,
-} from "./actions/wallet/prepareTransactionRequest";
 export type {
   SendUnsignedTransactionErrorType,
   SendUnsignedTransactionParameters,
@@ -365,16 +178,6 @@ export type {
   SetStorageAtParameters,
 } from "./actions/test/setStorageAt";
 export type {
-  SignMessageErrorType,
-  SignMessageParameters,
-  SignMessageReturnType,
-} from "./actions/wallet/signMessage";
-export type {
-  SimulateContractErrorType,
-  SimulateContractParameters,
-  SimulateContractReturnType,
-} from "./actions/public/simulateContract";
-export type {
   StopImpersonatingAccountErrorType,
   StopImpersonatingAccountParameters,
 } from "./actions/test/stopImpersonatingAccount";
@@ -387,26 +190,6 @@ export type {
   UninstallFilterParameters,
   UninstallFilterReturnType,
 } from "./actions/public/uninstallFilter";
-export type {
-  WatchAssetErrorType,
-  WatchAssetParameters,
-  WatchAssetReturnType,
-} from "./actions/wallet/watchAsset";
-export type {
-  VerifyHashErrorType as VerifyHashActionErrorType,
-  VerifyHashParameters as VerifyHashActionParameters,
-  VerifyHashReturnType as VerifyHashActionReturnType,
-} from "./actions/public/verifyHash";
-export type {
-  VerifyMessageErrorType as VerifyMessageActionErrorType,
-  VerifyMessageParameters as VerifyMessageActionParameters,
-  VerifyMessageReturnType as VerifyMessageActionReturnType,
-} from "./actions/public/verifyMessage";
-export type {
-  WriteContractErrorType,
-  WriteContractParameters,
-  WriteContractReturnType,
-} from "./actions/wallet/writeContract";
 export type {
   Chain,
   ChainContract,
@@ -1343,17 +1126,6 @@ export {
   type FromBytesParameters,
   fromBytes,
 } from "./utils/encoding/fromBytes";
-export {
-  type CcipRequestParameters,
-  type CcipRequestErrorType,
-  ccipRequest,
-  /** @deprecated Use `ccipRequest`. */
-  ccipRequest as ccipFetch,
-  type OffchainLookupErrorType,
-  offchainLookup,
-  offchainLookupAbiItem,
-  offchainLookupSignature,
-} from "./utils/ccip";
 export {
   type BlobsToCommitmentsErrorType,
   type BlobsToCommitmentsParameters,

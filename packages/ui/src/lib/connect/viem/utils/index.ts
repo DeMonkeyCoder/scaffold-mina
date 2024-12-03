@@ -2,16 +2,6 @@
 export { type RequestErrorType, buildRequest } from "./buildRequest";
 
 export {
-  type OffchainLookupErrorType,
-  ccipRequest,
-  /** @deprecated Use `ccipRequest`. */
-  ccipRequest as ccipFetch,
-  offchainLookup,
-  offchainLookupAbiItem,
-  offchainLookupSignature,
-} from "./ccip";
-
-export {
   type AssertCurrentChainErrorType,
   type AssertCurrentChainParameters,
   assertCurrentChain,

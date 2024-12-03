@@ -7,8 +7,8 @@ import type { Prettify } from "../types/utils";
 import {
   type Client,
   type ClientConfig,
-  type CreateClientErrorType,
   createClient,
+  type CreateClientErrorType,
 } from "./createClient";
 import { type PublicActions, publicActions } from "./decorators/public";
 import type { Transport } from "./transports/createTransport";
@@ -23,7 +23,6 @@ export type PublicClientConfig<
     ClientConfig<transport, chain, accountOrAddress, rpcSchema>,
     | "batch"
     | "cacheTime"
-    | "ccipRead"
     | "chain"
     | "key"
     | "name"

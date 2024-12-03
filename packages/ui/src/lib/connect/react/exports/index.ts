@@ -7,10 +7,6 @@ export {
   type WagmiProviderProps,
   WagmiContext,
   WagmiProvider,
-  /** @deprecated Use `WagmiContext` instead */
-  WagmiContext as Context,
-  /** @deprecated Use `WagmiProvider` instead */
-  WagmiProvider as WagmiConfig,
 } from "../context";
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -40,34 +36,10 @@ export {
 } from "../hooks/useAccountEffect";
 
 export {
-  type UseBlockParameters,
-  type UseBlockReturnType,
-  useBlock,
-} from "../hooks/useBlock";
-
-export {
   type UseBlockHashParameters,
   type UseBlockHashReturnType,
   useBlockHash,
 } from "../hooks/useBlockHash";
-
-export {
-  type UseBlockTransactionCountParameters,
-  type UseBlockTransactionCountReturnType,
-  useBlockTransactionCount,
-} from "../hooks/useBlockTransactionCount";
-
-export {
-  type UseBytecodeParameters,
-  type UseBytecodeReturnType,
-  useBytecode,
-} from "../hooks/useBytecode";
-
-export {
-  type UseCallParameters,
-  type UseCallReturnType,
-  useCall,
-} from "../hooks/useCall";
 
 export {
   type UseNetworkIdParameters,
@@ -124,108 +96,16 @@ export {
 } from "../hooks/useDisconnect";
 
 export {
-  type UseEstimateFeesPerGasParameters,
-  type UseEstimateFeesPerGasReturnType,
-  useEstimateFeesPerGas,
-  /** @deprecated Use `useEstimateFeesPerGas` instead */
-  useEstimateFeesPerGas as useFeeData,
-} from "../hooks/useEstimateFeesPerGas";
-
-export {
-  type UseEstimateGasParameters,
-  type UseEstimateGasReturnType,
-  useEstimateGas,
-} from "../hooks/useEstimateGas";
-
-export {
-  type UseEstimateMaxPriorityFeePerGasParameters,
-  type UseEstimateMaxPriorityFeePerGasReturnType,
-  useEstimateMaxPriorityFeePerGas,
-} from "../hooks/useEstimateMaxPriorityFeePerGas";
-
-export {
-  type UseFeeHistoryParameters,
-  type UseFeeHistoryReturnType,
-  useFeeHistory,
-} from "../hooks/useFeeHistory";
-
-export {
-  type UseGasPriceParameters,
-  type UseGasPriceReturnType,
-  useGasPrice,
-} from "../hooks/useGasPrice";
-
-export {
-  type UseInfiniteContractReadsParameters,
-  type UseInfiniteContractReadsReturnType,
-  useInfiniteReadContracts,
-  /** @deprecated Use `useInfiniteReadContracts` instead */
-  useInfiniteReadContracts as useContractInfiniteReads,
-} from "../hooks/useInfiniteReadContracts";
-
-export {
-  type UsePrepareTransactionRequestParameters,
-  type UsePrepareTransactionRequestReturnType,
-  usePrepareTransactionRequest,
-} from "../hooks/usePrepareTransactionRequest";
-
-export {
-  type UseProofParameters,
-  type UseProofReturnType,
-  useProof,
-} from "../hooks/useProof";
-
-export {
   type UsePublicClientParameters,
   type UsePublicClientReturnType,
   usePublicClient,
 } from "../hooks/usePublicClient";
 
 export {
-  type UseReadContractParameters,
-  type UseReadContractReturnType,
-  useReadContract,
-  /** @deprecated Use `useWriteContract` instead */
-  useReadContract as useContractRead,
-} from "../hooks/useReadContract";
-
-export {
-  type UseReadContractsParameters,
-  type UseReadContractsReturnType,
-  useReadContracts,
-  /** @deprecated Use `useWriteContract` instead */
-  useReadContracts as useContractReads,
-} from "../hooks/useReadContracts";
-
-export {
   type UseReconnectParameters,
   type UseReconnectReturnType,
   useReconnect,
 } from "../hooks/useReconnect";
-
-export {
-  type UseSendTransactionParameters,
-  type UseSendTransactionReturnType,
-  useSendTransaction,
-} from "../hooks/useSendTransaction";
-
-export {
-  type UseSignMessageParameters,
-  type UseSignMessageReturnType,
-  useSignMessage,
-} from "../hooks/useSignMessage";
-
-export {
-  type UseSimulateContractParameters,
-  type UseSimulateContractReturnType,
-  useSimulateContract,
-} from "../hooks/useSimulateContract";
-
-export {
-  type UseStorageAtParameters,
-  type UseStorageAtReturnType,
-  useStorageAt,
-} from "../hooks/useStorageAt";
 
 export {
   type UseSwitchAccountParameters,
@@ -240,78 +120,16 @@ export {
 } from "../hooks/useSwitchChain";
 
 export {
-  type UseTransactionParameters,
-  type UseTransactionReturnType,
-  useTransaction,
-} from "../hooks/useTransaction";
-
-export {
-  type UseTransactionConfirmationsParameters,
-  type UseTransactionConfirmationsReturnType,
-  useTransactionConfirmations,
-} from "../hooks/useTransactionConfirmations";
-
-export {
-  type UseTransactionCountParameters,
-  type UseTransactionCountReturnType,
-  useTransactionCount,
-} from "../hooks/useTransactionCount";
-
-export {
-  type UseTransactionReceiptParameters,
-  type UseTransactionReceiptReturnType,
-  useTransactionReceipt,
-} from "../hooks/useTransactionReceipt";
-
-export {
-  type UseVerifyMessageParameters,
-  type UseVerifyMessageReturnType,
-  useVerifyMessage,
-} from "../hooks/useVerifyMessage";
-
-export {
   type UseWalletClientParameters,
   type UseWalletClientReturnType,
   useWalletClient,
 } from "../hooks/useWalletClient";
 
 export {
-  type UseWaitForTransactionReceiptParameters,
-  type UseWaitForTransactionReceiptReturnType,
-  useWaitForTransactionReceipt,
-} from "../hooks/useWaitForTransactionReceipt";
-
-export {
-  type UseWatchAssetParameters,
-  type UseWatchAssetReturnType,
-  useWatchAsset,
-} from "../hooks/useWatchAsset";
-
-export {
-  type UseWatchBlocksParameters,
-  type UseWatchBlocksReturnType,
-  useWatchBlocks,
-} from "../hooks/useWatchBlocks";
-
-export {
   type UseWatchBlockHashParameters,
   type UseWatchBlockHashReturnType,
   useWatchBlockHash,
 } from "../hooks/useWatchBlockHash";
-
-export {
-  type UseWatchPendingTransactionsParameters,
-  type UseWatchPendingTransactionsReturnType,
-  useWatchPendingTransactions,
-} from "../hooks/useWatchPendingTransactions";
-
-export {
-  type UseWriteContractParameters,
-  type UseWriteContractReturnType,
-  useWriteContract,
-  /** @deprecated Use `useWriteContract` instead */
-  useWriteContract as useContractWrite,
-} from "../hooks/useWriteContract";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Hydrate

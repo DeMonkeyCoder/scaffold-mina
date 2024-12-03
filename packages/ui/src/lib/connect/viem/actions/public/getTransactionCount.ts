@@ -1,20 +1,14 @@
-import type { Address } from "@/lib/connect/viem";
+import type { Address } from "abitype";
 
-import type { Account } from "../../accounts/types";
-import type { Client } from "../../clients/createClient";
-import type { Transport } from "../../clients/transports/createTransport";
-import type { ErrorType } from "../../errors/utils";
-import type { BlockTag } from "../../types/block";
-import type { Chain } from "../../types/chain";
-import type { RequestErrorType } from "../../utils/buildRequest";
-import {
-  type HexToNumberErrorType,
-  hexToNumber,
-} from "../../utils/encoding/fromHex";
-import {
-  type NumberToHexErrorType,
-  numberToHex,
-} from "../../utils/encoding/toHex";
+import type { Account } from "../../accounts/types.js";
+import type { Client } from "../../clients/createClient.js";
+import type { Transport } from "../../clients/transports/createTransport.js";
+import type { ErrorType } from "../../errors/utils.js";
+import type { BlockTag } from "../../types/block.js";
+import type { Chain } from "../../types/chain.js";
+import type { RequestErrorType } from "../../utils/buildRequest.js";
+import { type HexToNumberErrorType } from "../../utils/encoding/fromHex.js";
+import { type NumberToHexErrorType } from "../../utils/encoding/toHex.js";
 
 export type GetTransactionCountParameters = {
   /** The account address. */
@@ -43,7 +37,7 @@ export type GetTransactionCountErrorType =
  * Returns the number of [Transactions](https://viem.sh/docs/glossary/terms#transaction) an Account has sent.
  *
  * - Docs: https://viem.sh/docs/actions/public/getTransactionCount
- * - JSON-RPC Methods: [`mina_getTransactionCount`](https://ethereum.org/en/developers/docs/apis/json-rpc/#mina_gettransactioncount)
+ * - JSON-RPC Methods: [`eth_getTransactionCount`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_gettransactioncount)
  *
  * @param client - Client to use
  * @param parameters - {@link GetTransactionCountParameters}
@@ -69,12 +63,18 @@ export async function getTransactionCount<
   client: Client<Transport, chain, account>,
   { address, blockTag = "latest", blockNumber }: GetTransactionCountParameters
 ): Promise<GetTransactionCountReturnType> {
-  const count = await client.request(
+  // TODO: fix this method's type
+  const accountData: {
+    nonce: string;
+    balance: string;
+  } = await client.request(
     {
-      method: "mina_getTransactionCount",
-      params: [address, blockNumber ? numberToHex(blockNumber) : blockTag],
+      // @ts-ignore
+      method: "mina_getAccount",
+      // params: [address, blockNumber ? numberToHex(blockNumber) : blockTag],
+      params: [address],
     },
     { dedupe: Boolean(blockNumber) }
   );
-  return hexToNumber(count);
+  return Number(accountData.nonce);
 }
