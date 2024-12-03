@@ -1,17 +1,9 @@
 import type { Address } from "@/lib/connect/viem";
 
-import type { Authorization } from "../experimental/eip7702/types/authorization";
 import type { HDKey } from "../types/account";
-import type { Hash, Hex, SignableMessage } from "../types/misc";
-import type {
-  TransactionSerializable,
-  TransactionSerialized,
-} from "../types/transaction";
-import type { IsNarrowable, OneOf, Prettify } from "../types/utils";
+import type { Hex } from "../types/misc";
+import type { OneOf, Prettify } from "../types/utils";
 import type { NonceManager } from "../utils/nonceManager";
-import type { GetTransactionType } from "../utils/transaction/getTransactionType";
-import type { SerializeTransactionFn } from "../utils/transaction/serializeTransaction";
-import type { SignAuthorizationReturnType } from "./utils/signAuthorization";
 
 export type Account<address extends Address = Address> = OneOf<
   JsonRpcAccount<address> | LocalAccount<string, address>
@@ -25,30 +17,6 @@ export type AccountSource = Address | CustomSource;
 export type CustomSource = {
   address: Address;
   nonceManager?: NonceManager | undefined;
-  // TODO(v3): Make `sign` required.
-  sign?: ((parameters: { hash: Hash }) => Promise<Hex>) | undefined;
-  experimental_signAuthorization?:
-    | ((parameters: Authorization) => Promise<SignAuthorizationReturnType>)
-    | undefined;
-  signMessage: ({ message }: { message: SignableMessage }) => Promise<Hex>;
-  signTransaction: <
-    serializer extends SerializeTransactionFn<TransactionSerializable> = SerializeTransactionFn<TransactionSerializable>,
-    transaction extends Parameters<serializer>[0] = Parameters<serializer>[0]
-  >(
-    transaction: transaction,
-    options?:
-      | {
-          serializer?: serializer | undefined;
-        }
-      | undefined
-  ) => Promise<
-    IsNarrowable<
-      TransactionSerialized<GetTransactionType<transaction>>,
-      Hex
-    > extends true
-      ? TransactionSerialized<GetTransactionType<transaction>>
-      : Hex
-  >;
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,8 +43,6 @@ export type LocalAccount<
 export type HDAccount = Prettify<
   LocalAccount<"hd"> & {
     getHdKey(): HDKey;
-    // TODO(v3): This will be redundant.
-    sign: NonNullable<CustomSource["sign"]>;
   }
 >;
 
@@ -98,12 +64,4 @@ export type HDOptions =
       path: `m/44'/60'/${string}`;
     };
 
-export type PrivateKeyAccount = Prettify<
-  LocalAccount<"privateKey"> & {
-    // TODO(v3): This will be redundant.
-    sign: NonNullable<CustomSource["sign"]>;
-    experimental_signAuthorization: NonNullable<
-      CustomSource["experimental_signAuthorization"]
-    >;
-  }
->;
+export type PrivateKeyAccount = Prettify<LocalAccount<"privateKey">>;

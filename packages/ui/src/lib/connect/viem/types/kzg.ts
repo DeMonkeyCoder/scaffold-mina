@@ -2,7 +2,6 @@ import type { Address } from "@/lib/connect/viem";
 
 import type { LocalAccount } from "../accounts/types";
 import type { ByteArray } from "./misc";
-import type { TransactionRequestEIP4844 } from "./transaction";
 import type { MaybeRequired } from "./utils";
 
 export type Kzg = {
@@ -26,7 +25,7 @@ export type GetTransactionRequestKzgParameter<
   },
   request extends {
     account: LocalAccount<string, Address>;
-    blobs: TransactionRequestEIP4844["blobs"];
+    blobs: any;
   }
     ? true
     : false

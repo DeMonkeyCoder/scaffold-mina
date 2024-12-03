@@ -1,14 +1,13 @@
-import type { Address } from "abitype";
-
-import type { Account } from "../../accounts/types.js";
-import type { Client } from "../../clients/createClient.js";
-import type { Transport } from "../../clients/transports/createTransport.js";
-import type { ErrorType } from "../../errors/utils.js";
-import type { BlockTag } from "../../types/block.js";
-import type { Chain } from "../../types/chain.js";
-import type { RequestErrorType } from "../../utils/buildRequest.js";
-import { type HexToNumberErrorType } from "../../utils/encoding/fromHex.js";
-import { type NumberToHexErrorType } from "../../utils/encoding/toHex.js";
+import type { Address } from "@/lib/connect/viem";
+import type { Account } from "../../accounts/types";
+import type { Client } from "../../clients/createClient";
+import type { Transport } from "../../clients/transports/createTransport";
+import type { ErrorType } from "../../errors/utils";
+import type { BlockTag } from "../../types/block";
+import type { Chain } from "../../types/chain";
+import type { RequestErrorType } from "../../utils/buildRequest";
+import { type HexToNumberErrorType } from "../../utils/encoding/fromHex";
+import { type NumberToHexErrorType } from "../../utils/encoding/toHex";
 
 export type GetTransactionCountParameters = {
   /** The account address. */

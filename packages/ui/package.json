@@ -10,7 +10,6 @@
     "ts-watch": "tsc --noEmit --incremental --watch"
   },
   "dependencies": {
-    "@adraffy/ens-normalize": "1.10.0",
     "@mina-js/connect": "https://pkg.pr.new/palladians/mina-js/@mina-js/connect@d652e7a",
     "@mina-js/providers": "https://pkg.pr.new/palladians/mina-js/@mina-js/providers@d652e7a",
     "@mina-js/utils": "https://pkg.pr.new/palladians/mina-js/@mina-js/utils@d652e7a",

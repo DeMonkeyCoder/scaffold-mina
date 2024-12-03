@@ -1,18 +1,13 @@
 import type { Address } from "@/lib/connect/viem";
 
 import type { Hash, Hex } from "./misc";
-import type { Transaction } from "./transaction";
 import type { Withdrawal } from "./withdrawal";
 
 export type Block<
   quantity = bigint,
   includeTransactions extends boolean = boolean,
   blockTag extends BlockTag = BlockTag,
-  transaction = Transaction<
-    bigint,
-    number,
-    blockTag extends "pending" ? true : false
-  >
+  transaction = any
 > = {
   /** Base fee per gas */
   baseFeePerGas: quantity | null;
@@ -89,9 +84,5 @@ export type Uncle<
   quantity = bigint,
   includeTransactions extends boolean = boolean,
   blockTag extends BlockTag = BlockTag,
-  transaction = Transaction<
-    bigint,
-    number,
-    blockTag extends "pending" ? true : false
-  >
+  transaction = any
 > = Block<quantity, includeTransactions, blockTag, transaction>;

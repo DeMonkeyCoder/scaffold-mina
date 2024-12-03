@@ -39,11 +39,6 @@ import { mine, type MineParameters } from "../../actions/test/mine";
 import { removeBlockTimestampInterval } from "../../actions/test/removeBlockTimestampInterval";
 import { reset, type ResetParameters } from "../../actions/test/reset";
 import { revert, type RevertParameters } from "../../actions/test/revert";
-import {
-  sendUnsignedTransaction,
-  type SendUnsignedTransactionParameters,
-  type SendUnsignedTransactionReturnType,
-} from "../../actions/test/sendUnsignedTransaction";
 import { setAutomine } from "../../actions/test/setAutomine";
 import {
   setBalance,
@@ -352,32 +347,6 @@ export type TestActions = {
    * await client.revert({ id: '0x…' })
    */
   revert: (args: RevertParameters) => Promise<void>;
-  /**
-   * Returns the details of all transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only.
-   *
-   * - Docs: https://viem.sh/docs/actions/test/getTxpoolContent
-   *
-   * @param args – {@link SendUnsignedTransactionParameters}
-   * @returns The transaction hash. {@link SendUnsignedTransactionReturnType}
-   *
-   * @example
-   * import { createTestClient, http } from 'viem'
-   * import { foundry } from 'viem/chains'
-   *
-   * const client = createTestClient({
-   *   mode: 'anvil',
-   *   chain: 'foundry',
-   *   transport: http(),
-   * })
-   * const hash = await client.sendUnsignedTransaction({
-   *   from: '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
-   *   to: '0x70997970c51812dc3a010c7d01b50e0d17dc79c8',
-   *   value: 1000000000000000000n,
-   * })
-   */
-  sendUnsignedTransaction: <chain extends Chain | undefined>(
-    args: SendUnsignedTransactionParameters<chain>
-  ) => Promise<SendUnsignedTransactionReturnType>;
   /**
    * Enables or disables the automatic mining of new blocks with each new transaction submitted to the network.
    *
@@ -748,8 +717,6 @@ export function testActions<mode extends TestClientMode>({
       removeBlockTimestampInterval: () => removeBlockTimestampInterval(client),
       reset: (args) => reset(client, args),
       revert: (args) => revert(client, args),
-      sendUnsignedTransaction: (args) =>
-        sendUnsignedTransaction(client, args as any),
       setAutomine: (args) => setAutomine(client, args),
       setBalance: (args) => setBalance(client, args),
       setBlockGasLimit: (args) => setBlockGasLimit(client, args),

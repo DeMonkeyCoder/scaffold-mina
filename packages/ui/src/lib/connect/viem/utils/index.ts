@@ -200,35 +200,6 @@ export {
   sliceHex,
 } from "./data/slice";
 export { type TrimErrorType, type TrimReturnType, trim } from "./data/trim";
-export {
-  type DefineBlockErrorType,
-  type FormattedBlock,
-  type FormatBlockErrorType,
-  defineBlock,
-  formatBlock,
-} from "./formatters/block";
-export {
-  type DefineTransactionErrorType,
-  type FormattedTransaction,
-  type FormatTransactionErrorType,
-  defineTransaction,
-  formatTransaction,
-  transactionType,
-} from "./formatters/transaction";
-export { type FormatLogErrorType, formatLog } from "./formatters/log";
-export {
-  type DefineTransactionReceiptErrorType,
-  type FormatTransactionReceiptErrorType,
-  type FormattedTransactionReceipt,
-  defineTransactionReceipt,
-} from "./formatters/transactionReceipt";
-export {
-  type DefineTransactionRequestErrorType,
-  type FormatTransactionRequestErrorType,
-  type FormattedTransactionRequest,
-  defineTransactionRequest,
-  formatTransactionRequest,
-} from "./formatters/transactionRequest";
 export { type ExtractErrorType, extract } from "./formatters/extract";
 export {
   type BytesToRlpErrorType,
@@ -315,23 +286,6 @@ export {
   containsNodeError,
   getNodeError,
 } from "./errors/getNodeError";
-export {
-  type GetCallErrorReturnType,
-  getCallError,
-} from "./errors/getCallError";
-export {
-  type GetContractErrorReturnType,
-  getContractError,
-} from "./errors/getContractError";
-export {
-  type GetEstimateGasErrorReturnType,
-  getEstimateGasError,
-} from "./errors/getEstimateGasError";
-export {
-  type GetTransactionErrorParameters,
-  type GetTransactionErrorReturnType,
-  getTransactionError,
-} from "./errors/getTransactionError";
 export { getAction } from "./getAction";
 export {
   type DefineFormatterErrorType,
@@ -378,94 +332,6 @@ export { type IsHashErrorType, isHash } from "./hash/isHash";
 export { type Keccak256ErrorType, keccak256 } from "./hash/keccak256";
 export { type Sha256ErrorType, sha256 } from "./hash/sha256";
 export { type Ripemd160ErrorType, ripemd160 } from "./hash/ripemd160";
-export {
-  type RecoverAddressErrorType,
-  type RecoverAddressParameters,
-  type RecoverAddressReturnType,
-  recoverAddress,
-} from "./signature/recoverAddress";
-export {
-  type RecoverMessageAddressErrorType,
-  type RecoverMessageAddressParameters,
-  type RecoverMessageAddressReturnType,
-  recoverMessageAddress,
-} from "./signature/recoverMessageAddress";
-export {
-  type RecoverPublicKeyErrorType,
-  type RecoverPublicKeyParameters,
-  type RecoverPublicKeyReturnType,
-  recoverPublicKey,
-} from "./signature/recoverPublicKey";
-export {
-  type VerifyHashErrorType,
-  type VerifyHashParameters,
-  type VerifyHashReturnType,
-  verifyHash,
-} from "./signature/verifyHash";
-export {
-  type VerifyMessageErrorType,
-  type VerifyMessageParameters,
-  type VerifyMessageReturnType,
-  verifyMessage,
-} from "./signature/verifyMessage";
-export {
-  type HashMessageReturnType,
-  type HashMessageErrorType,
-  hashMessage,
-} from "./signature/hashMessage";
-export {
-  type ParseErc6492SignatureErrorType,
-  type ParseErc6492SignatureParameters,
-  type ParseErc6492SignatureReturnType,
-  parseErc6492Signature,
-} from "./signature/parseErc6492Signature";
-export {
-  type IsErc6492SignatureErrorType,
-  type IsErc6492SignatureParameters,
-  type IsErc6492SignatureReturnType,
-  isErc6492Signature,
-} from "./signature/isErc6492Signature";
-export {
-  type SerializeErc6492SignatureErrorType,
-  type SerializeErc6492SignatureParameters,
-  type SerializeErc6492SignatureReturnType,
-  serializeErc6492Signature,
-} from "./signature/serializeErc6492Signature";
-export {
-  type GetSerializedTransactionTypeErrorType,
-  type GetSerializedTransactionType,
-  getSerializedTransactionType,
-} from "./transaction/getSerializedTransactionType";
-export {
-  type GetTransactionTypeErrorType,
-  type GetTransactionType,
-  getTransactionType,
-} from "./transaction/getTransactionType";
-export {
-  type AssertRequestErrorType,
-  assertRequest,
-} from "./transaction/assertRequest";
-export {
-  type AssertTransactionEIP1559ErrorType,
-  type AssertTransactionEIP2930ErrorType,
-  type AssertTransactionLegacyErrorType,
-  assertTransactionEIP1559,
-  assertTransactionEIP2930,
-  assertTransactionLegacy,
-} from "./transaction/assertTransaction";
-export {
-  type ParseTransactionErrorType,
-  parseTransaction,
-} from "./transaction/parseTransaction";
-export {
-  serializeTransaction,
-  type SerializeTransactionErrorType,
-  type SerializeTransactionFn,
-} from "./transaction/serializeTransaction";
-export {
-  type SerializeAccessListErrorType,
-  serializeAccessList,
-} from "./transaction/serializeAccessList";
 export { type FormatEtherErrorType, formatEther } from "./unit/formatEther";
 export { type FormatGweiErrorType, formatGwei } from "./unit/formatGwei";
 export { type FormatUnitsErrorType, formatUnits } from "./unit/formatUnits";

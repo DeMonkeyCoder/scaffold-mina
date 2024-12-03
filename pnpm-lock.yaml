@@ -60,9 +60,6 @@ importers:
 
   packages/ui:
     dependencies:
-      '@adraffy/ens-normalize':
-        specifier: 1.10.0
-        version: 1.10.0
       '@mina-js/connect':
         specifier: https://pkg.pr.new/palladians/mina-js/@mina-js/connect@d652e7a
         version: https://pkg.pr.new/palladians/mina-js/@mina-js/connect@d652e7a(typescript@5.5.4)
@@ -162,9 +159,6 @@ importers:
         version: 5.5.4
 
 packages:
-
-  '@adraffy/ens-normalize@1.10.0':
-    resolution: {integrity: sha512-nA9XHtlAkYfJxY7bce8DcN7eKxWWCWkU+1GR9d+U6MbNpfwQp8TI7vqOsBsMcHoT4mBu2kypKoSKnghEzOOq5Q==}
 
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
@@ -3320,8 +3314,6 @@ packages:
         optional: true
 
 snapshots:
-
-  '@adraffy/ens-normalize@1.10.0': {}
 
   '@alloc/quick-lru@5.2.0': {}
 

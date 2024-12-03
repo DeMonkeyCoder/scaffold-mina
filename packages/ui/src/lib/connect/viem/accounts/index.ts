@@ -47,38 +47,6 @@ export type {
   HDAccount,
   PrivateKeyAccount,
 } from "./types";
-export {
-  type SignErrorType,
-  type SignParameters,
-  type SignReturnType,
-  sign,
-} from "./utils/sign";
-export {
-  /** @deprecated Use `SignatureToHexErrorType` instead. */
-  type SerializeSignatureErrorType as SignatureToHexErrorType,
-  /** @deprecated Use `serializeSignature` instead. */
-  serializeSignature as signatureToHex,
-  type SerializeSignatureErrorType,
-  serializeSignature,
-} from "../utils/signature/serializeSignature";
-export {
-  type SignAuthorizationErrorType,
-  type SignAuthorizationParameters,
-  type SignAuthorizationReturnType,
-  experimental_signAuthorization,
-} from "./utils/signAuthorization";
-export {
-  type SignMessageErrorType,
-  type SignMessageParameters,
-  type SignMessageReturnType,
-  signMessage,
-} from "./utils/signMessage";
-export {
-  type SignTransactionErrorType,
-  type SignTransactionParameters,
-  type SignTransactionReturnType,
-  signTransaction,
-} from "./utils/signTransaction";
 export { type ParseAccountErrorType, parseAccount } from "./utils/parseAccount";
 export {
   type PublicKeyToAddressErrorType,

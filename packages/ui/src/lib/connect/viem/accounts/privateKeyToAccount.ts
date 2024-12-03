@@ -5,19 +5,15 @@ import { toHex, type ToHexErrorType } from "../utils/encoding/toHex";
 
 import type { ErrorType } from "../errors/utils";
 import type { NonceManager } from "../utils/nonceManager";
-import { toAccount, type ToAccountErrorType } from "./toAccount";
+import {
+  toAccount,
+  type ToAccountErrorType,
+} from "@/lib/connect/viem/accounts/toAccount";
 import type { PrivateKeyAccount } from "./types";
 import {
   publicKeyToAddress,
   type PublicKeyToAddressErrorType,
 } from "./utils/publicKeyToAddress";
-import { sign, type SignErrorType } from "./utils/sign";
-import { experimental_signAuthorization } from "./utils/signAuthorization";
-import { signMessage, type SignMessageErrorType } from "./utils/signMessage";
-import {
-  signTransaction,
-  type SignTransactionErrorType,
-} from "./utils/signTransaction";
 
 export type PrivateKeyToAccountOptions = {
   nonceManager?: NonceManager | undefined;
@@ -27,9 +23,6 @@ export type PrivateKeyToAccountErrorType =
   | ToAccountErrorType
   | ToHexErrorType
   | PublicKeyToAddressErrorType
-  | SignErrorType
-  | SignMessageErrorType
-  | SignTransactionErrorType
   | ErrorType;
 
 /**
@@ -48,18 +41,6 @@ export function privateKeyToAccount(
   const account = toAccount({
     address,
     nonceManager,
-    async sign({ hash }) {
-      return sign({ hash, privateKey, to: "hex" });
-    },
-    async experimental_signAuthorization(authorization) {
-      return experimental_signAuthorization({ ...authorization, privateKey });
-    },
-    async signMessage({ message }) {
-      return signMessage({ message, privateKey });
-    },
-    async signTransaction(transaction, { serializer } = {}) {
-      return signTransaction({ privateKey, transaction, serializer });
-    },
   });
 
   return {

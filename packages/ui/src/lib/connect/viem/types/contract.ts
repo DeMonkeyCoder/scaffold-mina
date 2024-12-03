@@ -16,7 +16,6 @@ import type {
 } from "abitype";
 import type { Address } from "@/lib/connect/viem";
 import type { Hex, LogTopic } from "./misc";
-import type { TransactionRequest } from "./transaction";
 import type {
   Filter,
   IsNarrowable,
@@ -302,7 +301,7 @@ export type EventDefinition = `${string}(${string})`;
 export type GetValue<
   abi extends Abi | readonly unknown[],
   functionName extends string,
-  valueType = TransactionRequest["value"],
+  valueType = any,
   abiFunction extends AbiFunction = abi extends Abi
     ? ExtractAbiFunction<abi, functionName>
     : AbiFunction,

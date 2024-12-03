@@ -113,12 +113,6 @@ export {
   revert,
 } from "./test/revert";
 export {
-  type SendUnsignedTransactionErrorType,
-  type SendUnsignedTransactionParameters,
-  type SendUnsignedTransactionReturnType,
-  sendUnsignedTransaction,
-} from "./test/sendUnsignedTransaction";
-export {
   type SetBalanceErrorType,
   type SetBalanceParameters,
   setBalance,

@@ -47,10 +47,6 @@ export function toAccount<accountSource extends AccountSource>(
   return {
     address: source.address,
     nonceManager: source.nonceManager,
-    sign: source.sign,
-    experimental_signAuthorization: source.experimental_signAuthorization,
-    signMessage: source.signMessage,
-    signTransaction: source.signTransaction,
     source: "custom",
     type: "local",
   } as GetAccountReturnType<accountSource>;

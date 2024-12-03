@@ -1,6 +1,5 @@
 import type { Address } from "@/lib/connect/viem";
 
-import type { RpcAuthorizationList } from "../experimental/eip7702/types/rpc";
 import type {
   Block,
   BlockHash,
@@ -12,20 +11,6 @@ import type { FeeHistory, FeeValues } from "./fee";
 import type { Log } from "./log";
 import type { Hex } from "./misc";
 import type { Proof } from "./proof";
-import type {
-  TransactionEIP1559,
-  TransactionEIP2930,
-  TransactionEIP4844,
-  TransactionEIP7702,
-  TransactionLegacy,
-  TransactionReceipt,
-  TransactionRequestEIP1559,
-  TransactionRequestEIP2930,
-  TransactionRequestEIP4844,
-  TransactionRequestEIP7702,
-  TransactionRequestLegacy,
-} from "./transaction";
-import type { Omit, OneOf, PartialBy } from "./utils";
 
 export type Index = `0x${string}`;
 export type Quantity = `0x${string}`;
@@ -50,46 +35,11 @@ export type RpcFeeHistory = FeeHistory<Quantity>;
 export type RpcFeeValues = FeeValues<Quantity>;
 export type RpcLog = Log<Quantity, Index>;
 export type RpcProof = Proof<Quantity, Index>;
-export type RpcTransactionReceipt = TransactionReceipt<
-  Quantity,
-  Index,
-  Status,
-  TransactionType
->;
-export type RpcTransactionRequest = OneOf<
-  | TransactionRequestLegacy<Quantity, Index, "0x0">
-  | TransactionRequestEIP2930<Quantity, Index, "0x1">
-  | TransactionRequestEIP1559<Quantity, Index, "0x2">
-  | TransactionRequestEIP4844<Quantity, Index, "0x3">
-  | (Omit<
-      TransactionRequestEIP7702<Quantity, Index, "0x4">,
-      "authorizationList"
-    > & { authorizationList?: RpcAuthorizationList | undefined })
->;
+export type RpcTransactionReceipt = any;
+export type RpcTransactionRequest = any;
 // `yParity` is optional on the RPC type as some nodes do not return it
 // for 1559 & 2930 transactions (they should!).
-export type RpcTransaction<pending extends boolean = boolean> = OneOf<
-  | Omit<TransactionLegacy<Quantity, Index, pending, "0x0">, "typeHex">
-  | PartialBy<
-      Omit<TransactionEIP2930<Quantity, Index, pending, "0x1">, "typeHex">,
-      "yParity"
-    >
-  | PartialBy<
-      Omit<TransactionEIP1559<Quantity, Index, pending, "0x2">, "typeHex">,
-      "yParity"
-    >
-  | PartialBy<
-      Omit<TransactionEIP4844<Quantity, Index, pending, "0x3">, "typeHex">,
-      "yParity"
-    >
-  | PartialBy<
-      Omit<
-        TransactionEIP7702<Quantity, Index, pending, "0x4">,
-        "authorizationList" | "typeHex"
-      > & { authorizationList?: RpcAuthorizationList | undefined },
-      "yParity"
-    >
->;
+export type RpcTransaction<pending extends boolean = boolean> = any;
 
 type SuccessResult<result> = {
   method?: undefined;

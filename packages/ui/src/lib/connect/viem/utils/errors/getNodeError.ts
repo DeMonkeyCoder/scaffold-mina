@@ -1,5 +1,4 @@
-import type { SendTransactionParameters } from '../../actions/wallet/sendTransaction'
-import { BaseError } from '../../errors/base'
+import { BaseError } from "../../errors/base";
 import {
   ExecutionRevertedError,
   type ExecutionRevertedErrorType,
@@ -25,25 +24,22 @@ import {
   type TransactionTypeNotSupportedErrorType,
   UnknownNodeError,
   type UnknownNodeErrorType,
-} from '../../errors/node'
-import { RpcRequestError } from '../../errors/request'
+} from "../../errors/node";
+import { RpcRequestError } from "../../errors/request";
 import {
   InvalidInputRpcError,
   TransactionRejectedRpcError,
-} from '../../errors/rpc'
-import type { ExactPartial } from '../../types/utils'
+} from "../../errors/rpc";
 
 export function containsNodeError(err: BaseError) {
   return (
     err instanceof TransactionRejectedRpcError ||
     err instanceof InvalidInputRpcError ||
     (err instanceof RpcRequestError && err.code === ExecutionRevertedError.code)
-  )
+  );
 }
 
-export type GetNodeErrorParameters = ExactPartial<
-  SendTransactionParameters<any>
->
+export type GetNodeErrorParameters = any;
 
 export type GetNodeErrorReturnType =
   | ExecutionRevertedErrorType
@@ -57,61 +53,61 @@ export type GetNodeErrorReturnType =
   | IntrinsicGasTooLowErrorType
   | TransactionTypeNotSupportedErrorType
   | TipAboveFeeCapErrorType
-  | UnknownNodeErrorType
+  | UnknownNodeErrorType;
 
 export function getNodeError(
   err: BaseError,
-  args: GetNodeErrorParameters,
+  args: GetNodeErrorParameters
 ): GetNodeErrorReturnType {
-  const message = (err.details || '').toLowerCase()
+  const message = (err.details || "").toLowerCase();
 
   const executionRevertedError =
     err instanceof BaseError
       ? err.walk(
-          (e) => (e as { code: number }).code === ExecutionRevertedError.code,
+          (e) => (e as { code: number }).code === ExecutionRevertedError.code
         )
-      : err
+      : err;
   if (executionRevertedError instanceof BaseError)
     return new ExecutionRevertedError({
       cause: err,
       message: executionRevertedError.details,
-    }) as any
+    }) as any;
   if (ExecutionRevertedError.nodeMessage.test(message))
     return new ExecutionRevertedError({
       cause: err,
       message: err.details,
-    }) as any
+    }) as any;
   if (FeeCapTooHighError.nodeMessage.test(message))
     return new FeeCapTooHighError({
       cause: err,
       maxFeePerGas: args?.maxFeePerGas,
-    }) as any
+    }) as any;
   if (FeeCapTooLowError.nodeMessage.test(message))
     return new FeeCapTooLowError({
       cause: err,
       maxFeePerGas: args?.maxFeePerGas,
-    }) as any
+    }) as any;
   if (NonceTooHighError.nodeMessage.test(message))
-    return new NonceTooHighError({ cause: err, nonce: args?.nonce }) as any
+    return new NonceTooHighError({ cause: err, nonce: args?.nonce }) as any;
   if (NonceTooLowError.nodeMessage.test(message))
-    return new NonceTooLowError({ cause: err, nonce: args?.nonce }) as any
+    return new NonceTooLowError({ cause: err, nonce: args?.nonce }) as any;
   if (NonceMaxValueError.nodeMessage.test(message))
-    return new NonceMaxValueError({ cause: err, nonce: args?.nonce }) as any
+    return new NonceMaxValueError({ cause: err, nonce: args?.nonce }) as any;
   if (InsufficientFundsError.nodeMessage.test(message))
-    return new InsufficientFundsError({ cause: err }) as any
+    return new InsufficientFundsError({ cause: err }) as any;
   if (IntrinsicGasTooHighError.nodeMessage.test(message))
-    return new IntrinsicGasTooHighError({ cause: err, gas: args?.gas }) as any
+    return new IntrinsicGasTooHighError({ cause: err, gas: args?.gas }) as any;
   if (IntrinsicGasTooLowError.nodeMessage.test(message))
-    return new IntrinsicGasTooLowError({ cause: err, gas: args?.gas }) as any
+    return new IntrinsicGasTooLowError({ cause: err, gas: args?.gas }) as any;
   if (TransactionTypeNotSupportedError.nodeMessage.test(message))
-    return new TransactionTypeNotSupportedError({ cause: err }) as any
+    return new TransactionTypeNotSupportedError({ cause: err }) as any;
   if (TipAboveFeeCapError.nodeMessage.test(message))
     return new TipAboveFeeCapError({
       cause: err,
       maxFeePerGas: args?.maxFeePerGas,
       maxPriorityFeePerGas: args?.maxPriorityFeePerGas,
-    }) as any
+    }) as any;
   return new UnknownNodeError({
     cause: err,
-  }) as any
+  }) as any;
 }

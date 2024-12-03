@@ -8,7 +8,6 @@
     "./celo": "./celo/index.ts",
     "./chains": "./chains/index.ts",
     "./chains/utils": "./chains/utils.ts",
-    "./ens": "./ens/index.ts",
     "./experimental": "./experimental/index.ts",
     "./node": "./node/index.ts",
     "./op-stack": "./op-stack/index.ts",
@@ -16,7 +15,12 @@
     "./zksync": "./zksync/index.ts"
   },
   "publish": {
-    "include": ["LICENSE", "README.md", "CHANGELOG.md", "**/*.ts"],
+    "include": [
+      "LICENSE",
+      "README.md",
+      "CHANGELOG.md",
+      "**/*.ts"
+    ],
     "exclude": [
       "**/*.bench.ts",
       "**/*.bench-d.ts",

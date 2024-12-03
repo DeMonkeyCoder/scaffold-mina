@@ -125,11 +125,6 @@ export type {
 export type { RemoveBlockTimestampIntervalErrorType } from "./actions/test/removeBlockTimestampInterval";
 export type { ResetErrorType, ResetParameters } from "./actions/test/reset";
 export type { RevertErrorType, RevertParameters } from "./actions/test/revert";
-export type {
-  SendUnsignedTransactionErrorType,
-  SendUnsignedTransactionParameters,
-  SendUnsignedTransactionReturnType,
-} from "./actions/test/sendUnsignedTransaction";
 export type { SetAutomineErrorType } from "./actions/test/setAutomine";
 export type {
   SetBalanceErrorType,
@@ -193,10 +188,7 @@ export type {
 export type {
   Chain,
   ChainContract,
-  ChainFees,
-  ChainFeesFnParameters,
   ChainFormatter,
-  ChainEstimateFeesPerGasFnParameters,
   DeriveChain,
   GetChainParameter,
   ChainFormatters,
@@ -437,20 +429,6 @@ export {
   type BlockNotFoundErrorType,
 } from "./errors/block";
 export {
-  CallExecutionError,
-  type CallExecutionErrorType,
-  ContractFunctionExecutionError,
-  type ContractFunctionExecutionErrorType,
-  ContractFunctionRevertedError,
-  type ContractFunctionRevertedErrorType,
-  ContractFunctionZeroDataError,
-  type ContractFunctionZeroDataErrorType,
-  RawContractError,
-  type RawContractErrorType,
-  CounterfactualDeploymentFailedError,
-  type CounterfactualDeploymentFailedErrorType,
-} from "./errors/contract";
-export {
   BaseFeeScalarError,
   type BaseFeeScalarErrorType,
   Eip1559FeesNotSupportedError,
@@ -528,20 +506,6 @@ export {
   type SizeOverflowErrorType,
 } from "./errors/encoding";
 export {
-  type EnsAvatarInvalidMetadataError,
-  EnsAvatarUriResolutionError,
-  type EnsAvatarInvalidMetadataErrorType,
-  EnsAvatarInvalidNftUriError,
-  type EnsAvatarInvalidNftUriErrorType,
-  EnsAvatarUnsupportedNamespaceError,
-  type EnsAvatarUnsupportedNamespaceErrorType,
-  type EnsAvatarUriResolutionErrorType,
-} from "./errors/ens";
-export {
-  EstimateGasExecutionError,
-  type EstimateGasExecutionErrorType,
-} from "./errors/estimateGas";
-export {
   ExecutionRevertedError,
   type ExecutionRevertedErrorType,
   FeeCapTooHighError,
@@ -587,28 +551,6 @@ export {
   InvalidAddressError,
   type InvalidAddressErrorType,
 } from "./errors/address";
-export {
-  FeeConflictError,
-  type FeeConflictErrorType,
-  InvalidLegacyVError,
-  type InvalidLegacyVErrorType,
-  InvalidSerializableTransactionError,
-  type InvalidSerializableTransactionErrorType,
-  InvalidSerializedTransactionError,
-  type InvalidSerializedTransactionErrorType,
-  InvalidSerializedTransactionTypeError,
-  type InvalidSerializedTransactionTypeErrorType,
-  InvalidStorageKeySizeError,
-  type InvalidStorageKeySizeErrorType,
-  TransactionExecutionError,
-  type TransactionExecutionErrorType,
-  TransactionNotFoundError,
-  type TransactionNotFoundErrorType,
-  TransactionReceiptNotFoundError,
-  type TransactionReceiptNotFoundErrorType,
-  WaitForTransactionReceiptTimeoutError,
-  type WaitForTransactionReceiptTimeoutErrorType,
-} from "./errors/transaction";
 export {
   SizeExceedsPaddingSizeError,
   type SizeExceedsPaddingSizeErrorType,
@@ -656,41 +598,6 @@ export type {
   Widen,
 } from "./types/contract";
 export type {
-  AccessList,
-  Transaction,
-  TransactionBase,
-  TransactionEIP1559,
-  TransactionEIP2930,
-  TransactionEIP4844,
-  TransactionEIP7702,
-  TransactionLegacy,
-  TransactionReceipt,
-  TransactionRequest,
-  TransactionRequestBase,
-  TransactionRequestEIP1559,
-  TransactionRequestEIP2930,
-  TransactionRequestEIP4844,
-  TransactionRequestEIP7702,
-  TransactionRequestGeneric,
-  TransactionRequestLegacy,
-  TransactionSerializable,
-  TransactionSerializableBase,
-  TransactionSerializableEIP1559,
-  TransactionSerializableEIP2930,
-  TransactionSerializableEIP4844,
-  TransactionSerializableEIP7702,
-  TransactionSerializableGeneric,
-  TransactionSerializableLegacy,
-  TransactionSerialized,
-  TransactionSerializedEIP1559,
-  TransactionSerializedEIP2930,
-  TransactionSerializedEIP4844,
-  TransactionSerializedEIP7702,
-  TransactionSerializedGeneric,
-  TransactionSerializedLegacy,
-  TransactionType,
-} from "./types/transaction";
-export type {
   Assign,
   Branded,
   Evaluate,
@@ -733,7 +640,6 @@ export type {
   LocalAccount,
   PrivateKeyAccount,
 } from "./accounts/types";
-export type { AssetGateway, AssetGatewayUrls } from "./types/ens";
 export type {
   Block,
   BlockIdentifier,
@@ -818,15 +724,6 @@ export type {
 } from "./types/rpc";
 export type { Withdrawal } from "./types/withdrawal";
 export type { StateMapping, StateOverride } from "./types/stateOverride";
-export { labelhash, type LabelhashErrorType } from "./utils/ens/labelhash";
-export { namehash, type NamehashErrorType } from "./utils/ens/namehash";
-export {
-  type FormattedBlock,
-  defineBlock,
-  type DefineBlockErrorType,
-  formatBlock,
-  type FormatBlockErrorType,
-} from "./utils/formatters/block";
 export { formatLog, type FormatLogErrorType } from "./utils/formatters/log";
 export {
   type DecodeAbiParametersErrorType,
@@ -911,29 +808,6 @@ export {
   parseEventLogs,
 } from "./utils/abi/parseEventLogs";
 export {
-  type FormattedTransaction,
-  defineTransaction,
-  type DefineTransactionErrorType,
-  formatTransaction,
-  type FormatTransactionErrorType,
-  transactionType,
-} from "./utils/formatters/transaction";
-export {
-  type FormattedTransactionReceipt,
-  defineTransactionReceipt,
-  type DefineTransactionReceiptErrorType,
-  formatTransactionReceipt,
-  type FormatTransactionReceiptErrorType,
-} from "./utils/formatters/transactionReceipt";
-export {
-  type FormattedTransactionRequest,
-  defineTransactionRequest,
-  type DefineTransactionRequestErrorType,
-  formatTransactionRequest,
-  type FormatTransactionRequestErrorType,
-  rpcTransactionType,
-} from "./utils/formatters/transactionRequest";
-export {
   type GetAbiItemErrorType,
   type GetAbiItemParameters,
   type GetAbiItemReturnType,
@@ -949,133 +823,6 @@ export {
   getCreate2Address,
   getCreateAddress,
 } from "./utils/address/getContractAddress";
-export {
-  type GetSerializedTransactionType,
-  type GetSerializedTransactionTypeErrorType,
-  getSerializedTransactionType,
-} from "./utils/transaction/getSerializedTransactionType";
-export {
-  type GetTransactionType,
-  type GetTransactionTypeErrorType,
-  getTransactionType,
-} from "./utils/transaction/getTransactionType";
-export {
-  type CompactSignatureToSignatureErrorType,
-  compactSignatureToSignature,
-} from "./utils/signature/compactSignatureToSignature";
-export {
-  /** @deprecated Use `ParseCompactSignatureErrorType`. */
-  type ParseCompactSignatureErrorType as HexToCompactSignatureErrorType,
-  /** @deprecated Use `parseCompactSignature`. */
-  parseCompactSignature as hexToCompactSignature,
-  type ParseCompactSignatureErrorType,
-  parseCompactSignature,
-} from "./utils/signature/parseCompactSignature";
-export {
-  /** @deprecated Use `ParseSignatureErrorType`. */
-  type ParseSignatureErrorType as HexToSignatureErrorType,
-  /** @deprecated Use `parseSignature`. */
-  parseSignature as hexToSignature,
-  type ParseSignatureErrorType,
-  parseSignature,
-} from "./utils/signature/parseSignature";
-export {
-  type RecoverAddressErrorType,
-  type RecoverAddressParameters,
-  type RecoverAddressReturnType,
-  recoverAddress,
-} from "./utils/signature/recoverAddress";
-export {
-  type RecoverMessageAddressErrorType,
-  type RecoverMessageAddressParameters,
-  type RecoverMessageAddressReturnType,
-  recoverMessageAddress,
-} from "./utils/signature/recoverMessageAddress";
-export {
-  type RecoverPublicKeyErrorType,
-  type RecoverPublicKeyParameters,
-  type RecoverPublicKeyReturnType,
-  recoverPublicKey,
-} from "./utils/signature/recoverPublicKey";
-export {
-  type RecoverTransactionAddressErrorType,
-  type RecoverTransactionAddressParameters,
-  type RecoverTransactionAddressReturnType,
-  recoverTransactionAddress,
-} from "./utils/signature/recoverTransactionAddress";
-export {
-  type SignatureToCompactSignatureErrorType,
-  signatureToCompactSignature,
-} from "./utils/signature/signatureToCompactSignature";
-export {
-  /** @deprecated Use `SignatureToHexErrorType` instead. */
-  type SerializeCompactSignatureErrorType as CompactSignatureToHexErrorType,
-  /** @deprecated Use `serializeCompactSignature` instead. */
-  serializeCompactSignature as compactSignatureToHex,
-  type SerializeCompactSignatureErrorType,
-  serializeCompactSignature,
-} from "./utils/signature/serializeCompactSignature";
-export {
-  /** @deprecated Use `SignatureToHexErrorType` instead. */
-  type SerializeSignatureErrorType as SignatureToHexErrorType,
-  /** @deprecated Use `serializeSignature` instead. */
-  serializeSignature as signatureToHex,
-  type SerializeSignatureParameters,
-  type SerializeSignatureReturnType,
-  type SerializeSignatureErrorType,
-  serializeSignature,
-} from "./utils/signature/serializeSignature";
-export {
-  bytesToRlp,
-  type BytesToRlpErrorType,
-  hexToRlp,
-  type HexToRlpErrorType,
-  toRlp,
-  type ToRlpErrorType,
-  type ToRlpReturnType,
-} from "./utils/encoding/toRlp";
-export {
-  type VerifyHashErrorType,
-  type VerifyHashParameters,
-  type VerifyHashReturnType,
-  verifyHash,
-} from "./utils/signature/verifyHash";
-export {
-  type VerifyMessageErrorType,
-  type VerifyMessageParameters,
-  type VerifyMessageReturnType,
-  verifyMessage,
-} from "./utils/signature/verifyMessage";
-export {
-  type ParseErc6492SignatureErrorType,
-  type ParseErc6492SignatureParameters,
-  type ParseErc6492SignatureReturnType,
-  parseErc6492Signature,
-} from "./utils/signature/parseErc6492Signature";
-export {
-  type IsErc6492SignatureErrorType,
-  type IsErc6492SignatureParameters,
-  type IsErc6492SignatureReturnType,
-  isErc6492Signature,
-} from "./utils/signature/isErc6492Signature";
-export {
-  type SerializeErc6492SignatureErrorType,
-  type SerializeErc6492SignatureParameters,
-  type SerializeErc6492SignatureReturnType,
-  serializeErc6492Signature,
-} from "./utils/signature/serializeErc6492Signature";
-export {
-  type AssertRequestErrorType,
-  assertRequest,
-} from "./utils/transaction/assertRequest";
-export {
-  type AssertTransactionEIP1559ErrorType,
-  assertTransactionEIP1559,
-  type AssertTransactionEIP2930ErrorType,
-  assertTransactionEIP2930,
-  type AssertTransactionLegacyErrorType,
-  assertTransactionLegacy,
-} from "./utils/transaction/assertTransaction";
 export {
   type BoolToBytesErrorType,
   type BoolToBytesOpts,
@@ -1253,10 +1000,6 @@ export {
   getAddress,
 } from "./utils/address/getAddress";
 export {
-  type GetContractErrorReturnType,
-  getContractError,
-} from "./utils/errors/getContractError";
-export {
   type ToEventSelectorErrorType,
   toEventSelector,
   /** @deprecated use `ToEventSelectorErrorType`. */
@@ -1297,14 +1040,6 @@ export {
   toFunctionHash,
 } from "./utils/hash/toFunctionHash";
 export {
-  type HashMessageErrorType,
-  hashMessage,
-} from "./utils/signature/hashMessage";
-export {
-  type ToPrefixedMessageErrorType,
-  toPrefixedMessage,
-} from "./utils/signature/toPrefixedMessage";
-export {
   type IsAddressOptions,
   type IsAddressErrorType,
   isAddress,
@@ -1343,22 +1078,6 @@ export {
 } from "./utils/data/pad";
 export { type ParseEtherErrorType, parseEther } from "./utils/unit/parseEther";
 export { type ParseGweiErrorType, parseGwei } from "./utils/unit/parseGwei";
-export {
-  type ParseTransactionErrorType,
-  type ParseTransactionReturnType,
-  parseTransaction,
-} from "./utils/transaction/parseTransaction";
-export { type ParseUnitsErrorType, parseUnits } from "./utils/unit/parseUnits";
-export {
-  type SerializeAccessListErrorType,
-  serializeAccessList,
-} from "./utils/transaction/serializeAccessList";
-export {
-  serializeTransaction,
-  type SerializeTransactionErrorType,
-  type SerializedTransactionReturnType,
-  type SerializeTransactionFn,
-} from "./utils/transaction/serializeTransaction";
 export { type SizeErrorType, size } from "./utils/data/size";
 export {
   type SliceBytesErrorType,

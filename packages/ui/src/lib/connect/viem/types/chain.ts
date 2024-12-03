@@ -1,19 +1,5 @@
 import type { Address } from "@/lib/connect/viem";
-
-import type { EstimateFeesPerGasReturnType } from "../actions/public/estimateFeesPerGas";
-import type { PrepareTransactionRequestParameters } from "../actions/wallet/prepareTransactionRequest";
-import type { Client } from "../clients/createClient";
-import type { Transport } from "../clients/transports/createTransport";
-import type { Account } from "../types/account";
-import type { FeeValuesType } from "../types/fee";
-import type {
-  TransactionSerializable,
-  TransactionSerializableGeneric,
-  TransactionSerializedGeneric,
-} from "../types/transaction";
 import type { IsNarrowable, IsUndefined, Prettify } from "../types/utils";
-import type { FormattedBlock } from "../utils/formatters/block";
-import type { SerializeTransactionFn } from "../utils/transaction/serializeTransaction";
 
 export type Chain<
   formatters extends ChainFormatters | undefined = ChainFormatters | undefined,
@@ -61,8 +47,6 @@ export type Chain<
 
   /** Custom chain data. */
   custom?: custom | undefined;
-  /** Modifies how fees are derived. */
-  fees?: ChainFees<formatters | undefined> | undefined;
   /** Modifies how data is formatted and typed (e.g. blocks and transactions) */
   formatters?: formatters | undefined;
   /** Modifies how data is serialized (e.g. transactions). */
@@ -71,41 +55,6 @@ export type Chain<
 
 /////////////////////////////////////////////////////////////////////
 // Config
-
-export type ChainFees<
-  formatters extends ChainFormatters | undefined = ChainFormatters | undefined
-> = {
-  /**
-   * The fee multiplier to use to account for fee fluctuations.
-   * Used in the [`estimateFeesPerGas` Action](/docs/actions/public/estimateFeesPerGas).
-   *
-   * @default 1.2
-   */
-  baseFeeMultiplier?:
-    | number
-    | ((args: ChainFeesFnParameters<formatters>) => Promise<number> | number);
-  /**
-   * The default `maxPriorityFeePerGas` to use when a priority
-   * fee is not defined upon sending a transaction.
-   *
-   * Overrides the return value in the [`estimateMaxPriorityFeePerGas` Action](/docs/actions/public/estimateMaxPriorityFeePerGas).
-   */
-  defaultPriorityFee?:
-    | bigint
-    | ((args: ChainFeesFnParameters<formatters>) => Promise<bigint> | bigint)
-    | undefined;
-  /**
-   * Allows customization of fee per gas values (e.g. `maxFeePerGas`/`maxPriorityFeePerGas`).
-   *
-   * Overrides the return value in the [`estimateFeesPerGas` Action](/docs/actions/public/estimateFeesPerGas).
-   */
-  estimateFeesPerGas?:
-    | bigint
-    | ((
-        args: ChainEstimateFeesPerGasFnParameters<formatters>
-      ) => Promise<EstimateFeesPerGasReturnType | null>)
-    | undefined;
-};
 
 export type ChainFormatters = {
   /** Modifies how the Block structure is formatted & typed. */
@@ -126,52 +75,11 @@ export type ChainFormatter<type extends string = string> = {
 export type ChainSerializers<
   formatters extends ChainFormatters | undefined = undefined,
   ///
-  transaction extends TransactionSerializableGeneric = formatters extends ChainFormatters
-    ? formatters["transactionRequest"] extends ChainFormatter
-      ? TransactionSerializableGeneric &
-          Parameters<formatters["transactionRequest"]["format"]>[0]
-      : TransactionSerializable
-    : TransactionSerializable
+  transaction extends any = any
 > = {
   /** Modifies how Transactions are serialized. */
-  transaction?:
-    | SerializeTransactionFn<transaction, TransactionSerializedGeneric>
-    | undefined;
+  transaction?: any;
 };
-
-/////////////////////////////////////////////////////////////////////
-// Parameters
-
-export type ChainFeesFnParameters<
-  formatters extends ChainFormatters | undefined = ChainFormatters | undefined
-> = {
-  /** The latest block. */
-  block: Prettify<
-    FormattedBlock<Omit<Chain, "formatters"> & { formatters: formatters }>
-  >;
-  client: Client<Transport, Chain>;
-  /**
-   * A transaction request. This value will be undefined if the caller
-   * is outside of a transaction request context (e.g. a direct call to
-   * the `estimateFeesPerGas` Action).
-   */
-  request?:
-    | PrepareTransactionRequestParameters<
-        Omit<Chain, "formatters"> & { formatters: formatters },
-        Account | undefined,
-        undefined
-      >
-    | undefined;
-};
-
-export type ChainEstimateFeesPerGasFnParameters<
-  formatters extends ChainFormatters | undefined = ChainFormatters | undefined
-> = {
-  /** A function to multiply the base fee based on the `baseFeeMultiplier` value. */
-  multiply: (x: bigint) => bigint;
-  /** The type of fees to return. */
-  type: FeeValuesType;
-} & ChainFeesFnParameters<formatters>;
 
 /////////////////////////////////////////////////////////////////////
 // Utils
