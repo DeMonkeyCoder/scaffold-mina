@@ -41,18 +41,6 @@ export {
   type AddChainParameters,
 } from "./actions/wallet/addChain";
 export type {
-  DropTransactionErrorType,
-  DropTransactionParameters,
-} from "./actions/test/dropTransaction";
-export type {
-  DumpStateErrorType,
-  DumpStateReturnType,
-} from "./actions/test/dumpState";
-export type {
-  GetAutomineErrorType,
-  GetAutomineReturnType,
-} from "./actions/test/getAutomine";
-export type {
   GetAddressesErrorType,
   GetAddressesReturnType,
 } from "./actions/wallet/getAddresses";
@@ -80,21 +68,6 @@ export type {
   GetPermissionsReturnType,
 } from "./actions/wallet/getPermissions";
 export type {
-  ImpersonateAccountErrorType,
-  ImpersonateAccountParameters,
-} from "./actions/test/impersonateAccount";
-export type {
-  IncreaseTimeErrorType,
-  IncreaseTimeParameters,
-} from "./actions/test/increaseTime";
-export type {
-  LoadStateErrorType,
-  LoadStateParameters,
-  LoadStateReturnType,
-} from "./actions/test/loadState";
-export type { MineErrorType, MineParameters } from "./actions/test/mine";
-export type { SnapshotErrorType } from "./actions/test/snapshot";
-export type {
   OnBlockHashFn,
   OnBlockHashParameter,
   WatchBlockHashErrorType,
@@ -110,72 +83,6 @@ export type {
   RequestPermissionsReturnType,
   RequestPermissionsParameters,
 } from "./actions/wallet/requestPermissions";
-export type {
-  GetTxpoolContentErrorType,
-  GetTxpoolContentReturnType,
-} from "./actions/test/getTxpoolContent";
-export type {
-  GetTxpoolStatusErrorType,
-  GetTxpoolStatusReturnType,
-} from "./actions/test/getTxpoolStatus";
-export type {
-  InspectTxpoolErrorType,
-  InspectTxpoolReturnType,
-} from "./actions/test/inspectTxpool";
-export type { RemoveBlockTimestampIntervalErrorType } from "./actions/test/removeBlockTimestampInterval";
-export type { ResetErrorType, ResetParameters } from "./actions/test/reset";
-export type { RevertErrorType, RevertParameters } from "./actions/test/revert";
-export type { SetAutomineErrorType } from "./actions/test/setAutomine";
-export type {
-  SetBalanceErrorType,
-  SetBalanceParameters,
-} from "./actions/test/setBalance";
-export type {
-  SetBlockGasLimitErrorType,
-  SetBlockGasLimitParameters,
-} from "./actions/test/setBlockGasLimit";
-export type {
-  SetBlockTimestampIntervalErrorType,
-  SetBlockTimestampIntervalParameters,
-} from "./actions/test/setBlockTimestampInterval";
-export type {
-  SetCodeErrorType,
-  SetCodeParameters,
-} from "./actions/test/setCode";
-export type {
-  SetCoinbaseErrorType,
-  SetCoinbaseParameters,
-} from "./actions/test/setCoinbase";
-export type {
-  SetIntervalMiningErrorType,
-  SetIntervalMiningParameters,
-} from "./actions/test/setIntervalMining";
-export type { SetLoggingEnabledErrorType } from "./actions/test/setLoggingEnabled";
-export type {
-  SetMinGasPriceErrorType,
-  SetMinGasPriceParameters,
-} from "./actions/test/setMinGasPrice";
-export type {
-  SetNextBlockBaseFeePerGasErrorType,
-  SetNextBlockBaseFeePerGasParameters,
-} from "./actions/test/setNextBlockBaseFeePerGas";
-export type {
-  SetNextBlockTimestampErrorType,
-  SetNextBlockTimestampParameters,
-} from "./actions/test/setNextBlockTimestamp";
-export type {
-  SetNonceErrorType,
-  SetNonceParameters,
-} from "./actions/test/setNonce";
-export type { SetRpcUrlErrorType } from "./actions/test/setRpcUrl";
-export type {
-  SetStorageAtErrorType,
-  SetStorageAtParameters,
-} from "./actions/test/setStorageAt";
-export type {
-  StopImpersonatingAccountErrorType,
-  StopImpersonatingAccountParameters,
-} from "./actions/test/stopImpersonatingAccount";
 export type {
   SwitchChainErrorType,
   SwitchChainParameters,
@@ -224,14 +131,7 @@ export {
   type CreatePublicClientErrorType,
   createPublicClient,
 } from "./clients/createPublicClient";
-export {
-  type TestClient,
-  type TestClientConfig,
-  type CreateTestClientErrorType,
-  createTestClient,
-} from "./clients/createTestClient";
 export { type PublicActions, publicActions } from "./clients/decorators/public";
-export { type TestActions, testActions } from "./clients/decorators/test";
 export { type WalletActions, walletActions } from "./clients/decorators/wallet";
 export {
   type Transport,
@@ -503,23 +403,6 @@ export {
   toHex,
 } from "./utils/encoding/toHex";
 export {
-  type BytesToBigIntErrorType,
-  type BytesToBigIntOpts,
-  bytesToBigInt,
-  type BytesToBoolErrorType,
-  type BytesToBoolOpts,
-  bytesToBool,
-  type BytesToNumberErrorType,
-  type BytesToNumberOpts,
-  bytesToNumber,
-  type BytesToStringErrorType,
-  type BytesToStringOpts,
-  bytesToString,
-  type FromBytesErrorType,
-  type FromBytesParameters,
-  fromBytes,
-} from "./utils/encoding/fromBytes";
-export {
   type ConcatBytesErrorType,
   type ConcatErrorType,
   type ConcatHexErrorType,
@@ -540,78 +423,17 @@ export {
   type ExtractChainReturnType,
   extractChain,
 } from "./utils/chain/extractChain";
-export {
-  type GetChainContractAddressErrorType,
-  getChainContractAddress,
-} from "./utils/chain/getChainContractAddress";
 export { type WithRetryErrorType, withRetry } from "./utils/promise/withRetry";
 export {
   type WithTimeoutErrorType,
   withTimeout,
 } from "./utils/promise/withTimeout";
 export {
-  type FromHexErrorType,
-  fromHex,
-  type HexToBigIntErrorType,
-  hexToBigInt,
-  type HexToBoolErrorType,
-  hexToBool,
-  type HexToNumberErrorType,
-  hexToNumber,
-  type HexToStringErrorType,
-  hexToString,
-} from "./utils/encoding/fromHex";
-export {
-  type FromRlpErrorType,
-  type FromRlpReturnType,
-  fromRlp,
-} from "./utils/encoding/fromRlp";
-export {
   type ChecksumAddressErrorType,
   type GetAddressErrorType,
   checksumAddress,
   getAddress,
 } from "./utils/address/getAddress";
-export {
-  type ToEventSelectorErrorType,
-  toEventSelector,
-  /** @deprecated use `ToEventSelectorErrorType`. */
-  type ToEventSelectorErrorType as GetEventSelectorErrorType,
-  /** @deprecated use `toEventSelector`. */
-  toEventSelector as getEventSelector,
-} from "./utils/hash/toEventSelector";
-export {
-  type ToFunctionSelectorErrorType,
-  toFunctionSelector,
-  /** @deprecated use `ToFunctionSelectorErrorType`. */
-  type ToFunctionSelectorErrorType as GetFunctionSelectorErrorType,
-  /** @deprecated use `toFunctionSelector`. */
-  toFunctionSelector as getFunctionSelector,
-} from "./utils/hash/toFunctionSelector";
-export {
-  type ToEventSignatureErrorType,
-  toEventSignature,
-  /** @deprecated use `ToEventSignatureErrorType`. */
-  type ToEventSignatureErrorType as GetEventSignatureErrorType,
-  /** @deprecated use `toEventSignature`. */
-  toEventSignature as getEventSignature,
-} from "./utils/hash/toEventSignature";
-export {
-  type ToFunctionSignatureErrorType,
-  toFunctionSignature,
-  /** @deprecated use `ToFunctionSignatureErrorType`. */
-  type ToFunctionSignatureErrorType as GetFunctionSignatureErrorType,
-  /** @deprecated use `toFunctionSignature`. */
-  toFunctionSignature as getFunctionSignature,
-} from "./utils/hash/toFunctionSignature";
-export {
-  type ToEventHashErrorType,
-  toEventHash,
-} from "./utils/hash/toEventHash";
-export {
-  type ToFunctionHashErrorType,
-  toFunctionHash,
-} from "./utils/hash/toFunctionHash";
 export {
   type IsAddressOptions,
   type IsAddressErrorType,
@@ -622,7 +444,6 @@ export {
   type IsAddressEqualErrorType,
   isAddressEqual,
 } from "./utils/address/isAddressEqual";
-export { type IsBytesErrorType, isBytes } from "./utils/data/isBytes";
 export { type IsHashErrorType, isHash } from "./utils/hash/isHash";
 export { type IsHexErrorType, isHex } from "./utils/data/isHex";
 export {

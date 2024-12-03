@@ -13,10 +13,6 @@ export {
   type ExtractChainReturnType,
   extractChain,
 } from "./chain/extractChain";
-export {
-  type GetChainContractAddressErrorType,
-  getChainContractAddress,
-} from "./chain/getChainContractAddress";
 
 export { arrayRegex, bytesRegex, integerRegex } from "./regex";
 
@@ -84,7 +80,6 @@ export {
   concatBytes,
   concatHex,
 } from "./data/concat";
-export { type IsBytesErrorType, isBytes } from "./data/isBytes";
 export { type IsHexErrorType, isHex } from "./data/isHex";
 export {
   type PadBytesErrorType,
@@ -108,13 +103,6 @@ export {
 } from "./data/slice";
 export { type TrimErrorType, type TrimReturnType, trim } from "./data/trim";
 export { type ExtractErrorType, extract } from "./formatters/extract";
-export {
-  type BytesToRlpErrorType,
-  type HexToRlpErrorType,
-  type ToRlpErrorType,
-  type ToRlpReturnType,
-  toRlp,
-} from "./encoding/toRlp";
 export {
   type BoolToBytesErrorType,
   type BoolToBytesOpts,
@@ -148,87 +136,11 @@ export {
   numberToHex,
   stringToHex,
 } from "./encoding/toHex";
-export {
-  type BytesToBigIntErrorType,
-  type BytesToBigIntOpts,
-  type BytesToBoolErrorType,
-  type BytesToBoolOpts,
-  type BytesToNumberErrorType,
-  type BytesToNumberOpts,
-  type BytesToStringErrorType,
-  type BytesToStringOpts,
-  type FromBytesErrorType,
-  type FromBytesParameters,
-  type FromBytesReturnType,
-  bytesToBigInt,
-  bytesToBigInt as bytesToBigint,
-  bytesToBool,
-  bytesToNumber,
-  bytesToString,
-  fromBytes,
-} from "./encoding/fromBytes";
-export {
-  type AssertSizeErrorType,
-  type FromHexErrorType,
-  type FromHexParameters,
-  type FromHexReturnType,
-  type HexToBigIntErrorType,
-  type HexToBigIntOpts,
-  type HexToBoolErrorType,
-  type HexToBoolOpts,
-  type HexToNumberErrorType,
-  type HexToNumberOpts,
-  type HexToStringErrorType,
-  type HexToStringOpts,
-  fromHex,
-  hexToBool,
-  hexToBigInt,
-  hexToNumber,
-  hexToString,
-} from "./encoding/fromHex";
-export { type FromRlpErrorType, fromRlp } from "./encoding/fromRlp";
 export { getAction } from "./getAction";
 export {
   type DefineFormatterErrorType,
   defineFormatter,
 } from "./formatters/formatter";
-export {
-  type ToEventSelectorErrorType,
-  toEventSelector,
-  /** @deprecated use `ToEventSelectorErrorType`. */
-  type ToEventSelectorErrorType as GetEventSelectorErrorType,
-  /** @deprecated use `toEventSelector`. */
-  toEventSelector as getEventSelector,
-} from "./hash/toEventSelector";
-export {
-  type ToFunctionSelectorErrorType,
-  toFunctionSelector,
-  /** @deprecated use `ToFunctionSelectorErrorType`. */
-  type ToFunctionSelectorErrorType as GetFunctionSelectorErrorType,
-  /** @deprecated use `toFunctionSelector`. */
-  toFunctionSelector as getFunctionSelector,
-} from "./hash/toFunctionSelector";
-export {
-  type ToEventSignatureErrorType,
-  toEventSignature,
-  /** @deprecated use `ToEventSignatureErrorType`. */
-  type ToEventSignatureErrorType as GetEventSignatureErrorType,
-  /** @deprecated use `toEventSignature`. */
-  toEventSignature as getEventSignature,
-} from "./hash/toEventSignature";
-export {
-  type ToFunctionSignatureErrorType,
-  toFunctionSignature,
-  /** @deprecated use `ToFunctionSignatureErrorType`. */
-  type ToFunctionSignatureErrorType as GetFunctionSignatureErrorType,
-  /** @deprecated use `toFunctionSignature`. */
-  toFunctionSignature as getFunctionSignature,
-} from "./hash/toFunctionSignature";
-export { type ToEventHashErrorType, toEventHash } from "./hash/toEventHash";
-export {
-  type ToFunctionHashErrorType,
-  toFunctionHash,
-} from "./hash/toFunctionHash";
 export { type IsHashErrorType, isHash } from "./hash/isHash";
 export { type Keccak256ErrorType, keccak256 } from "./hash/keccak256";
 export { type Sha256ErrorType, sha256 } from "./hash/sha256";

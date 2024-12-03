@@ -4,14 +4,10 @@ import type { Transport } from "../../clients/transports/createTransport";
 import type { ErrorType } from "../../errors/utils";
 import type { Chain } from "../../types/chain";
 import type { RequestErrorType } from "../../utils/buildRequest";
-import { type HexToNumberErrorType } from "../../utils/encoding/fromHex";
 
 export type GetNetworkIdReturnType = string;
 
-export type GetNetworkIdErrorType =
-  | HexToNumberErrorType
-  | RequestErrorType
-  | ErrorType;
+export type GetNetworkIdErrorType = RequestErrorType | ErrorType;
 
 /**
  * Returns the chain ID associated with the current network.

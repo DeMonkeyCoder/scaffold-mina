@@ -3,7 +3,6 @@ import type { Transport } from "../../clients/transports/createTransport";
 import type { ErrorType } from "../../errors/utils";
 import type { Chain } from "../../types/chain";
 import type { HasTransportType } from "../../types/transport";
-import { hexToBigInt } from "../../utils/encoding/fromHex";
 import { getAction } from "../../utils/getAction";
 import { observe } from "../../utils/observe";
 import { poll, type PollErrorType } from "../../utils/poll";
@@ -164,9 +163,9 @@ export function watchBlockHash<
             params: ["newHeads"],
             onData(data: any) {
               if (!active) return;
-              const blockNumber = hexToBigInt(data.result?.number);
-              emit.onBlockHash(blockNumber, prevBlockHash);
-              prevBlockHash = blockNumber;
+              const blockHash = data.result;
+              emit.onBlockHash(blockHash, prevBlockHash);
+              prevBlockHash = blockHash;
             },
             onError(error: Error) {
               emit.onError?.(error);

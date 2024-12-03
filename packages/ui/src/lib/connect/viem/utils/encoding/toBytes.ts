@@ -1,14 +1,14 @@
 import { BaseError } from "../../errors/base";
 import type { ErrorType } from "../../errors/utils";
 import type { ByteArray, Hex } from "../../types/misc";
-import { type IsHexErrorType, isHex } from "../data/isHex";
-import { type PadErrorType, pad } from "../data/pad";
+import { isHex, type IsHexErrorType } from "../data/isHex";
+import { pad, type PadErrorType } from "../data/pad";
 
-import { type AssertSizeErrorType, assertSize } from "./fromHex";
+import { assertSize, type AssertSizeErrorType } from "./fromHex";
 import {
+  numberToHex,
   type NumberToHexErrorType,
   type NumberToHexOpts,
-  numberToHex,
 } from "./toHex";
 
 const encoder = /*#__PURE__*/ new TextEncoder();
@@ -29,25 +29,25 @@ export type ToBytesErrorType =
 /**
  * Encodes a UTF-8 string, hex value, bigint, number or boolean to a byte array.
  *
- * - Docs: https://@/lib/connect/viem.sh/docs/utilities/toBytes
- * - Example: https://@/lib/connect/viem.sh/docs/utilities/toBytes#usage
+ * - Docs: https://viem.sh/docs/utilities/toBytes
+ * - Example: https://viem.sh/docs/utilities/toBytes#usage
  *
  * @param value Value to encode.
  * @param opts Options.
  * @returns Byte array value.
  *
  * @example
- * import { toBytes } from '@/lib/connect/viem'
+ * import { toBytes } from 'viem'
  * const data = toBytes('Hello world')
  * // Uint8Array([72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33])
  *
  * @example
- * import { toBytes } from '@/lib/connect/viem'
+ * import { toBytes } from 'viem'
  * const data = toBytes(420)
  * // Uint8Array([1, 164])
  *
  * @example
- * import { toBytes } from '@/lib/connect/viem'
+ * import { toBytes } from 'viem'
  * const data = toBytes(420, { size: 4 })
  * // Uint8Array([0, 0, 1, 164])
  */
@@ -75,19 +75,19 @@ export type BoolToBytesErrorType =
 /**
  * Encodes a boolean into a byte array.
  *
- * - Docs: https://@/lib/connect/viem.sh/docs/utilities/toBytes#booltobytes
+ * - Docs: https://viem.sh/docs/utilities/toBytes#booltobytes
  *
  * @param value Boolean value to encode.
  * @param opts Options.
  * @returns Byte array value.
  *
  * @example
- * import { boolToBytes } from '@/lib/connect/viem'
+ * import { boolToBytes } from 'viem'
  * const data = boolToBytes(true)
  * // Uint8Array([1])
  *
  * @example
- * import { boolToBytes } from '@/lib/connect/viem'
+ * import { boolToBytes } from 'viem'
  * const data = boolToBytes(true, { size: 32 })
  * // Uint8Array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
  */
@@ -134,19 +134,19 @@ export type HexToBytesErrorType =
 /**
  * Encodes a hex string into a byte array.
  *
- * - Docs: https://@/lib/connect/viem.sh/docs/utilities/toBytes#hextobytes
+ * - Docs: https://viem.sh/docs/utilities/toBytes#hextobytes
  *
  * @param hex Hex string to encode.
  * @param opts Options.
  * @returns Byte array value.
  *
  * @example
- * import { hexToBytes } from '@/lib/connect/viem'
+ * import { hexToBytes } from 'viem'
  * const data = hexToBytes('0x48656c6c6f20776f726c6421')
  * // Uint8Array([72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33])
  *
  * @example
- * import { hexToBytes } from '@/lib/connect/viem'
+ * import { hexToBytes } from 'viem'
  * const data = hexToBytes('0x48656c6c6f20776f726c6421', { size: 32 })
  * // Uint8Array([72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
  */
@@ -185,19 +185,19 @@ export type NumberToBytesErrorType =
 /**
  * Encodes a number into a byte array.
  *
- * - Docs: https://@/lib/connect/viem.sh/docs/utilities/toBytes#numbertobytes
+ * - Docs: https://viem.sh/docs/utilities/toBytes#numbertobytes
  *
  * @param value Number to encode.
  * @param opts Options.
  * @returns Byte array value.
  *
  * @example
- * import { numberToBytes } from '@/lib/connect/viem'
+ * import { numberToBytes } from 'viem'
  * const data = numberToBytes(420)
  * // Uint8Array([1, 164])
  *
  * @example
- * import { numberToBytes } from '@/lib/connect/viem'
+ * import { numberToBytes } from 'viem'
  * const data = numberToBytes(420, { size: 4 })
  * // Uint8Array([0, 0, 1, 164])
  */
@@ -222,19 +222,19 @@ export type StringToBytesErrorType =
 /**
  * Encodes a UTF-8 string into a byte array.
  *
- * - Docs: https://@/lib/connect/viem.sh/docs/utilities/toBytes#stringtobytes
+ * - Docs: https://viem.sh/docs/utilities/toBytes#stringtobytes
  *
  * @param value String to encode.
  * @param opts Options.
  * @returns Byte array value.
  *
  * @example
- * import { stringToBytes } from '@/lib/connect/viem'
+ * import { stringToBytes } from 'viem'
  * const data = stringToBytes('Hello world!')
  * // Uint8Array([72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 33])
  *
  * @example
- * import { stringToBytes } from '@/lib/connect/viem'
+ * import { stringToBytes } from 'viem'
  * const data = stringToBytes('Hello world!', { size: 32 })
  * // Uint8Array([72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
  */

@@ -1,19 +1,12 @@
 import type { Address } from "@/lib/connect/viem";
 import type { ErrorType } from "../../errors/utils";
-import {
-  stringToBytes,
-  type StringToBytesErrorType,
-} from "../encoding/toBytes";
-import { keccak256, type Keccak256ErrorType } from "../hash/keccak256";
+import { type Keccak256ErrorType } from "../hash/keccak256";
 import { LruMap } from "../lru";
 import { type IsAddressErrorType } from "./isAddress";
 
 const checksumAddressCache = /*#__PURE__*/ new LruMap<Address>(8192);
 
-export type ChecksumAddressErrorType =
-  | Keccak256ErrorType
-  | StringToBytesErrorType
-  | ErrorType;
+export type ChecksumAddressErrorType = Keccak256ErrorType | ErrorType;
 
 export function checksumAddress(
   address_: Address,
@@ -32,25 +25,9 @@ export function checksumAddress(
   if (checksumAddressCache.has(`${address_}.${networkId}`))
     return checksumAddressCache.get(`${address_}.${networkId}`)!;
 
-  const hexAddress = networkId
-    ? `${networkId}${address_.toLowerCase()}`
-    : address_.substring(2).toLowerCase();
-  const hash = keccak256(stringToBytes(hexAddress), "bytes");
+  // TODO: implement address checksum
 
-  const address = (
-    networkId ? hexAddress.substring(`${networkId}0x`.length) : hexAddress
-  ).split("");
-  for (let i = 0; i < 40; i += 2) {
-    if (hash[i >> 1] >> 4 >= 8 && address[i]) {
-      address[i] = address[i].toUpperCase();
-    }
-    if ((hash[i >> 1] & 0x0f) >= 8 && address[i + 1]) {
-      address[i + 1] = address[i + 1].toUpperCase();
-    }
-  }
-
-  const result = `0x${address.join("")}` as const;
-  checksumAddressCache.set(`${address_}.${networkId}`, result);
+  checksumAddressCache.set(`${address_}.${networkId}`, address_);
   return address_;
 }
 

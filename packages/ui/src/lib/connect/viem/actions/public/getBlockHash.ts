@@ -14,7 +14,7 @@ export type GetBlockHashParameters = {
   cacheTime?: number | undefined;
 };
 
-export type GetBlockHashReturnType = bigint;
+export type GetBlockHashReturnType = string;
 
 export type GetBlockHashErrorType = RequestErrorType | ErrorType;
 

@@ -6,8 +6,6 @@ import type { ErrorType } from "../../errors/utils";
 import type { BlockTag } from "../../types/block";
 import type { Chain } from "../../types/chain";
 import type { RequestErrorType } from "../../utils/buildRequest";
-import { type HexToNumberErrorType } from "../../utils/encoding/fromHex";
-import { type NumberToHexErrorType } from "../../utils/encoding/toHex";
 
 export type GetTransactionCountParameters = {
   /** The account address. */
@@ -26,11 +24,7 @@ export type GetTransactionCountParameters = {
 );
 export type GetTransactionCountReturnType = number;
 
-export type GetTransactionCountErrorType =
-  | RequestErrorType
-  | NumberToHexErrorType
-  | HexToNumberErrorType
-  | ErrorType;
+export type GetTransactionCountErrorType = RequestErrorType | ErrorType;
 
 /**
  * Returns the number of [Transactions](https://viem.sh/docs/glossary/terms#transaction) an Account has sent.
