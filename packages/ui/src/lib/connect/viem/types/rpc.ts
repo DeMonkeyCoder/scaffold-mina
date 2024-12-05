@@ -1,42 +1,6 @@
-import type {
-  Block,
-  BlockHash,
-  BlockIdentifier,
-  BlockTag,
-  Uncle,
-} from "./block";
 import type { Hex } from "./misc";
-import type { Proof } from "./proof";
 
-export type Index = `0x${string}`;
 export type Quantity = `0x${string}`;
-export type Status = "0x0" | "0x1";
-export type TransactionType =
-  | "0x0"
-  | "0x1"
-  | "0x2"
-  | "0x3"
-  | "0x4"
-  | (string & {});
-
-export type RpcBlock<
-  blockTag extends BlockTag = BlockTag,
-  includeTransactions extends boolean = boolean,
-  transaction = RpcTransaction<blockTag extends "pending" ? true : false>
-> = Block<Quantity, includeTransactions, blockTag, transaction>;
-export type RpcBlockHash = BlockHash;
-export type RpcBlockIdentifier = BlockIdentifier<Quantity>;
-export type RpcUncle = Uncle<Quantity>;
-export type RpcFeeHistory = any;
-export type RpcFeeValues = any;
-export type RpcLog = any;
-export type RpcProof = Proof<Quantity, Index>;
-export type RpcTransactionReceipt = any;
-export type RpcTransactionRequest = any;
-// `yParity` is optional on the RPC type as some nodes do not return it
-// for 1559 & 2930 transactions (they should!).
-export type RpcTransaction<pending extends boolean = boolean> = any;
-
 type SuccessResult<result> = {
   method?: undefined;
   result: result;

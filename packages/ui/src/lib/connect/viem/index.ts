@@ -288,7 +288,6 @@ export type {
   NetworkSync,
   RpcSchema,
   RpcSchemaOverride,
-  TestRpcSchema,
   WalletCapabilities,
   WalletCapabilitiesRecord,
   WalletCallReceipt,
@@ -302,26 +301,8 @@ export type {
   WatchAssetParams,
 } from "./types/eip1193";
 export { ProviderRpcError as EIP1193ProviderRpcError } from "./types/eip1193";
-export type { BlobSidecar, BlobSidecars } from "./types/eip4844";
 export type { GetTransportConfig, GetPollOptions } from "./types/transport";
 export type { ParseAccount, DeriveAccount, HDKey } from "./types/account";
-export type {
-  Index,
-  Quantity,
-  RpcBlock,
-  RpcBlockIdentifier,
-  RpcBlockHash,
-  RpcFeeHistory,
-  RpcFeeValues,
-  RpcLog,
-  RpcTransaction,
-  RpcTransactionReceipt,
-  RpcTransactionRequest,
-  RpcUncle,
-  Status,
-  RpcProof,
-  RpcStateMapping,
-} from "./types/rpc";
 export type { Withdrawal } from "./types/withdrawal";
 export {
   type AssertCurrentChainErrorType,
