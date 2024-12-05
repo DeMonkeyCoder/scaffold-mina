@@ -1,14 +1,10 @@
-import type { Address } from "@/lib/connect/viem";
+import type { Address, ChecksumAddressErrorType } from "@/lib/connect/viem";
 
 import type { Account } from "../../accounts/types";
 import type { Client } from "../../clients/createClient";
 import type { Transport } from "../../clients/transports/createTransport";
 import type { ErrorType } from "../../errors/utils";
 import type { Chain } from "../../types/chain";
-import {
-  checksumAddress,
-  type ChecksumAddressErrorType,
-} from "../../utils/address/getAddress";
 import type { RequestErrorType } from "../../utils/buildRequest";
 
 export type GetAddressesReturnType = Address[];
@@ -43,9 +39,5 @@ export async function getAddresses<
   account extends Account | undefined = undefined
 >(client: Client<Transport, chain, account>): Promise<GetAddressesReturnType> {
   if (client.account?.type === "local") return [client.account.address];
-  const addresses = await client.request(
-    { method: "mina_accounts" },
-    { dedupe: true }
-  );
-  return addresses.map((address) => checksumAddress(address));
+  return client.request({ method: "mina_accounts" }, { dedupe: true });
 }

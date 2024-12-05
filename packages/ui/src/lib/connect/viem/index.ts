@@ -429,14 +429,14 @@ export {
   withTimeout,
 } from "./utils/promise/withTimeout";
 export {
-  type ChecksumAddressErrorType,
   type GetAddressErrorType,
-  checksumAddress,
   getAddress,
 } from "./utils/address/getAddress";
 export {
+  type ChecksumAddressErrorType,
   type IsAddressOptions,
   type IsAddressErrorType,
+  validateAddressChecksum,
   isAddress,
 } from "./utils/address/isAddress";
 export {

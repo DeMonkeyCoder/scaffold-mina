@@ -59,11 +59,13 @@ export {
   type ParseAccountErrorType,
   parseAccount,
 } from "../accounts/utils/parseAccount";
+export { getAddress } from "./address/getAddress";
 export {
+  type IsAddressErrorType,
   type ChecksumAddressErrorType,
-  getAddress,
-} from "./address/getAddress";
-export { type IsAddressErrorType, isAddress } from "./address/isAddress";
+  validateAddressChecksum,
+  isAddress,
+} from "./address/isAddress";
 export {
   type IsAddressEqualErrorType,
   isAddressEqual,
