@@ -20,8 +20,8 @@ import {
   type ConnectorNotConnectedErrorType,
 } from "../errors/config";
 import type {
-  NetworkIdParameter,
   ConnectorParameter,
+  NetworkIdParameter,
 } from "../types/properties";
 import type { Compute } from "../types/utils";
 
@@ -106,9 +106,7 @@ export async function getConnectorClient<
   // If account was provided, check that it exists on the connector
   if (
     parameters.account &&
-    !connection.accounts.some(
-      (x) => x.toLowerCase() === account.address.toLowerCase()
-    )
+    !connection.accounts.some((x) => x === account.address)
   )
     throw new ConnectorAccountNotFoundError({
       address: account.address,

@@ -324,15 +324,6 @@ export type {
 } from "./types/rpc";
 export type { Withdrawal } from "./types/withdrawal";
 export {
-  type ConcatBytesErrorType,
-  type ConcatErrorType,
-  type ConcatHexErrorType,
-  type ConcatReturnType,
-  concat,
-  concatBytes,
-  concatHex,
-} from "./utils/data/concat";
-export {
   type AssertCurrentChainErrorType,
   type AssertCurrentChainParameters,
   assertCurrentChain,
@@ -365,31 +356,6 @@ export {
   type IsAddressEqualErrorType,
   isAddressEqual,
 } from "./utils/address/isAddressEqual";
-export { type IsHexErrorType, isHex } from "./utils/data/isHex";
-export {
-  type PadBytesErrorType,
-  type PadErrorType,
-  type PadHexErrorType,
-  type PadReturnType,
-  pad,
-  padBytes,
-  padHex,
-} from "./utils/data/pad";
-export { type SizeErrorType, size } from "./utils/data/size";
-export {
-  type SliceBytesErrorType,
-  type SliceErrorType,
-  type SliceHexErrorType,
-  slice,
-  sliceBytes,
-  sliceHex,
-} from "./utils/data/slice";
-export { type StringifyErrorType, stringify } from "./utils/stringify";
-export {
-  type TrimErrorType,
-  type TrimReturnType,
-  trim,
-} from "./utils/data/trim";
 export {
   type CreateNonceManagerParameters,
   type NonceManager,

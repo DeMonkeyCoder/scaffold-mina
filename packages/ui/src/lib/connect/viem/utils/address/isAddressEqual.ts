@@ -15,5 +15,5 @@ export function isAddressEqual(a: Address, b: Address) {
     throw new InvalidAddressError({ address: a });
   if (!isAddress(b, { strict: false }))
     throw new InvalidAddressError({ address: b });
-  return a.toLowerCase() === b.toLowerCase();
+  return a === b;
 }

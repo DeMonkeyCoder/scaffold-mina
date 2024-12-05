@@ -58,36 +58,6 @@ export {
   type IsAddressEqualErrorType,
   isAddressEqual,
 } from "./address/isAddressEqual";
-export {
-  type ConcatBytesErrorType,
-  type ConcatErrorType,
-  type ConcatHexErrorType,
-  concat,
-  concatBytes,
-  concatHex,
-} from "./data/concat";
-export { type IsHexErrorType, isHex } from "./data/isHex";
-export {
-  type PadBytesErrorType,
-  type PadErrorType,
-  type PadHexErrorType,
-  pad,
-  padBytes,
-  padHex,
-} from "./data/pad";
-export { type SizeErrorType, size } from "./data/size";
-export {
-  type AssertEndOffsetErrorType,
-  type AssertStartOffsetErrorType,
-  type SliceBytesErrorType,
-  type SliceErrorType,
-  type SliceHexErrorType,
-  type SliceReturnType,
-  slice,
-  sliceBytes,
-  sliceHex,
-} from "./data/slice";
-export { type TrimErrorType, type TrimReturnType, trim } from "./data/trim";
 export { getAction } from "./getAction";
 export {
   type CreateNonceManagerParameters,
