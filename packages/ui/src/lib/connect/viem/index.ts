@@ -1,42 +1,5 @@
 // biome-ignore lint/performance/noBarrelFile: entrypoint module
 export {
-  type Abi,
-  type AbiFunction,
-  type AbiParameter,
-  type AbiEvent,
-  type AbiStateMutability,
-  type AbiParameterKind,
-  type AbiParameterToPrimitiveType,
-  type Narrow,
-  type ParseAbi,
-  type ParseAbiItem,
-  type ParseAbiParameter,
-  type ParseAbiParameters,
-  type ResolvedRegister,
-  type TypedData,
-  type TypedDataDomain,
-  type TypedDataParameter,
-  CircularReferenceError,
-  InvalidAbiParameterError,
-  InvalidAbiParametersError,
-  InvalidAbiItemError,
-  InvalidAbiTypeParameterError,
-  InvalidFunctionModifierError,
-  InvalidModifierError,
-  InvalidParameterError,
-  InvalidParenthesisError,
-  InvalidSignatureError,
-  InvalidStructSignatureError,
-  SolidityProtectedKeywordError,
-  UnknownTypeError,
-  UnknownSignatureError,
-  parseAbi,
-  parseAbiItem,
-  parseAbiParameter,
-  parseAbiParameters,
-} from "abitype";
-
-export {
   type AddChainErrorType,
   type AddChainParameters,
 } from "./actions/wallet/addChain";
@@ -251,12 +214,6 @@ export {
   UrlRequiredError,
   type UrlRequiredErrorType,
 } from "./errors/transport";
-export {
-  AccountStateConflictError,
-  type AccountStateConflictErrorType,
-  StateAssignmentConflictError,
-  type StateAssignmentConflictErrorType,
-} from "./errors/stateOverride";
 export type {
   Assign,
   Branded,
@@ -363,45 +320,9 @@ export type {
   RpcUncle,
   Status,
   RpcProof,
-  RpcAccountStateOverride,
-  RpcStateOverride,
   RpcStateMapping,
 } from "./types/rpc";
 export type { Withdrawal } from "./types/withdrawal";
-export type { StateMapping, StateOverride } from "./types/stateOverride";
-export {
-  type BoolToBytesErrorType,
-  type BoolToBytesOpts,
-  boolToBytes,
-  type HexToBytesErrorType,
-  type HexToBytesOpts,
-  hexToBytes,
-  type NumberToBytesErrorType,
-  numberToBytes,
-  type StringToBytesErrorType,
-  type StringToBytesOpts,
-  stringToBytes,
-  type ToBytesErrorType,
-  type ToBytesParameters,
-  toBytes,
-} from "./utils/encoding/toBytes";
-export {
-  type BoolToHexErrorType,
-  type BoolToHexOpts,
-  boolToHex,
-  type BytesToHexErrorType,
-  type BytesToHexOpts,
-  bytesToHex,
-  type NumberToHexErrorType,
-  type NumberToHexOpts,
-  numberToHex,
-  type StringToHexErrorType,
-  type StringToHexOpts,
-  stringToHex,
-  type ToHexErrorType,
-  type ToHexParameters,
-  toHex,
-} from "./utils/encoding/toHex";
 export {
   type ConcatBytesErrorType,
   type ConcatErrorType,
@@ -445,11 +366,6 @@ export {
   isAddressEqual,
 } from "./utils/address/isAddressEqual";
 export { type IsHexErrorType, isHex } from "./utils/data/isHex";
-export {
-  type Sha256Hash,
-  type Sha256ErrorType,
-  sha256,
-} from "./utils/hash/sha256";
 export {
   type PadBytesErrorType,
   type PadErrorType,

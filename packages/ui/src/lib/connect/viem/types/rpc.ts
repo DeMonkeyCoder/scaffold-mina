@@ -1,5 +1,3 @@
-import type { Address } from "@/lib/connect/viem";
-
 import type {
   Block,
   BlockHash,
@@ -81,21 +79,4 @@ export type RpcResponse<result = any, error = any> = {
 /** A key-value mapping of slot and storage values (supposedly 32 bytes each) */
 export type RpcStateMapping = {
   [slots: Hex]: Hex;
-};
-
-export type RpcAccountStateOverride = {
-  /** Fake balance to set for the account before executing the call. <32 bytes */
-  balance?: Hex | undefined;
-  /** Fake nonce to set for the account before executing the call. <8 bytes */
-  nonce?: Hex | undefined;
-  /** Fake EVM bytecode to inject into the account before executing the call. */
-  code?: Hex | undefined;
-  /** Fake key-value mapping to override all slots in the account storage before executing the call. */
-  state?: RpcStateMapping | undefined;
-  /** Fake key-value mapping to override individual slots in the account storage before executing the call. */
-  stateDiff?: RpcStateMapping | undefined;
-};
-
-export type RpcStateOverride = {
-  [address: Address]: RpcAccountStateOverride;
 };

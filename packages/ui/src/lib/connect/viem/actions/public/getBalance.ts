@@ -6,7 +6,6 @@ import type { ErrorType } from "../../errors/utils";
 import type { BlockTag } from "../../types/block";
 import type { Chain } from "../../types/chain";
 import type { RequestErrorType } from "../../utils/buildRequest";
-import { type NumberToHexErrorType } from "../../utils/encoding/toHex";
 
 export type GetBalanceParameters = {
   /** The address of the account. */
@@ -26,10 +25,7 @@ export type GetBalanceParameters = {
 
 export type GetBalanceReturnType = bigint;
 
-export type GetBalanceErrorType =
-  | NumberToHexErrorType
-  | RequestErrorType
-  | ErrorType;
+export type GetBalanceErrorType = RequestErrorType | ErrorType;
 
 /**
  * Returns the balance of an address in wei.

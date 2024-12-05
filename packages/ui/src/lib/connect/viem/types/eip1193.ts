@@ -10,13 +10,12 @@ import type {
   RpcFeeHistory as FeeHistory,
   RpcLog as Log,
   RpcProof as Proof,
-  RpcStateOverride,
   RpcTransaction as Transaction,
   RpcTransactionReceipt as TransactionReceipt,
   RpcTransactionRequest as TransactionRequest,
   RpcUncle as Uncle,
 } from "./rpc";
-import type { ExactPartial, OneOf, Prettify } from "./utils";
+import type { OneOf, Prettify } from "./utils";
 
 //////////////////////////////////////////////////
 // Provider
@@ -315,28 +314,6 @@ export type PublicRpcSchema = [
     ReturnType: string;
   },
   /**
-   * @description Executes a new message call immediately without submitting a transaction to the network
-   *
-   * @example
-   * provider.request({ method: 'mina_call', params: [{ to: '0x...', data: '0x...' }] })
-   * // => '0x...'
-   */
-  {
-    Method: "mina_call";
-    Parameters:
-      | [transaction: ExactPartial<TransactionRequest>]
-      | [
-          transaction: ExactPartial<TransactionRequest>,
-          block: BlockHash | BlockTag | BlockIdentifier
-        ]
-      | [
-          transaction: ExactPartial<TransactionRequest>,
-          block: BlockHash | BlockTag | BlockIdentifier,
-          stateOverrideSet: RpcStateOverride
-        ];
-    ReturnType: Hex;
-  },
-  /**
    * @description Returns the chain ID associated with the current network
    * @example
    * provider.request({ method: 'mina_networkId' })
@@ -357,28 +334,6 @@ export type PublicRpcSchema = [
     Method: "mina_coinbase";
     Parameters?: undefined;
     ReturnType: Address;
-  },
-  /**
-   * @description Estimates the gas necessary to complete a transaction without submitting it to the network
-   *
-   * @example
-   * provider.request({
-   *  method: 'mina_estimateGas',
-   *  params: [{ from: '0x...', to: '0x...', value: '0x...' }]
-   * })
-   * // => '0x5208'
-   */
-  {
-    Method: "mina_estimateGas";
-    Parameters:
-      | [transaction: TransactionRequest]
-      | [transaction: TransactionRequest, block: BlockHash | BlockTag]
-      | [
-          transaction: TransactionRequest,
-          block: BlockHash | BlockTag,
-          stateOverride: RpcStateOverride
-        ];
-    ReturnType: Quantity;
   },
   /**
    * @description Returns a collection of historical gas information
@@ -1228,28 +1183,6 @@ export type WalletRpcSchema = [
     Method: "mina_networkId";
     Parameters?: undefined;
     ReturnType: string;
-  },
-  /**
-   * @description Estimates the gas necessary to complete a transaction without submitting it to the network
-   *
-   * @example
-   * provider.request({
-   *  method: 'mina_estimateGas',
-   *  params: [{ from: '0x...', to: '0x...', value: '0x...' }]
-   * })
-   * // => '0x5208'
-   */
-  {
-    Method: "mina_estimateGas";
-    Parameters:
-      | [transaction: TransactionRequest]
-      | [transaction: TransactionRequest, block: BlockHash | BlockTag]
-      | [
-          transaction: TransactionRequest,
-          block: BlockHash | BlockTag,
-          stateOverride: RpcStateOverride
-        ];
-    ReturnType: Quantity;
   },
   /**
    * @description Requests that the user provides an Ethereum address to be identified by. Typically causes a browser extension popup to appear.

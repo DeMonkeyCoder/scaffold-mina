@@ -4,17 +4,13 @@ import type { Transport } from "../../clients/transports/createTransport";
 import type { ErrorType } from "../../errors/utils";
 import type { Chain } from "../../types/chain";
 import type { RequestErrorType } from "../../utils/buildRequest";
-import { type NumberToHexErrorType } from "../../utils/encoding/toHex";
 
 export type SwitchChainParameters = {
   /** ID of Chain to switch to */
   id: Chain["id"];
 };
 
-export type SwitchChainErrorType =
-  | NumberToHexErrorType
-  | RequestErrorType
-  | ErrorType;
+export type SwitchChainErrorType = RequestErrorType | ErrorType;
 
 /**
  * Switch the target chain in a wallet.

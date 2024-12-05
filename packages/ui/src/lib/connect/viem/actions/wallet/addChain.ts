@@ -4,17 +4,13 @@ import type { Transport } from "../../clients/transports/createTransport";
 import type { ErrorType } from "../../errors/utils";
 import type { Chain } from "../../types/chain";
 import type { RequestErrorType } from "../../utils/buildRequest";
-import { type NumberToHexErrorType } from "../../utils/encoding/toHex";
 
 export type AddChainParameters = {
   /** The chain to add to the wallet. */
   chain: Chain;
 };
 
-export type AddChainErrorType =
-  | RequestErrorType
-  | NumberToHexErrorType
-  | ErrorType;
+export type AddChainErrorType = RequestErrorType | ErrorType;
 
 /**
  * Adds an EVM chain to the wallet.

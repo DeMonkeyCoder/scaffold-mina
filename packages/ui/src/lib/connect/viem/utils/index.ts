@@ -14,8 +14,6 @@ export {
   extractChain,
 } from "./chain/extractChain";
 
-export { arrayRegex, bytesRegex, integerRegex } from "./regex";
-
 export {
   type WebSocketAsyncErrorType,
   type WebSocketAsyncOptions,
@@ -45,16 +43,6 @@ export {
 } from "./rpc/socket";
 export { getWebSocketRpcClient } from "./rpc/webSocket";
 export { type StringifyErrorType, stringify } from "./stringify";
-export {
-  type ParseAbi,
-  type ParseAbiItem,
-  type ParseAbiParameter,
-  type ParseAbiParameters,
-  parseAbi,
-  parseAbiItem,
-  parseAbiParameter,
-  parseAbiParameters,
-} from "abitype";
 export {
   type ParseAccountErrorType,
   parseAccount,
@@ -100,46 +88,7 @@ export {
   sliceHex,
 } from "./data/slice";
 export { type TrimErrorType, type TrimReturnType, trim } from "./data/trim";
-export { type ExtractErrorType, extract } from "./formatters/extract";
-export {
-  type BoolToBytesErrorType,
-  type BoolToBytesOpts,
-  type HexToBytesErrorType,
-  type HexToBytesOpts,
-  type NumberToBytesErrorType,
-  type StringToBytesErrorType,
-  type StringToBytesOpts,
-  type ToBytesErrorType,
-  type ToBytesParameters,
-  boolToBytes,
-  toBytes,
-  hexToBytes,
-  numberToBytes,
-  stringToBytes,
-} from "./encoding/toBytes";
-export {
-  type BoolToHexErrorType,
-  type BoolToHexOpts,
-  type BytesToHexErrorType,
-  type BytesToHexOpts,
-  type NumberToHexErrorType,
-  type NumberToHexOpts,
-  type StringToHexErrorType,
-  type StringToHexOpts,
-  type ToHexErrorType,
-  type ToHexParameters,
-  boolToHex,
-  bytesToHex,
-  toHex,
-  numberToHex,
-  stringToHex,
-} from "./encoding/toHex";
 export { getAction } from "./getAction";
-export {
-  type DefineFormatterErrorType,
-  defineFormatter,
-} from "./formatters/formatter";
-export { type Sha256ErrorType, sha256 } from "./hash/sha256";
 export {
   type CreateNonceManagerParameters,
   type NonceManager,
