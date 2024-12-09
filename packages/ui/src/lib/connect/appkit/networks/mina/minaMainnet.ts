@@ -1,8 +1,10 @@
-import {defineChain} from "../../utils/chain/defineChain";
+import {defineChain} from '../utils'
 
-export const mainnet = /*#__PURE__*/ defineChain({
+// @ts-ignore
+export const minaMainnet = defineChain({
     id: "mina:mainnet",
     name: "Mina Mainnet",
+    network: 'mina:mainnet',
     nativeCurrency: {name: "MINA", symbol: "MINA", decimals: 9},
     rpcUrls: {
         default: {
@@ -15,4 +17,10 @@ export const mainnet = /*#__PURE__*/ defineChain({
             url: "https://minascan.io/mainnet",
         },
     },
-});
+    testnet: false,
+    // @ts-ignore
+    chainNamespace: 'mina',
+    // @ts-ignore
+    caipNetworkId: 'mina:mainnet',
+    deprecatedCaipNetworkId: 'mina:mainnet'
+})

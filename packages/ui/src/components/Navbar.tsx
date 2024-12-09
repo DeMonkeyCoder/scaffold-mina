@@ -1,98 +1,95 @@
 import Image from "next/image";
-import { useAccount } from "@/lib/connect/react/hooks/useAccount";
-import { useBalance } from "@/lib/connect/react/hooks/useBalance";
-import ConnectWallet from "./ConnectWallet";
-import { formatMina } from "@mina-js/utils";
-import { useNetworkId } from "@/lib/connect/react/hooks/useNetworkId";
-import { useChains } from "@/lib/connect/react/hooks/useChains";
-import { useBlockHash } from "@/lib/connect/react/hooks/useBlockHash";
-import { useEffect } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import {useAccount} from "@/lib/connect/react/hooks/useAccount";
+import {useBalance} from "@/lib/connect/react/hooks/useBalance";
+import {useNetworkId} from "@/lib/connect/react/hooks/useNetworkId";
+import {useChains} from "@/lib/connect/react/hooks/useChains";
+import {useBlockHash} from "@/lib/connect/react/hooks/useBlockHash";
+import {useEffect} from "react";
+import {useQueryClient} from "@tanstack/react-query";
+import {ConnectWallet} from "@/components/ConnectWallet";
 
 export default function Navbar() {
-  const { isConnected, address } = useAccount();
+    const {isConnected, address} = useAccount();
 
-  const { data: blockHash } = useBlockHash({ watch: true });
-  const { data: balance, queryKey } = useBalance({
-    address,
-  });
-  const queryClient = useQueryClient();
-  useEffect(() => {
-    queryClient.invalidateQueries({ queryKey });
-  }, [blockHash, queryClient, queryKey]);
+    const {data: blockHash} = useBlockHash({watch: true});
+    const {data: balance, queryKey} = useBalance({
+        address,
+    });
+    const queryClient = useQueryClient();
+    useEffect(() => {
+        queryClient.invalidateQueries({queryKey});
+    }, [blockHash, queryClient, queryKey]);
 
-  const networkId = useNetworkId();
-  const chains = useChains();
+    const networkId = useNetworkId();
+    const chains = useChains();
 
-  if (!isConnected) return <div></div>;
+    if (!isConnected) return <div></div>;
 
-  return (
-    <nav className="absolute top-3 w-full z-50">
-      <div className="py-1 mx-10 px-10 bg-purple-50 shadow-lg rounded-full border-stone-400 ">
-        <div className="relative flex h-12 items-center justify-between">
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex items-center font-bold">
-              <img
-                className="h-6 w-auto mr-1"
-                src="/assets/minalogo.png"
-                alt=""
-              />{" "}
-              Scaffold-
-              <div className="bg-gradient-to-r from-purple-600 to-orange-500 text-transparent bg-clip-text">
-                MINA
-              </div>
-            </div>
-            <div className="hidden sm:ml-6 sm:block">
-              <div className="flex">
-                <a
-                  href="#"
-                  className="px-8 py-2 text-sm font-medium text-black rounded-2xl transition-colors duration-200 ease-in-out hover:bg-gray-200"
-                >
-                  Home
-                </a>
-                <div className="flex rounded-2xl transition-colors duration-200 ease-in-out hover:bg-gray-200">
-                  <Image
-                    alt="debug-contracts"
-                    width={16}
-                    height={16}
-                    src="/assets/debug.svg"
-                  />
-                  <a
-                    href="#"
-                    className="flex justify-center items-center text-sm font-medium text-black pr-3 pl-1"
-                  >
-                    Debug Contracts
-                  </a>
+    return (
+        <nav className="absolute top-3 w-full z-50">
+            <div className="py-1 mx-10 px-10 bg-purple-50 shadow-lg rounded-full border-stone-400 ">
+                <div className="relative flex h-12 items-center justify-between">
+                    <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                        <div className="flex items-center font-bold">
+                            <img
+                                className="h-6 w-auto mr-1"
+                                src="/assets/minalogo.png"
+                                alt=""
+                            />{" "}
+                            Scaffold-
+                            <div
+                                className="bg-gradient-to-r from-purple-600 to-orange-500 text-transparent bg-clip-text">
+                                MINA
+                            </div>
+                        </div>
+                        <div className="hidden sm:ml-6 sm:block">
+                            <div className="flex">
+                                <a
+                                    href="#"
+                                    className="px-8 py-2 text-sm font-medium text-black rounded-2xl transition-colors duration-200 ease-in-out hover:bg-gray-200"
+                                >
+                                    Home
+                                </a>
+                                <div
+                                    className="flex rounded-2xl transition-colors duration-200 ease-in-out hover:bg-gray-200">
+                                    <Image
+                                        alt="debug-contracts"
+                                        width={16}
+                                        height={16}
+                                        src="/assets/debug.svg"
+                                    />
+                                    <a
+                                        href="#"
+                                        className="flex justify-center items-center text-sm font-medium text-black pr-3 pl-1"
+                                    >
+                                        Debug Contracts
+                                    </a>
+                                </div>
+                                <div
+                                    className="flex items-center rounded-2xl transition-colors duration-200 ease-in-out hover:bg-gray-200 pl-2">
+                                    <img
+                                        className="h-6 w-auto"
+                                        src="/assets/minalogo.png"
+                                        alt=""
+                                    />
+                                    <a
+                                        href="https://faucet.minaprotocol.com/?address"
+                                        target="blank"
+                                        className="flex justify-center items-center text-sm font-medium text-black pl-1 pr-2"
+                                    >
+                                        Mina Faucet
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                        <ConnectWallet/>
+                    </div>
                 </div>
-                <div className="flex items-center rounded-2xl transition-colors duration-200 ease-in-out hover:bg-gray-200 pl-2">
-                  <img
-                    className="h-6 w-auto"
-                    src="/assets/minalogo.png"
-                    alt=""
-                  />
-                  <a
-                    href="https://faucet.minaprotocol.com/?address"
-                    target="blank"
-                    className="flex justify-center items-center text-sm font-medium text-black pl-1 pr-2"
-                  >
-                    Mina Faucet
-                  </a>
-                </div>
-              </div>
             </div>
-          </div>
-
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {networkId && chains.find((c) => c.id === networkId)?.name}{" "}
-            {isConnected && (
-              <>
-                {balance ? formatMina(balance.value) : "..."} MINA
-                <ConnectWallet />
-              </>
-            )}
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
+        </nav>
+    );
 }

@@ -1,75 +1,9 @@
-import { formatPublicKey } from "@/utils";
-import Image from "next/image";
-import { useCallback, useState } from "react";
-import { isSupportedNetwork, NETWORK_ID } from "@/constants/network";
-import { PublicKey } from "o1js";
-import { useConnect } from "@/lib/connect/react/hooks/useConnect";
-import { useConnectors } from "@/lib/connect/react/hooks/useConnectors";
-import { useDisconnect } from "@/lib/connect/react/hooks/useDisconnect";
-import { useAccount } from "@/lib/connect/react/hooks/useAccount";
-import { useNetworkId } from "@/lib/connect/react/hooks/useNetworkId";
-import { useSwitchChain } from "@/lib/connect/react/hooks/useSwitchChain";
+'use client'
 
-export default function ConnectWallet() {
-  const { address, isConnected } = useAccount();
-
-  const networkId = useNetworkId();
-
-  const { connect: wagmiConnect } = useConnect();
-  const connectors = useConnectors();
-  const connect = useCallback(() => {
-    try {
-      wagmiConnect({
-        connector: connectors[0],
-      });
-    } catch (e) {
-      console.log("errrr");
-      console.log(e);
-    }
-  }, [connectors, wagmiConnect]);
-  const { disconnect } = useDisconnect();
-  const [isHovered, setIsHovered] = useState(false);
-
-  const { switchChain } = useSwitchChain();
-
-  if (!connectors) {
+export const ConnectWallet = () => {
     return (
-      <a
-        href="https://pallad.co/"
-        target="_blank"
-        rel="noreferrer"
-        className="card flex items-center justify-center"
-      >
-        Install Wallet
-      </a>
-    );
-  }
-
-  return (
-    <button
-      className="card flex items-center justify-center"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={() => {
-        if (!isConnected) {
-          connect();
-        } else if (!isSupportedNetwork(networkId)) {
-          switchChain({ networkId: NETWORK_ID });
-        } else {
-          disconnect();
-        }
-      }}
-    >
-      <Image width={16} height={16} src="/assets/wallet-2.svg" alt="" />
-      {isConnected
-        ? isSupportedNetwork(networkId)
-          ? isHovered
-            ? "Disconnect"
-            : address
-            ? formatPublicKey(PublicKey.fromBase58(address))
-            : "No Account"
-          : "Wrong Network"
-        : "Connect Wallet"}
-    </button>
-  );
+        <div>
+            <appkit-button/>
+        </div>
+    )
 }
