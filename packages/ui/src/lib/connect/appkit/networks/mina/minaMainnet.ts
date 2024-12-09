@@ -1,7 +1,8 @@
-import {defineChain} from '../utils'
+import type {AppKitNetwork} from "@reown/appkit/networks";
+import {defineChain} from '@reown/appkit/networks'
+import {CaipNetworkId, ChainNamespace} from "@reown/appkit-common/dist/types/src/utils/TypeUtil";
 
-// @ts-ignore
-export const minaMainnet = defineChain({
+export const minaMainnet: AppKitNetwork = defineChain({
     id: "mina:mainnet",
     name: "Mina Mainnet",
     network: 'mina:mainnet',
@@ -18,9 +19,7 @@ export const minaMainnet = defineChain({
         },
     },
     testnet: false,
-    // @ts-ignore
-    chainNamespace: 'mina',
-    // @ts-ignore
-    caipNetworkId: 'mina:mainnet',
+    chainNamespace: 'mina' as ChainNamespace,
+    caipNetworkId: 'mina:mainnet' as CaipNetworkId,
     deprecatedCaipNetworkId: 'mina:mainnet'
 })

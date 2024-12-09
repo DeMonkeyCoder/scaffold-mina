@@ -1,6 +1,6 @@
 import {WagmiAdapter} from '@/lib/connect/adapter/src'
 import type {AppKitNetwork} from '@reown/appkit/networks'
-import {devnet, mainnet, minaDevnet} from "@/lib/connect/appkit/networks";
+import {devnet, mainnet, minaDevnet, minaMainnet} from "@/lib/connect/appkit/networks";
 import {http} from "@/lib/connect/viem";
 import {Mina} from "o1js";
 
@@ -15,10 +15,11 @@ export const metadata = {
     name: 'Scaffold Mina',
     description: 'Scaffold Mina',
     url: 'https://scaffold-mina.on-fleek.app/',
+    icons: []
 }
 
 // for custom networks visit -> https://docs.reown.com/appkit/react/core/custom-networks
-export const networks = [minaDevnet, minaDevnet] as [AppKitNetwork, ...AppKitNetwork[]]
+export const networks = [minaDevnet, minaMainnet] as [AppKitNetwork, ...AppKitNetwork[]]
 
 //Set up the Wagmi Adapter (Config)
 export const wagmiAdapter = new WagmiAdapter({
