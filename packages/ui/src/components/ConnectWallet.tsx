@@ -2,7 +2,7 @@
 
 export const ConnectWallet = () => {
   return (
-    <div>
+    <div className="center">
       <appkit-button />
     </div>
   )
