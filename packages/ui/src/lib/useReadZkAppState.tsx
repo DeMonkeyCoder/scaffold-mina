@@ -15,12 +15,13 @@ export function useReadZkAppState<T extends SmartContract>({
     smartContract: new (...args: any[]) => T;
     watch?: boolean;
     stateVariable: StateVariable<T>;
-    publicKey: PublicKey;
+    publicKey: PublicKey | undefined;
 }) {
     const [data, setData] = useState<Field | null>(null);
     const {data: blockHash} = useBlockHash()
     useEffect(() => {
         async function getData() {
+            if (!publicKey) return;
             await fetchAccount({
                 publicKey,
             });

@@ -1,17 +1,18 @@
-import {useCallback, useEffect, useMemo, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import GradientBG from "../components/GradientBG.js";
 import LoadingScreen from "@/components/LoadingScreen";
 import {ConnectWallet} from "@/components/ConnectWallet";
 import {QuestContractProvider, useQuestContract,} from "@/lib/useQuestContract";
-import {CircuitString, PublicKey} from "o1js";
+import {CircuitString} from "o1js";
 import Image from "next/image";
 import {useMinaProvider} from "@/lib/ZkappContext";
 import {isSupportedNetwork} from "@/constants/network";
 import AccountDoesNotExist from "@/components/AccountDoesNotExist";
 import {useAccount} from "@/lib/connect/react/hooks/useAccount";
-import {useNetworkId} from "@/lib/connect/react/hooks/useNetworkId";
 import {useReadZkAppState} from "@/lib/useReadZkAppState";
 import {Quest} from "scaffold-mina-contracts";
+import {useAppKitNetwork} from "@reown/appkit/react";
+import useDeployedContracts from "@/contracts/useDeployedContracts";
 
 enum TransactionState {
     INITIAL,
@@ -25,13 +26,13 @@ function HomeBody() {
     const {address, isConnected} = useAccount();
 
     const {accountExists} = useMinaProvider();
-    const networkId = useNetworkId();
+    const {chainId: networkId} = useAppKitNetwork()
+
+    const deployedContracts = useDeployedContracts();
 
     const {data: currentNum} = useReadZkAppState({
         smartContract: Quest,
-        publicKey: useMemo(() => PublicKey.fromBase58(
-            "B62qjDnppFhY5tsEmLbCDRniCoJcYqLmHpEeXVfwM4Ej18uJFhTrmBb"
-        ), []),
+        publicKey: networkId ? deployedContracts[networkId]?.Quest?.publicKey : undefined,
         stateVariable: "counter",
         watch: true,
     });
@@ -184,11 +185,7 @@ function HomeBody() {
 
 export default function Home() {
     return (
-        <QuestContractProvider
-            zkappPublicKey={PublicKey.fromBase58(
-                "B62qjDnppFhY5tsEmLbCDRniCoJcYqLmHpEeXVfwM4Ej18uJFhTrmBb"
-            )}
-        >
+        <QuestContractProvider>
             <HomeBody/>
         </QuestContractProvider>
     );
