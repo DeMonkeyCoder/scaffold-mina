@@ -1,16 +1,16 @@
-import type { Account } from "../../accounts/types";
-import type { Client } from "../../clients/createClient";
-import type { Transport } from "../../clients/transports/createTransport";
-import type { ErrorType } from "../../errors/utils";
-import type { Chain } from "../../types/chain";
-import type { RequestErrorType } from "../../utils/buildRequest";
+import type { Account } from '../../accounts/types'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { RequestErrorType } from '../../utils/buildRequest'
 
 export type SwitchChainParameters = {
   /** ID of Chain to switch to */
-  id: Chain["id"];
-};
+  id: Chain['id']
+}
 
-export type SwitchChainErrorType = RequestErrorType | ErrorType;
+export type SwitchChainErrorType = RequestErrorType | ErrorType
 
 /**
  * Switch the target chain in a wallet.
@@ -34,13 +34,13 @@ export type SwitchChainErrorType = RequestErrorType | ErrorType;
  */
 export async function switchChain<
   chain extends Chain | undefined,
-  account extends Account | undefined = undefined
+  account extends Account | undefined = undefined,
 >(client: Client<Transport, chain, account>, { id }: SwitchChainParameters) {
   await client.request(
     {
-      method: "mina_switchChain",
+      method: 'mina_switchChain',
       params: [id],
     },
-    { retryCount: 0 }
-  );
+    { retryCount: 0 },
+  )
 }

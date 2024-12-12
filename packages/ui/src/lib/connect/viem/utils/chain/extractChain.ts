@@ -1,24 +1,24 @@
-import type { ErrorType } from "../../errors/utils";
-import type { Chain } from "../../types/chain";
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
 
 export type ExtractChainParameters<
   chains extends readonly Chain[],
-  networkId extends chains[number]["id"]
+  networkId extends chains[number]['id'],
 > = {
-  chains: chains;
-  id: networkId | chains[number]["id"];
-};
+  chains: chains
+  id: networkId | chains[number]['id']
+}
 
 export type ExtractChainReturnType<
   chains extends readonly Chain[],
-  networkId extends chains[number]["id"]
-> = Extract<chains[number], { id: networkId }>;
+  networkId extends chains[number]['id'],
+> = Extract<chains[number], { id: networkId }>
 
-export type ExtractChainErrorType = ErrorType;
+export type ExtractChainErrorType = ErrorType
 
 export function extractChain<
   const chains extends readonly Chain[],
-  networkId extends chains[number]["id"]
+  networkId extends chains[number]['id'],
 >({
   chains,
   id,
@@ -29,5 +29,5 @@ export function extractChain<
   return chains.find((chain) => chain.id === id) as ExtractChainReturnType<
     chains,
     networkId
-  >;
+  >
 }

@@ -7,18 +7,18 @@ export {
   type WagmiProviderProps,
   WagmiContext,
   WagmiProvider,
-} from "../context";
+} from '../context'
 
 ////////////////////////////////////////////////////////////////////////////////
 // Errors
 ////////////////////////////////////////////////////////////////////////////////
 
-export { type BaseErrorType, BaseError } from "../errors/base";
+export { type BaseErrorType, BaseError } from '../errors/base'
 
 export {
   type WagmiProviderNotFoundErrorType,
   WagmiProviderNotFoundError,
-} from "../errors/context";
+} from '../errors/context'
 
 ////////////////////////////////////////////////////////////////////////////////
 // Hooks
@@ -28,114 +28,114 @@ export {
   type UseAccountParameters,
   type UseAccountReturnType,
   useAccount,
-} from "../hooks/useAccount";
+} from '../hooks/useAccount'
 
 export {
   type UseAccountEffectParameters,
   useAccountEffect,
-} from "../hooks/useAccountEffect";
+} from '../hooks/useAccountEffect'
 
 export {
   type UseBlockHashParameters,
   type UseBlockHashReturnType,
   useBlockHash,
-} from "../hooks/useBlockHash";
+} from '../hooks/useBlockHash'
 
 export {
   type UseNetworkIdParameters,
   type UseNetworkIdReturnType,
   useNetworkId,
-} from "../hooks/useNetworkId";
+} from '../hooks/useNetworkId'
 
 export {
   type UseChainsParameters,
   type UseChainsReturnType,
   useChains,
-} from "../hooks/useChains";
+} from '../hooks/useChains'
 
 export {
   type UseClientParameters,
   type UseClientReturnType,
   useClient,
-} from "../hooks/useClient";
+} from '../hooks/useClient'
 
 export {
   type UseConfigParameters,
   type UseConfigReturnType,
   useConfig,
-} from "../hooks/useConfig";
+} from '../hooks/useConfig'
 
 export {
   type UseConnectParameters,
   type UseConnectReturnType,
   useConnect,
-} from "../hooks/useConnect";
+} from '../hooks/useConnect'
 
 export {
   type UseConnectionsParameters,
   type UseConnectionsReturnType,
   useConnections,
-} from "../hooks/useConnections";
+} from '../hooks/useConnections'
 
 export {
   type UseConnectorsParameters,
   type UseConnectorsReturnType,
   useConnectors,
-} from "../hooks/useConnectors";
+} from '../hooks/useConnectors'
 
 export {
   type UseConnectorClientParameters,
   type UseConnectorClientReturnType,
   useConnectorClient,
-} from "../hooks/useConnectorClient";
+} from '../hooks/useConnectorClient'
 
 export {
   type UseDisconnectParameters,
   type UseDisconnectReturnType,
   useDisconnect,
-} from "../hooks/useDisconnect";
+} from '../hooks/useDisconnect'
 
 export {
   type UsePublicClientParameters,
   type UsePublicClientReturnType,
   usePublicClient,
-} from "../hooks/usePublicClient";
+} from '../hooks/usePublicClient'
 
 export {
   type UseReconnectParameters,
   type UseReconnectReturnType,
   useReconnect,
-} from "../hooks/useReconnect";
+} from '../hooks/useReconnect'
 
 export {
   type UseSwitchAccountParameters,
   type UseSwitchAccountReturnType,
   useSwitchAccount,
-} from "../hooks/useSwitchAccount";
+} from '../hooks/useSwitchAccount'
 
 export {
   type UseSwitchChainParameters,
   type UseSwitchChainReturnType,
   useSwitchChain,
-} from "../hooks/useSwitchChain";
+} from '../hooks/useSwitchChain'
 
 export {
   type UseWalletClientParameters,
   type UseWalletClientReturnType,
   useWalletClient,
-} from "../hooks/useWalletClient";
+} from '../hooks/useWalletClient'
 
 export {
   type UseWatchBlockHashParameters,
   type UseWatchBlockHashReturnType,
   useWatchBlockHash,
-} from "../hooks/useWatchBlockHash";
+} from '../hooks/useWatchBlockHash'
 
 ////////////////////////////////////////////////////////////////////////////////
 // Hydrate
 ////////////////////////////////////////////////////////////////////////////////
 
-export { type HydrateProps, Hydrate } from "../hydrate";
+export { type HydrateProps, Hydrate } from '../hydrate'
 
 ////////////////////////////////////////////////////////////////////////////////
 // @/lib/connect/core/exports
@@ -188,10 +188,10 @@ export {
   normalizeNetworkId,
   parseCookie,
   serialize,
-} from "@/lib/connect/core/exports";
+} from '@/lib/connect/core/exports'
 
 ////////////////////////////////////////////////////////////////////////////////
 // Version
 ////////////////////////////////////////////////////////////////////////////////
 
-export { version } from "../version";
+export { version } from '../version'

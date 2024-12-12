@@ -1,40 +1,40 @@
-import type { Account } from "../../accounts/types";
+import type { Account } from '../../accounts/types'
 import {
   getNetworkId,
   type GetNetworkIdReturnType,
-} from "../../actions/public/getNetworkId";
+} from '../../actions/public/getNetworkId'
 import {
   addChain,
   type AddChainParameters,
-} from "../../actions/wallet/addChain";
+} from '../../actions/wallet/addChain'
 import {
   getAddresses,
   type GetAddressesReturnType,
-} from "../../actions/wallet/getAddresses";
+} from '../../actions/wallet/getAddresses'
 import {
   getPermissions,
   type GetPermissionsReturnType,
-} from "../../actions/wallet/getPermissions";
+} from '../../actions/wallet/getPermissions'
 import {
   requestAddresses,
   type RequestAddressesReturnType,
-} from "../../actions/wallet/requestAddresses";
+} from '../../actions/wallet/requestAddresses'
 import {
   requestPermissions,
   type RequestPermissionsParameters,
   type RequestPermissionsReturnType,
-} from "../../actions/wallet/requestPermissions";
+} from '../../actions/wallet/requestPermissions'
 import {
   switchChain,
   type SwitchChainParameters,
-} from "../../actions/wallet/switchChain";
-import type { Chain } from "../../types/chain";
-import type { Client } from "../createClient";
-import type { Transport } from "../transports/createTransport";
+} from '../../actions/wallet/switchChain'
+import type { Chain } from '../../types/chain'
+import type { Client } from '../createClient'
+import type { Transport } from '../transports/createTransport'
 
 export type WalletActions<
   chain extends Chain | undefined = Chain | undefined,
-  account extends Account | undefined = Account | undefined
+  account extends Account | undefined = Account | undefined,
 > = {
   /**
    * Adds an EVM chain to the wallet.
@@ -53,7 +53,7 @@ export type WalletActions<
    * })
    * await client.addChain({ chain: optimism })
    */
-  addChain: (args: AddChainParameters) => Promise<void>;
+  addChain: (args: AddChainParameters) => Promise<void>
   /**
    * Returns a list of account addresses owned by the wallet or client.
    *
@@ -72,7 +72,7 @@ export type WalletActions<
    * })
    * const accounts = await client.getAddresses()
    */
-  getAddresses: () => Promise<GetAddressesReturnType>;
+  getAddresses: () => Promise<GetAddressesReturnType>
   /**
    * Returns the chain ID associated with the current network.
    *
@@ -92,7 +92,7 @@ export type WalletActions<
    * const networkId = await client.getNetworkId()
    * // 1
    */
-  getNetworkId: () => Promise<GetNetworkIdReturnType>;
+  getNetworkId: () => Promise<GetNetworkIdReturnType>
   /**
    * Gets the wallets current permissions.
    *
@@ -111,7 +111,7 @@ export type WalletActions<
    * })
    * const permissions = await client.getPermissions()
    */
-  getPermissions: () => Promise<GetPermissionsReturnType>;
+  getPermissions: () => Promise<GetPermissionsReturnType>
   /**
    * Requests a list of accounts managed by a wallet.
    *
@@ -134,7 +134,7 @@ export type WalletActions<
    * })
    * const accounts = await client.requestAddresses()
    */
-  requestAddresses: () => Promise<RequestAddressesReturnType>;
+  requestAddresses: () => Promise<RequestAddressesReturnType>
   /**
    * Requests permissions for a wallet.
    *
@@ -157,8 +157,8 @@ export type WalletActions<
    * })
    */
   requestPermissions: (
-    args: RequestPermissionsParameters
-  ) => Promise<RequestPermissionsReturnType>;
+    args: RequestPermissionsParameters,
+  ) => Promise<RequestPermissionsReturnType>
   /**
    * Switch the target chain in a wallet.
    *
@@ -177,13 +177,13 @@ export type WalletActions<
    * })
    * await client.switchChain({ id: optimism.id })
    */
-  switchChain: (args: SwitchChainParameters) => Promise<void>;
-};
+  switchChain: (args: SwitchChainParameters) => Promise<void>
+}
 
 export function walletActions<
   transport extends Transport,
   chain extends Chain | undefined = Chain | undefined,
-  account extends Account | undefined = Account | undefined
+  account extends Account | undefined = Account | undefined,
 >(client: Client<transport, chain, account>): WalletActions<chain, account> {
   return {
     addChain: (args) => addChain(client, args),
@@ -193,5 +193,5 @@ export function walletActions<
     requestAddresses: () => requestAddresses(client),
     requestPermissions: (args) => requestPermissions(client, args),
     switchChain: (args) => switchChain(client, args),
-  };
+  }
 }

@@ -1,41 +1,41 @@
-import type { MutateOptions, MutationOptions } from "@tanstack/query-core";
+import type { MutateOptions, MutationOptions } from '@tanstack/query-core'
 
 import {
   type SwitchChainErrorType,
   type SwitchChainParameters,
   type SwitchChainReturnType,
   switchChain,
-} from "../actions/switchChain";
-import type { Config } from "../createConfig";
-import type { Compute } from "../types/utils";
+} from '../actions/switchChain'
+import type { Config } from '../createConfig'
+import type { Compute } from '../types/utils'
 
 export function switchChainMutationOptions<config extends Config>(
-  config: config
+  config: config,
 ) {
   return {
     mutationFn(variables) {
-      return switchChain(config, variables);
+      return switchChain(config, variables)
     },
-    mutationKey: ["switchChain"],
+    mutationKey: ['switchChain'],
   } as const satisfies MutationOptions<
-    SwitchChainData<config, config["chains"][number]["id"]>,
+    SwitchChainData<config, config['chains'][number]['id']>,
     SwitchChainErrorType,
-    SwitchChainVariables<config, config["chains"][number]["id"]>
-  >;
+    SwitchChainVariables<config, config['chains'][number]['id']>
+  >
 }
 
 export type SwitchChainData<
   config extends Config,
-  networkId extends config["chains"][number]["id"]
-> = Compute<SwitchChainReturnType<config, networkId>>;
+  networkId extends config['chains'][number]['id'],
+> = Compute<SwitchChainReturnType<config, networkId>>
 
 export type SwitchChainVariables<
   config extends Config,
-  networkId extends config["chains"][number]["id"]
-> = Compute<SwitchChainParameters<config, networkId>>;
+  networkId extends config['chains'][number]['id'],
+> = Compute<SwitchChainParameters<config, networkId>>
 
 export type SwitchChainMutate<config extends Config, context = unknown> = <
-  networkId extends config["chains"][number]["id"]
+  networkId extends config['chains'][number]['id'],
 >(
   variables: SwitchChainVariables<config, networkId>,
   options?:
@@ -47,11 +47,11 @@ export type SwitchChainMutate<config extends Config, context = unknown> = <
           context
         >
       >
-    | undefined
-) => void;
+    | undefined,
+) => void
 
 export type SwitchChainMutateAsync<config extends Config, context = unknown> = <
-  networkId extends config["chains"][number]["id"]
+  networkId extends config['chains'][number]['id'],
 >(
   variables: SwitchChainVariables<config, networkId>,
   options?:
@@ -63,5 +63,5 @@ export type SwitchChainMutateAsync<config extends Config, context = unknown> = <
           context
         >
       >
-    | undefined
-) => Promise<SwitchChainData<config, networkId>>;
+    | undefined,
+) => Promise<SwitchChainData<config, networkId>>

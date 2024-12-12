@@ -1,16 +1,16 @@
-import type { Account } from "../../accounts/types";
-import type { Client } from "../../clients/createClient";
-import type { Transport } from "../../clients/transports/createTransport";
-import type { ErrorType } from "../../errors/utils";
-import type { Chain } from "../../types/chain";
-import type { RequestErrorType } from "../../utils/buildRequest";
+import type { Account } from '../../accounts/types'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { RequestErrorType } from '../../utils/buildRequest'
 
 export type AddChainParameters = {
   /** The chain to add to the wallet. */
-  chain: Chain;
-};
+  chain: Chain
+}
 
-export type AddChainErrorType = RequestErrorType | ErrorType;
+export type AddChainErrorType = RequestErrorType | ErrorType
 
 /**
  * Adds an EVM chain to the wallet.
@@ -33,12 +33,12 @@ export type AddChainErrorType = RequestErrorType | ErrorType;
  */
 export async function addChain<
   chain extends Chain | undefined,
-  account extends Account | undefined
+  account extends Account | undefined,
 >(client: Client<Transport, chain, account>, { chain }: AddChainParameters) {
-  const { id, name, nativeCurrency, rpcUrls, blockExplorers } = chain;
+  const { id, name, nativeCurrency, rpcUrls, blockExplorers } = chain
   await client.request(
     {
-      method: "wallet_addEthereumChain",
+      method: 'wallet_addEthereumChain',
       params: [
         {
           networkId: id,
@@ -51,6 +51,6 @@ export async function addChain<
         },
       ],
     },
-    { dedupe: true, retryCount: 0 }
-  );
+    { dedupe: true, retryCount: 0 },
+  )
 }

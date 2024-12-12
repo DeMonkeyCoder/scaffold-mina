@@ -1,31 +1,31 @@
-import type { Address } from "@/lib/connect/viem";
+import type { Address } from '@/lib/connect/viem'
 
-import type { Account, JsonRpcAccount } from "../accounts/types";
-import type { IsUndefined, Prettify } from "./utils";
+import type { Account, JsonRpcAccount } from '../accounts/types'
+import type { IsUndefined, Prettify } from './utils'
 
 export type DeriveAccount<
   account extends Account | undefined,
-  accountOverride extends Account | Address | undefined
-> = accountOverride extends Account | Address ? accountOverride : account;
+  accountOverride extends Account | Address | undefined,
+> = accountOverride extends Account | Address ? accountOverride : account
 
 export type GetAccountParameter<
   account extends Account | undefined = Account | undefined,
   accountOverride extends Account | Address | undefined = Account | Address,
-  required extends boolean = true
+  required extends boolean = true,
 > = IsUndefined<account> extends true
   ? required extends true
     ? { account: accountOverride | Account | Address }
     : { account?: accountOverride | Account | Address | undefined }
-  : { account?: accountOverride | Account | Address | undefined };
+  : { account?: accountOverride | Account | Address | undefined }
 
 export type ParseAccount<
   accountOrAddress extends Account | Address | undefined =
     | Account
     | Address
-    | undefined
+    | undefined,
 > = accountOrAddress extends Address
   ? Prettify<JsonRpcAccount<accountOrAddress>>
-  : accountOrAddress;
+  : accountOrAddress
 
-export type { Account } from "../accounts/types";
-export type { HDKey } from "@scure/bip32";
+export type { Account } from '../accounts/types'
+export type { HDKey } from '@scure/bip32'

@@ -1,22 +1,22 @@
-import type { Account } from "../../accounts/types";
-import type { Client } from "../../clients/createClient";
-import type { Transport } from "../../clients/transports/createTransport";
-import type { ErrorType } from "../../errors/utils";
-import type { Chain } from "../../types/chain";
-import type { WalletPermission } from "../../types/eip1193";
-import type { Prettify } from "../../types/utils";
-import type { RequestErrorType } from "../../utils/buildRequest";
+import type { Account } from '../../accounts/types'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { WalletPermission } from '../../types/eip1193'
+import type { Prettify } from '../../types/utils'
+import type { RequestErrorType } from '../../utils/buildRequest'
 
 export type RequestPermissionsParameters = Prettify<
   {
-    mina_accounts: Record<string, any>;
+    mina_accounts: Record<string, any>
   } & {
-    [key: string]: Record<string, any>;
+    [key: string]: Record<string, any>
   }
->;
-export type RequestPermissionsReturnType = WalletPermission[];
+>
+export type RequestPermissionsReturnType = WalletPermission[]
 
-export type RequestPermissionsErrorType = RequestErrorType | ErrorType;
+export type RequestPermissionsErrorType = RequestErrorType | ErrorType
 
 /**
  * Requests permissions for a wallet.
@@ -43,16 +43,16 @@ export type RequestPermissionsErrorType = RequestErrorType | ErrorType;
  */
 export async function requestPermissions<
   chain extends Chain | undefined,
-  account extends Account | undefined = undefined
+  account extends Account | undefined = undefined,
 >(
   client: Client<Transport, chain, account>,
-  permissions: RequestPermissionsParameters
+  permissions: RequestPermissionsParameters,
 ) {
   return client.request(
     {
-      method: "wallet_requestPermissions",
+      method: 'wallet_requestPermissions',
       params: [permissions],
     },
-    { retryCount: 0 }
-  );
+    { retryCount: 0 },
+  )
 }

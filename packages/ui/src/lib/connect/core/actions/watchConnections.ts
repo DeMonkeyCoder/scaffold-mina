@@ -1,9 +1,6 @@
 import type { Config } from '../createConfig'
 import { deepEqual } from '../utils/deepEqual'
-import {
-  type GetConnectionsReturnType,
-  getConnections,
-} from './getConnections'
+import { type GetConnectionsReturnType, getConnections } from './getConnections'
 
 export type WatchConnectionsParameters = {
   onChange(

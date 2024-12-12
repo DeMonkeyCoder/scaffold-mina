@@ -1,38 +1,38 @@
-import { type Address } from "@/lib/connect/viem";
+import { type Address } from '@/lib/connect/viem'
 import {
   getBalance as viem_getBalance,
   type GetBalanceErrorType as viem_GetBalanceErrorType,
   type GetBalanceParameters as viem_GetBalanceParameters,
-} from "@/lib/connect/viem/actions";
+} from '@/lib/connect/viem/actions'
 
-import type { Config } from "../createConfig";
-import type { NetworkIdParameter } from "../types/properties";
-import type { Unit } from "../types/unit";
-import type { Compute } from "../types/utils";
-import { getAction } from "../utils/getAction";
+import type { Config } from '../createConfig'
+import type { NetworkIdParameter } from '../types/properties'
+import type { Unit } from '../types/unit'
+import type { Compute } from '../types/utils'
+import { getAction } from '../utils/getAction'
 
 export type GetBalanceParameters<config extends Config = Config> = Compute<
   NetworkIdParameter<config> &
     viem_GetBalanceParameters & {
       /** @deprecated */
-      token?: Address | undefined;
+      token?: Address | undefined
       /** @deprecated */
-      unit?: Unit | undefined;
+      unit?: Unit | undefined
     }
->;
+>
 
 export type GetBalanceReturnType = {
-  decimals: number;
-  symbol: string;
-  value: bigint;
-};
+  decimals: number
+  symbol: string
+  value: bigint
+}
 
-export type GetBalanceErrorType = viem_GetBalanceErrorType;
+export type GetBalanceErrorType = viem_GetBalanceErrorType
 
 /** https://wagmi.sh/core/api/actions/getBalance */
 export async function getBalance<config extends Config>(
   config: config,
-  parameters: GetBalanceParameters<config>
+  parameters: GetBalanceParameters<config>,
 ): Promise<GetBalanceReturnType> {
   const {
     address,
@@ -40,21 +40,21 @@ export async function getBalance<config extends Config>(
     blockTag,
     networkId,
     token: tokenAddress,
-    unit = "ether",
-  } = parameters;
+    unit = 'ether',
+  } = parameters
 
   if (tokenAddress) {
-    throw new Error("not supported yet");
+    throw new Error('not supported yet')
   }
-  const client = config.getClient({ networkId });
-  const action = getAction(client, viem_getBalance, "getBalance");
+  const client = config.getClient({ networkId })
+  const action = getAction(client, viem_getBalance, 'getBalance')
   const value = await action(
-    blockNumber ? { address, blockNumber } : { address, blockTag }
-  );
-  const chain = config.chains.find((x) => x.id === networkId) ?? client.chain!;
+    blockNumber ? { address, blockNumber } : { address, blockTag },
+  )
+  const chain = config.chains.find((x) => x.id === networkId) ?? client.chain!
   return {
     decimals: chain.nativeCurrency.decimals,
     symbol: chain.nativeCurrency.symbol,
     value,
-  };
+  }
 }

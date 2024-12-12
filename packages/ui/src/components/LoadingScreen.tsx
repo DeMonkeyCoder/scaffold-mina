@@ -4,5 +4,5 @@ export default function LoadingScreen() {
       <span className="loadingText">Loading</span>
       <img className="w-14" src="/assets/qubeanimation.gif" />
     </div>
-  );
+  )
 }

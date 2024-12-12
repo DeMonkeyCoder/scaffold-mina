@@ -1,18 +1,18 @@
-import {defineChain} from "../../utils/chain/defineChain";
+import { defineChain } from '../../utils/chain/defineChain'
 
 export const mainnet = /*#__PURE__*/ defineChain({
-    id: "mina:mainnet",
-    name: "Mina Mainnet",
-    nativeCurrency: {name: "MINA", symbol: "MINA", decimals: 9},
-    rpcUrls: {
-        default: {
-            http: ["https://mainnet.klesia.palladians.xyz/api"],
-        },
+  id: 'mina:mainnet',
+  name: 'Mina Mainnet',
+  nativeCurrency: { name: 'MINA', symbol: 'MINA', decimals: 9 },
+  rpcUrls: {
+    default: {
+      http: ['https://mainnet.klesia.palladians.xyz/api'],
     },
-    blockExplorers: {
-        default: {
-            name: "Minascan",
-            url: "https://minascan.io/mainnet",
-        },
+  },
+  blockExplorers: {
+    default: {
+      name: 'Minascan',
+      url: 'https://minascan.io/mainnet',
     },
-});
+  },
+})

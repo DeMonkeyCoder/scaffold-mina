@@ -1,34 +1,34 @@
-import type { Address } from "@/lib/connect/viem";
-import type { Hex } from "./misc";
-import type { Quantity } from "./rpc";
-import type { OneOf, Prettify } from "./utils";
+import type { Address } from '@/lib/connect/viem'
+import type { Hex } from './misc'
+import type { Quantity } from './rpc'
+import type { OneOf, Prettify } from './utils'
 
 //////////////////////////////////////////////////
 // Provider
 
-export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema];
+export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema]
 
 export type EIP1193Provider = Prettify<
   EIP1193Events & {
-    request: EIP1193RequestFn<EIP1474Methods>;
+    request: EIP1193RequestFn<EIP1474Methods>
   }
->;
+>
 
 //////////////////////////////////////////////////
 // Errors
 
 export type ProviderRpcErrorType = ProviderRpcError & {
-  name: "ProviderRpcError";
-};
+  name: 'ProviderRpcError'
+}
 
 export class ProviderRpcError extends Error {
-  code: number;
-  details: string;
+  code: number
+  details: string
 
   constructor(code: number, message: string) {
-    super(message);
-    this.code = code;
-    this.details = message;
+    super(message)
+    this.code = code
+    this.details = message
   }
 }
 
@@ -36,183 +36,183 @@ export class ProviderRpcError extends Error {
 // Provider Events
 
 export type ProviderConnectInfo = {
-  networkId: string;
-};
+  networkId: string
+}
 
 export type ProviderMessage = {
-  type: string;
-  data: unknown;
-};
+  type: string
+  data: unknown
+}
 
 export type EIP1193EventMap = {
-  accountsChanged(accounts: Address[]): void;
-  chainChanged(networkId: string): void;
-  connect(connectInfo: ProviderConnectInfo): void;
-  disconnect(error: ProviderRpcError): void;
-  message(message: ProviderMessage): void;
-};
+  accountsChanged(accounts: Address[]): void
+  chainChanged(networkId: string): void
+  connect(connectInfo: ProviderConnectInfo): void
+  disconnect(error: ProviderRpcError): void
+  message(message: ProviderMessage): void
+}
 
 export type EIP1193Events = {
   on<event extends keyof EIP1193EventMap>(
     event: event,
-    listener: EIP1193EventMap[event]
-  ): void;
+    listener: EIP1193EventMap[event],
+  ): void
   removeListener<event extends keyof EIP1193EventMap>(
     event: event,
-    listener: EIP1193EventMap[event]
-  ): void;
-};
+    listener: EIP1193EventMap[event],
+  ): void
+}
 
 //////////////////////////////////////////////////
 // Provider Requests
 
 export type AddEthereumChainParameter = {
   /** A 0x-prefixed hexadecimal string */
-  networkId: string;
+  networkId: string
   /** The chain name. */
-  chainName: string;
+  chainName: string
   /** Native currency for the chain. */
   nativeCurrency?:
     | {
-        name: string;
-        symbol: string;
-        decimals: number;
+        name: string
+        symbol: string
+        decimals: number
       }
-    | undefined;
-  rpcUrls: readonly string[];
-  blockExplorerUrls?: string[] | undefined;
-  iconUrls?: string[] | undefined;
-};
+    | undefined
+  rpcUrls: readonly string[]
+  blockExplorerUrls?: string[] | undefined
+  iconUrls?: string[] | undefined
+}
 
 export type NetworkSync = {
   /** The current block number */
-  currentBlock: Quantity;
+  currentBlock: Quantity
   /** Number of latest block on the network */
-  highestBlock: Quantity;
+  highestBlock: Quantity
   /** Block number at which syncing started */
-  startingBlock: Quantity;
-};
+  startingBlock: Quantity
+}
 
 export type WalletCapabilities = {
-  [capability: string]: any;
-};
+  [capability: string]: any
+}
 
 export type WalletCapabilitiesRecord<
   capabilities extends WalletCapabilities = WalletCapabilities,
-  id extends string | number = Hex
+  id extends string | number = Hex,
 > = {
-  [networkId in id]: capabilities;
-};
+  [networkId in id]: capabilities
+}
 
 export type WalletCallReceipt<quantity = Hex, status = Hex> = {
   logs: {
-    address: Hex;
-    data: Hex;
-    topics: Hex[];
-  }[];
-  status: status;
-  blockHash: Hex;
-  blockNumber: quantity;
-  gasUsed: quantity;
-  transactionHash: Hex;
-};
+    address: Hex
+    data: Hex
+    topics: Hex[]
+  }[]
+  status: status
+  blockHash: Hex
+  blockNumber: quantity
+  gasUsed: quantity
+  transactionHash: Hex
+}
 
 export type WalletGrantPermissionsParameters = {
   signer?:
     | {
-        type: string;
-        data?: unknown | undefined;
+        type: string
+        data?: unknown | undefined
       }
-    | undefined;
+    | undefined
   permissions: readonly {
-    data: unknown;
+    data: unknown
     policies: readonly {
-      data: unknown;
-      type: string;
-    }[];
-    required?: boolean | undefined;
-    type: string;
-  }[];
-  expiry: number;
-};
+      data: unknown
+      type: string
+    }[]
+    required?: boolean | undefined
+    type: string
+  }[]
+  expiry: number
+}
 
 export type WalletGrantPermissionsReturnType = {
-  expiry: number;
-  factory?: `0x${string}` | undefined;
-  factoryData?: string | undefined;
+  expiry: number
+  factory?: `0x${string}` | undefined
+  factoryData?: string | undefined
   grantedPermissions: readonly {
-    data: unknown;
+    data: unknown
     policies: readonly {
-      data: unknown;
-      type: string;
-    }[];
-    required?: boolean | undefined;
-    type: string;
-  }[];
-  permissionsContext: string;
+      data: unknown
+      type: string
+    }[]
+    required?: boolean | undefined
+    type: string
+  }[]
+  permissionsContext: string
   signerData?:
     | {
-        userOpBuilder?: `0x${string}` | undefined;
-        submitToAddress?: `0x${string}` | undefined;
+        userOpBuilder?: `0x${string}` | undefined
+        submitToAddress?: `0x${string}` | undefined
       }
-    | undefined;
-};
+    | undefined
+}
 
 export type WalletGetCallsStatusReturnType<quantity = Hex, status = Hex> = {
-  status: "PENDING" | "CONFIRMED";
-  receipts?: WalletCallReceipt<quantity, status>[] | undefined;
-};
+  status: 'PENDING' | 'CONFIRMED'
+  receipts?: WalletCallReceipt<quantity, status>[] | undefined
+}
 
 export type WalletPermissionCaveat = {
-  type: string;
-  value: any;
-};
+  type: string
+  value: any
+}
 
 export type WalletPermission = {
-  caveats: WalletPermissionCaveat[];
-  date: number;
-  id: string;
-  invoker: `http://${string}` | `https://${string}`;
-  parentCapability: "mina_accounts" | string;
-};
+  caveats: WalletPermissionCaveat[]
+  date: number
+  id: string
+  invoker: `http://${string}` | `https://${string}`
+  parentCapability: 'mina_accounts' | string
+}
 
 export type WalletSendCallsParameters<
   capabilities extends WalletCapabilities = WalletCapabilities,
   networkId extends string = string,
-  quantity extends Quantity | bigint = Quantity
+  quantity extends Quantity | bigint = Quantity,
 > = [
   {
     calls: OneOf<
       | {
-          to: Address;
-          data?: Hex | undefined;
-          value?: quantity | undefined;
+          to: Address
+          data?: Hex | undefined
+          value?: quantity | undefined
         }
       | {
-          data: Hex;
+          data: Hex
         }
-    >[];
-    capabilities?: capabilities | undefined;
-    networkId: networkId;
-    from: Address;
-    version: string;
-  }
-];
+    >[]
+    capabilities?: capabilities | undefined
+    networkId: networkId
+    from: Address
+    version: string
+  },
+]
 
 export type WatchAssetParams = {
   /** Token type. */
-  type: "ERC20";
+  type: 'ERC20'
   options: {
     /** The address of the token contract */
-    address: string;
+    address: string
     /** A ticker symbol or shorthand, up to 11 characters */
-    symbol: string;
+    symbol: string
     /** The number of token decimals */
-    decimals: number;
+    decimals: number
     /** A string url of the token logo */
-    image?: string | undefined;
-  };
-};
+    image?: string | undefined
+  }
+}
 
 export type PublicRpcSchema = [
   /**
@@ -223,9 +223,9 @@ export type PublicRpcSchema = [
    * // => '0x1b4'
    */
   {
-    Method: "mina_blockHash";
-    Parameters?: undefined;
-    ReturnType: string;
+    Method: 'mina_blockHash'
+    Parameters?: undefined
+    ReturnType: string
   },
   /**
    * @description Returns the chain ID associated with the current network
@@ -234,9 +234,9 @@ export type PublicRpcSchema = [
    * // => '1'
    */
   {
-    Method: "mina_networkId";
-    Parameters?: undefined;
-    ReturnType: string;
+    Method: 'mina_networkId'
+    Parameters?: undefined
+    ReturnType: string
   },
   /**
    * @description Returns the balance of an address in wei
@@ -246,14 +246,14 @@ export type PublicRpcSchema = [
    * // => '0x12a05...'
    */
   {
-    Method: "mina_getBalance";
+    Method: 'mina_getBalance'
     Parameters: [
-      address: Address
+      address: Address,
       // block: BlockHash | BlockTag | BlockIdentifier
-    ];
-    ReturnType: Quantity;
-  }
-];
+    ]
+    ReturnType: Quantity
+  },
+]
 
 export type WalletRpcSchema = [
   /**
@@ -264,9 +264,9 @@ export type WalletRpcSchema = [
    * // => ['0x0fB69...']
    */
   {
-    Method: "mina_accounts";
-    Parameters?: undefined;
-    ReturnType: Address[];
+    Method: 'mina_accounts'
+    Parameters?: undefined
+    ReturnType: Address[]
   },
   /**
    * @description Returns the current chain ID associated with the wallet.
@@ -275,9 +275,9 @@ export type WalletRpcSchema = [
    * // => '1'
    */
   {
-    Method: "mina_networkId";
-    Parameters?: undefined;
-    ReturnType: string;
+    Method: 'mina_networkId'
+    Parameters?: undefined
+    ReturnType: string
   },
   /**
    * @description Requests that the user provides an Ethereum address to be identified by. Typically causes a browser extension popup to appear.
@@ -287,9 +287,9 @@ export type WalletRpcSchema = [
    * // => ['0x...', '0x...']
    */
   {
-    Method: "mina_requestAccounts";
-    Parameters?: undefined;
-    ReturnType: Address[];
+    Method: 'mina_requestAccounts'
+    Parameters?: undefined
+    ReturnType: Address[]
   },
   /**
    * @description Add an Ethereum chain to the wallet.
@@ -299,9 +299,9 @@ export type WalletRpcSchema = [
    * // => { ... }
    */
   {
-    Method: "wallet_addEthereumChain";
-    Parameters: [chain: AddEthereumChainParameter];
-    ReturnType: null;
+    Method: 'wallet_addEthereumChain'
+    Parameters: [chain: AddEthereumChainParameter]
+    ReturnType: null
   },
   /**
    * @description Gets the connected wallet's capabilities.
@@ -311,9 +311,9 @@ export type WalletRpcSchema = [
    * // => { ... }
    */
   {
-    Method: "wallet_getCapabilities";
-    Parameters?: [Address];
-    ReturnType: Prettify<WalletCapabilitiesRecord>;
+    Method: 'wallet_getCapabilities'
+    Parameters?: [Address]
+    ReturnType: Prettify<WalletCapabilitiesRecord>
   },
   /**
    * @description Gets the wallets current permissions.
@@ -323,9 +323,9 @@ export type WalletRpcSchema = [
    * // => { ... }
    */
   {
-    Method: "wallet_getPermissions";
-    Parameters?: undefined;
-    ReturnType: WalletPermission[];
+    Method: 'wallet_getPermissions'
+    Parameters?: undefined
+    ReturnType: WalletPermission[]
   },
   /**
    * @description Requests permissions from a wallet
@@ -335,9 +335,9 @@ export type WalletRpcSchema = [
    * // => { ... }
    */
   {
-    Method: "wallet_grantPermissions";
-    Parameters?: [WalletGrantPermissionsParameters];
-    ReturnType: Prettify<WalletGrantPermissionsReturnType>;
+    Method: 'wallet_grantPermissions'
+    Parameters?: [WalletGrantPermissionsParameters]
+    ReturnType: Prettify<WalletGrantPermissionsReturnType>
   },
   /**
    * @description Requests the given permissions from the user.
@@ -347,9 +347,9 @@ export type WalletRpcSchema = [
    * // => { ... }
    */
   {
-    Method: "wallet_requestPermissions";
-    Parameters: [permissions: { mina_accounts: Record<string, any> }];
-    ReturnType: WalletPermission[];
+    Method: 'wallet_requestPermissions'
+    Parameters: [permissions: { mina_accounts: Record<string, any> }]
+    ReturnType: WalletPermission[]
   },
   /**
    * @description Revokes the given permissions from the user.
@@ -359,9 +359,9 @@ export type WalletRpcSchema = [
    * // => { ... }
    */
   {
-    Method: "wallet_revokePermissions";
-    Parameters: [permissions: { mina_accounts: Record<string, any> }];
-    ReturnType: null;
+    Method: 'wallet_revokePermissions'
+    Parameters: [permissions: { mina_accounts: Record<string, any> }]
+    ReturnType: null
   },
   /**
    * @description Switch the wallet to the given Ethereum chain.
@@ -371,64 +371,64 @@ export type WalletRpcSchema = [
    * // => { ... }
    */
   {
-    Method: "mina_switchChain";
-    Parameters: [networkId: string];
-    ReturnType: null;
-  }
-];
+    Method: 'mina_switchChain'
+    Parameters: [networkId: string]
+    ReturnType: null
+  },
+]
 
 ///////////////////////////////////////////////////////////////////////////
 // Utils
 
 export type RpcSchema = readonly {
-  Method: string;
-  Parameters?: unknown | undefined;
-  ReturnType: unknown;
-}[];
+  Method: string
+  Parameters?: unknown | undefined
+  ReturnType: unknown
+}[]
 
-export type RpcSchemaOverride = Omit<RpcSchema[number], "Method">;
+export type RpcSchemaOverride = Omit<RpcSchema[number], 'Method'>
 
 export type EIP1193Parameters<
-  rpcSchema extends RpcSchema | undefined = undefined
+  rpcSchema extends RpcSchema | undefined = undefined,
 > = rpcSchema extends RpcSchema
   ? {
       [K in keyof rpcSchema]: Prettify<
         {
           method: rpcSchema[K] extends rpcSchema[number]
-            ? rpcSchema[K]["Method"]
-            : never;
+            ? rpcSchema[K]['Method']
+            : never
         } & (rpcSchema[K] extends rpcSchema[number]
-          ? rpcSchema[K]["Parameters"] extends undefined
+          ? rpcSchema[K]['Parameters'] extends undefined
             ? { params?: undefined }
-            : { params: rpcSchema[K]["Parameters"] }
+            : { params: rpcSchema[K]['Parameters'] }
           : never)
-      >;
+      >
     }[number]
   : {
-      method: string;
-      params?: unknown | undefined;
-    };
+      method: string
+      params?: unknown | undefined
+    }
 
 export type EIP1193RequestOptions = {
   // Deduplicate in-flight requests.
-  dedupe?: boolean | undefined;
+  dedupe?: boolean | undefined
   // The base delay (in ms) between retries.
-  retryDelay?: number | undefined;
+  retryDelay?: number | undefined
   // The max number of times to retry.
-  retryCount?: number | undefined;
+  retryCount?: number | undefined
   /** Unique identifier for the request. */
-  uid?: string | undefined;
-};
+  uid?: string | undefined
+}
 
 type DerivedRpcSchema<
   rpcSchema extends RpcSchema | undefined,
-  rpcSchemaOverride extends RpcSchemaOverride | undefined
+  rpcSchemaOverride extends RpcSchemaOverride | undefined,
 > = rpcSchemaOverride extends RpcSchemaOverride
   ? [rpcSchemaOverride & { Method: string }]
-  : rpcSchema;
+  : rpcSchema
 
 export type EIP1193RequestFn<
-  rpcSchema extends RpcSchema | undefined = undefined
+  rpcSchema extends RpcSchema | undefined = undefined,
 > = <
   rpcSchemaOverride extends RpcSchemaOverride | undefined = undefined,
   _parameters extends EIP1193Parameters<
@@ -437,10 +437,10 @@ export type EIP1193RequestFn<
   _returnType = DerivedRpcSchema<rpcSchema, rpcSchemaOverride> extends RpcSchema
     ? Extract<
         DerivedRpcSchema<rpcSchema, rpcSchemaOverride>[number],
-        { Method: _parameters["method"] }
-      >["ReturnType"]
-    : unknown
+        { Method: _parameters['method'] }
+      >['ReturnType']
+    : unknown,
 >(
   args: _parameters,
-  options?: EIP1193RequestOptions | undefined
-) => Promise<_returnType>;
+  options?: EIP1193RequestOptions | undefined,
+) => Promise<_returnType>

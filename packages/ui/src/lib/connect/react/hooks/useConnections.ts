@@ -1,28 +1,28 @@
-"use client";
+'use client'
 
 import {
   type GetConnectionsReturnType,
   getConnections,
   watchConnections,
-} from "@/lib/connect/core/exports";
-import { useSyncExternalStore } from "react";
+} from '@/lib/connect/core/exports'
+import { useSyncExternalStore } from 'react'
 
-import type { ConfigParameter } from "../types/properties";
-import { useConfig } from "./useConfig";
+import type { ConfigParameter } from '../types/properties'
+import { useConfig } from './useConfig'
 
-export type UseConnectionsParameters = ConfigParameter;
+export type UseConnectionsParameters = ConfigParameter
 
-export type UseConnectionsReturnType = GetConnectionsReturnType;
+export type UseConnectionsReturnType = GetConnectionsReturnType
 
 /** https://wagmi.sh/react/api/hooks/useConnections */
 export function useConnections(
-  parameters: UseConnectionsParameters = {}
+  parameters: UseConnectionsParameters = {},
 ): UseConnectionsReturnType {
-  const config = useConfig(parameters);
+  const config = useConfig(parameters)
 
   return useSyncExternalStore(
     (onChange) => watchConnections(config, { onChange }),
     () => getConnections(config),
-    () => getConnections(config)
-  );
+    () => getConnections(config),
+  )
 }

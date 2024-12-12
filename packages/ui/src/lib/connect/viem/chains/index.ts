@@ -1,4 +1,4 @@
-export type { Chain } from "../types/chain";
+export type { Chain } from '../types/chain'
 
-export { devnet } from "./definitions/devnet";
-export { mainnet } from "./definitions/mainnet";
+export { devnet } from './definitions/devnet'
+export { mainnet } from './definitions/mainnet'

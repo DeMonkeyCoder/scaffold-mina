@@ -1,16 +1,16 @@
-import type { Address } from "@/lib/connect/viem";
+import type { Address } from '@/lib/connect/viem'
 
-import type { Account } from "../../accounts/types";
-import type { Client } from "../../clients/createClient";
-import type { Transport } from "../../clients/transports/createTransport";
-import type { ErrorType } from "../../errors/utils";
-import type { Chain } from "../../types/chain";
-import { getAddress } from "../../utils/address/getAddress";
-import type { RequestErrorType } from "../../utils/buildRequest";
+import type { Account } from '../../accounts/types'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import { getAddress } from '../../utils/address/getAddress'
+import type { RequestErrorType } from '../../utils/buildRequest'
 
-export type RequestAddressesReturnType = Address[];
+export type RequestAddressesReturnType = Address[]
 
-export type RequestAddressesErrorType = RequestErrorType | ErrorType;
+export type RequestAddressesErrorType = RequestErrorType | ErrorType
 
 /**
  * Requests a list of accounts managed by a wallet.
@@ -38,13 +38,13 @@ export type RequestAddressesErrorType = RequestErrorType | ErrorType;
  */
 export async function requestAddresses<
   chain extends Chain | undefined,
-  account extends Account | undefined = undefined
+  account extends Account | undefined = undefined,
 >(
-  client: Client<Transport, chain, account>
+  client: Client<Transport, chain, account>,
 ): Promise<RequestAddressesReturnType> {
   const addresses = await client.request(
-    { method: "mina_requestAccounts" },
-    { dedupe: true, retryCount: 0 }
-  );
-  return addresses.map((address) => getAddress(address));
+    { method: 'mina_requestAccounts' },
+    { dedupe: true, retryCount: 0 },
+  )
+  return addresses.map((address) => getAddress(address))
 }

@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   type Config,
@@ -6,26 +6,26 @@ import {
   type ResolvedRegister,
   getAccount,
   watchAccount,
-} from "@/lib/connect/core/exports";
+} from '@/lib/connect/core/exports'
 
-import type { ConfigParameter } from "../types/properties";
-import { useConfig } from "./useConfig";
-import { useSyncExternalStoreWithTracked } from "./useSyncExternalStoreWithTracked";
+import type { ConfigParameter } from '../types/properties'
+import { useConfig } from './useConfig'
+import { useSyncExternalStoreWithTracked } from './useSyncExternalStoreWithTracked'
 
 export type UseAccountParameters<config extends Config = Config> =
-  ConfigParameter<config>;
+  ConfigParameter<config>
 
 export type UseAccountReturnType<config extends Config = Config> =
-  GetAccountReturnType<config>;
+  GetAccountReturnType<config>
 
 /** https://wagmi.sh/react/api/hooks/useAccount */
-export function useAccount<config extends Config = ResolvedRegister["config"]>(
-  parameters: UseAccountParameters<config> = {}
+export function useAccount<config extends Config = ResolvedRegister['config']>(
+  parameters: UseAccountParameters<config> = {},
 ): UseAccountReturnType<config> {
-  const config = useConfig(parameters);
+  const config = useConfig(parameters)
 
   return useSyncExternalStoreWithTracked(
     (onChange) => watchAccount(config, { onChange }),
-    () => getAccount(config)
-  );
+    () => getAccount(config),
+  )
 }

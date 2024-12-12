@@ -6,11 +6,11 @@ import {
   createClient,
   custom,
   type Transport,
-} from "@/lib/connect/viem";
-import { getAddress, parseAccount } from "@/lib/connect/viem/utils";
+} from '@/lib/connect/viem'
+import { getAddress, parseAccount } from '@/lib/connect/viem/utils'
 
-import type { Config, Connection } from "../createConfig";
-import type { ErrorType } from "../errors/base";
+import type { Config, Connection } from '../createConfig'
+import type { ErrorType } from '../errors/base'
 import {
   ConnectorAccountNotFoundError,
   type ConnectorAccountNotFoundErrorType,
@@ -18,33 +18,35 @@ import {
   type ConnectorChainMismatchErrorType,
   ConnectorNotConnectedError,
   type ConnectorNotConnectedErrorType,
-} from "../errors/config";
+} from '../errors/config'
 import type {
   ConnectorParameter,
   NetworkIdParameter,
-} from "../types/properties";
-import type { Compute } from "../types/utils";
+} from '../types/properties'
+import type { Compute } from '../types/utils'
 
 export type GetConnectorClientParameters<
   config extends Config = Config,
-  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends
+    config['chains'][number]['id'] = config['chains'][number]['id'],
 > = Compute<
   NetworkIdParameter<config, networkId> &
     ConnectorParameter & {
-      account?: Address | Account | undefined;
+      account?: Address | Account | undefined
     }
->;
+>
 
 export type GetConnectorClientReturnType<
   config extends Config = Config,
-  networkId extends config["chains"][number]["id"] = config["chains"][number]["id"]
+  networkId extends
+    config['chains'][number]['id'] = config['chains'][number]['id'],
 > = Compute<
   Client<
-    config["_internal"]["transports"][networkId],
-    Extract<config["chains"][number], { id: networkId }>,
+    config['_internal']['transports'][networkId],
+    Extract<config['chains'][number], { id: networkId }>,
     Account
   >
->;
+>
 
 export type GetConnectorClientErrorType =
   | ConnectorAccountNotFoundErrorType
@@ -52,56 +54,56 @@ export type GetConnectorClientErrorType =
   | ConnectorNotConnectedErrorType
   // base
   | BaseErrorType
-  | ErrorType;
+  | ErrorType
 
 /** https://wagmi.sh/core/api/actions/getConnectorClient */
 export async function getConnectorClient<
   config extends Config,
-  networkId extends config["chains"][number]["id"]
+  networkId extends config['chains'][number]['id'],
 >(
   config: config,
-  parameters: GetConnectorClientParameters<config, networkId> = {}
+  parameters: GetConnectorClientParameters<config, networkId> = {},
 ): Promise<GetConnectorClientReturnType<config, networkId>> {
   // Get connection
-  let connection: Connection | undefined;
+  let connection: Connection | undefined
   if (parameters.connector) {
-    const { connector } = parameters;
+    const { connector } = parameters
     const [accounts, networkId] = await Promise.all([
       connector.getAccounts(),
       connector.getNetworkId(),
-    ]);
+    ])
     connection = {
       accounts: accounts as readonly [Address, ...Address[]],
       networkId,
       connector,
-    };
-  } else connection = config.state.connections.get(config.state.current!);
-  if (!connection) throw new ConnectorNotConnectedError();
+    }
+  } else connection = config.state.connections.get(config.state.current!)
+  if (!connection) throw new ConnectorNotConnectedError()
 
-  const networkId = parameters.networkId ?? connection.networkId;
+  const networkId = parameters.networkId ?? connection.networkId
 
   // Check connector using same networkId as connection
-  const connectorNetworkId = await connection.connector.getNetworkId();
+  const connectorNetworkId = await connection.connector.getNetworkId()
   if (connectorNetworkId !== connection.networkId)
     throw new ConnectorChainMismatchError({
       connectionNetworkId: connection.networkId,
       connectorNetworkId,
-    });
+    })
 
   // If connector has custom `getClient` implementation
-  type Return = GetConnectorClientReturnType<config, networkId>;
-  const connector = connection.connector;
+  type Return = GetConnectorClientReturnType<config, networkId>
+  const connector = connection.connector
   if (connector.getClient)
-    return connector.getClient({ networkId }) as unknown as Return;
+    return connector.getClient({ networkId }) as unknown as Return
 
   // Default using `custom` transport
-  const account = parseAccount(parameters.account ?? connection.accounts[0]!);
-  account.address = getAddress(account.address); // TODO: Checksum address as part of `parseAccount`?
+  const account = parseAccount(parameters.account ?? connection.accounts[0]!)
+  account.address = getAddress(account.address) // TODO: Checksum address as part of `parseAccount`?
 
-  const chain = config.chains.find((chain) => chain.id === networkId);
+  const chain = config.chains.find((chain) => chain.id === networkId)
   const provider = (await connection.connector.getProvider({ networkId })) as {
-    request(...args: any): Promise<any>;
-  };
+    request(...args: any): Promise<any>
+  }
 
   // If account was provided, check that it exists on the connector
   if (
@@ -111,13 +113,13 @@ export async function getConnectorClient<
     throw new ConnectorAccountNotFoundError({
       address: account.address,
       connector,
-    });
+    })
 
   return createClient({
     account,
     chain,
-    name: "Connector Client",
+    name: 'Connector Client',
     transport: ((opts) =>
       custom(provider)({ ...opts, retryCount: 0 })) as Transport,
-  }) as Return;
+  }) as Return
 }

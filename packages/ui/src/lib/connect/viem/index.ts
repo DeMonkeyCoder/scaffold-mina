@@ -2,54 +2,54 @@
 export {
   type AddChainErrorType,
   type AddChainParameters,
-} from "./actions/wallet/addChain";
+} from './actions/wallet/addChain'
 export type {
   GetAddressesErrorType,
   GetAddressesReturnType,
-} from "./actions/wallet/getAddresses";
+} from './actions/wallet/getAddresses'
 export type {
   GetBalanceErrorType,
   GetBalanceParameters,
   GetBalanceReturnType,
-} from "./actions/public/getBalance";
+} from './actions/public/getBalance'
 export type {
   GetBlockHashErrorType,
   GetBlockHashParameters,
   GetBlockHashReturnType,
-} from "./actions/public/getBlockHash";
+} from './actions/public/getBlockHash'
 export type {
   GetNetworkIdErrorType,
   GetNetworkIdReturnType,
-} from "./actions/public/getNetworkId";
+} from './actions/public/getNetworkId'
 export type {
   GetTransactionCountErrorType,
   GetTransactionCountParameters,
   GetTransactionCountReturnType,
-} from "./actions/public/getTransactionCount";
+} from './actions/public/getTransactionCount'
 export type {
   GetPermissionsErrorType,
   GetPermissionsReturnType,
-} from "./actions/wallet/getPermissions";
+} from './actions/wallet/getPermissions'
 export type {
   OnBlockHashFn,
   OnBlockHashParameter,
   WatchBlockHashErrorType,
   WatchBlockHashParameters,
   WatchBlockHashReturnType,
-} from "./actions/public/watchBlockHash";
+} from './actions/public/watchBlockHash'
 export type {
   RequestAddressesErrorType,
   RequestAddressesReturnType,
-} from "./actions/wallet/requestAddresses";
+} from './actions/wallet/requestAddresses'
 export type {
   RequestPermissionsErrorType,
   RequestPermissionsReturnType,
   RequestPermissionsParameters,
-} from "./actions/wallet/requestPermissions";
+} from './actions/wallet/requestPermissions'
 export type {
   SwitchChainErrorType,
   SwitchChainParameters,
-} from "./actions/wallet/switchChain";
+} from './actions/wallet/switchChain'
 export type {
   Chain,
   ChainContract,
@@ -61,7 +61,7 @@ export type {
   ExtractChainFormatterExclude,
   ExtractChainFormatterParameters,
   ExtractChainFormatterReturnType,
-} from "./types/chain";
+} from './types/chain'
 export {
   type Client,
   type ClientConfig,
@@ -69,56 +69,56 @@ export {
   type MulticallBatchOptions,
   createClient,
   rpcSchema,
-} from "./clients/createClient";
+} from './clients/createClient'
 export {
   type CustomTransport,
   type CustomTransportConfig,
   type CustomTransportErrorType,
   custom,
-} from "./clients/transports/custom";
+} from './clients/transports/custom'
 export {
   type FallbackTransport,
   type FallbackTransportConfig,
   type FallbackTransportErrorType,
   fallback,
-} from "./clients/transports/fallback";
+} from './clients/transports/fallback'
 export {
   type HttpTransport,
   type HttpTransportConfig,
   type HttpTransportErrorType,
   http,
-} from "./clients/transports/http";
+} from './clients/transports/http'
 export {
   type PublicClient,
   type PublicClientConfig,
   type CreatePublicClientErrorType,
   createPublicClient,
-} from "./clients/createPublicClient";
-export { type PublicActions, publicActions } from "./clients/decorators/public";
-export { type WalletActions, walletActions } from "./clients/decorators/wallet";
+} from './clients/createPublicClient'
+export { type PublicActions, publicActions } from './clients/decorators/public'
+export { type WalletActions, walletActions } from './clients/decorators/wallet'
 export {
   type Transport,
   type TransportConfig,
   type CreateTransportErrorType,
   createTransport,
-} from "./clients/transports/createTransport";
+} from './clients/transports/createTransport'
 export {
   type WalletClient,
   type WalletClientConfig,
   type CreateWalletClientErrorType,
   createWalletClient,
-} from "./clients/createWalletClient";
+} from './clients/createWalletClient'
 export {
   type WebSocketTransport,
   type WebSocketTransportConfig,
   type WebSocketTransportErrorType,
   webSocket,
-} from "./clients/transports/webSocket";
-export { BaseError, type BaseErrorType, setErrorConfig } from "./errors/base";
+} from './clients/transports/webSocket'
+export { BaseError, type BaseErrorType, setErrorConfig } from './errors/base'
 export {
   BlockNotFoundError,
   type BlockNotFoundErrorType,
-} from "./errors/block";
+} from './errors/block'
 export {
   ChainDisconnectedError,
   type ChainDisconnectedErrorType,
@@ -163,7 +163,7 @@ export {
   type UnsupportedProviderMethodErrorType,
   UserRejectedRequestError,
   type UserRejectedRequestErrorType,
-} from "./errors/rpc";
+} from './errors/rpc'
 export {
   ChainDoesNotSupportContract,
   type ChainDoesNotSupportContractErrorType,
@@ -175,7 +175,7 @@ export {
   type ClientChainNotConfiguredErrorType,
   InvalidNetworkIdError,
   type InvalidNetworkIdErrorType,
-} from "./errors/chain";
+} from './errors/chain'
 export {
   InvalidBytesBooleanError,
   type InvalidBytesBooleanErrorType,
@@ -187,7 +187,7 @@ export {
   type InvalidHexValueErrorType,
   SizeOverflowError,
   type SizeOverflowErrorType,
-} from "./errors/encoding";
+} from './errors/encoding'
 export {
   HttpRequestError,
   type HttpRequestErrorType,
@@ -199,21 +199,21 @@ export {
   type SocketClosedErrorType,
   WebSocketRequestError,
   type WebSocketRequestErrorType,
-} from "./errors/request";
+} from './errors/request'
 export {
   InvalidAddressError,
   type InvalidAddressErrorType,
-} from "./errors/address";
+} from './errors/address'
 export {
   SizeExceedsPaddingSizeError,
   type SizeExceedsPaddingSizeErrorType,
   SliceOffsetOutOfBoundsError,
   type SliceOffsetOutOfBoundsErrorType,
-} from "./errors/data";
+} from './errors/data'
 export {
   UrlRequiredError,
   type UrlRequiredErrorType,
-} from "./errors/transport";
+} from './errors/transport'
 export type {
   Assign,
   Branded,
@@ -246,7 +246,7 @@ export type {
   UnionPick,
   UnionRequiredBy,
   UnionToTuple,
-} from "./types/utils";
+} from './types/utils'
 export type {
   Account,
   AccountSource,
@@ -256,14 +256,14 @@ export type {
   JsonRpcAccount,
   LocalAccount,
   PrivateKeyAccount,
-} from "./accounts/types";
+} from './accounts/types'
 export type {
   Block,
   BlockIdentifier,
   BlockHash,
   BlockTag,
   Uncle,
-} from "./types/block";
+} from './types/block'
 export type {
   ByteArray,
   Hash,
@@ -272,7 +272,7 @@ export type {
   Signature,
   CompactSignature,
   SignableMessage,
-} from "./types/misc";
+} from './types/misc'
 export type {
   AddEthereumChainParameter,
   EIP1193EventMap,
@@ -299,50 +299,50 @@ export type {
   WalletPermission,
   WalletRpcSchema,
   WatchAssetParams,
-} from "./types/eip1193";
-export { ProviderRpcError as EIP1193ProviderRpcError } from "./types/eip1193";
-export type { GetTransportConfig, GetPollOptions } from "./types/transport";
-export type { ParseAccount, DeriveAccount, HDKey } from "./types/account";
-export type { Withdrawal } from "./types/withdrawal";
+} from './types/eip1193'
+export { ProviderRpcError as EIP1193ProviderRpcError } from './types/eip1193'
+export type { GetTransportConfig, GetPollOptions } from './types/transport'
+export type { ParseAccount, DeriveAccount, HDKey } from './types/account'
+export type { Withdrawal } from './types/withdrawal'
 export {
   type AssertCurrentChainErrorType,
   type AssertCurrentChainParameters,
   assertCurrentChain,
-} from "./utils/chain/assertCurrentChain";
-export { defineChain } from "./utils/chain/defineChain";
+} from './utils/chain/assertCurrentChain'
+export { defineChain } from './utils/chain/defineChain'
 export {
   type ExtractChainErrorType,
   type ExtractChainParameters,
   type ExtractChainReturnType,
   extractChain,
-} from "./utils/chain/extractChain";
-export { type WithRetryErrorType, withRetry } from "./utils/promise/withRetry";
+} from './utils/chain/extractChain'
+export { type WithRetryErrorType, withRetry } from './utils/promise/withRetry'
 export {
   type WithTimeoutErrorType,
   withTimeout,
-} from "./utils/promise/withTimeout";
+} from './utils/promise/withTimeout'
 export {
   type GetAddressErrorType,
   getAddress,
-} from "./utils/address/getAddress";
+} from './utils/address/getAddress'
 export {
   type ChecksumAddressErrorType,
   type IsAddressOptions,
   type IsAddressErrorType,
   validateAddressChecksum,
   isAddress,
-} from "./utils/address/isAddress";
+} from './utils/address/isAddress'
 export {
   type IsAddressEqualReturnType,
   type IsAddressEqualErrorType,
   isAddressEqual,
-} from "./utils/address/isAddressEqual";
+} from './utils/address/isAddressEqual'
 export {
   type CreateNonceManagerParameters,
   type NonceManager,
   type NonceManagerSource,
   createNonceManager,
   nonceManager,
-} from "./utils/nonceManager";
+} from './utils/nonceManager'
 
-export type Address = string;
+export type Address = string

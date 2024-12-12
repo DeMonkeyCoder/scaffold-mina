@@ -2,55 +2,55 @@ import {
   type Client,
   publicActions,
   type PublicClient,
-} from "@/lib/connect/viem";
+} from '@/lib/connect/viem'
 
-import type { Config } from "../createConfig";
-import type { NetworkIdParameter } from "../types/properties";
-import type { Compute, IsNarrowable } from "../types/utils";
-import { getClient } from "./getClient";
+import type { Config } from '../createConfig'
+import type { NetworkIdParameter } from '../types/properties'
+import type { Compute, IsNarrowable } from '../types/utils'
+import { getClient } from './getClient'
 
 export type GetPublicClientParameters<
   config extends Config = Config,
   networkId extends
-    | config["chains"][number]["id"]
-    | undefined = config["chains"][number]["id"]
-> = NetworkIdParameter<config, networkId>;
+    | config['chains'][number]['id']
+    | undefined = config['chains'][number]['id'],
+> = NetworkIdParameter<config, networkId>
 
 export type GetPublicClientReturnType<
   config extends Config = Config,
   networkId extends
-    | config["chains"][number]["id"]
-    | undefined = config["chains"][number]["id"],
+    | config['chains'][number]['id']
+    | undefined = config['chains'][number]['id'],
   ///
   resolvedNetworkId extends
-    | config["chains"][number]["id"]
+    | config['chains'][number]['id']
     | undefined = IsNarrowable<
-    config["chains"][number]["id"],
+    config['chains'][number]['id'],
     number
   > extends true
     ? IsNarrowable<networkId, number> extends true
       ? networkId
-      : config["chains"][number]["id"]
-    : config["chains"][number]["id"] | undefined
-> = resolvedNetworkId extends config["chains"][number]["id"]
+      : config['chains'][number]['id']
+    : config['chains'][number]['id'] | undefined,
+> = resolvedNetworkId extends config['chains'][number]['id']
   ? Compute<
       PublicClient<
-        config["_internal"]["transports"][resolvedNetworkId],
-        Extract<config["chains"][number], { id: resolvedNetworkId }>
+        config['_internal']['transports'][resolvedNetworkId],
+        Extract<config['chains'][number], { id: resolvedNetworkId }>
       >
     >
-  : undefined;
+  : undefined
 
 export function getPublicClient<
   config extends Config,
-  networkId extends config["chains"][number]["id"] | string | undefined
+  networkId extends config['chains'][number]['id'] | string | undefined,
 >(
   config: config,
-  parameters: GetPublicClientParameters<config, networkId> = {}
+  parameters: GetPublicClientParameters<config, networkId> = {},
 ): GetPublicClientReturnType<config, networkId> {
-  const client = getClient(config, parameters);
+  const client = getClient(config, parameters)
   return (client as Client)?.extend(publicActions) as GetPublicClientReturnType<
     config,
     networkId
-  >;
+  >
 }

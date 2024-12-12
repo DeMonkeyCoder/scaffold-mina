@@ -9,7 +9,7 @@ export {
   type ConnectMutate,
   type ConnectMutateAsync,
   connectMutationOptions,
-} from "../query/connect";
+} from '../query/connect'
 
 export {
   type DisconnectData,
@@ -17,7 +17,7 @@ export {
   type DisconnectMutate,
   type DisconnectMutateAsync,
   disconnectMutationOptions,
-} from "../query/disconnect";
+} from '../query/disconnect'
 
 export {
   type GetBalanceData,
@@ -26,7 +26,7 @@ export {
   type GetBalanceQueryKey,
   getBalanceQueryKey,
   getBalanceQueryOptions,
-} from "../query/getBalance";
+} from '../query/getBalance'
 
 export {
   type GetBlockHashData,
@@ -35,7 +35,7 @@ export {
   type GetBlockHashQueryKey,
   getBlockHashQueryKey,
   getBlockHashQueryOptions,
-} from "../query/getBlockHash";
+} from '../query/getBlockHash'
 
 export {
   type GetConnectorClientData,
@@ -44,7 +44,7 @@ export {
   type GetConnectorClientQueryKey,
   getConnectorClientQueryKey,
   getConnectorClientQueryOptions,
-} from "../query/getConnectorClient";
+} from '../query/getConnectorClient'
 
 export {
   type GetWalletClientData,
@@ -53,7 +53,7 @@ export {
   type GetWalletClientQueryKey,
   getWalletClientQueryKey,
   getWalletClientQueryOptions,
-} from "../query/getWalletClient";
+} from '../query/getWalletClient'
 
 export {
   type ReconnectData,
@@ -61,7 +61,7 @@ export {
   type ReconnectMutate,
   type ReconnectMutateAsync,
   reconnectMutationOptions,
-} from "../query/reconnect";
+} from '../query/reconnect'
 
 export {
   type SwitchAccountData,
@@ -69,7 +69,7 @@ export {
   type SwitchAccountMutate,
   type SwitchAccountMutateAsync,
   switchAccountMutationOptions,
-} from "../query/switchAccount";
+} from '../query/switchAccount'
 
 export {
   type SwitchChainData,
@@ -77,6 +77,6 @@ export {
   type SwitchChainMutate,
   type SwitchChainMutateAsync,
   switchChainMutationOptions,
-} from "../query/switchChain";
+} from '../query/switchChain'
 
-export { hashFn, structuralSharing } from "../query/utils";
+export { hashFn, structuralSharing } from '../query/utils'

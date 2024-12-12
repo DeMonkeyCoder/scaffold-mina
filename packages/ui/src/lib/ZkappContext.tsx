@@ -4,49 +4,49 @@ import React, {
   useContext,
   useEffect,
   useState,
-} from "react";
-import ZkappWorkerClient from "./zkappWorkerClient";
-import { fetchAccount, PublicKey } from "o1js";
-import { useAccount } from "@/lib/connect/react/hooks/useAccount";
+} from 'react'
+import ZkappWorkerClient from './zkappWorkerClient'
+import { fetchAccount, PublicKey } from 'o1js'
+import { useAccount } from '@/lib/connect/react/hooks/useAccount'
 
 type MinaAccountData = {
-  accountExists: boolean | null;
-};
+  accountExists: boolean | null
+}
 
 type ZkappContextType = {
-  zkappWorkerClient: ZkappWorkerClient | null;
-} & MinaAccountData;
+  zkappWorkerClient: ZkappWorkerClient | null
+} & MinaAccountData
 
-const ZkappContext = createContext<ZkappContextType | null>(null);
+const ZkappContext = createContext<ZkappContextType | null>(null)
 
 export const ZkappProvider = ({ children }: { children: ReactNode }) => {
   const [zkappWorkerClient, setZkappWorkerClient] =
-    useState<ZkappWorkerClient | null>(null);
-  const { address } = useAccount();
+    useState<ZkappWorkerClient | null>(null)
+  const { address } = useAccount()
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       if (!zkappWorkerClient) {
-        const zkappWorkerClientInstance = new ZkappWorkerClient();
-        await zkappWorkerClientInstance.workerReady;
-        await zkappWorkerClientInstance.setActiveInstanceToDevnet();
-        setZkappWorkerClient(zkappWorkerClientInstance);
+        const zkappWorkerClientInstance = new ZkappWorkerClient()
+        await zkappWorkerClientInstance.workerReady
+        await zkappWorkerClientInstance.setActiveInstanceToDevnet()
+        setZkappWorkerClient(zkappWorkerClientInstance)
       }
-    })();
-  }, [zkappWorkerClient]);
+    })()
+  }, [zkappWorkerClient])
 
-  const [accountExists, setAccountExists] = useState<boolean | null>(null);
+  const [accountExists, setAccountExists] = useState<boolean | null>(null)
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       if (address) {
         const res = await fetchAccount({
           publicKey: PublicKey.fromBase58(address),
-        });
-        setAccountExists(res.error == null);
+        })
+        setAccountExists(res.error == null)
       }
-    })();
-  }, [address, setAccountExists]);
+    })()
+  }, [address, setAccountExists])
 
   return (
     <ZkappContext.Provider
@@ -57,13 +57,13 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
     >
       {children}
     </ZkappContext.Provider>
-  );
-};
+  )
+}
 
 export const useMinaProvider = (): ZkappContextType => {
-  const context = useContext(ZkappContext);
+  const context = useContext(ZkappContext)
   if (!context) {
-    throw new Error("useMinaProvider must be used within a ZkappProvider");
+    throw new Error('useMinaProvider must be used within a ZkappProvider')
   }
-  return context;
-};
+  return context
+}

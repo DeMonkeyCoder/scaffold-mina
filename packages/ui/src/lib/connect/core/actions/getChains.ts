@@ -1,21 +1,21 @@
-import type { Chain } from "@/lib/connect/viem";
-import type { Config } from "../createConfig";
-import { deepEqual } from "../utils/deepEqual";
+import type { Chain } from '@/lib/connect/viem'
+import type { Config } from '../createConfig'
+import { deepEqual } from '../utils/deepEqual'
 
 export type GetChainsReturnType<config extends Config = Config> = readonly [
-  ...config["chains"],
-  ...Chain[]
-];
+  ...config['chains'],
+  ...Chain[],
+]
 
-let previousChains: readonly Chain[] = [];
+let previousChains: readonly Chain[] = []
 
 /** https://wagmi.sh/core/api/actions/getChains */
 export function getChains<config extends Config>(
-  config: config
+  config: config,
 ): GetChainsReturnType<config> {
-  const chains = config.chains;
+  const chains = config.chains
   if (deepEqual(previousChains, chains))
-    return previousChains as GetChainsReturnType<config>;
-  previousChains = chains;
-  return chains as unknown as GetChainsReturnType<config>;
+    return previousChains as GetChainsReturnType<config>
+  previousChains = chains
+  return chains as unknown as GetChainsReturnType<config>
 }

@@ -1,26 +1,23 @@
-"use client";
+'use client'
 
-import { useMutation } from "@tanstack/react-query";
-import type {
-  Connector,
-  DisconnectErrorType,
-} from "@/lib/connect/core/exports";
-import type { Compute } from "@/lib/connect/core/exports/internal";
+import { useMutation } from '@tanstack/react-query'
+import type { Connector, DisconnectErrorType } from '@/lib/connect/core/exports'
+import type { Compute } from '@/lib/connect/core/exports/internal'
 import {
   type DisconnectData,
   type DisconnectMutate,
   type DisconnectMutateAsync,
   type DisconnectVariables,
   disconnectMutationOptions,
-} from "@/lib/connect/core/exports/query";
+} from '@/lib/connect/core/exports/query'
 
-import type { ConfigParameter } from "../types/properties";
+import type { ConfigParameter } from '../types/properties'
 import type {
   UseMutationParameters,
   UseMutationReturnType,
-} from "../utils/query";
-import { useConfig } from "./useConfig";
-import { useConnections } from "./useConnections";
+} from '../utils/query'
+import { useConfig } from './useConfig'
+import { useConnections } from './useConnections'
 
 export type UseDisconnectParameters<context = unknown> = Compute<
   ConfigParameter & {
@@ -31,9 +28,9 @@ export type UseDisconnectParameters<context = unknown> = Compute<
           DisconnectVariables,
           context
         >
-      | undefined;
+      | undefined
   }
->;
+>
 
 export type UseDisconnectReturnType<context = unknown> = Compute<
   UseMutationReturnType<
@@ -42,32 +39,32 @@ export type UseDisconnectReturnType<context = unknown> = Compute<
     DisconnectVariables,
     context
   > & {
-    connectors: readonly Connector[];
-    disconnect: DisconnectMutate<context>;
-    disconnectAsync: DisconnectMutateAsync<context>;
+    connectors: readonly Connector[]
+    disconnect: DisconnectMutate<context>
+    disconnectAsync: DisconnectMutateAsync<context>
   }
->;
+>
 
 /** https://wagmi.sh/react/api/hooks/useDisconnect */
 export function useDisconnect<context = unknown>(
-  parameters: UseDisconnectParameters<context> = {}
+  parameters: UseDisconnectParameters<context> = {},
 ): UseDisconnectReturnType<context> {
-  const { mutation } = parameters;
+  const { mutation } = parameters
 
-  const config = useConfig(parameters);
+  const config = useConfig(parameters)
 
-  const mutationOptions = disconnectMutationOptions(config);
+  const mutationOptions = disconnectMutationOptions(config)
   const { mutate, mutateAsync, ...result } = useMutation({
     ...mutation,
     ...mutationOptions,
-  });
+  })
 
   return {
     ...result,
     connectors: useConnections({ config }).map(
-      (connection) => connection.connector
+      (connection) => connection.connector,
     ),
     disconnect: mutate,
     disconnectAsync: mutateAsync,
-  };
+  }
 }

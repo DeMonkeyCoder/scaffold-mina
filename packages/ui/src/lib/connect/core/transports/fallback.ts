@@ -1,10 +1,10 @@
-import { fallback as viem_fallback } from "@/lib/connect/viem";
+import { fallback as viem_fallback } from '@/lib/connect/viem'
 
-import type { Transport } from "../createConfig";
+import type { Transport } from '../createConfig'
 
 export function fallback(
   transports: Transport[],
-  config?: Parameters<typeof viem_fallback>[1]
+  config?: Parameters<typeof viem_fallback>[1],
 ) {
-  return viem_fallback(transports, config);
+  return viem_fallback(transports, config)
 }

@@ -1,9 +1,9 @@
 'use client'
 
 export const ConnectWallet = () => {
-    return (
-        <div>
-            <appkit-button/>
-        </div>
-    )
+  return (
+    <div>
+      <appkit-button />
+    </div>
+  )
 }

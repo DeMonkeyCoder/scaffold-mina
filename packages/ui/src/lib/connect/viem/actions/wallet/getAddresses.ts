@@ -1,18 +1,18 @@
-import type { Address, ChecksumAddressErrorType } from "@/lib/connect/viem";
+import type { Address, ChecksumAddressErrorType } from '@/lib/connect/viem'
 
-import type { Account } from "../../accounts/types";
-import type { Client } from "../../clients/createClient";
-import type { Transport } from "../../clients/transports/createTransport";
-import type { ErrorType } from "../../errors/utils";
-import type { Chain } from "../../types/chain";
-import type { RequestErrorType } from "../../utils/buildRequest";
+import type { Account } from '../../accounts/types'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { RequestErrorType } from '../../utils/buildRequest'
 
-export type GetAddressesReturnType = Address[];
+export type GetAddressesReturnType = Address[]
 
 export type GetAddressesErrorType =
   | RequestErrorType
   | ChecksumAddressErrorType
-  | ErrorType;
+  | ErrorType
 
 /**
  * Returns a list of account addresses owned by the wallet or client.
@@ -36,8 +36,8 @@ export type GetAddressesErrorType =
  */
 export async function getAddresses<
   chain extends Chain | undefined,
-  account extends Account | undefined = undefined
+  account extends Account | undefined = undefined,
 >(client: Client<Transport, chain, account>): Promise<GetAddressesReturnType> {
-  if (client.account?.type === "local") return [client.account.address];
-  return client.request({ method: "mina_accounts" }, { dedupe: true });
+  if (client.account?.type === 'local') return [client.account.address]
+  return client.request({ method: 'mina_accounts' }, { dedupe: true })
 }

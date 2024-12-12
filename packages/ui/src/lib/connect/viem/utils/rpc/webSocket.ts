@@ -1,9 +1,6 @@
 import type { MessageEvent } from 'isows'
 
-import {
-  SocketClosedError,
-  WebSocketRequestError,
-} from '../../errors/request'
+import { SocketClosedError, WebSocketRequestError } from '../../errors/request'
 import {
   type GetSocketRpcClientParameters,
   type Socket,
