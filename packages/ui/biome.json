@@ -1,0 +1,118 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "ignore": [
+      "CHANGELOG.md",
+      "pnpm-lock.yaml",
+      "tsconfig.base.json",
+      "_cjs",
+      "_esm",
+      "_types",
+      ".next",
+      ".svelte-kit",
+      ".vercel",
+      "**/node_modules",
+      "bun.lockb",
+      "cache",
+      "contracts",
+      "test/kzg/*.json",
+      "test/kzg/*.txt",
+      "coverage",
+      "tsconfig.json",
+      "tsconfig.*.json",
+      "generated.ts",
+      "vectors/*.json",
+      "vectors/**/*.test.ts",
+      "site/dist",
+      "public"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 80
+  },
+  "linter": {
+    "ignore": ["packages/create-wagmi/templates/*"],
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "useButtonType": "off"
+      },
+      "correctness": {
+        "noUnusedVariables": "error",
+        "useExhaustiveDependencies": "error"
+      },
+      "performance": {
+        "noBarrelFile": "error",
+        "noReExportAll": "error",
+        "noDelete": "off"
+      },
+      "style": {
+        "noNonNullAssertion": "off",
+        "useShorthandArrayType": "error"
+      },
+      "suspicious": {
+        "noArrayIndexKey": "off",
+        "noConfusingVoidType": "off",
+        "noConsoleLog": "error",
+        "noExplicitAny": "off",
+        "noAssignInExpressions": "off",
+        "noRedeclare": "off"
+      },
+      "complexity": {
+        "noBannedTypes": "off"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingCommas": "all",
+      "semicolons": "asNeeded"
+    }
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "overrides": [
+    {
+      "include": ["*.vue"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedVariables": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["./scripts/**/*.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsoleLog": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["./playgrounds/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useNodejsImportProtocol": "off"
+          }
+        }
+      }
+    }
+  ],
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  }
+}
