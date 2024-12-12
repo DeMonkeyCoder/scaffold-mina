@@ -1,6 +1,7 @@
 import Image from "next/image";
 import {ConnectWallet} from "@/components/ConnectWallet";
 import {useAppKitAccount} from "@reown/appkit-core/react";
+import Link from "next/link";
 
 export default function Navbar() {
     const {isConnected} = useAppKitAccount();
@@ -40,12 +41,12 @@ export default function Navbar() {
                                         height={16}
                                         src="/assets/debug.svg"
                                     />
-                                    <a
-                                        href="#"
+                                    <Link
+                                        href="/debug"
                                         className="flex justify-center items-center text-sm font-medium text-black pr-3 pl-1"
                                     >
                                         Debug Contracts
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div
                                     className="flex items-center rounded-2xl transition-colors duration-200 ease-in-out hover:bg-gray-200 pl-2">

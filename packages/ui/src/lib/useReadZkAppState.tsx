@@ -15,7 +15,7 @@ export function useReadZkAppState<T extends SmartContract>({
     smartContract: new (...args: any[]) => T;
     watch?: boolean;
     stateVariable: StateVariable<T>;
-    publicKey: PublicKey | undefined;
+    publicKey?: PublicKey;
 }) {
     const [data, setData] = useState<Field | null>(null);
     const {data: blockHash} = useBlockHash()

@@ -27,7 +27,7 @@ const useDeployedContracts = () => {
             Add: {
                 contract: Add,
                 publicKey: PublicKey.fromBase58(
-                    "B62qjDnppFhY5tsEmLbCDRniCoJcYqLmHpEeXVfwM4Ej18uJFhTrmBb"
+                    "B62qpXPvmKDf4SaFJynPsT6DyvuxMS9H1pT4TGonDT26m599m7dS9gP"
                 )
             }
         }
