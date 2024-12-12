@@ -1,10 +1,10 @@
 import Image from "next/image";
 import {ConnectWallet} from "@/components/ConnectWallet";
-import {useAppKitAccount} from "@reown/appkit-core/react";
 import Link from "next/link";
+import {useAccount} from "@/lib/connect/react/hooks/useAccount";
 
 export default function Navbar() {
-    const {isConnected} = useAppKitAccount();
+    const {isConnected, address} = useAccount();
 
     if (!isConnected) return <div></div>;
 
@@ -27,12 +27,12 @@ export default function Navbar() {
                         </div>
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex">
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/"
                                     className="px-8 py-2 text-sm font-medium text-black rounded-2xl transition-colors duration-200 ease-in-out hover:bg-gray-200"
                                 >
                                     Home
-                                </a>
+                                </Link>
                                 <div
                                     className="flex rounded-2xl transition-colors duration-200 ease-in-out hover:bg-gray-200">
                                     <Image
@@ -56,7 +56,7 @@ export default function Navbar() {
                                         alt=""
                                     />
                                     <a
-                                        href="https://faucet.minaprotocol.com/?address"
+                                        href={"https://faucet.minaprotocol.com/?address=" + address}
                                         target="blank"
                                         className="flex justify-center items-center text-sm font-medium text-black pl-1 pr-2"
                                     >
