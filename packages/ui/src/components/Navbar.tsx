@@ -1,10 +1,10 @@
-import Image from 'next/image'
 import { ConnectWallet } from '@/components/ConnectWallet'
+import { useAppKitAccount } from '@reown/appkit/react'
+import Image from 'next/image'
 import Link from 'next/link'
-import { useAccount } from '@/lib/connect/react/hooks/useAccount'
 
 export default function Navbar() {
-  const { isConnected, address } = useAccount()
+  const { isConnected, address } = useAppKitAccount()
 
   if (!isConnected) return <div />
 

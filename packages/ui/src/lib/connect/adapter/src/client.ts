@@ -162,29 +162,10 @@ export class WagmiAdapter extends AdapterBlueprint {
   }
 
   public async connectWalletConnect(
-    onUri: (uri: string) => void,
-    networkId?: string,
+    _onUri: (uri: string) => void,
+    _networkId?: string,
   ) {
-    const connector = this.wagmiConfig.connectors.find(
-      (c) => c.type === 'walletConnect',
-    ) as unknown as Connector
-
-    const provider = (await connector.getProvider()) as UniversalProvider
-
-    if (!this.caipNetworks || !provider) {
-      throw new Error(
-        'UniversalAdapter:connectWalletConnect - caipNetworks or provider is undefined',
-      )
-    }
-
-    provider.on('display_uri', (uri: string) => {
-      onUri(uri)
-    })
-
-    await connect(this.wagmiConfig, {
-      connector,
-      networkId,
-    })
+    throw new Error('not implemented')
   }
 
   public async connect(
@@ -267,8 +248,7 @@ export class WagmiAdapter extends AdapterBlueprint {
   }
 
   public getWalletConnectProvider(): AdapterBlueprint.GetWalletConnectProviderResult {
-    return this.wagmiConfig.connectors.find((c) => c.type === 'walletConnect')
-      ?.provider as UniversalProvider
+    throw new Error('not implemented')
   }
 
   public async disconnect() {

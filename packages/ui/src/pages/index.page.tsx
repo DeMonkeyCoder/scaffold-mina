@@ -4,10 +4,9 @@ import LoadingScreen from '@/components/LoadingScreen'
 import { isSupportedNetwork } from '@/constants/network'
 import useDeployedContracts from '@/contracts/useDeployedContracts'
 import { useMinaProvider } from '@/lib/ZkappContext'
-import { useAccount } from '@/lib/connect/react/hooks/useAccount'
 import { QuestContractProvider, useQuestContract } from '@/lib/useQuestContract'
 import { useReadZkAppState } from '@/lib/useReadZkAppState'
-import { useAppKitNetwork } from '@reown/appkit/react'
+import { useAppKitAccount, useAppKitNetwork } from '@reown/appkit/react'
 import Image from 'next/image'
 import { CircuitString } from 'o1js'
 import { useCallback, useEffect, useState } from 'react'
@@ -23,7 +22,7 @@ enum TransactionState {
 function HomeBody() {
   const { prepareTransaction } = useQuestContract()
   const { zkappWorkerClient } = useMinaProvider()
-  const { address, isConnected } = useAccount()
+  const { address, isConnected } = useAppKitAccount()
 
   const { accountExists } = useMinaProvider()
   const { chainId: networkId } = useAppKitNetwork()

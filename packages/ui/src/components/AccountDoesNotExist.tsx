@@ -1,7 +1,7 @@
-import { useAccount } from '@/lib/connect/react/hooks/useAccount'
+import { useAppKitAccount } from '@reown/appkit/react'
 
 export default function AccountDoesNotExist() {
-  const { address } = useAccount()
+  const { address } = useAppKitAccount()
   return (
     <div>
       <span className="pr-2">Account does not exist</span>

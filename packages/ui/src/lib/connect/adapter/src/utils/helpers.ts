@@ -1,30 +1,6 @@
+import type { Hex } from '@/lib/connect/viem'
 import type { CaipNetworkId } from '@reown/appkit-common'
 import { ConstantsUtil, PresetsUtil } from '@reown/appkit-utils'
-import type { UniversalProvider } from '@walletconnect/universal-provider'
-import type { Hex } from '@/lib/connect/viem'
-
-import type { Connector } from '@/lib/connect/core/exports'
-import { WcHelpersUtil } from '@reown/appkit'
-
-export async function getWalletConnectCaipNetworks(connector?: Connector) {
-  if (!connector) {
-    throw new Error(
-      'networkControllerClient:getApprovedCaipNetworks - connector is undefined',
-    )
-  }
-  const provider = (await connector?.getProvider()) as Awaited<
-    ReturnType<(typeof UniversalProvider)['init']>
-  >
-
-  const approvedCaipNetworkIds = WcHelpersUtil.getChainsFromNamespaces(
-    provider?.session?.namespaces,
-  )
-
-  return {
-    supportsAllNetworks: false,
-    approvedCaipNetworkIds,
-  }
-}
 
 export function getEmailCaipNetworks() {
   return {
