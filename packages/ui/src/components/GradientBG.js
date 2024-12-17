@@ -15,9 +15,7 @@ export default function GradientBG({ children }) {
     this.dir = Math.random() > 0.5 ? -1 : 1
 
     this.toString = function () {
-      return (
-        'hsla(' + this.h + ', ' + this.s + '%, ' + this.l + '%, ' + this.a + ')'
-      )
+      return `hsla(${this.h}, ${this.s}%, ${this.l}%, ${this.a})`
     }
   }
 
@@ -103,6 +101,7 @@ export default function GradientBG({ children }) {
     }
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (canvasRef.current) {
       const canvas = canvasRef.current
@@ -120,6 +119,7 @@ export default function GradientBG({ children }) {
     }
   }, [])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     let animationFrameId
 
@@ -135,7 +135,7 @@ export default function GradientBG({ children }) {
     return () => {
       window.cancelAnimationFrame(animationFrameId)
     }
-  }, [paint, pixels, context])
+  }, [pixels, context])
 
   return (
     <>

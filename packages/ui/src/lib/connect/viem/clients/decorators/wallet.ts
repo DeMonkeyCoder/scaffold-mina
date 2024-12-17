@@ -33,8 +33,8 @@ import type { Client } from '../createClient'
 import type { Transport } from '../transports/createTransport'
 
 export type WalletActions<
-  chain extends Chain | undefined = Chain | undefined,
-  account extends Account | undefined = Account | undefined,
+  _chain extends Chain | undefined = Chain | undefined,
+  _account extends Account | undefined = Account | undefined,
 > = {
   /**
    * Adds an EVM chain to the wallet.

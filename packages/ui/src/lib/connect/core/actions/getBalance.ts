@@ -1,8 +1,8 @@
-import { type Address } from '@/lib/connect/viem'
+import type { Address } from '@/lib/connect/viem'
 import {
-  getBalance as viem_getBalance,
   type GetBalanceErrorType as viem_GetBalanceErrorType,
   type GetBalanceParameters as viem_GetBalanceParameters,
+  getBalance as viem_getBalance,
 } from '@/lib/connect/viem/actions'
 
 import type { Config } from '../createConfig'
@@ -40,7 +40,6 @@ export async function getBalance<config extends Config>(
     blockTag,
     networkId,
     token: tokenAddress,
-    unit = 'ether',
   } = parameters
 
   if (tokenAddress) {

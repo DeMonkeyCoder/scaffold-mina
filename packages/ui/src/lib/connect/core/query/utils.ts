@@ -23,7 +23,6 @@ export function hashFn(queryKey: QueryKey): string {
   })
 }
 
-// biome-ignore lint/complexity/noBannedTypes:
 function isPlainObject(value: any): value is Object {
   if (!hasObjectPrototype(value)) {
     return false

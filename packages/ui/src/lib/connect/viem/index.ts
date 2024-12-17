@@ -1,4 +1,3 @@
-// biome-ignore lint/performance/noBarrelFile: entrypoint module
 export {
   type AddChainErrorType,
   type AddChainParameters,
@@ -62,6 +61,7 @@ export type {
   ExtractChainFormatterParameters,
   ExtractChainFormatterReturnType,
 } from './types/chain'
+// biome-ignore lint/performance/noBarrelFile:
 export {
   type Client,
   type ClientConfig,

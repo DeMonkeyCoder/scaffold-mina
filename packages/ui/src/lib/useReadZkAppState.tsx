@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react'
-import { fetchAccount, Field, PublicKey, SmartContract, State } from 'o1js'
-import { StateVariable } from '@/lib/types'
+import {
+  fetchAccount,
+  type Field,
+  type PublicKey,
+  type SmartContract,
+  type State,
+} from 'o1js'
+import type { StateVariable } from '@/lib/types'
 import { useBlockHash } from '@/lib/connect/react/hooks/useBlockHash'
 
 // Helper type to assert that a property is a State
@@ -12,7 +18,7 @@ export function useReadZkAppState<T extends SmartContract>({
   stateVariable,
   publicKey,
 }: {
-  smartContract: new (...args: any[]) => T
+  smartContract: new (..._args: any[]) => T
   watch?: boolean
   stateVariable: StateVariable<T>
   publicKey?: PublicKey

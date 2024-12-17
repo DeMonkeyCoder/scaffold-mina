@@ -10,10 +10,7 @@ export default function Document() {
       </Head>
       <body>
         <Main />
-        <Script
-          src="/coi-serviceworker.min.js"
-          strategy="afterInteractive"
-        ></Script>
+        <Script src="/coi-serviceworker.min.js" strategy="afterInteractive" />
         <NextScript />
       </body>
     </Html>

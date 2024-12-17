@@ -1,4 +1,4 @@
-import { Field, SmartContract, State } from 'o1js'
+import type { Field, SmartContract, State } from 'o1js'
 
 type Methods<T extends SmartContract> = {
   [K in keyof T]: K extends keyof SmartContract

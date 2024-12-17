@@ -1,4 +1,4 @@
-import { fetchAccount, Field, Mina, PublicKey } from 'o1js'
+import { Field, Mina, PublicKey, fetchAccount } from 'o1js'
 // ---------------------------------------------------------------------------------------
 import type { Add } from '../../../contracts/src/Add'
 import type { Quest } from '../../../contracts/src/Quest'
@@ -23,11 +23,10 @@ export type State = typeof state
 export type ContractName = keyof State['contracts']
 
 const functions = {
-  setActiveInstanceToDevnet: async (args: {}) => {
+  setActiveInstanceToDevnet: async (_args: {}) => {
     const Network = Mina.Network(
       'https://api.minascan.io/node/devnet/v1/graphql',
     )
-    console.log('Devnet networkId instance configured.')
     Mina.setActiveInstance(Network)
   },
   loadContract: async ({ contractName }: { contractName: ContractName }) => {
@@ -99,6 +98,7 @@ const functions = {
     try {
       const transaction = await Mina.transaction(async () => {
         // @ts-ignore
+        // biome-ignore lint/correctness/noUnsafeOptionalChaining: <explanation>
         await zkapp[method](...args?.map((arg) => Field.fromJSON(arg)))
       })
       await transaction.prove()
@@ -144,5 +144,3 @@ if (typeof window !== 'undefined') {
 }
 
 postMessage({ type: 'ready' })
-
-console.log('Web Worker Successfully Initialized.')

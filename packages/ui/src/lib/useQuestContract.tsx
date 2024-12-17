@@ -1,8 +1,8 @@
-import React, { createContext, ReactNode, useContext } from 'react'
-import { fetchAccount, Field } from 'o1js'
+import React, { createContext, type ReactNode, useContext } from 'react'
+import { fetchAccount, type Field } from 'o1js'
 import { useMinaProvider } from '@/lib/ZkappContext'
-import { ContractContextType, Methods } from '@/lib/types'
-import { Quest } from 'scaffold-mina-contracts'
+import type { ContractContextType, Methods } from '@/lib/types'
+import type { Quest } from 'scaffold-mina-contracts'
 import useDeployedContracts from '@/contracts/useDeployedContracts'
 import { useAppKitNetwork } from '@reown/appkit/react'
 

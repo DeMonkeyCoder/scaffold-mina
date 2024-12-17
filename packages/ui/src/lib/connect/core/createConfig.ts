@@ -32,7 +32,7 @@ import type {
 } from './types/utils'
 import { uid } from './utils/uid'
 import { version } from './version'
-import { Mina as MinaInstance } from 'o1js/dist/node/lib/mina/mina-instance'
+import type { Mina as MinaInstance } from 'o1js/dist/node/lib/mina/mina-instance'
 import { Mina } from 'o1js'
 
 export type CreateConfigParameters<

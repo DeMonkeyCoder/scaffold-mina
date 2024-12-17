@@ -1,4 +1,4 @@
-import { PublicKey } from 'o1js'
+import type { PublicKey } from 'o1js'
 
 export function formatPublicKey(publicKey: PublicKey) {
   const publicKeyBase58 = publicKey.toBase58()

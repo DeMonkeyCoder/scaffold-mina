@@ -1,13 +1,13 @@
+import { useAccount } from '@/lib/connect/react/hooks/useAccount'
+import { PublicKey, fetchAccount } from 'o1js'
 import React, {
   createContext,
-  ReactNode,
+  type ReactNode,
   useContext,
   useEffect,
   useState,
 } from 'react'
 import ZkappWorkerClient from './zkappWorkerClient'
-import { fetchAccount, PublicKey } from 'o1js'
-import { useAccount } from '@/lib/connect/react/hooks/useAccount'
 
 type MinaAccountData = {
   accountExists: boolean | null
@@ -46,7 +46,7 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
         setAccountExists(res.error == null)
       }
     })()
-  }, [address, setAccountExists])
+  }, [address])
 
   return (
     <ZkappContext.Provider

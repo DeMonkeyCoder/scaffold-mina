@@ -1,23 +1,23 @@
-import { useCallback, useEffect, useState } from 'react'
-import GradientBG from '../components/GradientBG.js'
-import LoadingScreen from '@/components/LoadingScreen'
-import { ConnectWallet } from '@/components/ConnectWallet'
-import { QuestContractProvider, useQuestContract } from '@/lib/useQuestContract'
-import { CircuitString } from 'o1js'
-import Image from 'next/image'
-import { useMinaProvider } from '@/lib/ZkappContext'
-import { isSupportedNetwork } from '@/constants/network'
 import AccountDoesNotExist from '@/components/AccountDoesNotExist'
-import { useAccount } from '@/lib/connect/react/hooks/useAccount'
-import { useReadZkAppState } from '@/lib/useReadZkAppState'
-import { Quest } from 'scaffold-mina-contracts'
-import { useAppKitNetwork } from '@reown/appkit/react'
+import { ConnectWallet } from '@/components/ConnectWallet'
+import LoadingScreen from '@/components/LoadingScreen'
+import { isSupportedNetwork } from '@/constants/network'
 import useDeployedContracts from '@/contracts/useDeployedContracts'
+import { useMinaProvider } from '@/lib/ZkappContext'
+import { useAccount } from '@/lib/connect/react/hooks/useAccount'
+import { QuestContractProvider, useQuestContract } from '@/lib/useQuestContract'
+import { useReadZkAppState } from '@/lib/useReadZkAppState'
+import { useAppKitNetwork } from '@reown/appkit/react'
+import Image from 'next/image'
+import { CircuitString } from 'o1js'
+import { useCallback, useEffect, useState } from 'react'
+import { Quest } from 'scaffold-mina-contracts'
+import GradientBG from '../components/GradientBG.js'
 
 enum TransactionState {
-  INITIAL,
-  PREPARING,
-  AWAITING_USER_APPROVAL,
+  INITIAL = 0,
+  PREPARING = 1,
+  AWAITING_USER_APPROVAL = 2,
 }
 
 function HomeBody() {
@@ -67,6 +67,7 @@ function HomeBody() {
     setTxState(TransactionState.INITIAL)
   }, [prepareTransaction, questSolution, txState])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
     setTransactionLink('')
   }, [address])

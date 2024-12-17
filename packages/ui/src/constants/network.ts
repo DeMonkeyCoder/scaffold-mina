@@ -1,5 +1,5 @@
 //TODO: change this to mina:devnet
-import { CaipNetwork } from '@reown/appkit-common'
+import type { CaipNetwork } from '@reown/appkit-common'
 
 export const NETWORK_ID = 'mina:devnet'
 

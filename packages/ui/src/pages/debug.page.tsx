@@ -11,7 +11,7 @@ function ContractMethod<T extends SmartContract>({
   contract,
   methodName,
 }: {
-  contract: new (...args: any[]) => T
+  contract: new (..._args: any[]) => T
   methodName: Methods<T>
 }) {
   const paramNames = useMemo(() => {
@@ -37,7 +37,7 @@ function ContractMethod<T extends SmartContract>({
       <div className="font-bold">{String(methodName)}</div>
       <div>
         {paramNames.map((paramName) => (
-          <div>
+          <div key={paramName}>
             <label>{paramName}</label>
             <br />
             <input
@@ -58,7 +58,7 @@ function ContractState<T extends SmartContract>({
   contract,
   stateVariable,
 }: {
-  contract: new (...args: any[]) => T
+  contract: new (..._args: any[]) => T
   stateVariable: StateVariable<T>
 }) {
   const deployedContracts = useDeployedContracts()
@@ -93,7 +93,7 @@ export default function DebugContracts() {
   const selectedContractMethods = useMemo(() => {
     if (selectedContract && chainContracts) {
       // @ts-ignore
-      return chainContracts[selectedContract].contract['_methods'].map(
+      return chainContracts[selectedContract].contract._methods.map(
         (m: any) => m.methodName,
       ) as string[]
     }

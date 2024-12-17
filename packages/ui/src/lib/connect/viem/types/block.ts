@@ -62,7 +62,7 @@ export type Block<
   withdrawalsRoot?: Hex | undefined
 }
 
-export type BlockIdentifier<quantity = bigint> = {
+export type BlockIdentifier<_quantity = bigint> = {
   /** Whether or not to throw an error if the block is not in the canonical chain as described below. Only allowed in conjunction with the blockHash tag. Defaults to false. */
   requireCanonical?: boolean | undefined
 } & (

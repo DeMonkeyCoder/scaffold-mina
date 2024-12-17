@@ -1,12 +1,17 @@
-import { fetchAccount, Field, PublicKey, SmartContract } from 'o1js'
-
 import {
+  type fetchAccount,
+  Field,
+  type PublicKey,
+  type SmartContract,
+} from 'o1js'
+
+import type {
   ContractName,
   WorkerFunctions,
   ZkappWorkerReponse,
   ZkappWorkerRequest,
 } from './zkappWorker'
-import { Methods, StateVariable } from '@/lib/types'
+import type { Methods, StateVariable } from '@/lib/types'
 
 export default class ZkappWorkerClient {
   // ---------------------------------------------------------------------------------------

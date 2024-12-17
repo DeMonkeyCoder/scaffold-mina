@@ -26,7 +26,7 @@ const config: Config = {
     },
   },
   plugins: [
-    function ({ addUtilities }: PluginAPI) {
+    ({ addUtilities }: PluginAPI) => {
       addUtilities({
         '.transform-style-preserve-3d': {
           'transform-style': 'preserve-3d',

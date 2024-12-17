@@ -6,7 +6,7 @@ import { useAccount } from '@/lib/connect/react/hooks/useAccount'
 export default function Navbar() {
   const { isConnected, address } = useAccount()
 
-  if (!isConnected) return <div></div>
+  if (!isConnected) return <div />
 
   return (
     <nav className="absolute top-3 w-full z-50">
@@ -53,7 +53,7 @@ export default function Navbar() {
                     alt=""
                   />
                   <a
-                    href={'https://faucet.minaprotocol.com/?address=' + address}
+                    href={`https://faucet.minaprotocol.com/?address=${address}`}
                     target="blank"
                     className="flex justify-center items-center text-sm font-medium text-black pl-1 pr-2"
                   >

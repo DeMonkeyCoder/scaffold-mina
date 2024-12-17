@@ -1,6 +1,10 @@
-import { Address, InvalidAddressError, isAddress } from '@/lib/connect/viem'
+import {
+  type Address,
+  InvalidAddressError,
+  isAddress,
+} from '@/lib/connect/viem'
 import type { ErrorType } from '../../errors/utils'
-import { type IsAddressErrorType } from './isAddress'
+import type { IsAddressErrorType } from './isAddress'
 
 export type GetAddressErrorType = IsAddressErrorType | ErrorType
 

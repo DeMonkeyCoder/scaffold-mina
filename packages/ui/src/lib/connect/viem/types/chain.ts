@@ -73,9 +73,9 @@ export type ChainFormatter<type extends string = string> = {
 }
 
 export type ChainSerializers<
-  formatters extends ChainFormatters | undefined = undefined,
+  _formatters extends ChainFormatters | undefined = undefined,
   ///
-  transaction extends any = any,
+  _transaction = any,
 > = {
   /** Modifies how Transactions are serialized. */
   transaction?: any

@@ -1,4 +1,4 @@
-import { Address } from '@/lib/connect/viem'
+import type { Address } from '@/lib/connect/viem'
 import type { ErrorType } from '../../errors/utils'
 import { LruMap } from '../lru'
 import bs58 from 'bs58'

@@ -28,9 +28,9 @@ import type { Client } from '../createClient'
 import type { Transport } from '../transports/createTransport'
 
 export type PublicActions<
-  transport extends Transport = Transport,
-  chain extends Chain | undefined = Chain | undefined,
-  account extends Account | undefined = Account | undefined,
+  _transport extends Transport = Transport,
+  _chain extends Chain | undefined = Chain | undefined,
+  _account extends Account | undefined = Account | undefined,
 > = {
   /**
    * Returns the balance of an address in wei.

@@ -1,7 +1,7 @@
-import { type CaipNetworkId } from '@reown/appkit-common'
+import type { CaipNetworkId } from '@reown/appkit-common'
 import { ConstantsUtil, PresetsUtil } from '@reown/appkit-utils'
-import { UniversalProvider } from '@walletconnect/universal-provider'
-import { type Hex } from '@/lib/connect/viem'
+import type { UniversalProvider } from '@walletconnect/universal-provider'
+import type { Hex } from '@/lib/connect/viem'
 
 import type { Connector } from '@/lib/connect/core/exports'
 import { WcHelpersUtil } from '@reown/appkit'
@@ -50,7 +50,7 @@ export function requireCaipAddress(caipAddress: string) {
 export function parseWalletCapabilities(str: string) {
   try {
     return JSON.parse(str)
-  } catch (error) {
+  } catch (_error) {
     throw new Error('Error parsing wallet capabilities')
   }
 }

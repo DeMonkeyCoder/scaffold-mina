@@ -1,37 +1,37 @@
-import type UniversalProvider from '@walletconnect/universal-provider'
-import type {
-  AppKitNetwork,
-  BaseNetwork,
-  CaipNetwork,
-} from '@reown/appkit-common'
-import { AdapterBlueprint } from '@reown/appkit/adapters'
 import {
   type Config,
-  connect,
   type Connector,
-  createConfig,
   type CreateConfigParameters,
   type CreateConnectorFn,
-  disconnect as wagmiDisconnect,
+  connect,
+  createConfig,
   getBalance,
   getConnections,
   injected,
   reconnect,
   switchChain,
+  disconnect as wagmiDisconnect,
   watchAccount,
   watchConnections,
 } from '@/lib/connect/core/exports'
-import { type Chain } from '@/lib/connect/core/exports/chains'
-import { AppKit, type AppKitOptions } from '@reown/appkit'
-import { type ConnectorType, type Provider } from '@reown/appkit-core'
+import type { Chain } from '@/lib/connect/core/exports/chains'
+import type { Hex } from '@/lib/connect/viem'
+import { formatMina, formatUnits, parseUnits } from '@mina-js/utils'
+import type { AppKit, AppKitOptions } from '@reown/appkit'
+import type {
+  AppKitNetwork,
+  BaseNetwork,
+  CaipNetwork,
+} from '@reown/appkit-common'
+import type { ConnectorType, Provider } from '@reown/appkit-core'
 import {
   CaipNetworksUtil,
   ConstantsUtil,
   PresetsUtil,
 } from '@reown/appkit-utils'
-import { type Hex } from '@/lib/connect/viem'
+import { AdapterBlueprint } from '@reown/appkit/adapters'
+import type UniversalProvider from '@walletconnect/universal-provider'
 import { parseWalletCapabilities } from './utils/helpers'
-import { formatMina, formatUnits, parseUnits } from '@mina-js/utils'
 
 export class WagmiAdapter extends AdapterBlueprint {
   public wagmiChains: readonly [Chain, ...Chain[]] | undefined
@@ -64,31 +64,31 @@ export class WagmiAdapter extends AdapterBlueprint {
   }
 
   public async signMessage(
-    params: AdapterBlueprint.SignMessageParams,
+    _params: AdapterBlueprint.SignMessageParams,
   ): Promise<AdapterBlueprint.SignMessageResult> {
     throw new Error('not implemented')
   }
 
   public async sendTransaction(
-    params: AdapterBlueprint.SendTransactionParams,
+    _params: AdapterBlueprint.SendTransactionParams,
   ): Promise<AdapterBlueprint.SendTransactionResult> {
     throw new Error('not implemented')
   }
 
   public async writeContract(
-    params: AdapterBlueprint.WriteContractParams,
+    _params: AdapterBlueprint.WriteContractParams,
   ): Promise<AdapterBlueprint.WriteContractResult> {
     throw new Error('not implemented')
   }
 
   public async getEnsAddress(
-    params: AdapterBlueprint.GetEnsAddressParams,
+    _params: AdapterBlueprint.GetEnsAddressParams,
   ): Promise<AdapterBlueprint.GetEnsAddressResult> {
     throw new Error('not implemented')
   }
 
   public async estimateGas(
-    params: AdapterBlueprint.EstimateGasTransactionArgs,
+    _params: AdapterBlueprint.EstimateGasTransactionArgs,
   ): Promise<AdapterBlueprint.EstimateGasTransactionResult> {
     throw new Error('not implemented')
   }
@@ -121,7 +121,7 @@ export class WagmiAdapter extends AdapterBlueprint {
       return !isDuplicate
     })
 
-    filteredConnectors.forEach((connector) => {
+    for (const connector of filteredConnectors) {
       const shouldSkip = ConstantsUtil.AUTH_CONNECTOR_ID === connector.id
 
       const injectedConnector =
@@ -140,7 +140,7 @@ export class WagmiAdapter extends AdapterBlueprint {
           chains: [],
         })
       }
-    })
+    }
   }
 
   public async syncConnection(
@@ -190,7 +190,7 @@ export class WagmiAdapter extends AdapterBlueprint {
   public async connect(
     params: AdapterBlueprint.ConnectParams,
   ): Promise<AdapterBlueprint.ConnectResult> {
-    const { id, provider, type, info, chainId } = params
+    const { id, provider, type, info } = params
 
     const connector = this.wagmiConfig.connectors.find((c) => c.id === id)
     if (!connector) {
@@ -261,15 +261,14 @@ export class WagmiAdapter extends AdapterBlueprint {
   }
 
   public async getProfile(
-    params: AdapterBlueprint.GetProfileParams,
+    _params: AdapterBlueprint.GetProfileParams,
   ): Promise<AdapterBlueprint.GetProfileResult> {
     throw new Error('not implemented')
   }
 
   public getWalletConnectProvider(): AdapterBlueprint.GetWalletConnectProviderResult {
-    return this.wagmiConfig.connectors.find(
-      (c) => c.type === 'walletConnect',
-    )?.['provider'] as UniversalProvider
+    return this.wagmiConfig.connectors.find((c) => c.type === 'walletConnect')
+      ?.provider as UniversalProvider
   }
 
   public async disconnect() {
@@ -316,7 +315,7 @@ export class WagmiAdapter extends AdapterBlueprint {
     }
 
     const walletCapabilitiesString =
-      provider.session?.sessionProperties?.['capabilities']
+      provider.session?.sessionProperties?.capabilities
     if (walletCapabilitiesString) {
       const walletCapabilities = parseWalletCapabilities(
         walletCapabilitiesString,
@@ -475,7 +474,7 @@ export class WagmiAdapter extends AdapterBlueprint {
     })
   }
 
-  private addWagmiConnectors(options: AppKitOptions, appKit: AppKit) {
+  private addWagmiConnectors(options: AppKitOptions, _appKit: AppKit) {
     const customConnectors: CreateConnectorFn[] = []
 
     // if (options.enableCoinbase !== false) {
@@ -524,9 +523,9 @@ export class WagmiAdapter extends AdapterBlueprint {
     //     );
     // }
 
-    customConnectors.forEach((connector) => {
+    for (const connector of customConnectors) {
       const cnctr = this.wagmiConfig._internal.connectors.setup(connector)
       this.wagmiConfig._internal.connectors.setState((prev) => [...prev, cnctr])
-    })
+    }
   }
 }

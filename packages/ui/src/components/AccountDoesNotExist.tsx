@@ -8,7 +8,7 @@ export default function AccountDoesNotExist() {
       <br />
       Visit{' '}
       <a
-        href={'https://faucet.minaprotocol.com/?address=' + address}
+        href={`https://faucet.minaprotocol.com/?address=${address}`}
         className=" text-blue-500 hover:text-blue-600"
         target="_blank"
         rel="noreferrer"
