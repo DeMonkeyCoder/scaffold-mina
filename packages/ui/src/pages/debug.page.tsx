@@ -67,7 +67,7 @@ function ContractState<T extends SmartContract>({
     smartContract: contract,
     publicKey: networkId
       ? // @ts-ignore
-        deployedContracts[networkId][contract.name].publicKey
+        deployedContracts[networkId][contract.name].publicKey.toBase58()
       : undefined,
     stateVariable,
     watch: true,

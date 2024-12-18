@@ -36,10 +36,22 @@ export {
 } from '../hooks/useAccountEffect'
 
 export {
+  type UseBalanceParameters,
+  type UseBalanceReturnType,
+  useBalance,
+} from '../hooks/useBalance'
+
+export {
   type UseBlockHashParameters,
   type UseBlockHashReturnType,
   useBlockHash,
 } from '../hooks/useBlockHash'
+
+export {
+  type UseFetchAccountParameters,
+  type UseFetchAccountReturnType,
+  useFetchAccount,
+} from '../hooks/useFetchAccount'
 
 export {
   type UseNetworkIdParameters,

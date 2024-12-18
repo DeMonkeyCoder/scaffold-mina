@@ -20,6 +20,15 @@ export {
 } from '../query/disconnect'
 
 export {
+  type FetchAccountData,
+  type FetchAccountOptions,
+  type FetchAccountQueryFnData,
+  type FetchAccountQueryKey,
+  fetchAccountQueryKey,
+  fetchAccountQueryOptions,
+} from '../query/fetchAccount'
+
+export {
   type GetBalanceData,
   type GetBalanceOptions,
   type GetBalanceQueryFnData,

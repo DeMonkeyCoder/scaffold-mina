@@ -32,7 +32,7 @@ function HomeBody() {
   const { data: currentNum } = useReadZkAppState({
     smartContract: Quest,
     publicKey: networkId
-      ? deployedContracts[networkId]?.Quest?.publicKey
+      ? deployedContracts[networkId]?.Quest?.publicKey.toBase58()
       : undefined,
     stateVariable: 'counter',
     watch: true,

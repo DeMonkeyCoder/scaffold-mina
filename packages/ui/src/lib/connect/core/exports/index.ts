@@ -17,6 +17,13 @@ export {
   disconnect,
 } from '../actions/disconnect'
 
+export {
+  type FetchAccountParameters,
+  type FetchAccountReturnType,
+  type FetchAccountErrorType,
+  fetchAccount,
+} from '../actions/fetchAccount'
+
 export { type GetAccountReturnType, getAccount } from '../actions/getAccount'
 
 export {

@@ -5,6 +5,12 @@ export {
   addChain,
 } from './wallet/addChain'
 export {
+  type FetchAccountErrorType,
+  type FetchAccountParameters,
+  type FetchAccountReturnType,
+  fetchAccount,
+} from './public/fetchAccount'
+export {
   type GetBalanceErrorType,
   type GetBalanceParameters,
   type GetBalanceReturnType,

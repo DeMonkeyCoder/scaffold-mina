@@ -1,26 +1,31 @@
 import {
-  getBalance,
+  type FetchAccountParameters,
+  type FetchAccountReturnType,
+  fetchAccount,
+} from '../../actions/public/fetchAccount'
+import {
   type GetBalanceParameters,
   type GetBalanceReturnType,
+  getBalance,
 } from '../../actions/public/getBalance'
 import {
-  getBlockHash,
   type GetBlockHashParameters,
   type GetBlockHashReturnType,
+  getBlockHash,
 } from '../../actions/public/getBlockHash'
 import {
-  getNetworkId,
   type GetNetworkIdReturnType,
+  getNetworkId,
 } from '../../actions/public/getNetworkId'
 import {
-  getTransactionCount,
   type GetTransactionCountParameters,
   type GetTransactionCountReturnType,
+  getTransactionCount,
 } from '../../actions/public/getTransactionCount'
 import {
-  watchBlockHash,
   type WatchBlockHashParameters,
   type WatchBlockHashReturnType,
+  watchBlockHash,
 } from '../../actions/public/watchBlockHash'
 import type { Account } from '../../types/account'
 import type { Chain } from '../../types/chain'
@@ -32,6 +37,9 @@ export type PublicActions<
   _chain extends Chain | undefined = Chain | undefined,
   _account extends Account | undefined = Account | undefined,
 > = {
+  fetchAccount: (
+    args: FetchAccountParameters,
+  ) => Promise<FetchAccountReturnType>
   /**
    * Returns the balance of an address in wei.
    *
@@ -170,6 +178,7 @@ export function publicActions<
   client: Client<transport, chain, account>,
 ): PublicActions<transport, chain, account> {
   return {
+    fetchAccount: (args) => fetchAccount(client, args),
     getBalance: (args) => getBalance(client, args),
     getBlockHash: (args) => getBlockHash(client, args),
     getNetworkId: () => getNetworkId(client),

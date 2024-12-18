@@ -24,7 +24,7 @@
       "vectors/*.json",
       "vectors/**/*.test.ts",
       "site/dist",
-      "public"
+      "./public"
     ]
   },
   "formatter": {
