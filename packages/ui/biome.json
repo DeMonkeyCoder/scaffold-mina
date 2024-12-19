@@ -14,7 +14,6 @@
       "**/node_modules",
       "bun.lockb",
       "cache",
-      "contracts",
       "test/kzg/*.json",
       "test/kzg/*.txt",
       "coverage",

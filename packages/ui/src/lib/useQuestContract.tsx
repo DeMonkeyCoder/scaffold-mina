@@ -1,8 +1,8 @@
-import useDeployedContracts from '@/contracts/useDeployedContracts'
+import deployedContracts from '@/contracts/deployedContracts'
 import { useMinaProvider } from '@/lib/ZkappContext'
 import type { ContractContextType, Methods } from '@/lib/types'
 import { useAppKitNetwork } from '@reown/appkit/react'
-import { type Field, fetchAccount } from 'o1js'
+import { type Field, PublicKey, fetchAccount } from 'o1js'
 import React, { createContext, type ReactNode, useContext } from 'react'
 import type { Quest } from 'scaffold-mina-contracts'
 
@@ -15,7 +15,6 @@ export const QuestContractProvider = ({
 }: {
   children: ReactNode
 }) => {
-  const deployedContracts = useDeployedContracts()
   const { chainId } = useAppKitNetwork()
   const { zkappWorkerClient } = useMinaProvider()
 
@@ -33,7 +32,11 @@ export const QuestContractProvider = ({
     if (!chainId) {
       throw Error('chainId not defined')
     }
-    const zkappPublicKey = deployedContracts[chainId].Quest.publicKey
+    const address = deployedContracts.Quest.addressMap[chainId]
+    if (!address) {
+      throw Error('zkapp address for chain not provided')
+    }
+    const zkappPublicKey = PublicKey.fromBase58(address)
     await zkappWorkerClient.loadAndCompileContract({
       contractName: 'Quest',
     })

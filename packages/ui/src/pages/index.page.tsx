@@ -2,7 +2,7 @@ import AccountDoesNotExist from '@/components/AccountDoesNotExist'
 import { ConnectWallet } from '@/components/ConnectWallet'
 import LoadingScreen from '@/components/LoadingScreen'
 import { isSupportedNetwork } from '@/constants/network'
-import useDeployedContracts from '@/contracts/useDeployedContracts'
+import deployedContracts from '@/contracts/deployedContracts'
 import { useMinaProvider } from '@/lib/ZkappContext'
 import { useFetchAccount } from '@/lib/connect/react/hooks/useFetchAccount'
 import { QuestContractProvider, useQuestContract } from '@/lib/useQuestContract'
@@ -27,22 +27,18 @@ function HomeBody() {
   const { accountExists } = useMinaProvider()
   const { chainId: networkId } = useAppKitNetwork()
 
-  const deployedContracts = useDeployedContracts()
-
-  const { data } = useFetchAccount({
+  const { data: fetchedAccount } = useFetchAccount({
     address: networkId
-      ? deployedContracts[networkId]?.Quest?.publicKey.toBase58()
+      ? deployedContracts.Quest.addressMap[networkId]
       : undefined,
     watch: true,
   })
 
   const currentNum = useMemo(() => {
-    if (networkId && data) {
-      return new Quest(
-        deployedContracts[networkId]?.Quest?.publicKey,
-      ).counter.get()
+    if (fetchedAccount) {
+      return new Quest(fetchedAccount.publicKey).counter.get()
     }
-  }, [deployedContracts, networkId, data])
+  }, [fetchedAccount])
 
   const [questSolution, setQuestSolution] = useState('')
 

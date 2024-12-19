@@ -1,11 +1,13 @@
-import useDeployedContracts, {
-  type ChainContracts,
-} from '@/contracts/useDeployedContracts'
+import deployedContracts from '@/contracts/deployedContracts'
 import { useFetchAccount } from '@/lib/connect/react/hooks/useFetchAccount'
 import type { Methods, StateVariable } from '@/lib/types'
 import { useAppKitNetwork } from '@reown/appkit/react'
 import type { SmartContract, State } from 'o1js'
 import { useMemo, useState } from 'react'
+
+const contractNames = Object.keys(deployedContracts) as Array<
+  keyof typeof deployedContracts
+>
 
 function ContractMethod<T extends SmartContract>({
   contract,
@@ -117,33 +119,37 @@ function ContractView<T extends SmartContract>({
 
 export default function DebugContracts() {
   const { chainId: networkId } = useAppKitNetwork()
-  const deployedContracts = useDeployedContracts()
-  const chainContracts: ChainContracts = useMemo(
-    () => (networkId ? deployedContracts[networkId] : {}),
-    [deployedContracts, networkId],
+  const chainContracts = useMemo(
+    () =>
+      networkId
+        ? contractNames.filter(
+            (contractName) =>
+              deployedContracts[contractName].addressMap[networkId],
+          )
+        : [],
+    [networkId],
   )
   const [selectedContract, setSelectedContract] = useState<
-    keyof typeof chainContracts | undefined
-  >(chainContracts ? Object.keys(chainContracts)[0] : undefined)
+    keyof typeof deployedContracts | undefined
+  >(chainContracts?.[0])
 
   return (
     <div className="pt-20 overflow-auto h-screen">
       <div className="px-5">
-        {chainContracts &&
-          Object.keys(chainContracts).map((contractName) => (
-            <button
-              key={contractName}
-              onClick={() => setSelectedContract(contractName)}
-              className={`card items-center justify-center whitespace-nowrap text-sm ${selectedContract === contractName ? '!bg-blue-700 !text-white' : ''}`}
-            >
-              {contractName}
-            </button>
-          ))}
+        {contractNames.map((contractName) => (
+          <button
+            key={contractName}
+            onClick={() => setSelectedContract(contractName)}
+            className={`card items-center justify-center whitespace-nowrap text-sm ${selectedContract === contractName ? '!bg-blue-700 !text-white' : ''}`}
+          >
+            {contractName}
+          </button>
+        ))}
       </div>
-      {chainContracts && selectedContract && (
+      {networkId && selectedContract && (
         <ContractView
-          contract={chainContracts[selectedContract].contract}
-          address={chainContracts[selectedContract].publicKey.toBase58()}
+          contract={deployedContracts[selectedContract].contract}
+          address={deployedContracts[selectedContract].addressMap[networkId]}
         />
       )}
     </div>
