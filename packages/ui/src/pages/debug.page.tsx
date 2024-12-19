@@ -2,9 +2,9 @@ import useDeployedContracts, {
   type ChainContracts,
 } from '@/contracts/useDeployedContracts'
 import { useFetchAccount } from '@/lib/connect/react/hooks/useFetchAccount'
-import type { Methods } from '@/lib/types'
+import type { Methods, StateVariable } from '@/lib/types'
 import { useAppKitNetwork } from '@reown/appkit/react'
-import type { SmartContract } from 'o1js'
+import type { SmartContract, State } from 'o1js'
 import { useMemo, useState } from 'react'
 
 function ContractMethod<T extends SmartContract>({
@@ -54,6 +54,67 @@ function ContractMethod<T extends SmartContract>({
   )
 }
 
+function ContractView<T extends SmartContract>({
+  contract,
+  address,
+}: {
+  contract: new (..._args: any[]) => T
+  address: string
+}) {
+  const { data: fetchedAccount } = useFetchAccount({
+    address,
+    watch: true,
+  })
+
+  const contractMethods = useMemo(() => {
+    // @ts-ignore
+    return contract._methods.map((m: any) => m.methodName) as string[]
+  }, [contract])
+
+  const contractStates = useMemo(() => {
+    const notStateVariables = ['constructor', 'init', ...contractMethods]
+    const contractInstance = fetchedAccount
+      ? new contract(fetchedAccount.publicKey)
+      : undefined
+    return (
+      Object.getOwnPropertyNames(contract.prototype).filter(
+        (n) => !notStateVariables.includes(n),
+      ) as StateVariable<T>[]
+    ).map((stateVariable) => ({
+      name: stateVariable,
+      value: contractInstance
+        ? (contractInstance[stateVariable] as State<any>).get()
+        : undefined,
+    }))
+  }, [contract, fetchedAccount, contractMethods])
+
+  return (
+    <div className="px-9 py-2">
+      {contractStates.map((stateVariable) => (
+        <div
+          key={stateVariable.name.toString()}
+          className="mb-5 p-5 bg-purple-50 shadow-lg rounded-3xl border-stone-400 break-words"
+        >
+          <div className="font-bold">{String(stateVariable.name)}</div>
+          <div>{stateVariable.value?.toString() ?? 'Loading...'}</div>
+        </div>
+      ))}
+      <div className="py-2 px-5 mb-2 bg-purple-50 rounded-3xl border-stone-400 w-100">
+        Write
+      </div>
+      {contractMethods?.map((methodName) => (
+        // @ts-ignore
+        <ContractMethod
+          key={methodName}
+          contract={contract}
+          // @ts-ignore
+          methodName={methodName}
+        />
+      ))}
+    </div>
+  )
+}
+
 export default function DebugContracts() {
   const { chainId: networkId } = useAppKitNetwork()
   const deployedContracts = useDeployedContracts()
@@ -64,54 +125,6 @@ export default function DebugContracts() {
   const [selectedContract, setSelectedContract] = useState<
     keyof typeof chainContracts | undefined
   >(chainContracts ? Object.keys(chainContracts)[0] : undefined)
-
-  const selectedContractMethods = useMemo(() => {
-    if (selectedContract && chainContracts) {
-      // @ts-ignore
-      return chainContracts[selectedContract].contract._methods.map(
-        (m: any) => m.methodName,
-      ) as string[]
-    }
-  }, [chainContracts, selectedContract])
-
-  const selectedContractStates = useMemo(() => {
-    if (
-      selectedContract &&
-      chainContracts &&
-      selectedContractMethods !== undefined
-    ) {
-      // @ts-ignore
-      const notStateVariables = [
-        'constructor',
-        'init',
-        ...selectedContractMethods,
-      ]
-      return Object.getOwnPropertyNames(
-        chainContracts[selectedContract].contract.prototype,
-      ).filter((n) => !notStateVariables.includes(n))
-    }
-    return []
-  }, [chainContracts, selectedContract, selectedContractMethods])
-
-  const { data: fetchedAccount } = useFetchAccount({
-    address:
-      chainContracts && selectedContract
-        ? // @ts-ignore
-          chainContracts[selectedContract].publicKey.toBase58()
-        : undefined,
-    watch: true,
-  })
-
-  const selectedContractInstance = useMemo(
-    () =>
-      chainContracts &&
-      selectedContract &&
-      fetchedAccount &&
-      new chainContracts[selectedContract].contract(
-        chainContracts[selectedContract].publicKey,
-      ),
-    [chainContracts, fetchedAccount, selectedContract],
-  )
 
   return (
     <div className="pt-20 overflow-auto h-screen">
@@ -128,40 +141,10 @@ export default function DebugContracts() {
           ))}
       </div>
       {chainContracts && selectedContract && (
-        <>
-          <div className="px-9 py-2">
-            {selectedContractStates.map((stateVariable) => (
-              <div
-                key={stateVariable}
-                className="mb-5 p-5 bg-purple-50 shadow-lg rounded-3xl border-stone-400 break-words"
-              >
-                <div className="font-bold">{String(stateVariable)}</div>
-                <div>
-                  {
-                    // @ts-ignore
-                    selectedContractInstance?.[stateVariable]
-                      ? // @ts-ignore
-                        selectedContractInstance[stateVariable]
-                          .get()
-                          .toString()
-                      : 'Loading...'
-                  }
-                </div>
-              </div>
-            ))}
-            <div className="py-2 px-5 mb-2 bg-purple-50 rounded-3xl border-stone-400 w-100">
-              Write
-            </div>
-            {selectedContractMethods?.map((methodName) => (
-              <ContractMethod
-                key={methodName}
-                contract={chainContracts[selectedContract].contract}
-                // @ts-ignore
-                methodName={methodName}
-              />
-            ))}
-          </div>
-        </>
+        <ContractView
+          contract={chainContracts[selectedContract].contract}
+          address={chainContracts[selectedContract].publicKey.toBase58()}
+        />
       )}
     </div>
   )
