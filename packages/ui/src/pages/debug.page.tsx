@@ -33,7 +33,7 @@ function ContractMethod<T extends SmartContract>({
       .filter((param) => param !== '')
   }, [contract, methodName])
   return (
-    <div className="mb-5 p-5 bg-purple-50 shadow-lg rounded-3xl border-stone-400 break-words">
+    <div className="mb-5 p-5 bg-black shadow-lg rounded-3xl border-white border-2 text-white break-words ">
       <div className="font-bold">{String(methodName)}</div>
       <div>
         {paramNames.map((paramName) => (
@@ -42,12 +42,13 @@ function ContractMethod<T extends SmartContract>({
             <br />
             <input
               type="text"
-              className="mt-2 py-1 px-3 border-gray-300 rounded-full border-2 w-full"
+              placeholder='write here'
+              className="mt-2 py-1 px-3 bg-black border-white rounded-full border-2 w-full"
             />
           </div>
         ))}
       </div>
-      <button className="card flex items-center justify-center whitespace-nowrap">
+      <button className="flex items-center justify-center text-black font-firacode whitespace-nowrap bg-white border rounded-md px-4 py-1 mt-4 text-xs hover:bg-black hover:text-white">
         Send Transaction
       </button>
     </div>
@@ -73,7 +74,7 @@ function ContractState<T extends SmartContract>({
     watch: true,
   })
   return (
-    <div className="mb-5 p-5 bg-purple-50 shadow-lg rounded-3xl border-stone-400 break-words">
+    <div className="mb-5 p-5 bg-black text-white shadow-lg rounded-3xl border-white border-2 break-words">
       <div className="font-bold">{String(stateVariable)}</div>
       <div>{data ? data.toString() : 'Loading...'}</div>
     </div>
@@ -117,14 +118,14 @@ export default function DebugContracts() {
     return []
   }, [chainContracts, selectedContract, selectedContractMethods])
   return (
-    <div className="pt-20 overflow-auto h-screen">
+    <div className="overflow-auto h-screen">
       <div className="px-5">
         {chainContracts &&
           Object.keys(chainContracts).map((contractName) => (
             <button
               key={contractName}
               onClick={() => setSelectedContract(contractName)}
-              className={`card items-center justify-center whitespace-nowrap text-sm ${selectedContract === contractName ? '!bg-blue-700 !text-white' : ''}`}
+              className={`card items-center justify-center whitespace-nowrap text-sm ${selectedContract === contractName ? '!bg-slate-900 !text-white' : ''}`}
             >
               {contractName}
             </button>
@@ -133,6 +134,9 @@ export default function DebugContracts() {
       {chainContracts && selectedContract && (
         <>
           <div className="px-9 py-2">
+          <div className="pl-9 mb-2 text-white text-2xl font-firacode">
+              Read 
+            </div>
             {selectedContractStates.map((stateVariable) => (
               <ContractState
                 key={stateVariable}
@@ -141,7 +145,7 @@ export default function DebugContracts() {
                 stateVariable={stateVariable}
               />
             ))}
-            <div className="py-2 px-5 mb-2 bg-purple-50 rounded-3xl border-stone-400 w-100">
+            <div className="pl-9 mb-2 text-white text-2xl font-firacode">
               Write
             </div>
             {selectedContractMethods?.map((methodName) => (
