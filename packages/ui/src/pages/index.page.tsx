@@ -4,12 +4,12 @@ import LoadingScreen from '@/components/LoadingScreen'
 import { isSupportedNetwork } from '@/constants/network'
 import useDeployedContracts from '@/contracts/useDeployedContracts'
 import { useMinaProvider } from '@/lib/ZkappContext'
+import { useFetchAccount } from '@/lib/connect/react/hooks/useFetchAccount'
 import { QuestContractProvider, useQuestContract } from '@/lib/useQuestContract'
-import { useReadZkAppState } from '@/lib/useReadZkAppState'
 import { useAppKitAccount, useAppKitNetwork } from '@reown/appkit/react'
 import Image from 'next/image'
 import { CircuitString } from 'o1js'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Quest } from 'scaffold-mina-contracts'
 import GradientBG from '../components/GradientBG.js'
 
@@ -29,14 +29,20 @@ function HomeBody() {
 
   const deployedContracts = useDeployedContracts()
 
-  const { data: currentNum } = useReadZkAppState({
-    smartContract: Quest,
-    publicKey: networkId
+  const { data } = useFetchAccount({
+    address: networkId
       ? deployedContracts[networkId]?.Quest?.publicKey.toBase58()
       : undefined,
-    stateVariable: 'counter',
     watch: true,
   })
+
+  const currentNum = useMemo(() => {
+    if (networkId && data) {
+      return new Quest(
+        deployedContracts[networkId]?.Quest?.publicKey,
+      ).counter.get()
+    }
+  }, [deployedContracts, networkId, data])
 
   const [questSolution, setQuestSolution] = useState('')
 

@@ -17,6 +17,7 @@ import {
 import type { ConfigParameter, QueryParameter } from '../types/properties'
 import { type UseQueryReturnType, useQuery } from '../utils/query'
 import { useConfig } from './useConfig'
+import { useInvalidateOnBlock } from './useInvalidateOnBlock'
 import { useNetworkId } from './useNetworkId'
 
 export type UseFetchAccountParameters<
@@ -30,7 +31,9 @@ export type UseFetchAccountParameters<
       FetchAccountErrorType,
       selectData,
       FetchAccountQueryKey<config>
-    >
+    > & {
+      watch?: boolean
+    }
 >
 
 export type UseFetchAccountReturnType<selectData = FetchAccountData> =
@@ -43,7 +46,7 @@ export function useFetchAccount<
 >(
   parameters: UseFetchAccountParameters<config, selectData> = {},
 ): UseFetchAccountReturnType<selectData> {
-  const { address, query = {} } = parameters
+  const { address, watch, query = {} } = parameters
 
   const config = useConfig(parameters)
   const networkId = useNetworkId({ config })
@@ -54,5 +57,13 @@ export function useFetchAccount<
   })
   const enabled = Boolean(address && (query.enabled ?? true))
 
-  return useQuery({ ...query, ...options, enabled })
+  const fetchAccountQuery = useQuery({ ...query, ...options, enabled })
+
+  useInvalidateOnBlock({
+    networkId,
+    enabled: Boolean(enabled && watch),
+    queryKey: fetchAccountQuery.queryKey,
+  })
+
+  return fetchAccountQuery
 }

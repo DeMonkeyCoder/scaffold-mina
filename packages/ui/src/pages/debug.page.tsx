@@ -1,8 +1,8 @@
 import useDeployedContracts, {
   type ChainContracts,
 } from '@/contracts/useDeployedContracts'
-import type { Methods, StateVariable } from '@/lib/types'
-import { useReadZkAppState } from '@/lib/useReadZkAppState'
+import { useFetchAccount } from '@/lib/connect/react/hooks/useFetchAccount'
+import type { Methods } from '@/lib/types'
 import { useAppKitNetwork } from '@reown/appkit/react'
 import type { SmartContract } from 'o1js'
 import { useMemo, useState } from 'react'
@@ -54,32 +54,6 @@ function ContractMethod<T extends SmartContract>({
   )
 }
 
-function ContractState<T extends SmartContract>({
-  contract,
-  stateVariable,
-}: {
-  contract: new (..._args: any[]) => T
-  stateVariable: StateVariable<T>
-}) {
-  const deployedContracts = useDeployedContracts()
-  const { chainId: networkId } = useAppKitNetwork()
-  const { data } = useReadZkAppState({
-    smartContract: contract,
-    publicKey: networkId
-      ? // @ts-ignore
-        deployedContracts[networkId][contract.name].publicKey.toBase58()
-      : undefined,
-    stateVariable,
-    watch: true,
-  })
-  return (
-    <div className="mb-5 p-5 bg-purple-50 shadow-lg rounded-3xl border-stone-400 break-words">
-      <div className="font-bold">{String(stateVariable)}</div>
-      <div>{data ? data.toString() : 'Loading...'}</div>
-    </div>
-  )
-}
-
 export default function DebugContracts() {
   const { chainId: networkId } = useAppKitNetwork()
   const deployedContracts = useDeployedContracts()
@@ -90,6 +64,7 @@ export default function DebugContracts() {
   const [selectedContract, setSelectedContract] = useState<
     keyof typeof chainContracts | undefined
   >(chainContracts ? Object.keys(chainContracts)[0] : undefined)
+
   const selectedContractMethods = useMemo(() => {
     if (selectedContract && chainContracts) {
       // @ts-ignore
@@ -98,6 +73,7 @@ export default function DebugContracts() {
       ) as string[]
     }
   }, [chainContracts, selectedContract])
+
   const selectedContractStates = useMemo(() => {
     if (
       selectedContract &&
@@ -116,6 +92,27 @@ export default function DebugContracts() {
     }
     return []
   }, [chainContracts, selectedContract, selectedContractMethods])
+
+  const { data: fetchedAccount } = useFetchAccount({
+    address:
+      chainContracts && selectedContract
+        ? // @ts-ignore
+          chainContracts[selectedContract].publicKey.toBase58()
+        : undefined,
+    watch: true,
+  })
+
+  const selectedContractInstance = useMemo(
+    () =>
+      chainContracts &&
+      selectedContract &&
+      fetchedAccount &&
+      new chainContracts[selectedContract].contract(
+        chainContracts[selectedContract].publicKey,
+      ),
+    [chainContracts, fetchedAccount, selectedContract],
+  )
+
   return (
     <div className="pt-20 overflow-auto h-screen">
       <div className="px-5">
@@ -134,12 +131,23 @@ export default function DebugContracts() {
         <>
           <div className="px-9 py-2">
             {selectedContractStates.map((stateVariable) => (
-              <ContractState
+              <div
                 key={stateVariable}
-                contract={chainContracts[selectedContract].contract}
-                // @ts-ignore
-                stateVariable={stateVariable}
-              />
+                className="mb-5 p-5 bg-purple-50 shadow-lg rounded-3xl border-stone-400 break-words"
+              >
+                <div className="font-bold">{String(stateVariable)}</div>
+                <div>
+                  {
+                    // @ts-ignore
+                    selectedContractInstance?.[stateVariable]
+                      ? // @ts-ignore
+                        selectedContractInstance[stateVariable]
+                          .get()
+                          .toString()
+                      : 'Loading...'
+                  }
+                </div>
+              </div>
             ))}
             <div className="py-2 px-5 mb-2 bg-purple-50 rounded-3xl border-stone-400 w-100">
               Write
