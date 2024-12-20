@@ -2,13 +2,13 @@ import {
   type AddEthereumChainParameter,
   type Address,
   type EIP1193Provider,
-  getAddress,
   type ProviderConnectInfo,
   type ProviderRpcError,
   ResourceUnavailableRpcError,
   type RpcError,
   SwitchChainError,
   UserRejectedRequestError,
+  getAddress,
   withRetry,
   withTimeout,
 } from '@/lib/connect/viem'
@@ -479,11 +479,11 @@ export function injected(parameters: InjectedParameters = {}) {
 
         // Indicates chain is not added to provider
         if (
-          error.code === 4902 ||
+          error.code === 20004 ||
           // Unwrapping for MetaMask Mobile
           // https://github.com/MetaMask/metamask-mobile/issues/2944#issuecomment-976988719
           (error as ProviderRpcError<{ originalError?: { code: number } }>)
-            ?.data?.originalError?.code === 4902
+            ?.data?.originalError?.code === 20004
         ) {
           try {
             const { default: blockExplorer, ...blockExplorers } =
@@ -513,9 +513,12 @@ export function injected(parameters: InjectedParameters = {}) {
               rpcUrls,
             } satisfies AddEthereumChainParameter
 
+            // @ts-ignore
             await provider.request({
-              method: 'wallet_addEthereumChain',
-              params: [addEthereumChain],
+              // @ts-ignore
+              method: 'mina_addChain',
+              // @ts-ignore
+              params: { url: chain.graphqlEndpoint, name: chain.id },
             })
 
             const currentNetworkId = await this.getNetworkId()

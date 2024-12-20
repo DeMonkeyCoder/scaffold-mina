@@ -54,7 +54,7 @@ import type { ErrorType } from '../errors/utils'
 import type { EIP1193RequestFn, EIP1193RequestOptions } from '../types/eip1193'
 import type { CreateBatchSchedulerErrorType } from './promise/createBatchScheduler'
 import { withDedupe } from './promise/withDedupe'
-import { withRetry, type WithRetryErrorType } from './promise/withRetry'
+import { type WithRetryErrorType, withRetry } from './promise/withRetry'
 import type { GetSocketRpcClientErrorType } from './rpc/socket'
 import { stringify } from './stringify'
 
@@ -172,7 +172,7 @@ export function buildRequest<request extends (args: any) => Promise<any>>(
                 // 4901
                 case ChainDisconnectedError.code:
                   throw new ChainDisconnectedError(err)
-                // 4902
+                // 20004
                 case SwitchChainError.code:
                   throw new SwitchChainError(err)
                 // CAIP-25: User Rejected Error

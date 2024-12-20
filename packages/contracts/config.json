@@ -18,6 +18,15 @@
       "feepayerAlias": "testim",
       "fee": "0.1",
       "smartContract": "Quest"
+    },
+    "lightnet1": {
+      "networkId": "testnet",
+      "url": "http://127.0.0.1:8080/graphql",
+      "keyPath": "keys/lightnet1.json",
+      "feepayerKeyPath": "/home/ali/.cache/zkapp-cli/keys/lightnet1.json",
+      "feepayerAlias": "lightnet1",
+      "fee": "0.01",
+      "smartContract": "Quest"
     }
   }
 }

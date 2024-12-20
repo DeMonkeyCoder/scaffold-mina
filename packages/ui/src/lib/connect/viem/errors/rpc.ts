@@ -67,7 +67,7 @@ export type ProviderRpcErrorCode =
   | 4200 // Unsupported Method
   | 4900 // Disconnected
   | 4901 // Chain Disconnected
-  | 4902 // Chain Not Recognized
+  | 20004 // Chain Not Recognized
 
 /**
  * Error subclass implementing Ethereum Provider errors per EIP-1193.
@@ -470,11 +470,11 @@ export class ChainDisconnectedError extends ProviderRpcError {
  * EIP https://eips.ethereum.org/EIPS/eip-1193#provider-errors
  */
 export type SwitchChainErrorType = SwitchChainError & {
-  code: 4902
+  code: 20004
   name: 'SwitchChainError'
 }
 export class SwitchChainError extends ProviderRpcError {
-  static code = 4902 as const
+  static code = 20004 as const
 
   constructor(cause: Error) {
     super(cause, {

@@ -1,5 +1,9 @@
 import { WagmiAdapter } from '@/lib/connect/adapter/src'
-import { minaDevnet, minaMainnet } from '@/lib/connect/appkit/networks'
+import {
+  minaDevnet,
+  minaLightnet,
+  minaMainnet,
+} from '@/lib/connect/appkit/networks'
 import { http } from '@/lib/connect/viem'
 import type { AppKitNetwork } from '@reown/appkit/networks'
 
@@ -18,7 +22,7 @@ export const metadata = {
 }
 
 // for custom networks visit -> https://docs.reown.com/appkit/react/core/custom-networks
-export const networks = [minaDevnet, minaMainnet] as [
+export const networks = [minaDevnet, minaLightnet, minaMainnet] as [
   AppKitNetwork,
   ...AppKitNetwork[],
 ]
@@ -33,6 +37,7 @@ export const wagmiAdapter = new WagmiAdapter({
   transports: {
     [minaMainnet.id]: http(),
     [minaDevnet.id]: http(),
+    [minaLightnet.id]: http(),
   },
 })
 
