@@ -120,7 +120,7 @@ function ContractView<T extends SmartContract>({
 
 export default function DebugContracts() {
   const { chainId: networkId } = useAppKitNetwork()
-  const chainContracts = useMemo(
+  const chainContractNames = useMemo(
     () =>
       networkId
         ? contractNames.filter(
@@ -132,12 +132,12 @@ export default function DebugContracts() {
   )
   const [selectedContract, setSelectedContract] = useState<
     keyof typeof deployedContracts | undefined
-  >(chainContracts?.[0])
+  >(chainContractNames?.[0])
 
   return (
     <div className="overflow-auto h-screen">
       <div className="px-5">
-        {contractNames.map((contractName) => (
+        {chainContractNames.map((contractName) => (
           <button
             key={contractName}
             onClick={() => setSelectedContract(contractName)}
