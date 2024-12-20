@@ -230,7 +230,17 @@ export function injected(parameters: InjectedParameters = {}) {
         }
         if (!chainChanged) {
           chainChanged = this.onChainChanged.bind(this)
-          provider.on('chainChanged', chainChanged)
+          provider.on('chainChanged', (arg) => {
+            // TODO: Remove this hotfix once the method mismatch between wallets is resolved
+            let newNetworkId = arg
+            if (getTarget().id === 'com.aurowallet') {
+              newNetworkId =
+                (arg as any).networkID === 'mina:testnet'
+                  ? 'mina:devnet'
+                  : (arg as any).networkID
+            }
+            chainChanged?.(newNetworkId)
+          })
         }
         if (!disconnect) {
           disconnect = this.onDisconnect.bind(this)
@@ -565,7 +575,17 @@ export function injected(parameters: InjectedParameters = {}) {
         }
         if (!chainChanged) {
           chainChanged = this.onChainChanged.bind(this)
-          provider.on('chainChanged', chainChanged)
+          provider.on('chainChanged', (arg) => {
+            // TODO: Remove this hotfix once the method mismatch between wallets is resolved
+            let newNetworkId = arg
+            if (getTarget().id === 'com.aurowallet') {
+              newNetworkId =
+                (arg as any).networkID === 'mina:testnet'
+                  ? 'mina:devnet'
+                  : (arg as any).networkID
+            }
+            chainChanged?.(newNetworkId)
+          })
         }
         if (!disconnect) {
           disconnect = this.onDisconnect.bind(this)
