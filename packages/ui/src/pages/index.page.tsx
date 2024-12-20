@@ -94,9 +94,9 @@ function HomeBody() {
               isSupportedNetwork(networkId) ? (
                 accountExists ? (
                   <>
-                    <div className="riddle-box bg-purple-50">
+                    <div className="riddle-box bg-gradient-to-tr from-black/60 to-blue-800/60 border m-8">
                       <div className="justify-center items-center">
-                        <div className="text-center text-2xl mb-2 flex items-center justify-center p-0">
+                        <div className="text-center text-2xl flex items-center justify-center text-white">
                           Solve the riddle{' '}
                           <img
                             className="px-2 w-11"
@@ -104,7 +104,7 @@ function HomeBody() {
                             alt=""
                           />
                         </div>
-                        <div className="text-justify text-last-justify">
+                        <div className="text-justify text-last-justify text-white">
                           <br />I am a mighty ledger, yet I weigh next to none,
                           <br />
                           Verified by all, even when the work is done.
@@ -134,9 +134,9 @@ function HomeBody() {
                       >
                         {txState !== TransactionState.PREPARING && (
                           <Image
-                            width={16}
-                            height={16}
-                            src="/assets/upload-circle-01-stroke-rounded.svg"
+                            width={20}
+                            height={20}
+                            src="/assets/arrow5.svg"
                             alt=""
                           />
                         )}
@@ -147,7 +147,9 @@ function HomeBody() {
                             : 'Send Transaction'}
                       </button>
                     </div>
-                    <div>Correct Submissions: {currentNum?.toString()} </div>
+                    <div className="text-s text-white font-firacode">
+                      Correct Submissions: {currentNum?.toString()}{' '}
+                    </div>
                   </>
                 ) : (
                   <AccountDoesNotExist />
@@ -161,9 +163,9 @@ function HomeBody() {
                 </div>
               )
             ) : (
-              <div className="welcome">
-                <div>Welcome to</div>
-                <div className="flex items-center justify-center text-2xl font-semibold mr-6">
+              <div>
+                <div className="text-white text-xl">Welcome to</div>
+                <div className="flex items-center justify-center text-3xl font-semibold mr-6 text-white py-3">
                   <img
                     className="px-2 w-12"
                     src="/assets/minalogo.png"
@@ -174,7 +176,9 @@ function HomeBody() {
                     MINA
                   </div>
                 </div>
-                <ConnectWallet />
+                <div>
+                  <ConnectWallet />
+                </div>
               </div>
             )}
           </div>

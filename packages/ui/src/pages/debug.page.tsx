@@ -35,7 +35,7 @@ function ContractMethod<T extends SmartContract>({
       .filter((param) => param !== '')
   }, [contract, methodName])
   return (
-    <div className="mb-5 p-5 bg-purple-50 shadow-lg rounded-3xl border-stone-400 break-words">
+    <div className="mb-5 p-5 bg-black shadow-lg rounded-3xl border-white border-2 text-white break-words ">
       <div className="font-bold">{String(methodName)}</div>
       <div>
         {paramNames.map((paramName) => (
@@ -44,12 +44,13 @@ function ContractMethod<T extends SmartContract>({
             <br />
             <input
               type="text"
-              className="mt-2 py-1 px-3 border-gray-300 rounded-full border-2 w-full"
+              placeholder="write here"
+              className="mt-2 py-1 px-3 bg-black border-white rounded-full border-2 w-full"
             />
           </div>
         ))}
       </div>
-      <button className="card flex items-center justify-center whitespace-nowrap">
+      <button className="flex items-center justify-center text-black font-firacode whitespace-nowrap bg-white border rounded-md px-4 py-1 mt-4 text-xs hover:bg-black hover:text-white">
         Send Transaction
       </button>
     </div>
@@ -93,18 +94,17 @@ function ContractView<T extends SmartContract>({
 
   return (
     <div className="px-9 py-2">
+      <div className="pl-9 mb-2 text-white text-2xl font-firacode">Read</div>
       {contractStates.map((stateVariable) => (
         <div
           key={stateVariable.name.toString()}
-          className="mb-5 p-5 bg-purple-50 shadow-lg rounded-3xl border-stone-400 break-words"
+          className="mb-5 p-5 bg-black text-white shadow-lg rounded-3xl border-white border-2 break-words"
         >
           <div className="font-bold">{String(stateVariable.name)}</div>
           <div>{stateVariable.value?.toString() ?? 'Loading...'}</div>
         </div>
       ))}
-      <div className="py-2 px-5 mb-2 bg-purple-50 rounded-3xl border-stone-400 w-100">
-        Write
-      </div>
+      <div className="pl-9 mb-2 text-white text-2xl font-firacode">Write</div>
       {contractMethods?.map((methodName) => (
         // @ts-ignore
         <ContractMethod
@@ -135,13 +135,13 @@ export default function DebugContracts() {
   >(chainContracts?.[0])
 
   return (
-    <div className="pt-20 overflow-auto h-screen">
+    <div className="overflow-auto h-screen">
       <div className="px-5">
         {contractNames.map((contractName) => (
           <button
             key={contractName}
             onClick={() => setSelectedContract(contractName)}
-            className={`card items-center justify-center whitespace-nowrap text-sm ${selectedContract === contractName ? '!bg-blue-700 !text-white' : ''}`}
+            className={`card items-center justify-center whitespace-nowrap text-sm ${selectedContract === contractName ? '!bg-slate-900 !text-white' : ''}`}
           >
             {contractName}
           </button>

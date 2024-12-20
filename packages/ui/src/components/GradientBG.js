@@ -142,8 +142,8 @@ export default function GradientBG({ children }) {
       <div className="background">
         <canvas
           className="backgroundGradients"
-          width="6"
-          height="6"
+          width="0"
+          height="0"
           ref={canvasRef}
         />
       </div>
