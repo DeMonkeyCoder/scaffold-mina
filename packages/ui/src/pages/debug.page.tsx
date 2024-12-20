@@ -135,7 +135,7 @@ export default function DebugContracts() {
   >(chainContractNames?.[0])
 
   return (
-    <div className="overflow-auto h-screen">
+    <div className="overflow-auto h-screen max-w-[1000px] w-[90%] mx-auto pt-5">
       <div className="px-5">
         {chainContractNames.map((contractName) => (
           <button
