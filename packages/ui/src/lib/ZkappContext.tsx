@@ -1,5 +1,6 @@
 import { useAccount } from '@/lib/connect/react/hooks/useAccount'
-import { PublicKey, fetchAccount } from 'o1js'
+import { useAppKitNetwork } from '@reown/appkit/react'
+import { Mina, PublicKey, fetchAccount } from 'o1js'
 import React, {
   createContext,
   type ReactNode,
@@ -29,7 +30,6 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
       if (!zkappWorkerClient) {
         const zkappWorkerClientInstance = new ZkappWorkerClient()
         await zkappWorkerClientInstance.workerReady
-        await zkappWorkerClientInstance.setActiveInstanceToDevnet()
         setZkappWorkerClient(zkappWorkerClientInstance)
       }
     })()
@@ -47,6 +47,20 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
       }
     })()
   }, [address])
+
+  const { caipNetwork } = useAppKitNetwork()
+  useEffect(() => {
+    if (
+      caipNetwork &&
+      'graphqlEndpoint' in caipNetwork &&
+      typeof caipNetwork.graphqlEndpoint === 'string'
+    ) {
+      Mina.setActiveInstance(Mina.Network(caipNetwork.graphqlEndpoint))
+      zkappWorkerClient?.setActiveInstance({
+        graphqlEndpoint: caipNetwork.graphqlEndpoint,
+      })
+    }
+  }, [caipNetwork, zkappWorkerClient])
 
   return (
     <ZkappContext.Provider

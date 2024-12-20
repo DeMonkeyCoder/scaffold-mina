@@ -63,7 +63,7 @@ function ContractView<T extends SmartContract>({
   contract: new (..._args: any[]) => T
   address: string
 }) {
-  const { data: fetchedAccount } = useFetchAccount({
+  const { data: fetchedAccount, isFetching } = useFetchAccount({
     address,
     watch: true,
   })
@@ -75,9 +75,10 @@ function ContractView<T extends SmartContract>({
 
   const contractStates = useMemo(() => {
     const notStateVariables = ['constructor', 'init', ...contractMethods]
-    const contractInstance = fetchedAccount
-      ? new contract(fetchedAccount.publicKey)
-      : undefined
+    const contractInstance =
+      fetchedAccount && !isFetching
+        ? new contract(fetchedAccount.publicKey)
+        : undefined
     return (
       Object.getOwnPropertyNames(contract.prototype).filter(
         (n) => !notStateVariables.includes(n),
@@ -88,7 +89,7 @@ function ContractView<T extends SmartContract>({
         ? (contractInstance[stateVariable] as State<any>).get()
         : undefined,
     }))
-  }, [contract, fetchedAccount, contractMethods])
+  }, [contractMethods, fetchedAccount, isFetching, contract])
 
   return (
     <div className="px-9 py-2">

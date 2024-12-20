@@ -1,3 +1,5 @@
+import { networks } from '@/config'
+import type { CaipNetwork } from '@reown/appkit-common'
 import type { PublicKey } from 'o1js'
 
 export function formatPublicKey(publicKey: PublicKey) {
@@ -13,4 +15,8 @@ export async function timeout(seconds: number): Promise<void> {
       resolve()
     }, seconds * 1000)
   })
+}
+
+export function isSupportedNetwork(networkId: CaipNetwork['id'] | undefined) {
+  return Boolean(networks.find((x) => x.id === networkId))
 }

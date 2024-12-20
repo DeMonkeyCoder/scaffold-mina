@@ -23,10 +23,10 @@ export type State = typeof state
 export type ContractName = keyof State['contracts']
 
 const functions = {
-  setActiveInstanceToDevnet: async (_args: {}) => {
-    const Network = Mina.Network(
-      'https://api.minascan.io/node/devnet/v1/graphql',
-    )
+  setActiveInstance: async ({
+    graphqlEndpoint,
+  }: { graphqlEndpoint: string }) => {
+    const Network = Mina.Network(graphqlEndpoint)
     Mina.setActiveInstance(Network)
   },
   loadContract: async ({ contractName }: { contractName: ContractName }) => {

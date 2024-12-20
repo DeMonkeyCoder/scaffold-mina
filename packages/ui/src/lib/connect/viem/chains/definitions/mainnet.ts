@@ -15,4 +15,5 @@ export const mainnet = /*#__PURE__*/ defineChain({
       url: 'https://minascan.io/mainnet',
     },
   },
+  graphqlEndpoint: 'https://api.minascan.io/node/mainnet/v1/graphql',
 })

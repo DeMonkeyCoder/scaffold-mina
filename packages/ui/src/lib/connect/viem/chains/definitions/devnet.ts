@@ -15,4 +15,5 @@ export const devnet = /*#__PURE__*/ defineChain({
       url: 'https://minascan.io/devnet',
     },
   },
+  graphqlEndpoint: 'https://api.minascan.io/node/devnet/v1/graphql',
 })

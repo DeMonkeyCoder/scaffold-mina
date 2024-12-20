@@ -1,4 +1,4 @@
-import { minaDevnet } from '@/lib/connect/appkit/networks'
+import { minaDevnet, minaMainnet } from '@/lib/connect/appkit/networks'
 import type { CaipNetwork } from '@reown/appkit-common'
 import type { SmartContract } from 'o1js'
 import { Add, Quest } from 'scaffold-mina-contracts'
@@ -18,6 +18,8 @@ const deployedContracts: Contracts = {
     addressMap: {
       [minaDevnet.id]:
         'B62qjDnppFhY5tsEmLbCDRniCoJcYqLmHpEeXVfwM4Ej18uJFhTrmBb',
+      [minaMainnet.id]:
+        'B62qr2Cpxi55U4jurDBy8US5PGiAH7FK81dzWMPsWwanDaTqQw73Wvr',
     },
   },
   Add: {

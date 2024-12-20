@@ -1,27 +1,27 @@
 import {
-  createStore as createMipd,
-  type MinaProviderDetail,
-  type Store as MipdStore,
-} from '@mina-js/connect'
-import {
   type Address,
   type Chain,
   type Client,
-  type ClientConfig as viem_ClientConfig,
-  createClient,
   type EIP1193RequestFn,
+  createClient,
+  type ClientConfig as viem_ClientConfig,
   type Transport as viem_Transport,
 } from '@/lib/connect/viem'
+import {
+  type MinaProviderDetail,
+  type Store as MipdStore,
+  createStore as createMipd,
+} from '@mina-js/connect'
 import { persist, subscribeWithSelector } from 'zustand/middleware'
-import { createStore, type Mutate, type StoreApi } from 'zustand/vanilla'
+import { type Mutate, type StoreApi, createStore } from 'zustand/vanilla'
 
 import type {
   ConnectorEventMap,
   CreateConnectorFn,
 } from './connectors/createConnector'
 import { injected } from './connectors/injected'
-import { createEmitter, type Emitter, type EventData } from './createEmitter'
-import { createStorage, noopStorage, type Storage } from './createStorage'
+import { type Emitter, type EventData, createEmitter } from './createEmitter'
+import { type Storage, createStorage, noopStorage } from './createStorage'
 import { ChainNotConfiguredError } from './errors/config'
 import type {
   Compute,
@@ -32,8 +32,6 @@ import type {
 } from './types/utils'
 import { uid } from './utils/uid'
 import { version } from './version'
-import type { Mina as MinaInstance } from 'o1js/dist/node/lib/mina/mina-instance'
-import { Mina } from 'o1js'
 
 export type CreateConfigParameters<
   chains extends readonly [Chain, ...Chain[]] = readonly [Chain, ...Chain[]],
@@ -49,7 +47,6 @@ export type CreateConfigParameters<
     storage?: Storage | null | undefined
     ssr?: boolean | undefined
     syncConnectedChain?: boolean | undefined
-    minaActiveInstance: MinaInstance
   } & OneOf<
     | ({ transports: transports } & {
         [key in keyof ClientConfig]?:
@@ -81,14 +78,12 @@ export function createConfig<
     }),
     syncConnectedChain = true,
     ssr = false,
-    minaActiveInstance,
     ...rest
   } = parameters
+
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Set up connectors, clients, etc.
   /////////////////////////////////////////////////////////////////////////////////////////////////
-
-  Mina.setActiveInstance(minaActiveInstance)
 
   const mipd =
     typeof window !== 'undefined' && multiInjectedProviderDiscovery

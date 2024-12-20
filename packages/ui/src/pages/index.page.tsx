@@ -1,11 +1,11 @@
 import AccountDoesNotExist from '@/components/AccountDoesNotExist'
 import { ConnectWallet } from '@/components/ConnectWallet'
 import LoadingScreen from '@/components/LoadingScreen'
-import { isSupportedNetwork } from '@/constants/network'
 import deployedContracts from '@/contracts/deployedContracts'
 import { useMinaProvider } from '@/lib/ZkappContext'
 import { useFetchAccount } from '@/lib/connect/react/hooks/useFetchAccount'
 import { QuestContractProvider, useQuestContract } from '@/lib/useQuestContract'
+import { isSupportedNetwork } from '@/utils'
 import { useAppKitAccount, useAppKitNetwork } from '@reown/appkit/react'
 import Image from 'next/image'
 import { CircuitString } from 'o1js'
@@ -27,7 +27,7 @@ function HomeBody() {
   const { accountExists } = useMinaProvider()
   const { chainId: networkId } = useAppKitNetwork()
 
-  const { data: fetchedAccount } = useFetchAccount({
+  const { data: fetchedAccount, isFetching } = useFetchAccount({
     address: networkId
       ? deployedContracts.Quest.addressMap[networkId]
       : undefined,
@@ -35,10 +35,10 @@ function HomeBody() {
   })
 
   const currentNum = useMemo(() => {
-    if (fetchedAccount) {
+    if (fetchedAccount && !isFetching) {
       return new Quest(fetchedAccount.publicKey).counter.get()
     }
-  }, [fetchedAccount])
+  }, [fetchedAccount, isFetching])
 
   const [questSolution, setQuestSolution] = useState('')
 
@@ -154,7 +154,7 @@ function HomeBody() {
                 )
               ) : (
                 <div>
-                  Please change your wallet network to Devnet
+                  Please switch to a supported network.
                   <div className="flex items-center justify-center">
                     <ConnectWallet />
                   </div>

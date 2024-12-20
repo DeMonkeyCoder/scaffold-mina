@@ -1,17 +1,17 @@
 import {
-  type fetchAccount,
   Field,
   type PublicKey,
   type SmartContract,
+  type fetchAccount,
 } from 'o1js'
 
+import type { Methods, StateVariable } from '@/lib/types'
 import type {
   ContractName,
   WorkerFunctions,
   ZkappWorkerReponse,
   ZkappWorkerRequest,
 } from './zkappWorker'
-import type { Methods, StateVariable } from '@/lib/types'
 
 export default class ZkappWorkerClient {
   // ---------------------------------------------------------------------------------------
@@ -64,8 +64,8 @@ export default class ZkappWorkerClient {
     })
   }
 
-  setActiveInstanceToDevnet() {
-    return this._call('setActiveInstanceToDevnet', {})
+  setActiveInstance(args: { graphqlEndpoint: string }) {
+    return this._call('setActiveInstance', args)
   }
 
   loadAndCompileContract(args: { contractName: ContractName }) {

@@ -25,4 +25,5 @@ export const minaDevnet: AppKitNetwork = defineChain({
   chainNamespace: 'mina' as ChainNamespace,
   caipNetworkId: 'mina:devnet' as CaipNetworkId,
   deprecatedCaipNetworkId: 'mina:devnet',
+  graphqlEndpoint: 'https://api.minascan.io/node/devnet/v1/graphql',
 })
