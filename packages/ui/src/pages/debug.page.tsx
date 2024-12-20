@@ -1,7 +1,7 @@
 import deployedContracts from '@/contracts/deployedContracts'
 import { useFetchAccount } from '@/lib/connect/react/hooks/useFetchAccount'
 import type { Methods, StateVariable } from '@/lib/types'
-import { useAppKitNetwork } from '@reown/appkit/react'
+import { AppKit, useAppKitNetwork } from '@reown/appkit/react'
 import type { SmartContract, State } from 'o1js'
 import { useMemo, useState } from 'react'
 
@@ -35,7 +35,7 @@ function ContractMethod<T extends SmartContract>({
       .filter((param) => param !== '')
   }, [contract, methodName])
   return (
-    <div className="mb-5 p-5 bg-black shadow-lg rounded-3xl border-white border-2 text-white break-words ">
+    <div className="mb-5 p-4 bg-black shadow-lg rounded-3xl border-white border-2 text-white break-words ">
       <div className="font-bold">{String(methodName)}</div>
       <div>
         {paramNames.map((paramName) => (
@@ -50,7 +50,7 @@ function ContractMethod<T extends SmartContract>({
           </div>
         ))}
       </div>
-      <button className="flex items-center justify-center text-black font-firacode whitespace-nowrap bg-white border rounded-md px-4 py-1 mt-4 text-xs hover:bg-black hover:text-white">
+      <button className="flex items-center justify-center text-black font-firacode whitespace-nowrap bg-white border rounded-md px-4 py-1 mt-4 text-xs hover:bg-black hover:text-white duration-200">
         Send Transaction
       </button>
     </div>
@@ -98,7 +98,7 @@ function ContractView<T extends SmartContract>({
       {contractStates.map((stateVariable) => (
         <div
           key={stateVariable.name.toString()}
-          className="mb-5 p-5 bg-black text-white shadow-lg rounded-3xl border-white border-2 break-words"
+          className="mb-5 p-4 bg-black text-white shadow-lg rounded-3xl border-white border-2 break-words"
         >
           <div className="font-bold">{String(stateVariable.name)}</div>
           <div>{stateVariable.value?.toString() ?? 'Loading...'}</div>
@@ -135,7 +135,7 @@ export default function DebugContracts() {
   >(chainContractNames?.[0])
 
   return (
-    <div className="overflow-auto h-screen max-w-[1000px] w-[90%] mx-auto pt-5">
+    <div className="overflow-auto h-screen max-w-[1000px] w-[90%] mx-auto pt-5 pb-10">
       <div className="px-5">
         {chainContractNames.map((contractName) => (
           <button
@@ -156,3 +156,4 @@ export default function DebugContracts() {
     </div>
   )
 }
+

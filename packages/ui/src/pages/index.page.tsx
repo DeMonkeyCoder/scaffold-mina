@@ -157,7 +157,7 @@ function HomeBody() {
               ) : (
                 <div>
                   Please switch to a supported network.
-                  <div className="flex items-center justify-center">
+                  <div>
                     <ConnectWallet />
                   </div>
                 </div>
@@ -176,7 +176,7 @@ function HomeBody() {
                     MINA
                   </div>
                 </div>
-                <div>
+                <div className="flex items-center justify-center center mt-1">
                   <ConnectWallet />
                 </div>
               </div>

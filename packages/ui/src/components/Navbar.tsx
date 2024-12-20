@@ -24,7 +24,7 @@ export default function Navbar() {
               <div className="flex justify-center items-center">
                 <Link
                   href="/"
-                  className="flex justify-center items-center text-sm font-medium text-black bg-white hover:text-white hover:bg-black border px-4 py-1 rounded"
+                  className="flex justify-center items-center text-sm font-medium text-black bg-white hover:text-white hover:bg-black border px-4 py-1 rounded duration-200"
                 >
                   Home
                 </Link>
@@ -32,7 +32,7 @@ export default function Navbar() {
               <div>
                 <Link
                   href="/debug"
-                  className="flex justify-center items-center text-sm font-medium text-black bg-white hover:text-white hover:bg-black border px-4 py-1 rounded"
+                  className="flex justify-center items-center text-sm font-medium text-black bg-white hover:text-white hover:bg-black border px-4 py-1 rounded duration-200"
                 >
                   Debug Contracts
                 </Link>
@@ -41,7 +41,7 @@ export default function Navbar() {
                 <a
                   href={`https://faucet.minaprotocol.com/?address=${address}`}
                   target="blank"
-                  className="flex justify-center items-center text-sm font-medium text-black bg-white hover:text-white hover:bg-black border px-4 py-1 rounded"
+                  className="flex justify-center items-center text-sm font-medium text-black bg-white hover:text-white hover:bg-black border px-4 py-1 rounded duration-200"
                 >
                   Mina Faucet
                 </a>
