@@ -3,15 +3,16 @@ import { ConnectWallet } from '@/components/ConnectWallet'
 import LoadingScreen from '@/components/LoadingScreen'
 import deployedContracts from '@/contracts/deployedContracts'
 import { useMinaProvider } from '@/lib/ZkappContext'
+import { useAccount } from '@/lib/connect/react/hooks/useAccount'
 import { useFetchAccount } from '@/lib/connect/react/hooks/useFetchAccount'
 import { QuestContractProvider, useQuestContract } from '@/lib/useQuestContract'
 import { isSupportedNetwork } from '@/utils'
 import { useAppKitAccount, useAppKitNetwork } from '@reown/appkit/react'
 import Image from 'next/image'
-import { CircuitString } from 'o1js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Quest } from 'scaffold-mina-contracts'
 import GradientBG from '../components/GradientBG.js'
+import { CircuitString } from 'o1js'
 
 enum TransactionState {
   INITIAL = 0,
@@ -44,8 +45,14 @@ function HomeBody() {
 
   const [txState, setTxState] = useState(TransactionState.INITIAL)
   const [transactionLink, setTransactionLink] = useState('')
+
+  const { connector } = useAccount()
+  useEffect(() => {
+    connector?.getProvider().then((provider) => console.log({ provider }))
+  }, [connector])
+
   const onSendTransaction = useCallback(async () => {
-    if (txState !== TransactionState.INITIAL) return
+    if (txState !== TransactionState.INITIAL || !connector) return
     try {
       setTxState(TransactionState.PREPARING)
       const transactionJSON = await prepareTransaction({
@@ -53,12 +60,16 @@ function HomeBody() {
         args: [CircuitString.fromString(questSolution.toLowerCase()).hash()],
       })
       setTxState(TransactionState.AWAITING_USER_APPROVAL)
+      const provider = await connector.getProvider()
       // @ts-ignore
-      const { hash } = await window.mina.sendTransaction({
-        transaction: transactionJSON,
-        feePayer: {
-          fee: 0.1,
-          memo: '',
+      const { hash } = await provider.request({
+        method: 'mina_sendTransaction',
+        params: {
+          transaction: transactionJSON,
+          feePayer: {
+            fee: 0.1,
+            memo: '',
+          },
         },
       })
       setTransactionLink(`https://minascan.io/devnet/tx/${hash}`)
@@ -66,7 +77,7 @@ function HomeBody() {
       alert(JSON.stringify(e))
     }
     setTxState(TransactionState.INITIAL)
-  }, [prepareTransaction, questSolution, txState])
+  }, [connector, prepareTransaction, questSolution, txState])
 
   // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
