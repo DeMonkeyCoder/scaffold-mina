@@ -1,4 +1,4 @@
-import type {Address, UnionLooseOmit} from '@/lib/connect/viem'
+import type {Address, UnionOmit} from '@/lib/connect/viem'
 
 import type {Account} from '../../accounts/types'
 import {parseAccount, type ParseAccountErrorType,} from '../../accounts/utils/parseAccount' // import type {SignTransactionErrorType} from '../../accounts/utils/signTransaction'
@@ -22,7 +22,7 @@ export type SendTransactionRequest<
   chainOverride extends Chain | undefined = Chain | undefined,
   ///
   _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>,
-> = UnionLooseOmit<FormattedTransactionRequest<_derivedChain>, 'from'>
+> = UnionOmit<FormattedTransactionRequest<_derivedChain>, 'from'> & {}
 
 export type SendTransactionParameters<
   chain extends Chain | undefined = Chain | undefined,
@@ -163,6 +163,43 @@ export async function sendTransaction<
                   // @ts-ignore
                   transaction: JSON.stringify(rest.zkappCommand),
                   feePayer: rest.feePayer,
+                },
+              },
+              { retryCount: 0 },
+            )) as { hash: string }
+          ).hash
+        case 'payment':
+          return (
+            (await client.request(
+              {
+                // @ts-ignore
+                method: 'mina_sendPayment',
+                params: {
+                  // TODO: fix from parameter
+                  // @ts-ignore
+                  from: account?.address,
+                  to: rest.to,
+                  fee: rest.fee,
+                  amount: rest.amount,
+                  memo: rest.memo,
+                },
+              },
+              { retryCount: 0 },
+            )) as { hash: string }
+          ).hash
+        case 'delegation':
+          return (
+            (await client.request(
+              {
+                // @ts-ignore
+                method: 'mina_sendStakeDelegation',
+                params: {
+                  // TODO: fix from parameter
+                  // @ts-ignore
+                  from: account?.address,
+                  to: rest.to,
+                  fee: rest.fee,
+                  memo: rest.memo,
                 },
               },
               { retryCount: 0 },

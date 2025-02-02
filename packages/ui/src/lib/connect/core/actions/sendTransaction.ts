@@ -24,10 +24,7 @@ export type SendTransactionParameters<
   chains extends readonly Chain[] = SelectChains<config, networkId>,
 > = {
   [key in keyof chains]: Compute<
-    Omit<
-      viem_SendTransactionParameters<chains[key], Account, chains[key]>,
-      'chain' | 'gas'
-    > &
+    viem_SendTransactionParameters<chains[key], Account, chains[key]> &
       NetworkIdParameter<config, networkId> &
       ConnectorParameter
   >
