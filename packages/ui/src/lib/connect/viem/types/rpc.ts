@@ -1,6 +1,19 @@
-import type { Hex } from './misc'
+import type {Hex} from './misc'
+import type {
+    TransactionReceipt,
+    TransactionRequestDelegation,
+    TransactionRequestPayment,
+    TransactionRequestZkApp,
+} from './transaction'
+import type {OneOf} from './utils'
 
 export type Quantity = `0x${string}`
+export type RpcTransactionReceipt = TransactionReceipt
+export type RpcTransactionRequest = OneOf<
+  | TransactionRequestZkApp
+  | TransactionRequestPayment
+  | TransactionRequestDelegation
+>
 type SuccessResult<result> = {
   method?: undefined
   result: result

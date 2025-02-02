@@ -46,6 +46,12 @@ export type {
   RequestPermissionsParameters,
 } from './actions/wallet/requestPermissions'
 export type {
+  SendTransactionErrorType,
+  SendTransactionParameters,
+  SendTransactionRequest,
+  SendTransactionReturnType,
+} from './actions/wallet/sendTransaction'
+export type {
   SwitchChainErrorType,
   SwitchChainParameters,
 } from './actions/wallet/switchChain'
@@ -61,6 +67,14 @@ export type {
   ExtractChainFormatterParameters,
   ExtractChainFormatterReturnType,
 } from './types/chain'
+export type {
+  TransactionReceipt,
+  TransactionRequest,
+  TransactionRequestDelegation,
+  TransactionRequestPayment,
+  TransactionRequestZkApp,
+  TransactionType,
+} from './types/transaction.js'
 // biome-ignore lint/performance/noBarrelFile:
 export {
   type Client,

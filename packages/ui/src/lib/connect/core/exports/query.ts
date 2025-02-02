@@ -73,6 +73,14 @@ export {
 } from '../query/reconnect'
 
 export {
+  type SendTransactionData,
+  type SendTransactionVariables,
+  type SendTransactionMutate,
+  type SendTransactionMutateAsync,
+  sendTransactionMutationOptions,
+} from '../query/sendTransaction'
+
+export {
   type SwitchAccountData,
   type SwitchAccountVariables,
   type SwitchAccountMutate,

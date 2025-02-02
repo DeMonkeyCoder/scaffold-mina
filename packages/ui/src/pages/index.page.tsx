@@ -1,18 +1,20 @@
 import AccountDoesNotExist from '@/components/AccountDoesNotExist'
-import { ConnectWallet } from '@/components/ConnectWallet'
+import {ConnectWallet} from '@/components/ConnectWallet'
 import LoadingScreen from '@/components/LoadingScreen'
+import {config} from '@/config'
 import deployedContracts from '@/contracts/deployedContracts'
-import { useMinaProvider } from '@/lib/ZkappContext'
-import { useAccount } from '@/lib/connect/react/hooks/useAccount'
-import { useFetchAccount } from '@/lib/connect/react/hooks/useFetchAccount'
-import { QuestContractProvider, useQuestContract } from '@/lib/useQuestContract'
-import { isSupportedNetwork } from '@/utils'
-import { useAppKitAccount, useAppKitNetwork } from '@reown/appkit/react'
+import {useMinaProvider} from '@/lib/ZkappContext'
+import {sendTransaction} from '@/lib/connect/core/exports'
+import {useFetchAccount} from '@/lib/connect/react/hooks/useFetchAccount'
+import {QuestContractProvider, useQuestContract} from '@/lib/useQuestContract'
+import {isSupportedNetwork} from '@/utils'
+import {useAppKitAccount, useAppKitNetwork} from '@reown/appkit/react'
 import Image from 'next/image'
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Quest } from 'scaffold-mina-contracts'
+import {CircuitString} from 'o1js'
+import type {ZkappCommand} from 'o1js/dist/web/bindings/mina-transaction/gen/transaction-json'
+import {useCallback, useEffect, useMemo, useState} from 'react'
+import {Quest} from 'scaffold-mina-contracts'
 import GradientBG from '../components/GradientBG.js'
-import { CircuitString } from 'o1js'
 
 enum TransactionState {
   INITIAL = 0,
@@ -46,38 +48,32 @@ function HomeBody() {
   const [txState, setTxState] = useState(TransactionState.INITIAL)
   const [transactionLink, setTransactionLink] = useState('')
 
-  const { connector } = useAccount()
-  useEffect(() => {
-    connector?.getProvider().then((provider) => console.log({ provider }))
-  }, [connector])
-
   const onSendTransaction = useCallback(async () => {
-    if (txState !== TransactionState.INITIAL || !connector) return
+    if (txState !== TransactionState.INITIAL) return
     try {
       setTxState(TransactionState.PREPARING)
-      const transactionJSON = await prepareTransaction({
+      const zkappCommandStr = await prepareTransaction({
         method: 'solve',
         args: [CircuitString.fromString(questSolution.toLowerCase()).hash()],
       })
+      if (typeof zkappCommandStr === 'object') {
+        throw new Error(zkappCommandStr.errorMessage)
+      }
       setTxState(TransactionState.AWAITING_USER_APPROVAL)
-      const provider = await connector.getProvider()
-      // @ts-ignore
-      const { hash } = await provider.request({
-        method: 'mina_sendTransaction',
-        params: {
-          transaction: transactionJSON,
-          feePayer: {
-            fee: 0.1,
-            memo: '',
-          },
+      const hash = await sendTransaction(config, {
+        type: 'zkapp',
+        zkappCommand: JSON.parse(zkappCommandStr) as ZkappCommand,
+        feePayer: {
+          fee: 10,
+          memo: '',
         },
       })
       setTransactionLink(`https://minascan.io/devnet/tx/${hash}`)
     } catch (e) {
-      alert(JSON.stringify(e))
+      alert(String(e))
     }
     setTxState(TransactionState.INITIAL)
-  }, [connector, prepareTransaction, questSolution, txState])
+  }, [prepareTransaction, questSolution, txState])
 
   // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {

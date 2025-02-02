@@ -79,6 +79,13 @@ export {
 } from '../actions/reconnect'
 
 export {
+  type SendTransactionErrorType,
+  type SendTransactionParameters,
+  type SendTransactionReturnType,
+  sendTransaction,
+} from '../actions/sendTransaction'
+
+export {
   type SwitchAccountErrorType,
   type SwitchAccountParameters,
   type SwitchAccountReturnType,

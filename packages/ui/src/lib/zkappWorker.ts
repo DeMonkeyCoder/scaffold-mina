@@ -1,7 +1,7 @@
-import { Field, Mina, PublicKey, fetchAccount } from 'o1js'
+import {fetchAccount, Field, Mina, PublicKey} from 'o1js'
 // ---------------------------------------------------------------------------------------
-import type { Add } from '../../../contracts/src/Add'
-import type { Quest } from '../../../contracts/src/Quest'
+import type {Add} from '../../../contracts/src/Add'
+import type {Quest} from '../../../contracts/src/Quest'
 
 const state = {
   contracts: {
@@ -92,7 +92,7 @@ const functions = {
     contractName: T
     method: keyof State['contracts'][T]['zkapp']
     args?: any[]
-  }): Promise<any> => {
+  }): Promise<string | { errorMessage: string }> => {
     const zkapp = state.contracts[contractName]?.zkapp
     if (!zkapp) throw new Error(`${contractName} zkapp is not initialized.`)
     try {
