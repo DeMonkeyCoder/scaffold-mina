@@ -52,6 +52,12 @@ export type {
   SendTransactionReturnType,
 } from './actions/wallet/sendTransaction'
 export type {
+  SignTransactionErrorType,
+  SignTransactionParameters,
+  SignTransactionRequest,
+  SignTransactionReturnType,
+} from './actions/wallet/signTransaction'
+export type {
   SwitchChainErrorType,
   SwitchChainParameters,
 } from './actions/wallet/switchChain'
@@ -284,7 +290,6 @@ export type {
   Hex,
   LogTopic,
   Signature,
-  CompactSignature,
   SignableMessage,
 } from './types/misc'
 export type {

@@ -1,17 +1,10 @@
 import type {ErrorType} from '../../errors/utils.js'
-import type {Chain, ExtractChainFormatterParameters,} from '../../types/chain.js'
 import type {RpcTransactionRequest} from '../../types/rpc.js'
 import type {TransactionRequest} from '../../types/transaction.js'
 import type {ExactPartial} from '../../types/utils.js'
 import {defineFormatter, type DefineFormatterErrorType} from './formatter.js'
 
-export type FormattedTransactionRequest<
-  chain extends Chain | undefined = Chain | undefined,
-> = ExtractChainFormatterParameters<
-  chain,
-  'transactionRequest',
-  TransactionRequest
->
+export type FormattedTransactionRequest = TransactionRequest
 
 export const rpcTransactionType = {
   legacy: '0x0',

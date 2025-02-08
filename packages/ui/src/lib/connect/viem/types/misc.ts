@@ -1,5 +1,3 @@
-import type {OneOf} from './utils'
-
 export type ByteArray = Uint8Array
 export type Hex = `0x${string}`
 export type Hash = string
@@ -10,29 +8,9 @@ export type SignableMessage =
       /** Raw data representation of the message. */
       raw: Hex | ByteArray
     }
-export type SignatureLegacy = {
-  r: Hex
-  s: Hex
-  v: bigint
-}
-export type Signature = OneOf<
-  | SignatureLegacy
+export type Signature =
+  | string
   | {
-      r: Hex
-      s: Hex
-      /** @deprecated use `yParity`. */
-      v: bigint
-      yParity?: number | undefined
+      field: string
+      scalar: string
     }
-  | {
-      r: Hex
-      s: Hex
-      /** @deprecated use `yParity`. */
-      v?: bigint | undefined
-      yParity: number
-    }
->
-export type CompactSignature = {
-  r: Hex
-  yParityAndS: Hex
-}

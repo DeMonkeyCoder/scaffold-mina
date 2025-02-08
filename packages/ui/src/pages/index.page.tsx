@@ -4,7 +4,7 @@ import LoadingScreen from '@/components/LoadingScreen'
 import {config} from '@/config'
 import deployedContracts from '@/contracts/deployedContracts'
 import {useMinaProvider} from '@/lib/ZkappContext'
-import {sendTransaction} from '@/lib/connect/core/exports'
+import {sendTransaction, signTransaction} from '@/lib/connect/core/exports'
 import {useFetchAccount} from '@/lib/connect/react/hooks/useFetchAccount'
 import {QuestContractProvider, useQuestContract} from '@/lib/useQuestContract'
 import {isSupportedNetwork} from '@/utils'
@@ -48,17 +48,22 @@ function HomeBody() {
   const [txState, setTxState] = useState(TransactionState.INITIAL)
   const [transactionLink, setTransactionLink] = useState('')
 
+  const prepareQuestTransaction = useCallback(async () => {
+    const zkappCommandStr = await prepareTransaction({
+      method: 'solve',
+      args: [CircuitString.fromString(questSolution.toLowerCase()).hash()],
+    })
+    if (typeof zkappCommandStr === 'object') {
+      throw new Error(zkappCommandStr.errorMessage)
+    }
+    return zkappCommandStr
+  }, [prepareTransaction, questSolution])
+
   const onSendTransaction = useCallback(async () => {
     if (txState !== TransactionState.INITIAL) return
     try {
       setTxState(TransactionState.PREPARING)
-      const zkappCommandStr = await prepareTransaction({
-        method: 'solve',
-        args: [CircuitString.fromString(questSolution.toLowerCase()).hash()],
-      })
-      if (typeof zkappCommandStr === 'object') {
-        throw new Error(zkappCommandStr.errorMessage)
-      }
+      const zkappCommandStr = await prepareQuestTransaction()
       setTxState(TransactionState.AWAITING_USER_APPROVAL)
       const hash = await sendTransaction(config, {
         type: 'zkapp',
@@ -73,7 +78,28 @@ function HomeBody() {
       alert(String(e))
     }
     setTxState(TransactionState.INITIAL)
-  }, [prepareTransaction, questSolution, txState])
+  }, [prepareQuestTransaction, txState])
+
+  const onSignTransaction = useCallback(async () => {
+    if (txState !== TransactionState.INITIAL) return
+    try {
+      setTxState(TransactionState.PREPARING)
+      const zkappCommandStr = await prepareQuestTransaction()
+      setTxState(TransactionState.AWAITING_USER_APPROVAL)
+      const signedZkappCommand = await signTransaction(config, {
+        type: 'zkapp',
+        zkappCommand: JSON.parse(zkappCommandStr) as ZkappCommand,
+        feePayer: {
+          fee: 10,
+          memo: '',
+        },
+      })
+      console.log({ signedZkappCommand })
+    } catch (e) {
+      alert(String(e))
+    }
+    setTxState(TransactionState.INITIAL)
+  }, [prepareQuestTransaction, txState])
 
   // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
@@ -152,6 +178,25 @@ function HomeBody() {
                           : txState === TransactionState.PREPARING
                             ? 'Preparing Transaction...'
                             : 'Send Transaction'}
+                      </button>
+                      <button
+                        className="card flex items-center justify-center whitespace-nowrap"
+                        onClick={onSignTransaction}
+                        disabled={txState !== TransactionState.INITIAL}
+                      >
+                        {txState !== TransactionState.PREPARING && (
+                          <Image
+                            width={20}
+                            height={20}
+                            src="/assets/arrow5.svg"
+                            alt=""
+                          />
+                        )}
+                        {txState === TransactionState.AWAITING_USER_APPROVAL
+                          ? 'Awaiting Approval...'
+                          : txState === TransactionState.PREPARING
+                            ? 'Preparing Transaction...'
+                            : 'Sign Transaction'}
                       </button>
                     </div>
                     <div className="text-s text-white font-firacode">

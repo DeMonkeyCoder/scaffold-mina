@@ -79,6 +79,13 @@ export {
 } from '../actions/reconnect'
 
 export {
+  type SignTransactionErrorType,
+  type SignTransactionParameters,
+  type SignTransactionReturnType,
+  signTransaction,
+} from '../actions/signTransaction'
+
+export {
   type SendTransactionErrorType,
   type SendTransactionParameters,
   type SendTransactionReturnType,

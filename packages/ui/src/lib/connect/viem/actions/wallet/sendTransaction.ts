@@ -8,7 +8,7 @@ import {AccountNotFoundError, AccountTypeNotSupportedError,} from '../../errors/
 import {BaseError} from '../../errors/base'
 import type {ErrorType} from '../../errors/utils'
 import type {GetAccountParameter} from '../../types/account'
-import type {Chain, DeriveChain, GetChainParameter} from '../../types/chain'
+import type {Chain, GetChainParameter} from '../../types/chain'
 import type {Hash} from '../../types/misc'
 import {assertCurrentChain} from '../../utils/chain/assertCurrentChain' // import {getTransactionError, type GetTransactionErrorReturnType,} from '../../utils/errors/getTransactionError'
 import type {FormattedTransactionRequest} from '../../utils/formatters/transactionRequest'
@@ -17,21 +17,16 @@ import {assertRequest, type AssertRequestParameters,} from '../../utils/transact
 import {getNetworkId} from '../public/getNetworkId' // import type {SendRawTransactionErrorType} from './sendRawTransaction'
 // import type {SendRawTransactionErrorType} from './sendRawTransaction'
 
-export type SendTransactionRequest<
-  chain extends Chain | undefined = Chain | undefined,
-  chainOverride extends Chain | undefined = Chain | undefined,
-  ///
-  _derivedChain extends Chain | undefined = DeriveChain<chain, chainOverride>,
-> = UnionOmit<FormattedTransactionRequest<_derivedChain>, 'from'> & {}
+export type SendTransactionRequest = UnionOmit<
+  FormattedTransactionRequest,
+  'from'
+> & {}
 
 export type SendTransactionParameters<
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
   chainOverride extends Chain | undefined = Chain | undefined,
-  request extends SendTransactionRequest<
-    chain,
-    chainOverride
-  > = SendTransactionRequest<chain, chainOverride>,
+  request extends SendTransactionRequest = SendTransactionRequest,
 > = request &
   GetAccountParameter<account, Account | Address, true, true> &
   GetChainParameter<chain, chainOverride>
@@ -153,40 +148,38 @@ export async function sendTransaction<
         })
       }
       switch (rest.type) {
-        case 'zkapp':
-          return (
-            (await client.request(
-              {
+        case 'zkapp': {
+          const res = (await client.request(
+            {
+              // @ts-ignore
+              method: 'mina_sendTransaction',
+              params: {
                 // @ts-ignore
-                method: 'mina_sendTransaction',
-                params: {
-                  // @ts-ignore
-                  transaction: JSON.stringify(rest.zkappCommand),
-                  feePayer: rest.feePayer,
-                },
+                transaction: JSON.stringify(rest.zkappCommand),
+                feePayer: rest.feePayer,
               },
-              { retryCount: 0 },
-            )) as { hash: string }
-          ).hash
-        case 'payment':
-          return (
-            (await client.request(
-              {
+            },
+            { retryCount: 0 },
+          )) as { hash: string }
+          return res.hash
+        }
+        case 'payment': {
+          const res = (await client.request(
+            {
+              // @ts-ignore
+              method: 'mina_sendPayment',
+              params: {
                 // @ts-ignore
-                method: 'mina_sendPayment',
-                params: {
-                  // TODO: fix from parameter
-                  // @ts-ignore
-                  from: account?.address,
-                  to: rest.to,
-                  fee: rest.fee,
-                  amount: rest.amount,
-                  memo: rest.memo,
-                },
+                to: rest.to,
+                fee: rest.fee,
+                amount: rest.amount,
+                memo: rest.memo,
               },
-              { retryCount: 0 },
-            )) as { hash: string }
-          ).hash
+            },
+            { retryCount: 0 },
+          )) as { hash: string }
+          return res.hash
+        }
         case 'delegation':
           return (
             (await client.request(
@@ -194,9 +187,7 @@ export async function sendTransaction<
                 // @ts-ignore
                 method: 'mina_sendStakeDelegation',
                 params: {
-                  // TODO: fix from parameter
                   // @ts-ignore
-                  from: account?.address,
                   to: rest.to,
                   fee: rest.fee,
                   memo: rest.memo,
@@ -213,7 +204,6 @@ export async function sendTransaction<
     }
 
     throw new AccountTypeNotSupportedError({
-      docsPath: '/docs/actions/wallet/sendTransaction',
       type: (account as any)?.type,
     })
   } catch (err) {

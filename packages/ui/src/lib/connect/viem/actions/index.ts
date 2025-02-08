@@ -69,6 +69,12 @@ export {
   sendTransaction,
 } from './wallet/sendTransaction'
 export {
+  type SignTransactionErrorType,
+  type SignTransactionParameters,
+  type SignTransactionReturnType,
+  signTransaction,
+} from './wallet/signTransaction'
+export {
   type SwitchChainErrorType,
   type SwitchChainParameters,
   switchChain,

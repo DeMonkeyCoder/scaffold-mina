@@ -102,6 +102,13 @@ export {
 } from '../actions/sendTransaction'
 
 export {
+  type SignTransactionErrorType,
+  type SignTransactionParameters,
+  type SignTransactionReturnType,
+  signTransaction,
+} from '../actions/signTransaction'
+
+export {
   type SwitchAccountErrorType,
   type SwitchAccountParameters,
   type SwitchAccountReturnType,

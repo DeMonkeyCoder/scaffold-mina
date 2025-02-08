@@ -81,6 +81,14 @@ export {
 } from '../query/sendTransaction'
 
 export {
+  type SignTransactionData,
+  type SignTransactionVariables,
+  type SignTransactionMutate,
+  type SignTransactionMutateAsync,
+  signTransactionMutationOptions,
+} from '../query/signTransaction'
+
+export {
   type SwitchAccountData,
   type SwitchAccountVariables,
   type SwitchAccountMutate,
