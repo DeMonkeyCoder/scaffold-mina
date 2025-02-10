@@ -1,15 +1,15 @@
-import type {MutateOptions, MutationOptions} from '@tanstack/query-core'
+import type {MutationOptions} from '@tanstack/query-core'
 
 import type {TransactionType} from '@/lib/connect/viem'
 import {
-    signTransaction,
-    type SignTransactionErrorType,
-    type SignTransactionParameters,
-    type SignTransactionReturnType,
+  signTransaction,
+  type SignTransactionErrorType,
+  type SignTransactionParameters,
+  type SignTransactionReturnType,
 } from '../actions/signTransaction'
 import type {Config} from '../createConfig'
 import type {Compute} from '../types/utils'
-import {TransactionTypeNotSupportedError} from "@/lib/connect/viem/actions/wallet/sendTransaction";
+import type {Mutate, MutateAsync} from './types'
 
 export function signTransactionMutationOptions<
   transactionType extends TransactionType,
@@ -59,9 +59,21 @@ export function signTransactionMutationOptions<
       >
     >
   }
-  throw new TransactionTypeNotSupportedError({
-    type: transactionType,
-  })
+}
+
+export function signPaymentTransactionMutationOptions<config extends Config>(
+  config: config,
+) {
+  return {
+    mutationFn(variables) {
+      return signTransaction(config, variables)
+    },
+    mutationKey: ['signTransaction'],
+  } as const satisfies MutationOptions<
+    SignTransactionData<'payment'>,
+    SignTransactionErrorType,
+    SignTransactionVariables<'payment', config, config['chains'][number]['id']>
+  >
 }
 
 export type SignTransactionData<transactionType extends TransactionType> =
@@ -77,34 +89,20 @@ export type SignTransactionMutate<
   transactionType extends TransactionType,
   config extends Config,
   context = unknown,
-> = <chainId extends config['chains'][number]['id']>(
-  variables: SignTransactionVariables<transactionType, config, chainId>,
-  options?:
-    | Compute<
-        MutateOptions<
-          SignTransactionData<transactionType>,
-          SignTransactionErrorType,
-          Compute<SignTransactionVariables<transactionType, config, chainId>>,
-          context
-        >
-      >
-    | undefined,
-) => void
+> = Mutate<
+  SignTransactionData<'payment'>,
+  SignTransactionErrorType,
+  SignTransactionVariables<'payment', config, config['chains'][number]['id']>,
+  context
+>
 
 export type SignTransactionMutateAsync<
   transactionType extends TransactionType,
   config extends Config,
   context = unknown,
-> = <chainId extends config['chains'][number]['id']>(
-  variables: SignTransactionVariables<transactionType, config, chainId>,
-  options?:
-    | Compute<
-        MutateOptions<
-          SignTransactionData<transactionType>,
-          SignTransactionErrorType,
-          Compute<SignTransactionVariables<transactionType, config, chainId>>,
-          context
-        >
-      >
-    | undefined,
-) => Promise<SignTransactionData<transactionType>>
+> = MutateAsync<
+  SignTransactionData<'payment'>,
+  SignTransactionErrorType,
+  SignTransactionVariables<'payment', config, config['chains'][number]['id']>,
+  context
+>
