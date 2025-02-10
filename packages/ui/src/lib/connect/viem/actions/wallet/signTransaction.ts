@@ -1,4 +1,10 @@
-import type {Signature} from '@/lib/connect/viem'
+import type {
+  Signature,
+  TransactionRequestDelegation,
+  TransactionRequestPayment,
+  TransactionRequestZkApp,
+  TransactionType,
+} from '@/lib/connect/viem'
 import {TransactionTypeNotSupportedError} from '@/lib/connect/viem/actions/wallet/sendTransaction'
 import type {ZkappCommand} from 'o1js/dist/web/bindings/mina-transaction/gen/transaction-json'
 import type {Account} from '../../accounts/types'
@@ -21,19 +27,26 @@ export type SignTransactionRequest = UnionOmit<
   FormattedTransactionRequest,
   'from'
 >
+export type SignTransactionRequestByType<T extends TransactionType> =
+  T extends 'zkapp'
+    ? TransactionRequestZkApp
+    : T extends 'payment'
+      ? Omit<TransactionRequestPayment, 'from'>
+      : T extends 'delegation'
+        ? Omit<TransactionRequestDelegation, 'from'>
+        : never
 
 export type SignTransactionParameters<
+  transactionType extends TransactionType,
   chain extends Chain | undefined,
   account extends Account | undefined,
   chainOverride extends Chain | undefined = Chain | undefined,
-  request extends SignTransactionRequest = SignTransactionRequest,
-> = request &
+> = SignTransactionRequestByType<transactionType> &
   GetAccountParameter<account> &
   GetChainParameter<chain, chainOverride>
 
-export type SignTransactionReturnType<
-  request extends SignTransactionRequest = SignTransactionRequest,
-> = request['type'] extends 'zkapp' ? ZkappCommand : Signature
+export type SignTransactionReturnType<transactionType extends TransactionType> =
+  transactionType extends 'zkapp' ? ZkappCommand : Signature
 
 export type SignTransactionErrorType =
   | ParseAccountErrorType
@@ -87,19 +100,21 @@ export type SignTransactionErrorType =
  * })
  */
 export async function signTransaction<
+  transactionType extends TransactionType,
   chain extends Chain | undefined,
   account extends Account | undefined,
   chainOverride extends Chain | undefined = undefined,
-  const request extends SignTransactionRequest = SignTransactionRequest,
 >(
   client: Client<Transport, chain, account>,
-  parameters: SignTransactionParameters<chain, account, chainOverride, request>,
-): Promise<SignTransactionReturnType<request>> {
-  const {
-    account: account_ = client.account,
-    chain = client.chain,
-    ...transaction
-  } = parameters
+  parameters: SignTransactionParameters<
+    transactionType,
+    chain,
+    account,
+    chainOverride
+  >,
+): Promise<SignTransactionReturnType<transactionType>> {
+  const { account: account_ = client.account, chain = client.chain } =
+    parameters
 
   if (!account_) throw new AccountNotFoundError()
   const account = parseAccount(account_)
@@ -134,20 +149,20 @@ export async function signTransaction<
           params: {
             // @ts-ignore
             transaction: JSON.stringify(parameters.zkappCommand),
-            feePayer: transaction.feePayer,
+            feePayer: parameters.feePayer,
             onlySign: true,
           },
         },
         { retryCount: 0 },
       )) as { signedData: string }
       return JSON.parse(res.signedData)
-        .zkappCommand as SignTransactionReturnType<request>
+        .zkappCommand as SignTransactionReturnType<transactionType>
     }
     case 'payment':
     case 'delegation':
     default:
       throw new TransactionTypeNotSupportedError({
-        type: transaction.type,
+        type: parameters.type,
       })
   }
 }

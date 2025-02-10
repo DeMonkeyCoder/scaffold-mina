@@ -7,7 +7,7 @@ import type {OneOf} from './utils' //
 //   storageKeys: readonly Hex[]
 // }[]
 
-export type TransactionType = 'zkapp' | 'payment' | 'delegation' | (string & {})
+export type TransactionType = 'zkapp' | 'payment' | 'delegation'
 
 export type TransactionReceipt = {
   /** Hash of this transaction */
@@ -175,6 +175,15 @@ export type TransactionRequest = OneOf<
   | TransactionRequestPayment
   | TransactionRequestDelegation
 >
+
+export type TransactionRequestByType<T extends TransactionType> =
+  T extends 'zkapp'
+    ? TransactionRequestZkApp
+    : T extends 'payment'
+      ? TransactionRequestPayment
+      : T extends 'delegation'
+        ? TransactionRequestDelegation
+        : never
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 // Signed Request
