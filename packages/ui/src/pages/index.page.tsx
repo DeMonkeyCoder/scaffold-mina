@@ -4,7 +4,7 @@ import LoadingScreen from '@/components/LoadingScreen'
 import {config} from '@/config'
 import deployedContracts from '@/contracts/deployedContracts'
 import {useMinaProvider} from '@/lib/ZkappContext'
-import {sendTransaction, signTransaction} from '@/lib/connect/core/exports'
+import {sendRawTransaction, sendTransaction, signTransaction,} from '@/lib/connect/core/exports'
 import {useFetchAccount} from '@/lib/connect/react/hooks/useFetchAccount'
 import {QuestContractProvider, useQuestContract} from '@/lib/useQuestContract'
 import {isSupportedNetwork} from '@/utils'
@@ -20,6 +20,7 @@ enum TransactionState {
   INITIAL = 0,
   PREPARING = 1,
   AWAITING_USER_APPROVAL = 2,
+  SENDING = 3,
 }
 
 function HomeBody() {
@@ -80,6 +81,7 @@ function HomeBody() {
     setTxState(TransactionState.INITIAL)
   }, [prepareQuestTransaction, txState])
 
+  const [signedTransaction, setSignedTransaction] = useState('')
   const onSignTransaction = useCallback(async () => {
     if (txState !== TransactionState.INITIAL) return
     try {
@@ -94,12 +96,29 @@ function HomeBody() {
           memo: '',
         },
       })
-      console.log({ signedZkappCommand })
+      setSignedTransaction(JSON.stringify(signedZkappCommand))
     } catch (e) {
       alert(String(e))
     }
     setTxState(TransactionState.INITIAL)
   }, [prepareQuestTransaction, txState])
+
+  const onSendSignedTransaction = useCallback(async () => {
+    if (txState !== TransactionState.INITIAL) return
+    try {
+      setTxState(TransactionState.SENDING)
+      const hash = await sendRawTransaction(config, {
+        type: 'zkapp',
+        input: {
+          zkappCommand: JSON.parse(signedTransaction) as ZkappCommand,
+        },
+      })
+      setTransactionLink(`https://minascan.io/devnet/tx/${hash}`)
+    } catch (e) {
+      alert(String(e))
+    }
+    setTxState(TransactionState.INITIAL)
+  }, [signedTransaction, txState])
 
   // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
@@ -126,83 +145,127 @@ function HomeBody() {
             {isConnected ? (
               isSupportedNetwork(networkId) ? (
                 accountExists ? (
-                  <>
-                    <div className="riddle-box bg-gradient-to-tr from-black/60 to-blue-800/60 border m-8">
-                      <div className="justify-center items-center">
-                        <div className="text-center text-2xl flex items-center justify-center text-white">
-                          Solve the riddle{' '}
-                          <img
-                            className="px-2 w-11"
-                            src="/assets/thinkingface.svg"
-                            alt=""
+                  signedTransaction ? (
+                    <>
+                      <div className="riddle-box bg-gradient-to-tr from-black/60 to-blue-800/60 border m-8">
+                        <div className="justify-center items-center">
+                          <textarea
+                            cols={60}
+                            rows={10}
+                            value={signedTransaction}
+                            onChange={(e) =>
+                              setSignedTransaction(e.target.value)
+                            }
                           />
                         </div>
-                        <div className="text-justify text-last-justify text-white">
-                          <br />I am a mighty ledger, yet I weigh next to none,
-                          <br />
-                          Verified by all, even when the work is done.
-                          <br />
-                          My size is constant, no matter how much I grow,
-                          <br />
-                          What’s my name, this protocol you need to know?
-                          <br />
-                          <br />
+                      </div>
+                      <div className="flex items-center justify-center">
+                        <button
+                          className="card flex items-center justify-center whitespace-nowrap"
+                          onClick={onSendSignedTransaction}
+                          disabled={txState !== TransactionState.INITIAL}
+                        >
+                          {txState !== TransactionState.PREPARING && (
+                            <Image
+                              width={20}
+                              height={20}
+                              src="/assets/arrow5.svg"
+                              alt=""
+                            />
+                          )}
+                          {txState === TransactionState.AWAITING_USER_APPROVAL
+                            ? 'Awaiting Approval...'
+                            : txState === TransactionState.PREPARING
+                              ? 'Preparing Transaction...'
+                              : txState === TransactionState.SENDING
+                                ? 'Sending Transaction...'
+                                : 'Send Signed Transaction'}
+                        </button>
+                      </div>
+                      <div className="text-s text-white font-firacode">
+                        Correct Submissions: {currentNum?.toString()}{' '}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="riddle-box bg-gradient-to-tr from-black/60 to-blue-800/60 border m-8">
+                        <div className="justify-center items-center">
+                          <div className="text-center text-2xl flex items-center justify-center text-white">
+                            Solve the riddle{' '}
+                            <img
+                              className="px-2 w-11"
+                              src="/assets/thinkingface.svg"
+                              alt=""
+                            />
+                          </div>
+                          <div className="text-justify text-last-justify text-white">
+                            <br />I am a mighty ledger, yet I weigh next to
+                            none,
+                            <br />
+                            Verified by all, even when the work is done.
+                            <br />
+                            My size is constant, no matter how much I grow,
+                            <br />
+                            What’s my name, this protocol you need to know?
+                            <br />
+                            <br />
+                          </div>
+                        </div>
+                        <div>
+                          <input
+                            type="text"
+                            className="p-2 my-4 rounded-l border-2 border-gray-400 w-56 h-11"
+                            placeholder="Solution"
+                            value={questSolution}
+                            onChange={(e) => setQuestSolution(e.target.value)}
+                          />
                         </div>
                       </div>
-                      <div>
-                        <input
-                          type="text"
-                          className="p-2 my-4 rounded-l border-2 border-gray-400 w-56 h-11"
-                          placeholder="Solution"
-                          value={questSolution}
-                          onChange={(e) => setQuestSolution(e.target.value)}
-                        />
+                      <div className="flex items-center justify-center">
+                        <button
+                          className="card flex items-center justify-center whitespace-nowrap"
+                          onClick={onSendTransaction}
+                          disabled={txState !== TransactionState.INITIAL}
+                        >
+                          {txState !== TransactionState.PREPARING && (
+                            <Image
+                              width={20}
+                              height={20}
+                              src="/assets/arrow5.svg"
+                              alt=""
+                            />
+                          )}
+                          {txState === TransactionState.AWAITING_USER_APPROVAL
+                            ? 'Awaiting Approval...'
+                            : txState === TransactionState.PREPARING
+                              ? 'Preparing Transaction...'
+                              : 'Send Transaction'}
+                        </button>
+                        <button
+                          className="card flex items-center justify-center whitespace-nowrap"
+                          onClick={onSignTransaction}
+                          disabled={txState !== TransactionState.INITIAL}
+                        >
+                          {txState !== TransactionState.PREPARING && (
+                            <Image
+                              width={20}
+                              height={20}
+                              src="/assets/arrow5.svg"
+                              alt=""
+                            />
+                          )}
+                          {txState === TransactionState.AWAITING_USER_APPROVAL
+                            ? 'Awaiting Approval...'
+                            : txState === TransactionState.PREPARING
+                              ? 'Preparing Transaction...'
+                              : 'Sign Transaction'}
+                        </button>
                       </div>
-                    </div>
-                    <div className="flex items-center justify-center">
-                      <button
-                        className="card flex items-center justify-center whitespace-nowrap"
-                        onClick={onSendTransaction}
-                        disabled={txState !== TransactionState.INITIAL}
-                      >
-                        {txState !== TransactionState.PREPARING && (
-                          <Image
-                            width={20}
-                            height={20}
-                            src="/assets/arrow5.svg"
-                            alt=""
-                          />
-                        )}
-                        {txState === TransactionState.AWAITING_USER_APPROVAL
-                          ? 'Awaiting Approval...'
-                          : txState === TransactionState.PREPARING
-                            ? 'Preparing Transaction...'
-                            : 'Send Transaction'}
-                      </button>
-                      <button
-                        className="card flex items-center justify-center whitespace-nowrap"
-                        onClick={onSignTransaction}
-                        disabled={txState !== TransactionState.INITIAL}
-                      >
-                        {txState !== TransactionState.PREPARING && (
-                          <Image
-                            width={20}
-                            height={20}
-                            src="/assets/arrow5.svg"
-                            alt=""
-                          />
-                        )}
-                        {txState === TransactionState.AWAITING_USER_APPROVAL
-                          ? 'Awaiting Approval...'
-                          : txState === TransactionState.PREPARING
-                            ? 'Preparing Transaction...'
-                            : 'Sign Transaction'}
-                      </button>
-                    </div>
-                    <div className="text-s text-white font-firacode">
-                      Correct Submissions: {currentNum?.toString()}{' '}
-                    </div>
-                  </>
+                      <div className="text-s text-white font-firacode">
+                        Correct Submissions: {currentNum?.toString()}{' '}
+                      </div>
+                    </>
+                  )
                 ) : (
                   <AccountDoesNotExist />
                 )

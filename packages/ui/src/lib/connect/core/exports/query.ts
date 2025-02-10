@@ -81,6 +81,14 @@ export {
 } from '../query/sendTransaction'
 
 export {
+  type SendRawTransactionData,
+  type SendRawTransactionVariables,
+  type SendRawTransactionMutate,
+  type SendRawTransactionMutateAsync,
+  sendRawTransactionMutationOptions,
+} from '../query/sendRawTransaction'
+
+export {
   type SignTransactionData,
   type SignTransactionVariables,
   type SignTransactionMutate,

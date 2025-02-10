@@ -63,6 +63,12 @@ export {
   requestPermissions,
 } from './wallet/requestPermissions'
 export {
+  type SendRawTransactionErrorType,
+  type SendRawTransactionParameters,
+  type SendRawTransactionReturnType,
+  sendRawTransaction,
+} from './wallet/sendRawTransaction'
+export {
   type SendTransactionErrorType,
   type SendTransactionParameters,
   type SendTransactionReturnType,

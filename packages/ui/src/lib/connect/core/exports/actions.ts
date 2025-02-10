@@ -79,11 +79,11 @@ export {
 } from '../actions/reconnect'
 
 export {
-  type SignTransactionErrorType,
-  type SignTransactionParameters,
-  type SignTransactionReturnType,
-  signTransaction,
-} from '../actions/signTransaction'
+  type SendRawTransactionErrorType,
+  type SendRawTransactionParameters,
+  type SendRawTransactionReturnType,
+  sendRawTransaction,
+} from '../actions/sendRawTransaction'
 
 export {
   type SendTransactionErrorType,
@@ -91,6 +91,13 @@ export {
   type SendTransactionReturnType,
   sendTransaction,
 } from '../actions/sendTransaction'
+
+export {
+  type SignTransactionErrorType,
+  type SignTransactionParameters,
+  type SignTransactionReturnType,
+  signTransaction,
+} from '../actions/signTransaction'
 
 export {
   type SwitchAccountErrorType,

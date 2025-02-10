@@ -1,5 +1,5 @@
 import type {ZkappCommand} from 'o1js/dist/web/bindings/mina-transaction/gen/transaction-json'
-import type {Hash} from './misc'
+import type {Hash, Signature} from './misc'
 import type {OneOf} from './utils' //
 //
 // export type AccessList = readonly {
@@ -174,4 +174,32 @@ export type TransactionRequest = OneOf<
   | TransactionRequestZkApp
   | TransactionRequestPayment
   | TransactionRequestDelegation
+>
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// Signed Request
+////////////////////////////////////////////////////////////////////////////////////////////
+
+//TODO: see if optional nonce can also be added to the types or not
+export type TransactionRequestZkAppSigned = {
+  type: 'zkapp'
+  input: {
+    zkappCommand: ZkappCommand
+  }
+}
+export type TransactionRequestPaymentSigned = {
+  type: 'payment'
+  input: Omit<TransactionRequestPayment, 'type'>
+  signature: Signature
+}
+export type TransactionRequestDelegationSigned = {
+  type: 'delegation'
+  input: Omit<TransactionRequestDelegation, 'type'>
+  signature: Signature
+}
+
+export type TransactionRequestSigned = OneOf<
+  | TransactionRequestZkAppSigned
+  | TransactionRequestPaymentSigned
+  | TransactionRequestDelegationSigned
 >

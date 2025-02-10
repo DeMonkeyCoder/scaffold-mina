@@ -71,5 +71,5 @@ export async function sendTransaction<
   })
 
   // return hash
-  return hash as string
+  return hash as SendTransactionReturnType
 }
