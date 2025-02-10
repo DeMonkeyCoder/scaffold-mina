@@ -8,7 +8,7 @@ import type {
 import {TransactionTypeNotSupportedError} from '@/lib/connect/viem/actions/wallet/sendTransaction'
 import type {ZkappCommand} from 'o1js/dist/web/bindings/mina-transaction/gen/transaction-json'
 import type {Account} from '../../accounts/types'
-import {parseAccount, type ParseAccountErrorType,} from '../../accounts/utils/parseAccount'
+import {parseAccount,} from '../../accounts/utils/parseAccount'
 import type {Client} from '../../clients/createClient'
 import type {Transport} from '../../clients/transports/createTransport'
 import {AccountNotFoundError} from '../../errors/account'
@@ -16,12 +16,11 @@ import type {ErrorType} from '../../errors/utils'
 import type {GetAccountParameter} from '../../types/account'
 import type {Chain, GetChainParameter} from '../../types/chain'
 import type {UnionOmit} from '../../types/utils'
-import type {RequestErrorType} from '../../utils/buildRequest'
-import {assertCurrentChain, type AssertCurrentChainErrorType,} from '../../utils/chain/assertCurrentChain'
+import {assertCurrentChain,} from '../../utils/chain/assertCurrentChain'
 import type {FormattedTransactionRequest} from '../../utils/formatters/transactionRequest'
 import {getAction} from '../../utils/getAction'
-import {assertRequest, type AssertRequestErrorType,} from '../../utils/transaction/assertRequest'
-import {getNetworkId, type GetNetworkIdErrorType,} from '../public/getNetworkId'
+import {assertRequest,} from '../../utils/transaction/assertRequest'
+import {getNetworkId,} from '../public/getNetworkId'
 
 export type SignTransactionRequest = UnionOmit<
   FormattedTransactionRequest,
@@ -49,12 +48,12 @@ export type SignTransactionReturnType<transactionType extends TransactionType> =
   transactionType extends 'zkapp' ? ZkappCommand : Signature
 
 export type SignTransactionErrorType =
-  | ParseAccountErrorType
-  | AssertRequestErrorType
-  | GetNetworkIdErrorType
-  | AssertCurrentChainErrorType
-  | RequestErrorType
-  | ErrorType
+  // | ParseAccountErrorType
+  // | AssertRequestErrorType
+  // | GetNetworkIdErrorType
+  // | AssertCurrentChainErrorType
+  // | RequestErrorType
+  ErrorType
 
 /**
  * Signs a transaction.

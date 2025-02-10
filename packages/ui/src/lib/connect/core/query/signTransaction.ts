@@ -9,7 +9,8 @@ import {
 } from '../actions/signTransaction'
 import type {Config} from '../createConfig'
 import type {Compute} from '../types/utils'
-import type {Mutate, MutateAsync} from './types'
+import type {Mutate} from './types'
+import {UseMutateAsyncFunction} from "@tanstack/react-query";
 
 export function signTransactionMutationOptions<
   transactionType extends TransactionType,
@@ -100,7 +101,28 @@ export type SignTransactionMutateAsync<
   transactionType extends TransactionType,
   config extends Config,
   context = unknown,
-> = MutateAsync<
+> = //   variables: SignTransactionVariables< //     (
+//     'payment',
+//     config,
+//     config['chains'][number]['id']
+//   >,
+//   options?:
+//     | Compute<
+//         MutateOptions<
+//           SignTransactionData<'payment'>,
+//           SignTransactionErrorType,
+//           SignTransactionVariables<
+//             'payment',
+//             config,
+//             config['chains'][number]['id']
+//           >,
+//           unknown
+//         >
+//       >
+//     | undefined,
+// ) => Promise<SignTransactionData<'payment'>>
+
+UseMutateAsyncFunction<
   SignTransactionData<'payment'>,
   SignTransactionErrorType,
   SignTransactionVariables<'payment', config, config['chains'][number]['id']>,
