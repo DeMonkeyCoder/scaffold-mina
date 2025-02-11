@@ -4,8 +4,9 @@ import LoadingScreen from '@/components/LoadingScreen'
 import {config} from '@/config'
 import deployedContracts from '@/contracts/deployedContracts'
 import {useMinaProvider} from '@/lib/ZkappContext'
-import {sendRawTransaction, sendTransaction, signTransaction,} from '@/lib/connect/core/exports'
+import {sendRawTransaction, sendTransaction} from '@/lib/connect/core/exports'
 import {useFetchAccount} from '@/lib/connect/react/hooks/useFetchAccount'
+import {useSignZkappTransaction} from '@/lib/connect/react/exports'
 import {QuestContractProvider, useQuestContract} from '@/lib/useQuestContract'
 import {isSupportedNetwork} from '@/utils'
 import {useAppKitAccount, useAppKitNetwork} from '@reown/appkit/react'
@@ -46,6 +47,7 @@ function HomeBody() {
 
   const [questSolution, setQuestSolution] = useState('')
 
+  const [preparingTransaction, setPreparingTransaction] = useState(false)
   const [txState, setTxState] = useState(TransactionState.INITIAL)
   const [transactionLink, setTransactionLink] = useState('')
 
@@ -81,36 +83,43 @@ function HomeBody() {
     setTxState(TransactionState.INITIAL)
   }, [prepareQuestTransaction, txState])
 
-  const [signedTransaction, setSignedTransaction] = useState('')
+  const {
+    signTransaction,
+    isPending: isPendingSignTransaction,
+    data: signedTransaction,
+  } = useSignZkappTransaction()
+
   const onSignTransaction = useCallback(async () => {
-    if (txState !== TransactionState.INITIAL) return
+    if (preparingTransaction || isPendingSignTransaction) return
     try {
-      setTxState(TransactionState.PREPARING)
+      setPreparingTransaction(true)
       const zkappCommandStr = await prepareQuestTransaction()
-      setTxState(TransactionState.AWAITING_USER_APPROVAL)
-      const signedZkappCommand = await signTransaction(config, {
-        type: 'zkapp',
+      signTransaction({
         zkappCommand: JSON.parse(zkappCommandStr) as ZkappCommand,
         feePayer: {
           fee: 10,
           memo: '',
         },
       })
-      setSignedTransaction(JSON.stringify(signedZkappCommand))
     } catch (e) {
       alert(String(e))
     }
-    setTxState(TransactionState.INITIAL)
-  }, [prepareQuestTransaction, txState])
+    setPreparingTransaction(false)
+  }, [
+    isPendingSignTransaction,
+    prepareQuestTransaction,
+    preparingTransaction,
+    signTransaction,
+  ])
 
   const onSendSignedTransaction = useCallback(async () => {
-    if (txState !== TransactionState.INITIAL) return
+    if (txState !== TransactionState.INITIAL || !signedTransaction) return
     try {
       setTxState(TransactionState.SENDING)
       const hash = await sendRawTransaction(config, {
         type: 'zkapp',
         input: {
-          zkappCommand: JSON.parse(signedTransaction) as ZkappCommand,
+          zkappCommand: signedTransaction,
         },
       })
       setTransactionLink(`https://minascan.io/devnet/tx/${hash}`)
@@ -152,10 +161,8 @@ function HomeBody() {
                           <textarea
                             cols={60}
                             rows={10}
-                            value={signedTransaction}
-                            onChange={(e) =>
-                              setSignedTransaction(e.target.value)
-                            }
+                            value={JSON.stringify(signedTransaction)}
+                            disabled={true}
                           />
                         </div>
                       </div>
@@ -254,10 +261,10 @@ function HomeBody() {
                               alt=""
                             />
                           )}
-                          {txState === TransactionState.AWAITING_USER_APPROVAL
-                            ? 'Awaiting Approval...'
-                            : txState === TransactionState.PREPARING
-                              ? 'Preparing Transaction...'
+                          {preparingTransaction
+                            ? 'Preparing Transaction...'
+                            : isPendingSignTransaction
+                              ? 'Awaiting Approval...'
                               : 'Sign Transaction'}
                         </button>
                       </div>

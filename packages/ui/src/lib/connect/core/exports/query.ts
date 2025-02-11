@@ -89,12 +89,12 @@ export {
 } from '../query/sendRawTransaction'
 
 export {
-  type SignTransactionData,
-  type SignTransactionVariables,
-  type SignTransactionMutate,
-  type SignTransactionMutateAsync,
-  signTransactionMutationOptions,
-} from '../query/signTransaction'
+  type SignZkappTransactionData,
+  type SignZkappTransactionVariables,
+  type SignZkappTransactionMutate,
+  type SignZkappTransactionMutateAsync,
+  signZkappTransactionMutationOptions,
+} from '../query/signZkappTransaction'
 
 export {
   type SwitchAccountData,

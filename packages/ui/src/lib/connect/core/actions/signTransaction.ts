@@ -4,8 +4,8 @@ import type {
   Client,
   SignTransactionErrorType as viem_SignTransactionErrorType,
   SignTransactionParameters as viem_SignTransactionParameters,
-  SignTransactionRequest,
   SignTransactionReturnType as viem_SignTransactionReturnType,
+  TransactionType,
 } from '@/lib/connect/viem'
 import {signTransaction as viem_signTransaction} from '@/lib/connect/viem/actions'
 
@@ -18,6 +18,7 @@ import {getAction} from '../utils/getAction'
 import {getConnectorClient, type GetConnectorClientErrorType,} from './getConnectorClient'
 
 export type SignTransactionParameters<
+  transactionType extends TransactionType,
   config extends Config = Config,
   networkId extends
     config['chains'][number]['id'] = config['chains'][number]['id'],
@@ -25,15 +26,19 @@ export type SignTransactionParameters<
   chains extends readonly Chain[] = SelectChains<config, networkId>,
 > = {
   [key in keyof chains]: Compute<
-    viem_SignTransactionParameters<chains[key], Account, chains[key]> &
+    viem_SignTransactionParameters<
+      transactionType,
+      chains[key],
+      Account,
+      chains[key]
+    > &
       NetworkIdParameter<config, networkId> &
       ConnectorParameter
   >
 }[number]
 
-export type SignTransactionReturnType<
-  request extends SignTransactionRequest = SignTransactionRequest,
-> = viem_SignTransactionReturnType<request>
+export type SignTransactionReturnType<transactionType extends TransactionType> =
+  viem_SignTransactionReturnType<transactionType>
 
 export type SignTransactionErrorType =
   // getConnectorClient()
@@ -49,13 +54,14 @@ export async function signTransaction<
   config extends Config,
   networkId extends config['chains'][number]['id'],
   parameters extends SignTransactionParameters<
+    TransactionType,
     config,
     networkId
-  > = SignTransactionParameters<config, networkId>,
+  > = SignTransactionParameters<TransactionType, config, networkId>,
 >(
   config: config,
   parameters: parameters,
-): Promise<SignTransactionReturnType<parameters>> {
+): Promise<SignTransactionReturnType<parameters['type']>> {
   const { account, networkId, connector, ...rest } = parameters
 
   let client: Client
@@ -75,5 +81,5 @@ export async function signTransaction<
     ...(account ? { account } : {}),
     chain: networkId ? { id: networkId } : null,
     // gas: rest.gas ?? undefined,
-  }) as SignTransactionReturnType<parameters>
+  }) as SignTransactionReturnType<parameters['type']>
 }

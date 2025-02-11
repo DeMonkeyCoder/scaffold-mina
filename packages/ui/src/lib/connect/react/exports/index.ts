@@ -120,6 +120,12 @@ export {
 } from '../hooks/useReconnect'
 
 export {
+  type UseSignZkappTransactionParameters,
+  type UseSignZkappTransactionReturnType,
+  useSignZkappTransaction,
+} from '../hooks/useSignZkappTransaction'
+
+export {
   type UseSwitchAccountParameters,
   type UseSwitchAccountReturnType,
   useSwitchAccount,
