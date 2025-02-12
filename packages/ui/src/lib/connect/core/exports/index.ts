@@ -81,6 +81,13 @@ export {
 } from '../actions/getPublicClient'
 
 export {
+  type GetTransactionCountErrorType,
+  type GetTransactionCountParameters,
+  type GetTransactionCountReturnType,
+  getTransactionCount,
+} from '../actions/getTransactionCount'
+
+export {
   type GetWalletClientErrorType,
   type GetWalletClientParameters,
   type GetWalletClientReturnType,

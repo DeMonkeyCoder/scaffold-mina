@@ -146,21 +146,64 @@ export async function signTransaction<
 
   switch (parameters.type) {
     case 'zkapp': {
-      const res = (await client.request(
-        {
-          // @ts-ignore
-          method: 'mina_sendTransaction',
-          params: {
+      /* TODO: remove this try catch block after having a standard way of
+           signing transactions with both AuroWallet and Pallad */
+      // First try it AuroWallet's way
+      try {
+        const res = (await client.request(
+          {
             // @ts-ignore
-            transaction: JSON.stringify(parameters.zkappCommand),
-            feePayer: parameters.feePayer,
-            onlySign: true,
+            method: 'mina_sendTransaction',
+            params: {
+              // @ts-ignore
+              transaction: JSON.stringify(parameters.zkappCommand),
+              // feePayer: parameters.feePayer,
+              onlySign: true,
+            },
           },
-        },
-        { retryCount: 0 },
-      )) as { signedData: string }
-      return JSON.parse(res.signedData)
-        .zkappCommand as SignTransactionReturnType<transactionType>
+          { retryCount: 0 },
+        )) as { signedData: string }
+        return JSON.parse(res.signedData)
+          .zkappCommand as SignTransactionReturnType<transactionType>
+      } catch (e: any) {
+        let palladErrorCode: string
+        try {
+          palladErrorCode = JSON.parse(e.details)[0].code
+        } catch (e_) {
+          throw e
+        }
+        if (palladErrorCode === 'invalid_type') {
+          // Try it Pallad's way
+          const res = (await client.request(
+            {
+              // @ts-ignore
+              method: 'mina_signTransaction',
+              params: [
+                // @ts-ignore
+                {
+                  command: {
+                    zkappCommand: parameters.zkappCommand,
+                    feePayer: {
+                      fee:
+                        parameters.feePayer?.fee !== undefined
+                          ? String(parameters.feePayer.fee * 1000000000)
+                          : undefined,
+                      feePayer: parameters.feePayer?.publicKey,
+                      nonce: String(parameters.feePayer?.nonce),
+                      validUntil: parameters.feePayer?.validUntil,
+                      memo: parameters.feePayer?.memo,
+                    },
+                  },
+                },
+              ],
+            },
+            { retryCount: 0 },
+          )) as { data: { zkappCommand: ZkappCommand } }
+          return res.data
+            .zkappCommand as SignTransactionReturnType<transactionType>
+        }
+        throw e
+      }
     }
     case 'payment':
     case 'delegation':

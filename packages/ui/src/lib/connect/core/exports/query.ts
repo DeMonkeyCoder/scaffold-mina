@@ -56,6 +56,15 @@ export {
 } from '../query/getConnectorClient'
 
 export {
+  type GetTransactionCountData,
+  type GetTransactionCountOptions,
+  type GetTransactionCountQueryFnData,
+  type GetTransactionCountQueryKey,
+  getTransactionCountQueryKey,
+  getTransactionCountQueryOptions,
+} from '../query/getTransactionCount'
+
+export {
   type GetWalletClientData,
   type GetWalletClientOptions,
   type GetWalletClientQueryFnData,

@@ -138,6 +138,12 @@ export {
 } from '../hooks/useSwitchChain'
 
 export {
+  type UseTransactionCountParameters,
+  type UseTransactionCountReturnType,
+  useTransactionCount,
+} from '../hooks/useTransactionCount'
+
+export {
   type UseWalletClientParameters,
   type UseWalletClientReturnType,
   useWalletClient,

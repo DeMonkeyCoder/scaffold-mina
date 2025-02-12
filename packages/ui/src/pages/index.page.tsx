@@ -5,8 +5,8 @@ import {config} from '@/config'
 import deployedContracts from '@/contracts/deployedContracts'
 import {useMinaProvider} from '@/lib/ZkappContext'
 import {sendRawTransaction, sendTransaction} from '@/lib/connect/core/exports'
-import {useFetchAccount} from '@/lib/connect/react/hooks/useFetchAccount'
 import {useSignZkappTransaction} from '@/lib/connect/react/exports'
+import {useFetchAccount} from '@/lib/connect/react/hooks/useFetchAccount'
 import {QuestContractProvider, useQuestContract} from '@/lib/useQuestContract'
 import {isSupportedNetwork} from '@/utils'
 import {useAppKitAccount, useAppKitNetwork} from '@reown/appkit/react'
@@ -97,7 +97,7 @@ function HomeBody() {
       signTransaction({
         zkappCommand: JSON.parse(zkappCommandStr) as ZkappCommand,
         feePayer: {
-          fee: 10,
+          fee: 0.5,
           memo: '',
         },
       })

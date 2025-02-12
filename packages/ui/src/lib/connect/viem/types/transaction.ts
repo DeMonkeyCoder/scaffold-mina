@@ -145,12 +145,14 @@ export type TransactionReceipt = {
 // Request
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-//TODO: see if optional nonce can also be added to the types or not
 export type TransactionRequestZkApp = {
   type: 'zkapp'
   zkappCommand: ZkappCommand
   feePayer?: {
+    publicKey?: string
     fee?: number
+    validUntil?: string
+    nonce?: number
     memo?: string
   }
 }
@@ -160,6 +162,7 @@ export type TransactionRequestPayment = {
   to: string
   amount: number
   fee?: number
+  nonce?: number
   memo?: string
 }
 export type TransactionRequestDelegation = {
@@ -167,6 +170,7 @@ export type TransactionRequestDelegation = {
   from: string
   to: string
   fee?: number
+  nonce?: number
   memo?: string
 }
 

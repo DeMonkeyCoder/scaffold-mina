@@ -9,6 +9,7 @@ import type {
 } from '@/lib/connect/viem'
 import {signTransaction as viem_signTransaction} from '@/lib/connect/viem/actions'
 
+import {getAccount} from '@/lib/connect/core/actions/getAccount'
 import type {Config} from '../createConfig'
 import type {BaseErrorType, ErrorType} from '../errors/base'
 import type {SelectChains} from '../types/chain'
@@ -16,6 +17,7 @@ import type {ConnectorParameter, NetworkIdParameter,} from '../types/properties'
 import type {Compute} from '../types/utils'
 import {getAction} from '../utils/getAction'
 import {getConnectorClient, type GetConnectorClientErrorType,} from './getConnectorClient'
+import {getTransactionCount} from './getTransactionCount'
 
 export type SignTransactionParameters<
   transactionType extends TransactionType,
@@ -76,8 +78,31 @@ export async function signTransaction<
 
   // @ts-ignore
   const action = getAction(client, viem_signTransaction, 'signTransaction')
+
+  // TODO: remove this nonce parameter injection after Pallad supports optional nonce
+  const txParameters = { ...(rest as any) }
+  const address = account
+    ? typeof account === 'string'
+      ? account
+      : account.address
+    : (await getAccount(config)).address
+  const nonce: number =
+    (txParameters.type === 'zkapp'
+      ? txParameters.feePayer?.nonce
+      : txParameters.nonce) ??
+    (await getTransactionCount(config, { address: address! }))
+  if (txParameters.type === 'zkapp') {
+    txParameters.feePayer = {
+      ...txParameters.feePayer,
+      publicKey: txParameters.feePayer.publicKey ?? address,
+      nonce,
+    }
+  } else {
+    txParameters.nonce = nonce
+  }
+
   return action({
-    ...(rest as any),
+    ...(txParameters as any),
     ...(account ? { account } : {}),
     chain: networkId ? { id: networkId } : null,
     // gas: rest.gas ?? undefined,
