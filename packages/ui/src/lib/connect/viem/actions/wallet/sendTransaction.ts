@@ -14,8 +14,8 @@ import {assertCurrentChain} from '../../utils/chain/assertCurrentChain' // impor
 import type {FormattedTransactionRequest} from '../../utils/formatters/transactionRequest'
 import {getAction} from '../../utils/getAction'
 import {assertRequest, type AssertRequestParameters,} from '../../utils/transaction/assertRequest'
-import {getNetworkId} from '../public/getNetworkId' // import type {SendRawTransactionErrorType} from './sendRawTransaction'
-// import type {SendRawTransactionErrorType} from './sendRawTransaction'
+import {getNetworkId} from '../public/getNetworkId' // import type {SendSignedTransactionErrorType} from './sendSignedTransaction'
+// import type {SendSignedTransactionErrorType} from './sendSignedTransaction'
 
 export type SendTransactionRequest = UnionOmit<
   FormattedTransactionRequest,
@@ -63,7 +63,7 @@ export type SendTransactionErrorType =
   //     | AssertCurrentChainErrorType
   //     | AssertRequestErrorType
   //     | GetNetworkIdErrorType
-  //     | SendRawTransactionErrorType
+  //     | SendSignedTransactionErrorType
   //     | SignTransactionErrorType
   //     | RequestErrorType
   //   >
@@ -77,7 +77,7 @@ export type SendTransactionErrorType =
  * - Examples: https://stackblitz.com/github/wevm/viem/tree/main/examples/transactions_sending-transactions
  * - JSON-RPC Methods:
  *   - JSON-RPC Accounts: [`eth_sendTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendtransaction)
- *   - Local Accounts: [`eth_sendRawTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendrawtransaction)
+ *   - Local Accounts: [`eth_sendSignedTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendrawtransaction)
  *
  * @param client - Client to use
  * @param parameters - {@link SendTransactionParameters}

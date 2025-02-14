@@ -109,11 +109,11 @@ export {
 } from '../actions/sendTransaction'
 
 export {
-  type SendRawTransactionErrorType,
-  type SendRawTransactionParameters,
-  type SendRawTransactionReturnType,
-  sendRawTransaction,
-} from '../actions/sendRawTransaction'
+  type SendSignedTransactionErrorType,
+  type SendSignedTransactionParameters,
+  type SendSignedTransactionReturnType,
+  sendSignedTransaction,
+} from '../actions/sendSignedTransaction'
 
 export {
   type SignTransactionErrorType,

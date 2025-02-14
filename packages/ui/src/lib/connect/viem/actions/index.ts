@@ -63,11 +63,11 @@ export {
   requestPermissions,
 } from './wallet/requestPermissions'
 export {
-  type SendRawTransactionErrorType,
-  type SendRawTransactionParameters,
-  type SendRawTransactionReturnType,
-  sendRawTransaction,
-} from './wallet/sendRawTransaction'
+  type SendSignedTransactionErrorType,
+  type SendSignedTransactionParameters,
+  type SendSignedTransactionReturnType,
+  sendSignedTransaction,
+} from './wallet/sendSignedTransaction'
 export {
   type SendTransactionErrorType,
   type SendTransactionParameters,

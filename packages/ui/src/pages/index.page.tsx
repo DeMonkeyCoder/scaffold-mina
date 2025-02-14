@@ -4,7 +4,7 @@ import LoadingScreen from '@/components/LoadingScreen'
 import {config} from '@/config'
 import deployedContracts from '@/contracts/deployedContracts'
 import {useMinaProvider} from '@/lib/ZkappContext'
-import {sendRawTransaction, sendTransaction} from '@/lib/connect/core/exports'
+import {sendSignedTransaction, sendTransaction,} from '@/lib/connect/core/exports'
 import {useSignZkappTransaction} from '@/lib/connect/react/exports'
 import {useFetchAccount} from '@/lib/connect/react/hooks/useFetchAccount'
 import {QuestContractProvider, useQuestContract} from '@/lib/useQuestContract'
@@ -116,7 +116,7 @@ function HomeBody() {
     if (txState !== TransactionState.INITIAL || !signedTransaction) return
     try {
       setTxState(TransactionState.SENDING)
-      const hash = await sendRawTransaction(config, {
+      const hash = await sendSignedTransaction(config, {
         type: 'zkapp',
         input: {
           zkappCommand: signedTransaction,

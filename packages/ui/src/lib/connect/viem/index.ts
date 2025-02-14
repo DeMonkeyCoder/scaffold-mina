@@ -46,10 +46,10 @@ export type {
   RequestPermissionsParameters,
 } from './actions/wallet/requestPermissions'
 export type {
-  SendRawTransactionErrorType,
-  SendRawTransactionParameters,
-  SendRawTransactionReturnType,
-} from './actions/wallet/sendRawTransaction'
+  SendSignedTransactionErrorType,
+  SendSignedTransactionParameters,
+  SendSignedTransactionReturnType,
+} from './actions/wallet/sendSignedTransaction'
 export type {
   SendTransactionErrorType,
   SendTransactionParameters,

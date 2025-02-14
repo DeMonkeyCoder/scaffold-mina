@@ -90,12 +90,12 @@ export {
 } from '../query/sendTransaction'
 
 export {
-  type SendRawTransactionData,
-  type SendRawTransactionVariables,
-  type SendRawTransactionMutate,
-  type SendRawTransactionMutateAsync,
-  sendRawTransactionMutationOptions,
-} from '../query/sendRawTransaction'
+  type SendSignedTransactionData,
+  type SendSignedTransactionVariables,
+  type SendSignedTransactionMutate,
+  type SendSignedTransactionMutateAsync,
+  sendSignedTransactionMutationOptions,
+} from '../query/sendSignedTransaction'
 
 export {
   type SignZkappTransactionData,

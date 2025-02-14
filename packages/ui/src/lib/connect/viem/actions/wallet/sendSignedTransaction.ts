@@ -6,40 +6,40 @@ import type {Hash} from '../../types/misc'
 import type {TransactionRequestSigned} from '../../types/transaction'
 import type {RequestErrorType} from '../../utils/buildRequest'
 
-export type SendRawTransactionParameters = TransactionRequestSigned
+export type SendSignedTransactionParameters = TransactionRequestSigned
 
-export type SendRawTransactionReturnType = Hash
+export type SendSignedTransactionReturnType = Hash
 
-export type SendRawTransactionErrorType = RequestErrorType | ErrorType
+export type SendSignedTransactionErrorType = RequestErrorType | ErrorType
 
 /**
  * Sends a **signed** transaction to the network
  *
- * - Docs: https://viem.sh/docs/actions/wallet/sendRawTransaction
- * - JSON-RPC Method: [`eth_sendRawTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)
+ * - Docs: https://viem.sh/docs/actions/wallet/sendSignedTransaction
+ * - JSON-RPC Method: [`eth_sendSignedTransaction`](https://ethereum.github.io/execution-apis/api-documentation/)
  *
  * @param client - Client to use
- * @param parameters - {@link SendRawTransactionParameters}
- * @returns The transaction hash. {@link SendRawTransactionReturnType}
+ * @param parameters - {@link SendSignedTransactionParameters}
+ * @returns The transaction hash. {@link SendSignedTransactionReturnType}
  *
  * @example
  * import { createWalletClient, custom } from 'viem'
  * import { mainnet } from 'viem/chains'
- * import { sendRawTransaction } from 'viem/wallet'
+ * import { sendSignedTransaction } from 'viem/wallet'
  *
  * const client = createWalletClient({
  *   chain: mainnet,
  *   transport: custom(window.ethereum),
  * })
  *
- * const hash = await sendRawTransaction(client, {
+ * const hash = await sendSignedTransaction(client, {
  *   signedTransaction: '0x02f850018203118080825208808080c080a04012522854168b27e5dc3d5839bab5e6b39e1a0ffd343901ce1622e3d64b48f1a04e00902ae0502c4728cbf12156290df99c3ed7de85b1dbfe20b5c36931733a33'
  * })
  */
-export async function sendRawTransaction<chain extends Chain | undefined>(
+export async function sendSignedTransaction<chain extends Chain | undefined>(
   client: Client<Transport, chain>,
-  parameters: SendRawTransactionParameters,
-): Promise<SendRawTransactionReturnType> {
+  parameters: SendSignedTransactionParameters,
+): Promise<SendSignedTransactionReturnType> {
   const { type, ...rest } = parameters
   const response = (await client.request(
     {
