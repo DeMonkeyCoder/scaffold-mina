@@ -11,11 +11,13 @@ import {
 } from '@/lib/connect/core/exports/query'
 import {useMutation} from '@tanstack/react-query'
 
+import type {TransactionType} from '@/lib/connect/viem'
 import type {ConfigParameter} from '../types/properties'
 import type {UseMutationParameters, UseMutationReturnType,} from '../utils/query'
 import {useConfig} from './useConfig'
 
 export type UseSendTransactionParameters<
+  transactionType extends TransactionType,
   config extends Config = Config,
   context = unknown,
 > = Compute<
@@ -24,7 +26,11 @@ export type UseSendTransactionParameters<
       | UseMutationParameters<
           SendTransactionData,
           SendTransactionErrorType,
-          SendTransactionVariables<config, config['chains'][number]['id']>,
+          SendTransactionVariables<
+            transactionType,
+            config,
+            config['chains'][number]['id']
+          >,
           context
         >
       | undefined
@@ -32,13 +38,18 @@ export type UseSendTransactionParameters<
 >
 
 export type UseSendTransactionReturnType<
+  transactionType extends TransactionType,
   config extends Config = Config,
   context = unknown,
 > = Compute<
   UseMutationReturnType<
     SendTransactionData,
     SendTransactionErrorType,
-    SendTransactionVariables<config, config['chains'][number]['id']>,
+    SendTransactionVariables<
+      transactionType,
+      config,
+      config['chains'][number]['id']
+    >,
     context
   > & {
     sendTransaction: SendTransactionMutate<config, context>
@@ -48,11 +59,16 @@ export type UseSendTransactionReturnType<
 
 /** https://wagmi.sh/react/api/hooks/useSendTransaction */
 export function useSendTransaction<
+  transactionType extends TransactionType,
   config extends Config = ResolvedRegister['config'],
   context = unknown,
 >(
-  parameters: UseSendTransactionParameters<config, context> = {},
-): UseSendTransactionReturnType<config, context> {
+  parameters: UseSendTransactionParameters<
+    transactionType,
+    config,
+    context
+  > = {},
+): UseSendTransactionReturnType<transactionType, config, context> {
   const { mutation } = parameters
 
   const config = useConfig(parameters)
