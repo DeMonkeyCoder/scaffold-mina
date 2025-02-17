@@ -20,7 +20,7 @@ import {getNetworkId} from '../public/getNetworkId' // import type {SendSignedTr
 export type SendTransactionRequest = UnionOmit<
   FormattedTransactionRequest,
   'from'
-> & {}
+>
 
 export type SendTransactionParameters<
   chain extends Chain | undefined = Chain | undefined,
@@ -118,7 +118,7 @@ export type SendTransactionErrorType =
 export async function sendTransaction<
   chain extends Chain | undefined,
   account extends Account | undefined,
-  const request extends SendTransactionRequest<chain, chainOverride>,
+  const request extends SendTransactionRequest,
   chainOverride extends Chain | undefined = undefined,
 >(
   client: Client<Transport, chain, account>,
