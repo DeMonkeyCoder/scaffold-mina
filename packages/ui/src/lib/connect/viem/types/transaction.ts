@@ -180,6 +180,15 @@ export type TransactionRequest = OneOf<
   | TransactionRequestDelegation
 >
 
+export type TransactionRequestByType<T extends TransactionType> =
+  T extends 'zkapp'
+    ? TransactionRequestZkApp
+    : T extends 'payment'
+      ? Omit<TransactionRequestPayment, 'from'>
+      : T extends 'delegation'
+        ? Omit<TransactionRequestDelegation, 'from'>
+        : never
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 // Signed Request
 ////////////////////////////////////////////////////////////////////////////////////////////

@@ -5,6 +5,7 @@ import type {
   SendTransactionErrorType as viem_SendTransactionErrorType,
   SendTransactionParameters as viem_SendTransactionParameters,
   SendTransactionReturnType as viem_SendTransactionReturnType,
+  TransactionType,
 } from '@/lib/connect/viem'
 import {sendTransaction as viem_sendTransaction} from '@/lib/connect/viem/actions'
 
@@ -17,6 +18,7 @@ import {getAction} from '../utils/getAction'
 import {getConnectorClient, type GetConnectorClientErrorType,} from './getConnectorClient'
 
 export type SendTransactionParameters<
+  transactionType extends TransactionType,
   config extends Config = Config,
   networkId extends
     config['chains'][number]['id'] = config['chains'][number]['id'],
@@ -24,7 +26,12 @@ export type SendTransactionParameters<
   chains extends readonly Chain[] = SelectChains<config, networkId>,
 > = {
   [key in keyof chains]: Compute<
-    viem_SendTransactionParameters<chains[key], Account, chains[key]> &
+    viem_SendTransactionParameters<
+      transactionType,
+      chains[key],
+      Account,
+      chains[key]
+    > &
       NetworkIdParameter<config, networkId> &
       ConnectorParameter
   >
@@ -47,7 +54,7 @@ export async function sendTransaction<
   networkId extends config['chains'][number]['id'],
 >(
   config: config,
-  parameters: SendTransactionParameters<config, networkId>,
+  parameters: SendTransactionParameters<TransactionType, config, networkId>,
 ): Promise<SendTransactionReturnType> {
   const { account, networkId, connector, ...rest } = parameters
 

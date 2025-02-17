@@ -1,4 +1,4 @@
-import type {Address, UnionOmit} from '@/lib/connect/viem'
+import type {Address, TransactionType, UnionOmit,} from '@/lib/connect/viem'
 
 import type {Account} from '../../accounts/types'
 import {parseAccount, type ParseAccountErrorType,} from '../../accounts/utils/parseAccount' // import type {SignTransactionErrorType} from '../../accounts/utils/signTransaction'
@@ -14,7 +14,12 @@ import {assertCurrentChain} from '../../utils/chain/assertCurrentChain' // impor
 import type {FormattedTransactionRequest} from '../../utils/formatters/transactionRequest'
 import {getAction} from '../../utils/getAction'
 import {assertRequest, type AssertRequestParameters,} from '../../utils/transaction/assertRequest'
-import {getNetworkId} from '../public/getNetworkId' // import type {SendSignedTransactionErrorType} from './sendSignedTransaction'
+import {getNetworkId} from '../public/getNetworkId'
+import type {TransactionRequestByType} from "@/lib/connect/viem/types/transaction"; // import type {SendSignedTransactionErrorType} from './sendSignedTransaction'
+import {
+  type ParseAccountErrorType,
+  parseAccount,
+} from '../../accounts/utils/parseAccount' // import type {SignTransactionErrorType} from '../../accounts/utils/signTransaction'
 // import type {SendSignedTransactionErrorType} from './sendSignedTransaction'
 
 export type SendTransactionRequest = UnionOmit<
@@ -23,11 +28,11 @@ export type SendTransactionRequest = UnionOmit<
 >
 
 export type SendTransactionParameters<
+  transactionType extends TransactionType,
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
   chainOverride extends Chain | undefined = Chain | undefined,
-  request extends SendTransactionRequest = SendTransactionRequest,
-> = request &
+> = TransactionRequestByType<transactionType> &
   GetAccountParameter<account, Account | Address, true, true> &
   GetChainParameter<chain, chainOverride>
 
@@ -116,19 +121,21 @@ export type SendTransactionErrorType =
  * })
  */
 export async function sendTransaction<
+  transactionType extends TransactionType,
   chain extends Chain | undefined,
   account extends Account | undefined,
-  const request extends SendTransactionRequest,
   chainOverride extends Chain | undefined = undefined,
 >(
   client: Client<Transport, chain, account>,
-  parameters: SendTransactionParameters<chain, account, chainOverride, request>,
+  parameters: SendTransactionParameters<
+    transactionType,
+    chain,
+    account,
+    chainOverride
+  >,
 ): Promise<SendTransactionReturnType> {
-  const {
-    account: account_ = client.account,
-    chain = client.chain,
-    ...rest
-  } = parameters
+  const { account: account_ = client.account, chain = client.chain } =
+    parameters
 
   if (typeof account_ === 'undefined') throw new AccountNotFoundError()
   const account = account_ ? parseAccount(account_) : null
@@ -147,7 +154,7 @@ export async function sendTransaction<
           chain,
         })
       }
-      switch (rest.type) {
+      switch (parameters.type) {
         case 'zkapp': {
           const res = (await client.request(
             {
@@ -155,8 +162,8 @@ export async function sendTransaction<
               method: 'mina_sendTransaction',
               params: {
                 // @ts-ignore
-                transaction: JSON.stringify(rest.zkappCommand),
-                feePayer: rest.feePayer,
+                transaction: JSON.stringify(parameters.zkappCommand),
+                feePayer: parameters.feePayer,
               },
             },
             { retryCount: 0 },
@@ -170,10 +177,10 @@ export async function sendTransaction<
               method: 'mina_sendPayment',
               params: {
                 // @ts-ignore
-                to: rest.to,
-                fee: rest.fee,
-                amount: rest.amount,
-                memo: rest.memo,
+                to: parameters.to,
+                fee: parameters.fee,
+                amount: parameters.amount,
+                memo: parameters.memo,
               },
             },
             { retryCount: 0 },
@@ -188,9 +195,9 @@ export async function sendTransaction<
                 method: 'mina_sendStakeDelegation',
                 params: {
                   // @ts-ignore
-                  to: rest.to,
-                  fee: rest.fee,
-                  memo: rest.memo,
+                  to: parameters.to,
+                  fee: parameters.fee,
+                  memo: parameters.memo,
                 },
               },
               { retryCount: 0 },
@@ -198,7 +205,7 @@ export async function sendTransaction<
           ).hash
         default:
           throw new TransactionTypeNotSupportedError({
-            type: rest.type,
+            type: (parameters as any)?.type,
           })
       }
     }

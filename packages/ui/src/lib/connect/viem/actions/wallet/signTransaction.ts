@@ -1,11 +1,6 @@
-import type {
-  Signature,
-  TransactionRequestDelegation,
-  TransactionRequestPayment,
-  TransactionRequestZkApp,
-  TransactionType,
-} from '@/lib/connect/viem'
+import type {Signature, TransactionType} from '@/lib/connect/viem'
 import {TransactionTypeNotSupportedError} from '@/lib/connect/viem/actions/wallet/sendTransaction'
+import type {TransactionRequestByType} from '@/lib/connect/viem/types/transaction'
 import type {ZkappCommand} from 'o1js/dist/web/bindings/mina-transaction/gen/transaction-json'
 import type {Account} from '../../accounts/types'
 import {parseAccount, type ParseAccountErrorType,} from '../../accounts/utils/parseAccount'
@@ -28,21 +23,12 @@ export type SignTransactionRequest = UnionOmit<
   'from'
 >
 
-export type SignTransactionRequestByType<T extends TransactionType> =
-  T extends 'zkapp'
-    ? TransactionRequestZkApp
-    : T extends 'payment'
-      ? Omit<TransactionRequestPayment, 'from'>
-      : T extends 'delegation'
-        ? Omit<TransactionRequestDelegation, 'from'>
-        : never
-
 export type SignTransactionParameters<
   transactionType extends TransactionType,
   chain extends Chain | undefined,
   account extends Account | undefined,
   chainOverride extends Chain | undefined = Chain | undefined,
-> = SignTransactionRequestByType<transactionType> &
+> = TransactionRequestByType<transactionType> &
   GetAccountParameter<account> &
   GetChainParameter<chain, chainOverride>
 
