@@ -4,9 +4,10 @@ import LoadingScreen from '@/components/LoadingScreen'
 import {config} from '@/config'
 import deployedContracts from '@/contracts/deployedContracts'
 import {useMinaProvider} from '@/lib/ZkappContext'
-import {sendSignedTransaction, sendTransaction,} from '@/lib/connect/core/exports'
+import {sendTransaction} from '@/lib/connect/core/exports'
 import {useSignZkappTransaction} from '@/lib/connect/react/exports'
 import {useFetchAccount} from '@/lib/connect/react/hooks/useFetchAccount'
+import {useSendSignedTransaction} from '@/lib/connect/react/hooks/useSendSignedTransaction'
 import {QuestContractProvider, useQuestContract} from '@/lib/useQuestContract'
 import {isSupportedNetwork} from '@/utils'
 import {useAppKitAccount, useAppKitNetwork} from '@reown/appkit/react'
@@ -112,22 +113,25 @@ function HomeBody() {
     signTransaction,
   ])
 
+  const {
+    sendSignedTransaction,
+    isPending: isPendingSendSignedTransaction,
+    data: txHash,
+  } = useSendSignedTransaction()
+
   const onSendSignedTransaction = useCallback(async () => {
-    if (txState !== TransactionState.INITIAL || !signedTransaction) return
-    try {
-      setTxState(TransactionState.SENDING)
-      const hash = await sendSignedTransaction(config, {
-        type: 'zkapp',
-        input: {
-          zkappCommand: signedTransaction,
-        },
-      })
-      setTransactionLink(`https://minascan.io/devnet/tx/${hash}`)
-    } catch (e) {
-      alert(String(e))
-    }
-    setTxState(TransactionState.INITIAL)
-  }, [signedTransaction, txState])
+    if (!signedTransaction || isPendingSendSignedTransaction) return
+    sendSignedTransaction({
+      type: 'zkapp',
+      input: {
+        zkappCommand: signedTransaction,
+      },
+    })
+  }, [isPendingSendSignedTransaction, sendSignedTransaction, signedTransaction])
+
+  useEffect(() => {
+    setTransactionLink(`https://minascan.io/devnet/tx/${txHash}`)
+  }, [txHash])
 
   // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
@@ -170,9 +174,9 @@ function HomeBody() {
                         <button
                           className="card flex items-center justify-center whitespace-nowrap"
                           onClick={onSendSignedTransaction}
-                          disabled={txState !== TransactionState.INITIAL}
+                          disabled={isPendingSendSignedTransaction}
                         >
-                          {txState !== TransactionState.PREPARING && (
+                          {!isPendingSendSignedTransaction && (
                             <Image
                               width={20}
                               height={20}
@@ -180,13 +184,9 @@ function HomeBody() {
                               alt=""
                             />
                           )}
-                          {txState === TransactionState.AWAITING_USER_APPROVAL
-                            ? 'Awaiting Approval...'
-                            : txState === TransactionState.PREPARING
-                              ? 'Preparing Transaction...'
-                              : txState === TransactionState.SENDING
-                                ? 'Sending Transaction...'
-                                : 'Send Signed Transaction'}
+                          {isPendingSendSignedTransaction
+                            ? 'Sending Transaction...'
+                            : 'Send Signed Transaction'}
                         </button>
                       </div>
                       <div className="text-s text-white font-firacode">

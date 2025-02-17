@@ -1,6 +1,11 @@
 import type {MutateOptions, MutationOptions} from '@tanstack/query-core'
 
-import {sendRawTransaction,} from '../actions/sendRawTransaction'
+import {
+    sendSignedTransaction,
+    type SendSignedTransactionErrorType,
+    type SendSignedTransactionParameters,
+    type SendSignedTransactionReturnType,
+} from '../actions/sendSignedTransaction'
 import type {Config} from '../createConfig'
 import type {Compute} from '../types/utils'
 

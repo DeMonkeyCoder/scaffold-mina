@@ -41,7 +41,7 @@ export async function sendSignedTransaction<chain extends Chain | undefined>(
   parameters: SendSignedTransactionParameters,
 ): Promise<SendSignedTransactionReturnType> {
   const { type, ...rest } = parameters
-  const response = (await client.request(
+  return client.request(
     {
       // @ts-ignore
       method: 'mina_sendTransaction',
@@ -49,6 +49,5 @@ export async function sendSignedTransaction<chain extends Chain | undefined>(
       params: [rest, type],
     },
     { retryCount: 0 },
-  )) as { hash: Hash }
-  return response.hash
+  )
 }
