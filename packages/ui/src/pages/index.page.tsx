@@ -1,13 +1,12 @@
 import AccountDoesNotExist from '@/components/AccountDoesNotExist'
 import {ConnectWallet} from '@/components/ConnectWallet'
 import LoadingScreen from '@/components/LoadingScreen'
-import {config} from '@/config'
 import deployedContracts from '@/contracts/deployedContracts'
 import {useMinaProvider} from '@/lib/ZkappContext'
-import {sendTransaction} from '@/lib/connect/core/exports'
 import {useSignZkappTransaction} from '@/lib/connect/react/exports'
 import {useFetchAccount} from '@/lib/connect/react/hooks/useFetchAccount'
 import {useSendSignedTransaction} from '@/lib/connect/react/hooks/useSendSignedTransaction'
+import {useSendTransaction} from '@/lib/connect/react/hooks/useSendTransaction'
 import {QuestContractProvider, useQuestContract} from '@/lib/useQuestContract'
 import {isSupportedNetwork} from '@/utils'
 import {useAppKitAccount, useAppKitNetwork} from '@reown/appkit/react'
@@ -17,13 +16,6 @@ import type {ZkappCommand} from 'o1js/dist/web/bindings/mina-transaction/gen/tra
 import {useCallback, useEffect, useMemo, useState} from 'react'
 import {Quest} from 'scaffold-mina-contracts'
 import GradientBG from '../components/GradientBG.js'
-
-enum TransactionState {
-  INITIAL = 0,
-  PREPARING = 1,
-  AWAITING_USER_APPROVAL = 2,
-  SENDING = 3,
-}
 
 function HomeBody() {
   const { prepareTransaction } = useQuestContract()
@@ -49,7 +41,6 @@ function HomeBody() {
   const [questSolution, setQuestSolution] = useState('')
 
   const [preparingTransaction, setPreparingTransaction] = useState(false)
-  const [txState, setTxState] = useState(TransactionState.INITIAL)
   const [transactionLink, setTransactionLink] = useState('')
 
   const prepareQuestTransaction = useCallback(async () => {
@@ -63,26 +54,39 @@ function HomeBody() {
     return zkappCommandStr
   }, [prepareTransaction, questSolution])
 
+  const {
+    sendTransaction,
+    isPending: isPendingSendTransaction,
+    data: txHash,
+  } = useSendTransaction()
+
+  useEffect(() => {
+    setTransactionLink(`https://minascan.io/devnet/tx/${txHash}`)
+  }, [txHash])
+
   const onSendTransaction = useCallback(async () => {
-    if (txState !== TransactionState.INITIAL) return
+    if (preparingTransaction || isPendingSendTransaction) return
     try {
-      setTxState(TransactionState.PREPARING)
+      setPreparingTransaction(true)
       const zkappCommandStr = await prepareQuestTransaction()
-      setTxState(TransactionState.AWAITING_USER_APPROVAL)
-      const hash = await sendTransaction(config, {
+      sendTransaction({
         type: 'zkapp',
         zkappCommand: JSON.parse(zkappCommandStr) as ZkappCommand,
         feePayer: {
-          fee: 10,
+          fee: 0.5,
           memo: '',
         },
       })
-      setTransactionLink(`https://minascan.io/devnet/tx/${hash}`)
     } catch (e) {
       alert(String(e))
     }
-    setTxState(TransactionState.INITIAL)
-  }, [prepareQuestTransaction, txState])
+    setPreparingTransaction(false)
+  }, [
+    isPendingSendTransaction,
+    prepareQuestTransaction,
+    preparingTransaction,
+    sendTransaction,
+  ])
 
   const {
     signTransaction,
@@ -116,8 +120,12 @@ function HomeBody() {
   const {
     sendSignedTransaction,
     isPending: isPendingSendSignedTransaction,
-    data: txHash,
+    data: signedTxHash,
   } = useSendSignedTransaction()
+
+  useEffect(() => {
+    setTransactionLink(`https://minascan.io/devnet/tx/${signedTxHash}`)
+  }, [signedTxHash])
 
   const onSendSignedTransaction = useCallback(async () => {
     if (!signedTransaction || isPendingSendSignedTransaction) return
@@ -128,10 +136,6 @@ function HomeBody() {
       },
     })
   }, [isPendingSendSignedTransaction, sendSignedTransaction, signedTransaction])
-
-  useEffect(() => {
-    setTransactionLink(`https://minascan.io/devnet/tx/${txHash}`)
-  }, [txHash])
 
   // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
@@ -232,9 +236,11 @@ function HomeBody() {
                         <button
                           className="card flex items-center justify-center whitespace-nowrap"
                           onClick={onSendTransaction}
-                          disabled={txState !== TransactionState.INITIAL}
+                          disabled={
+                            preparingTransaction || isPendingSendTransaction
+                          }
                         >
-                          {txState !== TransactionState.PREPARING && (
+                          {!preparingTransaction && (
                             <Image
                               width={20}
                               height={20}
@@ -242,18 +248,20 @@ function HomeBody() {
                               alt=""
                             />
                           )}
-                          {txState === TransactionState.AWAITING_USER_APPROVAL
+                          {isPendingSendTransaction
                             ? 'Awaiting Approval...'
-                            : txState === TransactionState.PREPARING
+                            : preparingTransaction
                               ? 'Preparing Transaction...'
                               : 'Send Transaction'}
                         </button>
                         <button
                           className="card flex items-center justify-center whitespace-nowrap"
                           onClick={onSignTransaction}
-                          disabled={txState !== TransactionState.INITIAL}
+                          disabled={
+                            preparingTransaction || isPendingSignTransaction
+                          }
                         >
-                          {txState !== TransactionState.PREPARING && (
+                          {!preparingTransaction && (
                             <Image
                               width={20}
                               height={20}

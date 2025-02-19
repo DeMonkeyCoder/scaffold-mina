@@ -1,4 +1,4 @@
-import type {Address, UnionOmit} from '@/lib/connect/viem'
+import type {Address, TransactionRequest, UnionOmit} from '@/lib/connect/viem'
 
 import type {Account} from '../../accounts/types'
 import {parseAccount, type ParseAccountErrorType,} from '../../accounts/utils/parseAccount' // import type {SignTransactionErrorType} from '../../accounts/utils/signTransaction'
@@ -20,7 +20,7 @@ import {getNetworkId} from '../public/getNetworkId' // import type {SendSignedTr
 export type SendTransactionRequest = UnionOmit<
   FormattedTransactionRequest,
   'from'
-> & {}
+>
 
 export type SendTransactionParameters<
   chain extends Chain | undefined = Chain | undefined,
@@ -118,7 +118,7 @@ export type SendTransactionErrorType =
 export async function sendTransaction<
   chain extends Chain | undefined,
   account extends Account | undefined,
-  const request extends SendTransactionRequest<chain, chainOverride>,
+  const request extends TransactionRequest,
   chainOverride extends Chain | undefined = undefined,
 >(
   client: Client<Transport, chain, account>,

@@ -22,13 +22,15 @@ export type SendTransactionParameters<
     config['chains'][number]['id'] = config['chains'][number]['id'],
   ///
   chains extends readonly Chain[] = SelectChains<config, networkId>,
-> = {
-  [key in keyof chains]: Compute<
-    viem_SendTransactionParameters<chains[key], Account, chains[key]> &
-      NetworkIdParameter<config, networkId> &
-      ConnectorParameter
-  >
-}[number]
+> = Compute<
+  {
+    [key in keyof chains]: Compute<
+      viem_SendTransactionParameters<chains[key], Account, chains[key]> &
+        NetworkIdParameter<config, networkId> &
+        ConnectorParameter
+    >
+  }[number]
+>
 
 export type SendTransactionReturnType = viem_SendTransactionReturnType
 
