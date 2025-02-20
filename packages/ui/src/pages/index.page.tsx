@@ -73,7 +73,7 @@ function HomeBody() {
         type: 'zkapp',
         zkappCommand: JSON.parse(zkappCommandStr) as ZkappCommand,
         feePayer: {
-          fee: 0.5,
+          fee: 5000000000n,
           memo: '',
         },
       })
@@ -102,7 +102,7 @@ function HomeBody() {
       signTransaction({
         zkappCommand: JSON.parse(zkappCommandStr) as ZkappCommand,
         feePayer: {
-          fee: 0.5,
+          fee: 500000000n,
           memo: '',
         },
       })

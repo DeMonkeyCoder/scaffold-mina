@@ -18,6 +18,7 @@ import type {Compute} from '../types/utils'
 import {getAction} from '../utils/getAction'
 import {getConnectorClient, type GetConnectorClientErrorType,} from './getConnectorClient'
 import {getTransactionCount} from './getTransactionCount'
+import type {UInt32} from "o1js/dist/web/bindings/mina-transaction/transaction-leaves-json";
 
 export type SignTransactionParameters<
   transactionType extends TransactionType,
@@ -86,11 +87,12 @@ export async function signTransaction<
       ? account
       : account.address
     : (await getAccount(config)).address
-  const nonce: number =
+  const nonce: UInt32 = String(
     (txParameters.type === 'zkapp'
       ? txParameters.feePayer?.nonce
       : txParameters.nonce) ??
-    (await getTransactionCount(config, { address: address! }))
+      (await getTransactionCount(config, { address: address! })),
+  )
   if (txParameters.type === 'zkapp') {
     txParameters.feePayer = {
       ...txParameters.feePayer,

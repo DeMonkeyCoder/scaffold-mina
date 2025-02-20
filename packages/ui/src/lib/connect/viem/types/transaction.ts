@@ -1,6 +1,7 @@
 import type {ZkappCommand} from 'o1js/dist/web/bindings/mina-transaction/gen/transaction-json'
+import type {UInt32} from 'o1js/dist/web/bindings/mina-transaction/transaction-leaves-json'
 import type {Hash, Signature} from './misc'
-import type {OneOf} from './utils' //
+import type {OneOf} from './utils'
 //
 // export type AccessList = readonly {
 //   address: Address
@@ -150,9 +151,9 @@ export type TransactionRequestZkApp = {
   zkappCommand: ZkappCommand
   feePayer?: {
     publicKey?: string
-    fee?: number
-    validUntil?: string
-    nonce?: number
+    fee?: bigint
+    validUntil?: UInt32
+    nonce?: UInt32
     memo?: string
   }
 }
@@ -160,17 +161,17 @@ export type TransactionRequestPayment = {
   type: 'payment'
   from: string
   to: string
-  amount: number
-  fee?: number
-  nonce?: number
+  amount: bigint
+  fee?: bigint
+  nonce?: UInt32
   memo?: string
 }
 export type TransactionRequestDelegation = {
   type: 'delegation'
   from: string
   to: string
-  fee?: number
-  nonce?: number
+  fee?: bigint
+  nonce?: UInt32
   memo?: string
 }
 

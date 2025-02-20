@@ -1,7 +1,8 @@
 import type {Address, TransactionRequest, UnionOmit} from '@/lib/connect/viem'
 
+import {formatMina} from '@mina-js/utils' // import type {SendSignedTransactionErrorType} from './sendSignedTransaction'
 import type {Account} from '../../accounts/types'
-import {parseAccount, type ParseAccountErrorType,} from '../../accounts/utils/parseAccount' // import type {SignTransactionErrorType} from '../../accounts/utils/signTransaction'
+import {parseAccount, type ParseAccountErrorType,} from '../../accounts/utils/parseAccount' // import type {SignTransactionErrorType} from '../../accounts/utils/signTransaction' // import type {SignTransactionErrorType} from '../../accounts/utils/signTransaction'
 import type {Client} from '../../clients/createClient'
 import type {Transport} from '../../clients/transports/createTransport'
 import {AccountNotFoundError, AccountTypeNotSupportedError,} from '../../errors/account'
@@ -14,7 +15,13 @@ import {assertCurrentChain} from '../../utils/chain/assertCurrentChain' // impor
 import type {FormattedTransactionRequest} from '../../utils/formatters/transactionRequest'
 import {getAction} from '../../utils/getAction'
 import {assertRequest, type AssertRequestParameters,} from '../../utils/transaction/assertRequest'
-import {getNetworkId} from '../public/getNetworkId' // import type {SendSignedTransactionErrorType} from './sendSignedTransaction'
+import {getNetworkId} from '../public/getNetworkId'
+import {SendPaymentArgs, SendStakeDelegationArgs, SendTransactionArgs} from "@aurowallet/mina-provider"; // import type {SendSignedTransactionErrorType} from './sendSignedTransaction'
+import {
+  type ParseAccountErrorType,
+  parseAccount,
+} from '../../accounts/utils/parseAccount' // import type {SignTransactionErrorType} from '../../accounts/utils/signTransaction'
+import { assertCurrentChain } from '../../utils/chain/assertCurrentChain' // import {getTransactionError, type GetTransactionErrorReturnType,} from '../../utils/errors/getTransactionError'
 // import type {SendSignedTransactionErrorType} from './sendSignedTransaction'
 
 export type SendTransactionRequest = UnionOmit<
@@ -147,55 +154,72 @@ export async function sendTransaction<
           chain,
         })
       }
-      switch (rest.type) {
+      switch (parameters.type) {
         case 'zkapp': {
+          const auroWalletTransactionParams: SendTransactionArgs = {
+            transaction: JSON.stringify(parameters.zkappCommand),
+            feePayer: parameters.feePayer
+              ? {
+                  fee: parameters.feePayer.fee
+                    ? Number(formatMina(parameters.feePayer.fee))
+                    : undefined,
+                  memo: parameters.feePayer.memo,
+                }
+              : undefined,
+          }
           const res = (await client.request(
             {
               // @ts-ignore
               method: 'mina_sendTransaction',
-              params: {
-                // @ts-ignore
-                transaction: JSON.stringify(rest.zkappCommand),
-                feePayer: rest.feePayer,
-              },
+              // @ts-ignore
+              params: auroWalletTransactionParams,
             },
             { retryCount: 0 },
           )) as { hash: string }
           return res.hash
         }
         case 'payment': {
+          const auroWalletPaymentParams: SendPaymentArgs = {
+            to: parameters.to,
+            fee: parameters.fee
+              ? Number(formatMina(parameters.fee))
+              : undefined,
+            amount: Number(formatMina(parameters.amount)),
+            memo: parameters.memo,
+            nonce: parameters.nonce ? Number(parameters.nonce) : undefined,
+          }
           const res = (await client.request(
             {
               // @ts-ignore
               method: 'mina_sendPayment',
-              params: {
-                // @ts-ignore
-                to: rest.to,
-                fee: rest.fee,
-                amount: rest.amount,
-                memo: rest.memo,
-              },
+              // @ts-ignore
+              params: auroWalletPaymentParams,
             },
             { retryCount: 0 },
           )) as { hash: string }
           return res.hash
         }
-        case 'delegation':
+        case 'delegation': {
+          const auroWalletDelegationParams: SendStakeDelegationArgs = {
+            to: parameters.to,
+            fee: parameters.fee
+              ? Number(formatMina(parameters.fee))
+              : undefined,
+            memo: parameters.memo,
+            nonce: parameters.nonce ? Number(parameters.nonce) : undefined,
+          }
           return (
             (await client.request(
               {
                 // @ts-ignore
                 method: 'mina_sendStakeDelegation',
-                params: {
-                  // @ts-ignore
-                  to: rest.to,
-                  fee: rest.fee,
-                  memo: rest.memo,
-                },
+                // @ts-ignore
+                params: auroWalletDelegationParams,
               },
               { retryCount: 0 },
             )) as { hash: string }
           ).hash
+        }
         default:
           throw new TransactionTypeNotSupportedError({
             type: rest.type,

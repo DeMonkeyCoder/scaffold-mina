@@ -40,7 +40,7 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "@aurowallet/mina-provider": "^1.0.5",
+    "@aurowallet/mina-provider": "^1.0.6",
     "@biomejs/biome": "1.8.0",
     "@types/node": "^20",
     "@types/react": "^18",

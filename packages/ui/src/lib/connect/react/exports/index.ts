@@ -120,6 +120,18 @@ export {
 } from '../hooks/useReconnect'
 
 export {
+  type UseSignDelegationTransactionParameters,
+  type UseSignDelegationTransactionReturnType,
+  useSignDelegationTransaction,
+} from '../hooks/useSignDelegationTransaction'
+
+export {
+  type UseSignPaymentTransactionParameters,
+  type UseSignPaymentTransactionReturnType,
+  useSignPaymentTransaction,
+} from '../hooks/useSignPaymentTransaction'
+
+export {
   type UseSignZkappTransactionParameters,
   type UseSignZkappTransactionReturnType,
   useSignZkappTransaction,

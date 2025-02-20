@@ -6,6 +6,7 @@ import type {
   TransactionType,
 } from '@/lib/connect/viem'
 import {TransactionTypeNotSupportedError} from '@/lib/connect/viem/actions/wallet/sendTransaction'
+import {formatMina} from '@mina-js/utils'
 import type {ZkappCommand} from 'o1js/dist/web/bindings/mina-transaction/gen/transaction-json'
 import type {Account} from '../../accounts/types'
 import {parseAccount, type ParseAccountErrorType,} from '../../accounts/utils/parseAccount'
@@ -22,6 +23,7 @@ import type {FormattedTransactionRequest} from '../../utils/formatters/transacti
 import {getAction} from '../../utils/getAction'
 import {assertRequest, type AssertRequestErrorType,} from '../../utils/transaction/assertRequest'
 import {getNetworkId, type GetNetworkIdErrorType,} from '../public/getNetworkId'
+import {SendTransactionArgs} from "@aurowallet/mina-provider";
 
 export type SignTransactionRequest = UnionOmit<
   FormattedTransactionRequest,
@@ -150,16 +152,24 @@ export async function signTransaction<
            signing transactions with both AuroWallet and Pallad */
       // First try it AuroWallet's way
       try {
+        const auroWalletTransactionParams: SendTransactionArgs = {
+          transaction: JSON.stringify(parameters.zkappCommand),
+          feePayer: parameters.feePayer
+            ? {
+                fee: parameters.feePayer.fee
+                  ? Number(formatMina(parameters.feePayer.fee))
+                  : undefined,
+                memo: parameters.feePayer.memo,
+              }
+            : undefined,
+          onlySign: true,
+        }
         const res = (await client.request(
           {
             // @ts-ignore
             method: 'mina_sendTransaction',
-            params: {
-              // @ts-ignore
-              transaction: JSON.stringify(parameters.zkappCommand),
-              // feePayer: parameters.feePayer,
-              onlySign: true,
-            },
+            // @ts-ignore
+            params: auroWalletTransactionParams,
           },
           { retryCount: 0 },
         )) as { signedData: string }
@@ -183,16 +193,21 @@ export async function signTransaction<
                 {
                   command: {
                     zkappCommand: parameters.zkappCommand,
-                    feePayer: {
-                      fee:
-                        parameters.feePayer?.fee !== undefined
-                          ? String(parameters.feePayer.fee * 1000000000)
-                          : undefined,
-                      feePayer: parameters.feePayer?.publicKey,
-                      nonce: String(parameters.feePayer?.nonce),
-                      validUntil: parameters.feePayer?.validUntil,
-                      memo: parameters.feePayer?.memo,
-                    },
+                    feePayer: parameters.feePayer
+                      ? {
+                          fee:
+                            parameters.feePayer.fee !== undefined
+                              ? parameters.feePayer.fee.toString()
+                              : undefined,
+                          feePayer: parameters.feePayer.publicKey,
+                          nonce:
+                            parameters.feePayer.nonce !== undefined
+                              ? String(parameters.feePayer.nonce)
+                              : undefined,
+                          validUntil: parameters.feePayer.validUntil,
+                          memo: parameters.feePayer.memo,
+                        }
+                      : undefined,
                   },
                 },
               ],
@@ -205,7 +220,31 @@ export async function signTransaction<
         throw e
       }
     }
-    case 'payment':
+    case 'payment': {
+      const res = (await client.request(
+        {
+          // @ts-ignore
+          method: 'mina_signTransaction',
+          params: [
+            // @ts-ignore
+            {
+              transaction: {
+                fee:
+                  parameters?.fee !== undefined
+                    ? parameters.fee.toString()
+                    : undefined,
+                from: account.address,
+                to: parameters?.to,
+                nonce: String(parameters?.nonce),
+                memo: parameters?.memo,
+              },
+            },
+          ],
+        },
+        { retryCount: 0 },
+      )) as { signature: Signature }
+      return res.signature as SignTransactionReturnType<transactionType>
+    }
     case 'delegation':
     default:
       throw new TransactionTypeNotSupportedError({

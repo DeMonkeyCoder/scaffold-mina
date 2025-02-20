@@ -12,8 +12,8 @@ import {
 
 import type {ConfigParameter, QueryParameter} from '../types/properties'
 import {useQuery, type UseQueryReturnType} from '../utils/query'
-import {useNetworkId} from './useNetworkId'
 import {useConfig} from './useConfig'
+import {useNetworkId} from './useNetworkId'
 
 export type UseTransactionCountParameters<
   config extends Config = Config,

@@ -98,6 +98,22 @@ export {
 } from '../query/sendSignedTransaction'
 
 export {
+  type SignDelegationTransactionData,
+  type SignDelegationTransactionVariables,
+  type SignDelegationTransactionMutate,
+  type SignDelegationTransactionMutateAsync,
+  signDelegationTransactionMutationOptions,
+} from '../query/signDelegationTransaction'
+
+export {
+  type SignPaymentTransactionData,
+  type SignPaymentTransactionVariables,
+  type SignPaymentTransactionMutate,
+  type SignPaymentTransactionMutateAsync,
+  signPaymentTransactionMutationOptions,
+} from '../query/signPaymentTransaction'
+
+export {
   type SignZkappTransactionData,
   type SignZkappTransactionVariables,
   type SignZkappTransactionMutate,
