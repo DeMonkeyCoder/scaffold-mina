@@ -42,6 +42,7 @@
         "useButtonType": "off"
       },
       "correctness": {
+        "noUnusedImports": "error",
         "noUnusedVariables": "error",
         "useExhaustiveDependencies": "error"
       },
