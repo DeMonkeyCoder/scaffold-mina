@@ -5,10 +5,10 @@ import {
   type GetTransactionCountReturnType as viem_GetTransactionCountReturnType,
 } from '@/lib/connect/viem/actions'
 
-import type {Config} from '../createConfig'
-import type {NetworkIdParameter} from '../types/properties'
-import type {Compute} from '../types/utils'
-import {getAction} from '../utils/getAction'
+import type { Config } from '../createConfig'
+import type { NetworkIdParameter } from '../types/properties'
+import type { Compute } from '../types/utils'
+import { getAction } from '../utils/getAction'
 
 export type GetTransactionCountParameters<config extends Config = Config> =
   Compute<NetworkIdParameter<config> & viem_GetTransactionCountParameters>

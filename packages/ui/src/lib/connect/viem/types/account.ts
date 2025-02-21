@@ -1,7 +1,7 @@
-import type {Address} from '@/lib/connect/viem'
+import type { Address } from '@/lib/connect/viem'
 
-import type {Account, JsonRpcAccount} from '../accounts/types'
-import type {IsUndefined, MaybeRequired, Prettify} from './utils'
+import type { Account, JsonRpcAccount } from '../accounts/types'
+import type { IsUndefined, MaybeRequired, Prettify } from './utils'
 
 export type DeriveAccount<
   account extends Account | undefined,

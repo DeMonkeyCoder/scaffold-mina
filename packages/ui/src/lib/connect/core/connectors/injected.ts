@@ -502,7 +502,7 @@ export function injected(parameters: InjectedParameters = {}) {
               rpcUrls = addEthereumChainParameter.rpcUrls
             else rpcUrls = [chain.rpcUrls.default?.http[0] ?? '']
 
-            const addEthereumChain = {
+            const _addEthereumChain = {
               blockExplorerUrls,
               networkId,
               chainName: addEthereumChainParameter?.chainName ?? chain.name,

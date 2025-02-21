@@ -1,10 +1,10 @@
-import type {Client} from '../../clients/createClient'
-import type {Transport} from '../../clients/transports/createTransport'
-import type {ErrorType} from '../../errors/utils'
-import type {Chain} from '../../types/chain'
-import type {Hash} from '../../types/misc'
-import type {TransactionRequestSigned} from '../../types/transaction'
-import type {RequestErrorType} from '../../utils/buildRequest'
+import type { Client } from '../../clients/createClient'
+import type { Transport } from '../../clients/transports/createTransport'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { Hash } from '../../types/misc'
+import type { TransactionRequestSigned } from '../../types/transaction'
+import type { RequestErrorType } from '../../utils/buildRequest'
 
 export type SendSignedTransactionParameters = TransactionRequestSigned
 

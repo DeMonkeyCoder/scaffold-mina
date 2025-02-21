@@ -6,15 +6,21 @@ import type {
   SendTransactionParameters as viem_SendTransactionParameters,
   SendTransactionReturnType as viem_SendTransactionReturnType,
 } from '@/lib/connect/viem'
-import {sendTransaction as viem_sendTransaction} from '@/lib/connect/viem/actions'
+import { sendTransaction as viem_sendTransaction } from '@/lib/connect/viem/actions'
 
-import type {Config} from '../createConfig'
-import type {BaseErrorType, ErrorType} from '../errors/base'
-import type {SelectChains} from '../types/chain'
-import type {ConnectorParameter, NetworkIdParameter,} from '../types/properties'
-import type {Compute} from '../types/utils'
-import {getAction} from '../utils/getAction'
-import {getConnectorClient, type GetConnectorClientErrorType,} from './getConnectorClient'
+import type { Config } from '../createConfig'
+import type { BaseErrorType, ErrorType } from '../errors/base'
+import type { SelectChains } from '../types/chain'
+import type {
+  ConnectorParameter,
+  NetworkIdParameter,
+} from '../types/properties'
+import type { Compute } from '../types/utils'
+import { getAction } from '../utils/getAction'
+import {
+  getConnectorClient,
+  type GetConnectorClientErrorType,
+} from './getConnectorClient'
 
 export type SendTransactionParameters<
   config extends Config = Config,

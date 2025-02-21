@@ -7,18 +7,24 @@ import type {
   SignTransactionReturnType as viem_SignTransactionReturnType,
   TransactionType,
 } from '@/lib/connect/viem'
-import {signTransaction as viem_signTransaction} from '@/lib/connect/viem/actions'
+import { signTransaction as viem_signTransaction } from '@/lib/connect/viem/actions'
 
-import {getAccount} from '@/lib/connect/core/actions/getAccount'
-import type {Config} from '../createConfig'
-import type {BaseErrorType, ErrorType} from '../errors/base'
-import type {SelectChains} from '../types/chain'
-import type {ConnectorParameter, NetworkIdParameter,} from '../types/properties'
-import type {Compute} from '../types/utils'
-import {getAction} from '../utils/getAction'
-import {getConnectorClient, type GetConnectorClientErrorType,} from './getConnectorClient'
-import {getTransactionCount} from './getTransactionCount'
-import type {UInt32} from "o1js/dist/web/bindings/mina-transaction/transaction-leaves-json";
+import { getAccount } from '@/lib/connect/core/actions/getAccount'
+import type { Config } from '../createConfig'
+import type { BaseErrorType, ErrorType } from '../errors/base'
+import type { SelectChains } from '../types/chain'
+import type {
+  ConnectorParameter,
+  NetworkIdParameter,
+} from '../types/properties'
+import type { Compute } from '../types/utils'
+import { getAction } from '../utils/getAction'
+import {
+  getConnectorClient,
+  type GetConnectorClientErrorType,
+} from './getConnectorClient'
+import { getTransactionCount } from './getTransactionCount'
+import type { UInt32 } from 'o1js/dist/web/bindings/mina-transaction/transaction-leaves-json'
 
 export type SignTransactionParameters<
   transactionType extends TransactionType,

@@ -1,11 +1,11 @@
-import type {Hex} from './misc'
+import type { Hex } from './misc'
 import type {
-    TransactionReceipt,
-    TransactionRequestDelegation,
-    TransactionRequestPayment,
-    TransactionRequestZkApp,
+  TransactionReceipt,
+  TransactionRequestDelegation,
+  TransactionRequestPayment,
+  TransactionRequestZkApp,
 } from './transaction'
-import type {OneOf} from './utils'
+import type { OneOf } from './utils'
 
 export type Quantity = `0x${string}`
 export type RpcTransactionReceipt = TransactionReceipt

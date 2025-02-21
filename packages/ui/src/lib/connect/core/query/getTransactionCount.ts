@@ -1,4 +1,4 @@
-import type {QueryOptions} from '@tanstack/query-core'
+import type { QueryOptions } from '@tanstack/query-core'
 
 import {
   getTransactionCount,
@@ -6,10 +6,10 @@ import {
   type GetTransactionCountParameters,
   type GetTransactionCountReturnType,
 } from '../actions/getTransactionCount'
-import type {Config} from '../createConfig'
-import type {ScopeKeyParameter} from '../types/properties'
-import type {Compute, PartialBy} from '../types/utils'
-import {filterQueryOptions} from './utils'
+import type { Config } from '../createConfig'
+import type { ScopeKeyParameter } from '../types/properties'
+import type { Compute, PartialBy } from '../types/utils'
+import { filterQueryOptions } from './utils'
 
 export type GetTransactionCountOptions<config extends Config> = Compute<
   PartialBy<GetTransactionCountParameters<config>, 'address'> &

@@ -1,12 +1,12 @@
-import type {MutateOptions, MutationOptions} from '@tanstack/query-core'
+import type { MutateOptions, MutationOptions } from '@tanstack/query-core'
 import {
-    signTransaction,
-    type SignTransactionErrorType,
-    type SignTransactionParameters,
-    type SignTransactionReturnType,
+  signTransaction,
+  type SignTransactionErrorType,
+  type SignTransactionParameters,
+  type SignTransactionReturnType,
 } from '../actions/signTransaction'
-import type {Config} from '../createConfig'
-import type {Compute} from '../types/utils'
+import type { Config } from '../createConfig'
+import type { Compute } from '../types/utils'
 
 export function signZkappTransactionMutationOptions<config extends Config>(
   config: config,

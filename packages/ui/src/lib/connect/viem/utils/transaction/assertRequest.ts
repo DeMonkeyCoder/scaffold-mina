@@ -1,10 +1,16 @@
-import {parseAccount, type ParseAccountErrorType,} from '../../accounts/utils/parseAccount'
-import type {SendTransactionParameters} from '../../actions/wallet/sendTransaction'
-import {InvalidAddressError, type InvalidAddressErrorType,} from '../../errors/address'
-import type {ErrorType} from '../../errors/utils'
-import type {Chain} from '../../types/chain'
-import type {ExactPartial} from '../../types/utils'
-import {isAddress} from '../address/isAddress'
+import {
+  parseAccount,
+  type ParseAccountErrorType,
+} from '../../accounts/utils/parseAccount'
+import type { SendTransactionParameters } from '../../actions/wallet/sendTransaction'
+import {
+  InvalidAddressError,
+  type InvalidAddressErrorType,
+} from '../../errors/address'
+import type { ErrorType } from '../../errors/utils'
+import type { Chain } from '../../types/chain'
+import type { ExactPartial } from '../../types/utils'
+import { isAddress } from '../address/isAddress'
 
 export type AssertRequestParameters = ExactPartial<
   SendTransactionParameters<Chain>

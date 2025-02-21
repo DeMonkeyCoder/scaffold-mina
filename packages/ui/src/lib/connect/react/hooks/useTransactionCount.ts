@@ -1,8 +1,12 @@
 'use client'
 
-import type {Config, GetTransactionCountErrorType, ResolvedRegister,} from '@/lib/connect/core/exports'
-import type {Compute} from '@/lib/connect/core/exports/internal'
-import type {GetTransactionCountQueryFnData} from '@/lib/connect/core/exports/query'
+import type {
+  Config,
+  GetTransactionCountErrorType,
+  ResolvedRegister,
+} from '@/lib/connect/core/exports'
+import type { Compute } from '@/lib/connect/core/exports/internal'
+import type { GetTransactionCountQueryFnData } from '@/lib/connect/core/exports/query'
 import {
   type GetTransactionCountData,
   type GetTransactionCountOptions,
@@ -10,10 +14,10 @@ import {
   getTransactionCountQueryOptions,
 } from '@/lib/connect/core/exports/query'
 
-import type {ConfigParameter, QueryParameter} from '../types/properties'
-import {useQuery, type UseQueryReturnType} from '../utils/query'
-import {useConfig} from './useConfig'
-import {useNetworkId} from './useNetworkId'
+import type { ConfigParameter, QueryParameter } from '../types/properties'
+import { useQuery, type UseQueryReturnType } from '../utils/query'
+import { useConfig } from './useConfig'
+import { useNetworkId } from './useNetworkId'
 
 export type UseTransactionCountParameters<
   config extends Config = Config,

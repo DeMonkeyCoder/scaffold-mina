@@ -1,13 +1,13 @@
-import type {MutateOptions, MutationOptions} from '@tanstack/query-core'
+import type { MutateOptions, MutationOptions } from '@tanstack/query-core'
 
 import {
-    sendTransaction,
-    type SendTransactionErrorType,
-    type SendTransactionParameters,
-    type SendTransactionReturnType,
+  sendTransaction,
+  type SendTransactionErrorType,
+  type SendTransactionParameters,
+  type SendTransactionReturnType,
 } from '../actions/sendTransaction'
-import type {Config} from '../createConfig'
-import type {Compute} from '../types/utils'
+import type { Config } from '../createConfig'
+import type { Compute } from '../types/utils'
 
 export function sendTransactionMutationOptions<config extends Config>(
   config: config,

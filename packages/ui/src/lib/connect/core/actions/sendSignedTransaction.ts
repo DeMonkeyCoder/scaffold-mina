@@ -3,14 +3,14 @@ import type {
   SendSignedTransactionParameters as viem_SendSignedTransactionParameters,
   SendSignedTransactionReturnType as viem_SendSignedTransactionReturnType,
 } from '@/lib/connect/viem'
-import {sendSignedTransaction as viem_sendSignedTransaction} from '@/lib/connect/viem/actions'
+import { sendSignedTransaction as viem_sendSignedTransaction } from '@/lib/connect/viem/actions'
 
-import type {Config} from '../createConfig'
-import type {BaseErrorType, ErrorType} from '../errors/base'
-import type {NetworkIdParameter} from '../types/properties'
-import type {Compute} from '../types/utils'
-import {getAction} from '../utils/getAction'
-import type {GetConnectorClientErrorType} from './getConnectorClient'
+import type { Config } from '../createConfig'
+import type { BaseErrorType, ErrorType } from '../errors/base'
+import type { NetworkIdParameter } from '../types/properties'
+import type { Compute } from '../types/utils'
+import { getAction } from '../utils/getAction'
+import type { GetConnectorClientErrorType } from './getConnectorClient'
 
 export type SendSignedTransactionParameters<
   config extends Config = Config,

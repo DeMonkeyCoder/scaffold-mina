@@ -1,7 +1,7 @@
-import {fetchAccount, Field, Mina, PublicKey} from 'o1js'
+import { fetchAccount, Field, Mina, PublicKey } from 'o1js'
 // ---------------------------------------------------------------------------------------
-import type {Add} from '../../../contracts/src/Add'
-import type {Quest} from '../../../contracts/src/Quest'
+import type { Add } from '../../../contracts/src/Add'
+import type { Quest } from '../../../contracts/src/Quest'
 
 const state = {
   contracts: {

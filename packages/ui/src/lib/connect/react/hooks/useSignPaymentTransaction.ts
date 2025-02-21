@@ -1,8 +1,12 @@
 'use client'
 
-import {useMutation} from '@tanstack/react-query'
-import type {Config, ResolvedRegister, SignTransactionErrorType,} from '@/lib/connect/core/exports'
-import type {Compute} from '@/lib/connect/core/exports/internal'
+import { useMutation } from '@tanstack/react-query'
+import type {
+  Config,
+  ResolvedRegister,
+  SignTransactionErrorType,
+} from '@/lib/connect/core/exports'
+import type { Compute } from '@/lib/connect/core/exports/internal'
 import {
   type SignPaymentTransactionData,
   type SignPaymentTransactionMutate,
@@ -11,9 +15,12 @@ import {
   type SignPaymentTransactionVariables,
 } from '@/lib/connect/core/exports/query'
 
-import type {ConfigParameter} from '../types/properties'
-import type {UseMutationParameters, UseMutationReturnType,} from '../utils/query'
-import {useConfig} from './useConfig'
+import type { ConfigParameter } from '../types/properties'
+import type {
+  UseMutationParameters,
+  UseMutationReturnType,
+} from '../utils/query'
+import { useConfig } from './useConfig'
 
 export type UseSignPaymentTransactionParameters<
   config extends Config = Config,
@@ -24,7 +31,10 @@ export type UseSignPaymentTransactionParameters<
       | UseMutationParameters<
           SignPaymentTransactionData,
           SignTransactionErrorType,
-          SignPaymentTransactionVariables<config, config['chains'][number]['id']>,
+          SignPaymentTransactionVariables<
+            config,
+            config['chains'][number]['id']
+          >,
           context
         >
       | undefined

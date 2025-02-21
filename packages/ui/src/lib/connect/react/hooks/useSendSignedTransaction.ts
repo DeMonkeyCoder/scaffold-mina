@@ -1,7 +1,11 @@
 'use client'
 
-import type {Config, ResolvedRegister, SendSignedTransactionErrorType,} from '@/lib/connect/core/exports'
-import type {Compute} from '@/lib/connect/core/exports/internal'
+import type {
+  Config,
+  ResolvedRegister,
+  SendSignedTransactionErrorType,
+} from '@/lib/connect/core/exports'
+import type { Compute } from '@/lib/connect/core/exports/internal'
 import {
   type SendSignedTransactionData,
   type SendSignedTransactionMutate,
@@ -9,11 +13,14 @@ import {
   sendSignedTransactionMutationOptions,
   type SendSignedTransactionVariables,
 } from '@/lib/connect/core/exports/query'
-import {useMutation} from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 
-import type {ConfigParameter} from '../types/properties'
-import type {UseMutationParameters, UseMutationReturnType,} from '../utils/query'
-import {useConfig} from './useConfig'
+import type { ConfigParameter } from '../types/properties'
+import type {
+  UseMutationParameters,
+  UseMutationReturnType,
+} from '../utils/query'
+import { useConfig } from './useConfig'
 
 export type UseSendSignedTransactionParameters<
   config extends Config = Config,
