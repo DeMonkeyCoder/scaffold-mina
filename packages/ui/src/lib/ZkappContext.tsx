@@ -1,7 +1,7 @@
 import { useAccount } from '@/lib/connect/react/hooks/useAccount'
 import { useAppKitNetwork } from '@reown/appkit/react'
 import { Mina, PublicKey, fetchAccount } from 'o1js'
-import React, {
+import {
   createContext,
   type ReactNode,
   useContext,

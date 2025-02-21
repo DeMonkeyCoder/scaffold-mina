@@ -25,7 +25,6 @@ import type { Chain, GetChainParameter } from '../../types/chain'
 import type { Hash } from '../../types/misc'
 import { assertCurrentChain } from '../../utils/chain/assertCurrentChain'
 // import {getTransactionError, type GetTransactionErrorReturnType,} from '../../utils/errors/getTransactionError'
-import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest'
 import { getAction } from '../../utils/getAction'
 import {
   type AssertRequestParameters,
@@ -34,10 +33,7 @@ import {
 import { getNetworkId } from '../public/getNetworkId'
 // import type {SendSignedTransactionErrorType} from './sendSignedTransaction'
 
-export type SendTransactionRequest = UnionOmit<
-  FormattedTransactionRequest,
-  'from'
->
+export type SendTransactionRequest = UnionOmit<TransactionRequest, 'from'>
 
 export type SendTransactionParameters<
   chain extends Chain | undefined = Chain | undefined,

@@ -3,7 +3,7 @@ import { useMinaProvider } from '@/lib/ZkappContext'
 import type { ContractContextType, Methods } from '@/lib/types'
 import { useAppKitNetwork } from '@reown/appkit/react'
 import { type Field, PublicKey, fetchAccount } from 'o1js'
-import React, { createContext, type ReactNode, useContext } from 'react'
+import { createContext, type ReactNode, useContext } from 'react'
 import type { Quest } from 'scaffold-mina-contracts'
 
 const QuestContractContext = createContext<ContractContextType<Quest> | null>(

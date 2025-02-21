@@ -1,6 +1,5 @@
 import {
   type Config,
-  type Connector,
   type CreateConfigParameters,
   type CreateConnectorFn,
   connect,

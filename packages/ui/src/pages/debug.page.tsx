@@ -1,7 +1,7 @@
 import deployedContracts from '@/contracts/deployedContracts'
 import { useFetchAccount } from '@/lib/connect/react/hooks/useFetchAccount'
 import type { Methods, StateVariable } from '@/lib/types'
-import { AppKit, useAppKitNetwork } from '@reown/appkit/react'
+import { useAppKitNetwork } from '@reown/appkit/react'
 import type { SmartContract, State } from 'o1js'
 import { useMemo, useState } from 'react'
 

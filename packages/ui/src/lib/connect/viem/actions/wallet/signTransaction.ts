@@ -1,17 +1,19 @@
 import type {
   Signature,
+  TransactionRequest,
   TransactionRequestDelegation,
   TransactionRequestPayment,
   TransactionRequestZkApp,
   TransactionType,
 } from '@/lib/connect/viem'
 import { TransactionTypeNotSupportedError } from '@/lib/connect/viem/actions/wallet/sendTransaction'
+import type { SendTransactionArgs } from '@aurowallet/mina-provider'
 import { formatMina } from '@mina-js/utils'
 import type { ZkappCommand } from 'o1js/dist/web/bindings/mina-transaction/gen/transaction-json'
 import type { Account } from '../../accounts/types'
 import {
-  parseAccount,
   type ParseAccountErrorType,
+  parseAccount,
 } from '../../accounts/utils/parseAccount'
 import type { Client } from '../../clients/createClient'
 import type { Transport } from '../../clients/transports/createTransport'
@@ -22,25 +24,20 @@ import type { Chain, GetChainParameter } from '../../types/chain'
 import type { UnionOmit } from '../../types/utils'
 import type { RequestErrorType } from '../../utils/buildRequest'
 import {
-  assertCurrentChain,
   type AssertCurrentChainErrorType,
+  assertCurrentChain,
 } from '../../utils/chain/assertCurrentChain'
-import type { FormattedTransactionRequest } from '../../utils/formatters/transactionRequest'
 import { getAction } from '../../utils/getAction'
 import {
-  assertRequest,
   type AssertRequestErrorType,
+  assertRequest,
 } from '../../utils/transaction/assertRequest'
 import {
-  getNetworkId,
   type GetNetworkIdErrorType,
+  getNetworkId,
 } from '../public/getNetworkId'
-import type { SendTransactionArgs } from '@aurowallet/mina-provider'
 
-export type SignTransactionRequest = UnionOmit<
-  FormattedTransactionRequest,
-  'from'
->
+export type SignTransactionRequest = UnionOmit<TransactionRequest, 'from'>
 
 export type SignTransactionRequestByType<T extends TransactionType> =
   T extends 'zkapp'
