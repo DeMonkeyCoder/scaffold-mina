@@ -1,7 +1,17 @@
-import {type fetchAccount, Field, type PublicKey, type SmartContract,} from 'o1js'
+import {
+  Field,
+  type PublicKey,
+  type SmartContract,
+  type fetchAccount,
+} from 'o1js'
 
-import type {Methods, StateVariable} from '@/lib/types'
-import type {ContractName, WorkerFunctions, ZkappWorkerReponse, ZkappWorkerRequest,} from './zkappWorker'
+import type { Methods, StateVariable } from '@/lib/types'
+import type {
+  ContractName,
+  WorkerFunctions,
+  ZkappWorkerReponse,
+  ZkappWorkerRequest,
+} from './zkappWorker'
 
 export default class ZkappWorkerClient {
   // ---------------------------------------------------------------------------------------
@@ -114,6 +124,6 @@ export default class ZkappWorkerClient {
     return this._call('prepareTransaction', {
       ...args,
       args: args.args?.map((arg) => arg.toJSON()),
-    })
+    }) as Promise<string | { errorMessage: string }>
   }
 }

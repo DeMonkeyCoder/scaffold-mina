@@ -1,8 +1,8 @@
-import type {ErrorType} from '../../errors/utils.js'
-import type {RpcTransactionRequest} from '../../types/rpc.js'
-import type {TransactionRequest} from '../../types/transaction.js'
-import type {ExactPartial} from '../../types/utils.js'
-import {defineFormatter, type DefineFormatterErrorType} from './formatter.js'
+import type { ErrorType } from '../../errors/utils'
+import type { RpcTransactionRequest } from '../../types/rpc'
+import type { TransactionRequest } from '../../types/transaction'
+import type { ExactPartial } from '../../types/utils'
+import { type DefineFormatterErrorType, defineFormatter } from './formatter'
 
 export type FormattedTransactionRequest = TransactionRequest
 
