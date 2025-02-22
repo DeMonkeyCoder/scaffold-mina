@@ -14,8 +14,9 @@ import {
   getTransactionCountQueryOptions,
 } from '@/lib/connect/core/exports/query'
 
+import { useInvalidateOnBlock } from '@/lib/connect/react/hooks/useInvalidateOnBlock'
 import type { ConfigParameter, QueryParameter } from '../types/properties'
-import { useQuery, type UseQueryReturnType } from '../utils/query'
+import { type UseQueryReturnType, useQuery } from '../utils/query'
 import { useConfig } from './useConfig'
 import { useNetworkId } from './useNetworkId'
 
@@ -30,7 +31,9 @@ export type UseTransactionCountParameters<
       GetTransactionCountErrorType,
       selectData,
       GetTransactionCountQueryKey<config>
-    >
+    > & {
+      watch?: boolean
+    }
 >
 
 export type UseTransactionCountReturnType<
@@ -44,7 +47,7 @@ export function useTransactionCount<
 >(
   parameters: UseTransactionCountParameters<config, selectData> = {},
 ): UseTransactionCountReturnType<selectData> {
-  const { address, query = {} } = parameters
+  const { address, watch, query = {} } = parameters
 
   const config = useConfig(parameters)
   const networkId = useNetworkId({ config })
@@ -55,5 +58,13 @@ export function useTransactionCount<
   })
   const enabled = Boolean(address && (query.enabled ?? true))
 
-  return useQuery({ ...query, ...options, enabled })
+  const transactionCountQuery = useQuery({ ...query, ...options, enabled })
+
+  useInvalidateOnBlock({
+    networkId,
+    enabled: Boolean(enabled && watch),
+    queryKey: transactionCountQuery.queryKey,
+  })
+
+  return transactionCountQuery
 }

@@ -34,6 +34,7 @@ export default function TxDemo() {
 
   const { data: transactionCount } = useTransactionCount({
     address,
+    watch: true,
   })
   useEffect(() => {
     if (transactionCount) {
