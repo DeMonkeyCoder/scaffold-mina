@@ -11,7 +11,6 @@ import {
   type ParseAccountErrorType,
   parseAccount,
 } from '../../accounts/utils/parseAccount'
-// import type {SignTransactionErrorType} from '../../accounts/utils/signTransaction'
 import type { Client } from '../../clients/createClient'
 import type { Transport } from '../../clients/transports/createTransport'
 import {
@@ -24,14 +23,12 @@ import type { GetAccountParameter } from '../../types/account'
 import type { Chain, GetChainParameter } from '../../types/chain'
 import type { Hash } from '../../types/misc'
 import { assertCurrentChain } from '../../utils/chain/assertCurrentChain'
-// import {getTransactionError, type GetTransactionErrorReturnType,} from '../../utils/errors/getTransactionError'
 import { getAction } from '../../utils/getAction'
 import {
   type AssertRequestParameters,
   assertRequest,
 } from '../../utils/transaction/assertRequest'
 import { getNetworkId } from '../public/getNetworkId'
-// import type {SendSignedTransactionErrorType} from './sendSignedTransaction'
 
 export type SendTransactionRequest = UnionOmit<TransactionRequest, 'from'>
 
@@ -70,6 +67,7 @@ export class TransactionTypeNotSupportedError extends BaseError {
 
 export type SendTransactionErrorType =
   | ParseAccountErrorType
+  // TODO: implement getTransactionError function
   // | GetTransactionErrorReturnType<
   //     | AccountNotFoundErrorType
   //     | AccountTypeNotSupportedErrorType
@@ -146,107 +144,103 @@ export async function sendTransaction<
   if (typeof account_ === 'undefined') throw new AccountNotFoundError()
   const account = account_ ? parseAccount(account_) : null
 
-  try {
-    assertRequest(parameters as AssertRequestParameters)
-    if (account?.type === 'json-rpc' || account === null) {
-      if (chain !== null) {
-        const networkId = await getAction(
-          client,
-          getNetworkId,
-          'getNetworkId',
-        )({})
-        assertCurrentChain({
-          currentNetworkId: networkId,
-          chain,
-        })
-      }
-      switch (parameters.type) {
-        case 'zkapp': {
-          const auroWalletTransactionParams: SendTransactionArgs = {
-            transaction: JSON.stringify(parameters.zkappCommand),
-            feePayer: parameters.feePayer
-              ? {
-                  fee: parameters.feePayer.fee
-                    ? Number(formatMina(parameters.feePayer.fee))
-                    : undefined,
-                  memo: parameters.feePayer.memo,
-                }
-              : undefined,
-          }
-          const res = (await client.request(
-            {
-              // @ts-ignore
-              method: 'mina_sendTransaction',
-              // @ts-ignore
-              params: auroWalletTransactionParams,
-            },
-            { retryCount: 0 },
-          )) as { hash: string }
-          return res.hash
-        }
-        case 'payment': {
-          const auroWalletPaymentParams: SendPaymentArgs = {
-            to: parameters.to,
-            fee: parameters.fee
-              ? Number(formatMina(parameters.fee))
-              : undefined,
-            amount: Number(formatMina(parameters.amount)),
-            memo: parameters.memo,
-            nonce: parameters.nonce ? Number(parameters.nonce) : undefined,
-          }
-          const res = (await client.request(
-            {
-              // @ts-ignore
-              method: 'mina_sendPayment',
-              // @ts-ignore
-              params: auroWalletPaymentParams,
-            },
-            { retryCount: 0 },
-          )) as { hash: string }
-          return res.hash
-        }
-        case 'delegation': {
-          const auroWalletDelegationParams: SendStakeDelegationArgs = {
-            to: parameters.to,
-            fee: parameters.fee
-              ? Number(formatMina(parameters.fee))
-              : undefined,
-            memo: parameters.memo,
-            nonce: parameters.nonce ? Number(parameters.nonce) : undefined,
-          }
-          return (
-            (await client.request(
-              {
-                // @ts-ignore
-                method: 'mina_sendStakeDelegation',
-                // @ts-ignore
-                params: auroWalletDelegationParams,
-              },
-              { retryCount: 0 },
-            )) as { hash: string }
-          ).hash
-        }
-        default:
-          throw new TransactionTypeNotSupportedError({
-            type: rest.type,
-          })
-      }
+  // try {
+  assertRequest(parameters as AssertRequestParameters)
+  if (account?.type === 'json-rpc' || account === null) {
+    if (chain !== null) {
+      const networkId = await getAction(
+        client,
+        getNetworkId,
+        'getNetworkId',
+      )({})
+      assertCurrentChain({
+        currentNetworkId: networkId,
+        chain,
+      })
     }
-
-    throw new AccountTypeNotSupportedError({
-      type: (account as any)?.type,
-    })
-  } catch (err) {
-    // if (
-    //   err instanceof AccountTypeNotSupportedError ||
-    //   err instanceof TransactionTypeNotSupportedError
-    // )
-    // biome-ignore lint/complexity/noUselessCatch: <explanation>
-    throw err
-    // throw getTransactionError(err as BaseError, {
-    //   ...parameters,
-    //   account,
-    //   chain: parameters.chain || undefined,
-    // })
+    switch (parameters.type) {
+      case 'zkapp': {
+        const auroWalletTransactionParams: SendTransactionArgs = {
+          transaction: JSON.stringify(parameters.zkappCommand),
+          feePayer: parameters.feePayer
+            ? {
+                fee: parameters.feePayer.fee
+                  ? Number(formatMina(parameters.feePayer.fee))
+                  : undefined,
+                memo: parameters.feePayer.memo,
+              }
+            : undefined,
+        }
+        const res = (await client.request(
+          {
+            // @ts-ignore
+            method: 'mina_sendTransaction',
+            // @ts-ignore
+            params: auroWalletTransactionParams,
+          },
+          { retryCount: 0 },
+        )) as { hash: string }
+        return res.hash
+      }
+      case 'payment': {
+        const auroWalletPaymentParams: SendPaymentArgs = {
+          to: parameters.to,
+          fee: parameters.fee ? Number(formatMina(parameters.fee)) : undefined,
+          amount: Number(formatMina(parameters.amount)),
+          memo: parameters.memo,
+          nonce: parameters.nonce ? Number(parameters.nonce) : undefined,
+        }
+        const res = (await client.request(
+          {
+            // @ts-ignore
+            method: 'mina_sendPayment',
+            // @ts-ignore
+            params: auroWalletPaymentParams,
+          },
+          { retryCount: 0 },
+        )) as { hash: string }
+        return res.hash
+      }
+      case 'delegation': {
+        const auroWalletDelegationParams: SendStakeDelegationArgs = {
+          to: parameters.to,
+          fee: parameters.fee ? Number(formatMina(parameters.fee)) : undefined,
+          memo: parameters.memo,
+          nonce: parameters.nonce ? Number(parameters.nonce) : undefined,
+        }
+        return (
+          (await client.request(
+            {
+              // @ts-ignore
+              method: 'mina_sendStakeDelegation',
+              // @ts-ignore
+              params: auroWalletDelegationParams,
+            },
+            { retryCount: 0 },
+          )) as { hash: string }
+        ).hash
+      }
+      default:
+        throw new TransactionTypeNotSupportedError({
+          type: rest.type,
+        })
+    }
   }
+
+  throw new AccountTypeNotSupportedError({
+    type: (account as any)?.type,
+  })
+  // TODO: implement getTransactionError function
+  // } catch (err) {
+  //   if (
+  //     err instanceof AccountTypeNotSupportedError ||
+  //     err instanceof TransactionTypeNotSupportedError
+  //   )
+  //     throw err
+  //   throw getTransactionError(err as BaseError, {
+  //     ...parameters,
+  //     account,
+  //     chain: parameters.chain || undefined,
+  //   })
+  // }
 }
