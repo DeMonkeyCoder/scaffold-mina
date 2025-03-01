@@ -1,7 +1,6 @@
 import AccountDoesNotExist from '@/components/AccountDoesNotExist'
 import { ConnectWallet } from '@/components/ConnectWallet'
 import { useMinaProvider } from '@/lib/ZkappContext'
-import { useAccount } from '@/lib/connect/react/hooks/useAccount'
 import { useSendSignedTransaction } from '@/lib/connect/react/hooks/useSendSignedTransaction'
 import { useSendTransaction } from '@/lib/connect/react/hooks/useSendTransaction'
 import { useSignDelegationTransaction } from '@/lib/connect/react/hooks/useSignDelegationTransaction'
@@ -13,13 +12,13 @@ import type {
 } from '@/lib/connect/viem/types/transaction'
 import { isSupportedNetwork } from '@/utils'
 import { parseMina } from '@mina-js/utils'
-import { useAppKitNetwork } from '@reown/appkit/react'
+import { useAppKitAccount, useAppKitNetwork } from '@reown/appkit/react'
 import Image from 'next/image'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import GradientBG from '../components/GradientBG.js'
 
 export default function TxDemo() {
-  const { address, isConnected } = useAccount()
+  const { address, isConnected } = useAppKitAccount()
 
   const { accountExists } = useMinaProvider()
   const { chainId: networkId } = useAppKitNetwork()

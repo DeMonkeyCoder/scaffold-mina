@@ -338,9 +338,13 @@ export function injected(parameters: InjectedParameters = {}) {
         const response: string =
           // @ts-ignore
           (await provider.request({ method: 'mina_requestNetwork' })).networkID
-        return response === 'mina:testnet' ? 'mina:devnet' : response
+            // @ts-ignore
+            .split(':')[1]
+        return response === 'testnet' ? 'devnet' : response
       }
-      return provider.request({ method: 'mina_networkId' })
+      return (await provider.request({ method: 'mina_networkId' })).split(
+        ':',
+      )[1]
     },
     async getProvider() {
       if (typeof window === 'undefined') return undefined
@@ -441,6 +445,7 @@ export function injected(parameters: InjectedParameters = {}) {
       if (!chain) throw new SwitchChainError(new ChainNotConfiguredError())
 
       try {
+        const caipNetworkId = `mina:${networkId}`
         await Promise.all([
           // TODO: Remove this hotfix once the method mismatch between wallets is resolved
           (getTarget().id === 'com.aurowallet'
@@ -449,12 +454,14 @@ export function injected(parameters: InjectedParameters = {}) {
                 params: {
                   // @ts-ignore
                   networkID:
-                    networkId === 'mina:devnet' ? 'mina:testnet' : networkId,
+                    caipNetworkId === 'mina:devnet'
+                      ? 'mina:testnet'
+                      : caipNetworkId,
                 },
               })
             : provider.request({
                 method: 'mina_switchChain',
-                params: [networkId],
+                params: [caipNetworkId],
               })
           )
             // During `'mina_switchChain'`, MetaMask makes a `'net_version'` RPC call to the target chain.

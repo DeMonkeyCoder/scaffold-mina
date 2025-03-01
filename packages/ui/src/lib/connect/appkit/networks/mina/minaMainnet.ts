@@ -6,9 +6,8 @@ import type { AppKitNetwork } from '@reown/appkit/networks'
 import { defineChain } from '@reown/appkit/networks'
 
 export const minaMainnet: AppKitNetwork = defineChain({
-  id: 'mina:mainnet',
+  id: 'mainnet',
   name: 'Mina Mainnet',
-  network: 'mina:mainnet',
   nativeCurrency: { name: 'MINA', symbol: 'MINA', decimals: 9 },
   rpcUrls: {
     default: {

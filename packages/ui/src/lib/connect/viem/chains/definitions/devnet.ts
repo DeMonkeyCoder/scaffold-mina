@@ -1,7 +1,7 @@
 import { defineChain } from '../../utils/chain/defineChain'
 
 export const devnet = /*#__PURE__*/ defineChain({
-  id: 'mina:devnet',
+  id: 'devnet',
   name: 'Mina Devnet',
   nativeCurrency: { name: 'MINA', symbol: 'MINA', decimals: 9 },
   rpcUrls: {
