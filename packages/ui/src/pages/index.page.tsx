@@ -1,6 +1,7 @@
 import AccountDoesNotExist from '@/components/AccountDoesNotExist'
 import { ConnectWallet } from '@/components/ConnectWallet'
 import LoadingScreen from '@/components/LoadingScreen'
+import SwitchChainDemo from '@/components/SwitchChainDemo'
 import deployedContracts from '@/contracts/deployedContracts'
 import { useMinaProvider } from '@/lib/ZkappContext'
 import { useSignZkappTransaction } from '@/lib/connect/react/exports'
@@ -279,6 +280,7 @@ function HomeBody() {
                       <div className="text-s text-white font-firacode">
                         Correct Submissions: {currentNum?.toString()}{' '}
                       </div>
+                      <SwitchChainDemo />
                     </>
                   )
                 ) : (

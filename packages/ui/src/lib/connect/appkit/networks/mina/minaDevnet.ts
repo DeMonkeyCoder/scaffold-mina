@@ -5,7 +5,9 @@ import type {
 import type { AppKitNetwork } from '@reown/appkit/networks'
 import { defineChain } from '@reown/appkit/networks'
 
-export const minaDevnet: AppKitNetwork = defineChain({
+export const minaDevnet: AppKitNetwork & {
+  id: string
+} = defineChain({
   id: 'devnet',
   name: 'Mina Devnet',
   nativeCurrency: { name: 'MINA', symbol: 'MINA', decimals: 9 },

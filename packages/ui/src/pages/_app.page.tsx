@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar'
 import { metadata, networks, projectId, wagmiAdapter } from '@/config'
 import { ZkappProvider } from '@/lib/ZkappContext'
 import { WagmiProvider } from '@/lib/connect/react/context'
-import { createAppKit } from '@reown/appkit'
+import { createAppKit } from '@reown/appkit/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
 

@@ -539,8 +539,11 @@ export function injected(parameters: InjectedParameters = {}) {
             throw new UserRejectedRequestError(error as Error)
           }
         }
-
-        if (error.code === UserRejectedRequestError.code)
+        if (
+          error.code === UserRejectedRequestError.code ||
+          // for AuroWallet
+          error.code === 1002
+        )
           throw new UserRejectedRequestError(error)
         throw new SwitchChainError(error)
       }
