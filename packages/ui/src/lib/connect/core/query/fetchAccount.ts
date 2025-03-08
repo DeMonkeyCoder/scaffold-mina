@@ -1,5 +1,6 @@
+import type { SelectChains } from '@/lib/connect/core/types/chain'
 import type { QueryOptions } from '@tanstack/query-core'
-
+import type { GetChainParameter } from 'vimina'
 import {
   type FetchAccountErrorType,
   type FetchAccountParameters,
@@ -12,19 +13,30 @@ import type { Compute, PartialBy } from '../types/utils'
 import { filterQueryOptions } from './utils'
 
 export type FetchAccountOptions<config extends Config> = Compute<
-  PartialBy<FetchAccountParameters<config>, 'address'> & ScopeKeyParameter
+  PartialBy<
+    FetchAccountParameters<config, config['chains'][number]['id']>,
+    | 'address'
+    | keyof GetChainParameter<
+        SelectChains<config, config['chains'][number]['id']>[number],
+        SelectChains<config, config['chains'][number]['id']>[number]
+      >
+  > &
+    ScopeKeyParameter
 >
 
 export function fetchAccountQueryOptions<config extends Config>(
   config: config,
-  options: FetchAccountOptions<config> = {},
+  options: FetchAccountOptions<config> = {} as FetchAccountOptions<config>,
 ) {
   return {
     async queryFn({ queryKey }) {
       const { address, scopeKey: _, ...parameters } = queryKey[1]
       if (!address) throw new Error('address is required')
       const account = await fetchAccount(config, {
-        ...(parameters as FetchAccountParameters),
+        ...(parameters as unknown as FetchAccountParameters<
+          config,
+          config['chains'][number]['id']
+        >),
         address,
       })
       return account ?? null
@@ -43,7 +55,7 @@ export type FetchAccountQueryFnData = Compute<FetchAccountReturnType>
 export type FetchAccountData = FetchAccountQueryFnData
 
 export function fetchAccountQueryKey<config extends Config>(
-  options: FetchAccountOptions<config> = {},
+  options: FetchAccountOptions<config> = {} as FetchAccountOptions<config>,
 ) {
   return ['fetchAccount', filterQueryOptions(options)] as const
 }
