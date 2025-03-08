@@ -12,31 +12,37 @@ import type { ScopeKeyParameter } from '../types/properties'
 import type { Compute, PartialBy } from '../types/utils'
 import { filterQueryOptions } from './utils'
 
-export type FetchAccountOptions<config extends Config> = Compute<
+export type FetchAccountOptions<
+  config extends Config,
+  networkId extends config['chains'][number]['id'],
+> = Compute<
   PartialBy<
-    FetchAccountParameters<config, config['chains'][number]['id']>,
+    FetchAccountParameters<config, networkId>,
     | 'address'
     | keyof GetChainParameter<
-        SelectChains<config, config['chains'][number]['id']>[number],
-        SelectChains<config, config['chains'][number]['id']>[number]
+        SelectChains<config, networkId>[number],
+        SelectChains<config, networkId>[number]
       >
   > &
     ScopeKeyParameter
 >
 
-export function fetchAccountQueryOptions<config extends Config>(
+export function fetchAccountQueryOptions<
+  config extends Config,
+  networkId extends config['chains'][number]['id'],
+>(
   config: config,
-  options: FetchAccountOptions<config> = {} as FetchAccountOptions<config>,
+  options: FetchAccountOptions<config, networkId> = {} as FetchAccountOptions<
+    config,
+    networkId
+  >,
 ) {
   return {
     async queryFn({ queryKey }) {
       const { address, scopeKey: _, ...parameters } = queryKey[1]
       if (!address) throw new Error('address is required')
       const account = await fetchAccount(config, {
-        ...(parameters as unknown as FetchAccountParameters<
-          config,
-          config['chains'][number]['id']
-        >),
+        ...(parameters as FetchAccountParameters<config, networkId>),
         address,
       })
       return account ?? null
@@ -46,7 +52,7 @@ export function fetchAccountQueryOptions<config extends Config>(
     FetchAccountQueryFnData,
     FetchAccountErrorType,
     FetchAccountData,
-    FetchAccountQueryKey<config>
+    FetchAccountQueryKey<config, networkId>
   >
 }
 
@@ -54,12 +60,19 @@ export type FetchAccountQueryFnData = Compute<FetchAccountReturnType>
 
 export type FetchAccountData = FetchAccountQueryFnData
 
-export function fetchAccountQueryKey<config extends Config>(
-  options: FetchAccountOptions<config> = {} as FetchAccountOptions<config>,
+export function fetchAccountQueryKey<
+  config extends Config,
+  networkId extends config['chains'][number]['id'],
+>(
+  options: FetchAccountOptions<config, networkId> = {} as FetchAccountOptions<
+    config,
+    networkId
+  >,
 ) {
   return ['fetchAccount', filterQueryOptions(options)] as const
 }
 
-export type FetchAccountQueryKey<config extends Config> = ReturnType<
-  typeof fetchAccountQueryKey<config>
->
+export type FetchAccountQueryKey<
+  config extends Config,
+  networkId extends config['chains'][number]['id'],
+> = ReturnType<typeof fetchAccountQueryKey<config, networkId>>

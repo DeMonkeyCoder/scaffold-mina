@@ -239,7 +239,7 @@ export function injected(parameters: InjectedParameters = {}) {
                   ? 'mina:devnet'
                   : (arg as any).networkID
             }
-            chainChanged?.(newNetworkId)
+            chainChanged?.(newNetworkId.split(':')[1])
           })
         }
         if (!disconnect) {
@@ -597,7 +597,7 @@ export function injected(parameters: InjectedParameters = {}) {
                   ? 'mina:devnet'
                   : (arg as any).networkID
             }
-            chainChanged?.(newNetworkId)
+            chainChanged?.(newNetworkId.split(':')[1])
           })
         }
         if (!disconnect) {
