@@ -1,4 +1,4 @@
-import type { Chain, Transport } from '@/lib/connect/viem'
+import type { Chain, Transport } from 'vimina'
 
 type ExtractRpcUrlsParameters = {
   transports?: Record<string, Transport> | undefined

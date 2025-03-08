@@ -1,4 +1,4 @@
-import type { Client } from '@/lib/connect/viem'
+import type { Client } from 'vimina'
 
 import type { Config } from '../createConfig'
 import type { NetworkIdParameter } from '../types/properties'

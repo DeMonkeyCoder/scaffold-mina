@@ -2,7 +2,7 @@ import type {
   AddEthereumChainParameter,
   UserRejectedRequestErrorType,
   SwitchChainErrorType as viem_SwitchChainErrorType,
-} from '@/lib/connect/viem'
+} from 'vimina'
 
 import type { Config } from '../createConfig'
 import type { BaseErrorType, ErrorType } from '../errors/base'
@@ -49,7 +49,7 @@ export type SwitchChainErrorType =
   // base
   | BaseErrorType
   | ErrorType
-  // @/lib/connect/viem
+  // vimina
   | viem_SwitchChainErrorType
 
 /** https://wagmi.sh/core/api/actions/switchChain */

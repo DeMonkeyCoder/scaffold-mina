@@ -21,8 +21,8 @@ import {
   // watchPendingTransactions,
 } from '@/lib/connect/core/exports'
 import type { Chain } from '@/lib/connect/core/exports/chains'
-import type { Hex } from '@/lib/connect/viem'
 import type UniversalProvider from '@walletconnect/universal-provider'
+import type { Hex } from 'vimina'
 
 import type { AppKit, AppKitOptions } from '@reown/appkit'
 import type {

@@ -1,8 +1,6 @@
 import {
   type Address,
-  custom,
   type EIP1193RequestFn,
-  getAddress,
   type Hex,
   RpcRequestError,
   SwitchChainError,
@@ -10,8 +8,10 @@ import {
   UserRejectedRequestError,
   type WalletCallReceipt,
   type WalletRpcSchema,
-} from '@/lib/connect/viem'
-import { rpc } from '@/lib/connect/viem/utils'
+  custom,
+  getAddress,
+} from 'vimina'
+import { rpc } from 'vimina/utils'
 
 import {
   ChainNotConfiguredError,

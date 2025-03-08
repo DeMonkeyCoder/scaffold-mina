@@ -11,7 +11,7 @@ import {
   getAddress,
   withRetry,
   withTimeout,
-} from '@/lib/connect/viem'
+} from 'vimina'
 
 import type { Connector } from '../createConfig'
 import { ChainNotConfiguredError } from '../errors/config'
@@ -302,13 +302,13 @@ export function injected(parameters: InjectedParameters = {}) {
         // https://github.com/wevm/wagmi/issues/4064
         await withTimeout(
           () =>
-            // TODO: Remove explicit type for @/lib/connect/viem@3
+            // TODO: Remove explicit type for vimina@3
             provider.request<{
               Method: 'wallet_revokePermissions'
               Parameters: [permissions: { mina_accounts: Record<string, any> }]
               ReturnType: null
             }>({
-              // `'wallet_revokePermissions'` added in `@/lib/connect/viem@2.10.3`
+              // `'wallet_revokePermissions'` added in `vimina@2.10.3`
               method: 'wallet_revokePermissions',
               params: [{ mina_accounts: {} }],
             }),

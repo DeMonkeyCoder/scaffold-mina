@@ -1,15 +1,15 @@
 import {
   ChainDisconnectedError,
-  createTransport,
   type EIP1193Parameters,
   type EIP1193Provider,
   type EIP1193RequestFn,
   ProviderDisconnectedError,
   type TransportConfig,
   type WalletRpcSchema,
+  createTransport,
   withRetry,
   withTimeout,
-} from '@/lib/connect/viem'
+} from 'vimina'
 
 import type { Connector, Transport } from '../createConfig'
 

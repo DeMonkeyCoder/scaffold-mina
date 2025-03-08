@@ -1,4 +1,9 @@
 import {
+  type MinaProviderDetail,
+  type Store as MipdStore,
+  createStore as createMipd,
+} from '@mina-js/connect'
+import {
   type Address,
   type Chain,
   type Client,
@@ -6,12 +11,7 @@ import {
   createClient,
   type ClientConfig as viem_ClientConfig,
   type Transport as viem_Transport,
-} from '@/lib/connect/viem'
-import {
-  type MinaProviderDetail,
-  type Store as MipdStore,
-  createStore as createMipd,
-} from '@mina-js/connect'
+} from 'vimina'
 import { persist, subscribeWithSelector } from 'zustand/middleware'
 import { type Mutate, type StoreApi, createStore } from 'zustand/vanilla'
 

@@ -2,7 +2,7 @@ import type {
   Address,
   ResourceUnavailableRpcErrorType,
   UserRejectedRequestErrorType,
-} from '@/lib/connect/viem'
+} from 'vimina'
 
 import type { CreateConnectorFn } from '../connectors/createConnector'
 import type { Config, Connector } from '../createConfig'

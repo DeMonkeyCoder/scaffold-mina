@@ -1,8 +1,4 @@
-import {
-  type Account,
-  type WalletClient,
-  walletActions,
-} from '@/lib/connect/viem'
+import { type Account, type WalletClient, walletActions } from 'vimina'
 
 import type { Config } from '../createConfig'
 import type { BaseErrorType, ErrorType } from '../errors/base'

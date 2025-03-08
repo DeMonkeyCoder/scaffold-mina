@@ -1,9 +1,9 @@
 import {
-  getTransactionCount as viem_getTransactionCount,
   type GetTransactionCountErrorType as viem_GetTransactionCountErrorType,
   type GetTransactionCountParameters as viem_GetTransactionCountParameters,
   type GetTransactionCountReturnType as viem_GetTransactionCountReturnType,
-} from '@/lib/connect/viem/actions'
+  getTransactionCount as viem_getTransactionCount,
+} from 'vimina/actions'
 
 import type { Config } from '../createConfig'
 import type { NetworkIdParameter } from '../types/properties'

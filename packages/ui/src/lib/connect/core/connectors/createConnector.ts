@@ -5,7 +5,7 @@ import type {
   Client,
   ProviderConnectInfo,
   ProviderMessage,
-} from '@/lib/connect/viem'
+} from 'vimina'
 
 import type { Transport } from '../createConfig'
 import type { Emitter } from '../createEmitter'

@@ -258,7 +258,7 @@ export {
 // Transports
 ////////////////////////////////////////////////////////////////////////////////
 
-export { custom, http, webSocket } from '@/lib/connect/viem'
+export { custom, http, webSocket } from 'vimina'
 
 export {
   type ConnectorTransportConfig,

@@ -1,6 +1,6 @@
-import type { Hex } from '@/lib/connect/viem'
 import type { CaipNetworkId } from '@reown/appkit-common'
 import { ConstantsUtil, PresetsUtil } from '@reown/appkit-utils'
+import type { Hex } from 'vimina'
 
 export function getEmailCaipNetworks() {
   return {

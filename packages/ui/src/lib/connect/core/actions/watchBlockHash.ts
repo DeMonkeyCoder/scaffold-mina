@@ -1,10 +1,10 @@
 import {
-  watchBlockHash as viem_watchBlockHash,
   type WatchBlockHashParameters as viem_WatchBlockHashParameters,
   type WatchBlockHashReturnType as viem_WatchBlockHashReturnType,
-} from '@/lib/connect/viem/actions'
+  watchBlockHash as viem_watchBlockHash,
+} from 'vimina/actions'
 
-import type { Chain, Transport, WebSocketTransport } from '@/lib/connect/viem'
+import type { Chain, Transport, WebSocketTransport } from 'vimina'
 import type { Config } from '../createConfig'
 import type { SelectChains } from '../types/chain'
 import type {
@@ -37,7 +37,7 @@ export type WatchBlockHashParameters<
 
 export type WatchBlockHashReturnType = viem_WatchBlockHashReturnType
 
-// TODO: wrap in @/lib/connect/viem's `observe` to avoid duplicate invocations.
+// TODO: wrap in vimina's `observe` to avoid duplicate invocations.
 /** https://wagmi.sh/core/api/actions/watchBlockHash */
 export function watchBlockHash<
   config extends Config,

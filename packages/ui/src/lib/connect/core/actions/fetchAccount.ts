@@ -1,10 +1,10 @@
-import type { Address } from '@/lib/connect/viem'
+import type { Address } from 'vimina'
 import {
   type FetchAccountErrorType as viem_FetchAccountErrorType,
   type FetchAccountParameters as viem_FetchAccountParameters,
   type FetchAccountReturnType as viem_FetchAccountReturnType,
   fetchAccount as viem_fetchAccount,
-} from '@/lib/connect/viem/actions'
+} from 'vimina/actions'
 
 import type { Config } from '../createConfig'
 import type { NetworkIdParameter } from '../types/properties'

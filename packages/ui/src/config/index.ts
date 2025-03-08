@@ -1,7 +1,7 @@
 import { WagmiAdapter } from '@/lib/connect/adapter/src'
 import { minaDevnet, minaMainnet } from '@/lib/connect/appkit/networks'
-import { http } from '@/lib/connect/viem'
 import type { AppKitNetwork } from '@reown/appkit/networks'
+import { http } from 'vimina'
 
 // Get projectId from https://cloud.reown.com
 export const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID

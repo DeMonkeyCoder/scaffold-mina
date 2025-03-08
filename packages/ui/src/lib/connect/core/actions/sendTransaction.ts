@@ -5,8 +5,8 @@ import type {
   SendTransactionErrorType as viem_SendTransactionErrorType,
   SendTransactionParameters as viem_SendTransactionParameters,
   SendTransactionReturnType as viem_SendTransactionReturnType,
-} from '@/lib/connect/viem'
-import { sendTransaction as viem_sendTransaction } from '@/lib/connect/viem/actions'
+} from 'vimina'
+import { sendTransaction as viem_sendTransaction } from 'vimina/actions'
 
 import type { Config } from '../createConfig'
 import type { BaseErrorType, ErrorType } from '../errors/base'
@@ -18,8 +18,8 @@ import type {
 import type { Compute } from '../types/utils'
 import { getAction } from '../utils/getAction'
 import {
-  getConnectorClient,
   type GetConnectorClientErrorType,
+  getConnectorClient,
 } from './getConnectorClient'
 
 export type SendTransactionParameters<
