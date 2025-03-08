@@ -31,9 +31,14 @@ export async function fetchAccount<config extends Config>(
   config: config,
   parameters: FetchAccountParameters<config>,
 ): Promise<FetchAccountReturnType> {
-  const { address, blockNumber, blockTag, networkId } = parameters
+  const { address, networkId } = parameters
 
   const client = config.getClient({ networkId })
   const action = getAction(client, viem_fetchAccount, 'fetchAccount')
-  return action(blockNumber ? { address, blockNumber } : { address, blockTag })
+
+  const chain = config.chains.find((x) => x.id === networkId) ?? client.chain!
+  return action({
+    address,
+    chain,
+  })
 }
