@@ -37,6 +37,14 @@ export default function Navbar() {
                   Debug Contracts
                 </Link>
               </div>
+              <div>
+                <Link
+                  href="/txdemo"
+                  className="flex justify-center items-center text-sm font-medium text-black bg-white hover:text-white hover:bg-black border px-4 py-1 rounded duration-200"
+                >
+                  Tx Demo
+                </Link>
+              </div>
               <div className="flex items-center">
                 <a
                   href={`https://faucet.minaprotocol.com/?address=${address}`}
