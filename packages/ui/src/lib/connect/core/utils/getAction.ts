@@ -6,7 +6,7 @@ import type {
   RpcSchema,
   Transport,
   WalletActions,
-} from '@/lib/connect/viem'
+} from 'vimina'
 
 /**
  * Retrieves and returns an action from the client (if exists), and falls

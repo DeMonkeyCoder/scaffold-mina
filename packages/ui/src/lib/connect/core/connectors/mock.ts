@@ -1,17 +1,17 @@
 import {
   type Address,
-  custom,
-  type EIP1193RequestFn,
-  getAddress,
   type Hex,
+  type JSAPIStandardRequestFn,
   RpcRequestError,
   SwitchChainError,
   type Transport,
   UserRejectedRequestError,
   type WalletCallReceipt,
   type WalletRpcSchema,
-} from '@/lib/connect/viem'
-import { rpc } from '@/lib/connect/viem/utils'
+  custom,
+  getAddress,
+} from 'vimina'
+import { rpc } from 'vimina/utils'
 
 import {
   ChainNotConfiguredError,
@@ -40,7 +40,7 @@ export function mock(parameters: MockParameters) {
   const features = parameters.features ?? {}
 
   type Provider = ReturnType<
-    Transport<'custom', unknown, EIP1193RequestFn<WalletRpcSchema>>
+    Transport<'custom', unknown, JSAPIStandardRequestFn<WalletRpcSchema>>
   >
   let connected = false
   let connectedNetworkId: string
@@ -126,7 +126,7 @@ export function mock(parameters: MockParameters) {
         config.chains.find((x) => x.id === networkId) ?? config.chains[0]
       const url = chain.rpcUrls.default.http[0]!
 
-      const request: EIP1193RequestFn = async ({ method, params }) => {
+      const request: JSAPIStandardRequestFn = async ({ method, params }) => {
         // eth methods
         if (method === 'mina_networkId') return connectedNetworkId
         if (method === 'mina_requestAccounts') return parameters.accounts

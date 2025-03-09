@@ -1,4 +1,4 @@
-import type { Chain } from '@/lib/connect/viem'
+import type { Chain } from 'vimina'
 import type { Config } from '../createConfig'
 import { deepEqual } from '../utils/deepEqual'
 

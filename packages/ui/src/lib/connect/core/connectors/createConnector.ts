@@ -1,11 +1,11 @@
 import type {
-  AddEthereumChainParameter,
+  AddMinaChainParameter,
   Address,
   Chain,
   Client,
   ProviderConnectInfo,
   ProviderMessage,
-} from '@/lib/connect/viem'
+} from 'vimina'
 
 import type { Transport } from '../createConfig'
 import type { Emitter } from '../createEmitter'
@@ -64,8 +64,8 @@ export type CreateConnectorFn<
     isAuthorized(): Promise<boolean>
     switchChain?(
       parameters: Compute<{
-        addEthereumChainParameter?:
-          | ExactPartial<StrictOmit<AddEthereumChainParameter, 'networkId'>>
+        addMinaChainParameter?:
+          | ExactPartial<StrictOmit<AddMinaChainParameter, 'networkId'>>
           | undefined
         networkId: string
       }>,

@@ -3,11 +3,11 @@ import {
   type Address,
   type BaseErrorType,
   type Client,
+  type Transport,
   createClient,
   custom,
-  type Transport,
-} from '@/lib/connect/viem'
-import { getAddress, parseAccount } from '@/lib/connect/viem/utils'
+} from 'vimina'
+import { getAddress, parseAccount } from 'vimina/utils'
 
 import type { Config, Connection } from '../createConfig'
 import type { ErrorType } from '../errors/base'

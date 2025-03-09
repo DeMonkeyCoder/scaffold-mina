@@ -1,7 +1,7 @@
 // -- Networks ---------------------------------------------------------------
 // biome-ignore lint/performance/noBarrelFile:
 // biome-ignore lint/performance/noReExportAll:
-export * from '@/lib/connect/viem/chains'
+export * from 'vimina/chains'
 // biome-ignore lint/performance/noReExportAll:
 export * from './mina/index'
 

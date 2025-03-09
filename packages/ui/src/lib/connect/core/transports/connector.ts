@@ -1,15 +1,15 @@
 import {
   ChainDisconnectedError,
-  createTransport,
-  type EIP1193Parameters,
-  type EIP1193Provider,
-  type EIP1193RequestFn,
+  type JSAPIStandardParameters,
+  type JSAPIStandardProvider,
+  type JSAPIStandardRequestFn,
   ProviderDisconnectedError,
   type TransportConfig,
   type WalletRpcSchema,
+  createTransport,
   withRetry,
   withTimeout,
-} from '@/lib/connect/viem'
+} from 'vimina'
 
 import type { Connector, Transport } from '../createConfig'
 
@@ -37,7 +37,7 @@ export function unstable_connector(
     const { chain, connectors } = parameters
     const retryCount = config.retryCount ?? parameters.retryCount
 
-    const request: EIP1193RequestFn = async ({ method, params }) => {
+    const request: JSAPIStandardRequestFn = async ({ method, params }) => {
       const connector = connectors?.getState().find((c) => c.type === type)
       if (!connector)
         throw new ProviderDisconnectedError(
@@ -48,7 +48,7 @@ export function unstable_connector(
 
       const provider = (await connector.getProvider({
         networkId: chain?.id,
-      })) as EIP1193Provider | undefined
+      })) as JSAPIStandardProvider | undefined
       if (!provider)
         throw new ProviderDisconnectedError(
           new Error('Provider is disconnected.'),
@@ -68,7 +68,10 @@ export function unstable_connector(
           ),
         )
 
-      const body = { method, params } as EIP1193Parameters<WalletRpcSchema>
+      const body = {
+        method,
+        params,
+      } as JSAPIStandardParameters<WalletRpcSchema>
       return provider.request(body)
     }
 

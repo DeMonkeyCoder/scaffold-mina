@@ -1,8 +1,8 @@
 import type {
-  AddEthereumChainParameter,
+  AddMinaChainParameter,
   UserRejectedRequestErrorType,
   SwitchChainErrorType as viem_SwitchChainErrorType,
-} from '@/lib/connect/viem'
+} from 'vimina'
 
 import type { Config } from '../createConfig'
 import type { BaseErrorType, ErrorType } from '../errors/base'
@@ -25,8 +25,8 @@ export type SwitchChainParameters<
 > = Compute<
   ConnectorParameter & {
     networkId: networkId | config['chains'][number]['id']
-    addEthereumChainParameter?:
-      | Compute<ExactPartial<Omit<AddEthereumChainParameter, 'networkId'>>>
+    addMinaChainParameter?:
+      | Compute<ExactPartial<Omit<AddMinaChainParameter, 'networkId'>>>
       | undefined
   }
 >
@@ -49,7 +49,7 @@ export type SwitchChainErrorType =
   // base
   | BaseErrorType
   | ErrorType
-  // @/lib/connect/viem
+  // vimina
   | viem_SwitchChainErrorType
 
 /** https://wagmi.sh/core/api/actions/switchChain */
@@ -60,7 +60,7 @@ export async function switchChain<
   config: config,
   parameters: SwitchChainParameters<config, networkId>,
 ): Promise<SwitchChainReturnType<config, networkId>> {
-  const { addEthereumChainParameter, networkId } = parameters
+  const { addMinaChainParameter, networkId } = parameters
 
   const connection = config.state.connections.get(
     parameters.connector?.uid ?? config.state.current!,
@@ -70,7 +70,7 @@ export async function switchChain<
     if (!connector.switchChain)
       throw new SwitchChainNotSupportedError({ connector })
     const chain = await connector.switchChain({
-      addEthereumChainParameter,
+      addMinaChainParameter,
       networkId,
     })
     return chain as SwitchChainReturnType<config, networkId>

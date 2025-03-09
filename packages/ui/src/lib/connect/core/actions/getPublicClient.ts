@@ -1,8 +1,4 @@
-import {
-  type Client,
-  publicActions,
-  type PublicClient,
-} from '@/lib/connect/viem'
+import { type Client, type PublicClient, publicActions } from 'vimina'
 
 import type { Config } from '../createConfig'
 import type { NetworkIdParameter } from '../types/properties'

@@ -1,7 +1,7 @@
 import {
-  type AddEthereumChainParameter,
+  type AddMinaChainParameter,
   type Address,
-  type EIP1193Provider,
+  type JSAPIStandardProvider,
   type ProviderConnectInfo,
   type ProviderRpcError,
   ResourceUnavailableRpcError,
@@ -11,7 +11,7 @@ import {
   getAddress,
   withRetry,
   withTimeout,
-} from '@/lib/connect/viem'
+} from 'vimina'
 
 import type { Connector } from '../createConfig'
 import { ChainNotConfiguredError } from '../errors/config'
@@ -239,7 +239,7 @@ export function injected(parameters: InjectedParameters = {}) {
                   ? 'mina:devnet'
                   : (arg as any).networkID
             }
-            chainChanged?.(newNetworkId)
+            chainChanged?.(newNetworkId.split(':')[1])
           })
         }
         if (!disconnect) {
@@ -302,13 +302,13 @@ export function injected(parameters: InjectedParameters = {}) {
         // https://github.com/wevm/wagmi/issues/4064
         await withTimeout(
           () =>
-            // TODO: Remove explicit type for @/lib/connect/viem@3
+            // TODO: Remove explicit type for vimina@3
             provider.request<{
               Method: 'wallet_revokePermissions'
               Parameters: [permissions: { mina_accounts: Record<string, any> }]
               ReturnType: null
             }>({
-              // `'wallet_revokePermissions'` added in `@/lib/connect/viem@2.10.3`
+              // `'wallet_revokePermissions'` added in `vimina@2.10.3`
               method: 'wallet_revokePermissions',
               params: [{ mina_accounts: {} }],
             }),
@@ -437,7 +437,7 @@ export function injected(parameters: InjectedParameters = {}) {
         return false
       }
     },
-    async switchChain({ addEthereumChainParameter, networkId }) {
+    async switchChain({ addMinaChainParameter, networkId }) {
       const provider = await this.getProvider()
       if (!provider) throw new ProviderNotFoundError()
 
@@ -496,8 +496,8 @@ export function injected(parameters: InjectedParameters = {}) {
             const { default: blockExplorer, ...blockExplorers } =
               chain.blockExplorers ?? {}
             let blockExplorerUrls: string[] | undefined
-            if (addEthereumChainParameter?.blockExplorerUrls)
-              blockExplorerUrls = addEthereumChainParameter.blockExplorerUrls
+            if (addMinaChainParameter?.blockExplorerUrls)
+              blockExplorerUrls = addMinaChainParameter.blockExplorerUrls
             else if (blockExplorer)
               blockExplorerUrls = [
                 blockExplorer.url,
@@ -505,20 +505,19 @@ export function injected(parameters: InjectedParameters = {}) {
               ]
 
             let rpcUrls: readonly string[]
-            if (addEthereumChainParameter?.rpcUrls?.length)
-              rpcUrls = addEthereumChainParameter.rpcUrls
+            if (addMinaChainParameter?.rpcUrls?.length)
+              rpcUrls = addMinaChainParameter.rpcUrls
             else rpcUrls = [chain.rpcUrls.default?.http[0] ?? '']
 
             const _addEthereumChain = {
               blockExplorerUrls,
               networkId,
-              chainName: addEthereumChainParameter?.chainName ?? chain.name,
-              iconUrls: addEthereumChainParameter?.iconUrls,
+              chainName: addMinaChainParameter?.chainName ?? chain.name,
+              iconUrls: addMinaChainParameter?.iconUrls,
               nativeCurrency:
-                addEthereumChainParameter?.nativeCurrency ??
-                chain.nativeCurrency,
+                addMinaChainParameter?.nativeCurrency ?? chain.nativeCurrency,
               rpcUrls,
-            } satisfies AddEthereumChainParameter
+            } satisfies AddMinaChainParameter
 
             // @ts-ignore
             await provider.request({
@@ -597,7 +596,7 @@ export function injected(parameters: InjectedParameters = {}) {
                   ? 'mina:devnet'
                   : (arg as any).networkID
             }
-            chainChanged?.(newNetworkId)
+            chainChanged?.(newNetworkId.split(':')[1])
           })
         }
         if (!disconnect) {
@@ -701,7 +700,7 @@ type WalletProviderFlags =
   | 'isZerion'
 
 type WalletProvider = Compute<
-  EIP1193Provider & {
+  JSAPIStandardProvider & {
     [key in WalletProviderFlags]?: true | undefined
   } & {
     providers?: WalletProvider[] | undefined

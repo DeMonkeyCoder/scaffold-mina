@@ -2,8 +2,8 @@ import type {
   SendSignedTransactionErrorType as viem_SendSignedTransactionErrorType,
   SendSignedTransactionParameters as viem_SendSignedTransactionParameters,
   SendSignedTransactionReturnType as viem_SendSignedTransactionReturnType,
-} from '@/lib/connect/viem'
-import { sendSignedTransaction as viem_sendSignedTransaction } from '@/lib/connect/viem/actions'
+} from 'vimina'
+import { sendSignedTransaction as viem_sendSignedTransaction } from 'vimina/actions'
 
 import type { Config } from '../createConfig'
 import type { BaseErrorType, ErrorType } from '../errors/base'

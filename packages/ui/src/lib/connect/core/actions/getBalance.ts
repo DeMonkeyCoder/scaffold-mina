@@ -1,9 +1,9 @@
-import type { Address } from '@/lib/connect/viem'
+import type { Address } from 'vimina'
 import {
   type GetBalanceErrorType as viem_GetBalanceErrorType,
   type GetBalanceParameters as viem_GetBalanceParameters,
   getBalance as viem_getBalance,
-} from '@/lib/connect/viem/actions'
+} from 'vimina/actions'
 
 import type { Config } from '../createConfig'
 import type { NetworkIdParameter } from '../types/properties'

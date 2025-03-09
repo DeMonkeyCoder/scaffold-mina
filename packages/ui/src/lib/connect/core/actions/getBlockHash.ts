@@ -1,9 +1,9 @@
 import {
-  getBlockHash as viem_getBlockHash,
   type GetBlockHashErrorType as viem_GetBlockHashErrorType,
   type GetBlockHashParameters as viem_GetBlockHashParameters,
   type GetBlockHashReturnType as viem_GetBlockHashReturnType,
-} from '@/lib/connect/viem/actions'
+  getBlockHash as viem_getBlockHash,
+} from 'vimina/actions'
 
 import type { Config } from '../createConfig'
 import type { NetworkIdParameter } from '../types/properties'

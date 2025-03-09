@@ -1,4 +1,4 @@
-import type { Chain, ChainFormatters } from '@/lib/connect/viem'
+import type { Chain, ChainFormatters } from 'vimina'
 
 import type { Config } from '../createConfig'
 import type { IsNarrowable, Merge } from './utils'

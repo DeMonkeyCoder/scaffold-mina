@@ -1,4 +1,4 @@
-import type { Address } from '@/lib/connect/viem'
+import type { Address } from 'vimina'
 
 import type { Config, Connector } from '../createConfig'
 import type { BaseError, ErrorType } from '../errors/base'

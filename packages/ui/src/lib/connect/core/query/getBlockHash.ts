@@ -1,10 +1,10 @@
 import type { QueryOptions } from '@tanstack/query-core'
 
 import {
-  getBlockHash,
   type GetBlockHashErrorType,
   type GetBlockHashParameters,
   type GetBlockHashReturnType,
+  getBlockHash,
 } from '../actions/getBlockHash'
 import type { Config } from '../createConfig'
 import type { ScopeKeyParameter } from '../types/properties'
@@ -26,8 +26,8 @@ export function getBlockHashQueryOptions<
     gcTime: 0,
     async queryFn({ queryKey }) {
       const { scopeKey: _, ...parameters } = queryKey[1]
-      const blockNumber = await getBlockHash(config, parameters)
-      return blockNumber ?? null
+      const blockHash = await getBlockHash(config, parameters)
+      return blockHash ?? null
     },
     queryKey: getBlockHashQueryKey(options),
   } as const satisfies QueryOptions<

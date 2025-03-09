@@ -22,15 +22,17 @@ import { useNetworkId } from './useNetworkId'
 
 export type UseFetchAccountParameters<
   config extends Config = Config,
+  networkId extends
+    config['chains'][number]['id'] = config['chains'][number]['id'],
   selectData = FetchAccountData,
 > = Compute<
-  FetchAccountOptions<config> &
+  FetchAccountOptions<config, networkId> &
     ConfigParameter<config> &
     QueryParameter<
       FetchAccountQueryFnData,
       FetchAccountErrorType,
       selectData,
-      FetchAccountQueryKey<config>
+      FetchAccountQueryKey<config, networkId>
     > & {
       watch?: boolean
     }
@@ -42,19 +44,28 @@ export type UseFetchAccountReturnType<selectData = FetchAccountData> =
 /** https://wagmi.sh/react/api/hooks/useFetchAccount */
 export function useFetchAccount<
   config extends Config = ResolvedRegister['config'],
+  networkId extends
+    config['chains'][number]['id'] = config['chains'][number]['id'],
   selectData = FetchAccountData,
 >(
-  parameters: UseFetchAccountParameters<config, selectData> = {},
+  parameters: UseFetchAccountParameters<
+    config,
+    networkId,
+    selectData
+  > = {} as UseFetchAccountParameters<config, networkId, selectData>,
 ): UseFetchAccountReturnType<selectData> {
   const { address, watch, query = {} } = parameters
 
   const config = useConfig(parameters)
   const networkId = useNetworkId({ config })
 
-  const options = fetchAccountQueryOptions(config, {
-    ...parameters,
-    networkId: parameters.networkId ?? networkId,
-  })
+  const options = fetchAccountQueryOptions(
+    config as config,
+    {
+      ...parameters,
+      networkId: parameters.chain?.id ?? networkId,
+    } as FetchAccountOptions<config, networkId>,
+  )
   const enabled = Boolean(address && (query.enabled ?? true))
 
   const fetchAccountQuery = useQuery({ ...query, ...options, enabled })

@@ -1,4 +1,4 @@
-import { fallback as viem_fallback } from '@/lib/connect/viem'
+import { fallback as viem_fallback } from 'vimina'
 
 import type { Transport } from '../createConfig'
 

@@ -1,17 +1,17 @@
 import {
-  type Address,
-  type Chain,
-  type Client,
-  type EIP1193RequestFn,
-  createClient,
-  type ClientConfig as viem_ClientConfig,
-  type Transport as viem_Transport,
-} from '@/lib/connect/viem'
-import {
   type MinaProviderDetail,
   type Store as MipdStore,
   createStore as createMipd,
 } from '@mina-js/connect'
+import {
+  type Address,
+  type Chain,
+  type Client,
+  type JSAPIStandardRequestFn,
+  createClient,
+  type ClientConfig as viem_ClientConfig,
+  type Transport as viem_Transport,
+} from 'vimina'
 import { persist, subscribeWithSelector } from 'zustand/middleware'
 import { type Mutate, type StoreApi, createStore } from 'zustand/vanilla'
 
@@ -593,7 +593,7 @@ export type Connector = ReturnType<CreateConnectorFn> & {
 export type Transport<
   type extends string = string,
   rpcAttributes = Record<string, any>,
-  eip1193RequestFn extends EIP1193RequestFn = EIP1193RequestFn,
+  eip1193RequestFn extends JSAPIStandardRequestFn = JSAPIStandardRequestFn,
 > = (
   params: Parameters<
     viem_Transport<type, rpcAttributes, eip1193RequestFn>

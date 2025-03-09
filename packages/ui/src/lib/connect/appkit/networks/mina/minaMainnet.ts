@@ -4,27 +4,19 @@ import type {
 } from '@reown/appkit-common/dist/types/src/utils/TypeUtil'
 import type { AppKitNetwork } from '@reown/appkit/networks'
 import { defineChain } from '@reown/appkit/networks'
+import { mainnet } from 'vimina/chains'
 
 export const minaMainnet: AppKitNetwork & {
   id: string
 } = defineChain({
-  id: 'mainnet',
+  id: mainnet.id,
   name: 'Mina Mainnet',
-  nativeCurrency: { name: 'MINA', symbol: 'MINA', decimals: 9 },
-  rpcUrls: {
-    default: {
-      http: ['https://mainnet.klesia.palladians.xyz/api'],
-    },
-  },
-  blockExplorers: {
-    default: {
-      name: 'Minascan',
-      url: 'https://minascan.io/mainnet',
-    },
-  },
+  nativeCurrency: mainnet.nativeCurrency,
+  rpcUrls: mainnet.rpcUrls,
+  blockExplorers: mainnet.blockExplorers,
+  graphqlEndpoint: mainnet.graphqlEndpoint,
   testnet: false,
   chainNamespace: 'mina' as ChainNamespace,
   caipNetworkId: 'mina:mainnet' as CaipNetworkId,
   deprecatedCaipNetworkId: 'mina:mainnet',
-  graphqlEndpoint: 'https://api.minascan.io/node/mainnet/v1/graphql',
 })
