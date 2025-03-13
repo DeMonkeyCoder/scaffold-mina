@@ -1,11 +1,11 @@
 import '@/styles/App.scss'
 import Navbar from '@/components/Navbar'
-import { metadata, networks, projectId, wagmiAdapter } from '@/config'
+import { metadata, networks, projectId, wagminaAdapter } from '@/config'
 import { ZkappProvider } from '@/lib/ZkappContext'
-import { WagmiProvider } from '@/lib/connect/react/context'
 import { createAppKit } from '@reown/appkit/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
+import { WagminaProvider } from 'wagmina'
 
 if (!projectId) {
   throw new Error('Project ID is not defined')
@@ -19,7 +19,7 @@ const generalConfig = {
 
 // Create modal
 createAppKit({
-  adapters: [wagmiAdapter],
+  adapters: [wagminaAdapter],
   themeMode: 'dark',
   connectorImages: {
     'com.aurowallet':
@@ -40,13 +40,13 @@ createAppKit({
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
   return (
-    <WagmiProvider config={wagmiAdapter.wagmiConfig}>
+    <WagminaProvider config={wagminaAdapter.wagminaConfig}>
       <QueryClientProvider client={queryClient}>
         <ZkappProvider>
           <Navbar />
           <Component {...pageProps} />
         </ZkappProvider>
       </QueryClientProvider>
-    </WagmiProvider>
+    </WagminaProvider>
   )
 }

@@ -1,11 +1,6 @@
 import AccountDoesNotExist from '@/components/AccountDoesNotExist'
 import { ConnectWallet } from '@/components/ConnectWallet'
 import { useMinaProvider } from '@/lib/ZkappContext'
-import { useSendSignedTransaction } from '@/lib/connect/react/hooks/useSendSignedTransaction'
-import { useSendTransaction } from '@/lib/connect/react/hooks/useSendTransaction'
-import { useSignDelegationTransaction } from '@/lib/connect/react/hooks/useSignDelegationTransaction'
-import { useSignPaymentTransaction } from '@/lib/connect/react/hooks/useSignPaymentTransaction'
-import { useTransactionCount } from '@/lib/connect/react/hooks/useTransactionCount'
 import { isSupportedNetwork } from '@/utils'
 import { parseMina } from '@mina-js/utils'
 import { useAppKitAccount, useAppKitNetwork } from '@reown/appkit/react'
@@ -15,6 +10,11 @@ import type {
   TransactionRequestDelegationSigned,
   TransactionRequestPaymentSigned,
 } from 'vimina/types/transaction'
+import { useSendSignedTransaction } from 'wagmina'
+import { useSendTransaction } from 'wagmina'
+import { useSignDelegationTransaction } from 'wagmina'
+import { useSignPaymentTransaction } from 'wagmina'
+import { useTransactionCount } from 'wagmina'
 import GradientBG from '../components/GradientBG.js'
 
 export default function TxDemo() {

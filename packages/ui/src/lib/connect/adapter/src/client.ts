@@ -12,15 +12,15 @@ import {
   reconnect,
   // signMessage,
   switchChain,
-  disconnect as wagmiDisconnect,
-  // writeContract as wagmiWriteContract,
+  disconnect as wagminaDisconnect,
+  // writeContract as wagminaWriteContract,
   // waitForTransactionReceipt,
   watchAccount,
   watchConnections,
   watchConnectors,
   // watchPendingTransactions,
-} from '@/lib/connect/core/exports'
-import type { Chain } from '@/lib/connect/core/exports/chains'
+} from '@wagmina/core'
+import type { Chain } from '@wagmina/core/chains'
 import type UniversalProvider from '@walletconnect/universal-provider'
 import type { Hex } from 'vimina'
 
@@ -51,10 +51,10 @@ const DEFAULT_PENDING_TRANSACTIONS_FILTER = {
   pollingInterval: 30_000,
 }
 
-export class WagmiAdapter extends AdapterBlueprint {
-  public wagmiChains: readonly [Chain, ...Chain[]] | undefined
-  public wagmiConfig!: Config
-  public adapterType = 'wagmi'
+export class WagminaAdapter extends AdapterBlueprint {
+  public wagminaChains: readonly [Chain, ...Chain[]] | undefined
+  public wagminaConfig!: Config
+  public adapterType = 'wagmina'
 
   private pendingTransactionsFilter: PendingTransactionsFilter
   private unwatchPendingTransactions: (() => void) | undefined
@@ -106,7 +106,7 @@ export class WagmiAdapter extends AdapterBlueprint {
   override async getAccounts(
     params: AdapterBlueprint.GetAccountsParams,
   ): Promise<AdapterBlueprint.GetAccountsResult> {
-    const connector = this.getWagmiConnector(params.id)
+    const connector = this.getWagminaConnector(params.id)
 
     if (!connector) {
       return { accounts: [] }
@@ -123,7 +123,7 @@ export class WagmiAdapter extends AdapterBlueprint {
       })
     }
 
-    const { addresses, address } = getAccount(this.wagmiConfig)
+    const { addresses, address } = getAccount(this.wagminaConfig)
 
     return Promise.resolve({
       accounts: (addresses || [address])?.map((val) =>
@@ -132,8 +132,8 @@ export class WagmiAdapter extends AdapterBlueprint {
     })
   }
 
-  private getWagmiConnector(id: string) {
-    return this.wagmiConfig.connectors.find((c) => c.id === id)
+  private getWagminaConnector(id: string) {
+    return this.wagminaConfig.connectors.find((c) => c.id === id)
   }
 
   private createConfig(
@@ -143,12 +143,12 @@ export class WagmiAdapter extends AdapterBlueprint {
     },
   ) {
     // this.caipNetworks = configParams.networks
-    // this.wagmiChains = this.caipNetworks.filter(
+    // this.wagminaChains = this.caipNetworks.filter(
     //   (caipNetwork) =>
     //     caipNetwork.chainNamespace === CommonConstantsUtil.CHAIN.EVM,
     // ) as unknown as [BaseNetwork, ...BaseNetwork[]]
     //
-    // const transportsArr = this.wagmiChains.map((chain) => [
+    // const transportsArr = this.wagminaChains.map((chain) => [
     //   chain.id,
     //   CaipNetworksUtil.getViemTransport(chain as CaipNetwork),
     // ])
@@ -167,13 +167,13 @@ export class WagmiAdapter extends AdapterBlueprint {
     // const transports = Object.fromEntries(transportsArr)
     // const connectors: CreateConnectorFn[] = [...(configParams.connectors ?? [])]
     //
-    // this.wagmiConfig = createConfig({
+    // this.wagminaConfig = createConfig({
     //   ...configParams,
-    //   chains: this.wagmiChains,
+    //   chains: this.wagminaChains,
     //   transports,
     //   connectors,
     // })
-    this.wagmiConfig = createConfig({
+    this.wagminaConfig = createConfig({
       ...configParams,
       chains: configParams.networks as unknown as [
         BaseNetwork,
@@ -191,7 +191,7 @@ export class WagmiAdapter extends AdapterBlueprint {
     // }
     //
     // this.unwatchPendingTransactions = watchPendingTransactions(
-    //   this.wagmiConfig,
+    //   this.wagminaConfig,
     //   {
     //     pollingInterval: this.pendingTransactionsFilter.pollingInterval,
     //     /* Magic RPC does not support the pending transactions. We handle transaction for the AuthConnector cases in AppKit client to handle all clients at once. Adding the onError handler to avoid the error to throw. */
@@ -216,7 +216,7 @@ export class WagmiAdapter extends AdapterBlueprint {
   }
 
   private setupWatchers() {
-    watchAccount(this.wagmiConfig, {
+    watchAccount(this.wagminaConfig, {
       onChange: (accountData, prevAccountData) => {
         if (accountData.status === 'disconnected' && prevAccountData.address) {
           this.emit('disconnect')
@@ -242,7 +242,7 @@ export class WagmiAdapter extends AdapterBlueprint {
         }
       },
     })
-    watchConnections(this.wagmiConfig, {
+    watchConnections(this.wagminaConfig, {
       onChange: (connections) => {
         if (connections.length === 0) {
           this.emit('disconnect')
@@ -255,12 +255,15 @@ export class WagmiAdapter extends AdapterBlueprint {
     const thirdPartyConnectors: CreateConnectorFn[] = []
     // Add third party connectors if needed
     thirdPartyConnectors.forEach((connector) => {
-      const cnctr = this.wagmiConfig._internal.connectors.setup(connector)
-      this.wagmiConfig._internal.connectors.setState((prev) => [...prev, cnctr])
+      const cnctr = this.wagminaConfig._internal.connectors.setup(connector)
+      this.wagminaConfig._internal.connectors.setState((prev) => [
+        ...prev,
+        cnctr,
+      ])
     })
   }
 
-  private addWagmiConnectors(options: AppKitOptions, _appKit: AppKit) {
+  private addWagminaConnectors(options: AppKitOptions, _appKit: AppKit) {
     const customConnectors: CreateConnectorFn[] = []
 
     // if (options.enableWalletConnect !== false) {
@@ -289,7 +292,7 @@ export class WagmiAdapter extends AdapterBlueprint {
     // if (emailEnabled || socialsEnabled) {
     //   customConnectors.push(
     //     authConnector({
-    //       chains: this.wagmiChains,
+    //       chains: this.wagminaChains,
     //       options: {
     //         projectId: options.projectId,
     //         enableAuthLogger: options.enableAuthLogger,
@@ -299,8 +302,11 @@ export class WagmiAdapter extends AdapterBlueprint {
     // }
 
     customConnectors.forEach((connector) => {
-      const cnctr = this.wagmiConfig._internal.connectors.setup(connector)
-      this.wagmiConfig._internal.connectors.setState((prev) => [...prev, cnctr])
+      const cnctr = this.wagminaConfig._internal.connectors.setup(connector)
+      this.wagminaConfig._internal.connectors.setState((prev) => [
+        ...prev,
+        cnctr,
+      ])
     })
   }
 
@@ -313,7 +319,7 @@ export class WagmiAdapter extends AdapterBlueprint {
   public async sendTransaction(
     _params: AdapterBlueprint.SendTransactionParams,
   ): Promise<AdapterBlueprint.SendTransactionResult> {
-    // const { chainId } = getAccount(this.wagmiConfig)
+    // const { chainId } = getAccount(this.wagminaConfig)
     // const txParams = {
     //   account: params.address,
     //   to: params.to as Hex,
@@ -325,9 +331,9 @@ export class WagmiAdapter extends AdapterBlueprint {
     //   type: 'legacy' as const,
     // }
     //
-    // await prepareTransactionRequest(this.wagmiConfig, txParams)
-    // const tx = await wagmiSendTransaction(this.wagmiConfig, txParams)
-    // await waitForTransactionReceipt(this.wagmiConfig, {
+    // await prepareTransactionRequest(this.wagminaConfig, txParams)
+    // const tx = await wagminaSendTransaction(this.wagminaConfig, txParams)
+    // await waitForTransactionReceipt(this.wagminaConfig, {
     //   hash: tx,
     //   timeout: 25000,
     // })
@@ -366,13 +372,13 @@ export class WagmiAdapter extends AdapterBlueprint {
     return formatUnits(params.value, params.decimals)
   }
 
-  private async addWagmiConnector(
+  private async addWagminaConnector(
     connector: Connector,
     options: AppKitOptions,
   ) {
     /*
      * We don't need to set auth connector or walletConnect connector
-     * from wagmi since we already set it in chain adapter blueprint
+     * from wagmina since we already set it in chain adapter blueprint
      */
     if (
       connector.id === CommonConstantsUtil.CONNECTOR_ID.AUTH ||
@@ -407,22 +413,22 @@ export class WagmiAdapter extends AdapterBlueprint {
      * Watch for new connectors. This is needed because some EIP6963
      * connectors are added later in the process the initial setup
      */
-    watchConnectors(this.wagmiConfig, {
+    watchConnectors(this.wagminaConfig, {
       onChange: (connectors) =>
         connectors.forEach((connector) =>
-          this.addWagmiConnector(connector, options),
+          this.addWagminaConnector(connector, options),
         ),
     })
 
-    // Add current wagmi connectors to chain adapter blueprint
+    // Add current wagmina connectors to chain adapter blueprint
     await Promise.all(
-      this.wagmiConfig.connectors.map((connector) =>
-        this.addWagmiConnector(connector, options),
+      this.wagminaConfig.connectors.map((connector) =>
+        this.addWagminaConnector(connector, options),
       ),
     )
 
-    // Add wagmi connectors
-    this.addWagmiConnectors(options, appKit)
+    // Add wagmina connectors
+    this.addWagminaConnectors(options, appKit)
 
     // Add third party connectors
     await this.addThirdPartyConnectors(options)
@@ -432,9 +438,9 @@ export class WagmiAdapter extends AdapterBlueprint {
     params: AdapterBlueprint.SyncConnectionParams,
   ): Promise<AdapterBlueprint.ConnectResult> {
     const { id } = params
-    const connections = getConnections(this.wagmiConfig)
+    const connections = getConnections(this.wagminaConfig)
     const connection = connections.find((c) => c.connector.id === id)
-    const connector = this.getWagmiConnector(id)
+    const connector = this.getWagminaConnector(id)
     const provider = (await connector?.getProvider()) as Provider
 
     return {
@@ -449,20 +455,20 @@ export class WagmiAdapter extends AdapterBlueprint {
   public override async connectWalletConnect(
     _chainId?: number | string,
   ): Promise<{ clientId: string } | undefined> {
-    // // Attempt one click auth first, if authenticated, still connect with wagmi to store the session
+    // // Attempt one click auth first, if authenticated, still connect with wagmina to store the session
     // const walletConnectConnector = this.getWalletConnectConnector()
     // await walletConnectConnector.authenticate()
     //
-    // const wagmiConnector = this.getWagmiConnector('walletConnect')
+    // const wagminaConnector = this.getWagminaConnector('walletConnect')
     //
-    // if (!wagmiConnector) {
+    // if (!wagminaConnector) {
     //   throw new Error(
     //     'UniversalAdapter:connectWalletConnect - connector not found',
     //   )
     // }
     //
-    // await connect(this.wagmiConfig, {
-    //   connector: wagmiConnector,
+    // await connect(this.wagminaConfig, {
+    //   connector: wagminaConnector,
     //   chainId: chainId ? Number(chainId) : undefined,
     // })
     //
@@ -477,7 +483,7 @@ export class WagmiAdapter extends AdapterBlueprint {
     params: AdapterBlueprint.ConnectParams,
   ): Promise<AdapterBlueprint.ConnectResult> {
     const { id, provider, type, info, chainId } = params
-    const connector = this.getWagmiConnector(id)
+    const connector = this.getWagminaConnector(id)
 
     if (!connector) {
       throw new Error(
@@ -494,7 +500,7 @@ export class WagmiAdapter extends AdapterBlueprint {
       connector.setEip6963Wallet?.({ provider, info })
     }
 
-    const res = await connect(this.wagmiConfig, {
+    const res = await connect(this.wagminaConfig, {
       connector,
       networkId: chainId ? String(chainId) : undefined,
     })
@@ -513,7 +519,7 @@ export class WagmiAdapter extends AdapterBlueprint {
   ): Promise<void> {
     const { id } = params
 
-    const connector = this.getWagmiConnector(id)
+    const connector = this.getWagminaConnector(id)
 
     if (!connector) {
       throw new Error(
@@ -521,7 +527,7 @@ export class WagmiAdapter extends AdapterBlueprint {
       )
     }
 
-    await reconnect(this.wagmiConfig, {
+    await reconnect(this.wagminaConfig, {
       connectors: [connector],
     })
   }
@@ -533,7 +539,7 @@ export class WagmiAdapter extends AdapterBlueprint {
       (network) => network.id === params.chainId,
     )
 
-    if (caipNetwork && this.wagmiConfig) {
+    if (caipNetwork && this.wagminaConfig) {
       const caipAddress = `${caipNetwork.caipNetworkId}:${params.address}`
       const cachedPromise = this.balancePromises[caipAddress]
       if (cachedPromise) {
@@ -550,7 +556,7 @@ export class WagmiAdapter extends AdapterBlueprint {
         // biome-ignore lint/suspicious/noAsyncPromiseExecutor: <explanation>
         new Promise<AdapterBlueprint.GetBalanceResult>(async (resolve) => {
           const chainId = params.chainId
-          const balance = await getBalance(this.wagmiConfig, {
+          const balance = await getBalance(this.wagminaConfig, {
             address: params.address as Hex,
             networkId: chainId as string,
             token: params.tokens?.[caipNetwork.caipNetworkId]?.address as Hex,
@@ -583,19 +589,19 @@ export class WagmiAdapter extends AdapterBlueprint {
   }
 
   public getWalletConnectProvider(): AdapterBlueprint.GetWalletConnectProviderResult {
-    // return this.getWagmiConnector('walletConnect')
+    // return this.getWagminaConnector('walletConnect')
     //   ?.provider as UniversalProvider
     throw new Error('not implemented')
   }
 
   public async disconnect() {
-    const connections = getConnections(this.wagmiConfig)
+    const connections = getConnections(this.wagminaConfig)
     await Promise.all(
       connections.map(async (connection) => {
-        const connector = this.getWagmiConnector(connection.connector.id)
+        const connector = this.getWagminaConnector(connection.connector.id)
 
         if (connector) {
-          await wagmiDisconnect(this.wagmiConfig, { connector })
+          await wagminaDisconnect(this.wagminaConfig, { connector })
         }
       }),
     )
@@ -604,23 +610,23 @@ export class WagmiAdapter extends AdapterBlueprint {
   public override async switchNetwork(
     params: AdapterBlueprint.SwitchNetworkParams,
   ) {
-    return switchChain(this.wagmiConfig, {
+    return switchChain(this.wagminaConfig, {
       networkId: params.caipNetwork.id as string,
     })
   }
 
   public async getCapabilities(params: string) {
-    if (!this.wagmiConfig) {
+    if (!this.wagminaConfig) {
       throw new Error(
-        'connectionControllerClient:getCapabilities - wagmiConfig is undefined',
+        'connectionControllerClient:getCapabilities - wagminaConfig is undefined',
       )
     }
 
-    const connections = getConnections(this.wagmiConfig)
+    const connections = getConnections(this.wagminaConfig)
     const connection = connections[0]
 
     const connector = connection
-      ? this.getWagmiConnector(connection.connector.id)
+      ? this.getWagminaConnector(connection.connector.id)
       : null
 
     if (!connector) {
@@ -658,17 +664,17 @@ export class WagmiAdapter extends AdapterBlueprint {
   public async grantPermissions(
     params: AdapterBlueprint.GrantPermissionsParams,
   ) {
-    if (!this.wagmiConfig) {
+    if (!this.wagminaConfig) {
       throw new Error(
-        'connectionControllerClient:grantPermissions - wagmiConfig is undefined',
+        'connectionControllerClient:grantPermissions - wagminaConfig is undefined',
       )
     }
 
-    const connections = getConnections(this.wagmiConfig)
+    const connections = getConnections(this.wagminaConfig)
     const connection = connections[0]
 
     const connector = connection
-      ? this.getWagmiConnector(connection.connector.id)
+      ? this.getWagminaConnector(connection.connector.id)
       : null
 
     if (!connector) {
@@ -691,17 +697,17 @@ export class WagmiAdapter extends AdapterBlueprint {
   public async revokePermissions(
     params: AdapterBlueprint.RevokePermissionsParams,
   ): Promise<`0x${string}`> {
-    if (!this.wagmiConfig) {
+    if (!this.wagminaConfig) {
       throw new Error(
-        'connectionControllerClient:revokePermissions - wagmiConfig is undefined',
+        'connectionControllerClient:revokePermissions - wagminaConfig is undefined',
       )
     }
 
-    const connections = getConnections(this.wagmiConfig)
+    const connections = getConnections(this.wagminaConfig)
     const connection = connections[0]
 
     const connector = connection
-      ? this.getWagmiConnector(connection.connector.id)
+      ? this.getWagminaConnector(connection.connector.id)
       : null
 
     if (!connector) {
@@ -724,17 +730,17 @@ export class WagmiAdapter extends AdapterBlueprint {
   public async walletGetAssets(
     params: AdapterBlueprint.WalletGetAssetsParams,
   ): Promise<AdapterBlueprint.WalletGetAssetsResponse> {
-    if (!this.wagmiConfig) {
+    if (!this.wagminaConfig) {
       throw new Error(
-        'connectionControllerClient:walletGetAssets - wagmiConfig is undefined',
+        'connectionControllerClient:walletGetAssets - wagminaConfig is undefined',
       )
     }
 
-    const connections = getConnections(this.wagmiConfig)
+    const connections = getConnections(this.wagminaConfig)
     const connection = connections[0]
 
     const connector = connection
-      ? this.getWagmiConnector(connection.connector.id)
+      ? this.getWagminaConnector(connection.connector.id)
       : null
 
     if (!connector) {

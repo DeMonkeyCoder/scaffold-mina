@@ -1,9 +1,9 @@
 import deployedContracts from '@/contracts/deployedContracts'
-import { useFetchAccount } from '@/lib/connect/react/hooks/useFetchAccount'
 import type { Methods, StateVariable } from '@/lib/types'
 import { useAppKitNetwork } from '@reown/appkit/react'
 import type { SmartContract, State } from 'o1js'
 import { useMemo, useState } from 'react'
+import { useFetchAccount } from 'wagmina'
 
 const contractNames = Object.keys(deployedContracts) as Array<
   keyof typeof deployedContracts

@@ -10,14 +10,17 @@ type StateKey = keyof LimitteStoreUtilState
 
 // -- State --------------------------------------------- //
 const state = proxy<LimitteStoreUtilState>({
-  pendingTransactions: 0
+  pendingTransactions: 0,
 })
 
 // -- Controller ---------------------------------------- //
 export const LimitterUtil = {
   state,
 
-  subscribeKey<K extends StateKey>(key: K, callback: (value: LimitteStoreUtilState[K]) => void) {
+  subscribeKey<K extends StateKey>(
+    key: K,
+    callback: (value: LimitteStoreUtilState[K]) => void,
+  ) {
     return subKey(state, key, callback)
   },
 
@@ -31,5 +34,5 @@ export const LimitterUtil = {
 
   reset(value: StateKey) {
     state[value] = 0
-  }
+  },
 }

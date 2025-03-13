@@ -1,13 +1,13 @@
-import { useAccount } from '@/lib/connect/react/hooks/useAccount'
 import { useAppKitNetwork } from '@reown/appkit/react'
 import { Mina, PublicKey, fetchAccount } from 'o1js'
 import {
-  createContext,
   type ReactNode,
+  createContext,
   useContext,
   useEffect,
   useState,
 } from 'react'
+import { useAccount } from 'wagmina'
 import ZkappWorkerClient from './zkappWorkerClient'
 
 type MinaAccountData = {

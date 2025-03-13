@@ -1,7 +1,7 @@
 import '@reown/appkit-polyfills'
 
 // biome-ignore lint/performance/noBarrelFile: <explanation>
-export { WagmiAdapter } from './client'
+export { WagminaAdapter } from './client'
 
 // -- Connectors
 // export { authConnector } from './connectors/AuthConnector'

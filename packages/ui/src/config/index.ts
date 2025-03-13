@@ -1,4 +1,4 @@
-import { WagmiAdapter } from '@/lib/connect/adapter/src'
+import { WagminaAdapter } from '@/lib/connect/adapter/src'
 import { minaDevnet, minaMainnet } from '@/lib/connect/appkit/networks'
 import type { AppKitNetwork } from '@reown/appkit/networks'
 import { http } from 'vimina'
@@ -23,8 +23,8 @@ export const networks = [minaDevnet, minaMainnet] as [
   ...AppKitNetwork[],
 ]
 
-//Set up the Wagmi Adapter (Config)
-export const wagmiAdapter = new WagmiAdapter({
+//Set up the Wagmina Adapter (Config)
+export const wagminaAdapter = new WagminaAdapter({
   projectId,
   networks,
   connectors: [],
@@ -36,4 +36,4 @@ export const wagmiAdapter = new WagmiAdapter({
   },
 })
 
-export const config = wagmiAdapter.wagmiConfig
+export const config = wagminaAdapter.wagminaConfig
