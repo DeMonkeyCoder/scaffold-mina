@@ -1,6 +1,6 @@
-import { WagminaAdapter } from '@/lib/connect/adapter/src'
-import { minaDevnet, minaMainnet } from '@/lib/connect/appkit/networks'
 import type { AppKitNetwork } from '@reown/appkit/networks'
+import { WagminaAdapter } from '@wagmina/appkit'
+import { minaDevnet, minaMainnet } from '@wagmina/appkit/networks'
 import { http } from 'vimina'
 
 // Get projectId from https://cloud.reown.com

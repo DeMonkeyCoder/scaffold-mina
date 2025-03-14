@@ -1,6 +1,6 @@
 'use client'
-import { minaDevnet, minaMainnet } from '@/lib/connect/appkit/networks'
 import { useAppKitNetwork } from '@reown/appkit/react'
+import { minaDevnet, minaMainnet } from '@wagmina/appkit/networks'
 import { useSwitchChain } from 'wagmina'
 
 export default function SwitchChainDemo() {

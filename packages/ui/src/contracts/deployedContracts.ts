@@ -1,5 +1,5 @@
-import { minaDevnet, minaMainnet } from '@/lib/connect/appkit/networks'
 import type { CaipNetwork } from '@reown/appkit-common'
+import { minaDevnet, minaMainnet } from '@wagmina/appkit/networks'
 import type { SmartContract } from 'o1js'
 import { Add, Quest } from 'scaffold-mina-contracts'
 

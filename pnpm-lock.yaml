@@ -99,6 +99,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.59.20
         version: 5.59.20(react@18.2.0)
+      '@wagmina/appkit':
+        specifier: https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/appkit@bbfd6f1
+        version: https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/appkit@bbfd6f1(@reown/appkit@1.6.9(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(zod@3.23.8))(@tanstack/query-core@5.49.1)(@tanstack/react-query@5.59.20(react@18.2.0))(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(vimina@https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4))(zod@3.23.8)
       '@wagmina/core':
         specifier: https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/core@789bcfb
         version: https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/core@789bcfb(@tanstack/query-core@5.49.1)(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(vimina@https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4))
@@ -1479,6 +1482,17 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
+  '@wagmina/appkit@https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/appkit@bbfd6f1':
+    resolution: {tarball: https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/appkit@bbfd6f1}
+    version: 0.0.1
+    peerDependencies:
+      '@reown/appkit': '>=1.0.0'
+      typescript: '>=5.0.4'
+      vimina: '>=0.0.1'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   '@wagmina/core@https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/core@789bcfb':
     resolution: {tarball: https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/core@789bcfb}
     version: 0.0.1
@@ -1494,6 +1508,19 @@ packages:
 
   '@wagmina/core@https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/core@789bcfbc8d062a2075017430918dbe54b651c74c':
     resolution: {tarball: https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/core@789bcfbc8d062a2075017430918dbe54b651c74c}
+    version: 0.0.1
+    peerDependencies:
+      '@tanstack/query-core': '>=5.0.0'
+      typescript: '>=5.0.4'
+      vimina: '>=0.0.1'
+    peerDependenciesMeta:
+      '@tanstack/query-core':
+        optional: true
+      typescript:
+        optional: true
+
+  '@wagmina/core@https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/core@bbfd6f19dcf4e08a6a91ca1b0134c3c45b4b513f':
+    resolution: {tarball: https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/core@bbfd6f19dcf4e08a6a91ca1b0134c3c45b4b513f}
     version: 0.0.1
     peerDependencies:
       '@tanstack/query-core': '>=5.0.0'
@@ -4057,6 +4084,18 @@ packages:
       typescript:
         optional: true
 
+  wagmina@https://pkg.pr.new/DeMonkeyCoder/wagmina/wagmina@bbfd6f19dcf4e08a6a91ca1b0134c3c45b4b513f:
+    resolution: {tarball: https://pkg.pr.new/DeMonkeyCoder/wagmina/wagmina@bbfd6f19dcf4e08a6a91ca1b0134c3c45b4b513f}
+    version: 0.0.1
+    peerDependencies:
+      '@tanstack/react-query': '>=5.0.0'
+      react: '>=18'
+      typescript: '>=5.0.4'
+      vimina: '>=0.0.1'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   wagmina@https://pkg.pr.new/DeMonkeyCoder/wagmina@789bcfb:
     resolution: {tarball: https://pkg.pr.new/DeMonkeyCoder/wagmina@789bcfb}
     version: 0.0.1
@@ -5977,6 +6016,44 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
+  '@wagmina/appkit@https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/appkit@bbfd6f1(@reown/appkit@1.6.9(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(zod@3.23.8))(@tanstack/query-core@5.49.1)(@tanstack/react-query@5.59.20(react@18.2.0))(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(vimina@https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4))(zod@3.23.8)':
+    dependencies:
+      '@mina-js/utils': https://pkg.pr.new/palladians/mina-js/@mina-js/utils@d652e7a(typescript@5.5.4)
+      '@reown/appkit': 1.6.9(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(zod@3.23.8)
+      '@reown/appkit-common': 1.6.9(typescript@5.5.4)(zod@3.23.8)
+      '@reown/appkit-core': 1.6.9(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(zod@3.23.8)
+      '@reown/appkit-utils': 1.6.9(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(valtio@1.13.2(@types/react@18.3.3)(react@18.2.0))(zod@3.23.8)
+      '@reown/appkit-wallet': 1.6.9(typescript@5.5.4)
+      '@wagmina/core': https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/core@bbfd6f19dcf4e08a6a91ca1b0134c3c45b4b513f(@tanstack/query-core@5.49.1)(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(vimina@https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4))
+      valtio: 1.13.2(@types/react@18.3.3)(react@18.2.0)
+      vimina: https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4)
+      wagmina: https://pkg.pr.new/DeMonkeyCoder/wagmina/wagmina@bbfd6f19dcf4e08a6a91ca1b0134c3c45b4b513f(@tanstack/query-core@5.49.1)(@tanstack/react-query@5.59.20(react@18.2.0))(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(vimina@https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4))
+    optionalDependencies:
+      typescript: 5.5.4
+    transitivePeerDependencies:
+      - '@azure/app-configuration'
+      - '@azure/cosmos'
+      - '@azure/data-tables'
+      - '@azure/identity'
+      - '@azure/keyvault-secrets'
+      - '@azure/storage-blob'
+      - '@capacitor/preferences'
+      - '@netlify/blobs'
+      - '@planetscale/database'
+      - '@react-native-async-storage/async-storage'
+      - '@tanstack/query-core'
+      - '@tanstack/react-query'
+      - '@types/react'
+      - '@upstash/redis'
+      - '@vercel/kv'
+      - bufferutil
+      - encoding
+      - immer
+      - ioredis
+      - react
+      - utf-8-validate
+      - zod
+
   '@wagmina/core@https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/core@789bcfb(@tanstack/query-core@5.49.1)(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(vimina@https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4))':
     dependencies:
       '@mina-js/connect': https://pkg.pr.new/palladians/mina-js/@mina-js/connect@d652e7a(typescript@5.5.4)
@@ -5992,6 +6069,20 @@ snapshots:
       - react
 
   '@wagmina/core@https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/core@789bcfbc8d062a2075017430918dbe54b651c74c(@tanstack/query-core@5.49.1)(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(vimina@https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4))':
+    dependencies:
+      '@mina-js/connect': https://pkg.pr.new/palladians/mina-js/@mina-js/connect@d652e7a(typescript@5.5.4)
+      eventemitter3: 5.0.1
+      vimina: https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4)
+      zustand: 4.4.1(@types/react@18.3.3)(react@18.2.0)
+    optionalDependencies:
+      '@tanstack/query-core': 5.49.1
+      typescript: 5.5.4
+    transitivePeerDependencies:
+      - '@types/react'
+      - immer
+      - react
+
+  '@wagmina/core@https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/core@bbfd6f19dcf4e08a6a91ca1b0134c3c45b4b513f(@tanstack/query-core@5.49.1)(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(vimina@https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4))':
     dependencies:
       '@mina-js/connect': https://pkg.pr.new/palladians/mina-js/@mina-js/connect@d652e7a(typescript@5.5.4)
       eventemitter3: 5.0.1
@@ -9177,6 +9268,20 @@ snapshots:
       - bufferutil
       - encoding
       - utf-8-validate
+
+  wagmina@https://pkg.pr.new/DeMonkeyCoder/wagmina/wagmina@bbfd6f19dcf4e08a6a91ca1b0134c3c45b4b513f(@tanstack/query-core@5.49.1)(@tanstack/react-query@5.59.20(react@18.2.0))(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(vimina@https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4)):
+    dependencies:
+      '@tanstack/react-query': 5.59.20(react@18.2.0)
+      '@wagmina/core': https://pkg.pr.new/DeMonkeyCoder/wagmina/@wagmina/core@bbfd6f19dcf4e08a6a91ca1b0134c3c45b4b513f(@tanstack/query-core@5.49.1)(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(vimina@https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4))
+      react: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)
+      vimina: https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4)
+    optionalDependencies:
+      typescript: 5.5.4
+    transitivePeerDependencies:
+      - '@tanstack/query-core'
+      - '@types/react'
+      - immer
 
   wagmina@https://pkg.pr.new/DeMonkeyCoder/wagmina@789bcfb(@tanstack/query-core@5.49.1)(@tanstack/react-query@5.59.20(react@18.2.0))(@types/react@18.3.3)(react@18.2.0)(typescript@5.5.4)(vimina@https://pkg.pr.new/DeMonkeyCoder/vimina@414040a(typescript@5.5.4)):
     dependencies:
