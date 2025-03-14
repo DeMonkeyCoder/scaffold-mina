@@ -2,7 +2,7 @@
 
 export const ConnectWallet = () => {
   return (
-    <div className="flex border border-gray-500 rounded-full items-center justify-center center hover:border-gray-400 duration-300">
+    <div className="border border-gray-500 rounded-full hover:border-gray-400 duration-300 ml-2">
       <appkit-button />
     </div>
   )
