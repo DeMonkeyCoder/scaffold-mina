@@ -1,8 +1,7 @@
-import type { AppKitNetwork } from '@reown/appkit/networks'
+import type { CaipNetwork } from '@reown/appkit-common'
 import { WagminaAdapter } from '@wagmina/appkit'
-import { minaDevnet, minaMainnet } from '@wagmina/appkit/networks'
-import { http } from 'vimina'
-
+import { minaDevnet, minaLightnet, minaMainnet } from '@wagmina/appkit/networks'
+import { http, klesia } from 'vimina'
 // Get projectId from https://cloud.reown.com
 export const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID
 
@@ -18,9 +17,9 @@ export const metadata = {
 }
 
 // for custom networks visit -> https://docs.reown.com/appkit/react/core/custom-networks
-export const networks = [minaDevnet, minaMainnet] as [
-  AppKitNetwork,
-  ...AppKitNetwork[],
+export const networks = [minaDevnet, minaMainnet, minaLightnet] as [
+  CaipNetwork,
+  ...CaipNetwork[],
 ]
 
 //Set up the Wagmina Adapter (Config)
@@ -31,8 +30,9 @@ export const wagminaAdapter = new WagminaAdapter({
   storage: null,
   pollingInterval: 10_000,
   transports: {
-    [minaMainnet.id]: http(),
-    [minaDevnet.id]: http(),
+    [minaMainnet.id]: klesia(),
+    [minaDevnet.id]: klesia(),
+    [minaLightnet.id]: http(),
   },
 })
 

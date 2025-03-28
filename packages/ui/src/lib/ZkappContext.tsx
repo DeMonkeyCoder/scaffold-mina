@@ -50,16 +50,12 @@ export const ZkappProvider = ({ children }: { children: ReactNode }) => {
 
   const { caipNetwork } = useAppKitNetwork()
   useEffect(() => {
-    if (
-      caipNetwork &&
-      'graphqlEndpoint' in caipNetwork &&
-      typeof caipNetwork.graphqlEndpoint === 'string'
-    ) {
-      Mina.setActiveInstance(Mina.Network(caipNetwork.graphqlEndpoint))
-      zkappWorkerClient?.setActiveInstance({
-        graphqlEndpoint: caipNetwork.graphqlEndpoint,
-      })
-    }
+    if (!caipNetwork) return
+    const graphqlEndpoint = caipNetwork.rpcUrls.default.http[0]
+    Mina.setActiveInstance(Mina.Network(graphqlEndpoint))
+    zkappWorkerClient?.setActiveInstance({
+      graphqlEndpoint: graphqlEndpoint,
+    })
   }, [caipNetwork, zkappWorkerClient])
 
   return (

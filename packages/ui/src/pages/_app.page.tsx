@@ -11,12 +11,6 @@ if (!projectId) {
   throw new Error('Project ID is not defined')
 }
 
-const generalConfig = {
-  projectId,
-  metadata,
-  networks,
-}
-
 // Create modal
 createAppKit({
   adapters: [wagminaAdapter],
@@ -34,7 +28,9 @@ createAppKit({
     email: false,
   },
   enableWalletConnect: false,
-  ...generalConfig,
+  projectId,
+  metadata,
+  networks,
 })
 
 export default function App({ Component, pageProps }: AppProps) {
