@@ -26,9 +26,6 @@ export const networks = [minaDevnet, minaMainnet, minaLightnet] as [
 export const wagminaAdapter = new WagminaAdapter({
   projectId,
   networks,
-  connectors: [],
-  storage: null,
-  pollingInterval: 10_000,
   transports: {
     [minaMainnet.id]: klesia(),
     [minaDevnet.id]: klesia(),
