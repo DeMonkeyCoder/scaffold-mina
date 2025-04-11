@@ -1,5 +1,4 @@
-import type { CaipNetwork } from '@reown/appkit-common'
-import { WagminaAdapter } from '@wagmina/appkit'
+import { WagminaAdapter, type WagminaAppKitNetwork } from '@wagmina/appkit'
 import { minaDevnet, minaLightnet, minaMainnet } from '@wagmina/appkit/networks'
 import { http, klesia } from 'vimina'
 // Get projectId from https://cloud.reown.com
@@ -18,8 +17,8 @@ export const metadata = {
 
 // for custom networks visit -> https://docs.reown.com/appkit/react/core/custom-networks
 export const networks = [minaDevnet, minaMainnet, minaLightnet] as [
-  CaipNetwork,
-  ...CaipNetwork[],
+  WagminaAppKitNetwork,
+  ...WagminaAppKitNetwork[],
 ]
 
 //Set up the Wagmina Adapter (Config)
